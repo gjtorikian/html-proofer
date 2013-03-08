@@ -1,4 +1,4 @@
-require "doc-tester/version"
+require_relative "doc-tester/version"
 
 module Doc
   module Tester
