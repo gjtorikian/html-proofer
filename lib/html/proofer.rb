@@ -41,10 +41,6 @@ module HTML
       issues
     end
 
-    def external_href?(href)
-      !!(href =~ %r{^(\/\/|[a-z\-]+:)})
-    end
-
     def print_issues(issues)
       return if issues.empty?
       puts "Issues found!"

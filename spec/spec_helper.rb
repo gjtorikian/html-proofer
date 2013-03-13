@@ -1,7 +1,6 @@
 require 'bundler/setup'
 require_relative "../lib/html/proofer.rb"
 require_relative "../lib/html/proofer/checks.rb"
-require_relative "../lib/html/proofer/checks/images.rb"
 
 require File.expand_path('../../lib/html/proofer/version.rb', __FILE__)
 
