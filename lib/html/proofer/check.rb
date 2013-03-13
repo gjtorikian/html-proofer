@@ -6,11 +6,10 @@ module HTML::Proofer::Checks
 
     attr_reader :issues
 
-    def initialize(path, html, opts)
+    def initialize(path, html)
       @path   = path
       @html   = html
-      @options = opts
-      @issues = Set.new
+      @issues = []
     end
 
     def run
