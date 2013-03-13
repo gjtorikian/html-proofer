@@ -1,5 +1,5 @@
-module Doc
-  module Tester
+module HTML
+  class Proofer
     VERSION = "0.0.1"
   end
 end

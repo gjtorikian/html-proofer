@@ -1,3 +1,3 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require File.expand_path('../../lib/doc-tester.rb', __FILE__)
+require File.expand_path('../../lib/html/proofer/version.rb', __FILE__)

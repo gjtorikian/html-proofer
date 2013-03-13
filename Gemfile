@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source "http://rubygems.org"
 
-# Specify your gem's dependencies in doc-tester.gemspec
+# Specify your gem's dependencies in sinatra_auth_github.gemspec
 gemspec
