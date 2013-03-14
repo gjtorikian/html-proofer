@@ -19,7 +19,7 @@ module HTML
       end
     end
 
-    def create_nokogiri(path)
+    def self.create_nokogiri(path)
       Nokogiri::HTML(File.read(path))
     end
 

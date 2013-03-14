@@ -29,7 +29,12 @@ module HTML::Proofer::Checks
     end
 
     def external_href?(href)
-      !!(href =~ %r{^(\/\/|[a-z\-]+:)})
+      uri = URI.parse(href)
+      %w( http https ).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
     end
 
     def validate_url(href)
