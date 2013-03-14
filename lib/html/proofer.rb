@@ -9,12 +9,20 @@ module HTML
     end
 
     def run
-      Find.find(@srcDir) do |path|
-        if File.extname(path) == @options[:ext]
-          html = HTML::Proofer.create_nokogiri(path)
-          issues = run_checks(path, html)
-          self.print_issues(issues)
+      get_checks.each do |klass|
+        issues = []
+        puts "Running #{klass.name.split(/:/).pop()} check... \n\n"
+
+        Find.find(@srcDir) do |path|
+          if File.extname(path) == @options[:ext]
+            html = HTML::Proofer.create_nokogiri(path)
+            check = klass.new(path, html)
+            check.run
+            issues.concat(check.issues)
+          end
         end
+
+        self.print_issues(issues)
       end
     end
 
@@ -24,20 +32,6 @@ module HTML
 
     def get_checks
       HTML::Proofer::Checks::Check.subclasses
-    end
-
-    def run_checks(path, html)
-      issues = []
-
-      get_checks.each do |klass|
-        puts "Running #{klass.name.split(/:/).pop()} check... "
-
-        check = klass.new(path, html)
-        check.run
-
-        issues.concat(check.issues)
-      end
-      issues
     end
 
     def print_issues(issues)
