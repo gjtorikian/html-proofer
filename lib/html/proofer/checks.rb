@@ -1,5 +1,9 @@
-module HTML::Proofer::Checks
-  require './lib/html/proofer/check'
-  require './lib/html/proofer/checks/images'
-  require './lib/html/proofer/checks/links'
+module HTML
+  class Proofer
+    class Checks
+      require 'html/proofer/check'
+      require 'html/proofer/checks/images'
+      require 'html/proofer/checks/links'
+    end
+  end
 end

@@ -3,8 +3,9 @@ require 'net/http'
 require 'net/https'
 require 'timeout'
 require 'uri'
+require 'colored'
 
-module HTML::Proofer::Checks
+class HTML::Proofer::Checks
 
   class Check
 

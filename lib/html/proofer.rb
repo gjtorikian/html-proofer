@@ -1,10 +1,9 @@
-#require './lib/html/proofer/checks'
 require 'nokogiri'
+require 'html/proofer/checks'
 
 module HTML
   class Proofer
     def initialize(src, opts = {:ext => ".html"})
-      require './lib/html/proofer/checks'
       @srcDir = src
       @options = opts
     end
@@ -12,7 +11,7 @@ module HTML
     def run
       Find.find(@srcDir) do |path|
         if File.extname(path) == @options[:ext]
-          html = create_nokogiri
+          html = HTML::Proofer.create_nokogiri(path)
           issues = run_checks(path, html)
           self.print_issues(issues)
         end
@@ -33,19 +32,18 @@ module HTML
       get_checks.each do |klass|
         puts "Running #{klass.name.split(/:/).pop()} check... "
 
-        check = klass.new(path, html, @options)
+        check = klass.new(path, html)
         check.run
 
-        issues.merge(check.issues)
+        issues.concat(check.issues)
       end
       issues
     end
 
     def print_issues(issues)
       return if issues.empty?
-      puts "Issues found!"
       issues.each do |issue|
-        $stderr.puts issue
+        $stderr.puts issue + "\n\n"
       end
     end
   end
