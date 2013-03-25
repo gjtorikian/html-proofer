@@ -20,14 +20,14 @@ describe "Links tests" do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/brokenLinkExternal.html"
     @linkCheck = Links.new(brokenLinkExternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkExternalFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": externally linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist")
   end
 
   it "fails for broken internal links" do
     brokenLinkInternalFilepath = "#{FIXTURES_DIR}/brokenLinkInternal.html"
     @linkCheck = Links.new(brokenLinkInternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkInternalFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": linking to ./notreal.html, which does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": internally linking to ./notreal.html, which does not exist")
   end
 
   it "fails for link with no href" do
@@ -38,15 +38,22 @@ describe "Links tests" do
   end
 
   it "should follow redirects" do
-    missingLinkHrefFilepath = "#{FIXTURES_DIR}/linkWithRedirect.html"
-    @linkCheck = Links.new(missingLinkHrefFilepath, HTML::Proofer.create_nokogiri(missingLinkHrefFilepath))
+    linkWithRedirectFilepath = "#{FIXTURES_DIR}/linkWithRedirect.html"
+    @linkCheck = Links.new(linkWithRedirectFilepath, HTML::Proofer.create_nokogiri(linkWithRedirectFilepath))
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
 
   it "should understand https" do
-    missingLinkHrefFilepath = "#{FIXTURES_DIR}/linkWithHttps.html"
-    @linkCheck = Links.new(missingLinkHrefFilepath, HTML::Proofer.create_nokogiri(missingLinkHrefFilepath))
+    linkWithHttpsFilepath = "#{FIXTURES_DIR}/linkWithHttps.html"
+    @linkCheck = Links.new(linkWithHttpsFilepath, HTML::Proofer.create_nokogiri(linkWithHttpsFilepath))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
+
+  it "fails for broken hash links with status code numbers" do
+    brokenLinkWithNumberFilepath = "#{FIXTURES_DIR}/brokenLinkWithNumber.html"
+    @linkCheck = Links.new(brokenLinkWithNumberFilepath, HTML::Proofer.create_nokogiri(brokenLinkWithNumberFilepath))
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end

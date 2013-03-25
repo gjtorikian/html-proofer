@@ -70,11 +70,9 @@ class HTML::Proofer::Checks
           return nil
         end
 
-        if res.code =~ /^[3|5]..$/
-          if i == 4
-            return nil
-          end
-
+        next if res.code =~ /^5..$/
+        
+        if res.code =~ /^3..$/
           # Find proper location
           location = res['Location']
           if location !~ /^https?:\/\//

@@ -12,9 +12,9 @@ class Links < ::HTML::Proofer::Checks::Check
             href = href.gsub(link, replace)
           end
         end
-        
+
         return if ignore_href?(href)
-        
+
         if href.include? '#'
           href_split = href.split('#')
         end
@@ -32,13 +32,13 @@ class Links < ::HTML::Proofer::Checks::Check
               else
                 href_html = HTML::Proofer.create_nokogiri(href_location)
                 found_hash_match = false
-                unless href_html.search("[id=#{href_hash}]", "[name=#{href_hash}]").length > 0
+                unless hash_check(href_html, href_hash)
                   self.add_issue("#{@path}".blue + ": linking to #{href}, but #{href_hash} does not exist")
                 end
               end
             # it is an internal link, with an internal hash
             else
-              unless @html.search("[id=#{href_hash}]", "[name=#{href_hash}]").length > 0
+              unless hash_check(@html, href_hash)
                 self.add_issue("#{@path}".blue + ": linking to an internal hash called #{href_hash} that does not exist")
               end
             end
@@ -53,5 +53,9 @@ class Links < ::HTML::Proofer::Checks::Check
         self.add_issue("#{@path}".blue + ": link has no href attribute") unless a['name'] || a['id']
       end
     end
+  end
+
+  def hash_check(html, href_hash)
+    html.xpath("//*[@id='#{href_hash}']", "//*[@name='#{href_hash}']").length > 0
   end
 end
