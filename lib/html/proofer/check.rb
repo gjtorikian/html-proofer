@@ -59,9 +59,6 @@ class HTML::Proofer::Checks
         return Result.new(href, 'invalid URI')
       end
 
-      # Skip non-HTTP URLs
-      #return nil if url.scheme !~ /^https?$/
-
       # Get status
       res = nil
       5.times do |i|
@@ -73,7 +70,7 @@ class HTML::Proofer::Checks
           return nil
         end
 
-        if res.code =~ /^3..$/
+        if res.code =~ /^[3|5]..$/
           if i == 4
             return nil
           end

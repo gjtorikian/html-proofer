@@ -43,4 +43,11 @@ describe "Links tests" do
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
+
+  it "should understand https" do
+    missingLinkHrefFilepath = "#{FIXTURES_DIR}/linkWithHttps.html"
+    @linkCheck = Links.new(missingLinkHrefFilepath, HTML::Proofer.create_nokogiri(missingLinkHrefFilepath))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
 end
