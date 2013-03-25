@@ -43,7 +43,7 @@ class HTML::Proofer::Checks
 
     def ignore_href?(href)
       uri = URI.parse(href)
-      %w( mailto ).concat(@additional_href_ignores).include?(uri.scheme)
+      %w( mailto ).include?(uri.scheme) || @additional_href_ignores.include?(href)
     rescue URI::BadURIError
       false
     rescue URI::InvalidURIError
