@@ -3,9 +3,9 @@ require 'html/proofer/checks'
 
 module HTML
   class Proofer
-    def initialize(src, opts = {:ext => ".html"})
+    def initialize(src, opts={})
       @srcDir = src
-      @options = opts
+      @options = {:ext => ".html"}.merge(opts)
     end
 
     def run
@@ -16,13 +16,11 @@ module HTML
         Find.find(@srcDir) do |path|
           if File.extname(path) == @options[:ext]
             html = HTML::Proofer.create_nokogiri(path)
-            check = klass.new(path, html)
+            check = klass.new(path, html, @options)
             check.run
-            issues.concat(check.issues)
+            self.print_issues(check.issues)
           end
         end
-
-        self.print_issues(issues)
       end
     end
 

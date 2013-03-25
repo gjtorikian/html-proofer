@@ -15,6 +15,13 @@ describe "Image tests" do
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageAlt.html".blue + ": image ./gpl.png does not have an alt attribute")
   end
 
+  it "fails for image with an empty alt attribute" do
+    missingAltFilepath = "#{FIXTURES_DIR}/missingImageAltText.html"
+    @imageCheck = Images.new(missingAltFilepath, HTML::Proofer.create_nokogiri(missingAltFilepath))
+    @imageCheck.run
+    @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageAltText.html".blue + ": image ./gpl.png does not have an alt attribute")
+  end
+
   it "fails for image without a dir prefix" do
     missingImageDirPrefixFilepath = "#{FIXTURES_DIR}/missingImageDirPrefix.html"
     @imageCheck = Images.new(missingImageDirPrefixFilepath, HTML::Proofer.create_nokogiri(missingImageDirPrefixFilepath))

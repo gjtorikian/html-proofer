@@ -7,6 +7,14 @@ class Links < ::HTML::Proofer::Checks::Check
       href = a['href']
 
       if href && href.length > 0
+        if @options[:href_swap] 
+          @options[:href_swap].each do |link, replace|
+            href = href.gsub(link, replace)
+          end
+        end
+        
+        return if ignore_href?(href)
+        
         if href.include? '#'
           href_split = href.split('#')
         end

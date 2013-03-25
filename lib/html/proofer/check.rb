@@ -11,10 +11,13 @@ class HTML::Proofer::Checks
 
     attr_reader :issues
 
-    def initialize(path, html)
+    def initialize(path, html, opts={})
       @path   = path
       @html   = html
+      @options = opts
       @issues = []
+
+      @additional_href_ignores = @options[:href_ignore] || []
     end
 
     def run
@@ -32,6 +35,15 @@ class HTML::Proofer::Checks
     def external_href?(href)
       uri = URI.parse(href)
       %w( http https ).include?(uri.scheme)
+    rescue URI::BadURIError
+      false
+    rescue URI::InvalidURIError
+      false
+    end
+
+    def ignore_href?(href)
+      uri = URI.parse(href)
+      %w( mailto ).concat(@additional_href_ignores).include?(uri.scheme)
     rescue URI::BadURIError
       false
     rescue URI::InvalidURIError
@@ -75,7 +87,6 @@ class HTML::Proofer::Checks
             base_url.fragment = nil
             location = base_url.to_s + location
           end
-          puts location
           url = URI.parse(location)
         elsif res.code == '200'
           return true

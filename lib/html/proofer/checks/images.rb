@@ -18,7 +18,7 @@ class Images < ::HTML::Proofer::Checks::Check
       end
 
       # check alt tag
-      self.add_issue("#{@path}".blue + ": image #{src} does not have an alt attribute") unless img['alt']
+      self.add_issue("#{@path}".blue + ": image #{src} does not have an alt attribute") unless img['alt'] and !img['alt'].empty?
     end
   end
 end

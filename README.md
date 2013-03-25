@@ -20,8 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
-Require the gem; generate some HTML; then `call` the `HTML::Proofer` on 
-your out folder:
+Require the gem; generate some HTML; create a new instance of the `HTML::Proofer` on 
+your out folder; then `run` it:
 
 ```ruby
 require 'html/proofer'
@@ -51,9 +51,11 @@ tester = HTML::Proofer.new("./out")
 tester.run
 ```
 
-The `HTML::Proofer` constructor takes on optional hash of additional options:
+The `HTML::Proofer` constructor takes an optional hash of additional options:
 
-* `:ext`: the extension (including the `.`) of your HTML files (default: `.html)
+* `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
+* `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
+* `:href_ignore`: an array of Strings containing `href`s that are safe to ignore
 
 ## What's Tested?
 
