@@ -56,6 +56,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 * `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
 * `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
 * `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (default: `mailto`)
+* `:longTests`: a Boolean indicating if long-running tests should run (for example, tests checking external links)
 
 ## What's Tested?
 
