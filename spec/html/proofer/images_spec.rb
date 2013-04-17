@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Image tests" do
   it "passes for existing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/existingImageExternal.html"
-    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath))
+    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath), {:longTests => true})
     @imageCheck.run
     @imageCheck.issues[0].should eq(nil)
   end
@@ -49,7 +49,7 @@ describe "Image tests" do
     @imageCheck.run
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageSrc.html".blue + ": image has no src attribute")
   end
-  
+
   it "fails for image with default mac filename" do
     terribleImageName = "#{FIXTURES_DIR}/terribleImageName.html"
     @imageCheck = Images.new(terribleImageName, HTML::Proofer.create_nokogiri(terribleImageName))
