@@ -6,6 +6,7 @@ module HTML
     def initialize(src, opts={})
       @srcDir = src
       @options = {:ext => ".html"}.merge(opts)
+      @failedTests = []
     end
 
     def run
@@ -22,6 +23,10 @@ module HTML
           end
         end
       end
+
+      if !@failedTests.empty?
+        raise "Failing tests for: {@failedTests}"
+      end
     end
 
     def self.create_nokogiri(path)
@@ -34,7 +39,7 @@ module HTML
 
     def print_issues(klass, issues)
       return if issues.empty?
-      raise "#{klass} has failing tests"
+      @failedTests.push klass
       issues.each do |issue|
         $stderr.puts issue + "\n\n"
       end
