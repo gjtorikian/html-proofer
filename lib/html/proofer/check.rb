@@ -51,7 +51,7 @@ class HTML::Proofer::Checks
     end
 
     def validate_url(href)
-      return nil unless @options[:longTests]
+      return true unless @options[:longTests]
 
       # Parse
       url = nil
