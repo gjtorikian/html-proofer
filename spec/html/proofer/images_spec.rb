@@ -49,4 +49,11 @@ describe "Image tests" do
     @imageCheck.run
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageSrc.html".blue + ": image has no src attribute")
   end
+  
+  it "fails for image with default mac filename" do
+    terribleImageName = "#{FIXTURES_DIR}/terribleImageName.html"
+    @imageCheck = Images.new(terribleImageName, HTML::Proofer.create_nokogiri(terribleImageName))
+    @imageCheck.run
+    @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/terribleImageName.html".blue + ": image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)")
+  end
 end
