@@ -31,7 +31,7 @@ describe "Image tests" do
 
   it "fails for missing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/missingImageExternal.html"
-    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath))
+    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath), {:longTests => true})
     @imageCheck.run
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist")
   end

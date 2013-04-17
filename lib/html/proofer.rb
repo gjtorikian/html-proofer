@@ -18,7 +18,7 @@ module HTML
             html = HTML::Proofer.create_nokogiri(path)
             check = klass.new(path, html, @options)
             check.run
-            self.print_issues(check.issues)
+            self.print_issues(klass, check.issues)
           end
         end
       end
@@ -32,8 +32,9 @@ module HTML
       HTML::Proofer::Checks::Check.subclasses
     end
 
-    def print_issues(issues)
+    def print_issues(klass, issues)
       return if issues.empty?
+      raise "#{klass} has failing tests"
       issues.each do |issue|
         $stderr.puts issue + "\n\n"
       end
