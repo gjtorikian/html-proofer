@@ -11,7 +11,6 @@ module HTML
 
     def run
       get_checks.each do |klass|
-        issues = []
         puts "Running #{klass.name.split(/:/).pop()} check... \n\n"
 
         Find.find(@srcDir) do |path|
@@ -25,7 +24,18 @@ module HTML
       end
 
       if !@failedTests.empty?
-        raise "Failing tests for: {@failedTests}"
+        # make the hash default to 0 so that += will work correctly
+        count = Hash.new(0)
+
+        # iterate over the array, counting duplicate entries
+        @failedTests.each do |v|
+          count[v] += 1
+        end
+
+        count.each do |k, v|
+          $stderr.puts "#{k} failed #{v} times"
+        end
+        raise "Tests ran, but found failures!"
       end
     end
 
