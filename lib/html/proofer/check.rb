@@ -53,7 +53,7 @@ class HTML::Proofer::Checks
     end
 
     def validate_url(href, issue_text)
-      request = Typhoeus::Request.new(href)
+      request = Typhoeus::Request.new(href, followlocation: true)
       request.on_complete do |response|
         if response.success?
           # no op
