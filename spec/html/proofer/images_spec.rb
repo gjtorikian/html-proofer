@@ -33,6 +33,8 @@ describe "Image tests" do
     externalImageFilepath = "#{FIXTURES_DIR}/missingImageExternal.html"
     @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath), {:longTests => true})
     @imageCheck.run
+    @imageCheck.hydra.run
+    @imageCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist")
   end
 

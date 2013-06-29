@@ -4,12 +4,13 @@ require 'net/https'
 require 'timeout'
 require 'uri'
 require 'colored'
+require 'typhoeus'
 
 class HTML::Proofer::Checks
 
   class Check
 
-    attr_reader :issues
+    attr_reader :issues, :hydra
 
     def initialize(path, html, opts={})
       @path   = path
@@ -17,6 +18,7 @@ class HTML::Proofer::Checks
       @options = opts
       @issues = []
 
+      @hydra = Typhoeus::Hydra.hydra
       @additional_href_ignores = @options[:href_ignore] || []
     end
 
@@ -50,48 +52,66 @@ class HTML::Proofer::Checks
       false
     end
 
-    def validate_url(href)
-      return true unless @options[:longTests]
+    def validate_url(href, issue_text)
+      #return true unless @options[:longTests]
 
-      # Parse
-      url = nil
-      begin
-        url = URI.parse(href)
-      rescue URI::InvalidURIError
-        return Result.new(href, 'invalid URI')
+      # # Parse
+      # url = nil
+      # begin
+      #   url = URI.parse(href)
+      # rescue URI::InvalidURIError
+      #   return Result.new(href, 'invalid URI')
+      # end
+
+      request = Typhoeus::Request.new(href)
+      request.on_complete do |response|
+        if response.success?
+          # no op
+        elsif response.timed_out?
+          # aw hell no
+          log("got a time out")
+          self.add_issue(issue_text + " got a time out")
+        elsif response.code == 0
+          # Could not get an http response, something's wrong.
+          self.add_issue(issue_text + " #{response}")
+        else
+          # Received a non-successful http response.
+          self.add_issue(issue_text + " HTTP request failed: " + response.code.to_s)
+        end
       end
+      hydra.queue(request)
 
       # Get status
-      res = nil
-      5.times do |i|
-        begin
-          Timeout::timeout(10) do
-            res = request_url(url)
-          end
-        rescue => e
-          return nil
-        end
+      # res = nil
+      # 5.times do |i|
+      #   begin
+      #     Timeout::timeout(10) do
+      #       res = request_url(url)
+      #     end
+      #   rescue => e
+      #     return nil
+      #   end
 
-        next if res.code =~ /^5..$/
+      #   next if res.code =~ /^5..$/
         
-        if res.code =~ /^3..$/
-          # Find proper location
-          location = res['Location']
-          if location !~ /^https?:\/\//
-            base_url = url.dup
-            base_url.path = (location =~ /^\// ? '' : '/')
-            base_url.query = nil
-            base_url.fragment = nil
-            location = base_url.to_s + location
-          end
-          url = URI.parse(location)
-        elsif res.code == '200'
-          return true
-        else
-          return nil
-        end
-      end
-      raise 'should not have gotten here'
+      #   if res.code =~ /^3..$/
+      #     # Find proper location
+      #     location = res['Location']
+      #     if location !~ /^https?:\/\//
+      #       base_url = url.dup
+      #       base_url.path = (location =~ /^\// ? '' : '/')
+      #       base_url.query = nil
+      #       base_url.fragment = nil
+      #       location = base_url.to_s + location
+      #     end
+      #     url = URI.parse(location)
+      #   elsif res.code == '200'
+      #     return true
+      #   else
+      #     return nil
+      #   end
+      # end
+      # raise 'should not have gotten here'
     end
 
     def request_url(url)
