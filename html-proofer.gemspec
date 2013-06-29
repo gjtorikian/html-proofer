@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "nokogiri",        "~> 1.5.6"
   gem.add_dependency "colored",         "~> 1.2"
+  gem.add_dependency "typhoeus",        "~> 0.6.3"
 
   gem.add_development_dependency "html-pipeline", "~> 0.0.7"
   gem.add_development_dependency "rspec", "~> 2.13.0"

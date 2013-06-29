@@ -47,7 +47,7 @@ class Links < ::HTML::Proofer::Checks::Check
             self.add_issue("#{@path}".blue + ": internally linking to #{href}, which does not exist") unless File.exist?(File.join(File.dirname(@path), href))
           end
         else
-          self.add_issue("#{@path}".blue + ": externally linking to #{href}, which does not exist") unless validate_url(href)
+          validate_url(href, "#{@path}".blue + ": externally linking to #{href}, which does not exist")
         end
       else
         self.add_issue("#{@path}".blue + ": link has no href attribute") unless a['name'] || a['id']
