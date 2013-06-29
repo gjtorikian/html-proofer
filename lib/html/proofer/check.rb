@@ -64,7 +64,7 @@ class HTML::Proofer::Checks
           self.add_issue(issue_text + " #{response}")
         else
           # Received a non-successful http response.
-          self.add_issue(issue_text + " HTTP request failed: " + response.code.to_s)
+          self.add_issue(issue_text + " HTTP request failed: " + response.code.to_s) unless response.code.to_s == "420"
         end
       end
       hydra.queue(request)
