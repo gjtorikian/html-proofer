@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Image tests" do
   it "passes for existing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/existingImageExternal.html"
-    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath), {:longTests => true})
+    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath))
     @imageCheck.run
     @imageCheck.issues[0].should eq(nil)
   end
@@ -31,8 +31,10 @@ describe "Image tests" do
 
   it "fails for missing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/missingImageExternal.html"
-    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath), {:longTests => true})
+    @imageCheck = Images.new(externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath))
     @imageCheck.run
+    @imageCheck.hydra.run
+    @imageCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist")
   end
 

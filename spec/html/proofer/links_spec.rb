@@ -18,8 +18,10 @@ describe "Links tests" do
 
   it "fails for broken external links" do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/brokenLinkExternal.html"
-    @linkCheck = Links.new(brokenLinkExternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkExternalFilepath), {:longTests => true})
+    @linkCheck = Links.new(brokenLinkExternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkExternalFilepath))
     @linkCheck.run
+    @linkCheck.hydra.run
+    @linkCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
     @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": externally linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist")
   end
 
@@ -39,14 +41,14 @@ describe "Links tests" do
 
   it "should follow redirects" do
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/linkWithRedirect.html"
-    @linkCheck = Links.new(linkWithRedirectFilepath, HTML::Proofer.create_nokogiri(linkWithRedirectFilepath), {:longTests => true})
+    @linkCheck = Links.new(linkWithRedirectFilepath, HTML::Proofer.create_nokogiri(linkWithRedirectFilepath))
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
 
   it "should understand https" do
     linkWithHttpsFilepath = "#{FIXTURES_DIR}/linkWithHttps.html"
-    @linkCheck = Links.new(linkWithHttpsFilepath, HTML::Proofer.create_nokogiri(linkWithHttpsFilepath), {:longTests => true})
+    @linkCheck = Links.new(linkWithHttpsFilepath, HTML::Proofer.create_nokogiri(linkWithHttpsFilepath))
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end

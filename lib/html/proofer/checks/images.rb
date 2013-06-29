@@ -11,7 +11,7 @@ class Images < ::HTML::Proofer::Checks::Check
         if !external_href?(src)
           self.add_issue("#{@path}".blue + ": internal image #{src} does not exist") unless src[0] != "/" and File.exist?(File.join(File.dirname(@path), src))
         else
-          self.add_issue("#{@path}".blue + ": external image #{src} does not exist") unless validate_url(src)
+          validate_url(src, "#{@path}".blue + ": external image #{src} does not exist")
         end
       else
         self.add_issue("#{@path}".blue + ": image has no src attribute")

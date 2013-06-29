@@ -18,6 +18,7 @@ module HTML
             html = HTML::Proofer.create_nokogiri(path)
             check = klass.new(path, html, @options)
             check.run
+            check.hydra.run
             self.print_issues(klass, check.issues)
           end
         end
