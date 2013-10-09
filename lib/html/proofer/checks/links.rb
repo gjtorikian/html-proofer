@@ -7,7 +7,7 @@ class Links < ::HTML::Proofer::Checks::Check
       href = a['href']
 
       if href && href.length > 0
-        if @options[:href_swap] 
+        if @options[:href_swap]
           @options[:href_swap].each do |link, replace|
             href = href.gsub(link, replace)
           end
@@ -20,7 +20,7 @@ class Links < ::HTML::Proofer::Checks::Check
         end
         if !external_href?(href)
           # an internal link, with a hash
-          if href_split
+          if href_split && !href_split.empty?
             href_file = href_split[0]
             href_hash = href_split[1]
 
@@ -28,7 +28,7 @@ class Links < ::HTML::Proofer::Checks::Check
             if href_file.length > 0
               href_location = File.join(File.dirname(@path), href_file)
               if !File.exist?(href_location)
-                self.add_issue("#{@path}".blue + ": internal link #{href_location} does not exist") 
+                self.add_issue("#{@path}".blue + ": internal link #{href_location} does not exist")
               else
                 href_html = HTML::Proofer.create_nokogiri(href_location)
                 found_hash_match = false
