@@ -29,7 +29,7 @@ describe "Links tests" do
     brokenLinkInternalFilepath = "#{FIXTURES_DIR}/brokenLinkInternal.html"
     @linkCheck = Links.new(brokenLinkInternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkInternalFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": internally linking to ./notreal.html, which does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": internally linking to spec/html/proofer/fixtures/./notreal.html, which does not exist")
   end
 
   it "fails for link with no href" do
@@ -56,6 +56,20 @@ describe "Links tests" do
   it "fails for broken hash links with status code numbers" do
     brokenLinkWithNumberFilepath = "#{FIXTURES_DIR}/brokenLinkWithNumber.html"
     @linkCheck = Links.new(brokenLinkWithNumberFilepath, HTML::Proofer.create_nokogiri(brokenLinkWithNumberFilepath))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
+
+  it 'properly resolves implicit /index.html in link paths' do
+    linkToFolder = "#{FIXTURES_DIR}/linkToFolder.html"
+    @linkCheck = Links.new(linkToFolder, HTML::Proofer.create_nokogiri(linkToFolder))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
+
+  it 'properly checks links to root' do
+    rootLink = "#{FIXTURES_DIR}/rootLink.html"
+    @linkCheck = Links.new(rootLink, HTML::Proofer.create_nokogiri(rootLink))
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
