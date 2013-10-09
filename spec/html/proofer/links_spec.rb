@@ -59,4 +59,11 @@ describe "Links tests" do
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
+
+  it 'properly resolves implicit /index.html in link paths' do
+    linkToFolder = "#{FIXTURES_DIR}/linkToFolder.html"
+    @linkCheck = Links.new(linkToFolder, HTML::Proofer.create_nokogiri(linkToFolder))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
 end
