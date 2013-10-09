@@ -12,7 +12,8 @@ class HTML::Proofer::Checks
 
     attr_reader :issues, :hydra
 
-    def initialize(path, html, opts={})
+    def initialize(src, path, html, opts={})
+      @src    = src
       @path   = path
       @html   = html
       @options = opts
@@ -90,6 +91,31 @@ class HTML::Proofer::Checks
       end
 
       classes
+    end
+
+    def resolve_path(path)
+
+      if path =~ /^\// #path relative to root
+        base = @src
+      else #relative links
+        base = @path
+      end
+
+      if path =~ /^#/ #anchor link, no trailing slash
+        path = "#{base}#{path}"
+      else # relative path, resolve trailing slashes automatically
+        path = File.join base, path
+      end
+
+      # implicit /index.html support
+      begin
+        parts = URI.parse path
+        parts.path = File.join parts.path, "index.html" if File.directory? parts.path
+        path = parts.to_s
+      rescue
+        self.add_issue("#{@path}".blue + ": #{path} is not a valid URI")
+      end
+      path
     end
   end
 end
