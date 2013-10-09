@@ -20,4 +20,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "html-pipeline", "~> 0.0.12"
   gem.add_development_dependency "rspec", "~> 2.13.0"
+  gem.add_development_dependency "rake"
 end
