@@ -66,4 +66,11 @@ describe "Links tests" do
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
+
+  it 'properly checks links to root' do
+    rootLink = "#{FIXTURES_DIR}/rootLink.html"
+    @linkCheck = Links.new(rootLink, HTML::Proofer.create_nokogiri(rootLink))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
 end
