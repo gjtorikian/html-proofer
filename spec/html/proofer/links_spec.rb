@@ -29,7 +29,7 @@ describe "Links tests" do
     brokenLinkInternalFilepath = "#{FIXTURES_DIR}/brokenLinkInternal.html"
     @linkCheck = Links.new(brokenLinkInternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkInternalFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": internally linking to ./notreal.html, which does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkInternal.html".blue + ": internally linking to spec/html/proofer/fixtures/./notreal.html, which does not exist")
   end
 
   it "fails for link with no href" do
