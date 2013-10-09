@@ -26,7 +26,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
             # it's not an internal hash; it's pointing to some other file
             if href_file.length > 0
-              href_location = File.join(File.dirname(@path), href_file)
+              href_location = resolve_path File.join(File.dirname(@path), href_file)
               if !File.exist?(href_location)
                 self.add_issue("#{@path}".blue + ": internal link #{href_location} does not exist")
               else
@@ -44,7 +44,8 @@ class Links < ::HTML::Proofer::Checks::Check
             end
           # internal link, no hash
           else
-            self.add_issue("#{@path}".blue + ": internally linking to #{href}, which does not exist") unless File.exist?(File.join(File.dirname(@path), href))
+            href_location = resolve_path File.join(File.dirname(@path), href)
+            self.add_issue("#{@path}".blue + ": internally linking to #{href_location}, which does not exist") unless File.exist?(href_location)
           end
         else
           validate_url(href, "#{@path}".blue + ": externally linking to #{href}, which does not exist")
@@ -57,5 +58,11 @@ class Links < ::HTML::Proofer::Checks::Check
 
   def hash_check(html, href_hash)
     html.xpath("//*[@id='#{href_hash}']", "//*[@name='#{href_hash}']").length > 0
+  end
+
+  #support for implicit /index.html in URLs
+  def resolve_path(path)
+    path << "index.html" if File.directory? path
+    path
   end
 end
