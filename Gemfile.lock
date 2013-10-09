@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    html-proofer (0.0.15)
+      colored (~> 1.2)
+      nokogiri (= 1.6.0)
+      typhoeus (~> 0.6.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -26,7 +34,7 @@ GEM
       rinku (~> 1.7)
       sanitize (~> 2.0)
     i18n (0.6.4)
-    mime-types (1.23)
+    mime-types (1.25)
     mini_portile (0.5.0)
     minitest (4.7.5)
     multi_json (1.7.7)
@@ -54,9 +62,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  colored (~> 1.2)
   html-pipeline (~> 0.0.12)
-  nokogiri (= 1.6.0)
+  html-proofer!
   rake
   rspec (~> 2.13.0)
-  typhoeus (~> 0.6.3)
