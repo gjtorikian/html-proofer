@@ -104,18 +104,23 @@ class HTML::Proofer::Checks
       if path =~ /^#/ #anchor link, no trailing slash
         path = "#{base}#{path}"
       else # relative path, resolve trailing slashes automatically
-        path = File.join base, path
+        path = File.join File.dirname(base), path
       end
 
-      # implicit /index.html support
       begin
-        parts = URI.parse path
+        parts = URI.parse URI.encode path
+
+        # implicit /index.html support, with support for tailing slashes
         parts.path = File.join parts.path, "index.html" if File.directory? parts.path
+
+        # strip anchor which isn't necessary to resolve path
+        parts.fragment = nil
+
         path = parts.to_s
       rescue
         self.add_issue("#{@path}".blue + ": #{path} is not a valid URI")
       end
-      path
+      URI.decode path
     end
   end
 end
