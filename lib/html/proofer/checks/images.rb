@@ -9,7 +9,7 @@ class Images < ::HTML::Proofer::Checks::Check
       # check image sources
       if src && src.length > 0
         if !external_href?(src)
-          self.add_issue("#{@path}".blue + ": internal image #{src} does not exist") unless File.exist?( resolve_path(src))
+          self.add_issue("#{@path}".blue + ": internal image #{src} does not exist") unless file? src
         else
           validate_url(src, "#{@path}".blue + ": external image #{src} does not exist")
         end
