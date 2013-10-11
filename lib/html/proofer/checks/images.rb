@@ -1,30 +1,53 @@
 # encoding: utf-8
 
+class Image
+
+  SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
+
+  def initialize(img)
+    @img = img
+  end
+
+  def valid_alt_tag?
+    @img['alt'] and !@img['alt'].empty?
+  end
+
+  def terrible_filename?
+    src =~ SCREEN_SHOT_REGEX
+  end
+
+  def src
+    @img['src'] if @img['src'] && @img['src'].length > 0
+  end
+
+  def missing_src?
+    !src
+  end
+
+end
+
 class Images < ::HTML::Proofer::Checks::Check
 
   def run
     @html.css('img').each do |img|
-      src = img['src']
 
-      # check image sources
-      if src && src.length > 0
-        if !external_href?(src)
-          self.add_issue("#{@path}".blue + ": internal image #{src} does not exist") unless file? src
-        else
-          validate_url(src, "#{@path}".blue + ": external image #{src} does not exist")
-        end
+      img = Image.new img
+
+      # does the image exist?
+      if img.missing_src?
+        self.add_issue "image has no src attribute"
+      elsif external_href? img.src
+        validate_url img.src, "external image #{img.src} does not exist"
       else
-        self.add_issue("#{@path}".blue + ": image has no src attribute")
+        self.add_issue("internal image #{img.src} does not exist") unless file? img.src
       end
 
       # check alt tag
-      self.add_issue("#{@path}".blue + ": image #{src} does not have an alt attribute") unless img['alt'] and !img['alt'].empty?
+      self.add_issue "image #{img.src} does not have an alt attribute" unless img.valid_alt_tag?
 
-      screenShotRegExp = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
+      # screenshot filenames
+      self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
 
-      if src =~ screenShotRegExp
-        self.add_issue("#{@path}".blue + ": image has a terrible filename (#{src})")
-      end
     end
   end
 end

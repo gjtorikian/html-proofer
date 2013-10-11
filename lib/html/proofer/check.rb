@@ -28,7 +28,7 @@ class HTML::Proofer::Checks
     end
 
     def add_issue(desc)
-      @issues << desc
+      @issues << "#{@path.blue}: #{desc}"
     end
 
     def output_filenames
@@ -122,5 +122,6 @@ class HTML::Proofer::Checks
     def file?(path)
       File.exist? File.join Dir.pwd, resolve_path(path)
     end
+
   end
 end
