@@ -1,56 +1,45 @@
 # encoding: utf-8
 
+class Link < ::HTML::Proofer::Checkable
+
+  def href
+    @href unless @href.nil? || @href.empty?
+  end
+
+  def missing_href?
+    href.nil? and @name.nil? and @id.nil?
+  end
+
+end
+
 class Links < ::HTML::Proofer::Checks::Check
 
   def run
-    @html.css('a').each do |a|
-      href = a['href']
+    @html.css('a').each do |link|
 
-      if href && href.length > 0
-        if @options[:href_swap]
-          @options[:href_swap].each do |link, replace|
-            href = href.gsub(link, replace)
-          end
-        end
+      link = Link.new link, self
+      return if link.ignore?
 
-        return if ignore_href?(href)
+      # is there even a href?
+      return self.add_issue("link has no href attribute") if link.missing_href?
 
-        if href.include? '#'
-          href_split = href.split('#')
-        end
-        if !external_href?(href)
-
-          # an internal link, with a hash
-          if href_split && !href_split.empty?
-            href_file = href_split[0]
-            href_hash = href_split[1]
-
-            # it's not an internal hash; it's pointing to some other file
-            if href_file.length > 0
-              if !file?(href_file)
-                self.add_issue("#{@path}".blue + ": internal link #{href_file} does not exist")
-              else
-                href_html = HTML::Proofer.create_nokogiri(resolve_path(href_file))
-                found_hash_match = false
-                unless hash_check(href_html, href_hash)
-                  self.add_issue("#{@path}".blue + ": linking to #{href}, but #{href_hash} does not exist")
-                end
-              end
-            # it is an internal link, with an internal hash
-            else
-              unless hash_check(@html, href_hash)
-                self.add_issue("#{@path}".blue + ": linking to an internal hash called #{href_hash} that does not exist")
-              end
-            end
-          # internal link, no hash
-          else
-            self.add_issue("#{@path}".blue + ": internally linking to #{href}, which does not exist") unless file?(href)
-          end
-        else
-          validate_url(href, "#{@path}".blue + ": externally linking to #{href}, which does not exist")
-        end
+      # does the file even exist?
+      if link.remote?
+        validate_url link.href, "externally linking to #{link.href}, which does not exist"
       else
-        self.add_issue("#{@path}".blue + ": link has no href attribute") unless a['name'] || a['id']
+        self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
+      end
+
+      # verify the target hash
+      if link.hash
+        if link.remote?
+          #not yet checked
+        elsif link.internal?
+          self.add_issue "linking to internal hash ##{link.hash} that does not exist" unless hash_check @html, link.hash
+        elsif link.external?
+          target_html = HTML::Proofer.create_nokogiri link.absolute_path
+          self.add_issue "linking to #{link.href}, but #{link.hash} does not exist" unless hash_check target_html, link.hash
+        end
       end
     end
   end

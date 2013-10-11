@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'html/proofer/checkable'
 require 'html/proofer/checks'
 
 module HTML
