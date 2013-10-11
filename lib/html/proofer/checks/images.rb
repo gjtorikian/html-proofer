@@ -5,19 +5,20 @@ class Image
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
   def initialize(img)
-    @img = img
+    @src = img['src']
+    @alt = img['alt']
   end
 
   def valid_alt_tag?
-    @img['alt'] and !@img['alt'].empty?
+    @alt and !@alt.empty?
   end
 
   def terrible_filename?
-    src =~ SCREEN_SHOT_REGEX
+    @src =~ SCREEN_SHOT_REGEX
   end
 
   def src
-    @img['src'] if @img['src'] && @img['src'].length > 0
+    @src unless @src.nil? || @src.empty?
   end
 
   def missing_src?
