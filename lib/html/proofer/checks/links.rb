@@ -23,6 +23,9 @@ class Links < ::HTML::Proofer::Checks::Check
       # is there even a href?
       return self.add_issue("link has no href attribute") if link.missing_href?
 
+      # is it even a valid URL?
+      return self.add_issue "#{link.href} is an invalid URL" unless link.valid?
+
       # does the file even exist?
       if link.remote?
         validate_url link.href, "externally linking to #{link.href}, which does not exist"

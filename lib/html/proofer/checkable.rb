@@ -22,16 +22,24 @@ module HTML
         @src || @href || ""
       end
 
+      def valid?
+        begin
+          URI.parse url
+        rescue
+          false
+        end
+      end
+
       def parts
-        url.split('#') || [""]
+         URI.parse url
       end
 
       def path
-        parts.first
+        parts.path
       end
 
       def hash
-        parts.last if parts.length > 1
+        parts.fragment
       end
 
       # path is to an external server

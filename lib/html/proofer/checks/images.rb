@@ -29,6 +29,9 @@ class Images < ::HTML::Proofer::Checks::Check
 
       img = Image.new img, self
 
+      # screenshot filenames, return because invalid URL
+      return self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
+
       # does the image exist?
       if img.missing_src?
         self.add_issue "image has no src attribute"
@@ -41,8 +44,6 @@ class Images < ::HTML::Proofer::Checks::Check
       # check alt tag
       self.add_issue "image #{img.src} does not have an alt attribute" unless img.valid_alt_tag?
 
-      # screenshot filenames
-      self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
 
     end
   end
