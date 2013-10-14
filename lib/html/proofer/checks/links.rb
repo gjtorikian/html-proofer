@@ -19,6 +19,7 @@ class Links < ::HTML::Proofer::Checks::Check
           href_split = href.split('#')
         end
         if !external_href?(href)
+
           # an internal link, with a hash
           if href_split && !href_split.empty?
             href_file = href_split[0]
@@ -26,11 +27,10 @@ class Links < ::HTML::Proofer::Checks::Check
 
             # it's not an internal hash; it's pointing to some other file
             if href_file.length > 0
-              href_location = resolve_path File.join(File.dirname(@path), href_file)
-              if !File.exist?(href_location)
-                self.add_issue("#{@path}".blue + ": internal link #{href_location} does not exist")
+              if !file?(href_file)
+                self.add_issue("#{@path}".blue + ": internal link #{href_file} does not exist")
               else
-                href_html = HTML::Proofer.create_nokogiri(href_location)
+                href_html = HTML::Proofer.create_nokogiri(resolve_path(href_file))
                 found_hash_match = false
                 unless hash_check(href_html, href_hash)
                   self.add_issue("#{@path}".blue + ": linking to #{href}, but #{href_hash} does not exist")
@@ -44,8 +44,7 @@ class Links < ::HTML::Proofer::Checks::Check
             end
           # internal link, no hash
           else
-            href_location = resolve_path File.join(File.dirname(@path), href)
-            self.add_issue("#{@path}".blue + ": internally linking to #{href_location}, which does not exist") unless File.exist?(href_location)
+            self.add_issue("#{@path}".blue + ": internally linking to #{href}, which does not exist") unless file?(href)
           end
         else
           validate_url(href, "#{@path}".blue + ": externally linking to #{href}, which does not exist")
@@ -60,9 +59,4 @@ class Links < ::HTML::Proofer::Checks::Check
     html.xpath("//*[@id='#{href_hash}']", "//*[@name='#{href_hash}']").length > 0
   end
 
-  #support for implicit /index.html in URLs
-  def resolve_path(path)
-    path << "index.html" if File.directory? path
-    path
-  end
 end

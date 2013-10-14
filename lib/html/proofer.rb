@@ -16,7 +16,7 @@ module HTML
         Find.find(@srcDir) do |path|
           if File.extname(path) == @options[:ext]
             html = HTML::Proofer.create_nokogiri(path)
-            check = klass.new(path, html, @options)
+            check = klass.new(@srcDir, path, html, @options)
             check.run
             check.hydra.run
             self.print_issues(klass, check.issues)
