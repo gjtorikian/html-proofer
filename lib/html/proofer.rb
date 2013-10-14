@@ -1,4 +1,6 @@
 require 'nokogiri'
+require 'find'
+require 'html/proofer/checkable'
 require 'html/proofer/checks'
 
 module HTML
@@ -24,7 +26,10 @@ module HTML
         end
       end
 
-      if !@failedTests.empty?
+      if @failedTests.empty?
+        puts "Tests executed sucesfully.".green
+        exit 0
+      else
         # make the hash default to 0 so that += will work correctly
         count = Hash.new(0)
 
@@ -41,7 +46,7 @@ module HTML
     end
 
     def self.create_nokogiri(path)
-      path << "index.html" if File.directory? path #support for Jekyll-style links
+      path << "/index.html" if File.directory? path #support for Jekyll-style links
       Nokogiri::HTML(File.read(path))
     end
 
