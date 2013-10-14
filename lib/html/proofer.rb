@@ -26,7 +26,10 @@ module HTML
         end
       end
 
-      if !@failedTests.empty?
+      if @failedTests.empty?
+        puts "Tests executed sucesfully.".green
+        exit 0
+      else
         # make the hash default to 0 so that += will work correctly
         count = Hash.new(0)
 
