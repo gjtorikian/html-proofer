@@ -10,7 +10,7 @@ class HTML::Proofer::Checks
 
   class Check
 
-    attr_reader :issues, :hydra
+    attr_reader :issues, :hydra, :src, :path, :options, :additional_href_ignores
 
     def initialize(src, path, html, opts={})
       @src    = src
@@ -28,29 +28,11 @@ class HTML::Proofer::Checks
     end
 
     def add_issue(desc)
-      @issues << desc
+      @issues << "#{@path.blue}: #{desc}"
     end
 
     def output_filenames
       Dir[@site.config[:output_dir] + '/**/*'].select{ |f| File.file?(f) }
-    end
-
-    def external_href?(href)
-      uri = URI.parse(href)
-      %w( http https ).include?(uri.scheme)
-    rescue URI::BadURIError
-      false
-    rescue URI::InvalidURIError
-      false
-    end
-
-    def ignore_href?(href)
-      uri = URI.parse(href)
-      %w( mailto ).include?(uri.scheme) || @additional_href_ignores.include?(href)
-    rescue URI::BadURIError
-      false
-    rescue URI::InvalidURIError
-      false
     end
 
     def validate_url(href, issue_text)
@@ -93,34 +75,5 @@ class HTML::Proofer::Checks
       classes
     end
 
-    def resolve_path(path)
-
-      #Strip anchor, not needed to resolve file
-      path = path.split('#').first
-
-      if path =~ /^\// #path relative to root
-        base = @src
-      elsif File.exist? File.join Dir.pwd, @path #relative links, path is a file
-        base = File.dirname(@path)
-      else #relative link, path is a directory
-        base = @path
-      end
-
-      if path =~ /^#/ #anchor link, no trailing slash
-        path = "#{base}#{path}"
-      else # relative path, resolve trailing slashes automatically
-        path = File.join base, path
-      end
-
-      # implicit /index.html support, with support for tailing slashes
-      path = File.join path, "index.html" if File.directory? File.join Dir.pwd, path
-
-      path
-    end
-
-    # checks if a file exists relative to the current pwd
-    def file?(path)
-      File.exist? File.join Dir.pwd, resolve_path(path)
-    end
   end
 end

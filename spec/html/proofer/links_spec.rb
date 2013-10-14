@@ -13,7 +13,7 @@ describe "Links tests" do
     brokenHashInternalFilepath = "#{FIXTURES_DIR}/brokenHashInternal.html"
     @linkCheck = Links.new("#{FIXTURES_DIR}", brokenHashInternalFilepath, HTML::Proofer.create_nokogiri(brokenHashInternalFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenHashInternal.html".blue + ": linking to an internal hash called noHash that does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenHashInternal.html".blue + ": linking to internal hash #noHash that does not exist")
   end
 
   it "fails for broken external links" do
@@ -57,7 +57,7 @@ describe "Links tests" do
     brokenLinkWithNumberFilepath = "#{FIXTURES_DIR}/brokenLinkWithNumber.html"
     @linkCheck = Links.new("#{FIXTURES_DIR}", brokenLinkWithNumberFilepath, HTML::Proofer.create_nokogiri(brokenLinkWithNumberFilepath))
     @linkCheck.run
-    @linkCheck.issues[0].should eq(nil)
+    @linkCheck.issues[0].should eq("\e[34mspec/html/proofer/fixtures/brokenLinkWithNumber.html\e[0m: linking to internal hash #25-method-not-allowed that does not exist")
   end
 
   it 'properly resolves implicit /index.html in link paths' do
