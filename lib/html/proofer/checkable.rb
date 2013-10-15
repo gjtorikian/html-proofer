@@ -11,7 +11,7 @@ module HTML
         @check = check
 
         if @href && @check.options[:href_swap]
-          @options[:href_swap].each do |link, replace|
+          @check.options[:href_swap].each do |link, replace|
             @href = @href.gsub(link, replace)
           end
         end
