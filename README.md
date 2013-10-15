@@ -1,8 +1,8 @@
 # HTML::Proofer
 
-Generate HTML files? Use them for documentation? Great, then this tool might be for you.
+If you generate HTML files, _then this tool might be for you_.
 
-Here are a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your documentation output.
+`HTML::Proofer` is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
 
 [![Build Status](https://travis-ci.org/gjtorikian/html-proofer.png?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.png)](http://badge.fury.io/rb/html-proofer)
 
@@ -23,7 +23,7 @@ Or install it yourself as:
 ## Usage
 
 Require the gem; generate some HTML; create a new instance of the `HTML::Proofer` on
-your out folder; then `run` it:
+your output folder; then `run` it. Here's a simple example:
 
 ```ruby
 require 'html/proofer'
@@ -49,17 +49,10 @@ Find.find("./docs") do |path|
 end
 
 # test your out dir!
-tester = HTML::Proofer.new("./out")
-tester.run
+HTML::Proofer.new("./out").run
 ```
 
-The `HTML::Proofer` constructor takes an optional hash of additional options:
-
-* `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
-* `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
-* `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (default: `mailto`)
-
-### Usage with Jekyll
+## Usage with Jekyll
 
 Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'` to your `Gemfile` as described above, and add the following to your `Rakefile`, using `rake test` to execute:
 
@@ -79,3 +72,12 @@ end
 * Whether external images are showing
 * Whether your internal links are not broken; this includes hash references (`#linkToMe`)
 * Whether external links are working
+
+## Configuration 
+
+
+The `HTML::Proofer` constructor takes an optional hash of additional options:
+
+* `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
+* `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
+* `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (default: `mailto`)
