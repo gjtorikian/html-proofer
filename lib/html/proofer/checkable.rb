@@ -8,6 +8,7 @@ module HTML
         @alt = obj['alt']
         @name = obj['name']
         @id = obj['id']
+        @data_ignore_proofer = obj['data-ignore-proofer']
         @check = check
 
         if @href && @check.options[:href_swap]
@@ -54,7 +55,7 @@ module HTML
 
       def ignore?
         uri = URI.parse url
-        %w( mailto ).include?(uri.scheme) || @check.additional_href_ignores.include?(href)
+        @data_ignore_proofer || %w( mailto ).include?(uri.scheme) || @check.additional_href_ignores.include?(href)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
