@@ -81,3 +81,5 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 * `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
 * `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
 * `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (default: `mailto`)
+
+To any `<a>` or `<img>` tag, you may add the `data-proofer-ignore` attribute to ignore the link.

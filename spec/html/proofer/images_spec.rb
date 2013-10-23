@@ -51,4 +51,11 @@ describe "Image tests" do
     @imageCheck.run
     @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/terribleImageName.html".blue + ": image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)")
   end
+
+  it 'ignores images marked as ignore data-proofer-ignore' do
+    ignorableImages = "#{FIXTURES_DIR}/ignorableImages.html"
+    @linkCheck = Links.new("#{FIXTURES_DIR}", ignorableImages, HTML::Proofer.create_nokogiri(ignorableImages))
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
 end
