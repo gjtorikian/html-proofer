@@ -81,7 +81,7 @@ describe "Links tests" do
     @linkCheck.issues[0].should eq(nil)
   end
 
-  it 'ignores links marked as ignore data-ignore-proofer' do
+  it 'ignores links marked as ignore data-proofer-ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/ignorableLinks.html"
     @linkCheck = Links.new("#{FIXTURES_DIR}", ignorableLinks, HTML::Proofer.create_nokogiri(ignorableLinks))
     @linkCheck.run

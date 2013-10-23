@@ -8,7 +8,7 @@ module HTML
         @alt = obj['alt']
         @name = obj['name']
         @id = obj['id']
-        @data_ignore_proofer = obj['data-ignore-proofer']
+        @data_ignore_proofer = obj['data-proofer-ignore']
         @check = check
 
         if @href && @check.options[:href_swap]
