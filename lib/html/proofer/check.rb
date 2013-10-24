@@ -19,7 +19,7 @@ class HTML::Proofer::Checks
       @options = opts
       @issues = []
 
-      @hydra = Typhoeus::Hydra.new(:max_concurrency => 15)
+      @hydra = Typhoeus::Hydra.hydra
       @additional_href_ignores = @options[:href_ignore] || []
     end
 
@@ -47,7 +47,15 @@ class HTML::Proofer::Checks
           self.add_issue(issue_text + ". #{response.return_message}!")
         else
           response_code = response.code.to_s
-          self.add_issue("#{issue_text} HTTP request failed: #{response_code}")
+          if %w(420 503).include?(response_code)
+            # 420s usually come from rate limiting; let's ignore the query and try just the path
+            uri = URI(href)
+            response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, {:followlocation => true})
+            self.add_issue("#{issue_text} Originally, this was a #{response_code}. Now, the HTTP request failed again: #{response.code.to_s}") unless response.success?
+          else
+            # Received a non-successful http response.
+            self.add_issue("#{issue_text} HTTP request failed: #{response_code}")
+          end
         end
       end
       hydra.queue(request)
