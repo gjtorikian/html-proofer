@@ -27,7 +27,7 @@ module HTML
       end
 
       if @failedTests.empty?
-        puts "Tests executed sucesfully.".green
+        puts "Tests executed successfully.".green
         exit 0
       else
         # make the hash default to 0 so that += will work correctly

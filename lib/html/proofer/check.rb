@@ -44,10 +44,15 @@ class HTML::Proofer::Checks
           self.add_issue(issue_text + " got a time out")
         elsif response.code == 0
           # Could not get an http response, something's wrong.
-          self.add_issue(issue_text + " #{response}")
+          self.add_issue(issue_text + ". #{response.return_message}!")
         else
-          # Received a non-successful http response.
-          self.add_issue(issue_text + " HTTP request failed: " + response.code.to_s) unless response.code.to_s == "420"
+          if %w(420 503).include?(response.code.to_s)
+            response = Typhoeus.get(href, {:followlocation => true})
+            self.add_issue("#{issue_text} HTTP request failed: #{response.code.to_s}") unless response.success?
+          else
+            # Received a non-successful http response.
+            self.add_issue("#{issue_text} HTTP request failed: #{response.code.to_s}")
+          end
         end
       end
       hydra.queue(request)
