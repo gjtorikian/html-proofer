@@ -43,8 +43,6 @@ class Images < ::HTML::Proofer::Checks::Check
 
       # check alt tag
       self.add_issue "image #{img.src} does not have an alt attribute" unless img.valid_alt_tag?
-
-
     end
   end
 end

@@ -19,7 +19,7 @@ class HTML::Proofer::Checks
       @options = opts
       @issues = []
 
-      @hydra = Typhoeus::Hydra.hydra
+      @hydra = Typhoeus::Hydra.new(:max_concurrency => 15)
       @additional_href_ignores = @options[:href_ignore] || []
     end
 
@@ -46,13 +46,8 @@ class HTML::Proofer::Checks
           # Could not get an http response, something's wrong.
           self.add_issue(issue_text + ". #{response.return_message}!")
         else
-          if %w(420 503).include?(response.code.to_s)
-            response = Typhoeus.get(href, {:followlocation => true})
-            self.add_issue("#{issue_text} HTTP request failed: #{response.code.to_s}") unless response.success?
-          else
-            # Received a non-successful http response.
-            self.add_issue("#{issue_text} HTTP request failed: #{response.code.to_s}")
-          end
+          response_code = response.code.to_s
+          self.add_issue("#{issue_text} HTTP request failed: #{response_code}")
         end
       end
       hydra.queue(request)
