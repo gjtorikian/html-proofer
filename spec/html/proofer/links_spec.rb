@@ -22,7 +22,7 @@ describe "Links tests" do
     @linkCheck.run
     @linkCheck.hydra.run
     @linkCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": externally linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist")
+    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": externally linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist. Couldn't resolve host name!")
   end
 
   it "fails for broken internal links" do

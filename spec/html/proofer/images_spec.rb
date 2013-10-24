@@ -28,7 +28,7 @@ describe "Image tests" do
     @imageCheck.run
     @imageCheck.hydra.run
     @imageCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
-    @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist")
+    @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist. Couldn't resolve host name!")
   end
 
   it "fails for missing internal images" do
