@@ -18,6 +18,7 @@ class HTML::Proofer::Checks
       @html   = html
       @options = opts
       @issues = []
+      @checked_urls = {}
 
       @hydra = Typhoeus::Hydra.hydra
       @additional_href_ignores = @options[:href_ignore] || []
@@ -36,10 +37,11 @@ class HTML::Proofer::Checks
     end
 
     def validate_url(href, issue_text)
+      return @checked_urls[href] if @checked_urls.has_key? href
       request = Typhoeus::Request.new(href, {:followlocation => true})
       request.on_complete do |response|
         if response.success?
-          # no op
+          @checked_urls[href] = true
         elsif response.timed_out?
           self.add_issue(issue_text + " got a time out")
         elsif response.code == 0
@@ -57,6 +59,8 @@ class HTML::Proofer::Checks
             self.add_issue("#{issue_text} HTTP request failed: #{response_code}")
           end
         end
+
+        @checked_urls[href] = false unless response.success?
       end
       hydra.queue(request)
     end
