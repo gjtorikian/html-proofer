@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path("../lib/html/proofer/version", __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
+require 'html/proofer/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "html-proofer"
@@ -14,7 +15,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "nokogiri",        "1.6.0"
+  gem.add_dependency "mercenary",       "~> 0.2.0"
+  gem.add_dependency "nokogiri",        "~> 1.6.0"
   gem.add_dependency "colored",         "~> 1.2"
   gem.add_dependency "typhoeus",        "~> 0.6.3"
 
