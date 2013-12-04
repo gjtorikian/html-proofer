@@ -10,6 +10,7 @@ module HTML
         @id = obj['id']
         @data_ignore_proofer = obj['data-proofer-ignore']
         @check = check
+        @valid_paths = []
 
         if @href && @check.options[:href_swap]
           @check.options[:href_swap].each do |link, replace|
@@ -73,7 +74,6 @@ module HTML
       end
 
       def file_path
-
         return if path.nil?
 
         if path =~ /^\// #path relative to root
@@ -94,7 +94,10 @@ module HTML
 
       # checks if a file exists relative to the current pwd
       def exists?
-        File.exist? absolute_path
+        return true if @valid_paths.include? absolute_path
+        exists = File.exist? absolute_path
+        @valid_paths << absolute_path if exists
+        exists
       end
 
       def absolute_path
