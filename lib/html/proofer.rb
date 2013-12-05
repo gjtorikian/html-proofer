@@ -1,7 +1,6 @@
 require 'nokogiri'
-require 'find'
-require 'html/proofer/checkable'
-require 'html/proofer/checks'
+require File.dirname(__FILE__) + '/proofer/checkable'
+require File.dirname(__FILE__) + '/proofer/checks'
 
 module HTML
   class Proofer
@@ -12,19 +11,23 @@ module HTML
     end
 
     def run
-      get_checks.each do |klass|
-        puts "Running #{klass.name.split(/:/).pop()} check... \n\n"
+      total_files = 0
 
-        Find.find(@srcDir) do |path|
-          if File.extname(path) == @options[:ext]
-            html = HTML::Proofer.create_nokogiri(path)
-            check = klass.new(@srcDir, path, html, @options)
-            check.run
-            check.hydra.run
-            self.print_issues(klass, check.issues)
-          end
+      puts "Running #{get_checks} checks... \n\n"
+
+      glob_recursively("*#{@options[:ext]}") do |path|
+        total_files += 1
+        html = HTML::Proofer.create_nokogiri(path)
+
+        get_checks.each do |klass|
+          check = klass.new(@srcDir, path, html, @options)
+          check.run
+          check.hydra.run
+          self.print_issues(klass, check.issues)
         end
       end
+
+      puts "Ran on #{total_files} files!"
 
       if @failedTests.empty?
         puts "Tests executed successfully.".green
@@ -61,5 +64,24 @@ module HTML
         $stderr.puts issue + "\n\n"
       end
     end
+
+    private 
+
+    # from http://bit.ly/1iAxKzJ
+    def glob_recursively( pattern, &block )
+       begin
+         Dir.glob(pattern, &block)
+         dirs = Dir.glob(@srcDir).select { |f| File.directory? f }
+         dirs.each do |dir|
+           # Do not process symlink
+           next if File.symlink? dir
+           Dir.chdir dir
+           glob_recursively(pattern, &block)
+           Dir.chdir '..'
+         end
+       rescue SystemCallError => e
+         # a safe no op
+       end
+     end
   end
 end
