@@ -1,47 +1,43 @@
 require 'nokogiri'
-require 'find'
-require 'html/proofer/checkable'
-require 'html/proofer/checks'
+require File.dirname(__FILE__) + '/proofer/checkable'
+require File.dirname(__FILE__) + '/proofer/checks'
 
 module HTML
   class Proofer
     def initialize(src, opts={})
       @srcDir = src
       @options = {:ext => ".html"}.merge(opts)
-      @failedTests = []
     end
 
     def run
-      get_checks.each do |klass|
-        puts "Running #{klass.name.split(/:/).pop()} check... \n\n"
+      total_files = 0
+      failed_tests = []
 
-        Find.find(@srcDir) do |path|
-          if File.extname(path) == @options[:ext]
-            html = HTML::Proofer.create_nokogiri(path)
-            check = klass.new(@srcDir, path, html, @options)
-            check.run
-            check.hydra.run
-            self.print_issues(klass, check.issues)
-          end
+      puts "Running #{get_checks} checks on #{@srcDir}... \n\n"
+
+      Dir.glob("#{@srcDir}/**/*#{@options[:ext]}") do |path|
+        total_files += 1
+        html = HTML::Proofer.create_nokogiri(path)
+
+        get_checks.each do |klass|
+          check = klass.new(@srcDir, path, html, @options)
+          check.run
+          check.hydra.run
+          failed_tests.concat(check.issues) if check.issues.length > 0
         end
       end
 
-      if @failedTests.empty?
-        puts "Tests executed successfully.".green
+      puts "Ran on #{total_files} files!"
+
+      if failed_tests.empty?
+        puts "HTML-Proofer finished successfully.".green
         exit 0
       else
-        # make the hash default to 0 so that += will work correctly
-        count = Hash.new(0)
-
-        # iterate over the array, counting duplicate entries
-        @failedTests.each do |v|
-          count[v] += 1
+        failed_tests.each do |issue|
+          $stderr.puts issue + "\n\n"
         end
 
-        count.each do |k, v|
-          $stderr.puts "#{k} failed #{v} times"
-        end
-        raise "Tests ran, but found failures!"
+        raise "HTML-Proofer found #{failed_tests.length} failures!"
       end
     end
 
@@ -52,14 +48,6 @@ module HTML
 
     def get_checks
       HTML::Proofer::Checks::Check.subclasses
-    end
-
-    def print_issues(klass, issues)
-      return if issues.empty?
-      @failedTests.push klass
-      issues.each do |issue|
-        $stderr.puts issue + "\n\n"
-      end
     end
   end
 end

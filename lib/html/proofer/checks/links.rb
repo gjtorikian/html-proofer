@@ -40,8 +40,12 @@ class Links < ::HTML::Proofer::Checks::Check
         elsif link.internal?
           self.add_issue "linking to internal hash ##{link.hash} that does not exist" unless hash_check @html, link.hash
         elsif link.external?
-          target_html = HTML::Proofer.create_nokogiri link.absolute_path
-          self.add_issue "linking to #{link.href}, but #{link.hash} does not exist" unless hash_check target_html, link.hash
+          unless link.exists?
+            self.add_issue "trying to find hash of #{link.href}, but #{link.absolute_path} does not exist"
+          else
+            target_html = HTML::Proofer.create_nokogiri link.absolute_path
+            self.add_issue "linking to #{link.href}, but #{link.hash} does not exist" unless hash_check target_html, link.hash
+          end
         end
       end
     end

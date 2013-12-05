@@ -87,4 +87,11 @@ describe "Links tests" do
     @linkCheck.run
     @linkCheck.issues[0].should eq(nil)
   end
+
+  it 'translates links via href_swap' do
+    translatedLink = "#{FIXTURES_DIR}/linkTranslatedViaHrefSwap.html"
+    @linkCheck = Links.new("#{FIXTURES_DIR}", translatedLink, HTML::Proofer.create_nokogiri(translatedLink), {:href_swap => { /\A\/articles\/([\w-]+)/ => "\\1.html" }})
+    @linkCheck.run
+    @linkCheck.issues[0].should eq(nil)
+  end
 end

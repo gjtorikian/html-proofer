@@ -22,6 +22,8 @@ Or install it yourself as:
 
 ## Usage
 
+### In a script
+
 Require the gem; generate some HTML; create a new instance of the `HTML::Proofer` on
 your output folder; then `run` it. Here's a simple example:
 
@@ -52,6 +54,19 @@ end
 HTML::Proofer.new("./out").run
 ```
 
+### Usage on the command-line
+
+You'll get a new program called `htmlproof` with this gem. Jawesome!
+
+Use it like you'd expect to:
+
+``` bash
+htmlproof run ./out --swap wow:cow,mow:doh --ext .html.erb --ignore www.github.com
+```
+
+Note: since `swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
+`htmlproof` will figure out what you mean.
+
 ## Usage with Jekyll
 
 Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'` to your `Gemfile` as described above, and add the following to your `Rakefile`, using `rake test` to execute:
@@ -65,6 +80,12 @@ task :test do
 end
 ```
 
+Don't have or want a `Rakefile`? You _could_ also do something like the following:
+
+```bash
+htmlproof ./_site
+```
+
 ## What's Tested?
 
 * Whether all your images have alt tags
@@ -74,7 +95,6 @@ end
 * Whether external links are working
 
 ## Configuration 
-
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
 
