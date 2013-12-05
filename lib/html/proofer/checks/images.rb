@@ -23,7 +23,6 @@ class Image < ::HTML::Proofer::Checkable
 end
 
 class Images < ::HTML::Proofer::Checks::Check
-
   def run
     @html.css('img').each do |img|
 

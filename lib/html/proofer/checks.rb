@@ -1,9 +1,9 @@
 module HTML
   class Proofer
     class Checks
-      require 'html/proofer/check'
-      require 'html/proofer/checks/images'
-      require 'html/proofer/checks/links'
+      require File.dirname(__FILE__) + '/check'
+      require File.dirname(__FILE__) + '/checks/images'
+      require File.dirname(__FILE__) + '/checks/links'
     end
   end
 end
