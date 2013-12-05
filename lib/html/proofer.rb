@@ -22,7 +22,7 @@ module HTML
         get_checks.each do |klass|
           check = klass.new(@srcDir, path, html, @options)
           check.run
-          # check.hydra.run
+          check.hydra.run
           failed_tests.concat(check.issues) if check.issues.length > 0
         end
       end

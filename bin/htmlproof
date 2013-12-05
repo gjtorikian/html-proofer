@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-require 'html/proofer'
+require './lib/html/proofer'
 require 'mercenary'
 
 Mercenary.program(:htmlproof) do |p|
@@ -29,7 +29,7 @@ Mercenary.program(:htmlproof) do |p|
         end
       end
       options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
-      
+
       HTML::Proofer.new(args[0], options).run
     end
   end
