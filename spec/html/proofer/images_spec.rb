@@ -54,8 +54,20 @@ describe "Image tests" do
 
   it 'ignores images marked as ignore data-proofer-ignore' do
     ignorableImages = "#{FIXTURES_DIR}/ignorableImages.html"
-    @linkCheck = Links.new("#{FIXTURES_DIR}", ignorableImages, HTML::Proofer.create_nokogiri(ignorableImages))
-    @linkCheck.run
-    @linkCheck.issues[0].should eq(nil)
+    @imageCheck = Images.new("#{FIXTURES_DIR}", ignorableImages, HTML::Proofer.create_nokogiri(ignorableImages))
+    @imageCheck.run
+    @imageCheck.issues[0].should eq(nil)
+  end
+
+  it 'properly checks relative links' do
+    relativeLinks = "#{FIXTURES_DIR}/relativeLinks.html"
+    @imageCheck = Images.new("#{FIXTURES_DIR}", relativeLinks, HTML::Proofer.create_nokogiri(relativeLinks))
+    @imageCheck.run
+    @imageCheck.issues[0].should eq(nil)
+
+    relativeLinks = "#{FIXTURES_DIR}/resources/books/index.html"
+    @imageCheck = Images.new("#{FIXTURES_DIR}", relativeLinks, HTML::Proofer.create_nokogiri(relativeLinks))
+    @imageCheck.run
+    @imageCheck.issues[0].should eq(nil)
   end
 end

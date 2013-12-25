@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    html-proofer (0.2.3)
+    html-proofer (0.3.0)
       colored (~> 1.2)
       mercenary (~> 0.2.0)
       nokogiri (~> 1.6.0)
