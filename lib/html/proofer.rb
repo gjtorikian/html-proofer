@@ -44,7 +44,7 @@ module HTML
     def self.create_nokogiri(path)
       path << "/index.html" if File.directory? path # support for Jekyll-style links
       content = File.open(path, "rb") {|f| f.read }
-      Nokogiri::HTML(File.read(path))
+      Nokogiri::HTML(content)
     end
 
     def get_checks
