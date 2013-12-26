@@ -11,9 +11,11 @@ module HTML
 
     def run
       total_files = 0
+      external_urls = {}
       failed_tests = []
+      hydra = Typhoeus::Hydra.hydra
 
-      puts "Running #{get_checks} checks on #{@srcDir}... \n\n"
+      puts "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
 
       Dir.glob("#{@srcDir}/**/*#{@options[:ext]}") do |path|
         total_files += 1
@@ -22,10 +24,44 @@ module HTML
         get_checks.each do |klass|
           check = klass.new(@srcDir, path, html, @options)
           check.run
-          check.hydra.run
+          external_urls.merge!(check.external_urls)
           failed_tests.concat(check.issues) if check.issues.length > 0
         end
       end
+
+      puts "Checking #{external_urls.length} external links... \n\n"
+
+      # the hypothesis is that Proofer runs way faster if we pull out
+      # all the external URLs and run the checks at the end. Otherwise, we're halting
+      # the consuming processfor every file.
+      external_urls.each_pair do |href, filename|
+        request = Typhoeus::Request.new(href, {:followlocation => true})
+        request.on_complete do |response| #{ |response| failed_tests << response_handling(response) }
+          href = response.options[:effective_url]
+
+          if response.success?
+            next # continue with no op
+          elsif response.timed_out?
+             failed_tests << "#{filename.blue}: External link #{href} failed: got a time out"
+          elsif response.code == 0
+            # Could not get an http response, something's wrong.
+            failed_tests << "#{filename.blue}: External link #{href} failed: #{response.return_message}!"
+          else
+            response_code = response.code.to_s
+            if %w(420 503).include?(response_code)
+              # 420s usually come from rate limiting; let's ignore the query and try just the path
+              uri = URI(href)
+              response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, {:followlocation => true})
+              failed_tests << "#{filename.blue}: External link #{href} failed: originally, this was a #{response_code}. Now, the HTTP request failed again: #{response.code.to_s}" unless response.success?
+            else
+              # Received a non-successful http response.
+              failed_tests << "#{filename.blue}: External link #{href} failed: #{response_code}"
+            end
+          end
+        end
+        hydra.queue request
+      end
+      hydra.run
 
       puts "Ran on #{total_files} files!"
 

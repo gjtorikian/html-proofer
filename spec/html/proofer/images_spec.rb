@@ -24,11 +24,7 @@ describe "Image tests" do
 
   it "fails for missing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/missingImageExternal.html"
-    @imageCheck = Images.new("#{FIXTURES_DIR}", externalImageFilepath, HTML::Proofer.create_nokogiri(externalImageFilepath))
-    @imageCheck.run
-    @imageCheck.hydra.run
-    @imageCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
-    @imageCheck.issues[0].should eq("spec/html/proofer/fixtures/missingImageExternal.html".blue + ": external image http://www.whatthehell does not exist. Couldn't resolve host name!")
+    lambda { @imageCheck = HTML::Proofer.new(externalImageFilepath).run }.should raise_error SystemExit
   end
 
   it "fails for missing internal images" do

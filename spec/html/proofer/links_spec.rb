@@ -18,11 +18,7 @@ describe "Links tests" do
 
   it "fails for broken external links" do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/brokenLinkExternal.html"
-    @linkCheck = Links.new("#{FIXTURES_DIR}", brokenLinkExternalFilepath, HTML::Proofer.create_nokogiri(brokenLinkExternalFilepath))
-    @linkCheck.run
-    @linkCheck.hydra.run
-    @linkCheck.issues[0].sub!(/ #<Typhoeus::Response:[\w]+>/, "")
-    @linkCheck.issues[0].should eq("spec/html/proofer/fixtures/brokenLinkExternal.html".blue + ": externally linking to http://www.asdo3IRJ395295jsingrkrg4.com, which does not exist. Couldn't resolve host name!")
+    lambda { @linkCheck = HTML::Proofer.new(brokenLinkExternalFilepath).run }.should raise_error SystemExit
   end
 
   it "fails for broken internal links" do
