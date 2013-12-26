@@ -6,7 +6,7 @@ module HTML
   class Proofer
     def initialize(src, opts={})
       @srcDir = src
-      @options = {:ext => ".html"}.merge(opts)
+      @options = {:ext => ".html", :disable_external => true, :followlocation => true}.merge(opts)
     end
 
     def run
@@ -29,39 +29,41 @@ module HTML
         end
       end
 
-      puts "Checking #{external_urls.length} external links... \n\n"
+      unless @options[:disable_external]
+        puts "Checking #{external_urls.length} external links... \n\n"
 
-      # the hypothesis is that Proofer runs way faster if we pull out
-      # all the external URLs and run the checks at the end. Otherwise, we're halting
-      # the consuming processfor every file.
-      external_urls.each_pair do |href, filename|
-        request = Typhoeus::Request.new(href, {:followlocation => true})
-        request.on_complete do |response| #{ |response| failed_tests << response_handling(response) }
-          href = response.options[:effective_url]
+        # the hypothesis is that Proofer runs way faster if we pull out
+        # all the external URLs and run the checks at the end. Otherwise, we're halting
+        # the consuming process for every file.
+        external_urls.each_pair do |href, filename|
+          request = Typhoeus::Request.new(href, @options)
+          request.on_complete do |response|
+            href = response.options[:effective_url]
 
-          if response.success?
-            next # continue with no op
-          elsif response.timed_out?
-             failed_tests << "#{filename.blue}: External link #{href} failed: got a time out"
-          elsif response.code == 0
-            # Could not get an http response, something's wrong.
-            failed_tests << "#{filename.blue}: External link #{href} failed: #{response.return_message}!"
-          else
-            response_code = response.code.to_s
-            if %w(420 503).include?(response_code)
-              # 420s usually come from rate limiting; let's ignore the query and try just the path
-              uri = URI(href)
-              response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, {:followlocation => true})
-              failed_tests << "#{filename.blue}: External link #{href} failed: originally, this was a #{response_code}. Now, the HTTP request failed again: #{response.code.to_s}" unless response.success?
+            if response.success?
+              next # continue with no op
+            elsif response.timed_out?
+               failed_tests << "#{filename.blue}: External link #{href} failed: got a time out"
+            elsif response.code == 0
+              # Could not get an http response, something's wrong.
+              failed_tests << "#{filename.blue}: External link #{href} failed: #{response.return_message}!"
             else
-              # Received a non-successful http response.
-              failed_tests << "#{filename.blue}: External link #{href} failed: #{response_code}"
+              response_code = response.code.to_s
+              if %w(420 503).include?(response_code)
+                # 420s usually come from rate limiting; let's ignore the query and try just the path
+                uri = URI(href)
+                second_response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, {:followlocation => true})
+                failed_tests << "#{filename.blue}: External link #{href} failed: originally, this was a #{response_code}. Now, the HTTP request failed again: #{second_response.code.to_s}" unless second_response.success?
+              else
+                # Received a non-successful http response.
+                failed_tests << "#{filename.blue}: External link #{href} failed: #{response_code}"
+              end
             end
           end
+          hydra.queue request
         end
-        hydra.queue request
+        hydra.run
       end
-      hydra.run
 
       puts "Ran on #{total_files} files!"
 
