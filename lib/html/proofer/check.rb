@@ -18,9 +18,8 @@ class HTML::Proofer::Checks
       @html   = html
       @options = opts
       @issues = []
+      @additional_href_ignores = @options[:href_ignore]
       @external_urls = {}
-
-      @additional_href_ignores = @options[:href_ignore] || []
     end
 
     def run
@@ -36,7 +35,13 @@ class HTML::Proofer::Checks
     end
 
     def add_to_external_urls(href)
-      @external_urls.merge!({ href => @path })
+      href.sub!(/\/$/, '')
+
+      if @external_urls[href]
+        @external_urls[href] << @path
+      else
+        @external_urls[href] = [@path]
+      end
     end
 
     def self.subclasses
