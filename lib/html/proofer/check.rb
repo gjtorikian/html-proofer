@@ -35,8 +35,6 @@ class HTML::Proofer::Checks
     end
 
     def add_to_external_urls(href)
-      href.sub!(/\/$/, '')
-
       if @external_urls[href]
         @external_urls[href] << @path
       else

@@ -75,8 +75,8 @@ module HTML
       def file_path
         return if path.nil?
 
-        if path =~ /^\/$/ # path relative to root
-          base = @check.src
+        if path =~ /^\// # path relative to root
+          base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
         elsif File.exist?(File.expand_path path, @check.src) # relative links, path is a file
           base = File.dirname @check.path
         elsif File.exist?(File.join(File.dirname(@check.path), path)) # relative links in nested dir, path is a file
