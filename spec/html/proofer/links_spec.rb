@@ -17,7 +17,7 @@ describe "Links tests" do
   it "fails for broken external links" do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/brokenLinkExternal.html"
     output = capture_stderr { HTML::Proofer.new(brokenLinkExternalFilepath).run }
-    output.should match /External link http:\/\/www.asdo3IRJ395295jsingrkrg4.com\/ failed: 0 Couldn't resolve host name/
+    output.should match /External link http:\/\/www.asdo3IRJ395295jsingrkrg4.com\/? failed: 0 Couldn't resolve host name/
   end
 
   it "fails for broken internal links" do

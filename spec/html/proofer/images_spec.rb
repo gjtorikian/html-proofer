@@ -22,7 +22,7 @@ describe "Image tests" do
   it "fails for missing external images" do
     externalImageFilepath = "#{FIXTURES_DIR}/missingImageExternal.html"
     output = capture_stderr { HTML::Proofer.new(externalImageFilepath).run }
-    output.should match /External link http:\/\/www.whatthehell\/ failed: 0 Couldn't resolve host/
+    output.should match /External link http:\/\/www.whatthehell\/? failed: 0 Couldn't resolve host/
   end
 
   it "fails for missing internal images" do
