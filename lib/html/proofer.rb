@@ -17,7 +17,7 @@ module HTML
     def run
       total_files = 0
       external_urls = {}
-      hydra = Typhoeus::Hydra.new({:max_concurrency => 100})
+      hydra = Typhoeus::Hydra.new
 
       puts "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
 
