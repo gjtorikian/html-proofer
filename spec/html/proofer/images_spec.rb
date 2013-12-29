@@ -49,13 +49,13 @@ describe "Image tests" do
     output.should == ""
   end
 
-  it 'properly checks relative links' do
-    relativeLinks = "#{FIXTURES_DIR}/brokenRelativeImages.html"
-    output = capture_stderr { HTML::Proofer.new(relativeLinks).run }
+  it 'properly checks relative images' do
+    relativeImages = "#{FIXTURES_DIR}/rootRelativeImages.html"
+    output = capture_stderr { HTML::Proofer.new(relativeImages).run }
     output.should == ""
 
-    relativeLinks = "#{FIXTURES_DIR}/resources/books/nestedRelativeImages.html"
-    output = capture_stderr { HTML::Proofer.new(relativeLinks).run }
+    relativeImages = "#{FIXTURES_DIR}/resources/books/nestedRelativeImages.html"
+    output = capture_stderr { HTML::Proofer.new(relativeImages).run }
     output.should == ""
   end
 end
