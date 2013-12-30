@@ -7,7 +7,7 @@ module HTML
   class Proofer
     def initialize(src, opts={})
       @srcDir = src
-      # Typhoeus::Config.verbose = true
+
       @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
@@ -17,15 +17,8 @@ module HTML
     def run
       total_files = 0
       external_urls = {}
-      hydra = Typhoeus::Hydra.new
 
       puts "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
-
-      if File.directory? @srcDir
-        files = Dir.glob("#{@srcDir}/**/*#{@options[:ext]}")
-      else
-        files = File.extname(@srcDir) == @options[:ext] ? [@srcDir] : []
-      end
 
       files.each do |path|
         total_files += 1
@@ -100,6 +93,18 @@ module HTML
           # Received a non-successful http response.
           @failed_tests << "#{filenames.join(' ').blue}: External link #{href} failed: #{response_code} #{response.return_message}"
         end
+      end
+    end
+
+    def hydra
+      @hydra ||= Typhoeus::Hydra.new
+    end
+
+    def files
+      if File.directory? @srcDir
+        Dir.glob("#{@srcDir}/**/*#{@options[:ext]}")
+      else
+        File.extname(@srcDir) == @options[:ext] ? [@srcDir] : []
       end
     end
 
