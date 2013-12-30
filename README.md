@@ -111,7 +111,7 @@ You can also pass in any of Typhoeus' options for the external link check. For e
 HTML::Proofer.new("out/", {:ext => ".htm", :verbose = > true, :ssl_verifyhost => 2 })
 ```
 
-This sets `HTML::Proofer`'s' extensions to use _.htm_, and gives Typhoeus a configurtion for it to be verbose, and use specific SSL settings. Check the Typhoeus documentation for more information on what options it can receive.
+This sets `HTML::Proofer`'s' extensions to use _.htm_, and gives Typhoeus a configurtion for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
 ## Ignoring links
 

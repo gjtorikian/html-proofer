@@ -83,16 +83,14 @@ module HTML
       elsif response_code == 404 && method == :head
         next_response = Typhoeus.get(href, @options)
         response_handler(next_response, filenames)
+      elsif (response_code == 420 || response_code == 503) && method == :head
+        # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
+        uri = URI(href)
+        next_response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, @options)
+        response_handler(next_response, filenames)
       else
-        if (response_code == 420 || response_code == 503) && method == :head
-          # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
-          uri = URI(href)
-          next_response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, @options)
-          response_handler(next_response, filenames)
-        else
-          # Received a non-successful http response.
-          @failed_tests << "#{filenames.join(' ').blue}: External link #{href} failed: #{response_code} #{response.return_message}"
-        end
+        # Received a non-successful http response.
+        @failed_tests << "#{filenames.join(' ').blue}: External link #{href} failed: #{response_code} #{response.return_message}"
       end
     end
 
@@ -117,6 +115,5 @@ module HTML
     def get_checks
       HTML::Proofer::Checks::Check.subclasses
     end
-
   end
 end
