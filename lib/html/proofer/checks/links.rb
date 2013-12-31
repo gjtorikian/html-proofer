@@ -15,9 +15,8 @@ end
 class Links < ::HTML::Proofer::Checks::Check
 
   def run
-    @html.css('a').each do |link|
-
-      link = Link.new link, self
+    @html.css('a').each do |l|
+      link = Link.new l, self
       return if link.ignore?
 
       # is there even a href?
@@ -28,7 +27,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
       # does the file even exist?
       if link.remote?
-        validate_url link.href, "externally linking to #{link.href}, which does not exist"
+        add_to_external_urls link.href
       else
         self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
       end
@@ -36,7 +35,7 @@ class Links < ::HTML::Proofer::Checks::Check
       # verify the target hash
       if link.hash
         if link.remote?
-          #not yet checked
+          add_to_external_urls link.href
         elsif link.internal?
           self.add_issue "linking to internal hash ##{link.hash} that does not exist" unless hash_check @html, link.hash
         elsif link.external?
@@ -49,6 +48,8 @@ class Links < ::HTML::Proofer::Checks::Check
         end
       end
     end
+
+    return external_urls
   end
 
   def hash_check(html, href_hash)

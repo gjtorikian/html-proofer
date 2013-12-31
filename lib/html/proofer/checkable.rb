@@ -1,7 +1,6 @@
 module HTML
   class Proofer
     class Checkable
-
       def initialize(obj, check)
         @src = obj['src']
         @href = obj['href']
@@ -56,7 +55,7 @@ module HTML
 
       def ignore?
         uri = URI.parse url
-        @data_ignore_proofer || %w( mailto ).include?(uri.scheme) || @check.additional_href_ignores.include?(href)
+        @data_ignore_proofer || %w( mailto ).include?(uri.scheme) || @check.additional_href_ignores.include?(url)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
@@ -77,7 +76,7 @@ module HTML
         return if path.nil?
 
         if path =~ /^\// # path relative to root
-          base = @check.src
+          base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
         elsif File.exist?(File.expand_path path, @check.src) # relative links, path is a file
           base = File.dirname @check.path
         elsif File.exist?(File.join(File.dirname(@check.path), path)) # relative links in nested dir, path is a file
@@ -104,7 +103,6 @@ module HTML
         path = file_path || @check.path
         File.expand_path path, Dir.pwd
       end
-
     end
   end
 end

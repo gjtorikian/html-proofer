@@ -69,7 +69,9 @@ Note: since `swap` is a bit special, you'll pass in a pair of `RegEx:String` val
 
 ## Usage with Jekyll
 
-Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'` to your `Gemfile` as described above, and add the following to your `Rakefile`, using `rake test` to execute:
+Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'`
+to your `Gemfile` as described above, and add the following to your `Rakefile`,
+using `rake test` to execute:
 
 ```ruby
 require 'html/proofer'
@@ -94,12 +96,23 @@ htmlproof ./_site
 * Whether your internal links are not broken; this includes hash references (`#linkToMe`)
 * Whether external links are working
 
-## Configuration 
+## Configuration
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 * `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
 * `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
-* `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (default: `mailto`)
+* `:href_ignore`: an array of Strings containing `href`s that are safe to ignore (by default, `mailto` is always ignored)
+* `:disable_external`: if `true`, does not run the external link checker, which can take a lot of time (default: `false`)
+
+You can also pass in any of Typhoeus' options for the external link check. For example:
+
+``` ruby
+HTML::Proofer.new("out/", {:ext => ".htm", :verbose = > true, :ssl_verifyhost => 2 })
+```
+
+This sets `HTML::Proofer`'s' extensions to use _.htm_, and gives Typhoeus a configurtion for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+
+## Ignoring links
 
 To any `<a>` or `<img>` tag, you may add the `data-proofer-ignore` attribute to ignore the link.
