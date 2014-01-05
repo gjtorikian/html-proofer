@@ -12,6 +12,7 @@ test/tmp
 test/version_tmp
 tmp
 
+Gemfile.lock
 out/
 sample.rb
 run_sample.rb
