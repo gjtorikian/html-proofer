@@ -58,4 +58,10 @@ describe "Image tests" do
     output = capture_stderr { HTML::Proofer.new(relativeImages).run }
     output.should == ""
   end
+
+  it 'properly checks data URI images' do
+    dataURIImage = "#{FIXTURES_DIR}/workingDataURIImage.html"
+    output = capture_stderr { HTML::Proofer.new(dataURIImage).run }
+    output.should == ""
+  end
 end
