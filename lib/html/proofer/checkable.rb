@@ -1,7 +1,7 @@
 module HTML
   class Proofer
     class Checkable
-      def initialize(obj, check)
+      def initialize(obj, type, check)
         @src = obj['src']
         @href = obj['href']
         @alt = obj['alt']
@@ -10,6 +10,7 @@ module HTML
         @data_ignore_proofer = obj['data-proofer-ignore']
         @check = check
         @checked_paths = {}
+        @type = type
 
         if @href && @check.options[:href_swap]
           @check.options[:href_swap].each do |link, replace|
@@ -50,12 +51,18 @@ module HTML
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
+        if @type == "image"
+          @ignored = true
+          return true if url.match(/^data:image/)
+        end
+
         false
       end
 
       def ignore?
+        return true if @ignored || @data_ignore_proofer || @check.additional_href_ignores.include?(url)
         uri = URI.parse url
-        @data_ignore_proofer || %w( mailto ).include?(uri.scheme) || @check.additional_href_ignores.include?(url)
+        %w( mailto ).include?(uri.scheme)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
