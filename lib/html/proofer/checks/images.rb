@@ -25,7 +25,7 @@ end
 class Images < ::HTML::Proofer::Checks::Check
   def run
     @html.css('img').each do |i|
-      img = Image.new i, self
+      img = Image.new i, "image", self
 
       # screenshot filenames should return because of terrible names
       return self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
