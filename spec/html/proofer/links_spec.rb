@@ -68,6 +68,12 @@ describe "Links tests" do
     output.should == ""
   end
 
+  it 'properly checks ssl links' do
+    checkSSLLinks = "#{FIXTURES_DIR}/checkSSLLinks.html"
+    output = capture_stderr { HTML::Proofer.new(checkSSLLinks).run }
+    output.should == ""
+  end
+
   it 'ignores links marked as ignore data-proofer-ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/ignorableLinks.html"
     output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
