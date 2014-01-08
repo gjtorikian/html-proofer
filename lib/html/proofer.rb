@@ -77,16 +77,15 @@ module HTML
         # continue with no op
       elsif response.timed_out?
          @failed_tests << "#{filenames.join(' ').blue}: External link #{href} failed: got a time out"
-      # hey here's a funny bug: sometimes HEAD requests return a 404, even on legitimate pages! The
-      # bug seems to affect curl; try `curl -I -X HEAD https://help.github.com/changing-author-info`
-      # so in these cases, try a regular `GET`. if it fails, it fails.
-      elsif response_code == 404 && method == :head
-        next_response = Typhoeus.get(href, @options)
-        response_handler(next_response, filenames)
       elsif (response_code == 405 || response_code == 420 || response_code == 503) && method == :head
         # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
         uri = URI(href)
         next_response = Typhoeus.get(uri.scheme + "://" + uri.host + uri.path, @options)
+        response_handler(next_response, filenames)
+      # just be lazy; perform an explicit get request. some servers are apparently not configured to
+      # intercept HTTP HEAD
+      elsif method == :head
+        next_response = Typhoeus.get(href, @options)
         response_handler(next_response, filenames)
       else
         # Received a non-successful http response.
