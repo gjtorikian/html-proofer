@@ -61,6 +61,16 @@ module HTML
 
       def ignore?
         return true if @ignored || @data_ignore_proofer || @check.additional_href_ignores.include?(url)
+        unless @check.additional_href_ignores.empty?
+          @check.additional_href_ignores.each do |href_ignore|
+            if href_ignore.is_a? String
+              return true if href_ignore == url
+            elsif href_ignore.is_a? Regexp
+              return true if href_ignore =~ url
+            end
+          end
+        end
+
         uri = URI.parse url
         %w( mailto ).include?(uri.scheme)
       rescue URI::BadURIError

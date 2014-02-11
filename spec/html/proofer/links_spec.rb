@@ -80,6 +80,12 @@ describe "Links tests" do
     output.should == ""
   end
 
+  it 'ignores links via href_ignore' do
+    ignorableLinks = "#{FIXTURES_DIR}/ignorableLinksViaOptions.html"
+    output = capture_stderr { HTML::Proofer.new(ignorableLinks, {:href_ignore => [/^http:\/\//, /sdadsad/, "../whaadadt.html"]}).run }
+    output.should == ""
+  end
+
   it 'translates links via href_swap' do
     translatedLink = "#{FIXTURES_DIR}/linkTranslatedViaHrefSwap.html"
     output = capture_stderr { HTML::Proofer.new(translatedLink, {:href_swap => { /\A\/articles\/([\w-]+)/ => "\\1.html" }}).run }
