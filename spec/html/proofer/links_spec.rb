@@ -91,4 +91,10 @@ describe "Links tests" do
     output = capture_stderr { HTML::Proofer.new(translatedLink, {:href_swap => { /\A\/articles\/([\w-]+)/ => "\\1.html" }}).run }
     output.should == ""
   end
+
+  it 'finds a mix of broken and unbroken links' do
+    multipleProblems = "#{FIXTURES_DIR}/multipleProblems.html"
+    output = capture_stderr { HTML::Proofer.new(multipleProblems).run }
+    output.should match /linking to internal hash #anadaasdadsadschor that does not exist/
+  end
 end
