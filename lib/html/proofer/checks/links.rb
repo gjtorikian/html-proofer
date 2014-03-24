@@ -17,7 +17,7 @@ class Links < ::HTML::Proofer::Checks::Check
   def run
     @html.css('a').each do |l|
       link = Link.new l, "link", self
-      return if link.ignore?
+      next if link.ignore?
 
       # is there even a href?
       return self.add_issue("link has no href attribute") if link.missing_href?
