@@ -28,16 +28,16 @@ class Images < ::HTML::Proofer::Checks::Check
       img = Image.new i, "image", self
 
       # screenshot filenames should return because of terrible names
-      return self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
+      next self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
 
       # does the image exist?
       if img.missing_src?
         self.add_issue "image has no src attribute"
       elsif img.remote?
-        return if img.ignore?
+        next if img.ignore?
         add_to_external_urls img.src
       else
-        return if img.ignore?
+        next if img.ignore?
         self.add_issue("internal image #{img.src} does not exist") unless img.exists?
       end
 
@@ -45,6 +45,6 @@ class Images < ::HTML::Proofer::Checks::Check
       self.add_issue "image #{img.src} does not have an alt attribute" unless img.valid_alt_tag?
     end
 
-    return external_urls
+    external_urls
   end
 end

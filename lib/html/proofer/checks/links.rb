@@ -55,7 +55,7 @@ class Links < ::HTML::Proofer::Checks::Check
       end
     end
 
-    return external_urls
+    external_urls
   end
 
   def hash_check(html, href_hash)
