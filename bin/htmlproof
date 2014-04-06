@@ -1,16 +1,19 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-require './lib/html/proofer'
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'html/proofer'
 require 'mercenary'
+require "rubygems"
 
 Mercenary.program(:htmlproof) do |p|
-  # p.version HTML::Proofer::VERSION
+  p.version Gem::Specification::load("html-proofer.gemspec").version
   p.description "Test your rendered HTML files to make sure they're accurate."
   p.syntax 'htmlproof run PATH [options]'
 
   p.command(:run) do |c|
-    c.syntax "htmlproof run PATH"
+    c.syntax "run PATH"
     c.description "Runs the HTML-Proofer suite on the files in PATH"
 
     c.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
@@ -18,7 +21,8 @@ Mercenary.program(:htmlproof) do |p|
     c.option 'ignore', '--ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore (default: `mailto`)'
 
     c.action do |args, opts|
-      raise "`run` requires a PATH indicating a directory of files to check" if args.empty?
+      args = ["."] if args.empty?
+      path = File.expand_path(args.join(" "), Dir.pwd)
       options = {}
       options[:ext] = opts["ext"] unless opts["ext"].nil?
       unless opts["swap"].nil?
@@ -30,7 +34,7 @@ Mercenary.program(:htmlproof) do |p|
       end
       options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
 
-      HTML::Proofer.new(args[0], options).run
+      HTML::Proofer.new(path, options).run
     end
   end
 
