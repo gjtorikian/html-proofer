@@ -1,38 +1,40 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-require './lib/html/proofer'
+$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+
+require 'html/proofer'
 require 'mercenary'
+require "rubygems"
 
 Mercenary.program(:htmlproof) do |p|
-  # p.version HTML::Proofer::VERSION
+  p.version Gem::Specification::load("html-proofer.gemspec").version
   p.description "Test your rendered HTML files to make sure they're accurate."
-  p.syntax 'htmlproof run PATH [options]'
+  p.syntax 'htmlproof PATH [options]'
 
-  p.command(:run) do |c|
-    c.syntax "htmlproof run PATH"
-    c.description "Runs the HTML-Proofer suite on the files in PATH"
+  p.description "Runs the HTML-Proofer suite on the files in PATH"
 
-    c.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
-    c.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
-    c.option 'ignore', '--ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore (default: `mailto`)'
+  p.option 'ext', '--ext EXT', 'The extension of your HTML files (default: `.html`)'
+  p.option 'swap', '--swap regex:string,[regex:string,...]', 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
+  p.option 'ignore', '--ignore link1,[link2,...]', 'Array of Strings containing `href`s that are safe to ignore (default: `mailto`)'
+  p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
 
-    c.action do |args, opts|
-      raise "`run` requires a PATH indicating a directory of files to check" if args.empty?
-      options = {}
-      options[:ext] = opts["ext"] unless opts["ext"].nil?
-      unless opts["swap"].nil?
-        options[:href_swap] = {}
-        opts["swap"].each do |s|
-          pair = s.split(":")
-          options[:href_swap][%r{#{pair[0]}}] = pair[1]
-        end
+  p.action do |args, opts|
+    args = ["."] if args.empty?
+    path = File.expand_path(args.join(" "), Dir.pwd)
+
+    options = {}
+    options[:ext] = opts["ext"] unless opts["ext"].nil?
+    unless opts["swap"].nil?
+      options[:href_swap] = {}
+      opts["swap"].each do |s|
+        pair = s.split(":")
+        options[:href_swap][%r{#{pair[0]}}] = pair[1]
       end
-      options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
-
-      HTML::Proofer.new(args[0], options).run
     end
-  end
+    options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
+    options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
 
-  p.default_command(:run)
+    HTML::Proofer.new(path, options).run
+  end
 end
