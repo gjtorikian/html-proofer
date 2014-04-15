@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-### In a script
+### Using in a script
 
 Require the gem; generate some HTML; create a new instance of the `HTML::Proofer` on
 your output folder; then `run` it. Here's a simple example:
@@ -54,7 +54,7 @@ end
 HTML::Proofer.new("./out").run
 ```
 
-### Usage on the command-line
+### Using on the command-line
 
 You'll get a new program called `htmlproof` with this gem. Jawesome!
 
@@ -67,7 +67,7 @@ htmlproof run ./out --swap wow:cow,mow:doh --ext .html.erb --ignore www.github.c
 Note: since `swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
 `htmlproof` will figure out what you mean.
 
-## Usage with Jekyll
+### Using with Jekyll
 
 Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'`
 to your `Gemfile` as described above, and add the following to your `Rakefile`,
@@ -113,6 +113,41 @@ HTML::Proofer.new("out/", {:ext => ".htm", :verbose = > true, :ssl_verifyhost =>
 
 This sets `HTML::Proofer`'s' extensions to use _.htm_, and gives Typhoeus a configurtion for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
-## Ignoring links
+## Ignoring content
 
-To any `<a>` or `<img>` tag, you may add the `data-proofer-ignore` attribute to ignore the link.
+Add the `data-proofer-ignore` attribute to any `<a>` or `<img>` tag to ignore it from the checks.
+
+## Custom tests
+
+Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Checkable`, and another that inherits from `HTML::Proofer::Checks::Check`. `Checkable` defines various helper methods for your test, while `Checks::Check` actually runs across your content. `Checks::Check` should call `self.add_issue` on failures, to add them to the list.
+
+Here's an example custom test that protects against `mailto` links:
+
+``` ruby
+class OctocatLink < ::HTML::Proofer::Checkable
+
+  def mailto?
+    return false if @data_ignore_proofer || @href.nil? || @href.empty?
+    return @href.match /^mailto\:/
+  end
+
+  def octocat?
+    return @href.match /\:octocat@github.com\Z/
+  end
+
+end
+
+class MailToOctocat < ::HTML::Proofer::Checks::Check
+
+  def run
+    @html.css('a').each do |l|
+      link = OctocatLink.new l, "octocat_link", self
+
+      if link.mailto? && link.octocat?
+        return self.add_issue("Don't email the Octocat directly!")
+      end
+    end
+  end
+end
+```
+
