@@ -1,24 +1,35 @@
 require 'nokogiri'
+require 'yell'
 
 require File.dirname(__FILE__) + '/proofer/checkable'
 require File.dirname(__FILE__) + '/proofer/checks'
 
 module HTML
   class Proofer
+    include Yell::Loggable
+
     def initialize(src, opts={})
       @srcDir = src
 
-      @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false }
+      @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false, :verbose => false }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
       @failed_tests = []
+
+      Yell.new do |l|
+        l.name = "HTML::Proofer"
+        level = @proofer_opts[:verbose] ? :debug : :info
+        l.level = "gte.#{level}"
+        l.adapter :stdout, level: [:debug, :info, :warn]
+        l.adapter :stderr, level: [:error, :fatal]
+      end
     end
 
     def run
       total_files = 0
       external_urls = {}
 
-      puts "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
+      logger.info "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
 
       files.each do |path|
         total_files += 1
@@ -40,7 +51,7 @@ module HTML
       external_urls = Hash[external_urls.sort]
 
       unless @options[:disable_external]
-        puts "Checking #{external_urls.length} external links... \n\n"
+        logger.info "Checking #{external_urls.length} external links... \n\n"
 
         # Typhoeus won't let you pass any non-Typhoeus option
         @proofer_opts.each_key do |opt|
@@ -48,6 +59,7 @@ module HTML
         end
 
         external_urls.each_pair do |href, filenames|
+          logger.debug "Checking #{href}..."
           request = Typhoeus::Request.new(href, @options.merge({:method => :head}))
           request.on_complete { |response| response_handler(response, filenames) }
           hydra.queue request
@@ -55,13 +67,13 @@ module HTML
         hydra.run
       end
 
-      puts "Ran on #{total_files} files!"
+      logger.info "Ran on #{total_files} files!"
 
       if @failed_tests.empty?
-        puts "HTML-Proofer finished successfully.".green
+        logger.info "HTML-Proofer finished successfully.".green
       else
         @failed_tests.each do |issue|
-          $stderr.puts issue + "\n\n"
+          logger.error issue + "\n\n"
         end
 
         raise "HTML-Proofer found #{@failed_tests.length} failures!"
