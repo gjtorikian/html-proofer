@@ -16,10 +16,7 @@ module HTML
 
       @failed_tests = []
 
-      Yell.new do |l|
-        l.name = "HTML::Proofer"
-        level = @proofer_opts[:verbose] ? :debug : :info
-        l.level = "gte.#{level}"
+      Yell.new({ :format => false, :name => "HTML::Proofer", :level => "gte.#{log_level}" }) do |l|
         l.adapter :stdout, level: [:debug, :info, :warn]
         l.adapter :stderr, level: [:error, :fatal]
       end
@@ -29,13 +26,14 @@ module HTML
       total_files = 0
       external_urls = {}
 
-      logger.info "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
+      logger.info "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n".white
 
       files.each do |path|
         total_files += 1
         html = HTML::Proofer.create_nokogiri(path)
 
         get_checks.each do |klass|
+          logger.debug "Checking #{klass.to_s.downcase} on #{path} ...".blue
           check = klass.new(@srcDir, path, html, @options)
           check.run
           external_urls.merge!(check.external_urls)
@@ -51,32 +49,34 @@ module HTML
       external_urls = Hash[external_urls.sort]
 
       unless @options[:disable_external]
-        logger.info "Checking #{external_urls.length} external links... \n\n"
+        logger.info "Checking #{external_urls.length} external links...".yellow
 
         # Typhoeus won't let you pass any non-Typhoeus option
         @proofer_opts.each_key do |opt|
           @options.delete opt
         end
 
+        Ethon.logger = logger # log from Typhoeus/Ethon
+
         external_urls.each_pair do |href, filenames|
-          logger.debug "Checking #{href}..."
           request = Typhoeus::Request.new(href, @options.merge({:method => :head}))
           request.on_complete { |response| response_handler(response, filenames) }
           hydra.queue request
         end
+        logger.debug "Running requests for all #{hydra.queued_requests.size} external URLs...".yellow
         hydra.run
       end
 
-      logger.info "Ran on #{total_files} files!"
+      logger.info "Ran on #{total_files} files!\n\n".green
 
       if @failed_tests.empty?
         logger.info "HTML-Proofer finished successfully.".green
       else
         @failed_tests.each do |issue|
-          logger.error issue + "\n\n"
+          logger.error (issue + "\n\n").red
         end
 
-        raise "HTML-Proofer found #{@failed_tests.length} failures!"
+        raise "HTML-Proofer found #{@failed_tests.length} failures!".red
       end
     end
 
@@ -125,6 +125,10 @@ module HTML
 
     def get_checks
       HTML::Proofer::Checks::Check.subclasses
+    end
+
+    def log_level
+      @options[:verbose] ? :debug : :info
     end
   end
 end
