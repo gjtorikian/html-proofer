@@ -104,6 +104,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 * `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
 * `:href_ignore`: an array of Strings or RegExps containing `href`s that are safe to ignore (`mailto` is always ignored)
 * `:disable_external`: if `true`, does not run the external link checker, which can take a lot of time (default: `false`)
+* `:verbose`: if `true`, outputs extra information as the checking happens. Useful for debugging. (default: `false`)
 
 You can also pass in any of Typhoeus' options for the external link check. For example:
 
