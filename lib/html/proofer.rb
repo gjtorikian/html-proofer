@@ -85,6 +85,8 @@ module HTML
       method = response.request.options[:method]
       response_code = response.code
 
+      logger.debug "Received a #{response_code} for #{href} in #{filenames.join(' ')}"
+
       if response_code.between?(200, 299)
         # continue with no op
       elsif response.timed_out?
