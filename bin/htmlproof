@@ -18,6 +18,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
   p.option 'ignore', '--ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore (default: `mailto`)'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
+  p.option 'verbose', '--verbose', 'Enables more verbose logging.'
 
   p.action do |args, opts|
     args = ["."] if args.empty?
@@ -34,6 +35,7 @@ Mercenary.program(:htmlproof) do |p|
     end
     options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
+    options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
 
     HTML::Proofer.new(path, options).run
   end

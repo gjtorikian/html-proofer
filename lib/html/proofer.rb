@@ -1,30 +1,39 @@
 require 'nokogiri'
+require 'yell'
 
 require File.dirname(__FILE__) + '/proofer/checkable'
 require File.dirname(__FILE__) + '/proofer/checks'
 
 module HTML
   class Proofer
+    include Yell::Loggable
+
     def initialize(src, opts={})
       @srcDir = src
 
-      @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false }
+      @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false, :verbose => false }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
       @failed_tests = []
+
+      Yell.new({ :format => false, :name => "HTML::Proofer", :level => "gte.#{log_level}" }) do |l|
+        l.adapter :stdout, level: [:debug, :info, :warn]
+        l.adapter :stderr, level: [:error, :fatal]
+      end
     end
 
     def run
       total_files = 0
       external_urls = {}
 
-      puts "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n"
+      logger.info "Running #{get_checks} checks on #{@srcDir} on *#{@options[:ext]}... \n\n".white
 
       files.each do |path|
         total_files += 1
         html = HTML::Proofer.create_nokogiri(path)
 
         get_checks.each do |klass|
+          logger.debug "Checking #{klass.to_s.downcase} on #{path} ...".blue
           check = klass.new(@srcDir, path, html, @options)
           check.run
           external_urls.merge!(check.external_urls)
@@ -40,31 +49,34 @@ module HTML
       external_urls = Hash[external_urls.sort]
 
       unless @options[:disable_external]
-        puts "Checking #{external_urls.length} external links... \n\n"
+        logger.info "Checking #{external_urls.length} external links...".yellow
 
         # Typhoeus won't let you pass any non-Typhoeus option
         @proofer_opts.each_key do |opt|
           @options.delete opt
         end
 
+        Ethon.logger = logger # log from Typhoeus/Ethon
+
         external_urls.each_pair do |href, filenames|
           request = Typhoeus::Request.new(href, @options.merge({:method => :head}))
           request.on_complete { |response| response_handler(response, filenames) }
           hydra.queue request
         end
+        logger.debug "Running requests for all #{hydra.queued_requests.size} external URLs...".yellow
         hydra.run
       end
 
-      puts "Ran on #{total_files} files!"
+      logger.info "Ran on #{total_files} files!\n\n".green
 
       if @failed_tests.empty?
-        puts "HTML-Proofer finished successfully.".green
+        logger.info "HTML-Proofer finished successfully.".green
       else
         @failed_tests.each do |issue|
-          $stderr.puts issue + "\n\n"
+          logger.error (issue + "\n\n").red
         end
 
-        raise "HTML-Proofer found #{@failed_tests.length} failures!"
+        raise "HTML-Proofer found #{@failed_tests.length} failures!".red
       end
     end
 
@@ -72,6 +84,8 @@ module HTML
       href = response.options[:effective_url]
       method = response.request.options[:method]
       response_code = response.code
+
+      logger.debug "Received a #{response_code} for #{href} in #{filenames.join(' ')}"
 
       if response_code.between?(200, 299)
         # continue with no op
@@ -113,6 +127,10 @@ module HTML
 
     def get_checks
       HTML::Proofer::Checks::Check.subclasses
+    end
+
+    def log_level
+      @options[:verbose] ? :debug : :info
     end
   end
 end
