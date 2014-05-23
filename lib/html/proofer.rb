@@ -8,6 +8,8 @@ module HTML
   class Proofer
     include Yell::Loggable
 
+    attr_accessor :failed_tests
+
     def initialize(src, opts={})
       @srcDir = src
 
