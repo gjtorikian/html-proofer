@@ -19,6 +19,8 @@ And then execute:
 Or install it yourself as:
 
     $ gem install html-proofer
+    
+**NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
 ## Usage
 
