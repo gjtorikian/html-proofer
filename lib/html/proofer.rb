@@ -61,7 +61,7 @@ module HTML
         Ethon.logger = logger # log from Typhoeus/Ethon
 
         external_urls.each_pair do |href, filenames|
-          request = Typhoeus::Request.new(href, @options.merge({:method => :head}))
+          request = Typhoeus::Request.new(href, @options.merge({:method => :head, :timeout => 100}))
           request.on_complete { |response| response_handler(response, filenames) }
           hydra.queue request
         end
