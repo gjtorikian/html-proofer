@@ -97,4 +97,10 @@ describe "Links tests" do
     output = capture_stderr { HTML::Proofer.new(multipleProblems).run }
     output.should match /linking to internal hash #anadaasdadsadschor that does not exist/
   end
+
+  it 'ignores links via href_ignore' do
+    ignorableLinks = "#{FIXTURES_DIR}/mailto_link.html"
+    output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
+    output.should == ""
+  end
 end
