@@ -72,7 +72,7 @@ module HTML
         end
 
         uri = URI.parse url
-        %w( mailto ).include?(uri.scheme)
+        %w( mailto tel ).include?(uri.scheme)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError

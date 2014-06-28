@@ -103,4 +103,9 @@ describe "Links tests" do
     output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
     output.should == ""
   end
+  it 'ignores tel links' do
+    ignorableLinks = "#{FIXTURES_DIR}/tel_link.html"
+    output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
+    output.should == ""
+  end
 end
