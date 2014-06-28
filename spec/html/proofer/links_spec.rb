@@ -98,14 +98,28 @@ describe "Links tests" do
     output.should match /linking to internal hash #anadaasdadsadschor that does not exist/
   end
 
-  it 'ignores links via href_ignore' do
+  it 'ignores valid mailto links' do
     ignorableLinks = "#{FIXTURES_DIR}/mailto_link.html"
     output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
     output.should == ""
   end
-  it 'ignores tel links' do
+
+  it "fails for blank mailto links" do
+    blankMailToLink = "#{FIXTURES_DIR}/blank_mailto_link.html"
+    output = capture_stderr { HTML::Proofer.new(blankMailToLink).run }
+    output.should match /mailto: is an invalid URL/
+  end
+
+  it 'ignores valid tel links' do
     ignorableLinks = "#{FIXTURES_DIR}/tel_link.html"
     output = capture_stderr { HTML::Proofer.new(ignorableLinks).run }
     output.should == ""
   end
+
+  it "fails for blank tel links" do
+    blankTelLink = "#{FIXTURES_DIR}/blank_tel_link.html"
+    output = capture_stderr { HTML::Proofer.new(blankTelLink).run }
+    output.should match /tel: is an invalid URL/
+  end
+
 end
