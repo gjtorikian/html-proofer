@@ -64,4 +64,16 @@ describe "Image tests" do
     output = capture_stderr { HTML::Proofer.new(dataURIImage).run }
     output.should == ""
   end
+
+  it "works for valid images missing the protocol" do
+    missingProtocolLink = "#{FIXTURES_DIR}/image_missing_protocol_valid.html"
+    output = capture_stderr { HTML::Proofer.new(missingProtocolLink).run }
+    output.should == ""
+  end
+
+  it "fails for invalid images missing the protocol" do
+    missingProtocolLink = "#{FIXTURES_DIR}/image_missing_protocol_invalid.html"
+    output = capture_stderr { HTML::Proofer.new(missingProtocolLink).run }
+    output.should match /404 No error/
+  end
 end

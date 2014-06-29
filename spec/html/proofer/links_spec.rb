@@ -122,4 +122,15 @@ describe "Links tests" do
     output.should match /tel: is an invalid URL/
   end
 
+  it "works for valid links missing the protocol" do
+    missingProtocolLink = "#{FIXTURES_DIR}/link_missing_protocol_valid.html"
+    output = capture_stderr { HTML::Proofer.new(missingProtocolLink).run }
+    output.should == ""
+  end
+
+  it "fails for invalid links missing the protocol" do
+    missingProtocolLink = "#{FIXTURES_DIR}/link_missing_protocol_invalid.html"
+    output = capture_stderr { HTML::Proofer.new(missingProtocolLink).run }
+    output.should match /Couldn't resolve host name/
+  end
 end

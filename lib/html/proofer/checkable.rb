@@ -18,6 +18,10 @@ module HTML
           end
         end
 
+        # fix up missing protocols
+        @href.insert 0, "http:" if @href =~ /^\/\//
+        @src.insert 0, "http:" if @src =~ /^\/\//
+
       end
 
       def url
