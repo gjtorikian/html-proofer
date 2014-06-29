@@ -17,17 +17,18 @@ class Links < ::HTML::Proofer::Checks::Check
   def run
     @html.css('a').each do |l|
       link = Link.new l, "link", self
+
+      # is it even a valid URL?
+      unless link.valid?
+        self.add_issue "#{link.href} is an invalid URL"
+        next
+      end
+
       next if link.ignore?
 
       # is there even a href?
       if link.missing_href?
         self.add_issue("link has no href attribute")
-        next
-      end
-
-      # is it even a valid URL?
-      unless link.valid?
-        self.add_issue "#{link.href} is an invalid URL"
         next
       end
 

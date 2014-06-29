@@ -18,6 +18,10 @@ module HTML
           end
         end
 
+        # fix up missing protocols
+        @href.insert 0, "http:" if @href =~ /^\/\//
+        @src.insert 0, "http:" if @src =~ /^\/\//
+
       end
 
       def url
@@ -72,7 +76,7 @@ module HTML
         end
 
         uri = URI.parse url
-        %w( mailto ).include?(uri.scheme)
+        %w( mailto tel ).include?(uri.scheme)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError

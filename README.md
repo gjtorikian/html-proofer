@@ -19,7 +19,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install html-proofer
-    
+
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
 ## Usage
@@ -104,7 +104,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 * `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
 * `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
-* `:href_ignore`: an array of Strings or RegExps containing `href`s that are safe to ignore (`mailto` is always ignored)
+* `:href_ignore`: an array of Strings or RegExps containing `href`s that are safe to ignore (certain URIs, like `mailto` and `tel`, are always ignored)
 * `:disable_external`: if `true`, does not run the external link checker, which can take a lot of time (default: `false`)
 * `:verbose`: if `true`, outputs extra information as the checking happens. Useful for debugging. (default: `false`)
 
@@ -153,4 +153,3 @@ class MailToOctocat < ::HTML::Proofer::Checks::Check
   end
 end
 ```
-
