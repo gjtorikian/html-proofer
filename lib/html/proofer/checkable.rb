@@ -108,7 +108,7 @@ module HTML
 
         file = File.join base, path
 
-        # implicit /index.html support, with support for tailing slashes
+        # implicit /index.html support, with support for trailing slashes
         file = File.join path, "index.html" if File.directory? File.expand_path file, @check.src
 
         file

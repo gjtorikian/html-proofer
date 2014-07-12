@@ -10,6 +10,10 @@ class Link < ::HTML::Proofer::Checkable
     href.nil? and @name.nil? and @id.nil?
   end
 
+  def faux_directory?
+    File.directory? absolute_path and !absolute_path.end_with?(File::SEPARATOR)
+  end
+
 end
 
 class Links < ::HTML::Proofer::Checks::Check
@@ -37,6 +41,12 @@ class Links < ::HTML::Proofer::Checks::Check
         add_to_external_urls link.href
       else
         self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
+      end
+
+      # has the local directory a trailing slash?
+      if !@options[:followlocation] and !link.remote? and link.faux_directory?
+        self.add_issue("linking to a directory #{link.absolute_path} without trailing slash")
+        next
       end
 
       # verify the target hash
