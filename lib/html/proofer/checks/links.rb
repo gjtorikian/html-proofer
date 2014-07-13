@@ -15,7 +15,7 @@ end
 class Links < ::HTML::Proofer::Checks::Check
 
   def run
-    @html.css('a').each do |l|
+    @html.css('a, link').each do |l|
       link = Link.new l, "link", self
 
       # is it even a valid URL?

@@ -92,9 +92,18 @@ htmlproof ./_site
 
 ## What's Tested?
 
+### Images
+
+`img` elements:
+
 * Whether all your images have alt tags
 * Whether your internal image references are not broken
 * Whether external images are showing
+
+### Links
+
+`a`, `link` elements:
+
 * Whether your internal links are not broken; this includes hash references (`#linkToMe`)
 * Whether external links are working
 
