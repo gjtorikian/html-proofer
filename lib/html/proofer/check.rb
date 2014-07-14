@@ -28,7 +28,6 @@ class HTML::Proofer::Checks
 
     def add_issue(desc)
       @issues << "#{@path.blue}: #{desc}"
-      @issues.sort!
     end
 
     def output_filenames
