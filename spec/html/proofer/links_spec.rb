@@ -145,4 +145,10 @@ describe "Links tests" do
     output = capture_stderr { HTML::Proofer.new(head_link).run }
     output.should match /link has no href attribute/
   end
+
+  it "fails for absent href within link elements" do
+    head_link = "#{FIXTURES_DIR}/head_link_href_absent.html"
+    output = capture_stderr { HTML::Proofer.new(head_link).run }
+    output.should match /link has no href attribute/
+  end
 end
