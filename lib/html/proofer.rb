@@ -74,7 +74,7 @@ module HTML
       if @failed_tests.empty?
         logger.info "HTML-Proofer finished successfully.".green
       else
-        @failed_tests.each do |issue|
+        @failed_tests.sort.each do |issue|
           logger.error (issue + "\n\n").red
         end
 
