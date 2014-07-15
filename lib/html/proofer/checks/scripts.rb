@@ -25,7 +25,7 @@ class Scripts < ::HTML::Proofer::Checks::Check
 
       # does the script exist?
       if script.missing_src?
-        self.add_issue "script has no src attribute"
+        self.add_issue "script is empty and has no src attribute"
       elsif script.remote?
         next if script.ignore?
         add_to_external_urls script.src

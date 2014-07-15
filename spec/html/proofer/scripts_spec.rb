@@ -23,7 +23,7 @@ describe "Scripts tests" do
   it "fails for absent content" do
     file = "#{FIXTURES_DIR}/script_content_absent.html"
     output = capture_stderr { HTML::Proofer.new(file).run }
-    output.should match /script has no src attribute/
+    output.should match /script is empty and has no src attribute/
   end
 
 end
