@@ -14,6 +14,12 @@ describe "Scripts tests" do
     output.should == ""
   end
 
+  it "fails for missing internal src" do
+    file = "#{FIXTURES_DIR}/script_missing_internal.html"
+    output = capture_stderr { HTML::Proofer.new(file).run }
+    output.should match /doesnotexist.js does not exist/
+  end
+
   it "works for present content" do
     file = "#{FIXTURES_DIR}/script_content.html"
     output = capture_stderr { HTML::Proofer.new(file).run }
