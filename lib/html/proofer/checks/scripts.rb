@@ -11,7 +11,7 @@ class Script < ::HTML::Proofer::Checkable
   end
 
   def blank?
-    @content.empty?
+    @content.strip.empty?
   end
 
 end
