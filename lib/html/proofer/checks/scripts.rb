@@ -10,12 +10,18 @@ class Script < ::HTML::Proofer::Checkable
     !src
   end
 
+  def blank?
+    @content.empty?
+  end
+
 end
 
 class Scripts < ::HTML::Proofer::Checks::Check
   def run
     @html.css('script').each do |s|
       script = Script.new s, "script", self
+
+      next unless script.blank?
 
       # does the script exist?
       if script.missing_src?

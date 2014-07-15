@@ -10,6 +10,7 @@ module HTML
         @rel = obj['rel']
 
         @data_ignore_proofer = obj['data-proofer-ignore']
+        @content = obj.content
         @check = check
         @checked_paths = {}
         @type = type
