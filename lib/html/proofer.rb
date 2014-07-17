@@ -75,7 +75,7 @@ module HTML
         logger.info "HTML-Proofer finished successfully.".green
       else
         @failed_tests.sort.each do |issue|
-          logger.error (issue + "\n\n").red
+          logger.error issue.to_s.red
         end
 
         raise "HTML-Proofer found #{@failed_tests.length} failures!".red
