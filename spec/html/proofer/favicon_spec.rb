@@ -19,4 +19,10 @@ describe "Favicon tests" do
     output.should == ""
   end
 
+  it "passes for present favicon with shortcut notation" do
+    present = "#{FIXTURES_DIR}/favicon_present_shortcut.html"
+    output = capture_stderr { HTML::Proofer.new(present, {:favicon => true}).run }
+    output.should == ""
+  end
+
 end
