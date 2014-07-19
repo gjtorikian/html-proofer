@@ -113,10 +113,10 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `ext` | The extension of your HTML files including the dot | `.html` |
+| `ext` | The extension of your HTML files including the dot. | `.html` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
-| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time | `false` |
+| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
 You can also pass in any of Typhoeus' options for the external link check. For example:
