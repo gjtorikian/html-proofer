@@ -9,7 +9,7 @@ class Favicon < ::HTML::Proofer::Checks::Check
       return if link["rel"].split(" ").last.eql? "icon"
     }
 
-    self.add_issue "no favicon included"
+    self.add_issue "no favicon specified"
   end
 
 end
