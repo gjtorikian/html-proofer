@@ -5,14 +5,11 @@ class Favicon < ::HTML::Proofer::Checks::Check
   def run
     return unless @options[:favicon]
 
-    found = false
-    @html.css('link').each do |l|
-      if l['rel'] = 'icon'
-        found = true
-      end
+    @html.css("link").each do |l|
+      return if l["rel"] = "icon"
     end
 
-    self.add_issue "no favicon included" if !found
+    self.add_issue "no favicon included"
   end
 
 end
