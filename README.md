@@ -113,9 +113,9 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `ext` | The extension (including the `.`) of your HTML files | `.html` |
+| `ext` | The extension of your HTML files including the dot | `.html` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore (certain URIs, like `mailto` and `tel`, are always ignored) |
+| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored.
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
