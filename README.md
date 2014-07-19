@@ -112,7 +112,7 @@ htmlproof ./_site
 The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
-| ------ | ----------- | ------- |
+| :----- | :---------- | :------ |
 | `ext` | The extension (including the `.`) of your HTML files | `.html` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore (certain URIs, like `mailto` and `tel`, are always ignored) |
