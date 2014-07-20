@@ -57,16 +57,12 @@ module HTML
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
-        if @type == "image"
-          @ignored = true
-          return true if url.match(/^data:image/)
-        end
-
         false
       end
 
       def ignore?
-        return true if @ignored || @data_ignore_proofer || @check.additional_href_ignores.include?(url)
+        return true if @data_ignore_proofer || @check.additional_href_ignores.include?(url)
+        return true if @type == "image" and url.match(/^data:image/)
         unless @check.additional_href_ignores.empty?
           @check.additional_href_ignores.each do |href_ignore|
             if href_ignore.is_a? String

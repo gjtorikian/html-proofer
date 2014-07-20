@@ -59,7 +59,7 @@ describe "Image tests" do
     output.should == ""
   end
 
-  it 'properly checks data URI images' do
+  it 'properly ignores data URI images' do
     dataURIImage = "#{FIXTURES_DIR}/workingDataURIImage.html"
     output = capture_stderr { HTML::Proofer.new(dataURIImage).run }
     output.should == ""
