@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 class Favicon < ::HTML::Proofer::Checkable
+  def rel
+    @rel
+  end
 end
 
 class Favicons < ::HTML::Proofer::Checks::Check
@@ -8,10 +11,9 @@ class Favicons < ::HTML::Proofer::Checks::Check
   def run
     return unless @options[:favicon]
 
-    @html.css("link").each do |link|
-      favicon = Favicon.new l, "favicon", self
-      next if favicon.ignore?
-      return if favicon["rel"].split(" ").last.eql? "icon"
+    @html.css("link").each do |favicon|
+      favicon = Favicon.new favicon, "favicon", self
+      return if favicon.rel.split(" ").last.eql? "icon"
     end
 
     self.add_issue "no favicon specified"

@@ -7,6 +7,8 @@ module HTML
         @alt = obj['alt']
         @name = obj['name']
         @id = obj['id']
+        @rel = obj['rel']
+
         @data_ignore_proofer = obj['data-proofer-ignore']
         @check = check
         @checked_paths = {}
