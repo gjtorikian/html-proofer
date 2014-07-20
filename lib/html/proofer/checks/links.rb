@@ -22,13 +22,13 @@ class Links < ::HTML::Proofer::Checks::Check
     @html.css('a, link').each do |l|
       link = Link.new l, "link", self
 
+      next if link.ignore?
+
       # is it even a valid URL?
       unless link.valid?
         self.add_issue "#{link.href} is an invalid URL"
         next
       end
-
-      next if link.ignore?
 
       # is there even a href?
       if link.missing_href?
