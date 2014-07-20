@@ -19,7 +19,8 @@ module HTML
         :href_swap => [],
         :href_ignore => [],
         :disable_external => false,
-        :verbose => false }
+        :verbose => false
+      }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
       @failed_tests = []
