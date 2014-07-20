@@ -82,4 +82,10 @@ describe "Images test" do
     output = capture_stderr { HTML::Proofer.new(relativeLinks).run }
     output.should == ""
   end
+
+  it 'properly ignores missing alt tags when asked' do
+    ignorableLinks = "#{FIXTURES_DIR}/images/ignorableAltViaOptions.html"
+    output = capture_stderr { HTML::Proofer.new(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]}).run }
+    output.should == ""
+  end
 end

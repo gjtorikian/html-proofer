@@ -18,6 +18,7 @@ module HTML
         :favicon => false,
         :href_swap => [],
         :href_ignore => [],
+        :alt_ignore => [],
         :disable_external => false,
         :verbose => false
       }
