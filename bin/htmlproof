@@ -15,6 +15,7 @@ Mercenary.program(:htmlproof) do |p|
   p.description "Runs the HTML-Proofer suite on the files in PATH"
 
   p.option 'ext', '--ext EXT', 'The extension of your HTML files (default: `.html`)'
+  p.option 'favicon', '--favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
   p.option 'ignore', '--ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore (default: `mailto`)'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
@@ -35,6 +36,7 @@ Mercenary.program(:htmlproof) do |p|
     end
     options[:href_ignore] = opts["ignore"] unless opts["ignore"].nil?
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
+    options[:favicon] = opts["favicon"] unless opts["favicon"].nil?
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
 
     HTML::Proofer.new(path, options).run

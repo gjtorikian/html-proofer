@@ -13,7 +13,14 @@ module HTML
     def initialize(src, opts={})
       @srcDir = src
 
-      @proofer_opts = {:ext => ".html", :href_swap => [], :href_ignore => [], :disable_external => false, :verbose => false }
+      @proofer_opts = {
+        :ext => ".html",
+        :favicon => false,
+        :href_swap => [],
+        :href_ignore => [],
+        :disable_external => false,
+        :verbose => false
+      }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
       @failed_tests = []
