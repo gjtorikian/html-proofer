@@ -107,6 +107,13 @@ htmlproof ./_site
 * Whether your internal links are not broken; this includes hash references (`#linkToMe`)
 * Whether external links are working
 
+### Scripts
+
+`script` elements:
+
+* Whether your internal script references are not broken
+* Whether external scripts are loading
+
 ## Configuration
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:

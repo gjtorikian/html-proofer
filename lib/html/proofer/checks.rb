@@ -1,10 +1,13 @@
 module HTML
   class Proofer
     class Checks
-      require File.dirname(__FILE__) + '/check'
-      require File.dirname(__FILE__) + '/checks/images'
-      require File.dirname(__FILE__) + '/checks/links'
-      require File.dirname(__FILE__) + '/checks/favicon'
+      [
+        "/check",
+        "/checks/images",
+        "/checks/links",
+        "/checks/scripts",
+        "/checks/favicon"
+      ].each { |r| require File.dirname(__FILE__) + r }
     end
   end
 end
