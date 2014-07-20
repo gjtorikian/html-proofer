@@ -10,7 +10,7 @@ class HTML::Proofer::Checks
 
   class Check
 
-    attr_reader :issues, :src, :path, :options, :external_urls, :additional_href_ignores
+    attr_reader :issues, :src, :path, :options, :external_urls, :additional_href_ignores, :additional_alt_ignores
 
     def initialize(src, path, html, opts={})
       @src    = src
@@ -19,6 +19,7 @@ class HTML::Proofer::Checks
       @options = opts
       @issues = []
       @additional_href_ignores = @options[:href_ignore]
+      @additional_alt_ignores = @options[:alt_ignore]
       @external_urls = {}
     end
 

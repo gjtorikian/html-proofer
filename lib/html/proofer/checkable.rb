@@ -62,14 +62,15 @@ module HTML
       end
 
       def ignore?
-        return true if @data_ignore_proofer || @check.additional_href_ignores.include?(url)
-        return true if @type == "image" and url.match(/^data:image/)
-        unless @check.additional_href_ignores.empty?
-          @check.additional_href_ignores.each do |href_ignore|
-            if href_ignore.is_a? String
-              return true if href_ignore == url
-            elsif href_ignore.is_a? Regexp
-              return true if href_ignore =~ url
+        return true if @data_ignore_proofer || @check.additional_href_ignores.include?(url) || @check.additional_alt_ignores.include?(url)
+        return true if (@type == "image" || @type == "favicon") && url.match(/^data:image/)
+
+        [@check.additional_href_ignores, @check.additional_alt_ignores].each do |additional_ignore|
+          additional_ignore.each do |ignore|
+            if ignore.is_a? String
+              return true if ignore == url
+            elsif ignore.is_a? Regexp
+              return true if ignore =~ url
             end
           end
         end
