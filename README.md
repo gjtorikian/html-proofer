@@ -111,11 +111,13 @@ htmlproof ./_site
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
 
-* `:ext`: the extension (including the `.`) of your HTML files (default: `.html`)
-* `:href_swap`: a hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`.
-* `:href_ignore`: an array of Strings or RegExps containing `href`s that are safe to ignore (certain URIs, like `mailto` and `tel`, are always ignored)
-* `:disable_external`: if `true`, does not run the external link checker, which can take a lot of time (default: `false`)
-* `:verbose`: if `true`, outputs extra information as the checking happens. Useful for debugging. (default: `false`)
+| Option | Description | Default |
+| :----- | :---------- | :------ |
+| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
+| `ext` | The extension of your HTML files including the dot. | `.html` |
+| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
+| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
+| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
 You can also pass in any of Typhoeus' options for the external link check. For example:
 
