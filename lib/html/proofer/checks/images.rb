@@ -27,18 +27,20 @@ class Images < ::HTML::Proofer::Checks::Check
     @html.css('img').each do |i|
       img = Image.new i, "image", self
 
+      next if img.ignore?
+
       # screenshot filenames should return because of terrible names
       next self.add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
 
       # does the image exist?
       if img.missing_src?
         self.add_issue "image has no src attribute"
-      elsif img.remote?
-        next if img.ignore?
-        add_to_external_urls img.src
       else
-        next if img.ignore?
-        self.add_issue("internal image #{img.src} does not exist") unless img.exists?
+        if img.remote?
+          add_to_external_urls img.src
+        else
+          self.add_issue("internal image #{img.src} does not exist") unless img.exists?
+        end
       end
 
       # check alt tag
