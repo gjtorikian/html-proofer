@@ -38,6 +38,13 @@ describe "Links tests" do
     output.should == ""
   end
 
+  it "fails on redirects if not following" do
+    options = { :followlocation => false }
+    linkWithRedirectFilepath = "#{FIXTURES_DIR}/linkWithRedirect.html"
+    output = capture_stderr { HTML::Proofer.new(linkWithRedirectFilepath, options).run }
+    output.should match /External link https:\/\/help.github.com\/changing-author-info\/ failed: 301 No error/
+  end
+
   it "should understand https" do
     linkWithHttpsFilepath = "#{FIXTURES_DIR}/linkWithHttps.html"
     output = capture_stderr { HTML::Proofer.new(linkWithHttpsFilepath).run }
@@ -150,5 +157,12 @@ describe "Links tests" do
     head_link = "#{FIXTURES_DIR}/head_link_href_absent.html"
     output = capture_stderr { HTML::Proofer.new(head_link).run }
     output.should match /link has no href attribute/
+  end
+
+  it "fails for internal linking to a directory without trailing slash" do
+    options = { :followlocation => false }
+    internal = "#{FIXTURES_DIR}/link_directory_without_slash.html"
+    output = capture_stderr { HTML::Proofer.new(internal, options).run }
+    output.should match /without trailing slash/
   end
 end
