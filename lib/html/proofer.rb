@@ -150,7 +150,9 @@ module HTML
     end
 
     def get_checks
-      HTML::Proofer::Checks::Check.subclasses
+      checks = HTML::Proofer::Checks::Check.subclasses
+      checks.delete("Favicon") unless @options[:favicon]
+      checks
     end
 
     def log_level
