@@ -19,7 +19,7 @@ end
 class Links < ::HTML::Proofer::Checks::Check
 
   def run
-    @html.css('a, link').each do |l|
+    @html.xpath('//a[not(ancestor::pre or ancestor::code)]', '//link[not(ancestor::pre or ancestor::code)]').each do |l|
       link = Link.new l, "link", self
 
       next if link.ignore?

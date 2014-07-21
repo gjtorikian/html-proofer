@@ -171,4 +171,16 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"], options).run }
     output.should match /foofoo.biz\/? failed: 0 Couldn't resolve host name/
   end
+
+  it "works for broken anchors within pre" do
+    anchor_pre = "#{FIXTURES_DIR}/links/anchors_in_pre.html"
+    output = capture_stderr { HTML::Proofer.new(anchor_pre).run }
+    output.should == ""
+  end
+
+  it "works for broken link within pre" do
+    link_pre = "#{FIXTURES_DIR}/links/links_in_pre.html"
+    output = capture_stderr { HTML::Proofer.new(link_pre).run }
+    output.should == ""
+  end
 end
