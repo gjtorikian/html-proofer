@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |gem|
   gem.name          = "html-proofer"
-  gem.version       = "1.1.0"
+  gem.version       = "1.1.1"
   gem.authors       = ["Garen Torikian"]
   gem.email         = ["gjtorikian@gmail.com"]
   gem.description   = %q{Test your rendered HTML files to make sure they're accurate.}
