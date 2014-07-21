@@ -121,8 +121,9 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | Option | Description | Default |
 | :----- | :---------- | :------ |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `ext` | The extension of your HTML files including the dot. | `.html` |
+| `ext` | The extension of your HTML files including the dot. | `.html`
 | `favicon` | Enables the favicon checker. | `false` |
+| `as_link_array` | Assumes that you've passed in just an array of links to check. | `false` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
@@ -134,11 +135,11 @@ You can also pass in any of Typhoeus' options for the external link check. For e
 HTML::Proofer.new("out/", {:ext => ".htm", :verbose = > true, :ssl_verifyhost => 2 })
 ```
 
-This sets `HTML::Proofer`'s' extensions to use _.htm_, and gives Typhoeus a configurtion for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
 ## Ignoring content
 
-Add the `data-proofer-ignore` attribute to any `<a>` or `<img>` tag to ignore it from the checks.
+Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
 ## Custom tests
 
