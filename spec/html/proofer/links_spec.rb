@@ -165,4 +165,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(internal, options).run }
     output.should match /without trailing slash/
   end
+
+  it "works for array of links" do
+    options = { :as_link_array => true}
+    output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"], options).run }
+    output.should match /foofoo.biz\/? failed: 0 Couldn't resolve host name/
+  end
 end
