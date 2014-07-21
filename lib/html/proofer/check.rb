@@ -15,7 +15,7 @@ class HTML::Proofer::Checks
     def initialize(src, path, html, opts={})
       @src    = src
       @path   = path
-      @html   = html
+      @html   = remove_ignored(html)
       @options = opts
       @issues = []
       @additional_href_ignores = @options[:href_ignore]
@@ -52,6 +52,13 @@ class HTML::Proofer::Checks
       end
 
       classes
+    end
+
+  private
+
+    def remove_ignored(html)
+      html.css("code, pre").each { |node| node.unlink }
+      html
     end
 
   end

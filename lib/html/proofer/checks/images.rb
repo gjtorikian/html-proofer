@@ -24,7 +24,7 @@ end
 
 class Images < ::HTML::Proofer::Checks::Check
   def run
-    @html.xpath('//img[not(ancestor::pre or ancestor::code)]').each do |i|
+    @html.css("img").each do |i|
       img = Image.new i, "image", self
 
       next if img.ignore?
