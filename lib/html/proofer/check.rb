@@ -57,7 +57,7 @@ class HTML::Proofer::Checks
   private
 
     def remove_ignored(html)
-      html.css("code, pre").each { |node| node.unlink }
+      html.css("code, pre, [data-proofer-ignore]").each { |node| node.unlink }
       html
     end
 

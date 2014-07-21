@@ -151,7 +151,7 @@ Here's an example custom test that protects against `mailto` links:
 class OctocatLink < ::HTML::Proofer::Checkable
 
   def mailto?
-    return false if @data_ignore_proofer || @href.nil? || @href.empty?
+    return false if @href.nil? || @href.empty?
     return @href.match /^mailto\:/
   end
 

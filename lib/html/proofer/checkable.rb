@@ -9,7 +9,6 @@ module HTML
         @id = obj['id']
         @rel = obj['rel']
 
-        @data_ignore_proofer = obj['data-proofer-ignore']
         @content = obj.content
         @check = check
         @checked_paths = {}
@@ -62,7 +61,7 @@ module HTML
       end
 
       def ignore?
-        return true if @data_ignore_proofer || @check.additional_href_ignores.include?(url) || @check.additional_alt_ignores.include?(url)
+        return true if @check.additional_href_ignores.include?(url) || @check.additional_alt_ignores.include?(url)
         return true if (@type == "image" || @type == "favicon") && url.match(/^data:image/)
 
         [@check.additional_href_ignores, @check.additional_alt_ignores].each do |additional_ignore|
