@@ -32,4 +32,10 @@ describe "Scripts test" do
     output.should match /script is empty and has no src attribute/
   end
 
+  it "works for broken script within pre" do
+    script_pre = "#{FIXTURES_DIR}/scripts/script_in_pre.html"
+    output = capture_stderr { HTML::Proofer.new(script_pre).run }
+    output.should == ""
+  end
+
 end
