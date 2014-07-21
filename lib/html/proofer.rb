@@ -46,7 +46,7 @@ module HTML
 
           get_checks.each do |klass|
             logger.debug "Checking #{klass.to_s.downcase} on #{path} ...".blue
-            check = klass.new(@src, path, html, @options)
+            check =  Object.const_get(klass).new(@src, path, html, @options)
             check.run
             external_urls.merge!(check.external_urls)
             @failed_tests.concat(check.issues) if check.issues.length > 0
@@ -150,8 +150,8 @@ module HTML
     end
 
     def get_checks
-      checks = HTML::Proofer::Checks::Check.subclasses
-      checks.delete("Favicon") unless @options[:favicon]
+      checks = HTML::Proofer::Checks::Check.subclasses.map { |c| c.name }
+      checks.delete("Favicons") unless @options[:favicon]
       checks
     end
 
