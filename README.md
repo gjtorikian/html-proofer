@@ -123,6 +123,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `ext` | The extension of your HTML files including the dot. | `.html`
 | `favicon` | Enables the favicon checker. | `false` |
+| `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
 | `as_link_array` | Assumes that you've passed in just an array of links to check. | `false` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
