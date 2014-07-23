@@ -18,7 +18,7 @@ end
 
 class Scripts < ::HTML::Proofer::Checks::Check
   def run
-    @html.xpath('//script[not(ancestor::pre or ancestor::code)]').each do |s|
+    @html.css("script").each do |s|
       script = Script.new s, "script", self
 
       next if script.ignore?
