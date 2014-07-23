@@ -139,17 +139,7 @@ This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a confi
 
 ## Ignoring content
 
-Add the `data-proofer-ignore` attribute to any element to ignore it and its children from the checks. Examples:
-
-```html
-<a href="http://localhost:4000/" rel="nofollow" data-proofer-ignore>localhost</a>
-```
-
-```html
-<div class="comments" data-proofer-ignore>
-  <!-- lot of spam -->
-</div>
-```
+Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
 ## Custom tests
 
