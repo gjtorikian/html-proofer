@@ -8,8 +8,6 @@ module HTML
   class Proofer
     include Yell::Loggable
 
-    attr_accessor :failed_tests
-
     def initialize(src, opts={})
       @src = src
 
@@ -167,6 +165,13 @@ module HTML
       else
         string
       end
+    end
+
+    def failed_tests
+      return [] if @failed_tests.empty?
+      result = []
+      @failed_tests.each { |f| result << f.to_s }
+      result
     end
   end
 end
