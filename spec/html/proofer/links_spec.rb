@@ -175,7 +175,7 @@ describe "Links test" do
   it "works for array of links" do
     options = { :as_link_array => true}
     output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"], options).run }
-    output.should match /foofoo.biz\/? failed: 0 Couldn't resolve host name/
+    output.should match /foofoofoo.biz\/? failed: 0 Couldn't resolve host name/
   end
 
   it "works for broken anchors within pre" do
