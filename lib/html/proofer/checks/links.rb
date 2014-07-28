@@ -23,6 +23,7 @@ class Links < ::HTML::Proofer::Checks::Check
       link = Link.new l, "link", self
 
       next if link.ignore?
+      next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
 
       # is it even a valid URL?
       unless link.valid?
