@@ -129,6 +129,12 @@ describe "Links test" do
     output.should match /tel: is an invalid URL/
   end
 
+  it 'ignores javascript links' do
+    javascriptLink = "#{FIXTURES_DIR}/links/javascript_link.html"
+    output = capture_stderr { HTML::Proofer.new(javascriptLink).run }
+    output.should == ""
+  end
+
   it "works for valid links missing the protocol" do
     missingProtocolLink = "#{FIXTURES_DIR}/links/link_missing_protocol_valid.html"
     output = capture_stderr { HTML::Proofer.new(missingProtocolLink).run }
