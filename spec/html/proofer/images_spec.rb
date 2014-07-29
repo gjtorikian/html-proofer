@@ -88,4 +88,11 @@ describe "Images test" do
     output = capture_stderr { HTML::Proofer.new(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]}).run }
     output.should == ""
   end
+
+  it 'properly ignores missing alt tags, but not all URLs, when asked' do
+    ignorableLinks = "#{FIXTURES_DIR}/images/ignoreAltButNotLink.html"
+    output = capture_stderr { HTML::Proofer.new(ignorableLinks, {:alt_ignore => [/.*/]}).run }
+    output.should match /Couldn't resolve host name/
+    output.should_not match /does not have an alt attribute/
+  end
 end

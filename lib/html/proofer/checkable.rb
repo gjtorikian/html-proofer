@@ -62,17 +62,16 @@ module HTML
       end
 
       def ignore?
-        return true if @data_ignore_proofer || @check.additional_href_ignores.include?(url) || @check.additional_alt_ignores.include?(url)
-        return true if (@type == "image" || @type == "favicon") && url.match(/^data:image/)
+        return true if @data_ignore_proofer
 
-        [@check.additional_href_ignores, @check.additional_alt_ignores].each do |additional_ignore|
-          additional_ignore.each do |ignore|
-            if ignore.is_a? String
-              return true if ignore == url
-            elsif ignore.is_a? Regexp
-              return true if ignore =~ url
-            end
-          end
+        case @type
+        when "favicon"
+          return true if url.match(/^data:image/)
+        when "link"
+          return true if ignores_pattern_check(@check.additional_href_ignores)
+        when "image"
+          return true if url.match(/^data:image/)
+          return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
 
         uri = URI.parse url
@@ -123,6 +122,18 @@ module HTML
       def absolute_path
         path = file_path || @check.path
         File.expand_path path, Dir.pwd
+      end
+
+      def ignores_pattern_check(links)
+        links.each do |ignore|
+          if ignore.is_a? String
+            return true if ignore == url
+          elsif ignore.is_a? Regexp
+            return true if ignore =~ url
+          end
+        end
+
+        false
       end
     end
   end
