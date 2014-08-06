@@ -29,7 +29,7 @@ describe "Links test" do
   it "fails for link with no href" do
     missingLinkHrefFilepath = "#{FIXTURES_DIR}/links/missingLinkHref.html"
     output = capture_stderr { HTML::Proofer.new(missingLinkHrefFilepath).run }
-    output.should match /link has no href attribute/
+    output.should match /anchor has no href attribute/
   end
 
   it "should follow redirects" do
@@ -156,13 +156,13 @@ describe "Links test" do
   it "fails for empty href within link elements" do
     head_link = "#{FIXTURES_DIR}/links/head_link_href_empty.html"
     output = capture_stderr { HTML::Proofer.new(head_link).run }
-    output.should match /link has no href attribute/
+    output.should match /anchor has no href attribute/
   end
 
   it "fails for absent href within link elements" do
     head_link = "#{FIXTURES_DIR}/links/head_link_href_absent.html"
     output = capture_stderr { HTML::Proofer.new(head_link).run }
-    output.should match /link has no href attribute/
+    output.should match /anchor has no href attribute/
   end
 
   it "fails for internal linking to a directory without trailing slash" do

@@ -33,7 +33,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
       # is there even a href?
       if link.missing_href?
-        self.add_issue("link has no href attribute")
+        self.add_issue("anchor has no href attribute")
         next
       end
 
