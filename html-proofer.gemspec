@@ -11,12 +11,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/gjtorikian/html-proofer"
   gem.license       = "MIT"
   gem.executables   = ["htmlproof"]
-  gem.files         = `git ls-files`.split($/)
+  gem.files         = `git ls-files -z`.split("\x0").grep(%r{^lib/})
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ["lib"]
 
   gem.add_dependency "mercenary",       "~> 0.3.2"
-  gem.add_dependency "nokogiri",        "~> 1.6.0"
+  gem.add_dependency "nokogiri",        "~> 1.5"
   gem.add_dependency "colored",         "~> 1.2"
   gem.add_dependency "typhoeus",        "~> 0.6.7"
   gem.add_dependency "yell",            "~> 2.0"
