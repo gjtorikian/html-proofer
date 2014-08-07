@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "mercenary",       "~> 0.3.2"
-  gem.add_dependency "nokogiri",        "~> 1.6.0"
+  gem.add_dependency "nokogiri",        "~> 1.5"
   gem.add_dependency "colored",         "~> 1.2"
   gem.add_dependency "typhoeus",        "~> 0.6.7"
   gem.add_dependency "yell",            "~> 2.0"
