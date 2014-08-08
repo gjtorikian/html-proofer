@@ -97,7 +97,7 @@ module HTML
     end
 
     def queue_request(method, href, filenames, options)
-      request = Typhoeus::Request.new(href, @options.merge({:method => method}))
+      request = Typhoeus::Request.new(href, options.merge({:method => method}))
       request.on_complete { |response| response_handler(response, filenames) }
       hydra.queue request
     end
