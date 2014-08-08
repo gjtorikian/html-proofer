@@ -90,14 +90,14 @@ module HTML
       Ethon.logger = logger # log from Typhoeus/Ethon
 
       external_urls.each_pair do |href, filenames|
-        queue_request(:head, href, filenames, @options)
+        queue_request(:head, href, filenames)
       end
       logger.debug "Running requests for all #{hydra.queued_requests.size} external URLs...".yellow
       hydra.run
     end
 
-    def queue_request(method, href, filenames, options)
-      request = Typhoeus::Request.new(href, options.merge({:method => method}))
+    def queue_request(method, href, filenames)
+      request = Typhoeus::Request.new(href, @options.merge({:method => method}))
       request.on_complete { |response| response_handler(response, filenames) }
       hydra.queue request
     end
@@ -120,11 +120,11 @@ module HTML
       elsif (response_code == 405 || response_code == 420 || response_code == 503) && method == :head
         # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
         uri = URI(href)
-        queue_request(:get, uri.scheme + "://" + uri.host + uri.path, filenames, @options)
+        queue_request(:get, uri.scheme + "://" + uri.host + uri.path, filenames)
       # just be lazy; perform an explicit get request. some servers are apparently not configured to
       # intercept HTTP HEAD
       elsif method == :head
-        queue_request(:get, href, filenames, @options)
+        queue_request(:get, href, filenames)
       else
         # Received a non-successful http response.
         failed_test_msg = "External link #{href} failed: #{response_code} #{response.return_message}"
