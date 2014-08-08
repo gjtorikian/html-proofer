@@ -65,7 +65,7 @@ module HTML
         logger.info colorize :green, "HTML-Proofer finished successfully."
       else
         @failed_tests.sort.each do |issue|
-          logger.error issue.to_s.red
+          logger.error colorize :red, issue.to_s
         end
 
         raise colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
