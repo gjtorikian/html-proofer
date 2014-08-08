@@ -38,14 +38,14 @@ module HTML
         total_files = 0
         external_urls = {}
 
-        logger.info "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n".white
+        logger.info colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
         files.each do |path|
           total_files += 1
           html = HTML::Proofer.create_nokogiri(path)
 
           get_checks.each do |klass|
-            logger.debug "Checking #{klass.to_s.downcase} on #{path} ...".blue
+            logger.debug colorize :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
             check =  Object.const_get(klass).new(@src, path, html, @options)
             check.run
             external_urls.merge!(check.external_urls)
@@ -55,20 +55,20 @@ module HTML
 
         external_link_checker(external_urls) unless @options[:disable_external]
 
-        logger.info "Ran on #{total_files} files!\n\n".green
+        logger.info colorize :green, "Ran on #{total_files} files!\n\n"
       else
         external_urls = Hash[*@src.map{ |s| [s, nil] }.flatten]
         external_link_checker(external_urls) unless @options[:disable_external]
       end
 
       if @failed_tests.empty?
-        logger.info "HTML-Proofer finished successfully.".green
+        logger.info colorize :green, "HTML-Proofer finished successfully."
       else
         @failed_tests.sort.each do |issue|
           logger.error issue.to_s.red
         end
 
-        raise "HTML-Proofer found #{@failed_tests.length} failures!".red
+        raise colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
       end
     end
 
@@ -80,7 +80,7 @@ module HTML
     def external_link_checker(external_urls)
       external_urls = Hash[external_urls.sort]
 
-      logger.info "Checking #{external_urls.length} external links...".yellow
+      logger.info colorize :yellow, "Checking #{external_urls.length} external links..."
 
       # Typhoeus won't let you pass any non-Typhoeus option
       @proofer_opts.each_key do |opt|
@@ -94,7 +94,7 @@ module HTML
         request.on_complete { |response| response_handler(response, filenames) }
         hydra.queue request
       end
-      logger.debug "Running requests for all #{hydra.queued_requests.size} external URLs...".yellow
+      logger.debug colorize :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
       hydra.run
     end
 
@@ -157,6 +157,14 @@ module HTML
 
     def log_level
       @options[:verbose] ? :debug : :info
+    end
+
+    def colorize(color, string)
+      if $stdout.isatty && $stderr.isatty
+        Colored.colorize(string, :foreground => color)
+      else
+        string
+      end
     end
   end
 end
