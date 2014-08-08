@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/gjtorikian/html-proofer"
   gem.license       = "MIT"
   gem.executables   = ["htmlproof"]
-  gem.files         = `git ls-files -z`.split("\x0").grep(%r{^lib/})
+  gem.files         = `git ls-files`.split($/)
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ["lib"]
 
