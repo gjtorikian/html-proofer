@@ -189,4 +189,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(link_pre).run }
     output.should == ""
   end
+
+  it "works for google font" do
+    google_font = "#{FIXTURES_DIR}/links/google_font.html"
+    output = capture_stderr { HTML::Proofer.new(google_font).run }
+    output.should == ""
+  end
 end
