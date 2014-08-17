@@ -139,9 +139,11 @@ module HTML
 
     def files
       if File.directory? @src
-        Dir.glob("#{@src}/**/*#{@options[:ext]}")
+        Dir.glob File.join(@src, "**", "*#{@options[:ext]}")
+      elsif File.extname(@src) == @options[:ext]
+        [@src]
       else
-        File.extname(@src) == @options[:ext] ? [@src] : []
+        []
       end
     end
 
