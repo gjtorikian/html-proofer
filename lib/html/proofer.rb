@@ -1,8 +1,11 @@
 require 'nokogiri'
 require 'yell'
 
-require File.dirname(__FILE__) + '/proofer/checkable'
-require File.dirname(__FILE__) + '/proofer/checks'
+[
+  'checkable',
+  'checks',
+  'issue'
+].each { |r| require File.join(File.dirname(__FILE__), "proofer", r) }
 
 module HTML
   class Proofer
@@ -62,7 +65,7 @@ module HTML
       if @failed_tests.empty?
         logger.info colorize :green, "HTML-Proofer finished successfully."
       else
-        @failed_tests.sort.each do |issue|
+        @failed_tests.sort_by(&:path).each do |issue|
           logger.error colorize :red, issue.to_s
         end
 
@@ -112,9 +115,7 @@ module HTML
       if response_code.between?(200, 299)
         # continue with no op
       elsif response.timed_out?
-        failed_test_msg = "External link #{href} failed: got a time out"
-        failed_test_msg.insert(0, "#{filenames.join(' ').blue}: ") unless filenames.nil?
-        @failed_tests << failed_test_msg
+        add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
       elsif (response_code == 405 || response_code == 420 || response_code == 503) && method == :head
         # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
         uri = URI(href)
@@ -125,9 +126,7 @@ module HTML
         queue_request(:get, href, filenames)
       else
         # Received a non-successful http response.
-        failed_test_msg = "External link #{href} failed: #{response_code} #{response.return_message}"
-        failed_test_msg.insert(0, "#{filenames.join(' ').blue}: ") unless filenames.nil?
-        @failed_tests << failed_test_msg
+        add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
       end
     end
 
@@ -164,6 +163,16 @@ module HTML
         Colored.colorize(string, :foreground => color)
       else
         string
+      end
+    end
+
+    def add_failed_tests(filenames, desc, status = nil)
+      if filenames.nil?
+        @failed_tests << Checks::Issue.new("", desc, status)
+      elsif
+        filenames.each { |f|
+          @failed_tests << Checks::Issue.new(f, desc, status)
+        }
       end
     end
 
