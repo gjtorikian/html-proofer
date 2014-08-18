@@ -9,22 +9,15 @@ task :default => [:spec, :readme]
 
 task :readme do
   require 'html/proofer'
-  require 'html/pipeline'
+  require 'redcarpet'
 
-  # make an out dir
-  mkdir_p "out"
+  redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}
 
-  pipeline = HTML::Pipeline.new [
-    HTML::Pipeline::MarkdownFilter,
-    HTML::Pipeline::TableOfContentsFilter
-  ], :gfm => true
-
-  # generate HTML from Markdown
-  contents = File.read("README.md")
-  result = pipeline.call(contents)
-
-  File.open("out/README.html", "w") { |file| file.write(result[:output].to_s) }
+  html = redcarpet.render File.open("README.md").read
+  File.open "_README.html", File::CREAT|File::WRONLY do |file|
+    file.puts html
+  end
 
   # test your out dir!
-  HTML::Proofer.new("./out/README.html").run
+  HTML::Proofer.new("_README.html").run
 end
