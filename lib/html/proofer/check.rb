@@ -3,7 +3,6 @@ require 'net/http'
 require 'net/https'
 require 'timeout'
 require 'uri'
-require 'colored'
 require 'typhoeus'
 
 class HTML::Proofer::Checks
@@ -27,8 +26,8 @@ class HTML::Proofer::Checks
       raise NotImplementedError.new("HTML::Proofer::Check subclasses must implement #run")
     end
 
-    def add_issue(desc)
-      @issues << "#{@path.blue}: #{desc}"
+    def add_issue(desc, status = nil)
+      @issues << Issue.new(@path, desc, status)
     end
 
     def output_filenames
