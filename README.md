@@ -90,6 +90,14 @@ Don't have or want a `Rakefile`? You _could_ also do something like the followin
 htmlproof ./_site
 ```
 
+### Real-life examples
+
+Project | Repository
+:--- | :---
+[Raspberry Pi documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation]( https://github.com/raspberrypi/documentation)
+[Open Whisper Systems website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
+[Jekyll website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
+
 ## What's Tested?
 
 ### Images
