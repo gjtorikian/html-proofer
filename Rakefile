@@ -5,9 +5,9 @@ require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => [:spec, :readme]
+task :default => [:spec, :proof_readme]
 
-task :readme do
+task :proof_readme do
   require 'html/proofer'
   require 'redcarpet'
 
