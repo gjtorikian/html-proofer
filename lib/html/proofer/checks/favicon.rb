@@ -13,6 +13,7 @@ class Favicons < ::HTML::Proofer::Checks::Check
 
     @html.css("link").each do |favicon|
       favicon = Favicon.new favicon, "favicon", self
+      next if favicon.ignore?
       return if favicon.rel.split(" ").last.eql? "icon"
     end
 

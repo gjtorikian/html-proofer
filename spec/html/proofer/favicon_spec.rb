@@ -37,10 +37,10 @@ describe "Favicons test" do
     output.should == ""
   end
 
-  it "passes for broken favicon with data-proofer-ignore" do
+  it "fails for broken favicon with data-proofer-ignore" do
     broken_but_ignored = "#{FIXTURES_DIR}/favicon/favicon_broken_but_ignored.html"
     output = capture_stderr { HTML::Proofer.new(broken_but_ignored, {:favicon => true}).run }
-    output.should == ""
+    output.should match /no favicon specified/
   end
 
 end
