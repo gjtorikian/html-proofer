@@ -12,12 +12,12 @@ task :readme do
   require 'redcarpet'
 
   redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}
-
   html = redcarpet.render File.open("README.md").read
-  File.open "_README.html", File::CREAT|File::WRONLY do |file|
+
+  mkdir_p "out"
+  File.open "out/README.html", File::CREAT|File::WRONLY do |file|
     file.puts html
   end
 
-  # test your out dir!
-  HTML::Proofer.new("_README.html").run
+  HTML::Proofer.new("./out").run
 end
