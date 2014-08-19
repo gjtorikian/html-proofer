@@ -32,32 +32,30 @@ module HTML
       end
 
       def valid?
-        begin
-          parts
-        rescue
-          false
-        end
+        !parts.nil?
       end
 
       def parts
         URI::Parser.new(:ESCAPED => '\|').parse url
+      rescue URI::Error
+        nil
       end
 
       def path
-        parts.path
+        parts.path if !parts.nil?
       end
 
       def hash
-        parts.fragment
+        parts.fragment if !parts.nil?
+      end
+
+      def scheme
+        parts.scheme if !parts.nil?
       end
 
       # path is to an external server
       def remote?
-        %w( http https ).include?(parts.scheme)
-      rescue URI::BadURIError
-        false
-      rescue URI::InvalidURIError
-        false
+        %w( http https ).include? scheme
       end
 
       def ignore?
@@ -73,11 +71,7 @@ module HTML
           return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
 
-        %w( mailto tel ).include?(parts.scheme)
-      rescue URI::BadURIError
-        false
-      rescue URI::InvalidURIError
-        false
+        %w( mailto tel ).include? scheme
       end
 
       # path is external to the file
