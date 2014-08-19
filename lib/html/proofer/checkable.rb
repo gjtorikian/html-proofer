@@ -33,27 +33,27 @@ module HTML
 
       def valid?
         begin
-          uri
+          parts
         rescue
           false
         end
       end
 
-      def uri
+      def parts
         URI::Parser.new(:ESCAPED => '\|').parse url
       end
 
       def path
-        uri.path
+        parts.path
       end
 
       def hash
-        uri.fragment
+        parts.fragment
       end
 
       # path is to an external server
       def remote?
-        %w( http https ).include?(uri.scheme)
+        %w( http https ).include?(parts.scheme)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
@@ -73,7 +73,7 @@ module HTML
           return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
 
-        %w( mailto tel ).include?(uri.scheme)
+        %w( mailto tel ).include?(parts.scheme)
       rescue URI::BadURIError
         false
       rescue URI::InvalidURIError
