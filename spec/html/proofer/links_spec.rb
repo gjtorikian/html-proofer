@@ -190,9 +190,9 @@ describe "Links test" do
     output.should == ""
   end
 
-  it "works for google font" do
-    google_font = "#{FIXTURES_DIR}/links/google_font.html"
-    output = capture_stderr { HTML::Proofer.new(google_font).run }
+  it "works for pipes in the URL" do
+    escape_pipes = "#{FIXTURES_DIR}/links/escape_pipes.html"
+    output = capture_stderr { HTML::Proofer.new(escape_pipes).run }
     output.should == ""
   end
 end
