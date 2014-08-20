@@ -195,4 +195,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(escape_pipes).run }
     output.should == ""
   end
+
+  it "fails for internal link with broken query" do
+    broken_query_internal = "#{FIXTURES_DIR}/links/folder_without_index/broken_query_internal.html"
+    output = capture_stderr { HTML::Proofer.new(broken_query_internal).run }
+    output.should match /internally linking/
+  end
 end
