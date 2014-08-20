@@ -155,8 +155,8 @@ module HTML
     end
 
     def self.create_nokogiri(path)
-      path << "/index.html" if File.directory? path # support for Jekyll-style links
-      content = File.open(path, "rb") {|f| f.read }
+      File.join path, @options[:directory_index] if File.directory? path # support for Jekyll-style links
+      content = File.open(path).read
       Nokogiri::HTML(content)
     end
 
