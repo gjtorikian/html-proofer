@@ -102,7 +102,7 @@ module HTML
         # implicit index support, with support for trailing slashes
         if File.directory? file and slashed? file
           File.join file, @check.options[:directory_index]
-        elsif File.directory? file and !@check.options[:followlocation]
+        elsif File.directory? file and @check.options[:followlocation]
           File.join file, @check.options[:directory_index]
         else
           file
