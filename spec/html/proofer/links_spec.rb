@@ -189,4 +189,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(link_pre).run }
     output.should == ""
   end
+
+  it "works for pipes in the URL" do
+    escape_pipes = "#{FIXTURES_DIR}/links/escape_pipes.html"
+    output = capture_stderr { HTML::Proofer.new(escape_pipes).run }
+    output.should == ""
+  end
 end
