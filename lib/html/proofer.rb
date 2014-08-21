@@ -155,7 +155,6 @@ module HTML
     end
 
     def self.create_nokogiri(path)
-      path = File.join path, @options[:directory_index] if File.directory? path
       content = File.open(path).read
       Nokogiri::HTML(content)
     end

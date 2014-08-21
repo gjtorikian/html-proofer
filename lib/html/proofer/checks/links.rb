@@ -11,7 +11,7 @@ class Link < ::HTML::Proofer::Checkable
   end
 
   def unslashed_directory?
-    File.directory? absolute_path and !absolute_path.end_with? File::SEPARATOR
+    File.directory? absolute_path and unslashed? absolute_path
   end
 
 end

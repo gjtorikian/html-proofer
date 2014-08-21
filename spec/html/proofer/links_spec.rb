@@ -196,9 +196,9 @@ describe "Links test" do
     output.should == ""
   end
 
-  it "fails for internal link with broken query" do
-    broken_query_internal = "#{FIXTURES_DIR}/links/folder_without_index/broken_query_internal.html"
-    output = capture_stderr { HTML::Proofer.new(broken_query_internal).run }
-    output.should match /internally linking/
+  it "fails for broken hash with query" do
+    broken_hash = "#{FIXTURES_DIR}/links/broken_hash_with_query.html"
+    output = capture_stderr { HTML::Proofer.new(broken_hash).run }
+    output.should match /linking to internal hash #example that does not exist/
   end
 end

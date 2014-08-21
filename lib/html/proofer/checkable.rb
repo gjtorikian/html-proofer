@@ -79,9 +79,9 @@ module HTML
         !internal?
       end
 
-      # path is an anchor
+      # path is an anchor or a query
       def internal?
-        url[0] == "#"
+        url.start_with? "#", "?"
       end
 
       def file_path
@@ -113,7 +113,15 @@ module HTML
 
       def absolute_path
         path = file_path || @check.path
-        File.expand_path path, Dir.pwd
+        path = File.expand_path path, Dir.pwd
+
+        if File.directory? path and slashed? path
+          File.join path, @check.options[:directory_index]
+        elsif File.directory? path and !@check.options[:followlocation]
+          File.join path, @check.options[:directory_index]
+        else
+          path
+        end
       end
 
       def ignores_pattern_check(links)
@@ -126,6 +134,14 @@ module HTML
         end
 
         false
+      end
+
+      def unslashed?(path)
+        !path.end_with? File::SEPARATOR
+      end
+
+      def slashed?(path)
+        path.end_with? File::SEPARATOR
       end
     end
   end
