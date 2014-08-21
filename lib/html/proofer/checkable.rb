@@ -36,7 +36,7 @@ module HTML
       end
 
       def parts
-        URI::Parser.new(:ESCAPED => '\|').parse url
+        URI::Parser.new(:ESCAPED => '\%|\|').parse url
       rescue URI::Error
         nil
       end
