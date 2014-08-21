@@ -100,9 +100,13 @@ module HTML
         file = File.join base, path
 
         # implicit index support, with support for trailing slashes
-        file = File.join path, @check.options[:directory_index] if File.directory? File.expand_path file, @check.src
-
-        file
+        if File.directory? file and slashed? file
+          File.join file, @check.options[:directory_index]
+        elsif File.directory? file and !@check.options[:followlocation]
+          File.join file, @check.options[:directory_index]
+        else
+          file
+        end
       end
 
       # checks if a file exists relative to the current pwd
@@ -113,15 +117,7 @@ module HTML
 
       def absolute_path
         path = file_path || @check.path
-        path = File.expand_path path, Dir.pwd
-
-        if File.directory? path and slashed? path
-          File.join path, @check.options[:directory_index]
-        elsif File.directory? path and !@check.options[:followlocation]
-          File.join path, @check.options[:directory_index]
-        else
-          path
-        end
+        File.expand_path path, Dir.pwd
       end
 
       def ignores_pattern_check(links)
