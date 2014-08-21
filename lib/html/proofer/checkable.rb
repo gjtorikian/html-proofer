@@ -136,10 +136,6 @@ module HTML
         false
       end
 
-      def unslashed?(path)
-        !path.end_with? File::SEPARATOR
-      end
-
       def slashed?(path)
         path.end_with? File::SEPARATOR
       end
