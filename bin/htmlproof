@@ -16,6 +16,7 @@ Mercenary.program(:htmlproof) do |p|
 
   p.option 'ext', '--ext EXT', 'The extension of your HTML files (default: `.html`)'
   p.option 'favicon', '--favicon', 'Enables the favicon checker (default: `false`).'
+  p.option 'as-links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
   p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored.'
   p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings containing `img`s whose missing `alt` tags are safe to ignore'
@@ -45,9 +46,7 @@ Mercenary.program(:htmlproof) do |p|
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
     options[:directory_index_file] = opts["directory_index_file"] unless opts["directory_index_file"].nil?
 
-    if path =~ /^\[/
-      path = path[1..-2].delete(' ').delete('"').split(",")
-    end
+    path = path.delete(' ').split(",") if opts["as-links"]
 
     HTML::Proofer.new(path, options).run
   end

@@ -153,10 +153,10 @@ Instead of a directory as the first argument, you can also pass in an array of l
 HTML::Proofer.new(["http://github.com", "http://jekyllrb.com"])
 ```
 
-This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to wrap this array up in quotation marks:
+This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
 
 ``` bash
-htmlproof '["http://github.com", "http://jekyllrb.com"]'
+bin/htmlproof www.google.com,www.github.com --as-links
 ```
 
 ## Ignoring content
