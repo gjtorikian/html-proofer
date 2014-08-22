@@ -22,6 +22,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
+  p.option 'directory_index', '--directory_index', 'Sets the file to look for, when link is a directory.'
 
   p.action do |args, opts|
     args = ["."] if args.empty?
@@ -42,6 +43,7 @@ Mercenary.program(:htmlproof) do |p|
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
     options[:favicon] = opts["favicon"] unless opts["favicon"].nil?
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
+    options[:directory_index] = opts["directory_index"] unless opts["directory_index"].nil?
 
     path = path.delete(' ').split(",") if options[:as_link_array]
 
