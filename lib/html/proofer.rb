@@ -1,6 +1,10 @@
 require 'nokogiri'
 require 'yell'
 
+begin
+  require "awesome_print"
+rescue LoadError; end
+
 [
   'checkable',
   'checks',
@@ -31,10 +35,23 @@ module HTML
         :alt_ignore => [],
         :disable_external => false,
         :verbose => false,
-        :as_link_array => false,
+        :only_4xx => false,
         :directory_index_file => "index.html"
       }
-      @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
+
+      @typhoeus_opts = {
+        :followlocation => true
+      }
+
+      # Typhoeus won't let you pass any non-Typhoeus option
+      opts.keys.each do |key|
+        unless @typhoeus_opts[key].nil?
+          @typhoeus_opts[key] = opts[key]
+          @proofer_opts[key] = opts[key]
+        end
+      end
+
+      @options = @proofer_opts.merge(@typhoeus_opts).merge(opts)
 
       @failed_tests = []
 
@@ -45,7 +62,7 @@ module HTML
     end
 
     def run
-      unless @options[:as_link_array]
+      unless @src.is_a? Array
         total_files = 0
         external_urls = {}
 
@@ -93,11 +110,6 @@ module HTML
 
       logger.info HTML::colorize :yellow, "Checking #{external_urls.length} external links..."
 
-      # Typhoeus won't let you pass any non-Typhoeus option
-      @proofer_opts.each_key do |opt|
-        @options.delete opt
-      end
-
       Ethon.logger = logger # log from Typhoeus/Ethon
 
       external_urls.each_pair do |href, filenames|
@@ -108,7 +120,7 @@ module HTML
     end
 
     def queue_request(method, href, filenames)
-      request = Typhoeus::Request.new(href, @options.merge({:method => method}))
+      request = Typhoeus::Request.new(href, @typhoeus_opts.merge({:method => method}))
       request.on_complete { |response| response_handler(response, filenames) }
       hydra.queue request
     end
@@ -125,6 +137,7 @@ module HTML
       if response_code.between?(200, 299)
         # continue with no op
       elsif response.timed_out?
+        return if @options[:only_4xx]
         add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
       elsif (response_code == 405 || response_code == 420 || response_code == 503) && method == :head
         # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
@@ -135,6 +148,7 @@ module HTML
       elsif method == :head
         queue_request(:get, href, filenames)
       else
+        return if @options[:only_4xx] && !response_code.between?(400, 499)
         # Received a non-successful http response.
         add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
       end

@@ -45,6 +45,14 @@ describe "Links test" do
     output.should match /External link https:\/\/help.github.com\/changing-author-info\/ failed: 301 No error/
   end
 
+  it "does not fail on redirects we're not following" do
+    # this test should emit a 301--see above--but we're intentionally supressing it
+    options = { :only_4xx => true, :followlocation => false }
+    linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
+    output = capture_stderr { HTML::Proofer.new(linkWithRedirectFilepath, options).run }
+    output.should == ""
+  end
+
   it "should understand https" do
     linkWithHttpsFilepath = "#{FIXTURES_DIR}/links/linkWithHttps.html"
     output = capture_stderr { HTML::Proofer.new(linkWithHttpsFilepath).run }
@@ -173,8 +181,7 @@ describe "Links test" do
   end
 
   it "works for array of links" do
-    options = { :as_link_array => true}
-    output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"], options).run }
+    output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"]).run }
     output.should match /foofoofoo.biz\/? failed: 0 Couldn't resolve host name/
   end
 

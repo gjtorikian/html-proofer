@@ -16,11 +16,12 @@ Mercenary.program(:htmlproof) do |p|
 
   p.option 'ext', '--ext EXT', 'The extension of your HTML files (default: `.html`)'
   p.option 'favicon', '--favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'as-links', '--as-links', 'Assumes that `PATH` is an array of links to check.'
+  p.option 'as-links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
   p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored.'
   p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
+  p.option 'only-4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
   p.option 'directory_index_file', '--directory_index_file', 'Sets the file to look for when a link refers to a directory.'
 
@@ -37,7 +38,7 @@ Mercenary.program(:htmlproof) do |p|
         options[:href_swap][%r{#{pair[0]}}] = pair[1]
       end
     end
-    options[:as_link_array] = opts["as-links"] unless opts["as-links"].nil?
+
     options[:href_ignore] = opts["href_ignore"] unless opts["href_ignore"].nil?
     options[:alt_ignore] = opts["alt_ignore"] unless opts["alt_ignore"].nil?
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
@@ -45,7 +46,7 @@ Mercenary.program(:htmlproof) do |p|
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
     options[:directory_index_file] = opts["directory_index_file"] unless opts["directory_index_file"].nil?
 
-    path = path.delete(' ').split(",") if options[:as_link_array]
+    path = path.delete(' ').split(",") if opts["as-links"]
 
     HTML::Proofer.new(path, options).run
   end
