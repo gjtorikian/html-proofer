@@ -135,6 +135,10 @@ module HTML
       def slashed?(path)
         path.end_with? File::SEPARATOR
       end
+
+      def unslashed_directory? file
+        File.directory? file and !file.end_with? File::SEPARATOR and !@check.options[:followlocation]
+      end
     end
   end
 end

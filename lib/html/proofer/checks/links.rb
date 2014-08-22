@@ -45,7 +45,7 @@ class Links < ::HTML::Proofer::Checks::Check
       end
 
       # has the local directory a trailing slash?
-      if !@options[:followlocation] and !link.remote? and link.unslashed_directory?
+      if !@options[:followlocation] and link.unslashed_directory?
         self.add_issue("internally linking to a directory #{link.absolute_path} without trailing slash")
         next
       end
