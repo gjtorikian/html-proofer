@@ -32,7 +32,7 @@ module HTML
         :disable_external => false,
         :verbose => false,
         :as_link_array => false,
-        :directory_index => "index.html"
+        :directory_index_file => "index.html"
       }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 

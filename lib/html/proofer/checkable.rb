@@ -101,7 +101,7 @@ module HTML
 
         # implicit index support
         if File.directory? file and !unslashed_directory? file
-          file = File.join file, @check.options[:directory_index]
+          file = File.join file, @check.options[:directory_index_file]
         end
 
         file
