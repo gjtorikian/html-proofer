@@ -31,7 +31,6 @@ module HTML
         :alt_ignore => [],
         :disable_external => false,
         :verbose => false,
-        :as_link_array => false,
         :directory_index_file => "index.html"
       }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
@@ -45,7 +44,7 @@ module HTML
     end
 
     def run
-      unless @options[:as_link_array]
+      unless @src.is_a? Array
         total_files = 0
         external_urls = {}
 

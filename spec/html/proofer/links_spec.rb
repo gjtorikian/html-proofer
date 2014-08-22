@@ -173,8 +173,7 @@ describe "Links test" do
   end
 
   it "works for array of links" do
-    options = { :as_link_array => true}
-    output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"], options).run }
+    output = capture_stderr { HTML::Proofer.new(["www.github.com", "foofoofoo.biz"]).run }
     output.should match /foofoofoo.biz\/? failed: 0 Couldn't resolve host name/
   end
 

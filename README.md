@@ -58,7 +58,7 @@ HTML::Proofer.new("./out").run
 
 ### Using on the command-line
 
-You'll get a new program called `htmlproof` with this gem. Jawesome!
+You'll get a new program called `htmlproof` with this gem. Terrific!
 
 Use it like you'd expect to:
 
@@ -133,7 +133,6 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `favicon` | Enables the favicon checker. | `false` |
 | `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `as_link_array` | Assumes that you've passed in just an array of links to check. | `false` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
@@ -146,6 +145,18 @@ HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 
 ```
 
 This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+
+Instead of a directory as the first argument, you can also pass in an array of links:
+
+``` ruby
+HTML::Proofer.new(["http://github.com", "http://jekyllrb.com"])
+```
+
+This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to wrap this array up in quotation marks:
+
+``` bash
+htmlproof '["http://github.com", "http://jekyllrb.com"]'
+```
 
 ## Ignoring content
 
