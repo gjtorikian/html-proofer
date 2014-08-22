@@ -201,4 +201,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(broken_hash).run }
     output.should match /linking to internal hash #example that does not exist/
   end
+
+  it "works for directory index file" do
+    options = { :directory_index => "index.php" }
+    link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
+    output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
+  end
 end
