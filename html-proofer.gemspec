@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "yell",            "~> 2.0"
 
   gem.add_development_dependency "redcarpet"
-  gem.add_development_dependency "escape_utils", "~> 1.0" # Ruby 2.1 fix
   gem.add_development_dependency "rspec", "~> 2.13.0"
   gem.add_development_dependency "rake"
 end
