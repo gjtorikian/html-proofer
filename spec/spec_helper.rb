@@ -12,6 +12,9 @@ RSpec.configure do |config|
 
   # Use the specified formatter
   config.formatter = :documentation # :progress, :html, :textmate
+
+  # Run in a random order
+  config.order = :random
 end
 
 def capture_stderr(&block)
