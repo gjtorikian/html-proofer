@@ -36,7 +36,7 @@ module HTML
       end
 
       def parts
-        URI::Parser.new(:ESCAPED => '\|').parse url
+        URI::Parser.new(:ESCAPED => '\%|\|').parse url
       rescue URI::Error
         nil
       end
@@ -79,9 +79,9 @@ module HTML
         !internal?
       end
 
-      # path is an anchor
+      # path is an anchor or a query
       def internal?
-        url[0] == "#"
+        url.start_with? "#", "?"
       end
 
       def file_path
@@ -99,8 +99,10 @@ module HTML
 
         file = File.join base, path
 
-        # implicit /index.html support, with support for trailing slashes
-        file = File.join path, "index.html" if File.directory? File.expand_path file, @check.src
+        # implicit index support
+        if File.directory? file and !unslashed_directory? file
+          file = File.join file, @check.options[:directory_index_file]
+        end
 
         file
       end
@@ -126,6 +128,10 @@ module HTML
         end
 
         false
+      end
+
+      def unslashed_directory? file
+        File.directory? file and !file.end_with? File::SEPARATOR and !@check.options[:followlocation]
       end
     end
   end

@@ -31,7 +31,8 @@ module HTML
         :alt_ignore => [],
         :disable_external => false,
         :verbose => false,
-        :as_link_array => false
+        :as_link_array => false,
+        :directory_index_file => "index.html"
       }
       @options = @proofer_opts.merge({:followlocation => true}).merge(opts)
 
@@ -154,8 +155,7 @@ module HTML
     end
 
     def self.create_nokogiri(path)
-      path << "/index.html" if File.directory? path # support for Jekyll-style links
-      content = File.open(path, "rb") {|f| f.read }
+      content = File.open(path).read
       Nokogiri::HTML(content)
     end
 

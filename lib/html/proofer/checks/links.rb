@@ -10,10 +10,6 @@ class Link < ::HTML::Proofer::Checkable
     href.nil? and @name.nil? and @id.nil?
   end
 
-  def unslashed_directory?
-    File.directory? absolute_path and !absolute_path.end_with? File::SEPARATOR
-  end
-
 end
 
 class Links < ::HTML::Proofer::Checks::Check
@@ -45,7 +41,7 @@ class Links < ::HTML::Proofer::Checks::Check
       end
 
       # has the local directory a trailing slash?
-      if !@options[:followlocation] and !link.remote? and link.unslashed_directory?
+      if link.unslashed_directory? link.absolute_path
         self.add_issue("internally linking to a directory #{link.absolute_path} without trailing slash")
         next
       end
