@@ -3,5 +3,6 @@ rvm:
   - 1.9
   - 2.0
   - 2.1
-before_install:
-  - export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
