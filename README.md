@@ -137,7 +137,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
-| `only_4xx` | Only reports errors for links that fall within the 4x status code range. | `false` |
+| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 
 You can also pass in any of Typhoeus' options for the external link check. For example:
 
