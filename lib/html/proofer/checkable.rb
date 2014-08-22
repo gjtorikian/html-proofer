@@ -99,13 +99,13 @@ module HTML
 
         file = File.join base, path
 
-        # implicit index support, with support for trailing slashes
-        if File.directory? file and slashed? file
-          File.join file, @check.options[:directory_index]
-        elsif File.directory? file and @check.options[:followlocation]
-          File.join file, @check.options[:directory_index]
-        else
+        if !File.directory? file
           file
+        elsif unslashed_directory? file
+          file
+        else
+          # implicit index support
+          File.join file, @check.options[:directory_index]
         end
       end
 
@@ -132,12 +132,8 @@ module HTML
         false
       end
 
-      def slashed?(path)
-        path.end_with? File::SEPARATOR
-      end
-
       def unslashed_directory? file
-        File.directory? file and !file.end_with? File::SEPARATOR and !@check.options[:followlocation]
+        File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:followlocation]
       end
     end
   end
