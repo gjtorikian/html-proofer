@@ -206,5 +206,6 @@ describe "Links test" do
     options = { :directory_index => "index.php" }
     link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
     output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
+    output.should == ""
   end
 end
