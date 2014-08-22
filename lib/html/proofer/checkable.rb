@@ -99,14 +99,12 @@ module HTML
 
         file = File.join base, path
 
-        if !File.directory? file
-          file
-        elsif unslashed_directory? file
-          file
-        else
-          # implicit index support
-          File.join file, @check.options[:directory_index]
+        # implicit index support
+        if File.directory? file and !unslashed_directory? file
+          file = File.join file, @check.options[:directory_index]
         end
+
+        file
       end
 
       # checks if a file exists relative to the current pwd
@@ -133,7 +131,7 @@ module HTML
       end
 
       def unslashed_directory? file
-        File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:followlocation]
+        File.directory? file and !file.end_with? File::SEPARATOR and !@check.options[:followlocation]
       end
     end
   end
