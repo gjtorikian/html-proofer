@@ -43,11 +43,11 @@ module HTML
         :followlocation => true
       }
 
-      # Typhoeus won't let you pass any non-Typhoeus option
+      # Typhoeus won't let you pass in any non-Typhoeus option; if the option is not
+      # a proofer_opt, it must be for Typhoeus
       opts.keys.each do |key|
-        unless @typhoeus_opts[key].nil?
+        if @proofer_opts[key].nil?
           @typhoeus_opts[key] = opts[key]
-          @proofer_opts[key] = opts[key]
         end
       end
 

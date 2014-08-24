@@ -215,4 +215,11 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
     output.should == ""
   end
+
+  it "ensures Typhoeus options are passed" do
+    options = { ssl_verifypeer: false }
+    typhoeus_options_link = "#{FIXTURES_DIR}/links/ensure_typhoeus_options.html"
+    output = capture_stderr { HTML::Proofer.new(typhoeus_options_link, options).run }
+    output.should == ""
+  end
 end
