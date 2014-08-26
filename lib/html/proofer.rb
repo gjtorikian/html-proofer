@@ -160,7 +160,11 @@ module HTML
 
     def files
       if File.directory? @src
-        Dir.glob File.join(@src, "**", "*#{@options[:ext]}")
+        result = []
+        Dir.glob File.join(@src, "**", "*#{@options[:ext]}") do |f|
+          result << f if !File.directory? f
+        end
+        result
       elsif File.extname(@src) == @options[:ext]
         [@src]
       else
