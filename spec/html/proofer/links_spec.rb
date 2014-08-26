@@ -72,7 +72,7 @@ describe "Links test" do
   end
 
   it 'properly checks links to root' do
-    rootLink = "#{FIXTURES_DIR}/links/rootLink.html"
+    rootLink = "#{FIXTURES_DIR}/links/rootLink/rootLink.html"
     output = capture_stderr { HTML::Proofer.new(rootLink).run }
     output.should == ""
   end
