@@ -36,7 +36,7 @@ class Links < ::HTML::Proofer::Checks::Check
       # does the file even exist?
       if link.remote?
         add_to_external_urls link.href
-      else
+      elsif !link.internal?
         self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
       end
 

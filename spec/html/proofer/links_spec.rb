@@ -222,4 +222,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(typhoeus_options_link, options).run }
     output.should == ""
   end
+
+  it "works for hash referring to itself" do
+    hashReferringToSelf = "#{FIXTURES_DIR}/links/hashReferringToSelf.html"
+    output = capture_stderr { HTML::Proofer.new(hashReferringToSelf).run }
+    output.should == ""
+  end
 end
