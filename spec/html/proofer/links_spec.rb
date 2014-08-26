@@ -225,7 +225,7 @@ describe "Links test" do
 
   it "works if subdirectory ends with .html" do
     with_subdirectory_html = "#{FIXTURES_DIR}/links/_site"
-    output = capture_stderr { HTML::Proofer.new(with_subdirectory_html, :verbose => true).run }
+    output = capture_stderr { HTML::Proofer.new(with_subdirectory_html).run }
     output.should == ""
   end
 end
