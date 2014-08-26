@@ -11,7 +11,7 @@ describe HTML::Proofer do
   end
   describe "#files" do
     it "works for directory that ends with .html" do
-      folder = "#{FIXTURES_DIR}/links/folder.html"
+      folder = "#{FIXTURES_DIR}/links/_site/folder.html"
       proofer = HTML::Proofer.new folder
       proofer.files.should == ["#{folder}/index.html"]
     end
