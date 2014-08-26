@@ -140,6 +140,7 @@ module HTML
       logger.debug debug_msg
 
       if response_code.between?(200, 299)
+        return if @options[:only_4xx]
         if hash = has_hash?(href)
           hash = hash[1]
           body_doc = Nokogiri::HTML(response.body)

@@ -13,6 +13,12 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb).run }
     output.should match /but the hash 'no' does not/
   end
+
+  it "passes for broken hashes on the web (when we look only for 4xx)" do
+    options = { :only_4xx => true }
+    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
+    output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb, options).run }
+    output.should == ""
   end
 
   it "fails for broken internal hash" do
