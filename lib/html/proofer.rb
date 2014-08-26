@@ -142,7 +142,6 @@ module HTML
       if response_code.between?(200, 299)
         return if @options[:only_4xx]
         if hash = has_hash?(href)
-          hash = hash[1]
           body_doc = Nokogiri::HTML(response.body)
           # user-content is a special addition by GitHub.
           if URI.parse(href).host.match(/github\.com/i)
@@ -197,7 +196,11 @@ module HTML
     end
 
     def has_hash?(url)
-      url.match /\#(.+)\/?/
+      begin
+        URI.parse(url).fragment
+      rescue URI::InvalidURIError
+        nil
+      end
     end
 
     def log_level
