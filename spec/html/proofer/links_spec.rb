@@ -223,6 +223,12 @@ describe "Links test" do
     output.should == ""
   end
 
+  it "works if subdirectory ends with .html" do
+    with_subdirectory_html = "#{FIXTURES_DIR}/links/_site"
+    output = capture_stderr { HTML::Proofer.new(with_subdirectory_html).run }
+    output.should == ""
+  end
+
   it "works for hash referring to itself" do
     hashReferringToSelf = "#{FIXTURES_DIR}/links/hashReferringToSelf.html"
     output = capture_stderr { HTML::Proofer.new(hashReferringToSelf).run }
