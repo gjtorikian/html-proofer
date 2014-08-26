@@ -145,7 +145,11 @@ module HTML
           hash = hash[1]
           body_doc = Nokogiri::HTML(response.body)
           # user-content is a special addition by GitHub.
-          if body_doc.xpath(%$//*[@name="#{hash}"]|//*[@id="#{hash}"]|//*[@name="user-content-#{hash}"]$).empty?
+          if URI.parse(href).host.match(/github\.com/i)
+            if body_doc.xpath(%$//*[@name="user-content-#{hash}"]$).empty?
+              add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
+            end
+          elsif body_doc.xpath(%$//*[@name="#{hash}"]|//*[@id="#{hash}"]$).empty?
             add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
           end
         end

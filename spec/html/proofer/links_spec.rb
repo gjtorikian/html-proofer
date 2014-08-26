@@ -14,6 +14,12 @@ describe "Links test" do
     output.should match /but the hash 'no' does not/
   end
 
+  it "passes for GitHub hashes on the web" do
+    githubHash = "#{FIXTURES_DIR}/links/githubHash.html"
+    output = capture_stderr { HTML::Proofer.new(githubHash).run }
+    output.should == ""
+  end
+
   it "passes for broken hashes on the web (when we look only for 4xx)" do
     options = { :only_4xx => true }
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
