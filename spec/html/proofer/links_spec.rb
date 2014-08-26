@@ -72,7 +72,7 @@ describe "Links test" do
   end
 
   it 'properly checks links to root' do
-    rootLink = "#{FIXTURES_DIR}/links/rootLink.html"
+    rootLink = "#{FIXTURES_DIR}/links/rootLink/rootLink.html"
     output = capture_stderr { HTML::Proofer.new(rootLink).run }
     output.should == ""
   end
@@ -226,6 +226,12 @@ describe "Links test" do
   it "works if subdirectory ends with .html" do
     with_subdirectory_html = "#{FIXTURES_DIR}/links/_site"
     output = capture_stderr { HTML::Proofer.new(with_subdirectory_html).run }
+    output.should == ""
+  end
+
+  it "works for hash referring to itself" do
+    hashReferringToSelf = "#{FIXTURES_DIR}/links/hashReferringToSelf.html"
+    output = capture_stderr { HTML::Proofer.new(hashReferringToSelf).run }
     output.should == ""
   end
 end
