@@ -11,7 +11,8 @@ describe "Links test" do
   it "fails for broken hashes on the web (even if the file exists)" do
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
     output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb).run }
-    output.should match /articles\/searching-issues exists, but the hash 'no' does not/
+    output.should match /but the hash 'no' does not/
+  end
   end
 
   it "fails for broken internal hash" do
