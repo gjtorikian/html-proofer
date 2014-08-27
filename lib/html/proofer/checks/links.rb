@@ -40,7 +40,7 @@ class Links < ::HTML::Proofer::Checks::Check
         self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
       end
 
-      # has the local directory a trailing slash?
+      # does the local directory have a trailing slash?
       if link.unslashed_directory? link.absolute_path
         self.add_issue("internally linking to a directory #{link.absolute_path} without trailing slash")
         next
