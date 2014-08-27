@@ -3,15 +3,29 @@
 class Link < ::HTML::Proofer::Checkable
 
   def href
-    @href unless @href.nil? || @href.empty?
+    real_attr @href
+  end
+
+  def id
+    real_attr @id
+  end
+
+  def name
+    real_attr @name
   end
 
   def missing_href?
-    href.nil? and @name.nil? and @id.nil?
+    href.nil? and name.nil? and id.nil?
   end
 
   def placeholder?
-    (@id or @name) and href.nil?
+    (id || name) && href.nil?
+  end
+
+  private
+
+  def real_attr(attr)
+    attr unless attr.nil? || attr.empty?
   end
 
 end
