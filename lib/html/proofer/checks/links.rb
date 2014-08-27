@@ -10,6 +10,10 @@ class Link < ::HTML::Proofer::Checkable
     href.nil? and @name.nil? and @id.nil?
   end
 
+  def placeholder?
+    (@id or @name) and href.nil?
+  end
+
 end
 
 class Links < ::HTML::Proofer::Checks::Check
@@ -20,6 +24,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
+      next if link.placeholder?
 
       # is it even a valid URL?
       unless link.valid?
