@@ -216,7 +216,7 @@ describe "Links test" do
     output.should == ""
   end
 
-  it "fails if directory index file doesn’t exist" do
+  it "fails if directory index file doesn't exist" do
     options = { :directory_index_file => "README.md" }
     link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
     output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
