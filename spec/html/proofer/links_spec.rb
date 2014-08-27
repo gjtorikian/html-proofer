@@ -210,10 +210,17 @@ describe "Links test" do
   end
 
   it "works for directory index file" do
-    options = { :directory_index => "index.php" }
+    options = { :directory_index_file => "index.php" }
     link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
     output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
     output.should == ""
+  end
+
+  it "fails if directory index file doesn’t exist" do
+    options = { :directory_index_file => "README.md" }
+    link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
+    output = capture_stderr { HTML::Proofer.new(link_pointing_to_directory, options).run }
+    output.should match "internally linking to folder-php/, which does not exist"
   end
 
   it "ensures Typhoeus options are passed" do
