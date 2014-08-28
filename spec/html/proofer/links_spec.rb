@@ -250,6 +250,6 @@ describe "Links test" do
   it "fails for placeholder with empty id" do
     empty_id = "#{FIXTURES_DIR}/links/placeholder_with_empty_id.html"
     output = capture_stderr { HTML::Proofer.new(empty_id).run }
-    output.should match "anchor has no href attribute"
+    output.should match /anchor has no href attribute/
   end
 end
