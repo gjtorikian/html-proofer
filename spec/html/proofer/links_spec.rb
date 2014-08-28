@@ -234,4 +234,22 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(hashReferringToSelf).run }
     output.should == ""
   end
+
+  it "ignores placeholder with name" do
+    placeholder_with_name = "#{FIXTURES_DIR}/links/placeholder_with_name.html"
+    output = capture_stderr { HTML::Proofer.new(placeholder_with_name).run }
+    output.should == ""
+  end
+
+  it "ignores placeholder with id" do
+    placeholder_with_id = "#{FIXTURES_DIR}/links/placeholder_with_id.html"
+    output = capture_stderr { HTML::Proofer.new(placeholder_with_id).run }
+    output.should == ""
+  end
+
+  it "fails for placeholder with empty id" do
+    empty_id = "#{FIXTURES_DIR}/links/placeholder_with_empty_id.html"
+    output = capture_stderr { HTML::Proofer.new(empty_id).run }
+    output.should match /anchor has no href attribute/
+  end
 end

@@ -3,11 +3,29 @@
 class Link < ::HTML::Proofer::Checkable
 
   def href
-    @href unless @href.nil? || @href.empty?
+    real_attr @href
+  end
+
+  def id
+    real_attr @id
+  end
+
+  def name
+    real_attr @name
   end
 
   def missing_href?
-    href.nil? and @name.nil? and @id.nil?
+    href.nil? and name.nil? and id.nil?
+  end
+
+  def placeholder?
+    (id || name) && href.nil?
+  end
+
+  private
+
+  def real_attr(attr)
+    attr unless attr.nil? || attr.empty?
   end
 
 end
@@ -20,6 +38,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
+      next if link.placeholder?
 
       # is it even a valid URL?
       unless link.valid?
