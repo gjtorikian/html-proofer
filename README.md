@@ -139,6 +139,8 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 
+### Configuring Typhoeus
+
 You can also pass in any of Typhoeus' options for the external link check. For example:
 
 ``` ruby
@@ -146,6 +148,18 @@ HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 
 ```
 
 This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+
+### Configuring Parallel
+
+[Parallel](https://github.com/grosser/parallel) is being used to speed things up a bit. You can pass in any of its options with the options "namespace" `:parallel`. For example:
+
+``` ruby
+HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 2, :parallel => { :in_processes => 3} })
+```
+
+`:in_processes => 3` will be passed into Parallel as a configuration option.
+
+### Array of links
 
 Instead of a directory as the first argument, you can also pass in an array of links:
 

@@ -25,6 +25,8 @@ module HTML
   class Proofer
     include Yell::Loggable
 
+    attr_reader :options, :typhoeus_opts, :parallel_opts
+
     def initialize(src, opts={})
       @src = src
 
@@ -43,6 +45,10 @@ module HTML
       @typhoeus_opts = {
         :followlocation => true
       }
+
+      # fall back to parallel defaults
+      @parallel_opts = opts[:parallel] || {}
+      opts.delete(:parallel)
 
       # Typhoeus won't let you pass in any non-Typhoeus option; if the option is not
       # a proofer_opt, it must be for Typhoeus
@@ -68,7 +74,7 @@ module HTML
 
         logger.info HTML::colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
-        results = Parallel.map(files) do |path|
+        results = Parallel.map(files, @parallel_opts) do |path|
           html = HTML::Proofer.create_nokogiri(path)
           result = {:external_urls => {}, :failed_tests => []}
 
