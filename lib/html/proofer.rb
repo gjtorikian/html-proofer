@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'yell'
+require 'parallel'
 
 begin
   require "awesome_print"
@@ -63,27 +64,32 @@ module HTML
 
     def run
       unless @src.is_a? Array
-        total_files = 0
         external_urls = {}
 
         logger.info HTML::colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
-        files.each do |path|
-          total_files += 1
+        results = Parallel.map(files) do |path|
           html = HTML::Proofer.create_nokogiri(path)
+          result = {:external_urls => {}, :failed_tests => []}
 
           get_checks.each do |klass|
             logger.debug HTML::colorize :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
             check =  Object.const_get(klass).new(@src, path, html, @options)
             check.run
-            external_urls.merge!(check.external_urls)
-            @failed_tests.concat(check.issues) if check.issues.length > 0
+            result[:external_urls].merge!(check.external_urls)
+            result[:failed_tests].concat(check.issues) if check.issues.length > 0
           end
+          result
+        end
+
+        results.each do |item|
+          external_urls.merge!(item[:external_urls])
+          @failed_tests.concat(item[:failed_tests])
         end
 
         external_link_checker(external_urls) unless @options[:disable_external]
 
-        logger.info HTML::colorize :green, "Ran on #{total_files} files!\n\n"
+        logger.info HTML::colorize :green, "Ran on #{files.length} files!\n\n"
       else
         external_urls = Hash[*@src.map{ |s| [s, nil] }.flatten]
         external_link_checker(external_urls) unless @options[:disable_external]
