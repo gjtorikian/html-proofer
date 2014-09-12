@@ -25,7 +25,7 @@ module HTML
   class Proofer
     include Yell::Loggable
 
-    attr_accessor :options, :typhoeus_opts, :parallel_opts
+    attr_reader :options, :typhoeus_opts, :parallel_opts
 
     def initialize(src, opts={})
       @src = src
@@ -48,6 +48,7 @@ module HTML
 
       # fall back to parallel defaults
       @parallel_opts = opts[:parallel] || {}
+      opts.delete(:parallel)
 
       # Typhoeus won't let you pass in any non-Typhoeus option; if the option is not
       # a proofer_opt, it must be for Typhoeus

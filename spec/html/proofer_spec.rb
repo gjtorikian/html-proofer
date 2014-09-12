@@ -29,9 +29,10 @@ describe HTML::Proofer do
 
     it "takes options for Parallel" do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
-      proofer = HTML::Proofer.new folder, :parallel_opts => { :in_processes => 3 }
-      proofer.options[:parallel_opts][:in_processes].should == 3
+      proofer = HTML::Proofer.new folder, :parallel => { :in_processes => 3 }
+      proofer.parallel_opts[:in_processes].should == 3
       proofer.typhoeus_opts[:in_processes].should == nil
+      proofer.options[:parallel].should == nil
     end
   end
 end
