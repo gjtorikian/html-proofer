@@ -31,3 +31,9 @@ def capture_stderr(&block)
   end
   fake_err.string
 end
+
+def make_proofer(file, opts={})
+  proofer = HTML::Proofer.new(file, opts)
+  capture_stderr { proofer.run }
+  proofer
+end
