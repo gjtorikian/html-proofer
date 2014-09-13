@@ -36,9 +36,11 @@ module HTML
       end
 
       def parts
-        URI::Parser.new(:ESCAPED => '\%|\|').parse url
+        return @parts_cached if defined?(@parts_cached)
+
+        @parts_cached = URI::Parser.new(:ESCAPED => '\%|\|').parse url
       rescue URI::Error
-        nil
+        @parts_cached = nil
       end
 
       def path
