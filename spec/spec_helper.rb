@@ -35,5 +35,11 @@ end
 def make_proofer(file, opts={})
   proofer = HTML::Proofer.new(file, opts)
   capture_stderr { proofer.run }
+  # proofer.run # when I want to see output
   proofer
+end
+
+def send_proofer_output(file, opts={})
+  proofer = HTML::Proofer.new(file, opts)
+  capture_stderr { proofer.run }
 end

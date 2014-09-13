@@ -39,7 +39,8 @@ module HTML
         :disable_external => false,
         :verbose => false,
         :only_4xx => false,
-        :directory_index_file => "index.html"
+        :directory_index_file => "index.html",
+        :error_sort => :path
       }
 
       @typhoeus_opts = {
@@ -104,8 +105,28 @@ module HTML
       if @failed_tests.empty?
         logger.info HTML::colorize :green, "HTML-Proofer finished successfully."
       else
-        @failed_tests.sort_by(&:path).each do |issue|
-          logger.error HTML::colorize :red, issue.to_s
+        matcher = nil
+        @failed_tests.sort_by(&@options[:error_sort]).each do |issue|
+          case @options[:error_sort]
+          when :path
+            if matcher != issue.path
+              logger.error HTML::colorize :blue, issue.path
+              matcher = issue.path
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.desc}"
+          when :desc
+            if matcher != issue.desc
+              logger.error HTML::colorize :blue, issue.desc
+              matcher = issue.desc
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.path}"
+          when :status
+            if matcher != issue.status
+              logger.error HTML::colorize :blue, issue.status
+              matcher = issue.status
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.to_s}"
+          end
         end
 
         raise HTML::colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"

@@ -7,7 +7,7 @@ class HTML::Proofer::Checks
 
     attr_reader :path, :desc, :status
 
-    def initialize(path, desc, status = nil)
+    def initialize(path, desc, status = -1)
       @path = path
       @desc = desc
       @status = status

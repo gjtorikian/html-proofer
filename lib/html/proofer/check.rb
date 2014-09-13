@@ -26,7 +26,7 @@ class HTML::Proofer::Checks
       raise NotImplementedError.new("HTML::Proofer::Check subclasses must implement #run")
     end
 
-    def add_issue(desc, status = nil)
+    def add_issue(desc, status = -1)
       @issues << Issue.new(@path, desc, status)
     end
 
