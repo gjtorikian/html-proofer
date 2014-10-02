@@ -259,4 +259,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(empty_id).run }
     output.should match /anchor has no href attribute/
   end
+
+  it "ignores non-http(s) protocols" do
+    other_protocols = "#{FIXTURES_DIR}/links/other_protocols.html"
+    output = capture_stderr { HTML::Proofer.new(other_protocols).run }
+    output.should == ""
+  end
 end

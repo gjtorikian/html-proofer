@@ -52,6 +52,9 @@ class Links < ::HTML::Proofer::Checks::Check
         next
       end
 
+      # intentionally here because we still want valid? & missing_href? to execute
+      next if link.non_http_remote?
+
       # does the file even exist?
       if link.remote?
         add_to_external_urls link.href
