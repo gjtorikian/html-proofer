@@ -133,7 +133,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `favicon` | Enables the favicon checker. | `false` |
 | `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Certain URIs, like `mailto` and `tel`, are always ignored. | `[]` |
+| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
@@ -181,7 +181,7 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
 Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Checkable`, and another that inherits from `HTML::Proofer::Checks::Check`. `Checkable` defines various helper methods for your test, while `Checks::Check` actually runs across your content. `Checks::Check` should call `self.add_issue` on failures, to add them to the list.
 
-Here's an example custom test that protects against `mailto` links:
+Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
 class OctocatLink < ::HTML::Proofer::Checkable

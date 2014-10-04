@@ -60,6 +60,10 @@ module HTML
         %w( http https ).include? scheme
       end
 
+      def non_http_remote?
+        !scheme.nil? && !remote?
+      end
+
       def ignore?
         return true if @data_ignore_proofer
 
@@ -72,8 +76,6 @@ module HTML
           return true if url.match(/^data:image/)
           return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
-
-        %w( mailto tel ).include? scheme
       end
 
       # path is external to the file
