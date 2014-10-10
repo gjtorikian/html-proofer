@@ -265,4 +265,10 @@ describe "Links test" do
     output = capture_stderr { HTML::Proofer.new(other_protocols).run }
     output.should == ""
   end
+
+  it "passes non-standard characters" do
+    fixture = "#{FIXTURES_DIR}/links/non_standard_characters.html"
+    output = capture_stderr { HTML::Proofer.new(fixture).run }
+    output.should == ""
+  end
 end
