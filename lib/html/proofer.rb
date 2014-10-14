@@ -6,10 +6,11 @@ begin
   require "awesome_print"
 rescue LoadError; end
 
-[
-  'checkable',
-  'checks',
-  'issue'
+%w[
+  checkable
+  checks
+  issue
+  version
 ].each { |r| require File.join(File.dirname(__FILE__), "proofer", r) }
 
 module HTML
