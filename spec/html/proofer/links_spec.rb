@@ -42,7 +42,7 @@ describe "Links test" do
     options = { :followlocation => false }
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
     output = capture_stderr { HTML::Proofer.new(linkWithRedirectFilepath, options).run }
-    output.should match /External link https:\/\/help.github.com\/changing-author-info\/ failed: 301 No error/
+    output.should match /failed: 301 No error/
   end
 
   it "does not fail on redirects we're not following" do
