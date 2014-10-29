@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'yell'
 require 'parallel'
+require "addressable/uri"
 
 begin
   require "awesome_print"

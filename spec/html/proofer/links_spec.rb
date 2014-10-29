@@ -122,7 +122,7 @@ describe "Links test" do
   it "fails for blank mailto links" do
     blankMailToLink = "#{FIXTURES_DIR}/links/blank_mailto_link.html"
     output = capture_stderr { HTML::Proofer.new(blankMailToLink).run }
-    output.should match /mailto: is an invalid URL/
+    output.should match /mailto: contains no email address/
   end
 
   it 'ignores valid tel links' do
@@ -134,7 +134,7 @@ describe "Links test" do
   it "fails for blank tel links" do
     blankTelLink = "#{FIXTURES_DIR}/links/blank_tel_link.html"
     output = capture_stderr { HTML::Proofer.new(blankTelLink).run }
-    output.should match /tel: is an invalid URL/
+    output.should match /tel: contains no phone number/
   end
 
   it 'ignores javascript links' do
@@ -263,6 +263,12 @@ describe "Links test" do
   it "ignores non-http(s) protocols" do
     other_protocols = "#{FIXTURES_DIR}/links/other_protocols.html"
     output = capture_stderr { HTML::Proofer.new(other_protocols).run }
+    output.should == ""
+  end
+
+  it "passes non-standard characters" do
+    fixture = "#{FIXTURES_DIR}/links/non_standard_characters.html"
+    output = capture_stderr { HTML::Proofer.new(fixture).run }
     output.should == ""
   end
 end

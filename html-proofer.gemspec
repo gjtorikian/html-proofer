@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "typhoeus",        "~> 0.6.7"
   gem.add_dependency "yell",            "~> 2.0"
   gem.add_dependency "parallel",        "~> 1.3"
+  gem.add_dependency "addressable",     "~> 2.3"
 
   gem.add_development_dependency "redcarpet"
   gem.add_development_dependency "rspec", "~> 2.13.0"
