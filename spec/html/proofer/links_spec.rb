@@ -41,7 +41,7 @@ describe "Links test" do
   it "fails on redirects if not following" do
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
     proofer = make_proofer(linkWithRedirectFilepath, { :followlocation => false })
-    proofer.failed_tests.last.should match /External link https:\/\/help.github.com\/changing-author-info\/ failed: 301 No error/
+    proofer.failed_tests.first.should match /failed: 301 No error/
   end
 
   it "does not fail on redirects we're not following" do
@@ -120,7 +120,7 @@ describe "Links test" do
   it "fails for blank mailto links" do
     blankMailToLink = "#{FIXTURES_DIR}/links/blank_mailto_link.html"
     proofer = make_proofer(blankMailToLink)
-    proofer.failed_tests.first.should match /mailto: is an invalid URL/
+    proofer.failed_tests.first.should match /mailto: contains no email address/
   end
 
   it 'ignores valid tel links' do
@@ -132,7 +132,7 @@ describe "Links test" do
   it "fails for blank tel links" do
     blankTelLink = "#{FIXTURES_DIR}/links/blank_tel_link.html"
     proofer = make_proofer(blankTelLink)
-    proofer.failed_tests.first.should match /tel: is an invalid URL/
+    proofer.failed_tests.first.should match /tel: contains no phone number/
   end
 
   it 'ignores javascript links' do
@@ -256,5 +256,17 @@ describe "Links test" do
     empty_id = "#{FIXTURES_DIR}/links/placeholder_with_empty_id.html"
     proofer = make_proofer(empty_id)
     proofer.failed_tests.first.should match /anchor has no href attribute/
+  end
+
+  it "ignores non-http(s) protocols" do
+    other_protocols = "#{FIXTURES_DIR}/links/other_protocols.html"
+    proofer = make_proofer(other_protocols)
+    proofer.failed_tests.should == []
+  end
+
+  it "passes non-standard characters" do
+    fixture = "#{FIXTURES_DIR}/links/non_standard_characters.html"
+    proofer = make_proofer(fixture)
+    proofer.failed_tests.should == []
   end
 end

@@ -36,11 +36,9 @@ module HTML
       end
 
       def parts
-        return @parts_cached if defined?(@parts_cached)
-
-        @parts_cached = URI::Parser.new(:ESCAPED => '\%|\|').parse url
+        @parts ||= Addressable::URI.parse url
       rescue URI::Error
-        @parts_cached = nil
+        @parts = nil
       end
 
       def path
@@ -60,6 +58,10 @@ module HTML
         %w( http https ).include? scheme
       end
 
+      def non_http_remote?
+        !scheme.nil? && !remote?
+      end
+
       def ignore?
         return true if @data_ignore_proofer
 
@@ -72,8 +74,6 @@ module HTML
           return true if url.match(/^data:image/)
           return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
-
-        %w( mailto tel ).include? scheme
       end
 
       # path is external to the file

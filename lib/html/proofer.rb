@@ -1,15 +1,17 @@
 require 'nokogiri'
 require 'yell'
 require 'parallel'
+require "addressable/uri"
 
 begin
   require "awesome_print"
 rescue LoadError; end
 
-[
-  'checkable',
-  'checks',
-  'issue'
+%w[
+  checkable
+  checks
+  issue
+  version
 ].each { |r| require File.join(File.dirname(__FILE__), "proofer", r) }
 
 module HTML
@@ -40,6 +42,7 @@ module HTML
         :verbose => false,
         :only_4xx => false,
         :directory_index_file => "index.html",
+        :validate_html => false,
         :error_sort => :path
       }
 
@@ -210,6 +213,7 @@ module HTML
     def get_checks
       checks = HTML::Proofer::Checks::Check.subclasses.map { |c| c.name }
       checks.delete("Favicons") unless @options[:favicon]
+      checks.delete("Html") unless @options[:validate_html]
       checks
     end
 

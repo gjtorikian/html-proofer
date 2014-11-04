@@ -46,11 +46,23 @@ class Links < ::HTML::Proofer::Checks::Check
         next
       end
 
+      if link.scheme == "mailto"
+        self.add_issue "#{link.href} contains no email address" if link.path.empty?
+        self.add_issue "#{link.href} contain an invalid email address" unless link.path.include?("@")
+      end
+
+      if link.scheme == "tel"
+        self.add_issue "#{link.href} contains no phone number" if link.path.empty?
+      end
+
       # is there even a href?
       if link.missing_href?
         self.add_issue("anchor has no href attribute")
         next
       end
+
+      # intentionally here because we still want valid? & missing_href? to execute
+      next if link.non_http_remote?
 
       # does the file even exist?
       if link.remote?
