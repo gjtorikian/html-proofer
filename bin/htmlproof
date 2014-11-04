@@ -24,6 +24,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'only-4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
   p.option 'directory_index_file', '--directory_index_file', 'Sets the file to look for when a link refers to a directory.'
+  p.option 'validate_html', '--validate_html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
 
   p.action do |args, opts|
     args = ["."] if args.empty?
@@ -45,6 +46,7 @@ Mercenary.program(:htmlproof) do |p|
     options[:favicon] = opts["favicon"] unless opts["favicon"].nil?
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
     options[:directory_index_file] = opts["directory_index_file"] unless opts["directory_index_file"].nil?
+    options[:validate_html] = opts["validate_html"] unless opts["validate_html"].nil?
 
     path = path.delete(' ').split(",") if opts["as-links"]
 

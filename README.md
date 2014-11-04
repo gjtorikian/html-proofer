@@ -122,6 +122,11 @@ Project | Repository
 * Whether your internal script references are not broken
 * Whether external scripts are loading
 
+### HTML
+
+Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
+This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
+
 ## Configuration
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
@@ -138,6 +143,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
+| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
 
 ### Configuring Typhoeus
 

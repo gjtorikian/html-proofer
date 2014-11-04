@@ -41,7 +41,8 @@ module HTML
         :disable_external => false,
         :verbose => false,
         :only_4xx => false,
-        :directory_index_file => "index.html"
+        :directory_index_file => "index.html",
+        :validate_html => false
       }
 
       @typhoeus_opts = {
@@ -191,6 +192,7 @@ module HTML
     def get_checks
       checks = HTML::Proofer::Checks::Check.subclasses.map { |c| c.name }
       checks.delete("Favicons") unless @options[:favicon]
+      checks.delete("Html") unless @options[:validate_html]
       checks
     end
 

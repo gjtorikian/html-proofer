@@ -7,7 +7,8 @@ module HTML
         "checks/images",
         "checks/links",
         "checks/scripts",
-        "checks/favicon"
+        "checks/favicon",
+        "checks/html"
       ].each { |r| require File.join(File.dirname(__FILE__), r) }
     end
   end
