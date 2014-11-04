@@ -109,23 +109,30 @@ module HTML
         logger.info HTML::colorize :green, "HTML-Proofer finished successfully."
       else
         matcher = nil
-        @failed_tests.sort_by(&@options[:error_sort]).each do |issue|
+
+        # always sort by the actual option, then path, to ensure consistent alphabetical (by filename) results
+        @failed_tests = @failed_tests.sort do |a,b|
+          comp = (a.send(@options[:error_sort]) <=> b.send(@options[:error_sort]))
+          comp.zero? ? (a.path <=> b.path) : comp
+        end
+
+        @failed_tests.each do |issue|
           case @options[:error_sort]
           when :path
             if matcher != issue.path
-              logger.error HTML::colorize :blue, issue.path
+              logger.error HTML::colorize :blue, "- #{issue.path}"
               matcher = issue.path
             end
             logger.error HTML::colorize :red, "  *  #{issue.desc}"
           when :desc
             if matcher != issue.desc
-              logger.error HTML::colorize :blue, issue.desc
+              logger.error HTML::colorize :blue, "- #{issue.desc}"
               matcher = issue.desc
             end
             logger.error HTML::colorize :red, "  *  #{issue.path}"
           when :status
             if matcher != issue.status
-              logger.error HTML::colorize :blue, issue.status
+              logger.error HTML::colorize :blue, "- #{issue.status}"
               matcher = issue.status
             end
             logger.error HTML::colorize :red, "  *  #{issue.to_s}"
