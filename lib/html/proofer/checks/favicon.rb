@@ -9,8 +9,6 @@ end
 class Favicons < ::HTML::Proofer::Checks::Check
 
   def run
-    return unless @options[:favicon]
-
     @html.xpath("//link[not(ancestor::pre or ancestor::code)]").each do |favicon|
       favicon = Favicon.new favicon, "favicon", self
       next if favicon.ignore?
