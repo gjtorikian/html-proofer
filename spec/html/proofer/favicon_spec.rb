@@ -15,7 +15,7 @@ describe "Favicons test" do
   it "fails for absent favicon but present apple touch icon" do
     absent = "#{FIXTURES_DIR}/favicon/favicon_absent_apple.html"
     proofer = make_proofer(absent, {:favicon => true})
-    proofer.failed_tests.last.should match /no favicon specified/
+    proofer.failed_tests.last.should match /internally linking to gpl.png, which does not exist/
   end
 
   it "fails for broken favicon" do
