@@ -10,21 +10,21 @@ describe "Links test" do
 
   it "fails for broken hashes on the web (even if the file exists)" do
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb).run }
-    output.should match /but the hash 'no' does not/
+    proofer = make_proofer(brokenHashOnTheWeb)
+    expect(proofer.failed_tests.first).to match /but the hash 'no' does not/
   end
 
   it "passes for GitHub hashes on the web" do
     githubHash = "#{FIXTURES_DIR}/links/githubHash.html"
-    output = capture_stderr { HTML::Proofer.new(githubHash).run }
-    output.should == ""
+    proofer = make_proofer(githubHash)
+    expect(proofer.failed_tests).to eq []
   end
 
   it "passes for broken hashes on the web (when we look only for 4xx)" do
     options = { :only_4xx => true }
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb, options).run }
-    output.should == ""
+    proofer = make_proofer(brokenHashOnTheWeb)
+    expect(proofer.failed_tests).to eq []
   end
 
   it "fails for broken internal hash" do
