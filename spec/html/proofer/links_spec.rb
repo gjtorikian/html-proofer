@@ -8,6 +8,25 @@ describe "Links test" do
     output.should match /linking to ..\/images\/missingImageAlt.html#asdfasfdkafl, but asdfasfdkafl does not exist/
   end
 
+  it "fails for broken hashes on the web (even if the file exists)" do
+    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
+    output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb).run }
+    output.should match /but the hash 'no' does not/
+  end
+
+  it "passes for GitHub hashes on the web" do
+    githubHash = "#{FIXTURES_DIR}/links/githubHash.html"
+    output = capture_stderr { HTML::Proofer.new(githubHash).run }
+    output.should == ""
+  end
+
+  it "passes for broken hashes on the web (when we look only for 4xx)" do
+    options = { :only_4xx => true }
+    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
+    output = capture_stderr { HTML::Proofer.new(brokenHashOnTheWeb, options).run }
+    output.should == ""
+  end
+
   it "fails for broken internal hash" do
     brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
     output = capture_stderr { HTML::Proofer.new(brokenHashInternalFilepath).run }
