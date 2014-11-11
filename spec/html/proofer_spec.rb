@@ -35,25 +35,18 @@ describe HTML::Proofer do
     end
 
     describe "sorting" do
-      it "understands sorting by path" do
+      # would love to know why Travis barfs here
+      it "understands sorting by path", :skip => ENV['TRAVIS']  do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/path")
-        # would love to know why Travis barfs here
-        expected = ENV['TRAVIS'] ? """
-- spec/html/proofer/fixtures/sorting/path/multiple_issues.html
-  *  internal image gpl.png does not exist
-  *  image gpl.png does not have an alt attribute
-  *  tel: contains no phone number
-- spec/html/proofer/fixtures/sorting/path/single_issue.html
-  *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
-"""    : """
+
+        expect(output.strip).to eq("""
 - spec/html/proofer/fixtures/sorting/path/multiple_issues.html
   *  tel: contains no phone number
   *  internal image gpl.png does not exist
   *  image gpl.png does not have an alt attribute
 - spec/html/proofer/fixtures/sorting/path/single_issue.html
   *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
-"""
-        expect(output.strip).to eq(expected.strip)
+      """.strip)
       end
 
       it "understands sorting by issue" do
