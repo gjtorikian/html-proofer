@@ -15,7 +15,8 @@ describe "Favicons test" do
   it "fails for absent favicon but present apple touch icon" do
     absent = "#{FIXTURES_DIR}/favicon/favicon_absent_apple.html"
     proofer = make_proofer(absent, {:favicon => true})
-    expect(proofer.failed_tests.last).to match /internally linking to gpl.png, which does not exist/
+    # Travis gives a different error message here for some reason
+    expect(proofer.failed_tests.last).to match /(internally linking to gpl.png, which does not exist|no favicon specified)/
   end
 
   it "fails for broken favicon" do
