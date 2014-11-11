@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "addressable",     "~> 2.3"
 
   gem.add_development_dependency "redcarpet"
-  gem.add_development_dependency "rspec", "~> 2.13.0"
+  gem.add_development_dependency "rspec", "~> 3.1.0"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "awesome_print"
 end

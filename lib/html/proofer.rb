@@ -42,7 +42,8 @@ module HTML
         :verbose => false,
         :only_4xx => false,
         :directory_index_file => "index.html",
-        :validate_html => false
+        :validate_html => false,
+        :error_sort => :path
       }
 
       @typhoeus_opts = {
@@ -107,8 +108,35 @@ module HTML
       if @failed_tests.empty?
         logger.info HTML::colorize :green, "HTML-Proofer finished successfully."
       else
-        @failed_tests.sort_by(&:path).each do |issue|
-          logger.error HTML::colorize :red, issue.to_s
+        matcher = nil
+
+        # always sort by the actual option, then path, to ensure consistent alphabetical (by filename) results
+        @failed_tests = @failed_tests.sort do |a,b|
+          comp = (a.send(@options[:error_sort]) <=> b.send(@options[:error_sort]))
+          comp.zero? ? (a.path <=> b.path) : comp
+        end
+
+        @failed_tests.each do |issue|
+          case @options[:error_sort]
+          when :path
+            if matcher != issue.path
+              logger.error HTML::colorize :blue, "- #{issue.path}"
+              matcher = issue.path
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.desc}"
+          when :desc
+            if matcher != issue.desc
+              logger.error HTML::colorize :blue, "- #{issue.desc}"
+              matcher = issue.desc
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.path}"
+          when :status
+            if matcher != issue.status
+              logger.error HTML::colorize :blue, "- #{issue.status}"
+              matcher = issue.status
+            end
+            logger.error HTML::colorize :red, "  *  #{issue.to_s}"
+          end
         end
 
         raise HTML::colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
@@ -160,7 +188,7 @@ module HTML
           body_doc = Nokogiri::HTML(response.body)
           # user-content is a special addition by GitHub.
           if URI.parse(href).host.match(/github\.com/i)
-            if body_doc.xpath(%$//*[@name="user-content-#{hash}"]$).empty?
+            if body_doc.xpath(%$//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"]$).empty?
               add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
             end
           elsif body_doc.xpath(%$//*[@name="#{hash}"]|//*[@id="#{hash}"]$).empty?

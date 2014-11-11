@@ -5,7 +5,7 @@ FIXTURES_DIR = "spec/html/proofer/fixtures"
 
 RSpec.configure do |config|
   # Use color in STDOUT
-  config.color_enabled = true
+  config.color = true
 
   # Use color not only in STDOUT but also in pagers and files
   config.tty = true
@@ -30,4 +30,16 @@ def capture_stderr(&block)
     $stdout = original_stdout
   end
   fake_err.string
+end
+
+def make_proofer(file, opts={})
+  proofer = HTML::Proofer.new(file, opts)
+  capture_stderr { proofer.run }
+  # proofer.run # when I want to see output
+  proofer
+end
+
+def send_proofer_output(file, opts={})
+  proofer = HTML::Proofer.new(file, opts)
+  capture_stderr { proofer.run }
 end
