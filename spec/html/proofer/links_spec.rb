@@ -23,7 +23,7 @@ describe "Links test" do
   it "passes for broken hashes on the web (when we look only for 4xx)" do
     options = { :only_4xx => true }
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    proofer = make_proofer(brokenHashOnTheWeb)
+    proofer = make_proofer(brokenHashOnTheWeb, options)
     expect(proofer.failed_tests).to eq []
   end
 
