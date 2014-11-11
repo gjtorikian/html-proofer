@@ -156,7 +156,11 @@ module HTML
       Ethon.logger = logger # log from Typhoeus/Ethon
 
       external_urls.each_pair do |href, filenames|
-        queue_request(:head, href, filenames)
+        if has_hash? href
+          queue_request(:get, href, filenames)
+        else
+          queue_request(:head, href, filenames)
+        end
       end
       logger.debug HTML::colorize :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
       hydra.run
@@ -169,7 +173,8 @@ module HTML
     end
 
     def response_handler(response, filenames)
-      href = response.options[:effective_url]
+      effective_url = response.options[:effective_url]
+      href = response.request.base_url
       method = response.request.options[:method]
       response_code = response.code
 
@@ -178,7 +183,18 @@ module HTML
       logger.debug debug_msg
 
       if response_code.between?(200, 299)
-        # continue with no op
+        return if @options[:only_4xx]
+        if hash = has_hash?(href)
+          body_doc = Nokogiri::HTML(response.body)
+          # user-content is a special addition by GitHub.
+          if URI.parse(href).host.match(/github\.com/i)
+            if body_doc.xpath(%$//*[@name="user-content-#{hash}"]$).empty?
+              add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
+            end
+          elsif body_doc.xpath(%$//*[@name="#{hash}"]|//*[@id="#{hash}"]$).empty?
+            add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
+          end
+        end
       elsif response.timed_out?
         return if @options[:only_4xx]
         add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
@@ -222,6 +238,14 @@ module HTML
       checks.delete("Favicons") unless @options[:favicon]
       checks.delete("Html") unless @options[:validate_html]
       checks
+    end
+
+    def has_hash?(url)
+      begin
+        URI.parse(url).fragment
+      rescue URI::InvalidURIError
+        nil
+      end
     end
 
     def log_level
