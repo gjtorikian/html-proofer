@@ -288,4 +288,10 @@ describe "Links test" do
     proofer = make_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it "does not dupe errors" do
+    fixture = "#{FIXTURES_DIR}/links/nodupe.html"
+    proofer = make_proofer(fixture)
+    expect(proofer.failed_tests.length).to eq 1
+  end
 end
