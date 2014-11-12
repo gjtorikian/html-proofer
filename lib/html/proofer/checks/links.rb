@@ -67,6 +67,7 @@ class Links < ::HTML::Proofer::Checks::Check
       # does the file even exist?
       if link.remote?
         add_to_external_urls link.href
+        next
       elsif !link.internal?
         self.add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
       end
@@ -79,9 +80,7 @@ class Links < ::HTML::Proofer::Checks::Check
 
       # verify the target hash
       if link.hash
-        if link.remote?
-          add_to_external_urls link.href
-        elsif link.internal?
+        if link.internal?
           self.add_issue "linking to internal hash ##{link.hash} that does not exist" unless hash_check @html, link.hash
         elsif link.external?
           unless link.exists?
