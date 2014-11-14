@@ -37,6 +37,7 @@ module HTML
         :favicon => false,
         :href_swap => [],
         :href_ignore => [],
+        :check_external_hash => false,
         :alt_ignore => [],
         :disable_external => false,
         :verbose => false,
@@ -184,6 +185,7 @@ module HTML
 
       if response_code.between?(200, 299)
         return if @options[:only_4xx]
+        return unless @options[:check_external_hash]
         if hash = has_hash?(href)
           body_doc = Nokogiri::HTML(response.body)
           # user-content is a special addition by GitHub.

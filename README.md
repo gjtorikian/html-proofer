@@ -144,6 +144,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
 
 ### Configuring Typhoeus
 

@@ -2,19 +2,25 @@ require "spec_helper"
 
 describe "Links test" do
 
-  it "fails for broken external hash (even if the file exists)" do
+  it "fails for broken internal hash (even if the file exists)" do
     brokenHashExternalFilepath = "#{FIXTURES_DIR}/links/brokenHashExternal.html"
     proofer = make_proofer(brokenHashExternalFilepath)
     expect(proofer.failed_tests.last).to match /linking to ..\/images\/missingImageAlt.html#asdfasfdkafl, but asdfasfdkafl does not exist/
   end
 
-  it "fails for broken hashes on the web (even if the file exists)" do
+  it "fails for broken hashes on the web when asked (even if the file exists)" do
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    proofer = make_proofer(brokenHashOnTheWeb)
+    proofer = make_proofer(brokenHashOnTheWeb, { :check_external_hash => true} )
     expect(proofer.failed_tests.first).to match /but the hash 'no' does not/
   end
 
-  it "passes for GitHub hashes on the web" do
+  it "passes for broken hashes on the web when ignored (even if the file exists)" do
+    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
+    proofer = make_proofer(brokenHashOnTheWeb)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it "passes for GitHub hashes on the web when asked" do
     githubHash = "#{FIXTURES_DIR}/links/githubHash.html"
     proofer = make_proofer(githubHash)
     expect(proofer.failed_tests).to eq []
