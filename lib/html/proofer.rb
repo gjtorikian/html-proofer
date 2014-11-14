@@ -157,7 +157,7 @@ module HTML
       Ethon.logger = logger # log from Typhoeus/Ethon
 
       external_urls.each_pair do |href, filenames|
-        if has_hash? href
+        if has_hash? href && @options[:check_external_hash]
           queue_request(:get, href, filenames)
         else
           queue_request(:head, href, filenames)
@@ -205,7 +205,7 @@ module HTML
       # just be lazy; perform an explicit get request. some servers are apparently not configured to
       # intercept HTTP HEAD
       elsif method == :head
-        queue_request(:get, href, filenames)
+        queue_request(:get, effective_url, filenames)
       else
         return if @options[:only_4xx] && !response_code.between?(400, 499)
         # Received a non-successful http response.
