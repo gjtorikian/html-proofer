@@ -157,7 +157,7 @@ module HTML
       Ethon.logger = logger # log from Typhoeus/Ethon
 
       external_urls.each_pair do |href, filenames|
-        if has_hash? href
+        if has_hash? href && @options[:check_external_hash]
           queue_request(:get, href, filenames)
         else
           queue_request(:head, href, filenames)
