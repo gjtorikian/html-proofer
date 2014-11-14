@@ -297,7 +297,7 @@ describe "Links test" do
 
   it "does not dupe errors" do
     fixture = "#{FIXTURES_DIR}/links/nodupe.html"
-    proofer = make_proofer(fixture)
+    proofer = make_proofer(fixture, { :check_external_hash => true} )
     expect(proofer.failed_tests.length).to eq 1
   end
 end
