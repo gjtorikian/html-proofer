@@ -300,4 +300,10 @@ describe "Links test" do
     proofer = make_proofer(fixture, { :check_external_hash => true} )
     expect(proofer.failed_tests.length).to eq 1
   end
+
+  it "passes for broken *nix links" do
+    fixture = "#{FIXTURES_DIR}/links/brokenUnixLinks.html"
+    proofer = make_proofer(fixture)
+    expect(proofer.failed_tests).to eq []
+  end
 end
