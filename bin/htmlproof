@@ -21,10 +21,11 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored.'
   p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
-  p.option 'only-4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
+  p.option 'only_4xx', '--only_4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
   p.option 'directory_index_file', '--directory_index_file', 'Sets the file to look for when a link refers to a directory.'
   p.option 'validate_html', '--validate_html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
+  p.option 'check_external_hash', '--check_external_hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
 
   p.action do |args, opts|
     args = ["."] if args.empty?
@@ -43,10 +44,12 @@ Mercenary.program(:htmlproof) do |p|
     options[:href_ignore] = opts["href_ignore"] unless opts["href_ignore"].nil?
     options[:alt_ignore] = opts["alt_ignore"] unless opts["alt_ignore"].nil?
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
+    options[:only_4xx] = opts["only_4xx"] unless opts["only_4xx"].nil?
     options[:favicon] = opts["favicon"] unless opts["favicon"].nil?
     options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
     options[:directory_index_file] = opts["directory_index_file"] unless opts["directory_index_file"].nil?
     options[:validate_html] = opts["validate_html"] unless opts["validate_html"].nil?
+    options[:check_external_hash] = opts["check_external_hash"] unless opts["check_external_hash"].nil?
 
     path = path.delete(' ').split(",") if opts["as-links"]
 
