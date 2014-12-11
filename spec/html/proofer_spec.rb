@@ -75,5 +75,28 @@ describe HTML::Proofer do
       """.strip)
       end
     end
+
+    describe "file ignores" do
+      it "knows how to ignore a file by string" do
+        options = { :file_ignore => ["#{FIXTURES_DIR}/links/brokenHashInternal.html"] }
+        brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
+        proofer = make_proofer(brokenHashInternalFilepath, options)
+        expect(proofer.failed_tests).to eq []
+      end
+
+      it "knows how to ignore a file by regexp" do
+        options = { :file_ignore => [/brokenHash/] }
+        brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
+        proofer = make_proofer(brokenHashInternalFilepath, options)
+        expect(proofer.failed_tests).to eq []
+      end
+
+      it "knows how to ignore a directory by regexp" do
+        options = { :file_ignore => [/\S\.html/] }
+        linksDir = "#{FIXTURES_DIR}/links"
+        proofer = make_proofer(linksDir, options)
+        expect(proofer.failed_tests).to eq []
+      end
+    end
   end
 end

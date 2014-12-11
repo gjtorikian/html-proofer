@@ -140,6 +140,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
+| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
