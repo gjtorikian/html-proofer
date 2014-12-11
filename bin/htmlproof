@@ -18,8 +18,9 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'favicon', '--favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'as-links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
-  p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored.'
-  p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings containing `img`s whose missing `alt` tags are safe to ignore'
+  p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored.'
+  p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
+  p.option 'file_ignore', '--file_ignore file1,[file2,...]', Array, 'Array of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
   p.option 'only_4xx', '--only_4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
@@ -43,6 +44,7 @@ Mercenary.program(:htmlproof) do |p|
 
     options[:href_ignore] = opts["href_ignore"] unless opts["href_ignore"].nil?
     options[:alt_ignore] = opts["alt_ignore"] unless opts["alt_ignore"].nil?
+    options[:file_ignore] = opts["file_ignore"] unless opts["file_ignore"].nil?
     options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
     options[:only_4xx] = opts["only_4xx"] unless opts["only_4xx"].nil?
     options[:favicon] = opts["favicon"] unless opts["favicon"].nil?

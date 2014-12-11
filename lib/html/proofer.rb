@@ -37,6 +37,7 @@ module HTML
         :favicon => false,
         :href_swap => [],
         :href_ignore => [],
+        :file_ignore => [],
         :check_external_hash => false,
         :alt_ignore => [],
         :disable_external => false,
@@ -220,12 +221,25 @@ module HTML
     def files
       if File.directory? @src
         pattern = File.join @src, "**", "*#{@options[:ext]}"
-        Dir.glob(pattern).select { |fn| File.file? fn }
+        files = Dir.glob(pattern).select { |fn| File.file? fn }
+        files.reject { |f| ignore_file?(f) }
       elsif File.extname(@src) == @options[:ext]
-        [@src]
+        [@src].reject { |f| ignore_file?(f) }
       else
         []
       end
+    end
+
+    def ignore_file?(file)
+      @options[:file_ignore].each do |pattern|
+        if pattern.is_a? String
+          return pattern == file
+        elsif pattern.is_a? Regexp
+          return pattern =~ file
+        end
+      end
+
+      false
     end
 
     def self.create_nokogiri(path)
