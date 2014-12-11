@@ -1,5 +1,5 @@
 module HTML
   class Proofer
-    VERSION = "1.5.4"
+    VERSION = "1.6.0"
   end
 end
