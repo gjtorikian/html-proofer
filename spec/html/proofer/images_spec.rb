@@ -1,46 +1,46 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Images test" do
-  it "passes for existing external images" do
+describe 'Images test' do
+  it 'passes for existing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/existingImageExternal.html"
     proofer = make_proofer(externalImageFilepath)
     expect(proofer.failed_tests).to eq []
   end
 
-  it "fails for image without alt attribute" do
+  it 'fails for image without alt attribute' do
     missingAltFilepath = "#{FIXTURES_DIR}/images/missingImageAlt.html"
     proofer = make_proofer(missingAltFilepath)
-    expect(proofer.failed_tests.first).to match /gpl.png does not have an alt attribute/
+    expect(proofer.failed_tests.first).to match(/gpl.png does not have an alt attribute/)
   end
 
-  it "fails for image with an empty alt attribute" do
+  it 'fails for image with an empty alt attribute' do
     missingAltFilepath = "#{FIXTURES_DIR}/images/missingImageAltText.html"
     proofer = make_proofer(missingAltFilepath)
-    expect(proofer.failed_tests.first).to match /gpl.png does not have an alt attribute/
+    expect(proofer.failed_tests.first).to match(/gpl.png does not have an alt attribute/)
   end
 
-  it "fails for missing external images" do
+  it 'fails for missing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/missingImageExternal.html"
     proofer = make_proofer(externalImageFilepath)
-    expect(proofer.failed_tests.first).to match /External link http:\/\/www.whatthehell\/? failed: 0 Couldn't resolve host/
+    expect(proofer.failed_tests.first).to match(%r{External link http://www.whatthehell/ failed: 0 Couldn't resolve host})
   end
 
-  it "fails for missing internal images" do
+  it 'fails for missing internal images' do
     internalImageFilepath = "#{FIXTURES_DIR}/images/missingImageInternal.html"
     proofer = make_proofer(internalImageFilepath)
-    expect(proofer.failed_tests.first).to match /doesnotexist.png does not exist/
+    expect(proofer.failed_tests.first).to match(/doesnotexist.png does not exist/)
   end
 
-  it "fails for image with no src" do
+  it 'fails for image with no src' do
     imageSrcFilepath = "#{FIXTURES_DIR}/images/missingImageSrc.html"
     proofer = make_proofer(imageSrcFilepath)
-    expect(proofer.failed_tests.first).to match /image has no src attribute/
+    expect(proofer.failed_tests.first).to match(/image has no src attribute/)
   end
 
-  it "fails for image with default mac filename" do
+  it 'fails for image with default mac filename' do
     terribleImageName = "#{FIXTURES_DIR}/images/terribleImageName.html"
     proofer = make_proofer(terribleImageName)
-    expect(proofer.failed_tests.first).to match /image has a terrible filename/
+    expect(proofer.failed_tests.first).to match(/image has a terrible filename/)
   end
 
   it 'ignores images marked as ignore data-proofer-ignore' do
@@ -65,16 +65,16 @@ describe "Images test" do
     expect(proofer.failed_tests).to eq []
   end
 
-  it "works for valid images missing the protocol" do
+  it 'works for valid images missing the protocol' do
     missingProtocolLink = "#{FIXTURES_DIR}/images/image_missing_protocol_valid.html"
     proofer = make_proofer(missingProtocolLink)
     expect(proofer.failed_tests).to eq []
   end
 
-  it "fails for invalid images missing the protocol" do
+  it 'fails for invalid images missing the protocol' do
     missingProtocolLink = "#{FIXTURES_DIR}/images/image_missing_protocol_invalid.html"
     proofer = make_proofer(missingProtocolLink)
-    expect(proofer.failed_tests.first).to match /404 No error/
+    expect(proofer.failed_tests.first).to match(/404 No error/)
   end
 
   it 'properly checks relative links' do
@@ -92,7 +92,7 @@ describe "Images test" do
   it 'properly ignores missing alt tags, but not all URLs, when asked' do
     ignorableLinks = "#{FIXTURES_DIR}/images/ignoreAltButNotLink.html"
     proofer = make_proofer(ignorableLinks, {:alt_ignore => [/.*/]})
-    expect(proofer.failed_tests.first).to match /Couldn't resolve host name/
+    expect(proofer.failed_tests.first).to match(/Couldn't resolve host name/)
     expect(proofer.failed_tests.first).to_not match /does not have an alt attribute/
   end
 end

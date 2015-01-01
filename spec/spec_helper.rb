@@ -17,11 +17,11 @@ RSpec.configure do |config|
   config.order = :random
 end
 
-def capture_stderr(&block)
+def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = fake_out = StringIO.new
+  $stdout = StringIO.new
   begin
     yield
   rescue RuntimeError
@@ -32,14 +32,14 @@ def capture_stderr(&block)
   fake_err.string
 end
 
-def make_proofer(file, opts={})
+def make_proofer(file, opts = {})
   proofer = HTML::Proofer.new(file, opts)
   capture_stderr { proofer.run }
   # proofer.run # when I want to see output
   proofer
 end
 
-def send_proofer_output(file, opts={})
+def send_proofer_output(file, opts = {})
   proofer = HTML::Proofer.new(file, opts)
   capture_stderr { proofer.run }
 end

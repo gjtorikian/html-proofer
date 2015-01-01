@@ -22,13 +22,13 @@ module HTML
         end
 
         # fix up missing protocols
-        @href.insert 0, "http:" if @href =~ /^\/\//
-        @src.insert 0, "http:" if @src =~ /^\/\//
+        @href.insert 0, 'http:' if @href =~ %r{^//}
+        @src.insert 0, 'http:' if @src =~ %r{^//}
 
       end
 
       def url
-        @src || @href || ""
+        @src || @href || ''
       end
 
       def valid?
@@ -42,15 +42,15 @@ module HTML
       end
 
       def path
-        parts.path if !parts.nil?
+        parts.path unless parts.nil?
       end
 
       def hash
-        parts.fragment if !parts.nil?
+        parts.fragment unless parts.nil?
       end
 
       def scheme
-        parts.scheme if !parts.nil?
+        parts.scheme unless parts.nil?
       end
 
       # path is to an external server
@@ -66,11 +66,11 @@ module HTML
         return true if @data_ignore_proofer
 
         case @type
-        when "favicon"
+        when 'favicon'
           return true if url.match(/^data:image/)
-        when "link"
+        when 'link'
           return true if ignores_pattern_check(@check.additional_href_ignores)
-        when "image"
+        when 'image'
           return true if url.match(/^data:image/)
           return true if ignores_pattern_check(@check.additional_alt_ignores)
         end
@@ -83,7 +83,7 @@ module HTML
 
       # path is an anchor or a query
       def internal?
-        url.start_with? "#", "?"
+        url.start_with? '#', '?'
       end
 
       def file_path
@@ -102,7 +102,7 @@ module HTML
         file = File.join base, path
 
         # implicit index support
-        if File.directory? file and !unslashed_directory? file
+        if File.directory?(file) && !unslashed_directory?(file)
           file = File.join file, @check.options[:directory_index_file]
         end
 
@@ -111,7 +111,7 @@ module HTML
 
       # checks if a file exists relative to the current pwd
       def exists?
-        return @checked_paths[absolute_path] if @checked_paths.has_key? absolute_path
+        return @checked_paths[absolute_path] if @checked_paths.key? absolute_path
         @checked_paths[absolute_path] = File.exist? absolute_path
       end
 
@@ -132,8 +132,8 @@ module HTML
         false
       end
 
-      def unslashed_directory? file
-        File.directory? file and !file.end_with? File::SEPARATOR and !@check.options[:followlocation]
+      def unslashed_directory?(file)
+        File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:followlocation]
       end
     end
   end

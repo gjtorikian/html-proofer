@@ -23,7 +23,7 @@ class HTML::Proofer::Checks
     end
 
     def run
-      raise NotImplementedError.new("HTML::Proofer::Check subclasses must implement #run")
+      fail NotImplementedError.new('HTML::Proofer::Check subclasses must implement #run')
     end
 
     def add_issue(desc, status = -1)
@@ -31,7 +31,7 @@ class HTML::Proofer::Checks
     end
 
     def output_filenames
-      Dir[@site.config[:output_dir] + '/**/*'].select{ |f| File.file?(f) }
+      Dir[@site.config[:output_dir] + '/**/*'].select { |f| File.file?(f) }
     end
 
     def add_to_external_urls(href)
@@ -56,7 +56,7 @@ class HTML::Proofer::Checks
   private
 
     def remove_ignored(html)
-      html.css("code, pre").each { |node| node.unlink }
+      html.css('code, pre').each(&:unlink)
       html
     end
 
