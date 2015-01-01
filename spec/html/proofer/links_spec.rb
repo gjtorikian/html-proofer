@@ -42,7 +42,7 @@ describe 'Links test' do
   it 'fails for broken external links' do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     proofer = make_proofer(brokenLinkExternalFilepath)
-    expect(proofer.failed_tests.first).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com/ failed: 0 Couldn't resolve host name})
+    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host nam/)
   end
 
   it 'fails for broken internal links' do
@@ -205,7 +205,7 @@ describe 'Links test' do
 
   it 'works for array of links' do
     proofer = make_proofer(["www.github.com", "foofoofoo.biz"])
-    expect(proofer.failed_tests.first).to match(/foofoofoo.biz\/\)? failed: 0 Couldn't resolve host name/)
+    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host name/)
   end
 
   it 'works for broken anchors within pre' do

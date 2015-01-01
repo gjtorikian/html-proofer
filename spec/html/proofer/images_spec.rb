@@ -22,7 +22,7 @@ describe 'Images test' do
   it 'fails for missing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/missingImageExternal.html"
     proofer = make_proofer(externalImageFilepath)
-    expect(proofer.failed_tests.first).to match(%r{External link http://www.whatthehell/ failed: 0 Couldn't resolve host})
+    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host/)
   end
 
   it 'fails for missing internal images' do
