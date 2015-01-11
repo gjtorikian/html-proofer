@@ -35,7 +35,7 @@ require 'html/pipeline'
 require 'find'
 
 # make an out dir
-Dir.mkdir("out") unless File.exists?("out")
+Dir.mkdir("out") unless File.exist?("out")
 
 pipeline = HTML::Pipeline.new [
   HTML::Pipeline::MarkdownFilter,
