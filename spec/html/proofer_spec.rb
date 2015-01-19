@@ -41,9 +41,9 @@ describe HTML::Proofer do
 
         expect(output.strip).to eq('''
 - spec/html/proofer/fixtures/sorting/path/multiple_issues.html
-  *  tel: contains no phone number
   *  internal image gpl.png does not exist
   *  image gpl.png does not have an alt attribute
+  *  tel: contains no phone number
 - spec/html/proofer/fixtures/sorting/path/single_issue.html
   *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
       '''.strip)

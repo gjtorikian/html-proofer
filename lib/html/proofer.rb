@@ -67,42 +67,18 @@ module HTML
       @failed_tests = []
 
       Yell.new({ :format => false, :name => 'HTML::Proofer', :level => "gte.#{log_level}" }) do |l|
-        l.adapter :stdout, level: [:debug, :info, :warn]
-        l.adapter :stderr, level: [:error, :fatal]
+        l.adapter :stdout, :level => [:debug, :info, :warn]
+        l.adapter :stderr, :level => [:error, :fatal]
       end
     end
 
     def run
-      unless @src.is_a? Array
-        external_urls = {}
+      logger.info HTML.colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
-        logger.info HTML.colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
-
-        results = Parallel.map(files, @parallel_opts) do |path|
-          html = HTML::Proofer.create_nokogiri(path)
-          result = { :external_urls => {}, :failed_tests => [] }
-
-          get_checks.each do |klass|
-            logger.debug HTML.colorize :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
-            check =  Object.const_get(klass).new(@src, path, html, @options)
-            check.run
-            result[:external_urls].merge!(check.external_urls)
-            result[:failed_tests].concat(check.issues) if check.issues.length > 0
-          end
-          result
-        end
-
-        results.each do |item|
-          external_urls.merge!(item[:external_urls])
-          @failed_tests.concat(item[:failed_tests])
-        end
-
-        external_link_checker(external_urls) unless @options[:disable_external]
-
-        logger.info HTML.colorize :green, "Ran on #{files.length} files!\n\n"
+      if @src.is_a?(Array) && !@options[:disable_external]
+        check_list_of_links
       else
-        external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
-        external_link_checker(external_urls) unless @options[:disable_external]
+        check_directory_of_files
       end
 
       if @failed_tests.empty?
@@ -144,11 +120,51 @@ module HTML
       end
     end
 
-    # the hypothesis is that Proofer runs way faster if we pull out
-    # all the external URLs and run the checks at the end. Otherwise, we're halting
-    # the consuming process for every file. In addition, sorting the list lets
-    # libcurl keep connections to hosts alive. Finally, we'll make a HEAD request,
-    # rather than GETing all the contents
+    def check_list_of_links
+      external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
+      external_link_checker(external_urls)
+    end
+
+    def check_directory_of_files
+      external_urls = {}
+      results = check_files_for_internal_woes
+
+      results.each do |item|
+        external_urls.merge!(item[:external_urls])
+        @failed_tests.concat(item[:failed_tests])
+      end
+
+      external_link_checker(external_urls) unless @options[:disable_external]
+
+      logger.info HTML.colorize :green, "Ran on #{files.length} files!\n\n"
+    end
+
+    # Walks over each implemented check and runs them on the files, in parallel.
+    def check_files_for_internal_woes
+      Parallel.map(files, @parallel_opts) do |path|
+        html = HTML::Proofer.create_nokogiri(path)
+        result = { :external_urls => {}, :failed_tests => [] }
+
+        get_checks.each do |klass|
+          logger.debug HTML.colorize :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
+          check = Object.const_get(klass).new(@src, path, html, @options)
+          check.run
+          result[:external_urls].merge!(check.external_urls)
+          result[:failed_tests].concat(check.issues) if check.issues.length > 0
+        end
+        result
+      end
+    end
+
+    # Proofer runs faster if we pull out all the external URLs and run the checks
+    # at the end. Otherwise, we're halting the consuming process for every file.
+    #
+    # In addition, sorting the list lets libcurl keep connections to the same hosts alive.
+    #
+    # Finally, we'll first make a HEAD request, rather than GETing all the contents.
+    # If the HEAD fails, we'll fall back to GET, as some servers are not configured
+    # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
+    # not an option.
     def external_link_checker(external_urls)
       external_urls = Hash[external_urls.sort]
 
@@ -184,28 +200,9 @@ module HTML
       logger.debug debug_msg
 
       if response_code.between?(200, 299)
-        return if @options[:only_4xx]
-        return unless @options[:check_external_hash]
-        if hash = hash?(href)
-          body_doc = Nokogiri::HTML(response.body)
-          # user-content is a special addition by GitHub.
-          xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
-          if URI.parse(href).host.match(/github\.com/i)
-            xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
-          end
-          if body_doc.xpath(xpath).empty?
-            add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response_code
-          end
-        end
+        check_hash_in_2xx_response(href, effective_url, response, filenames)
       elsif response.timed_out?
-        return if @options[:only_4xx]
-        add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
-      elsif (response_code == 405 || response_code == 420 || response_code == 503) && method == :head
-        # 420s usually come from rate limiting; let's ignore the query and try just the path with a GET
-        uri = URI(href)
-        queue_request(:get, uri.scheme + '://' + uri.host + uri.path, filenames)
-      # just be lazy; perform an explicit get request. some servers are apparently not configured to
-      # intercept HTTP HEAD
+        handle_timeout(filenames, response_code)
       elsif method == :head
         queue_request(:get, effective_url, filenames)
       else
@@ -213,6 +210,31 @@ module HTML
         # Received a non-successful http response.
         add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
       end
+    end
+
+    # Even though the response was a success, we may have been asked to check
+    # if the hash on the URL exists on the page
+    def check_hash_in_2xx_response(href, effective_url, response, filenames)
+      return if @options[:only_4xx]
+      return unless @options[:check_external_hash]
+      return unless hash = hash?(href)
+
+      body_doc = Nokogiri::HTML(response.body)
+
+      # user-content is a special addition by GitHub.
+      xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
+      if URI.parse(href).host.match(/github\.com/i)
+        xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
+      end
+
+      return unless body_doc.xpath(xpath).empty?
+
+      add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
+    end
+
+    def handle_timeout
+      return if @options[:only_4xx]
+      add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
     end
 
     def hydra
