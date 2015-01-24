@@ -1,4 +1,5 @@
 # encoding: utf-8
+require_relative '../utils'
 
 class Link < ::HTML::Proofer::Checkable
 
@@ -31,6 +32,7 @@ class Link < ::HTML::Proofer::Checkable
 end
 
 class Links < ::HTML::Proofer::Checks::Check
+  include HTML::Utils
 
   def run
     @html.css('a, link').each do |l|
@@ -97,7 +99,7 @@ class Links < ::HTML::Proofer::Checks::Check
     if !link.exists?
       add_issue "trying to find hash of #{link.href}, but #{link.absolute_path} does not exist"
     else
-      target_html = HTML::Proofer.create_nokogiri link.absolute_path
+      target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
         add_issue "linking to #{link.href}, but #{link.hash} does not exist"
       end
