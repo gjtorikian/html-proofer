@@ -14,7 +14,7 @@ class HTML::Proofer::Checks
     end
 
     def to_s
-      "#{HTML.colorize(:blue, @path)}: #{desc}"
+      "#{@path}: #{desc}"
     end
 
   end

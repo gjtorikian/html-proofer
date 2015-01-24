@@ -1,5 +1,13 @@
+def require_all(path)
+  glob = File.join(File.dirname(__FILE__), path, '**', '*.rb')
+  puts glob
+  Dir[glob].each do |f|
+    require f
+  end
+end
+
+require_all 'proofer'
 require 'nokogiri'
-require 'yell'
 require 'parallel'
 require 'addressable/uri'
 
@@ -7,29 +15,12 @@ begin
   require 'awesome_print'
 rescue LoadError; end
 
-%w(
-  checkable
-  checks
-  issue
-  version
-).each { |r| require File.join(File.dirname(__FILE__), 'proofer', r) }
-
 module HTML
 
-  def self.colorize(color, string)
-    if $stdout.isatty && $stderr.isatty
-      Colored.colorize(string, foreground: color)
-    else
-      string
-    end
-  end
-
   class Proofer
-    include Yell::Loggable
-
     attr_reader :options, :typhoeus_opts, :parallel_opts
 
-    def initialize(src, opts={})
+    def initialize(src, opts = {})
       @src = src
 
       @proofer_opts = {
@@ -65,15 +56,14 @@ module HTML
       @options = @proofer_opts.merge(@typhoeus_opts).merge(opts)
 
       @failed_tests = []
+    end
 
-      Yell.new({ :format => false, :name => 'HTML::Proofer', :level => "gte.#{log_level}" }) do |l|
-        l.adapter :stdout, :level => [:debug, :info, :warn]
-        l.adapter :stderr, :level => [:error, :fatal]
-      end
+    def logger
+      @logger ||= HTML::Proofer::Log.new(@options[:verbose])
     end
 
     def run
-      logger.info HTML.colorize :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
+      logger.log :info, :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links
@@ -82,41 +72,9 @@ module HTML
       end
 
       if @failed_tests.empty?
-        logger.info HTML.colorize :green, 'HTML-Proofer finished successfully.'
+        logger.log :info, :green, 'HTML-Proofer finished successfully.'
       else
-        matcher = nil
-
-        # always sort by the actual option, then path, to ensure consistent
-        # alphabetical (by filename) results
-        @failed_tests = @failed_tests.sort do |a, b|
-          comp = (a.send(@options[:error_sort]) <=> b.send(@options[:error_sort]))
-          comp.zero? ? (a.path <=> b.path) : comp
-        end
-
-        @failed_tests.each do |issue|
-          case @options[:error_sort]
-          when :path
-            if matcher != issue.path
-              logger.error HTML.colorize :blue, "- #{issue.path}"
-              matcher = issue.path
-            end
-            logger.error HTML.colorize :red, "  *  #{issue.desc}"
-          when :desc
-            if matcher != issue.desc
-              logger.error HTML.colorize :blue, "- #{issue.desc}"
-              matcher = issue.desc
-            end
-            logger.error HTML.colorize :red, "  *  #{issue.path}"
-          when :status
-            if matcher != issue.status
-              logger.error HTML.colorize :blue, "- #{issue.status}"
-              matcher = issue.status
-            end
-            logger.error HTML.colorize :red, "  *  #{issue}"
-          end
-        end
-
-        fail HTML.colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
+        print_failed_tests
       end
     end
 
@@ -136,7 +94,7 @@ module HTML
 
       external_link_checker(external_urls) unless @options[:disable_external]
 
-      logger.info HTML.colorize :green, "Ran on #{files.length} files!\n\n"
+      logger.log :info, :green, "Ran on #{files.length} files!\n\n"
     end
 
     # Walks over each implemented check and runs them on the files, in parallel.
@@ -146,7 +104,7 @@ module HTML
         result = { :external_urls => {}, :failed_tests => [] }
 
         get_checks.each do |klass|
-          logger.debug HTML.colorize :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
+          logger.log :debug, :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
           check = Object.const_get(klass).new(@src, path, html, @options)
           check.run
           result[:external_urls].merge!(check.external_urls)
@@ -168,7 +126,7 @@ module HTML
     def external_link_checker(external_urls)
       external_urls = Hash[external_urls.sort]
 
-      logger.info HTML::colorize :yellow, "Checking #{external_urls.length} external links..."
+      logger.log :info, :yellow, "Checking #{external_urls.length} external links..."
 
       Ethon.logger = logger # log from Typhoeus/Ethon
 
@@ -179,7 +137,7 @@ module HTML
           queue_request(:head, href, filenames)
         end
       end
-      logger.debug HTML.colorize :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
+      logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
       hydra.run
     end
 
@@ -197,7 +155,7 @@ module HTML
 
       debug_msg = "Received a #{response_code} for #{href}"
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
-      logger.debug debug_msg
+      logger.log :debug, :yellow, debug_msg
 
       if response_code.between?(200, 299)
         check_hash_in_2xx_response(href, effective_url, response, filenames)
@@ -283,10 +241,6 @@ module HTML
         nil
     end
 
-    def log_level
-      @options[:verbose] ? :debug : :info
-    end
-
     def add_failed_tests(filenames, desc, status = nil)
       if filenames.nil?
         @failed_tests << Checks::Issue.new('', desc, status)
@@ -300,6 +254,42 @@ module HTML
       result = []
       @failed_tests.each { |f| result << f.to_s }
       result
+    end
+
+    def print_failed_tests
+      matcher = nil
+
+      # always sort by the actual option, then path, to ensure consistent
+      # alphabetical (by filename) results
+      @failed_tests = @failed_tests.sort do |a, b|
+        comp = (a.send(@options[:error_sort]) <=> b.send(@options[:error_sort]))
+        comp.zero? ? (a.path <=> b.path) : comp
+      end
+
+      @failed_tests.each do |issue|
+        case @options[:error_sort]
+        when :path
+          if matcher != issue.path
+            logger.log :error, :blue, "- #{issue.path}"
+            matcher = issue.path
+          end
+          logger.log :error, :red, "  *  #{issue.desc}"
+        when :desc
+          if matcher != issue.desc
+            logger.log :error, :blue, "- #{issue.desc}"
+            matcher = issue.desc
+          end
+          logger.log :error, :red, "  *  #{issue.path}"
+        when :status
+          if matcher != issue.status
+            logger.log :error, :blue, "- #{issue.status}"
+            matcher = issue.status
+          end
+          logger.log :error, :red, "  *  #{issue}"
+        end
+      end
+
+      # fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
     end
   end
 end
