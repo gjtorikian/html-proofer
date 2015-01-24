@@ -147,15 +147,17 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
 
-### Configuring Typhoeus
+### Configuring Typhoeus and Hydra
 
 You can also pass in any of Typhoeus' options for the external link check. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 2 })
+HTML::Proofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
 This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+
+You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
 ### Configuring Parallel
 
