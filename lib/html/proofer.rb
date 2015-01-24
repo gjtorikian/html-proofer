@@ -18,6 +18,8 @@ rescue LoadError; end
 module HTML
 
   class Proofer
+    include Utils
+
     attr_reader :options, :typhoeus_opts, :parallel_opts
 
     def initialize(src, opts = {})
@@ -63,7 +65,7 @@ module HTML
     end
 
     def run
-      logger.log :info, :white, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
+      logger.log :info, :blue, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links
@@ -72,7 +74,7 @@ module HTML
       end
 
       if @failed_tests.empty?
-        logger.log :info, :green, 'HTML-Proofer finished successfully.'
+        logger.log :info, :blue, 'HTML-Proofer finished successfully.'
       else
         print_failed_tests
       end
@@ -83,6 +85,10 @@ module HTML
       external_link_checker(external_urls)
     end
 
+    # Collects any external URLs found in a directory of files. Also collectes
+    # every failed test from check_files_for_internal_woes.
+    # Sends the external URLs to Typhoeus for batch processing. See external_link_checker
+    # for more information on why that is.
     def check_directory_of_files
       external_urls = {}
       results = check_files_for_internal_woes
@@ -94,17 +100,17 @@ module HTML
 
       external_link_checker(external_urls) unless @options[:disable_external]
 
-      logger.log :info, :green, "Ran on #{files.length} files!\n\n"
+      logger.log :info, :blue, "Ran on #{files.length} files!\n\n"
     end
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def check_files_for_internal_woes
       Parallel.map(files, @parallel_opts) do |path|
-        html = HTML::Proofer.create_nokogiri(path)
+        html = create_nokogiri(path)
         result = { :external_urls => {}, :failed_tests => [] }
 
         get_checks.each do |klass|
-          logger.log :debug, :blue, "Checking #{klass.to_s.downcase} on #{path} ..."
+          logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
           check = Object.const_get(klass).new(@src, path, html, @options)
           check.run
           result[:external_urls].merge!(check.external_urls)
@@ -115,7 +121,8 @@ module HTML
     end
 
     # Proofer runs faster if we pull out all the external URLs and run the checks
-    # at the end. Otherwise, we're halting the consuming process for every file.
+    # at the end. Otherwise, we're halting the consuming process for every file during
+    # the check_directory_of_files process.
     #
     # In addition, sorting the list lets libcurl keep connections to the same hosts alive.
     #
@@ -126,7 +133,7 @@ module HTML
     def external_link_checker(external_urls)
       external_urls = Hash[external_urls.sort]
 
-      logger.log :info, :yellow, "Checking #{external_urls.length} external links..."
+      logger.log :info, :blue, "Checking #{external_urls.length} external links..."
 
       Ethon.logger = logger # log from Typhoeus/Ethon
 
@@ -137,6 +144,7 @@ module HTML
           queue_request(:head, href, filenames)
         end
       end
+
       logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
       hydra.run
     end
@@ -223,11 +231,6 @@ module HTML
       false
     end
 
-    def self.create_nokogiri(path)
-      content = File.open(path).read
-      Nokogiri::HTML(content)
-    end
-
     def get_checks
       checks = HTML::Proofer::Checks::Check.subclasses.map(&:name)
       checks.delete('Favicons') unless @options[:favicon]
@@ -270,19 +273,19 @@ module HTML
         case @options[:error_sort]
         when :path
           if matcher != issue.path
-            logger.log :error, :blue, "- #{issue.path}"
+            logger.log :error, :red, "- #{issue.path}"
             matcher = issue.path
           end
           logger.log :error, :red, "  *  #{issue.desc}"
         when :desc
           if matcher != issue.desc
-            logger.log :error, :blue, "- #{issue.desc}"
+            logger.log :error, :red, "- #{issue.desc}"
             matcher = issue.desc
           end
           logger.log :error, :red, "  *  #{issue.path}"
         when :status
           if matcher != issue.status
-            logger.log :error, :blue, "- #{issue.status}"
+            logger.log :error, :red, "- #{issue.status}"
             matcher = issue.status
           end
           logger.log :error, :red, "  *  #{issue}"

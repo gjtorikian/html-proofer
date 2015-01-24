@@ -22,6 +22,43 @@ Or install it yourself as:
 
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
+## Real-life examples
+
+Project | Repository
+:--- | :---
+[Raspberry Pi documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation]( https://github.com/raspberrypi/documentation)
+[Open Whisper Systems website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
+[Jekyll website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
+
+## What's Tested?
+
+### Images
+
+`img` elements:
+
+* Whether all your images have alt tags
+* Whether your internal image references are not broken
+* Whether external images are showing
+
+### Links
+
+`a`, `link` elements:
+
+* Whether your internal links are not broken; this includes hash references (`#linkToMe`)
+* Whether external links are working
+
+### Scripts
+
+`script` elements:
+
+* Whether your internal script references are not broken
+* Whether external scripts are loading
+
+### HTML
+
+Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
+This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
+
 ## Usage
 
 ### Using in a script
@@ -90,43 +127,6 @@ Don't have or want a `Rakefile`? You _could_ also do something like the followin
 htmlproof ./_site
 ```
 
-### Real-life examples
-
-Project | Repository
-:--- | :---
-[Raspberry Pi documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation]( https://github.com/raspberrypi/documentation)
-[Open Whisper Systems website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
-[Jekyll website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-## What's Tested?
-
-### Images
-
-`img` elements:
-
-* Whether all your images have alt tags
-* Whether your internal image references are not broken
-* Whether external images are showing
-
-### Links
-
-`a`, `link` elements:
-
-* Whether your internal links are not broken; this includes hash references (`#linkToMe`)
-* Whether external links are working
-
-### Scripts
-
-`script` elements:
-
-* Whether your internal script references are not broken
-* Whether external scripts are loading
-
-### HTML
-
-Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
-This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
-
 ## Configuration
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
@@ -184,6 +184,11 @@ bin/htmlproof www.google.com,www.github.com --as-links
 ## Ignoring content
 
 Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
+
+
+``` html
+<a href="http://notareallink" data-proofer-ignore>Not checked.</a>
+```
 
 ## Custom tests
 
