@@ -201,7 +201,7 @@ The `Checkable` subclass defines various helper methods you can use as part of y
 Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class OctocatLink < ::HTML::Proofer::Checkable
+class OctocatLinkCheck < ::HTML::Proofer::Checkable
 
   def mailto?
     return false if @data_ignore_proofer || @href.nil? || @href.empty?
@@ -218,7 +218,7 @@ class MailToOctocat < ::HTML::Proofer::Runner
 
   def run
     @html.css('a').each do |l|
-      link = OctocatLink.new l, "octocat_link", self
+      link = OctocatLinkCheck.new l, "octocat_link", self
 
       if link.mailto? && link.octocat?
         return add_issue("Don't email the Octocat directly!")

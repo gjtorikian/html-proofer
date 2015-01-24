@@ -1,7 +1,7 @@
 # encoding: utf-8
 require_relative '../utils'
 
-class Link < ::HTML::Proofer::Checkable
+class LinkCheck < ::HTML::Proofer::Checkable
 
   def href
     real_attr @href
@@ -30,7 +30,7 @@ class LinkRunner < ::HTML::Proofer::Runner
 
   def run
     @html.css('a, link').each do |l|
-      link = Link.new l, self
+      link = LinkCheck.new l, self
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse

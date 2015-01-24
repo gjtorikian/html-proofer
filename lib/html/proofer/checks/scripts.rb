@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Script < ::HTML::Proofer::Checkable
+class ScriptCheck < ::HTML::Proofer::Checkable
 
   def src
     real_attr @src
@@ -19,7 +19,7 @@ end
 class ScriptRunner < ::HTML::Proofer::Runner
   def run
     @html.css('script').each do |s|
-      script = Script.new s, self
+      script = ScriptCheck.new s, self
 
       next if script.ignore?
       next unless script.blank?
