@@ -3,7 +3,7 @@
 class Script < ::HTML::Proofer::Checkable
 
   def src
-    @src unless @src.nil? || @src.empty?
+    real_attr @src
   end
 
   def missing_src?
@@ -16,10 +16,10 @@ class Script < ::HTML::Proofer::Checkable
 
 end
 
-class Scripts < ::HTML::Proofer::Checks::Check
+class ScriptRunner < ::HTML::Proofer::Runner
   def run
     @html.css('script').each do |s|
-      script = Script.new s, 'script', self
+      script = Script.new s, self
 
       next if script.ignore?
       next unless script.blank?

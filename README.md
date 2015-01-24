@@ -192,7 +192,11 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Checkable`, and another that inherits from `HTML::Proofer::Checks::Check`. `Checkable` defines various helper methods for your test, while `Checks::Check` actually runs across your content. `Checks::Check` should call `self.add_issue` on failures, to add them to the list.
+Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Runner`, and another that inherits from `HTML::Proofer::Checkable`.
+
+The `Runner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+
+The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
 
 Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
 
@@ -210,14 +214,14 @@ class OctocatLink < ::HTML::Proofer::Checkable
 
 end
 
-class MailToOctocat < ::HTML::Proofer::Checks::Check
+class MailToOctocat < ::HTML::Proofer::Runner
 
   def run
     @html.css('a').each do |l|
       link = OctocatLink.new l, "octocat_link", self
 
       if link.mailto? && link.octocat?
-        return self.add_issue("Don't email the Octocat directly!")
+        return add_issue("Don't email the Octocat directly!")
       end
     end
   end

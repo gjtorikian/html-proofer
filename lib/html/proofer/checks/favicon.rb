@@ -6,11 +6,11 @@ class Favicon < ::HTML::Proofer::Checkable
   end
 end
 
-class Favicons < ::HTML::Proofer::Checks::Check
+class FaviconRunner < ::HTML::Proofer::Runner
 
   def run
     @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |favicon|
-      favicon = Favicon.new favicon, "favicon", self
+      favicon = Favicon.new favicon, self
       next if favicon.ignore?
       return if favicon.rel.split(' ').last.eql? 'icon'
     end

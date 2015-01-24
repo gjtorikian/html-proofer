@@ -13,7 +13,7 @@ class Image < ::HTML::Proofer::Checkable
   end
 
   def src
-    @src unless @src.nil? || @src.empty?
+    real_attr @src
   end
 
   def missing_src?
@@ -22,10 +22,10 @@ class Image < ::HTML::Proofer::Checkable
 
 end
 
-class Images < ::HTML::Proofer::Checks::Check
+class ImageRunner < ::HTML::Proofer::Runner
   def run
     @html.css('img').each do |i|
-      img = Image.new i, 'image', self
+      img = Image.new i, self
 
       next if img.ignore?
 

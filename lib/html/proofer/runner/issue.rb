@@ -1,10 +1,7 @@
 # encoding: utf-8
-require 'colored'
-
-class HTML::Proofer::Checks
+class HTML::Proofer::Runner
 
   class Issue
-
     attr_reader :path, :desc, :status
 
     def initialize(path, desc, status = -1)
@@ -16,6 +13,5 @@ class HTML::Proofer::Checks
     def to_s
       "#{@path}: #{desc}"
     end
-
   end
 end

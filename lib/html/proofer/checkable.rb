@@ -1,19 +1,19 @@
+require 'addressable/uri'
+
 module HTML
   class Proofer
+    # Represents the superclass from which all checks derive.
     class Checkable
-      def initialize(obj, type, check)
-        @src = obj['src']
-        @href = obj['href']
-        @alt = obj['alt']
-        @name = obj['name']
-        @id = obj['id']
-        @rel = obj['rel']
+      def initialize(obj, check)
+        obj.attributes.each_pair do |attribute, value|
+          self.instance_variable_set("@#{attribute}".to_sym, value.value)
+        end
 
         @data_ignore_proofer = obj['data-proofer-ignore']
         @content = obj.content
         @check = check
         @checked_paths = {}
-        @type = type
+        @type = self.class.name
 
         if @href && @check.options[:href_swap]
           @check.options[:href_swap].each do |link, replace|
@@ -24,7 +24,6 @@ module HTML
         # fix up missing protocols
         @href.insert 0, 'http:' if @href =~ %r{^//}
         @src.insert 0, 'http:' if @src =~ %r{^//}
-
       end
 
       def url
@@ -66,13 +65,13 @@ module HTML
         return true if @data_ignore_proofer
 
         case @type
-        when 'favicon'
+        when 'Favicon'
           return true if url.match(/^data:image/)
-        when 'link'
-          return true if ignores_pattern_check(@check.additional_href_ignores)
-        when 'image'
+        when 'Link'
+          return true if ignores_pattern_check(@check.href_ignores)
+        when 'Image'
           return true if url.match(/^data:image/)
-          return true if ignores_pattern_check(@check.additional_alt_ignores)
+          return true if ignores_pattern_check(@check.alt_ignores)
         end
       end
 
@@ -135,6 +134,13 @@ module HTML
       def unslashed_directory?(file)
         File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:followlocation]
       end
+
+      private
+
+      def real_attr(attr)
+        attr.to_s unless attr.nil? || attr.empty?
+      end
+
     end
   end
 end

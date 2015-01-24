@@ -1,15 +1,15 @@
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, '**', '*.rb')
-  puts glob
+  glob = File.join(File.dirname(__FILE__), path, '*.rb')
   Dir[glob].each do |f|
     require f
   end
 end
 
 require_all 'proofer'
-require 'nokogiri'
+require_all 'proofer/runner'
+require_all 'proofer/checks'
+
 require 'parallel'
-require 'addressable/uri'
 
 begin
   require 'awesome_print'
@@ -147,9 +147,9 @@ module HTML
     end
 
     def get_checks
-      checks = HTML::Proofer::Checks::Check.subclasses.map(&:name)
-      checks.delete('Favicons') unless @options[:favicon]
-      checks.delete('Html') unless @options[:validate_html]
+      checks = HTML::Proofer::Runner.checks.map(&:name)
+      checks.delete('FaviconRunner') unless @options[:favicon]
+      checks.delete('HtmlRunner') unless @options[:validate_html]
       checks
     end
 

@@ -1,4 +1,5 @@
 require 'yell'
+require 'colored'
 
 module HTML
   class Proofer

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Html < ::HTML::Proofer::Checks::Check
+class HtmlRunner < ::HTML::Proofer::Runner
 
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   HTML5_TAGS = %w(article aside bdi details dialog figcaption

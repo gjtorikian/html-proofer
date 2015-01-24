@@ -1,4 +1,5 @@
 require_relative './utils'
+require 'typhoeus'
 
 module HTML
   class Proofer
@@ -110,9 +111,9 @@ module HTML
 
       def add_failed_tests(filenames, desc, status = nil)
         if filenames.nil?
-          @failed_tests << Checks::Issue.new('', desc, status)
+          @failed_tests << Runner::Issue.new('', desc, status)
         else
-          filenames.each { |f| @failed_tests << Checks::Issue.new(f, desc, status) }
+          filenames.each { |f| @failed_tests << Runner::Issue.new(f, desc, status) }
         end
       end
 

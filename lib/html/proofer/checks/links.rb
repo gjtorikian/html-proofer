@@ -23,20 +23,14 @@ class Link < ::HTML::Proofer::Checkable
     (id || name) && href.nil?
   end
 
-  private
-
-  def real_attr(attr)
-    attr unless attr.nil? || attr.empty?
-  end
-
 end
 
-class Links < ::HTML::Proofer::Checks::Check
+class LinkRunner < ::HTML::Proofer::Runner
   include HTML::Utils
 
   def run
     @html.css('a, link').each do |l|
-      link = Link.new l, 'link', self
+      link = Link.new l, self
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
