@@ -22,7 +22,7 @@ Or install it yourself as:
 
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
-## Real-life examples
+### Real-life examples
 
 Project | Repository
 :--- | :---
@@ -53,6 +53,10 @@ Project | Repository
 
 * Whether your internal script references are not broken
 * Whether external scripts are loading
+
+### Favicon
+
+Checks if your favicons are valid. This is an optional feature, set the `validate_favicon` option to turn it on.
 
 ### HTML
 
@@ -135,7 +139,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `ext` | The extension of your HTML files including the dot. | `.html`
-| `favicon` | Enables the favicon checker. | `false` |
+| `validate_favicon` | Enables the favicon checker. | `false` |
 | `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |

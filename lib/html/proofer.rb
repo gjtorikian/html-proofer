@@ -27,7 +27,7 @@ module HTML
 
       @proofer_opts = {
         :ext => '.html',
-        :favicon => false,
+        :validate_favicon => false,
         :href_swap => [],
         :href_ignore => [],
         :file_ignore => [],
@@ -148,7 +148,7 @@ module HTML
 
     def get_checks
       checks = HTML::Proofer::Runner.checks.map(&:name)
-      checks.delete('FaviconRunner') unless @options[:favicon]
+      checks.delete('FaviconRunner') unless @options[:validate_favicon]
       checks.delete('HtmlRunner') unless @options[:validate_html]
       checks
     end
