@@ -168,7 +168,7 @@ You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 [Parallel](https://github.com/grosser/parallel) is being used to speed things up a bit. You can pass in any of its options with the options "namespace" `:parallel`. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 2, :parallel => { :in_processes => 3} })
+HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 `:in_processes => 3` will be passed into Parallel as a configuration option.
