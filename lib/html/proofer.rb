@@ -41,27 +41,30 @@ module HTML
         :error_sort => :path
       }
 
-      @typhoeus_opts = {
+      @typhoeus_opts = opts[:typhoeus] || {
         :followlocation => true
       }
+      opts.delete(:typhoeus)
+
+      @hydra_opts = opts[:hydra] || {}
+      opts.delete(:hydra)
 
       # fall back to parallel defaults
       @parallel_opts = opts[:parallel] || {}
       opts.delete(:parallel)
 
-      # Typhoeus won't let you pass in any non-Typhoeus option; if the option is not
-      # a proofer_opt, it must be for Typhoeus
-      opts.keys.each do |key|
-        @typhoeus_opts[key] = opts[key] if @proofer_opts[key].nil?
-      end
-
-      @options = @proofer_opts.merge(@typhoeus_opts).merge(opts)
+      @options = @proofer_opts.merge(opts)
 
       @failed_tests = []
     end
 
     def logger
       @logger ||= HTML::Proofer::Log.new(@options[:verbose])
+    end
+
+    def validate_urls(external_urls)
+      url_validator = HTML::Proofer::UrlValidator.new(logger, external_urls, @options, @typhoeus_opts, @hydra_opts)
+      @failed_tests.concat(url_validator.run)
     end
 
     def run
@@ -82,13 +85,12 @@ module HTML
 
     def check_list_of_links
       external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
-      external_link_checker(external_urls)
+      validate_urls(external_urls)
     end
 
     # Collects any external URLs found in a directory of files. Also collectes
     # every failed test from check_files_for_internal_woes.
-    # Sends the external URLs to Typhoeus for batch processing. See external_link_checker
-    # for more information on why that is.
+    # Sends the external URLs to Typhoeus for batch processing.
     def check_directory_of_files
       external_urls = {}
       results = check_files_for_internal_woes
@@ -98,7 +100,7 @@ module HTML
         @failed_tests.concat(item[:failed_tests])
       end
 
-      external_link_checker(external_urls) unless @options[:disable_external]
+      validate_urls(external_urls) unless @options[:disable_external]
 
       logger.log :info, :blue, "Ran on #{files.length} files!\n\n"
     end
@@ -118,93 +120,6 @@ module HTML
         end
         result
       end
-    end
-
-    # Proofer runs faster if we pull out all the external URLs and run the checks
-    # at the end. Otherwise, we're halting the consuming process for every file during
-    # the check_directory_of_files process.
-    #
-    # In addition, sorting the list lets libcurl keep connections to the same hosts alive.
-    #
-    # Finally, we'll first make a HEAD request, rather than GETing all the contents.
-    # If the HEAD fails, we'll fall back to GET, as some servers are not configured
-    # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
-    # not an option.
-    def external_link_checker(external_urls)
-      external_urls = Hash[external_urls.sort]
-
-      logger.log :info, :blue, "Checking #{external_urls.length} external links..."
-
-      Ethon.logger = logger # log from Typhoeus/Ethon
-
-      external_urls.each_pair do |href, filenames|
-        if hash?(href) && @options[:check_external_hash]
-          queue_request(:get, href, filenames)
-        else
-          queue_request(:head, href, filenames)
-        end
-      end
-
-      logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
-      hydra.run
-    end
-
-    def queue_request(method, href, filenames)
-      request = Typhoeus::Request.new(href, @typhoeus_opts.merge({ :method => method }))
-      request.on_complete { |response| response_handler(response, filenames) }
-      hydra.queue request
-    end
-
-    def response_handler(response, filenames)
-      effective_url = response.options[:effective_url]
-      href = response.request.base_url
-      method = response.request.options[:method]
-      response_code = response.code
-
-      debug_msg = "Received a #{response_code} for #{href}"
-      debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
-      logger.log :debug, :yellow, debug_msg
-
-      if response_code.between?(200, 299)
-        check_hash_in_2xx_response(href, effective_url, response, filenames)
-      elsif response.timed_out?
-        handle_timeout(filenames, response_code)
-      elsif method == :head
-        queue_request(:get, effective_url, filenames)
-      else
-        return if @options[:only_4xx] && !response_code.between?(400, 499)
-        # Received a non-successful http response.
-        add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
-      end
-    end
-
-    # Even though the response was a success, we may have been asked to check
-    # if the hash on the URL exists on the page
-    def check_hash_in_2xx_response(href, effective_url, response, filenames)
-      return if @options[:only_4xx]
-      return unless @options[:check_external_hash]
-      return unless hash = hash?(href)
-
-      body_doc = Nokogiri::HTML(response.body)
-
-      # user-content is a special addition by GitHub.
-      xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
-      if URI.parse(href).host.match(/github\.com/i)
-        xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
-      end
-
-      return unless body_doc.xpath(xpath).empty?
-
-      add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
-    end
-
-    def handle_timeout
-      return if @options[:only_4xx]
-      add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
-    end
-
-    def hydra
-      @hydra ||= Typhoeus::Hydra.new
     end
 
     def files
@@ -236,20 +151,6 @@ module HTML
       checks.delete('Favicons') unless @options[:favicon]
       checks.delete('Html') unless @options[:validate_html]
       checks
-    end
-
-    def hash?(url)
-      URI.parse(url).fragment
-      rescue URI::InvalidURIError
-        nil
-    end
-
-    def add_failed_tests(filenames, desc, status = nil)
-      if filenames.nil?
-        @failed_tests << Checks::Issue.new('', desc, status)
-      else
-        filenames.each { |f| @failed_tests << Checks::Issue.new(f, desc, status) }
-      end
     end
 
     def failed_tests
