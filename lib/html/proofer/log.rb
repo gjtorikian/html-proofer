@@ -29,7 +29,7 @@ module HTML
 
       # dumb override to play nice with Typhoeus/Ethon
       def debug(message = nil)
-        log(:debug, :yellow, message || $stdout)
+        log(:debug, :yellow, message) unless message.nil?
       end
     end
   end
