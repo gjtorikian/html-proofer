@@ -21,13 +21,13 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  # $stdout = StringIO.new
+  $stdout = StringIO.new
   begin
     yield
   rescue RuntimeError
   ensure
     $stderr = original_stderr
-    # $stdout = original_stdout
+    $stdout = original_stdout
   end
   fake_err.string
 end
