@@ -6,7 +6,7 @@ module HTML
     class Checkable
       def initialize(obj, check)
         obj.attributes.each_pair do |attribute, value|
-          next if value.value.empty?
+          next if attribute == 'data-proofer-ignore' # TODO: not quite sure why this doesn't work
           self.instance_variable_set("@#{attribute}".to_sym, value.value)
         end
 
