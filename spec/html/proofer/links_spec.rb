@@ -247,7 +247,7 @@ describe 'Links test' do
   end
 
   it 'ensures Typhoeus options are passed' do
-    options = { ssl_verifypeer: false }
+    options = { :typhoeus => { :ssl_verifypeer => false } }
     typhoeus_options_link = "#{FIXTURES_DIR}/links/ensure_typhoeus_options.html"
     proofer = make_proofer(typhoeus_options_link, options)
     expect(proofer.failed_tests).to eq []
