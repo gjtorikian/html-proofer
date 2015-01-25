@@ -66,11 +66,11 @@ module HTML
         return true if @data_ignore_proofer
 
         case @type
-        when 'Favicon'
+        when 'FaviconCheck'
           return true if url.match(/^data:image/)
-        when 'Link'
+        when 'LinkCheck'
           return true if ignores_pattern_check(@check.href_ignores)
-        when 'Image'
+        when 'ImageCheck'
           return true if url.match(/^data:image/)
           return true if ignores_pattern_check(@check.alt_ignores)
         end
