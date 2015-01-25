@@ -65,7 +65,7 @@ describe HTML::Proofer do
 
 
       it 'understands sorting by status' do
-        output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :followlocation => false, :error_sort => :status)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :typhoeus => { :followlocation => false }, :error_sort => :status)
         expect(output.strip).to eq('''
 - -1
   *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist

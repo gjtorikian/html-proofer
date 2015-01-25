@@ -133,7 +133,7 @@ module HTML
       end
 
       def unslashed_directory?(file)
-        File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:followlocation]
+        File.directory?(file) && !file.end_with?(File::SEPARATOR) && !@check.options[:typhoeus][:followlocation]
       end
 
       private

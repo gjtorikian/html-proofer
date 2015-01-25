@@ -65,14 +65,14 @@ describe 'Links test' do
 
   it 'fails on redirects if not following' do
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
-    proofer = make_proofer(linkWithRedirectFilepath, { :followlocation => false })
+    proofer = make_proofer(linkWithRedirectFilepath, :typhoeus => { :followlocation => false })
     expect(proofer.failed_tests.first).to match(/failed: 301 No error/)
   end
 
   it "does not fail on redirects we're not following" do
     # this test should emit a 301--see above--but we're intentionally supressing it
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
-    proofer = make_proofer(linkWithRedirectFilepath, { :only_4xx => true, :followlocation => false })
+    proofer = make_proofer(linkWithRedirectFilepath, { :only_4xx => true, :typhoeus => { :followlocation => false } })
     expect(proofer.failed_tests).to eq []
   end
 
@@ -197,7 +197,7 @@ describe 'Links test' do
   end
 
   it 'fails for internal linking to a directory without trailing slash' do
-    options = { :followlocation => false }
+    options = { :typhoeus => { :followlocation => false } }
     internal = "#{FIXTURES_DIR}/links/link_directory_without_slash.html"
     proofer = make_proofer(internal, options)
     expect(proofer.failed_tests.first).to match(/without trailing slash/)
