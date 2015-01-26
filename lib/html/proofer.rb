@@ -193,7 +193,8 @@ module HTML
         end
       end
 
-      # fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} failures!"
+      failure_text = @failed_tests.length == 1 ? 'failure' : 'failures'
+      fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} #{failure_text}!"
     end
   end
 end
