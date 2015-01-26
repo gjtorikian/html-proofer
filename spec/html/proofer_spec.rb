@@ -35,8 +35,7 @@ describe HTML::Proofer do
     end
 
     describe 'sorting' do
-      # would love to know why Travis barfs here
-      it 'understands sorting by path', :skip => ENV['TRAVIS']  do
+      it 'understands sorting by path' do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/path")
 
         expect(output.strip).to eq('''
