@@ -9,7 +9,9 @@ module HTML
       def initialize(verbose)
         log_level = verbose ? :debug : :info
 
-        @logger = Yell.new({ :format => false, :name => 'HTML::Proofer', :level => "gte.#{log_level}" }) do |l|
+        @logger = Yell.new(:format => false, \
+                           :name => 'HTML::Proofer', \
+                           :level => "gte.#{log_level}") do |l|
           l.adapter :stdout, :level => [:debug, :info, :warn]
           l.adapter :stderr, :level => [:error, :fatal]
         end

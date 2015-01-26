@@ -1,5 +1,6 @@
 require_relative './utils'
 require 'typhoeus'
+require 'uri'
 
 module HTML
   class Proofer

@@ -21,7 +21,7 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = StringIO.new
+  $stdout = fake_out = StringIO.new
   begin
     yield
   rescue RuntimeError
@@ -41,4 +41,8 @@ end
 def send_proofer_output(file, opts = {})
   proofer = HTML::Proofer.new(file, opts)
   capture_stderr { proofer.run }
+end
+
+def make_bin(cmd, path=nil)
+  `bin/htmlproof #{cmd} #{path}`
 end

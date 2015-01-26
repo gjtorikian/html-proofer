@@ -137,23 +137,23 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `ext` | The extension of your HTML files including the dot. | `.html`
-| `validate_favicon` | Enables the favicon checker. | `false` |
-| `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
-| `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
-| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
-| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
-| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
-| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
+| `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
+| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
+| `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
+| `ext` | The extension of your HTML files including the dot. | `.html`
+| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
+| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
+| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
+| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
+| `validate_favicon` | Enables the favicon checker. | `false` |
+| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
 ### Configuring Typhoeus and Hydra
 
-You can also pass in any of Typhoeus' options for the external link check. For example:
+[Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
 HTML::Proofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
@@ -163,9 +163,11 @@ This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a confi
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
+The default value is `typhoeus => { :followlocation => true }`.
+
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) is being used to speed things up a bit. You can pass in any of its options with the options "namespace" `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) is being used to speed internal file checks. You can pass in any of its options with the options "namespace" `:parallel`. For example:
 
 ``` ruby
 HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
