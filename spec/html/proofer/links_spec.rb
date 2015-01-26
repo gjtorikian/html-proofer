@@ -42,7 +42,20 @@ describe 'Links test' do
   it 'fails for broken external links' do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     proofer = make_proofer(brokenLinkExternalFilepath)
-    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host nam/)
+    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host name/)
+  end
+
+  it 'passes for different filename without option' do
+    brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/file.foo"
+    proofer = make_proofer(brokenLinkExternalFilepath)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'fails for different filenames' do
+    options = { :ext => '.foo' }
+    brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/file.foo"
+    proofer = make_proofer(brokenLinkExternalFilepath, options)
+    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host name/)
   end
 
   it 'fails for broken internal links' do
@@ -120,13 +133,13 @@ describe 'Links test' do
 
   it 'ignores links via href_ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/links/ignorableLinksViaOptions.html"
-    proofer = make_proofer(ignorableLinks, {:href_ignore => [/^http:\/\//, /sdadsad/, "../whaadadt.html"]})
+    proofer = make_proofer(ignorableLinks, { :href_ignore => [%r{^http://}, /sdadsad/, '../whaadadt.html'] })
     expect(proofer.failed_tests).to eq []
   end
 
   it 'translates links via href_swap' do
     translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    proofer = make_proofer(translatedLink, {:href_swap => { /\A\/articles\/([\w-]+)/ => "\\1.html" }})
+    proofer = make_proofer(translatedLink, { :href_swap => { %r{\A/articles/([\w-]+)} => "\\1.html" } })
     expect(proofer.failed_tests).to eq []
   end
 
@@ -203,8 +216,15 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/without trailing slash/)
   end
 
+  it 'ignores external links when asked' do
+    options = { :disable_external => true }
+    external = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
+    proofer = make_proofer(external, options)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'works for array of links' do
-    proofer = make_proofer(["www.github.com", "foofoofoo.biz"])
+    proofer = make_proofer(['www.github.com', 'foofoofoo.biz'])
     expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host name/)
   end
 
