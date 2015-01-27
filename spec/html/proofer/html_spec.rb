@@ -46,6 +46,6 @@ describe 'Html test' do
   it 'fails for missing closing quotation mark in href' do
     html = "#{FIXTURES_DIR}/html/missing_closing_quotes.html"
     proofer = make_proofer(html, { :validate_html => true })
-    expect(proofer.failed_tests[1]).to match(/Couldn't find end of Start Tag a/)
+    expect(proofer.failed_tests.to_s).to match(/Couldn't find end of Start Tag a/)
   end
 end
