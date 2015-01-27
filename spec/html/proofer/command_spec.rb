@@ -50,7 +50,7 @@ describe 'Command test' do
 
   it 'works with href-swap' do
     translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    output = make_bin('--href-swap \A/articles/([\w-]+):\1.html', translatedLink)
+    output = make_bin('--href-swap "\A/articles/([\w-]+):\1.html"', translatedLink)
     expect(output).to match('successfully')
   end
 
