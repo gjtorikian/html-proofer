@@ -2,8 +2,6 @@ require 'nokogiri'
 
 module HTML
   module Utils
-    extend self
-
     def create_nokogiri(path)
       if File.exist? path
         content = File.open(path).read
@@ -13,5 +11,6 @@ module HTML
 
       Nokogiri::HTML(content)
     end
+    module_function :create_nokogiri
   end
 end
