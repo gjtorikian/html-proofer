@@ -170,31 +170,33 @@ module HTML
         comp.zero? ? (a.path <=> b.path) : comp
       end
 
-      @failed_tests.each do |issue|
-        case @options[:error_sort]
-        when :path
-          if matcher != issue.path
-            logger.log :error, :red, "- #{issue.path}"
-            matcher = issue.path
-          end
-          logger.log :error, :red, "  *  #{issue.desc}"
-        when :desc
-          if matcher != issue.desc
-            logger.log :error, :red, "- #{issue.desc}"
-            matcher = issue.desc
-          end
-          logger.log :error, :red, "  *  #{issue.path}"
-        when :status
-          if matcher != issue.status
-            logger.log :error, :red, "- #{issue.status}"
-            matcher = issue.status
-          end
-          logger.log :error, :red, "  *  #{issue}"
-        end
+      case @options[:error_sort]
+      when :path
+        sort_and_report_failure(:path, :desc)
+      when :desc
+        sort_and_report_failure(:desc, :path)
+      when :status
+        sort_and_report_failure(:status, :path)
       end
 
       failure_text = @failed_tests.length == 1 ? 'failure' : 'failures'
       fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} #{failure_text}!"
+    end
+
+    def sort_and_report_failure(first_sort, second_sort)
+      matcher = nil
+      sorted_failures = @failed_tests.sort_by { |t| [ t.send(first_sort), t.send(second_sort) ] }
+      sorted_failures.each do |issue|
+        if matcher != issue.send(first_sort)
+          logger.log :error, :red, "- #{issue.send(first_sort)}"
+          matcher = issue.send(first_sort)
+        end
+        if first_sort == :status
+          logger.log :error, :red, "  *  #{issue}"
+        else
+          logger.log :error, :red, "  *  #{issue.send(second_sort)}"
+        end
+      end
     end
   end
 end
