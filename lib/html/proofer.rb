@@ -161,42 +161,12 @@ module HTML
     end
 
     def print_failed_tests
-      matcher = nil
+      sorted_failures = HTML::Proofer::Runner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
 
-      # always sort by the actual option, then path, to ensure consistent
-      # alphabetical (by filename) results
-      @failed_tests = @failed_tests.sort do |a, b|
-        comp = (a.send(@options[:error_sort]) <=> b.send(@options[:error_sort]))
-        comp.zero? ? (a.path <=> b.path) : comp
-      end
-
-      case @options[:error_sort]
-      when :path
-        sort_and_report_failure(:path, :desc)
-      when :desc
-        sort_and_report_failure(:desc, :path)
-      when :status
-        sort_and_report_failure(:status, :path)
-      end
-
-      failure_text = @failed_tests.length == 1 ? 'failure' : 'failures'
+      sorted_failures.sort_and_report
+      count = @failed_tests.length
+      failure_text = "#{count} " << (count == 1 ? 'failure' : 'failures')
       fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} #{failure_text}!"
-    end
-
-    def sort_and_report_failure(first_sort, second_sort)
-      matcher = nil
-      sorted_failures = @failed_tests.sort_by { |t| [ t.send(first_sort), t.send(second_sort) ] }
-      sorted_failures.each do |issue|
-        if matcher != issue.send(first_sort)
-          logger.log :error, :red, "- #{issue.send(first_sort)}"
-          matcher = issue.send(first_sort)
-        end
-        if first_sort == :status
-          logger.log :error, :red, "  *  #{issue}"
-        else
-          logger.log :error, :red, "  *  #{issue.send(second_sort)}"
-        end
-      end
     end
   end
 end
