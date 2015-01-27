@@ -77,7 +77,7 @@ module HTML
       end
 
       if @failed_tests.empty?
-        logger.log :info, :blue, 'HTML-Proofer finished successfully.'
+        logger.log :info, :green, 'HTML-Proofer finished successfully.'
       else
         print_failed_tests
       end
