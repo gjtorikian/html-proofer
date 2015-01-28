@@ -39,7 +39,7 @@ class HTML::Proofer::Runner
     end
 
     def sort(first_sort, second_sort)
-      issues.sort_by { |t| [ t.send(first_sort), t.send(second_sort) ] }
+      issues.sort_by { |t| [t.send(first_sort), t.send(second_sort)] }
     end
 
     def report(sorted_issues, first_report, second_report)

@@ -32,7 +32,6 @@ class ScriptRunner < ::HTML::Proofer::Runner
       else
         add_issue("internal script #{script.src} does not exist") unless script.exists?
       end
-
     end
 
     external_urls

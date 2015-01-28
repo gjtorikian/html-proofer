@@ -7,7 +7,7 @@ module HTML
       def initialize(obj, check)
         obj.attributes.each_pair do |attribute, value|
           next if attribute == 'data-proofer-ignore' # TODO: not quite sure why this doesn't work
-          self.instance_variable_set("@#{attribute}".to_sym, value.value)
+          instance_variable_set("@#{attribute}".to_sym, value.value)
         end
 
         @data_ignore_proofer = obj['data-proofer-ignore']

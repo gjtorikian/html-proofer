@@ -62,11 +62,6 @@ module HTML
       @logger ||= HTML::Proofer::Log.new(@options[:verbose])
     end
 
-    def validate_urls(external_urls)
-      url_validator = HTML::Proofer::UrlValidator.new(logger, external_urls, @options, @typhoeus_opts, @hydra_opts)
-      @failed_tests.concat(url_validator.run)
-    end
-
     def run
       logger.log :info, :blue, "Running #{checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
@@ -120,6 +115,11 @@ module HTML
         end
         result
       end
+    end
+
+    def validate_urls(external_urls)
+      url_validator = HTML::Proofer::UrlValidator.new(logger, external_urls, @options, @typhoeus_opts, @hydra_opts)
+      @failed_tests.concat(url_validator.run)
     end
 
     def files
