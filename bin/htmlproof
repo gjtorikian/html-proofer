@@ -1,59 +1,68 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 
 require 'html/proofer'
 require 'mercenary'
-require "rubygems"
+require 'rubygems'
+
+def to_regex?(item)
+  if item.start_with? '/' and item.end_with? '/'
+    Regexp.new item[1...-1]
+  else
+    item
+  end
+end
 
 Mercenary.program(:htmlproof) do |p|
-  p.version Gem::Specification::load(File.join(File.dirname(__FILE__), "..", "html-proofer.gemspec")).version
-  p.description "Test your rendered HTML files to make sure they're accurate."
+  p.version Gem::Specification.load(File.join(File.dirname(__FILE__), '..', 'html-proofer.gemspec')).version
+  p.description %(Test your rendered HTML files to make sure they're accurate.)
   p.syntax 'htmlproof PATH [options]'
 
-  p.description "Runs the HTML-Proofer suite on the files in PATH"
+  p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
-  p.option 'ext', '--ext EXT', 'The extension of your HTML files (default: `.html`)'
-  p.option 'favicon', '--favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'as-links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
-  p.option 'swap', '--swap regex:string,[regex:string,...]', Array, 'Array containing key-value pairs of `RegExp:String`. It transforms links that match `RegExp` into `String`'
-  p.option 'href_ignore', '--href_ignore link1,[link2,...]', Array, 'Array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored.'
-  p.option 'alt_ignore', '--alt_ignore image1,[image2,...]', Array, 'Array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
-  p.option 'file_ignore', '--file_ignore file1,[file2,...]', Array, 'Array of Strings or RegExps containing file paths that are safe to ignore'
-  p.option 'disable_external', '--disable_external', 'Disables the external link checker (default: `false`)'
-  p.option 'only_4xx', '--only_4xx', 'Only reports errors for links that fall within the 4x status code range.'
+  p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
+  p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'Comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
+  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
+  p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
+  p.option 'disable_external', '--disable-external', 'Disables the external link checker (default: `false`)'
+  p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `path`, `desc`, or `status` (default: `path`).'
+  p.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
+  p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'Comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
+  p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing `href`s that are safe to ignore.'
+  p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'Comma-separated list of key-value pairs of `RegExp:String`. Transforms links matching `RegExp` into `String`'
+  p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
+  p.option 'validate_favicon', '--validate-favicon', 'Enables the favicon checker (default: `false`).'
+  p.option 'validate_html', '--validate-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
-  p.option 'directory_index_file', '--directory_index_file', 'Sets the file to look for when a link refers to a directory.'
-  p.option 'validate_html', '--validate_html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
-  p.option 'check_external_hash', '--check_external_hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
 
   p.action do |args, opts|
-    args = ["."] if args.empty?
+    args = ['.'] if args.empty?
     path = args.first
 
     options = {}
-    options[:ext] = opts["ext"] unless opts["ext"].nil?
-    unless opts["swap"].nil?
+
+    # prepare every to go to proofer
+    p.options.select { |o| !opts[o.config_key].nil? }.each do |option|
+      if option.return_type.to_s == 'Array' # TODO: is_a? doesn't work here?
+        opts[option.config_key] = opts[option.config_key].map { |i| to_regex?(i) }
+      end
+      options[option.config_key.to_sym] = opts[option.config_key]
+    end
+
+    # some minor manipulation of a special option
+    unless opts['href_swap'].nil?
       options[:href_swap] = {}
-      opts["swap"].each do |s|
-        pair = s.split(":")
-        options[:href_swap][%r{#{pair[0]}}] = pair[1]
+      opts['href_swap'].each do |s|
+        pair = s.split(':')
+        options[:href_swap][Regexp.new(pair[0])] = pair[1]
       end
     end
 
-    options[:href_ignore] = opts["href_ignore"] unless opts["href_ignore"].nil?
-    options[:alt_ignore] = opts["alt_ignore"] unless opts["alt_ignore"].nil?
-    options[:file_ignore] = opts["file_ignore"] unless opts["file_ignore"].nil?
-    options[:disable_external] = opts["disable_external"] unless opts["disable_external"].nil?
-    options[:only_4xx] = opts["only_4xx"] unless opts["only_4xx"].nil?
-    options[:favicon] = opts["favicon"] unless opts["favicon"].nil?
-    options[:verbose] = opts["verbose"] unless opts["verbose"].nil?
-    options[:directory_index_file] = opts["directory_index_file"] unless opts["directory_index_file"].nil?
-    options[:validate_html] = opts["validate_html"] unless opts["validate_html"].nil?
-    options[:check_external_hash] = opts["check_external_hash"] unless opts["check_external_hash"].nil?
+    options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
 
-    path = path.delete(' ').split(",") if opts["as-links"]
+    path = path.delete(' ').split(',') if opts['as_links']
 
     HTML::Proofer.new(path, options).run
   end

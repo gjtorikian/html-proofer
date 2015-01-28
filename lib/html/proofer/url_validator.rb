@@ -1,0 +1,133 @@
+require_relative './utils'
+require 'typhoeus'
+require 'uri'
+
+module HTML
+  class Proofer
+    class UrlValidator
+      include Utils
+
+      attr_accessor :logger, :external_urls, :hydra
+
+      def initialize(logger, external_urls, options, typhoeus_opts, hydra_opts)
+        @logger = logger
+        @external_urls = external_urls
+        @failed_tests = []
+        @options = options
+        @hydra = Typhoeus::Hydra.new(hydra_opts)
+        @typhoeus_opts = typhoeus_opts
+      end
+
+      def run
+        external_link_checker(external_urls)
+        @failed_tests
+      end
+
+      # Proofer runs faster if we pull out all the external URLs and run the checks
+      # at the end. Otherwise, we're halting the consuming process for every file during
+      # the check_directory_of_files process.
+      #
+      # In addition, sorting the list lets libcurl keep connections to the same hosts alive.
+      #
+      # Finally, we'll first make a HEAD request, rather than GETing all the contents.
+      # If the HEAD fails, we'll fall back to GET, as some servers are not configured
+      # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
+      # not an option.
+      def external_link_checker(external_urls)
+        external_urls = Hash[external_urls.sort]
+
+        logger.log :info, :blue, "Checking #{external_urls.length} external links..."
+
+        Ethon.logger = logger # log from Typhoeus/Ethon
+
+        url_processor(external_urls)
+
+        logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
+        hydra.run
+      end
+
+      def url_processor(external_urls)
+        external_urls.each_pair do |href, filenames|
+          href = clean_url(href)
+          if hash?(href) && @options[:check_external_hash]
+            queue_request(:get, href, filenames)
+          else
+            queue_request(:head, href, filenames)
+          end
+        end
+      end
+
+      def clean_url(href)
+        Addressable::URI.parse(href).normalize
+      end
+
+      def queue_request(method, href, filenames)
+        request = Typhoeus::Request.new(href, @typhoeus_opts.merge({ :method => method }))
+        request.on_complete { |response| response_handler(response, filenames) }
+        hydra.queue request
+      end
+
+      def response_handler(response, filenames)
+        effective_url = response.options[:effective_url]
+        href = response.request.base_url
+        method = response.request.options[:method]
+        response_code = response.code
+        debug_msg = "Received a #{response_code} for #{href}"
+        debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
+        logger.log :debug, :yellow, debug_msg
+
+        if response_code.between?(200, 299)
+          check_hash_in_2xx_response(href, effective_url, response, filenames)
+        elsif response.timed_out?
+          handle_timeout(filenames, response_code)
+        elsif method == :head
+          queue_request(:get, effective_url, filenames)
+        else
+          return if @options[:only_4xx] && !response_code.between?(400, 499)
+          # Received a non-successful http response.
+          add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
+        end
+      end
+
+      # Even though the response was a success, we may have been asked to check
+      # if the hash on the URL exists on the page
+      def check_hash_in_2xx_response(href, effective_url, response, filenames)
+        return if @options[:only_4xx]
+        return unless @options[:check_external_hash]
+        return unless (hash = hash?(href))
+
+        body_doc = create_nokogiri(response.body)
+
+        # user-content is a special addition by GitHub.
+        xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
+        if URI.parse(href).host.match(/github\.com/i)
+          xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
+        end
+
+        return unless body_doc.xpath(xpath).empty?
+
+        add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
+      end
+
+      def handle_timeout
+        return if @options[:only_4xx]
+        add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
+      end
+
+      def add_failed_tests(filenames, desc, status = nil)
+        if filenames.nil?
+          @failed_tests << Runner::Issue.new('', desc, status)
+        else
+          filenames.each { |f| @failed_tests << Runner::Issue.new(f, desc, status) }
+        end
+      end
+
+      def hash?(url)
+        URI.parse(url).fragment
+      rescue URI::InvalidURIError
+        nil
+      end
+
+    end
+  end
+end

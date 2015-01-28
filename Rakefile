@@ -12,12 +12,10 @@ task :proof_readme do
   require 'redcarpet'
 
   redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}
-  html = redcarpet.render File.open("README.md").read
+  html = redcarpet.render File.read('README.md')
 
-  mkdir_p "out"
-  File.open "out/README.html", File::CREAT|File::WRONLY do |file|
-    file.puts html
-  end
+  mkdir_p 'out'
+  File.write('out/README.html', html)
 
-  HTML::Proofer.new("./out").run
+  HTML::Proofer.new('./out').run
 end
