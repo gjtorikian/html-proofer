@@ -22,6 +22,47 @@ Or install it yourself as:
 
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
+### Real-life examples
+
+Project | Repository
+:--- | :---
+[Raspberry Pi documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation]( https://github.com/raspberrypi/documentation)
+[Open Whisper Systems website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
+[Jekyll website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
+
+## What's Tested?
+
+### Images
+
+`img` elements:
+
+* Whether all your images have alt tags
+* Whether your internal image references are not broken
+* Whether external images are showing
+
+### Links
+
+`a`, `link` elements:
+
+* Whether your internal links are not broken; this includes hash references (`#linkToMe`)
+* Whether external links are working
+
+### Scripts
+
+`script` elements:
+
+* Whether your internal script references are not broken
+* Whether external scripts are loading
+
+### Favicon
+
+Checks if your favicons are valid. This is an optional feature, set the `validate_favicon` option to turn it on.
+
+### HTML
+
+Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
+This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
+
 ## Usage
 
 ### Using in a script
@@ -35,7 +76,7 @@ require 'html/pipeline'
 require 'find'
 
 # make an out dir
-Dir.mkdir("out") unless File.exists?("out")
+Dir.mkdir("out") unless File.exist?("out")
 
 pipeline = HTML::Pipeline.new [
   HTML::Pipeline::MarkdownFilter,
@@ -90,79 +131,46 @@ Don't have or want a `Rakefile`? You _could_ also do something like the followin
 htmlproof ./_site
 ```
 
-### Real-life examples
-
-Project | Repository
-:--- | :---
-[Raspberry Pi documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation]( https://github.com/raspberrypi/documentation)
-[Open Whisper Systems website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
-[Jekyll website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
-
-## What's Tested?
-
-### Images
-
-`img` elements:
-
-* Whether all your images have alt tags
-* Whether your internal image references are not broken
-* Whether external images are showing
-
-### Links
-
-`a`, `link` elements:
-
-* Whether your internal links are not broken; this includes hash references (`#linkToMe`)
-* Whether external links are working
-
-### Scripts
-
-`script` elements:
-
-* Whether your internal script references are not broken
-* Whether external scripts are loading
-
-### HTML
-
-Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
-This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
-
 ## Configuration
 
 The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `ext` | The extension of your HTML files including the dot. | `.html`
-| `favicon` | Enables the favicon checker. | `false` |
-| `followlocation` | Follows external redirections. Amends missing trailing slashes to internal directories. | `true` |
-| `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
-| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
-| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
-| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
-| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
+| `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
+| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
+| `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
+| `ext` | The extension of your HTML files including the dot. | `.html`
+| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
+| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
+| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
+| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
+| `validate_favicon` | Enables the favicon checker. | `false` |
+| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
-### Configuring Typhoeus
+### Configuring Typhoeus and Hydra
 
-You can also pass in any of Typhoeus' options for the external link check. For example:
+[Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 2 })
+HTML::Proofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
 This sets `HTML::Proofer`'s extensions to use _.htm_, and gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
+You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
+
+The default value is `typhoeus => { :followlocation => true }`.
+
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) is being used to speed things up a bit. You can pass in any of its options with the options "namespace" `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) is being used to speed internal file checks. You can pass in any of its options with the options "namespace" `:parallel`. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :verbose => true, :ssl_verifyhost => 2, :parallel => { :in_processes => 3} })
+HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 `:in_processes => 3` will be passed into Parallel as a configuration option.
@@ -185,14 +193,23 @@ bin/htmlproof www.google.com,www.github.com --as-links
 
 Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
+
+``` html
+<a href="http://notareallink" data-proofer-ignore>Not checked.</a>
+```
+
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Checkable`, and another that inherits from `HTML::Proofer::Checks::Check`. `Checkable` defines various helper methods for your test, while `Checks::Check` actually runs across your content. `Checks::Check` should call `self.add_issue` on failures, to add them to the list.
+Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Runner`, and another that inherits from `HTML::Proofer::Checkable`.
+
+The `Runner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+
+The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
 
 Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class OctocatLink < ::HTML::Proofer::Checkable
+class OctocatLinkCheck < ::HTML::Proofer::Checkable
 
   def mailto?
     return false if @data_ignore_proofer || @href.nil? || @href.empty?
@@ -205,14 +222,14 @@ class OctocatLink < ::HTML::Proofer::Checkable
 
 end
 
-class MailToOctocat < ::HTML::Proofer::Checks::Check
+class MailToOctocat < ::HTML::Proofer::Runner
 
   def run
     @html.css('a').each do |l|
-      link = OctocatLink.new l, "octocat_link", self
+      link = OctocatLinkCheck.new l, "octocat_link", self
 
       if link.mailto? && link.octocat?
-        return self.add_issue("Don't email the Octocat directly!")
+        return add_issue("Don't email the Octocat directly!")
       end
     end
   end
