@@ -64,7 +64,7 @@ module HTML
 
       def response_handler(response, filenames)
         effective_url = response.options[:effective_url]
-        href = response.request.base_url
+        href = response.request.base_url.encode('UTF-8', :invalid => :replace, :undef => :replace)
         method = response.request.options[:method]
         response_code = response.code
 
