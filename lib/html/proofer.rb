@@ -68,7 +68,7 @@ module HTML
     end
 
     def run
-      logger.log :info, :blue, "Running #{get_checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
+      logger.log :info, :blue, "Running #{checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links
@@ -111,7 +111,7 @@ module HTML
         html = create_nokogiri(path)
         result = { :external_urls => {}, :failed_tests => [] }
 
-        get_checks.each do |klass|
+        checks.each do |klass|
           logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
           check = Object.const_get(klass).new(@src, path, html, @options)
           check.run
@@ -146,7 +146,7 @@ module HTML
       false
     end
 
-    def get_checks
+    def checks
       checks = HTML::Proofer::Runner.checks.map(&:name)
       checks.delete('FaviconRunner') unless @options[:validate_favicon]
       checks.delete('HtmlRunner') unless @options[:validate_html]
