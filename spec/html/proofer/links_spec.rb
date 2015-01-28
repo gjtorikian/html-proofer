@@ -326,4 +326,10 @@ describe 'Links test' do
     proofer = make_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'passes for external UTF-8 links' do
+    fixture = "#{FIXTURES_DIR}/links/utf8Link.html"
+    proofer = make_proofer(fixture)
+    expect(proofer.failed_tests).to eq []
+  end
 end

@@ -48,12 +48,17 @@ module HTML
 
       def url_processor(external_urls)
         external_urls.each_pair do |href, filenames|
+          href = clean_url(href)
           if hash?(href) && @options[:check_external_hash]
             queue_request(:get, href, filenames)
           else
             queue_request(:head, href, filenames)
           end
         end
+      end
+
+      def clean_url(href)
+        Addressable::URI.parse(href).normalize
       end
 
       def queue_request(method, href, filenames)
@@ -64,10 +69,9 @@ module HTML
 
       def response_handler(response, filenames)
         effective_url = response.options[:effective_url]
-        href = response.request.base_url.encode('UTF-8', :invalid => :replace, :undef => :replace)
+        href = response.request.base_url
         method = response.request.options[:method]
         response_code = response.code
-
         debug_msg = "Received a #{response_code} for #{href}"
         debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
         logger.log :debug, :yellow, debug_msg
