@@ -1,16 +1,16 @@
 # encoding: utf-8
 
-class FaviconCheck < ::HTML::Proofer::Checkable
+class FaviconCheckable < ::HTML::Proofer::Checkable
   def rel
     @rel
   end
 end
 
-class FaviconRunner < ::HTML::Proofer::Runner
+class FaviconCheck < ::HTML::Proofer::CheckRunner
 
   def run
     @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |favicon|
-      favicon = FaviconCheck.new favicon, self
+      favicon = FaviconCheckable.new favicon, self
       next if favicon.ignore?
       return if favicon.rel.split(' ').last.eql? 'icon'
     end

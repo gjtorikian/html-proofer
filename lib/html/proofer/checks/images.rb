@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ImageCheck < ::HTML::Proofer::Checkable
+class ImageCheckable < ::HTML::Proofer::Checkable
 
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
@@ -22,10 +22,10 @@ class ImageCheck < ::HTML::Proofer::Checkable
 
 end
 
-class ImageRunner < ::HTML::Proofer::Runner
+class ImageCheck < ::HTML::Proofer::CheckRunner
   def run
     @html.css('img').each do |i|
-      img = ImageCheck.new i, self
+      img = ImageCheckable.new i, self
 
       next if img.ignore?
 

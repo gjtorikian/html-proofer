@@ -12,6 +12,13 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
+  it 'works with checks_to_ignore' do
+    external = "#{FIXTURES_DIR}/links/file.foo"
+    output = make_bin('--ext .foo --checks-to-ignore LinkCheck', external)
+    expect(output).to match('successfully')
+    expect(output).to_not match('LinkCheck')
+  end
+
   it 'works with check-external-hash' do
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
     output = make_bin('--check-external-hash', brokenHashOnTheWeb)
@@ -34,6 +41,7 @@ describe 'Command test' do
     external = "#{FIXTURES_DIR}/links/file.foo"
     output = make_bin('--ext .foo', external)
     expect(output).to match('1 failure')
+    expect(output).to match('LinkCheck')
   end
 
   it 'works with file-ignore' do
@@ -60,15 +68,15 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with validate-favicon' do
+  it 'works with check-favicon' do
     broken = "#{FIXTURES_DIR}/favicon/favicon_broken.html"
-    output = make_bin('--validate-favicon', broken)
+    output = make_bin('--check-favicon', broken)
     expect(output).to match('1 failure')
   end
 
-  it 'works with validate-html' do
+  it 'works with check-html' do
     broken = "#{FIXTURES_DIR}/html/invalid_tag.html"
-    output = make_bin('--validate-html', broken)
+    output = make_bin('--check-html', broken)
     expect(output).to match('1 failure')
   end
 end
