@@ -9,11 +9,11 @@ class ImageCheckable < ::HTML::Proofer::Checkable
   end
 
   def terrible_filename?
-    @src =~ SCREEN_SHOT_REGEX
+    src =~ SCREEN_SHOT_REGEX
   end
 
   def src
-    real_attr @src
+    real_attr(@src) || real_attr(@srcset)
   end
 
   def missing_src?
@@ -34,7 +34,7 @@ class ImageCheck < ::HTML::Proofer::CheckRunner
 
       # does the image exist?
       if img.missing_src?
-        add_issue 'image has no src attribute'
+        add_issue 'image has no src or srcset attribute'
       else
         if img.remote?
           add_to_external_urls img.src

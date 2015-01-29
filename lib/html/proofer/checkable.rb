@@ -28,7 +28,7 @@ module HTML
       end
 
       def url
-        @src || @href || ''
+        @src || @srcset || @href || ''
       end
 
       def valid?
