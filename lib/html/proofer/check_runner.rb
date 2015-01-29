@@ -3,7 +3,7 @@
 class HTML::Proofer
 
   # Mostly handles issue management and collecting of external URLs.
-  class Runner
+  class CheckRunner
 
     attr_reader :issues, :src, :path, :options, :external_urls, :href_ignores, :alt_ignores
 
@@ -19,7 +19,7 @@ class HTML::Proofer
     end
 
     def run
-      fail NotImplementedError, 'HTML::Proofer::Runner subclasses must implement #run'
+      fail NotImplementedError, 'HTML::Proofer::CheckRunner subclasses must implement #run'
     end
 
     def add_issue(desc, status = -1)

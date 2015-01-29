@@ -56,12 +56,12 @@ Project | Repository
 
 ### Favicon
 
-Checks if your favicons are valid. This is an optional feature, set the `validate_favicon` option to turn it on.
+Checks if your favicons are valid. This is an optional feature, set the `check_favicon` option to turn it on.
 
 ### HTML
 
 Nokogiri looks at the markup and [provides errors](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) when parsing your document.
-This is an optional feature, set the `validate_html` option to enable validation errors from Nokogiri.
+This is an optional feature, set the `check_html` option to enable validation errors from Nokogiri.
 
 ## Usage
 
@@ -148,8 +148,8 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
-| `validate_favicon` | Enables the favicon checker. | `false` |
-| `validate_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `check_favicon` | Enables the favicon checker. | `false` |
+| `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
 ### Configuring Typhoeus and Hydra
@@ -201,9 +201,9 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from the checks.
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Runner`, and another that inherits from `HTML::Proofer::Checkable`.
+Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::CheckRunner`, and another that inherits from `HTML::Proofer::Checkable`.
 
-The `Runner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+The `CheckRunner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
 
 The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
 
@@ -223,7 +223,7 @@ class OctocatLinkCheck < ::HTML::Proofer::Checkable
 
 end
 
-class MailToOctocat < ::HTML::Proofer::Runner
+class MailToOctocat < ::HTML::Proofer::CheckRunner
 
   def run
     @html.css('a').each do |l|
