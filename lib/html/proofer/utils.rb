@@ -12,5 +12,13 @@ module HTML
       Nokogiri::HTML(content)
     end
     module_function :create_nokogiri
+
+    def swap(href, replacement)
+      replacement.each do |link, replace|
+        href = href.gsub(link, replace)
+      end
+      href
+    end
+    module_function :swap
   end
 end

@@ -8,6 +8,7 @@ end
 require_all 'proofer'
 require_all 'proofer/check_runner'
 require_all 'proofer/checks'
+require_relative './proofer/utils'
 
 require 'parallel'
 
@@ -64,7 +65,9 @@ module HTML
     end
 
     def run
-      logger.log :info, :blue, "Running #{checks} checks on #{@src} on *#{@options[:ext]}... \n\n"
+      count = checks.length
+      check_text = "#{count} " << (count == 1 ? 'check' : 'checks')
+      logger.log :info, :blue, "Running #{check_text} on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links
@@ -80,6 +83,11 @@ module HTML
     end
 
     def check_list_of_links
+      if @options[:href_swap]
+        @src = @src.map do |external_url|
+          swap(external_url, @options[:href_swap])
+        end
+      end
       external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
       validate_urls(external_urls)
     end
@@ -171,7 +179,7 @@ module HTML
       sorted_failures.sort_and_report
       count = @failed_tests.length
       failure_text = "#{count} " << (count == 1 ? 'failure' : 'failures')
-      fail logger.colorize :red, "HTML-Proofer found #{@failed_tests.length} #{failure_text}!"
+      fail logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
   end
 end

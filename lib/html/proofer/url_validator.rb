@@ -1,11 +1,9 @@
-require_relative './utils'
 require 'typhoeus'
 require 'uri'
 
 module HTML
   class Proofer
     class UrlValidator
-      include Utils
 
       attr_accessor :logger, :external_urls, :hydra
 
@@ -36,7 +34,9 @@ module HTML
       def external_link_checker(external_urls)
         external_urls = Hash[external_urls.sort]
 
-        logger.log :info, :blue, "Checking #{external_urls.length} external links..."
+        count = external_urls.length
+        check_text = "#{count} " << (count == 1 ? 'external link' : 'external links')
+        logger.log :info, :blue, "Checking #{check_text}..."
 
         Ethon.logger = logger # log from Typhoeus/Ethon
 
