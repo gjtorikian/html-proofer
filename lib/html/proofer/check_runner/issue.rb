@@ -2,16 +2,17 @@
 class HTML::Proofer::CheckRunner
 
   class Issue
-    attr_reader :path, :desc, :status
+    attr_reader :path, :desc, :status, :line_number
 
-    def initialize(path, desc, status = -1)
+    def initialize(path, desc, line_number = nil, status = -1)
+      @line_number = line_number.nil? ? '' : " (line #{line_number})"
       @path = path
       @desc = desc
       @status = status
     end
 
     def to_s
-      "#{@path}: #{desc}"
+      "#{@path}: #{@desc}#{@line_number}"
     end
   end
 
@@ -53,7 +54,7 @@ class HTML::Proofer::CheckRunner
         if first_report == :status
           @logger.log :error, :red, "  *  #{issue}"
         else
-          @logger.log :error, :red, "  *  #{issue.send(second_report)}"
+          @logger.log :error, :red, "  *  #{issue.send(second_report)}#{issue.line_number}"
         end
       end
     end

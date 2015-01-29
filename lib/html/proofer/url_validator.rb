@@ -118,9 +118,9 @@ module HTML
 
       def add_failed_tests(filenames, desc, status = nil)
         if filenames.nil?
-          @failed_tests << CheckRunner::Issue.new('', desc, status)
+          @failed_tests << CheckRunner::Issue.new('', desc, nil, status)
         else
-          filenames.each { |f| @failed_tests << CheckRunner::Issue.new(f, desc, status) }
+          filenames.each { |f| @failed_tests << CheckRunner::Issue.new(f, desc, nil, status) }
         end
       end
 

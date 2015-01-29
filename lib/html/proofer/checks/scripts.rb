@@ -26,11 +26,11 @@ class ScriptCheck < ::HTML::Proofer::CheckRunner
 
       # does the script exist?
       if script.missing_src?
-        add_issue 'script is empty and has no src attribute'
+        add_issue('script is empty and has no src attribute', s.line)
       elsif script.remote?
         add_to_external_urls script.src
       else
-        add_issue("internal script #{script.src} does not exist") unless script.exists?
+        add_issue("internal script #{script.src} does not exist", s.line) unless script.exists?
       end
     end
 
