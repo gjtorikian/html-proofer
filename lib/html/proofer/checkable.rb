@@ -42,7 +42,7 @@ module HTML
       end
 
       def path
-        parts.path unless parts.nil?
+        CGI.unescape parts.path unless parts.nil?
       end
 
       def hash
