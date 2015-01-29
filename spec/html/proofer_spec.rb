@@ -67,7 +67,7 @@ describe HTML::Proofer do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :typhoeus => { :followlocation => false }, :error_sort => :status)
         expect(output.strip).to eq('''
 - -1
-  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist
+  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof (line 3), which does not exist
 - 404
   *  spec/html/proofer/fixtures/sorting/status/a_404.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 404 No error
   *  spec/html/proofer/fixtures/sorting/status/broken_link.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 404 No error
