@@ -66,7 +66,7 @@ module HTML
 
     def run
       count = checks.length
-      check_text = "#{count} " << (count == 1 ? 'check' : 'checks')
+      check_text = "#{checks} " << (count == 1 ? 'check' : 'checks')
       logger.log :info, :blue, "Running #{check_text} on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
