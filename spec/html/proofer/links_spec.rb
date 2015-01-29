@@ -143,6 +143,11 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'translates links via href_swap for list of links' do
+    proofer = run_proofer(['www.garbalarba.com'], { :href_swap => { /garbalarba/ => 'github' } })
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'finds a mix of broken and unbroken links' do
     multipleProblems = "#{FIXTURES_DIR}/links/multipleProblems.html"
     proofer = run_proofer(multipleProblems)

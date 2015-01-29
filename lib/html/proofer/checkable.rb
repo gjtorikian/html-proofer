@@ -1,9 +1,12 @@
 require 'addressable/uri'
+require_relative './utils'
 
 module HTML
   class Proofer
     # Represents the superclass from which all checks derive.
     class Checkable
+      include HTML::Utils
+
       def initialize(obj, check)
         obj.attributes.each_pair do |attribute, value|
           next if attribute == 'data-proofer-ignore' # TODO: not quite sure why this doesn't work
@@ -17,9 +20,7 @@ module HTML
         @type = self.class.name
 
         if @href && @check.options[:href_swap]
-          @check.options[:href_swap].each do |link, replace|
-            @href = @href.gsub(link, replace)
-          end
+          @href = swap(@href, @check.options[:href_swap])
         end
 
         # fix up missing protocols

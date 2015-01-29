@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'html/proofer/utils'
 
 describe HTML::Utils do
   describe '::create_nokogiri' do
