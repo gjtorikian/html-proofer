@@ -12,7 +12,7 @@ class HTML::Proofer::CheckRunner
     end
 
     def to_s
-      "#{@path}: #{desc}"
+      "#{@path}: #{@desc}#{@line_number}"
     end
   end
 
