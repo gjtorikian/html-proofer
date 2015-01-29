@@ -71,7 +71,7 @@ module HTML
 
       def response_handler(response, filenames)
         effective_url = response.options[:effective_url]
-        href = response.request.base_url
+        href = response.request.base_url.to_s
         method = response.request.options[:method]
         response_code = response.code
         debug_msg = "Received a #{response_code} for #{href}"
@@ -83,7 +83,7 @@ module HTML
         elsif response.timed_out?
           handle_timeout(filenames, response_code)
         elsif method == :head
-          queue_request(:get, effective_url, filenames)
+          queue_request(:get, href, filenames)
         else
           return if @options[:only_4xx] && !response_code.between?(400, 499)
           # Received a non-successful http response.
