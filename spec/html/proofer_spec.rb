@@ -90,6 +90,13 @@ describe HTML::Proofer do
         expect(proofer.failed_tests).to eq []
       end
 
+      it 'knows how to ignore multiple files by regexp' do
+        options = { :file_ignore => [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
+        brokenFolders = "#{FIXTURES_DIR}/links/folder/multiples"
+        proofer = run_proofer(brokenFolders, options)
+        expect(proofer.failed_tests).to eq []
+      end
+
       it 'knows how to ignore a directory by regexp' do
         options = { :file_ignore => [/\S\.html/] }
         linksDir = "#{FIXTURES_DIR}/links"

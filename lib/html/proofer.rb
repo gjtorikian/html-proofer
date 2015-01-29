@@ -144,12 +144,9 @@ module HTML
     end
 
     def ignore_file?(file)
-      @options[:file_ignore].each do |pattern|
-        if pattern.is_a? String
-          return pattern == file
-        elsif pattern.is_a? Regexp
-          return pattern =~ file
-        end
+      options[:file_ignore].each do |pattern|
+        return true if pattern.is_a?(String) && pattern == file
+        return true if pattern.is_a?(Regexp) && pattern =~ file
       end
 
       false
