@@ -136,7 +136,8 @@ module HTML
     end
 
     def ignore_file?(file)
-      while (pattern = @options[:file_ignore].pop)
+      patterns = @options[:file_ignore].dup
+      while (pattern = patterns.pop)
         return pattern == file if pattern.is_a? String
         return pattern =~ file if pattern.is_a? Regexp
       end
