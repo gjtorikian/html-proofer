@@ -6,7 +6,7 @@ def require_all(path)
 end
 
 require_all 'proofer'
-require_all 'proofer/runner'
+require_all 'proofer/check_runner'
 require_all 'proofer/checks'
 
 require 'parallel'
@@ -27,7 +27,7 @@ module HTML
 
       @proofer_opts = {
         :ext => '.html',
-        :validate_favicon => false,
+        :check_favicon => false,
         :href_swap => [],
         :href_ignore => [],
         :file_ignore => [],
@@ -37,8 +37,9 @@ module HTML
         :verbose => false,
         :only_4xx => false,
         :directory_index_file => 'index.html',
-        :validate_html => false,
-        :error_sort => :path
+        :check_html => false,
+        :error_sort => :path,
+        :checks_to_ignore => []
       }
 
       @typhoeus_opts = opts[:typhoeus] || {
@@ -147,10 +148,14 @@ module HTML
     end
 
     def checks
-      checks = HTML::Proofer::Runner.checks.map(&:name)
-      checks.delete('FaviconRunner') unless @options[:validate_favicon]
-      checks.delete('HtmlRunner') unless @options[:validate_html]
-      checks
+      return @checks unless @checks.nil?
+      @checks = HTML::Proofer::CheckRunner.checks.map(&:name)
+      @checks.delete('FaviconCheck') unless @options[:check_favicon]
+      @checks.delete('HtmlCheck') unless @options[:check_html]
+      @options[:checks_to_ignore].each do |ignored|
+        @checks.delete(ignored)
+      end
+      @checks
     end
 
     def failed_tests
@@ -161,7 +166,7 @@ module HTML
     end
 
     def print_failed_tests
-      sorted_failures = HTML::Proofer::Runner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
+      sorted_failures = HTML::Proofer::CheckRunner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
 
       sorted_failures.sort_and_report
       count = @failed_tests.length
