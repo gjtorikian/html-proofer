@@ -1,9 +1,11 @@
 require 'typhoeus'
 require 'uri'
+require_relative './utils'
 
 module HTML
   class Proofer
     class UrlValidator
+      include Utils
 
       attr_accessor :logger, :external_urls, :hydra
 
