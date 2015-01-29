@@ -93,7 +93,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
     else
       target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
-        add_issue("linking to #{link.href}, but #{link.hash} does not exist", l.line)
+        add_issue("linking to #{link.href}, but #{link.hash} does not exist", link.line)
       end
     end
   end

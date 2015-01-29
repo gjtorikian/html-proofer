@@ -6,7 +6,7 @@ describe HTML::Proofer do
     it 'is a list of the formatted errors' do
       brokenLinkInternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkInternal.html"
       proofer = run_proofer(brokenLinkInternalFilepath)
-      expect(proofer.failed_tests).to eq(["spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./notreal.html, which does not exist", "spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./missingImageAlt.html, which does not exist"])
+      expect(proofer.failed_tests).to eq(["spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./notreal.html, which does not exist", "spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./missingImageAlt.html (line 6), which does not exist"])
     end
   end
 
@@ -40,11 +40,11 @@ describe HTML::Proofer do
 
         expect(output.strip).to eq('''
 - spec/html/proofer/fixtures/sorting/path/multiple_issues.html
-  *  image gpl.png does not have an alt attribute
-  *  internal image gpl.png does not exist
-  *  tel: contains no phone number
+  *  image gpl.png does not have an alt attribute (line 7)
+  *  internal image gpl.png does not exist (line 7)
+  *  tel: contains no phone number (line 5)
 - spec/html/proofer/fixtures/sorting/path/single_issue.html
-  *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
+  *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png) (line 1)
       '''.strip)
       end
 
