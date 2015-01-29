@@ -139,6 +139,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
+|`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`

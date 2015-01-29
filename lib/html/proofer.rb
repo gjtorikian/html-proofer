@@ -38,7 +38,8 @@ module HTML
         :only_4xx => false,
         :directory_index_file => 'index.html',
         :validate_html => false,
-        :error_sort => :path
+        :error_sort => :path,
+        :checks_to_ignore => []
       }
 
       @typhoeus_opts = opts[:typhoeus] || {
@@ -147,10 +148,14 @@ module HTML
     end
 
     def checks
-      checks = HTML::Proofer::Runner.checks.map(&:name)
-      checks.delete('FaviconRunner') unless @options[:validate_favicon]
-      checks.delete('HtmlRunner') unless @options[:validate_html]
-      checks
+      return @checks unless @checks.nil?
+      @checks = HTML::Proofer::Runner.checks.map(&:name)
+      @checks.delete('FaviconRunner') unless @options[:validate_favicon]
+      @checks.delete('HtmlRunner') unless @options[:validate_html]
+      @options[:checks_to_ignore].each do |ignored|
+        @checks.delete(ignored)
+      end
+      @checks
     end
 
     def failed_tests

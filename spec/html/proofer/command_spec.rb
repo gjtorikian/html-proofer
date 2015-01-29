@@ -12,6 +12,13 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
+  it 'works with checks_to_ignore' do
+    external = "#{FIXTURES_DIR}/links/file.foo"
+    output = make_bin('--ext .foo --checks-to-ignore LinkRunner', external)
+    expect(output).to match('successfully')
+    expect(output).to_not match('LinkRunner')
+  end
+
   it 'works with check-external-hash' do
     brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
     output = make_bin('--check-external-hash', brokenHashOnTheWeb)
@@ -34,6 +41,7 @@ describe 'Command test' do
     external = "#{FIXTURES_DIR}/links/file.foo"
     output = make_bin('--ext .foo', external)
     expect(output).to match('1 failure')
+    expect(output).to match('LinkRunner')
   end
 
   it 'works with file-ignore' do

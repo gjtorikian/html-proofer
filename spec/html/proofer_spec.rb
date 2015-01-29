@@ -98,4 +98,18 @@ describe HTML::Proofer do
       end
     end
   end
+
+  describe 'ignored checks' do
+    it 'knows how to ignore checks' do
+      options = { :checks_to_ignore => ['ImageRunner'] }
+      proofer = make_proofer('', options)
+      expect(proofer.checks).to eq ['LinkRunner', 'ScriptRunner']
+    end
+
+    it 'does not care about phoney ignored checks' do
+      options = { :checks_to_ignore => ['This is nothing.'] }
+      proofer = make_proofer('', options)
+      expect(proofer.checks).to eq ['ImageRunner', 'LinkRunner', 'ScriptRunner']
+    end
+  end
 end
