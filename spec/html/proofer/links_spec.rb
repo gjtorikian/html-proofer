@@ -333,7 +333,7 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it "passes for urlencoded href" do
+  it 'passes for urlencoded href' do
     fixture = "#{FIXTURES_DIR}/links/urlencoded-href.html"
     proofer = make_proofer(fixture)
     expect(proofer.failed_tests).to eq []
