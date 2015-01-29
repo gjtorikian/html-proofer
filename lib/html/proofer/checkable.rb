@@ -64,7 +64,7 @@ module HTML
       end
 
       def ignore?
-        return true if @data_ignore_proofer
+        return true if @data_proofer_ignore
 
         case @type
         when 'FaviconCheckable'
