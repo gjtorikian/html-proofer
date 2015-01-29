@@ -98,25 +98,25 @@ describe 'Images test' do
 
   it 'works for images with a srcset' do
     srcSetCheck = "#{FIXTURES_DIR}/images/srcSetCheck.html"
-    proofer = make_proofer(srcSetCheck)
+    proofer = run_proofer(srcSetCheck)
     expect(proofer.failed_tests).to eq []
   end
 
   it 'fails for images with a srcset but missing alt' do
     srcSetMissingAlt = "#{FIXTURES_DIR}/images/srcSetMissingAlt.html"
-    proofer = make_proofer(srcSetMissingAlt)
+    proofer = run_proofer(srcSetMissingAlt)
     expect(proofer.failed_tests.first).to match(/image gpl.png does not have an alt attribute/)
   end
 
   it 'fails for images with an alt but missing src or srcset' do
     srcSetMissingAlt = "#{FIXTURES_DIR}/images/srcSetMissingImage.html"
-    proofer = make_proofer(srcSetMissingAlt)
+    proofer = run_proofer(srcSetMissingAlt)
     expect(proofer.failed_tests.first).to match(/internal image notreal.png does not exist/)
   end
 
   it 'properly ignores missing alt tags when asked for srcset' do
     ignorableLinks = "#{FIXTURES_DIR}/images/srcSetIgnorable.html"
-    proofer = make_proofer(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]})
+    proofer = run_proofer(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]})
     expect(proofer.failed_tests).to eq []
   end
 end
