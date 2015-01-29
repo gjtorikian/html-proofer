@@ -349,4 +349,10 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests.first).to match(/post.htm\?id=63009224 failed: 404 No error/)
   end
+
+  it 'does not complain for files with attributes containing dashes' do
+    fixture = "#{FIXTURES_DIR}/links/attributeWithDash.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.failed_tests).to eq []
+  end
 end
