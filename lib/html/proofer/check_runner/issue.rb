@@ -52,7 +52,7 @@ class HTML::Proofer::CheckRunner
           matcher = issue.send(first_report)
         end
         if first_report == :status
-          @logger.log :error, :red, "  *  #{issue}#{issue.line_number}"
+          @logger.log :error, :red, "  *  #{issue}"
         else
           @logger.log :error, :red, "  *  #{issue.send(second_report)}#{issue.line_number}"
         end
