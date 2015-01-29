@@ -2,11 +2,12 @@
 class HTML::Proofer::CheckRunner
 
   class Issue
-    attr_reader :path, :desc, :status
+    attr_reader :path, :desc, :status, :line_number
 
-    def initialize(path, desc, status = -1)
+    def initialize(path, desc, line_number = nil, status = -1)
+      @line_number = " (line #{line_number || 'not given'})"
       @path = path
-      @desc = desc
+      @desc = desc << @line_number
       @status = status
     end
 

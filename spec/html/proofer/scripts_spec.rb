@@ -17,7 +17,7 @@ describe 'Scripts test' do
   it 'fails for missing internal src' do
     file = "#{FIXTURES_DIR}/scripts/script_missing_internal.html"
     proofer = run_proofer(file)
-    expect(proofer.failed_tests.first).to match(/doesnotexist.js does not exist/)
+    expect(proofer.failed_tests.first).to match(/doesnotexist.js does not exist \(line 5\)/)
   end
 
   it 'works for present content' do

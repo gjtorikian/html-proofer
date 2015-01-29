@@ -30,21 +30,21 @@ class ImageCheck < ::HTML::Proofer::CheckRunner
       next if img.ignore?
 
       # screenshot filenames should return because of terrible names
-      next add_issue "image has a terrible filename (#{img.src})" if img.terrible_filename?
+      next add_issue("image has a terrible filename (#{img.src})", i.line) if img.terrible_filename?
 
       # does the image exist?
       if img.missing_src?
-        add_issue 'image has no src or srcset attribute'
+        add_issue 'image has no src or srcset attribute', i.line
       else
         if img.remote?
           add_to_external_urls img.src
         else
-          add_issue("internal image #{img.src} does not exist") unless img.exists?
+          add_issue("internal image #{img.src} does not exist", i.line) unless img.exists?
         end
       end
 
       # check alt tag
-      add_issue "image #{img.src} does not have an alt attribute" unless img.valid_alt_tag?
+      add_issue("image #{img.src} does not have an alt attribute", i.line) unless img.valid_alt_tag?
     end
 
     external_urls

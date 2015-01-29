@@ -36,22 +36,22 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # is it even a valid URL?
       unless link.valid?
-        add_issue "#{link.href} is an invalid URL"
+        add_issue("#{link.href} is an invalid URL", l.line)
         next
       end
 
       if link.scheme == 'mailto'
-        add_issue "#{link.href} contains no email address" if link.path.empty?
-        add_issue "#{link.href} contain an invalid email address" unless link.path.include?('@')
+        add_issue("#{link.href} contains no email address", l.line) if link.path.empty?
+        add_issue("#{link.href} contain an invalid email address", l.line) unless link.path.include?('@')
       end
 
       if link.scheme == 'tel'
-        add_issue "#{link.href} contains no phone number" if link.path.empty?
+        add_issue("#{link.href} contains no phone number", l.line) if link.path.empty?
       end
 
       # is there even a href?
       if link.missing_href?
-        add_issue('anchor has no href attribute')
+        add_issue('anchor has no href attribute', l.line)
         next
       end
 
@@ -63,12 +63,12 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
         add_to_external_urls link.href
         next
       elsif !link.internal?
-        add_issue "internally linking to #{link.href}, which does not exist" unless link.exists?
+        add_issue("internally linking to #{link.href}, which does not exist", l.line) unless link.exists?
       end
 
       # does the local directory have a trailing slash?
       if link.unslashed_directory? link.absolute_path
-        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash")
+        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", l.line)
         next
       end
 
@@ -76,7 +76,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
       if link.hash
         if link.internal?
           unless hash_check @html, link.hash
-            add_issue "linking to internal hash ##{link.hash} that does not exist"
+            add_issue("linking to internal hash ##{link.hash} that does not exist", l.line)
           end
         elsif link.external?
           external_link_check(link)
@@ -89,11 +89,11 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
   def external_link_check(link)
     if !link.exists?
-      add_issue "trying to find hash of #{link.href}, but #{link.absolute_path} does not exist"
+      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", l.line)
     else
       target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
-        add_issue "linking to #{link.href}, but #{link.hash} does not exist"
+        add_issue("linking to #{link.href}, but #{link.hash} does not exist", l.line)
       end
     end
   end
