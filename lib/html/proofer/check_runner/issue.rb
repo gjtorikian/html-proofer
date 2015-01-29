@@ -5,9 +5,9 @@ class HTML::Proofer::CheckRunner
     attr_reader :path, :desc, :status, :line_number
 
     def initialize(path, desc, line_number = nil, status = -1)
-      @line_number = " (line #{line_number || 'not given'})"
+      @line_number = line_number.nil? ? '' : " (line #{line_number})"
       @path = path
-      @desc = desc << @line_number
+      @desc = desc
       @status = status
     end
 
@@ -52,9 +52,9 @@ class HTML::Proofer::CheckRunner
           matcher = issue.send(first_report)
         end
         if first_report == :status
-          @logger.log :error, :red, "  *  #{issue}"
+          @logger.log :error, :red, "  *  #{issue}#{issue.line_number}"
         else
-          @logger.log :error, :red, "  *  #{issue.send(second_report)}"
+          @logger.log :error, :red, "  *  #{issue.send(second_report)}#{issue.line_number}"
         end
       end
     end

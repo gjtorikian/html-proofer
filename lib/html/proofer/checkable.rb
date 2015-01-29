@@ -6,6 +6,7 @@ module HTML
     # Represents the superclass from which all checks derive.
     class Checkable
       include HTML::Utils
+      attr_reader :line
 
       def initialize(obj, check)
         obj.attributes.each_pair do |attribute, value|

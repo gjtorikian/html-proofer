@@ -52,13 +52,13 @@ describe HTML::Proofer do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/issue", :error_sort => :desc)
         expect(output.strip).to eq('''
 - image ./gpl.png does not have an alt attribute
-  *  spec/html/proofer/fixtures/sorting/issue/broken_image_one.html
-  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html
+  *  spec/html/proofer/fixtures/sorting/issue/broken_image_one.html (line 1)
+  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html (line 1)
 - internal image ./gpl.png does not exist
-  *  spec/html/proofer/fixtures/sorting/issue/broken_image_one.html
-  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html
+  *  spec/html/proofer/fixtures/sorting/issue/broken_image_one.html (line 1)
+  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html (line 1)
 - internal image NOT_AN_IMAGE does not exist
-  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html
+  *  spec/html/proofer/fixtures/sorting/issue/broken_image_two.html (line 4)
       '''.strip)
       end
 
@@ -67,7 +67,7 @@ describe HTML::Proofer do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :typhoeus => { :followlocation => false }, :error_sort => :status)
         expect(output.strip).to eq('''
 - -1
-  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof (line 3), which does not exist
+  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist (line 3)
 - 404
   *  spec/html/proofer/fixtures/sorting/status/a_404.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 404 No error
   *  spec/html/proofer/fixtures/sorting/status/broken_link.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 404 No error
