@@ -343,4 +343,10 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'reports failures for the original link, not the redirection' do
+    fixture = "#{FIXTURES_DIR}/links/redirected_error.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.failed_tests.first).to match(/post.htm\?id=63009224 failed: 404 No error/)
+  end
 end
