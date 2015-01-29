@@ -5,7 +5,7 @@ describe HTML::Proofer do
   describe '#failed_tests' do
     it 'is a list of the formatted errors' do
       brokenLinkInternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkInternal.html"
-      proofer = make_proofer(brokenLinkInternalFilepath)
+      proofer = run_proofer(brokenLinkInternalFilepath)
       expect(proofer.failed_tests).to eq(["spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./notreal.html, which does not exist", "spec/html/proofer/fixtures/links/brokenLinkInternal.html: internally linking to ./missingImageAlt.html, which does not exist"])
     end
   end
@@ -79,21 +79,21 @@ describe HTML::Proofer do
       it 'knows how to ignore a file by string' do
         options = { :file_ignore => ["#{FIXTURES_DIR}/links/brokenHashInternal.html"] }
         brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
-        proofer = make_proofer(brokenHashInternalFilepath, options)
+        proofer = run_proofer(brokenHashInternalFilepath, options)
         expect(proofer.failed_tests).to eq []
       end
 
       it 'knows how to ignore a file by regexp' do
         options = { :file_ignore => [/brokenHash/] }
         brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
-        proofer = make_proofer(brokenHashInternalFilepath, options)
+        proofer = run_proofer(brokenHashInternalFilepath, options)
         expect(proofer.failed_tests).to eq []
       end
 
       it 'knows how to ignore a directory by regexp' do
         options = { :file_ignore => [/\S\.html/] }
         linksDir = "#{FIXTURES_DIR}/links"
-        proofer = make_proofer(linksDir, options)
+        proofer = run_proofer(linksDir, options)
         expect(proofer.failed_tests).to eq []
       end
     end
