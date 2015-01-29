@@ -18,6 +18,7 @@ module HTML
         @check = check
         @checked_paths = {}
         @type = self.class.name
+        @line = obj.line
 
         if @href && @check.options[:href_swap]
           @href = swap(@href, @check.options[:href_swap])
