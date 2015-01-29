@@ -34,7 +34,7 @@ describe 'Images test' do
   it 'fails for image with no src' do
     imageSrcFilepath = "#{FIXTURES_DIR}/images/missingImageSrc.html"
     proofer = make_proofer(imageSrcFilepath)
-    expect(proofer.failed_tests.first).to match(/image has no src attribute/)
+    expect(proofer.failed_tests.first).to match(/image has no src or srcset attribute/)
   end
 
   it 'fails for image with default mac filename' do
@@ -94,5 +94,29 @@ describe 'Images test' do
     proofer = make_proofer(ignorableLinks, {:alt_ignore => [/.*/]})
     expect(proofer.failed_tests.first).to match(/Couldn't resolve host name/)
     expect(proofer.failed_tests.first).to_not match /does not have an alt attribute/
+  end
+
+  it 'works for images with a srcset' do
+    srcSetCheck = "#{FIXTURES_DIR}/images/srcSetCheck.html"
+    proofer = make_proofer(srcSetCheck)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'fails for images with a srcset but missing alt' do
+    srcSetMissingAlt = "#{FIXTURES_DIR}/images/srcSetMissingAlt.html"
+    proofer = make_proofer(srcSetMissingAlt)
+    expect(proofer.failed_tests.first).to match(/image gpl.png does not have an alt attribute/)
+  end
+
+  it 'fails for images with an alt but missing src or srcset' do
+    srcSetMissingAlt = "#{FIXTURES_DIR}/images/srcSetMissingImage.html"
+    proofer = make_proofer(srcSetMissingAlt)
+    expect(proofer.failed_tests.first).to match(/internal image notreal.png does not exist/)
+  end
+
+  it 'properly ignores missing alt tags when asked for srcset' do
+    ignorableLinks = "#{FIXTURES_DIR}/images/srcSetIgnorable.html"
+    proofer = make_proofer(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]})
+    expect(proofer.failed_tests).to eq []
   end
 end
