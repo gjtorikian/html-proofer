@@ -89,7 +89,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
   def external_link_check(link)
     if !link.exists?
-      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", l.line)
+      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", link.line)
     else
       target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
