@@ -111,7 +111,7 @@ module HTML
         add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
       end
 
-      def handle_timeout
+      def handle_timeout(filenames, response_code)
         return if @options[:only_4xx]
         add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
       end
