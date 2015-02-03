@@ -1,4 +1,5 @@
 require 'addressable/uri'
+require 'cgi'
 require_relative './utils'
 
 module HTML
