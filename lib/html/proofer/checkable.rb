@@ -1,5 +1,4 @@
 require 'addressable/uri'
-require 'cgi'
 require_relative './utils'
 
 module HTML
@@ -44,7 +43,7 @@ module HTML
       end
 
       def path
-        CGI.unescape parts.path unless parts.nil?
+        Addressable::URI.unencode parts.path unless parts.nil?
       end
 
       def hash
