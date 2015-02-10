@@ -227,7 +227,7 @@ class MailToOctocat < ::HTML::Proofer::CheckRunner
 
   def run
     @html.css('a').each do |l|
-      link = OctocatLinkCheck.new l, "octocat_link", self
+      link = OctocatLinkCheck.new l, self
 
       if link.mailto? && link.octocat?
         return add_issue("Don't email the Octocat directly!")
