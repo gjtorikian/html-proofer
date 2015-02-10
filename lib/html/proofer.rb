@@ -21,7 +21,7 @@ module HTML
   class Proofer
     include Utils
 
-    attr_reader :options, :typhoeus_opts, :parallel_opts
+    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts
 
     def initialize(src, opts = {})
       @src = src
@@ -117,7 +117,7 @@ module HTML
 
         checks.each do |klass|
           logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(@src, path, html, @options)
+          check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts)
           check.run
           result[:external_urls].merge!(check.external_urls)
           result[:failed_tests].concat(check.issues) if check.issues.length > 0

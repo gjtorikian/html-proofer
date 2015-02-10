@@ -5,13 +5,17 @@ module HTML
     # Mostly handles issue management and collecting of external URLs.
     class CheckRunner
 
-      attr_reader :issues, :src, :path, :options, :external_urls, :href_ignores, :alt_ignores
+      attr_reader :issues, :src, :path, :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
+                  :external_urls, :href_ignores, :alt_ignores
 
-      def initialize(src, path, html, opts={})
+      def initialize(src, path, html, options, typhoeus_opts, hydra_opts, parallel_opts)
         @src    = src
         @path   = path
         @html   = remove_ignored(html)
-        @options = opts
+        @options = options
+        @typhoeus_opts = typhoeus_opts
+        @hydra_opts = hydra_opts
+        @parallel_opts = parallel_opts
         @issues = []
         @href_ignores = @options[:href_ignore]
         @alt_ignores = @options[:alt_ignore]

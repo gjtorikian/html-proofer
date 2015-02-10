@@ -138,7 +138,7 @@ module HTML
       end
 
       def follow_location?
-        @check.options[:typhoeus] && @check.options[:typhoeus][:followlocation]
+        @check.typhoeus_opts && @check.typhoeus_opts[:followlocation]
       end
 
       private
