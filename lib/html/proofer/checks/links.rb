@@ -40,12 +40,14 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
         next
       end
 
-      if link.scheme == 'mailto'
-        add_issue("#{link.href} contains no email address", l.line) if link.path.empty?
-        add_issue("#{link.href} contain an invalid email address", l.line) unless link.path.include?('@')
-      end
-
-      if link.scheme == 'tel'
+      case link.scheme
+      when 'mailto'
+        if link.path.empty?
+          add_issue("#{link.href} contains no email address", l.line)
+        elsif !link.path.include?('@')
+          add_issue("#{link.href} contains an invalid email address", l.line)
+        end
+      when 'tel'
         add_issue("#{link.href} contains no phone number", l.line) if link.path.empty?
       end
 
