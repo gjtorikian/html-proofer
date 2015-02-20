@@ -156,4 +156,10 @@ describe 'Images test' do
     proofer = run_proofer(ignorableLinks, {:alt_ignore => [/wikimedia/, "gpl.png"]})
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'translates src via href_swap' do
+    translatedSrc = "#{FIXTURES_DIR}/images/replaceAbsUrlSrc.html"
+    proofer = run_proofer(translatedSrc, { :href_swap => { %r{^http://baseurl.com} => "" } })
+    expect(proofer.failed_tests).to eq []
+  end
 end
