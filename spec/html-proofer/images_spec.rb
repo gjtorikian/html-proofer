@@ -159,7 +159,7 @@ describe 'Images test' do
 
   it 'translates src via href_swap' do
     translatedSrc = "#{FIXTURES_DIR}/images/replaceAbsUrlSrc.html"
-    proofer = run_proofer(translatedSrc, { :href_swap => { %r{^http://baseurl.com} => "" } })
+    proofer = run_proofer(translatedSrc, { :href_swap => { %r{^http://example.com} => "" } })
     expect(proofer.failed_tests).to eq []
   end
 end
