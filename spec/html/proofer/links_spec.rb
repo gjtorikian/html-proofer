@@ -166,6 +166,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/mailto: contains no email address/)
   end
 
+  it 'fails for invalid mailto links' do
+    invalidMailToLink = "#{FIXTURES_DIR}/links/invalid_mailto_link.html"
+    proofer = run_proofer(invalidMailToLink)
+    expect(proofer.failed_tests.first).to match(/mailto:octocat contains an invalid email address/)
+  end
+
   it 'ignores valid tel links' do
     ignorableLinks = "#{FIXTURES_DIR}/links/tel_link.html"
     proofer = run_proofer(ignorableLinks)
