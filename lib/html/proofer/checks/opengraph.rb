@@ -10,6 +10,9 @@ class OpengraphCheckable < ::HTML::Proofer::Checkable
     !src
   end
 
+  def url
+    src
+  end
 end
 
 class OpengraphCheck < ::HTML::Proofer::CheckRunner
