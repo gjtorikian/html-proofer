@@ -13,7 +13,7 @@ module HTML
           instance_variable_set("@#{attribute.tr('-', '_')}".to_sym, value.value)
         end
 
-        @content = obj.content
+        @text = obj.content
         @check = check
         @checked_paths = {}
         @type = self.class.name
