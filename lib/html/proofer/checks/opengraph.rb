@@ -17,7 +17,7 @@ end
 
 class OpengraphCheck < ::HTML::Proofer::CheckRunner
   def run
-    @html.css('meta[property="og:url"]').each do |m|
+    @html.css('meta[property="og:url"], meta[property="og:image"]').each do |m|
       opengraph = OpengraphCheckable.new m, self
 
       next if opengraph.ignore?
