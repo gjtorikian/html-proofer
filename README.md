@@ -149,6 +149,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
+| `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
