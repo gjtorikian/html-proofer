@@ -28,7 +28,11 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
   def run
     @html.css('a, link').each do |l|
-      link = LinkCheckable.new l, self
+      begin
+        link = LinkCheckable.new l, self
+      rescue NameError => e
+        next add_issue(e, l.line)
+      end
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse

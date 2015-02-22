@@ -119,4 +119,12 @@ describe HTML::Proofer do
       expect(proofer.checks.length).to eq 3
     end
   end
+
+  describe 'failed ivar attributes' do
+    it 'provides some actual help' do
+      brokenAttribute = "#{FIXTURES_DIR}/utils/broken_attribute.html"
+      proofer = run_proofer(brokenAttribute)
+      expect(proofer.failed_tests.first).to match(/@xmlns:cc' is not allowed as an instance variable name \(line 4\)/)
+    end
+  end
 end

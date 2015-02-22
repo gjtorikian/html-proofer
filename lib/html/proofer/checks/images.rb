@@ -25,7 +25,11 @@ end
 class ImageCheck < ::HTML::Proofer::CheckRunner
   def run
     @html.css('img').each do |i|
-      img = ImageCheckable.new i, self
+      begin
+        img = ImageCheckable.new i, self
+      rescue NameError => e
+        next add_issue(e, i.line)
+      end
 
       next if img.ignore?
 
