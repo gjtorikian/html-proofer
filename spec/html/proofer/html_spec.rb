@@ -13,12 +13,6 @@ describe 'Html test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it "doesn't fail for svg elements" do
-    html = "#{FIXTURES_DIR}/html/svg_elements.html"
-    proofer = run_proofer(html, { :check_html => true })
-    expect(proofer.failed_tests).to eq []
-  end
-
   it 'fails for an invalid tag' do
     html = "#{FIXTURES_DIR}/html/invalid_tag.html"
     proofer = run_proofer(html, { :check_html => true })
