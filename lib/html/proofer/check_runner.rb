@@ -52,7 +52,7 @@ module HTML
     private
 
       def remove_ignored(html)
-        html.css('code, pre').each(&:unlink)
+        html.css('code, pre, svg').each(&:unlink)
         html
       end
     end
