@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require_relative './utils'
-
 module HTML
   class Proofer
     # Mostly handles issue management and collecting of external URLs.
@@ -55,11 +53,7 @@ module HTML
 
       def remove_ignored(html)
         html.css('code, pre, svg').each(&:unlink)
-        # We have to create a new document here otherwise we would still
-        # see errors because they get generated immediately after document
-        # is loaded so we have to re-validate the document after removing
-        # ignored tags.
-        HTML::Utils.create_nokogiri(html.to_s)
+        html
       end
     end
   end
