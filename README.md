@@ -104,7 +104,7 @@ You'll get a new program called `htmlproof` with this gem. Terrific!
 Use it like you'd expect to:
 
 ``` bash
-htmlproof ./out --swap wow:cow,mow:doh --ext .html.erb --ignore www.github.com
+htmlproof ./out --swap wow:cow,mow:doh --ext .html.erb --href-ignore www.github.com
 ```
 
 Note: since `swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
