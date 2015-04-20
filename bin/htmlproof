@@ -56,7 +56,7 @@ Mercenary.program(:htmlproof) do |p|
     unless opts['href_swap'].nil?
       options[:href_swap] = {}
       opts['href_swap'].each do |s|
-        pair = s.split(':')
+        pair = s.split(':', 2)
         options[:href_swap][Regexp.new(pair[0])] = pair[1]
       end
     end
