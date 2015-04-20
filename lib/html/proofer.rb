@@ -23,6 +23,13 @@ module HTML
 
     attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts
 
+    TYPHOEUS_DEFAULTS = {
+      :followlocation => true,
+      :headers => {
+        "User-Agent" => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
+      }
+    }
+
     def initialize(src, opts = {})
       @src = src
 
@@ -43,12 +50,7 @@ module HTML
         :checks_to_ignore => []
       }
 
-      @typhoeus_opts = opts[:typhoeus] || {
-        :followlocation => true,
-        :headers => {
-          "User-Agent" => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
-        }
-      }
+      @typhoeus_opts = TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
       opts.delete(:typhoeus)
 
       @hydra_opts = opts[:hydra] || {}
