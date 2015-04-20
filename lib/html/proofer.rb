@@ -44,7 +44,10 @@ module HTML
       }
 
       @typhoeus_opts = opts[:typhoeus] || {
-        :followlocation => true
+        :followlocation => true,
+        :headers => {
+          "User-Agent" => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
+        }
       }
       opts.delete(:typhoeus)
 
