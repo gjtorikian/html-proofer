@@ -19,6 +19,19 @@ describe 'Images test' do
     expect(proofer.failed_tests.first).to match(/gpl.png does not have an alt attribute/)
   end
 
+  it 'fails for image with nothing but spaces in alt attribute' do
+    emptyAltFilepath = "#{FIXTURES_DIR}/images/emptyImageAltText.html"
+    proofer = run_proofer(emptyAltFilepath)
+    expect(proofer.failed_tests.first).to match(/gpl.png does not have an alt attribute/)
+    expect(proofer.failed_tests.length).to equal(2)
+  end
+
+  it 'passes when ignoring image with nothing but spaces in alt attribute' do
+    emptyAltFilepath = "#{FIXTURES_DIR}/images/emptyImageAltText.html"
+    proofer = run_proofer(emptyAltFilepath, {:alt_ignore => [/.+/]})
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'fails for missing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/missingImageExternal.html"
     proofer = run_proofer(externalImageFilepath)
