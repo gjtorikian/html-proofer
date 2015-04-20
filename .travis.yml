@@ -10,3 +10,6 @@ env:
 addons:
   code_climate:
     repo_token:
+
+sudo: false
+cache: bundler
