@@ -79,4 +79,10 @@ describe 'Command test' do
     output = make_bin('--check-html', broken)
     expect(output).to match('1 failure')
   end
+
+  it 'works with empty-alt-ignore' do
+    broken = "#{FIXTURES_DIR}/html/emptyImageAltText.html"
+    output = make_bin('--empty-alt-ignore', broken)
+    expect(output).to match('successfully')
+  end
 end
