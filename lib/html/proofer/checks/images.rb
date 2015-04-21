@@ -5,7 +5,11 @@ class ImageCheckable < ::HTML::Proofer::Checkable
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
   def valid_alt_tag?
-    @alt && !@alt.strip.empty?
+    @alt && !empty_alt_tag?
+  end
+
+  def empty_alt_tag?
+    @alt.strip.empty?
   end
 
   def terrible_filename?
