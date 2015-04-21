@@ -4,8 +4,12 @@ class ImageCheckable < ::HTML::Proofer::Checkable
 
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
-  def valid_alt_tag?
-    @alt && !@alt.empty?
+  def has_alt_tag?
+    @alt
+  end
+
+  def empty_alt_tag?
+    @alt.empty?
   end
 
   def terrible_filename?
@@ -44,7 +48,9 @@ class ImageCheck < ::HTML::Proofer::CheckRunner
       end
 
       # check alt tag
-      add_issue("image #{img.src} does not have an alt attribute", i.line) unless img.valid_alt_tag?
+      if !img.has_alt_tag? || (img.empty_alt_tag? && !img.alt_empty_ignore?)
+        add_issue("image #{img.src} does not have an alt attribute", i.line)
+      end
     end
 
     external_urls

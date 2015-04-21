@@ -41,6 +41,7 @@ module HTML
         :file_ignore => [],
         :check_external_hash => false,
         :alt_ignore => [],
+        :alt_empty_ignore => false,
         :disable_external => false,
         :verbose => false,
         :only_4xx => false,
