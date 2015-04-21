@@ -77,8 +77,8 @@ module HTML
         end
       end
 
-      def alt_empty_ignore?
-        return true if @check.alt_empty_ignore
+      def empty_alt_ignore?
+        return true if @check.empty_alt_ignore
       end
 
       # path is external to the file

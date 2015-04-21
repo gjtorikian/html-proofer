@@ -6,7 +6,7 @@ module HTML
     class CheckRunner
 
       attr_reader :issues, :src, :path, :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
-                  :external_urls, :href_ignores, :alt_ignores, :alt_empty_ignore
+                  :external_urls, :href_ignores, :alt_ignores, :empty_alt_ignore
 
       def initialize(src, path, html, options, typhoeus_opts, hydra_opts, parallel_opts)
         @src    = src
@@ -19,7 +19,7 @@ module HTML
         @issues = []
         @href_ignores = @options[:href_ignore]
         @alt_ignores = @options[:alt_ignore]
-        @alt_empty_ignore = @options[:alt_empty_ignore]
+        @empty_alt_ignore = @options[:empty_alt_ignore]
         @external_urls = {}
       end
 
