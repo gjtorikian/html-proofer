@@ -77,6 +77,10 @@ module HTML
         end
       end
 
+      def ignore_empty_alt?
+        @check.empty_alt_ignore
+      end
+
       # path is external to the file
       def external?
         !internal?
