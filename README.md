@@ -237,3 +237,17 @@ class MailToOctocat < ::HTML::Proofer::CheckRunner
   end
 end
 ```
+
+## Troubleshooting
+
+### Certificates
+
+To ignore certificates turn off the Typhoeus SSL verification:
+
+``` ruby
+HTML::Proofer.new("out/", {
+  :typhoeus => {
+    :ssl_verifypeer => false,
+    :ssl_verifyhost => 0}
+})
+```
