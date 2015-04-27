@@ -249,5 +249,5 @@ HTML::Proofer.new("out/", {
   :typhoeus => {
     :ssl_verifypeer => false,
     :ssl_verifyhost => 0}
-})
+}).run
 ```
