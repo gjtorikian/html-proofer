@@ -38,4 +38,10 @@ describe 'Scripts test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'ignores links via href_ignore' do
+    ignorableLinks = "#{FIXTURES_DIR}/scripts/ignorableLinksViaOptions.html"
+    proofer = run_proofer(ignorableLinks, { :href_ignore => [/\/assets\/.*(js|css|png|svg)/] })
+    expect(proofer.failed_tests).to eq []
+  end
+
 end
