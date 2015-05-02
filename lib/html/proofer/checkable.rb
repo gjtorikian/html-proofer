@@ -72,14 +72,17 @@ module HTML
         end
 
         # ignore user defined URLs
-        return true if ignores_pattern_check(@check.href_ignores)
+        return true if ignores_pattern_check(@check.url_ignores)
+
+        # ignore user defined hrefs
+        if 'LinkCheckable' === @type
+          return true if ignores_pattern_check(@check.href_ignores)
+        end
 
         # ignore user defined alts
         if 'ImageCheckable' === @type
           return true if ignores_pattern_check(@check.alt_ignores)
         end
-
-        false
       end
 
       def ignore_empty_alt?
@@ -131,6 +134,8 @@ module HTML
       end
 
       def ignores_pattern_check(links)
+        return false if links.nil?
+
         links.each do |ignore|
           if ignore.is_a? String
             return true if ignore == url
