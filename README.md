@@ -251,3 +251,14 @@ HTML::Proofer.new("out/", {
     :ssl_verifyhost => 0}
 }).run
 ```
+
+### User-Agent
+
+To change the User-Agent used by Typhoeus:
+
+``` ruby
+HTML::Proofer.new("out/", {
+  :typhoeus => {
+    :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent" }
+}).run
+```
