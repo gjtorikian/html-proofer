@@ -22,7 +22,11 @@ module HTML
         if @href && @check.options[:href_swap]
           @href = swap(@href, @check.options[:href_swap])
         end
-
+        
+        if @src && @check.options[:href_swap]
+          @src = swap(@src, @check.options[:href_swap])
+        end
+        
         # fix up missing protocols
         @href.insert 0, 'http:' if @href =~ %r{^//}
         @src.insert 0, 'http:' if @src =~ %r{^//}
