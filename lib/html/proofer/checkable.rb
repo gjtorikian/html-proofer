@@ -134,8 +134,6 @@ module HTML
       end
 
       def ignores_pattern_check(links)
-        return false if links.nil?
-
         links.each do |ignore|
           if ignore.is_a? String
             return true if ignore == url
