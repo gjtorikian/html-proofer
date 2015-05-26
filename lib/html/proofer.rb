@@ -39,6 +39,7 @@ module HTML
         :href_swap => [],
         :href_ignore => [],
         :file_ignore => [],
+        :url_ignore => [],
         :check_external_hash => false,
         :alt_ignore => [],
         :empty_alt_ignore => false,

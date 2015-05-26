@@ -66,13 +66,21 @@ module HTML
       def ignore?
         return true if @data_proofer_ignore
 
-        case @type
-        when 'FaviconCheckable'
+        # ignore base64 encoded images
+        if %w(ImageCheckable FaviconCheckable).include? @type
           return true if url.match(/^data:image/)
-        when 'LinkCheckable'
+        end
+
+        # ignore user defined URLs
+        return true if ignores_pattern_check(@check.url_ignores)
+
+        # ignore user defined hrefs
+        if 'LinkCheckable' === @type
           return true if ignores_pattern_check(@check.href_ignores)
-        when 'ImageCheckable'
-          return true if url.match(/^data:image/)
+        end
+
+        # ignore user defined alts
+        if 'ImageCheckable' === @type
           return true if ignores_pattern_check(@check.alt_ignores)
         end
       end
