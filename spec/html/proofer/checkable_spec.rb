@@ -37,4 +37,11 @@ describe HTML::Proofer::Checkable do
       expect(checkable.url).to eq 'image.png'
     end
   end
+  describe '#ignore' do
+    it 'works for twitter cards' do
+      nokogiri = Nokogiri::HTML '<meta name="twitter:url" data-proofer-ignore content="http://example.com/soon-to-be-published-url">'
+      checkable = HTML::Proofer::Checkable.new nokogiri.css('meta').first, nil
+      expect(checkable.ignore?).to eq true
+    end
+  end
 end
