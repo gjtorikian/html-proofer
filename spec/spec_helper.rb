@@ -1,6 +1,3 @@
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 require 'bundler/setup'
 require_relative "../lib/html/proofer"
 
