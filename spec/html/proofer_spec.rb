@@ -68,9 +68,9 @@ describe HTML::Proofer do
         expect(output.strip).to eq('''
 - -1
   *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist (line 3)
-- 404
-  *  spec/html/proofer/fixtures/sorting/status/a_404.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 404 No error
-  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 404 No error
+- 301
+  *  spec/html/proofer/fixtures/sorting/status/a_404.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 301 No error
+  *  spec/html/proofer/fixtures/sorting/status/broken_link.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 301 No error
     '''.strip)
       end
     end
