@@ -1,7 +1,8 @@
 require 'bundler/setup'
-require_relative "../lib/html/proofer"
+require 'vcr'
+require_relative '../lib/html/proofer'
 
-FIXTURES_DIR = "spec/html/proofer/fixtures"
+FIXTURES_DIR = 'spec/html/proofer/fixtures'
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -37,16 +38,37 @@ def make_proofer(file, opts)
 end
 
 def run_proofer(file, opts = {})
+  cassette_name = make_cassette_name(file, opts)
   proofer = make_proofer(file, opts)
-  capture_stderr { proofer.run }
-  proofer
+  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+    capture_stderr { proofer.run }
+    proofer
+  end
 end
 
 def send_proofer_output(file, opts = {})
+  cassette_name = make_cassette_name(file, opts)
   proofer = make_proofer(file, opts)
-  capture_stderr { proofer.run }
+  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+    capture_stderr { proofer.run }
+  end
 end
 
 def make_bin(cmd, path=nil)
   `bin/htmlproof #{cmd} #{path}`
+end
+
+def make_cassette_name(file, opts)
+  filename = if file.is_a? Array
+               file.join('_')
+             else
+               file.split('/')[-2..-1].join('/')
+             end
+  (filename += opts.inspect) unless opts.empty?
+  filename
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "#{FIXTURES_DIR}/vcr_cassettes"
+  config.hook_into :typhoeus
 end
