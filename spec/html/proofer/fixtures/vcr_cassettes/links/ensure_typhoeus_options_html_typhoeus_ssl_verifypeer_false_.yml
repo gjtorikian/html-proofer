@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://blog.patternsinthevoid.net/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Set-Cookie:
+      - TRACKID=cdfbe67e17b35ca53b2cd0adef854ba1; Path=/; Version=1
+      Content-Type:
+      - text/html; charset=utf-8
+      Accept-Ranges:
+      - bytes
+      ETag:
+      - '"2287405067"'
+      Last-Modified:
+      - Fri, 19 Jun 2015 22:27:15 GMT
+      Content-Length:
+      - '33026'
+      Date:
+      - Mon, 06 Jul 2015 05:08:05 GMT
+      Server:
+      - fuck your bits
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://blog.patternsinthevoid.net/
+  recorded_at: Mon, 06 Jul 2015 05:08:05 GMT
+recorded_with: VCR 2.9.3

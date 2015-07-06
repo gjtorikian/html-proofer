@@ -1,0 +1,113 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sat, 04 Jul 2015 14:06:15 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 06 Jul 2015 05:09:34 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Length:
+      - '13402'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:53 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '498'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lax1432-LAX
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1436159273.015263,VS0,VE0
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Mon, 06 Jul 2015 05:07:53 GMT
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/10/08/why-government-contractors-should-%3C3-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sat, 04 Jul 2015 14:06:15 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 06 Jul 2015 05:17:53 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Length:
+      - '20411'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:53 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lax1434-LAX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1436159273.015548,VS0,VE135
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/10/08/why-government-contractors-should-%3C3-open-source/
+  recorded_at: Mon, 06 Jul 2015 05:07:53 GMT
+recorded_with: VCR 2.9.3

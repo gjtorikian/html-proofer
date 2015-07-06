@@ -1,0 +1,244 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: TLS Redirect
+    headers:
+      Server:
+      - Varnish
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+      Content-Length:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:30 GMT
+      X-Varnish:
+      - '1435679284'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Cache:
+      - cp1099 frontend miss (0)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Mon, 06 Jul 2015 05:07:30 GMT
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: TLS Redirect
+    headers:
+      Server:
+      - Varnish
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+      Content-Length:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:30 GMT
+      X-Varnish:
+      - '3079602659'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Cache:
+      - cp1073 frontend miss (0)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Mon, 06 Jul 2015 05:07:30 GMT
+- request:
+    method: get
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: TLS Redirect
+    headers:
+      Server:
+      - Varnish
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+      Content-Length:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:30 GMT
+      X-Varnish:
+      - '2488600998'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Cache:
+      - cp1049 frontend miss (0)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Mon, 06 Jul 2015 05:07:30 GMT
+- request:
+    method: head
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Mon, 06 Jul 2015 03:57:12 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 06 Jul 2015 05:17:30 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Length:
+      - '458'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:30 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3129-SJC
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/changing-author-info/
+  recorded_at: Mon, 06 Jul 2015 05:07:31 GMT
+- request:
+    method: get
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: TLS Redirect
+    headers:
+      Server:
+      - Varnish
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+      Content-Length:
+      - '0'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:07:30 GMT
+      X-Varnish:
+      - '1166051818'
+      Age:
+      - '0'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - close
+      X-Cache:
+      - cp1051 frontend miss (0)
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Mon, 06 Jul 2015 05:07:31 GMT
+recorded_with: VCR 2.9.3
