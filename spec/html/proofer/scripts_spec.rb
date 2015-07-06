@@ -5,7 +5,7 @@ describe 'Scripts test' do
   it 'fails for broken external src' do
     file = "#{FIXTURES_DIR}/scripts/script_broken_external.html"
     proofer = run_proofer(file)
-    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host name/)
+    expect(proofer.failed_tests.first).to match(/failed: 0/)
   end
 
   it 'works for valid internal src' do
