@@ -151,6 +151,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `check_favicon` | Enables the favicon checker. | `false` |
+| `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 

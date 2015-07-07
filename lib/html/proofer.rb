@@ -49,7 +49,8 @@ module HTML
         :directory_index_file => 'index.html',
         :check_html => false,
         :error_sort => :path,
-        :checks_to_ignore => []
+        :checks_to_ignore => [],
+        :check_opengraph => false
       }
 
       @typhoeus_opts = TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
@@ -164,6 +165,7 @@ module HTML
       @checks = HTML::Proofer::CheckRunner.checks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
       @checks.delete('HtmlCheck') unless @options[:check_html]
+      @checks.delete('OpengraphCheck') unless @options[:check_opengraph]
       @options[:checks_to_ignore].each do |ignored|
         @checks.delete(ignored)
       end
