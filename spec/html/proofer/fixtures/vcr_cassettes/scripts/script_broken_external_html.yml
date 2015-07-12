@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+  recorded_at: Mon, 06 Jul 2015 05:08:12 GMT
+- request:
+    method: get
+    uri: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+  recorded_at: Mon, 06 Jul 2015 05:08:12 GMT
+recorded_with: VCR 2.9.3

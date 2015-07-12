@@ -35,7 +35,7 @@ describe 'Images test' do
   it 'fails for missing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/missingImageExternal.html"
     proofer = run_proofer(externalImageFilepath)
-    expect(proofer.failed_tests.first).to match(/failed: 0 Couldn't resolve host/)
+    expect(proofer.failed_tests.first).to match(/failed: 0/)
   end
 
   it 'fails for missing internal images' do
@@ -87,7 +87,7 @@ describe 'Images test' do
   it 'fails for invalid images missing the protocol' do
     missingProtocolLink = "#{FIXTURES_DIR}/images/image_missing_protocol_invalid.html"
     proofer = run_proofer(missingProtocolLink)
-    expect(proofer.failed_tests.first).to match(/404 No error/)
+    expect(proofer.failed_tests.first).to match(/failed: 404/)
   end
 
   it 'properly checks relative links' do
@@ -105,7 +105,7 @@ describe 'Images test' do
   it 'properly ignores missing alt tags, but not all URLs, when asked' do
     ignorableLinks = "#{FIXTURES_DIR}/images/ignoreAltButNotLink.html"
     proofer = run_proofer(ignorableLinks, {:alt_ignore => [/.*/]})
-    expect(proofer.failed_tests.first).to match(/Couldn't resolve host name/)
+    expect(proofer.failed_tests.first).to match(/failed: 0/)
     expect(proofer.failed_tests.first).to_not match /does not have an alt attribute/
   end
 

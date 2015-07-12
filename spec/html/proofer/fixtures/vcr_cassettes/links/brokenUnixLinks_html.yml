@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://rtyley.github.io/bfg-repo-cleaner/#usage
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Tue, 28 Apr 2015 15:43:28 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 06 Jul 2015 05:18:02 GMT
+      Cache-Control:
+      - max-age=600
+      Content-Length:
+      - '16521'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 06 Jul 2015 05:08:02 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3129-SJC
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1436159282.742022,VS0,VE148
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://rtyley.github.io/bfg-repo-cleaner/
+  recorded_at: Mon, 06 Jul 2015 05:08:03 GMT
+- request:
+    method: head
+    uri: http://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Mon, 06 Jul 2015 05:08:03 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Content-Length:
+      - '56749'
+      Last-Modified:
+      - Wed, 20 May 2015 06:17:48 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Mon, 06 Jul 2015 05:18:03 GMT
+      Cache-Control:
+      - max-age=600
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://jekyllrb.com/docs/configuration/
+  recorded_at: Mon, 06 Jul 2015 05:08:03 GMT
+- request:
+    method: head
+    uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.3.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.9.2
+      Date:
+      - Mon, 06 Jul 2015 05:08:03 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - HHVM/3.6.1
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Vary:
+      - Accept-Encoding,Cookie
+      Last-Modified:
+      - Fri, 26 Jun 2015 22:53:16 GMT
+      X-Varnish:
+      - 3815777312 3795371646, 3831112198 3825044843
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      Age:
+      - '17798'
+      X-Cache:
+      - cp1067 hit (6), cp1055 frontend hit (4)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      Set-Cookie:
+      - GeoIP=:::::v6; Path=/; Domain=.wikipedia.org
+      - WMF-Last-Access=06-Jul-2015;Path=/;HttpOnly;Expires=Fri, 07 Aug 2015 00:00:00
+        GMT
+      X-Analytics:
+      - page_id=41548;ns=0;https=1
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
+  recorded_at: Mon, 06 Jul 2015 05:08:04 GMT
+recorded_with: VCR 2.9.3
