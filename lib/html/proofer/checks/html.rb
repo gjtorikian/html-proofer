@@ -1,6 +1,9 @@
 # encoding: utf-8
 
 class HtmlCheck < ::HTML::Proofer::CheckRunner
+  class HtmlCheckable < ::HTML::Proofer::Checkable
+
+  end
 
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   # and svg child tags (source: https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
@@ -30,11 +33,16 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
 
   def run
     @html.errors.each do |e|
+      message = e.message
+
       # Nokogiri (or rather libxml2 underhood) only recognizes html4 tags,
       # so we need to skip errors caused by the new tags in html5
-      next if HTML5_TAGS.include? e.to_s[/Tag ([\w-]+) invalid/o, 1]
+      next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
-      add_issue(e.to_s)
+      # tags embedded in scripts are used in templating languages: http://git.io/vOovv
+      next if @options[:ignore_script_embeds] && message =~ /Element script embeds close tag/
+
+      add_issue(message)
     end
   end
 end
