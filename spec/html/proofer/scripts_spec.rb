@@ -44,4 +44,10 @@ describe 'Scripts test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'ignores scripts with proofer-ignore and html' do
+    opts = { check_html: true }
+    ignorableScript = "#{FIXTURES_DIR}/scripts/script_proofer_ignore_with_html.html"
+    proofer = run_proofer(ignorableScript, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
