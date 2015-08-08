@@ -1,10 +1,6 @@
 # encoding: utf-8
 
 class HtmlCheck < ::HTML::Proofer::CheckRunner
-  class HtmlCheckable < ::HTML::Proofer::Checkable
-
-  end
-
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   # and svg child tags (source: https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
   HTML5_TAGS = %w(article aside bdi details dialog figcaption
@@ -39,6 +35,7 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
       # so we need to skip errors caused by the new tags in html5
       next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
+      ap e.code
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
       next if @options[:ignore_script_embeds] && message =~ /Element script embeds close tag/
 
