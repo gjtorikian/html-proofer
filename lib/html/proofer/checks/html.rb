@@ -35,9 +35,8 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
       # so we need to skip errors caused by the new tags in html5
       next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
-      ap e.code
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-      next if @options[:ignore_script_embeds] && message =~ /Element script embeds close tag/
+      next if @validation_opts[:ignore_script_embeds] && message =~ /Element script embeds close tag/
 
       add_issue(message)
     end
