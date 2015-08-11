@@ -34,7 +34,7 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
       # so we need to skip errors caused by the new tags in html5
       next if HTML5_TAGS.include? e.to_s[/Tag ([\w-]+) invalid/o, 1]
 
-      add_issue(e.to_s)
+      add_issue(e.to_s, e.line)
     end
   end
 end
