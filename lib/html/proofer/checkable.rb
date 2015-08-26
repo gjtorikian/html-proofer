@@ -112,11 +112,18 @@ module HTML
           base = @check.path
         end
 
-        file = File.join base, path
+        file = if File.directory? base
+          File.join path, base
+        else
+          # Behave like HTML internal linking.
+          File.expand_path path, File.dirname(base)
+        end
 
         # implicit index support
         if File.directory?(file) && !unslashed_directory?(file)
           file = File.join file, @check.options[:directory_index_file]
+        elsif File.file?("#{file}.html")
+          file = "#{file}.html"
         end
 
         file

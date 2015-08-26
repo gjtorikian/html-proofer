@@ -361,4 +361,10 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not complain when the link drops the .html extension' do
+    fixture = "#{FIXTURES_DIR}/links/no_html_extension.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.failed_tests).to eq []
+  end
 end
