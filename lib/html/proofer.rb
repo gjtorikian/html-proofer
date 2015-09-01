@@ -21,7 +21,7 @@ module HTML
   class Proofer
     include Utils
 
-    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts
+    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts
 
     TYPHOEUS_DEFAULTS = {
       :followlocation => true,
@@ -61,6 +61,9 @@ module HTML
       # fall back to parallel defaults
       @parallel_opts = opts[:parallel] || {}
       opts.delete(:parallel)
+
+      @validation_opts = opts[:validation] || {}
+      opts.delete(:validation)
 
       @options = @proofer_opts.merge(opts)
 
@@ -124,7 +127,7 @@ module HTML
 
         checks.each do |klass|
           logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts)
+          check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts, @validation_opts)
           check.run
           result[:external_urls].merge!(check.external_urls)
           result[:failed_tests].concat(check.issues) if check.issues.length > 0

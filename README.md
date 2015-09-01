@@ -140,6 +140,8 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
+| `check_favicon` | Enables the favicon checker. | `false` |
+| `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 |`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
@@ -148,10 +150,9 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. | `{}` |
+| `ignore_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
-| `check_favicon` | Enables the favicon checker. | `false` |
-| `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
 
 ### Configuring Typhoeus and Hydra

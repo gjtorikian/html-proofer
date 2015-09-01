@@ -54,4 +54,11 @@ describe 'Html test' do
     proofer = run_proofer(html, { :check_html => true })
     expect(proofer.failed_tests.to_s).to match(/Couldn't find end of Start Tag a \(line 6\)/)
   end
+
+  it 'ignores embeded scripts when asked' do
+    opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+    ignorableScript = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"
+    proofer = run_proofer(ignorableScript, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
