@@ -361,4 +361,10 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not complain for internal links with mismatched cases' do
+    fixture = "#{FIXTURES_DIR}/links/ignores_cases.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.failed_tests).to eq []
+  end
 end
