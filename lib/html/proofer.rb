@@ -22,7 +22,7 @@ module HTML
   class Proofer
     include Utils
 
-    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts
+    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls
 
     TYPHOEUS_DEFAULTS = {
       :followlocation => true,
@@ -95,27 +95,27 @@ module HTML
 
     def check_list_of_links
       if @options[:href_swap]
-        @src = @src.map do |external_url|
-          swap(external_url, @options[:href_swap])
+        @src = @src.map do |url|
+          swap(url, @options[:href_swap])
         end
       end
-      external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
-      validate_urls(external_urls)
+      @external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
+      validate_urls
     end
 
     # Collects any external URLs found in a directory of files. Also collectes
     # every failed test from check_files_for_internal_woes.
     # Sends the external URLs to Typhoeus for batch processing.
     def check_directory_of_files
-      external_urls = {}
+      @external_urls = {}
       results = check_files_for_internal_woes
 
       results.each do |item|
-        external_urls.merge!(item[:external_urls])
+        @external_urls.merge!(item[:external_urls])
         @failed_tests.concat(item[:failed_tests])
       end
 
-      validate_urls(external_urls) unless @options[:disable_external]
+      validate_urls unless @options[:disable_external]
 
       logger.log :info, :blue, "Ran on #{files.length} files!\n\n"
     end
@@ -137,8 +137,8 @@ module HTML
       end
     end
 
-    def validate_urls(external_urls)
-      url_validator = HTML::Proofer::UrlValidator.new(logger, external_urls, @options, @typhoeus_opts, @hydra_opts)
+    def validate_urls
+      url_validator = HTML::Proofer::UrlValidator.new(logger, @external_urls, @options, @typhoeus_opts, @hydra_opts)
       @failed_tests.concat(url_validator.run)
     end
 
