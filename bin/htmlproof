@@ -36,7 +36,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'Comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing `href`s that are safe to ignore.'
   p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'Comma-separated list of key-value pairs of `RegExp:String`. Transforms links matching `RegExp` into `String`'
-  p.option 'ignore_script_errors', '--ignore-script-errors', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
+  p.option 'ignore_script_embeds', '--ignore-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing URLs that are safe to ignore.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
