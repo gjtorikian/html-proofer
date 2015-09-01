@@ -1,4 +1,3 @@
-# encoding: utf-8
 class LinkCheckable < ::HTML::Proofer::Checkable
 
   def href
@@ -101,7 +100,8 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
   end
 
   def hash_check(html, href_hash)
-    html.xpath("//*[@id='#{href_hash}']", "//*[@name='#{href_hash}']").length > 0
+    html.xpath("//*[case_insensitive_equals(@id, '#{href_hash}')]", \
+               "//*[case_insensitive_equals(@name, '#{href_hash}')]", HTML::Proofer::XpathFunctions.new).length > 0
   end
 
 end

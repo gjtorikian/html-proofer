@@ -9,6 +9,7 @@ require_all 'proofer'
 require_all 'proofer/check_runner'
 require_all 'proofer/checks'
 require_relative './proofer/utils'
+require_relative './proofer/xpathfunctions'
 
 require 'parallel'
 
