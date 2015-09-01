@@ -27,6 +27,8 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'empty_alt_ignore', '--empty-alt-ignore', 'Ignores images with empty alt tags.'
   p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, ' An array of Strings indicating which checks you\'d like to not perform.'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
+  p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
+  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'Disables the external link checker (default: `false`)'
   p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `path`, `desc`, or `status` (default: `path`).'
@@ -36,8 +38,6 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'Comma-separated list of key-value pairs of `RegExp:String`. Transforms links matching `RegExp` into `String`'
   p.option 'ignore_script_errors', '--ignore-script-errors', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
-  p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing URLs that are safe to ignore.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
 
