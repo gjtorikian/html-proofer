@@ -170,6 +170,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. | `false` |
+| `verbosity` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 
 ### Configuring Typhoeus and Hydra
 
@@ -194,6 +195,15 @@ HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
+
+## Logging
+
+HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to log information:
+
+* If you set the `:verbose` option to `true`, HTML-Proofer will provide some debug information.
+* If you set the `:verbosity` option, you can better define the level of logging. See the configuration table above for more information.
+
+`:verbosity` is newer and offers better configuration. `:verbose` will be deprecated in a future 3.x.x release.
 
 ## Custom tests
 

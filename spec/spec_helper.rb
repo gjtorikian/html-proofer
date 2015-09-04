@@ -3,7 +3,6 @@ require 'vcr'
 require_relative '../lib/html/proofer'
 
 FIXTURES_DIR = 'spec/html/proofer/fixtures'
-QUIET = true
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -19,26 +18,20 @@ RSpec.configure do |config|
   config.order = :random
 end
 
-def quiet?
-  defined?(QUIET) && QUIET
-end
-
 def capture_stderr(*)
   original_stderr = $stderr
-  original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = fake_out = StringIO.new if quiet?
   begin
     yield
   rescue RuntimeError
   ensure
     $stderr = original_stderr
-    $stdout = original_stdout if quiet?
   end
   fake_err.string
 end
 
 def make_proofer(file, opts)
+  opts[:verbosity] = :fatal
   HTML::Proofer.new(file, opts)
 end
 

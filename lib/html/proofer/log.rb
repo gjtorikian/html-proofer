@@ -6,8 +6,12 @@ module HTML
     class Log
       include Yell::Loggable
 
-      def initialize(verbose)
-        log_level = verbose ? :debug : :info
+      def initialize(verbose, verbosity = nil)
+        log_level = if verbosity.nil?
+                      verbose ? :debug : :info
+                    else
+                      verbosity
+                    end
 
         @logger = Yell.new(:format => false, \
                            :name => 'HTML::Proofer', \

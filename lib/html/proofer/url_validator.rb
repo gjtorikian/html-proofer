@@ -129,7 +129,6 @@ module HTML
       rescue URI::InvalidURIError
         nil
       end
-
     end
   end
 end

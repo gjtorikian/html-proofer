@@ -34,6 +34,13 @@ module HTML
     def initialize(src, opts = {})
       @src = src
 
+      if opts[:verbose]
+        warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
+      end
+      if opts[:href_ignore]
+        warn '`@options[:href_ignore]` will be renamed in a future 3.x.x release: http://git.io/vGHHy'
+      end
+
       @proofer_opts = {
         :ext => '.html',
         :check_favicon => false,
@@ -72,7 +79,7 @@ module HTML
     end
 
     def logger
-      @logger ||= HTML::Proofer::Log.new(@options[:verbose])
+      @logger ||= HTML::Proofer::Log.new(@options[:verbose], @options[:verbosity])
     end
 
     def run
