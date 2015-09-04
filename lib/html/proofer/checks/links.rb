@@ -25,8 +25,9 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
   include HTML::Utils
 
   def run
-    @html.css('a, link').each do |l|
-      link = LinkCheckable.new l, self
+    @html.css('a, link').each do |node|
+      link = LinkCheckable.new(node, self)
+      line = line
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
@@ -34,7 +35,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # is it even a valid URL?
       unless link.valid?
-        add_issue("#{link.href} is an invalid URL", l.line)
+        add_issue("#{link.href} is an invalid URL", line)
         next
       end
 
@@ -51,7 +52,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # is there even a href?
       if link.missing_href?
-        add_issue('anchor has no href attribute', l.line)
+        add_issue('anchor has no href attribute', line)
         next
       end
 
@@ -63,12 +64,12 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
         add_to_external_urls link.href
         next
       elsif !link.internal?
-        add_issue("internally linking to #{link.href}, which does not exist", l.line) unless link.exists?
+        add_issue("internally linking to #{link.href}, which does not exist", line) unless link.exists?
       end
 
       # does the local directory have a trailing slash?
       if link.unslashed_directory? link.absolute_path
-        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", l.line)
+        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", line)
         next
       end
 

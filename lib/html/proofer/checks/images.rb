@@ -24,27 +24,28 @@ end
 
 class ImageCheck < ::HTML::Proofer::CheckRunner
   def run
-    @html.css('img').each do |i|
-      img = ImageCheckable.new i, self
+    @html.css('img').each do |node|
+      img = ImageCheckable.new(node, self)
+      line = node.line
 
       next if img.ignore?
 
       # screenshot filenames should return because of terrible names
-      next add_issue("image has a terrible filename (#{img.src})", i.line) if img.terrible_filename?
+      next add_issue("image has a terrible filename (#{img.src})", line) if img.terrible_filename?
 
       # does the image exist?
       if img.missing_src?
-        add_issue('image has no src or srcset attribute', i.line)
+        add_issue('image has no src or srcset attribute', line)
       else
         if img.remote?
           add_to_external_urls img.src
         else
-          add_issue("internal image #{img.src} does not exist", i.line) unless img.exists?
+          add_issue("internal image #{img.src} does not exist", line) unless img.exists?
         end
       end
 
       if img.alt.nil? || (img.empty_alt_tag? && !img.ignore_empty_alt?)
-        add_issue("image #{img.src} does not have an alt attribute", i.line)
+        add_issue("image #{img.src} does not have an alt attribute", line)
       end
     end
 

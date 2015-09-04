@@ -7,8 +7,8 @@ end
 class FaviconCheck < ::HTML::Proofer::CheckRunner
   def run
     found = false
-    @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |favicon|
-      favicon = FaviconCheckable.new favicon, self
+    @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |node|
+      favicon = FaviconCheckable.new(node, self)
       next if favicon.ignore?
       found = true if favicon.rel.split(' ').last.eql? 'icon'
       break if found
