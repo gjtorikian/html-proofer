@@ -74,6 +74,7 @@ module HTML
         href = response.request.base_url.to_s
         method = response.request.options[:method]
         response_code = response.code
+
         debug_msg = "Received a #{response_code} for #{href}"
         debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
         logger.log :debug, :yellow, debug_msg
@@ -87,7 +88,7 @@ module HTML
         else
           return if @options[:only_4xx] && !response_code.between?(400, 499)
           # Received a non-successful http response.
-          add_failed_tests filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code
+          add_external_issue(filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code)
         end
       end
 
@@ -108,15 +109,15 @@ module HTML
 
         return unless body_doc.xpath(xpath).empty?
 
-        add_failed_tests filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
+        add_external_issue filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
       end
 
       def handle_timeout(href, filenames, response_code)
         return if @options[:only_4xx]
-        add_failed_tests filenames, "External link #{href} failed: got a time out", response_code
+        add_external_issue filenames, "External link #{href} failed: got a time out", response_code
       end
 
-      def add_failed_tests(filenames, desc, status = nil)
+      def add_external_issue(filenames, desc, status = nil)
         if filenames.nil?
           @failed_tests << CheckRunner::Issue.new('', desc, nil, status)
         else
