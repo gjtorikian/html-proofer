@@ -19,7 +19,6 @@ class LinkCheckable < ::HTML::Proofer::Checkable
   def placeholder?
     (id || name) && href.nil?
   end
-
 end
 
 class LinkCheck < ::HTML::Proofer::CheckRunner

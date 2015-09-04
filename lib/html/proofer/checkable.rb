@@ -75,12 +75,12 @@ module HTML
         return true if ignores_pattern_check(@check.url_ignores)
 
         # ignore user defined hrefs
-        if 'LinkCheckable' === @type
+        if 'LinkCheckable' == @type
           return true if ignores_pattern_check(@check.href_ignores)
         end
 
         # ignore user defined alts
-        if 'ImageCheckable' === @type
+        if 'ImageCheckable' == @type
           return true if ignores_pattern_check(@check.alt_ignores)
         end
       end
@@ -102,7 +102,7 @@ module HTML
       def file_path
         return if path.nil?
 
-        if path =~ /^\// # path relative to root
+        if path =~ %r{^/} # path relative to root
           base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
         elsif File.exist?(File.expand_path path, @check.src) # relative links, path is a file
           base = File.dirname @check.path
@@ -158,7 +158,6 @@ module HTML
       def real_attr(attr)
         attr.to_s unless attr.nil? || attr.empty?
       end
-
     end
   end
 end

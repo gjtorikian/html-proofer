@@ -8,7 +8,7 @@ require 'mercenary'
 require 'rubygems'
 
 def to_regex?(item)
-  if item.start_with? '/' and item.end_with? '/'
+  if item.start_with?('/') && item.end_with?('/')
     Regexp.new item[1...-1]
   else
     item

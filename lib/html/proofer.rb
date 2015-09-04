@@ -27,7 +27,7 @@ module HTML
     TYPHOEUS_DEFAULTS = {
       :followlocation => true,
       :headers => {
-        "User-Agent" => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
+        'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
       }
     }
 

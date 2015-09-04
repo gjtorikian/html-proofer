@@ -27,6 +27,8 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
                   rect set stop switch symbol text textPath tref tspan use
                   view vkern)
 
+  SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
+
   def run
     @html.errors.each do |e|
       message = e.message
@@ -36,7 +38,7 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
       next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-      next if @validation_opts[:ignore_script_embeds] && message =~ /Element script embeds close tag/
+      next if @validation_opts[:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
 
       add_issue(message, line)
     end
