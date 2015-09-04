@@ -22,7 +22,7 @@ class LinkCheckable < ::HTML::Proofer::Checkable
 end
 
 class LinkCheck < ::HTML::Proofer::CheckRunner
-  include HTML::Utils
+  include HTML::Proofer::Utils
 
   def run
     @html.css('a, link').each do |node|

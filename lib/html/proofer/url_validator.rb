@@ -5,7 +5,7 @@ require_relative './utils'
 module HTML
   class Proofer
     class UrlValidator
-      include Utils
+      include HTML::Proofer::Utils
 
       attr_accessor :logger, :external_urls, :hydra
 

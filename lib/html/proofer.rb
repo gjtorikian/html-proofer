@@ -20,7 +20,7 @@ rescue LoadError; end
 module HTML
 
   class Proofer
-    include Utils
+    include HTML::Proofer::Utils
 
     attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls
 
