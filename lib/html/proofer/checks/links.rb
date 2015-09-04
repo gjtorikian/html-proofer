@@ -27,7 +27,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
   def run
     @html.css('a, link').each do |node|
       link = LinkCheckable.new(node, self)
-      line = line
+      line = node.line
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
@@ -52,7 +52,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # does the file even exist?
       if link.remote?
-        add_to_external_urls link.href
+        add_to_external_urls(link.href, line)
         next
       elsif !link.internal?
         add_issue("internally linking to #{link.href}, which does not exist", line) unless link.exists?

@@ -38,7 +38,7 @@ class ImageCheck < ::HTML::Proofer::CheckRunner
         add_issue('image has no src or srcset attribute', line)
       else
         if img.remote?
-          add_to_external_urls img.src
+          add_to_external_urls(img.src, line)
         else
           add_issue("internal image #{img.src} does not exist", line) unless img.exists?
         end

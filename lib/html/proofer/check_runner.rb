@@ -35,7 +35,7 @@ module HTML
         @issues << Issue.new(@path, desc, line_number, status)
       end
 
-      def add_to_external_urls(url)
+      def add_to_external_urls(url, line)
         return if @external_urls[url]
         uri = Addressable::URI.parse(url)
 
