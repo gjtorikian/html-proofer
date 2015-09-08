@@ -22,7 +22,7 @@ module HTML
   class Proofer
     include HTML::Proofer::Utils
 
-    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls
+    attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls, :iterable_external_urls
 
     TYPHOEUS_DEFAULTS = {
       :followlocation => true,
@@ -147,6 +147,7 @@ module HTML
     def validate_urls
       url_validator = HTML::Proofer::UrlValidator.new(logger, @external_urls, @options, @typhoeus_opts, @hydra_opts)
       @failed_tests.concat(url_validator.run)
+      @iterable_external_urls = url_validator.iterable_external_urls
     end
 
     def files
