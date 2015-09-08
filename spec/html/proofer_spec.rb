@@ -36,7 +36,7 @@ describe HTML::Proofer do
 
     describe 'sorting' do
       it 'understands sorting by path' do
-        output = send_proofer_output("#{FIXTURES_DIR}/sorting/path")
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/path", :verbosity => :info)
 
         expect(output.strip).to eq('''
 - spec/html/proofer/fixtures/sorting/path/multiple_issues.html
@@ -49,7 +49,7 @@ describe HTML::Proofer do
       end
 
       it 'understands sorting by issue' do
-        output = send_proofer_output("#{FIXTURES_DIR}/sorting/issue", :error_sort => :desc)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/issue", :verbosity => :info, :error_sort => :desc)
         expect(output.strip).to eq('''
 - image ./gpl.png does not have an alt attribute
   *  spec/html/proofer/fixtures/sorting/issue/broken_image_one.html (line 1)
@@ -64,7 +64,7 @@ describe HTML::Proofer do
 
 
       it 'understands sorting by status' do
-        output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :typhoeus => { :followlocation => false }, :error_sort => :status)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :verbosity => :info, :typhoeus => { :followlocation => false }, :error_sort => :status)
         expect(output.gsub(/\s*$/, '')).to eq('''
 - -1
   *  spec/html/proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist (line 3)
