@@ -6,7 +6,8 @@ module HTML
     class CheckRunner
 
       attr_reader :issues, :src, :path, :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
-                  :validation_opts, :external_urls, :href_ignores, :url_ignores, :alt_ignores, :empty_alt_ignore
+                  :validation_opts, :external_urls, :href_ignores, :url_ignores, :alt_ignores, \
+                  :empty_alt_ignore
 
       def initialize(src, path, html, options, typhoeus_opts, hydra_opts, parallel_opts, validation_opts)
         @src    = src
@@ -23,6 +24,7 @@ module HTML
         @alt_ignores = @options[:alt_ignore]
         @empty_alt_ignore = @options[:empty_alt_ignore]
         @external_urls = {}
+        @external_domain_paths_with_queries = {}
       end
 
       def run
@@ -33,12 +35,43 @@ module HTML
         @issues << Issue.new(@path, desc, line_number, status)
       end
 
-      def add_to_external_urls(href)
-        if @external_urls[href]
-          @external_urls[href] << @path
+      def add_to_external_urls(url, line)
+        return if @external_urls[url]
+        uri = Addressable::URI.parse(url)
+
+        if uri.query.nil?
+          add_path_for_url(url)
         else
-          @external_urls[href] = [@path]
+          new_url_query_values?(uri, url)
         end
+      end
+
+      def add_path_for_url(url)
+        if @external_urls[url]
+          @external_urls[url] << @path
+        else
+          @external_urls[url] = [@path]
+        end
+      end
+
+      def new_url_query_values?(uri, url)
+        queries = uri.query_values.keys.join('-')
+        domain_path = extract_domain_path(uri)
+        if @external_domain_paths_with_queries[domain_path].nil?
+          add_path_for_url(url)
+          # remember queries we've seen, ignore future ones
+          @external_domain_paths_with_queries[domain_path] = [queries]
+        else
+          # add queries we haven't seen
+          unless @external_domain_paths_with_queries[domain_path].include?(queries)
+            add_path_for_url(url)
+            @external_domain_paths_with_queries[domain_path] << queries
+          end
+        end
+      end
+
+      def extract_domain_path(uri)
+        uri.host + uri.path
       end
 
       def self.checks
@@ -52,7 +85,7 @@ module HTML
         classes
       end
 
-    private
+      private
 
       def remove_ignored(html)
         html.css('code, pre').each(&:unlink)

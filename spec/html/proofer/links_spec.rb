@@ -367,4 +367,10 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not check links with parameters multiple times' do
+    fixture = "#{FIXTURES_DIR}/links/check_just_once.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.external_urls.length).to eq 2
+  end
 end

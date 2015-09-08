@@ -34,6 +34,7 @@ def capture_stderr(*)
 end
 
 def make_proofer(file, opts)
+  opts[:verbosity] ||= :fatal
   HTML::Proofer.new(file, opts)
 end
 

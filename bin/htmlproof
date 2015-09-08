@@ -8,7 +8,7 @@ require 'mercenary'
 require 'rubygems'
 
 def to_regex?(item)
-  if item.start_with? '/' and item.end_with? '/'
+  if item.start_with?('/') && item.end_with?('/')
     Regexp.new item[1...-1]
   else
     item
@@ -40,6 +40,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing URLs that are safe to ignore.'
   p.option 'verbose', '--verbose', 'Enables more verbose logging.'
+  p.option 'verbosity', '--verbosity', String, 'Sets the logging level, as determined by Yell'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -47,7 +48,7 @@ Mercenary.program(:htmlproof) do |p|
 
     options = {}
 
-    # prepare every to go to proofer
+    # prepare everything to go to proofer
     p.options.select { |o| !opts[o.config_key].nil? }.each do |option|
       if option.return_type.to_s == 'Array' # TODO: is_a? doesn't work here?
         opts[option.config_key] = opts[option.config_key].map { |i| to_regex?(i) }
@@ -65,6 +66,7 @@ Mercenary.program(:htmlproof) do |p|
     end
 
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
+    options[:verbosity] = opts['verbosity'].to_sym unless opts['verbosity'].nil?
 
     path = path.delete(' ').split(',') if opts['as_links']
 
