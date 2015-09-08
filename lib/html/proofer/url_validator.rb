@@ -16,11 +16,43 @@ module HTML
         @options = options
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
+        @external_domain_paths_with_queries = {}
       end
 
       def run
+        external_urls = remove_query_values
         external_link_checker(external_urls)
         @failed_tests
+      end
+
+      def remove_query_values
+        return if @external_urls.nil?
+        iterable_external_urls = @external_urls.dup
+        @external_urls.keys.each do |url|
+          uri = Addressable::URI.parse(url)
+          next if uri.query.nil?
+          iterable_external_urls.delete(url) unless new_url_query_values?(uri)
+        end
+        iterable_external_urls
+      end
+
+      # remember queries we've seen, ignore future ones
+      def new_url_query_values?(uri)
+        queries = uri.query_values.keys.join('-')
+        domain_path = extract_domain_path(uri)
+        if @external_domain_paths_with_queries[domain_path].nil?
+          @external_domain_paths_with_queries[domain_path] = [queries]
+          true
+        elsif !@external_domain_paths_with_queries[domain_path].include?(queries)
+          @external_domain_paths_with_queries[domain_path] << queries
+          true
+        else
+          false
+        end
+      end
+
+      def extract_domain_path(uri)
+        uri.host + uri.path
       end
 
       # Proofer runs faster if we pull out all the external URLs and run the checks
