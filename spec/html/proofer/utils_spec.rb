@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe HTML::Utils do
+describe HTML::Proofer::Utils do
   describe '::create_nokogiri' do
     it 'passes for a string' do
-      noko = HTML::Utils::create_nokogiri '<html lang="jp">'
+      noko = HTML::Proofer::Utils::create_nokogiri '<html lang="jp">'
       expect(noko.css('html').first['lang']).to eq 'jp'
     end
     it 'passes for a file' do
-      noko = HTML::Utils::create_nokogiri "#{FIXTURES_DIR}/utils/lang-jp.html"
+      noko = HTML::Proofer::Utils::create_nokogiri "#{FIXTURES_DIR}/utils/lang-jp.html"
       expect(noko.css('html').first['lang']).to eq 'jp'
     end
   end

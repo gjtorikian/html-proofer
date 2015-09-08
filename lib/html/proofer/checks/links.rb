@@ -19,15 +19,15 @@ class LinkCheckable < ::HTML::Proofer::Checkable
   def placeholder?
     (id || name) && href.nil?
   end
-
 end
 
 class LinkCheck < ::HTML::Proofer::CheckRunner
-  include HTML::Utils
+  include HTML::Proofer::Utils
 
   def run
-    @html.css('a, link').each do |l|
-      link = LinkCheckable.new l, self
+    @html.css('a, link').each do |node|
+      link = LinkCheckable.new(node, self)
+      line = node.line
 
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
@@ -35,24 +35,15 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # is it even a valid URL?
       unless link.valid?
-        add_issue("#{link.href} is an invalid URL", l.line)
+        add_issue("#{link.href} is an invalid URL", line)
         next
       end
 
-      case link.scheme
-      when 'mailto'
-        if link.path.empty?
-          add_issue("#{link.href} contains no email address", l.line)
-        elsif !link.path.include?('@')
-          add_issue("#{link.href} contains an invalid email address", l.line)
-        end
-      when 'tel'
-        add_issue("#{link.href} contains no phone number", l.line) if link.path.empty?
-      end
+      check_schemes(link, line)
 
       # is there even a href?
       if link.missing_href?
-        add_issue('anchor has no href attribute', l.line)
+        add_issue('anchor has no href attribute', line)
         next
       end
 
@@ -61,47 +52,71 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
 
       # does the file even exist?
       if link.remote?
-        add_to_external_urls link.href
+        add_to_external_urls(link.href, line)
         next
       elsif !link.internal?
-        add_issue("internally linking to #{link.href}, which does not exist", l.line) unless link.exists?
+        add_issue("internally linking to #{link.href}, which does not exist", line) unless link.exists?
       end
 
       # does the local directory have a trailing slash?
       if link.unslashed_directory? link.absolute_path
-        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", l.line)
+        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", line)
         next
       end
 
       # verify the target hash
-      if link.hash
-        if link.internal?
-          unless hash_check @html, link.hash
-            add_issue("linking to internal hash ##{link.hash} that does not exist", l.line)
-          end
-        elsif link.external?
-          external_link_check(link)
-        end
-      end
+      handle_hash(link, line) if link.hash
     end
 
     external_urls
   end
 
-  def external_link_check(link)
+  def check_schemes(link, line)
+    case link.scheme
+    when 'mailto'
+      handle_mailto(link, line)
+    when 'tel'
+      handle_tel(link, line)
+    end
+  end
+
+  def handle_mailto(link, line)
+    if link.path.empty?
+      add_issue("#{link.href} contains no email address", line)
+    elsif !link.path.include?('@')
+      add_issue("#{link.href} contains an invalid email address", line)
+    end
+  end
+
+  def handle_tel(link, line)
+    add_issue("#{link.href} contains no phone number", line) if link.path.empty?
+  end
+
+  def handle_hash(link, line)
+    if link.internal?
+      unless hash_check @html, link.hash
+        add_issue("linking to internal hash ##{link.hash} that does not exist", line)
+      end
+    elsif link.external?
+      external_link_check(link, line)
+    end
+  end
+
+  def external_link_check(link, line)
     if !link.exists?
-      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", link.line)
+      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line)
     else
       target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
-        add_issue("linking to #{link.href}, but #{link.hash} does not exist", link.line)
+        add_issue("linking to #{link.href}, but #{link.hash} does not exist", line)
       end
     end
   end
 
   def hash_check(html, href_hash)
     html.xpath("//*[case_insensitive_equals(@id, '#{href_hash}')]", \
-               "//*[case_insensitive_equals(@name, '#{href_hash}')]", HTML::Proofer::XpathFunctions.new).length > 0
+               "//*[case_insensitive_equals(@name, '#{href_hash}')]", \
+               HTML::Proofer::XpathFunctions.new).length > 0
   end
 
 end

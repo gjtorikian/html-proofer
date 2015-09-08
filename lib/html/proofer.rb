@@ -20,14 +20,14 @@ rescue LoadError; end
 module HTML
 
   class Proofer
-    include Utils
+    include HTML::Proofer::Utils
 
     attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls
 
     TYPHOEUS_DEFAULTS = {
       :followlocation => true,
       :headers => {
-        "User-Agent" => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
+        'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
       }
     }
 
