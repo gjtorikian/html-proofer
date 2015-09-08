@@ -7,11 +7,12 @@ module HTML
     class UrlValidator
       include HTML::Proofer::Utils
 
-      attr_accessor :logger, :external_urls, :hydra
+      attr_accessor :logger, :external_urls, :iterable_external_urls, :hydra
 
       def initialize(logger, external_urls, options, typhoeus_opts, hydra_opts)
         @logger = logger
         @external_urls = external_urls
+        @iterable_external_urls = {}
         @failed_tests = []
         @options = options
         @hydra = Typhoeus::Hydra.new(hydra_opts)
@@ -20,8 +21,8 @@ module HTML
       end
 
       def run
-        external_urls = remove_query_values
-        external_link_checker(external_urls)
+        @iterable_external_urls = remove_query_values
+        external_link_checker(@iterable_external_urls)
         @failed_tests
       end
 
