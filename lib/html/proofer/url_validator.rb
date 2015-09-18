@@ -1,6 +1,7 @@
 require 'typhoeus'
 require 'uri'
 require_relative './utils'
+require_relative './cache'
 
 module HTML
   class Proofer
@@ -16,10 +17,17 @@ module HTML
         @options = options
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
+        @cache = Cache.new(Time.now, @options[:cache])
       end
 
       def run
-        external_link_checker(external_urls)
+        if @cache.exists?
+          @cache.load
+        else
+          external_link_checker(external_urls)
+          @cache.write if @cache.store?
+        end
+
         @failed_tests
       end
 
@@ -81,14 +89,17 @@ module HTML
 
         if response_code.between?(200, 299)
           check_hash_in_2xx_response(href, effective_url, response, filenames)
+          @cache.add(href, response_code)
         elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
+          @cache.add(href, 0)
         elsif method == :head
           queue_request(:get, href, filenames)
         else
           return if @options[:only_4xx] && !response_code.between?(400, 499)
           # Received a non-successful http response.
           add_external_issue(filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code)
+          @cache.add(href, response_code)
         end
       end
 

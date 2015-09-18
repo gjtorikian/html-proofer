@@ -1,16 +1,57 @@
+require 'json'
+
 module HTML
   class Proofer
-    module Cache
-      def create_nokogiri(path)
-        if File.exist? path
-          content = File.open(path).read
+    class Cache
+      attr_reader :status
+
+      FILENAME = '.htmlproofer.log'
+
+      def initialize(now, options)
+        @status = {}
+        @now = now
+        @status[:time] = @now
+        @status[:urls] = []
+
+        if options.nil? || options.empty?
+          @store = false
         else
-          content = path
+          @store = true
+          @timeframe = options[:timeframe]
         end
 
-        Nokogiri::HTML(content)
+        if File.exist?(FILENAME)
+          @exists = true
+          @cache_log = JSON.parse(File.read(FILENAME))
+        else
+          @exists = false
+        end
       end
-      module_function :create_nokogiri
+
+      def store?
+        @store
+      end
+
+      def exists?
+        @exists && within_timeframe
+      end
+
+      def within_timeframe
+
+      end
+
+      def load
+
+      end
+
+      def add(url, status)
+        return unless store?
+        @status[:urls] << { :url => url, :status => status }
+      end
+
+      def write
+        File.write(FILENAME, @status.to_json)
+      end
     end
   end
 end
