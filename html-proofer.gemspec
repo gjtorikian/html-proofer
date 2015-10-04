@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'yell',            '~> 2.0'
   gem.add_dependency 'parallel',        '~> 1.3'
   gem.add_dependency 'addressable',     '~> 2.3'
+  gem.add_dependency 'activesupport',   '~> 4.2'
 
   gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rspec', '~> 3.1'

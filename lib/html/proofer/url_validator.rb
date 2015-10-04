@@ -17,15 +17,18 @@ module HTML
         @options = options
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
-        @cache = Cache.new(Time.now, @options[:cache])
+        @cache = Cache.new(@options[:cache])
       end
 
       def run
         if @cache.exists?
-          @cache.load
+          @cache.load.each do |cache|
+            next if cache['message'].empty? # these were successes
+            add_external_issue(cache['filenames'], cache['message'], cache['status'])
+          end
         else
           external_link_checker(external_urls)
-          @cache.write if @cache.store?
+          @cache.write
         end
 
         @failed_tests
@@ -89,17 +92,17 @@ module HTML
 
         if response_code.between?(200, 299)
           check_hash_in_2xx_response(href, effective_url, response, filenames)
-          @cache.add(href, response_code)
+          @cache.add(href, filenames, response_code)
         elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
-          @cache.add(href, 0)
         elsif method == :head
           queue_request(:get, href, filenames)
         else
           return if @options[:only_4xx] && !response_code.between?(400, 499)
           # Received a non-successful http response.
-          add_external_issue(filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code)
-          @cache.add(href, response_code)
+          msg = "External link #{href} failed: #{response_code} #{response.return_message}"
+          add_external_issue(filenames, msg, response_code)
+          @cache.add(href, filenames, response_code, msg)
         end
       end
 
@@ -120,12 +123,16 @@ module HTML
 
         return unless body_doc.xpath(xpath).empty?
 
-        add_external_issue filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
+        msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
+        add_external_issue(filenames, msg, response.code)
+        @cache.add(href, filenames, response_code, msg)
       end
 
       def handle_timeout(href, filenames, response_code)
         return if @options[:only_4xx]
-        add_external_issue filenames, "External link #{href} failed: got a time out", response_code
+        msg = "External link #{href} failed: got a time out"
+        add_external_issue(filenames, msg, response_code)
+        @cache.add(href, filenames, 0, msg)
       end
 
       def add_external_issue(filenames, desc, status = nil)
