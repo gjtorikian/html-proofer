@@ -373,4 +373,11 @@ describe 'Links test' do
     proofer = run_proofer(fixture)
     expect(proofer.iterable_external_urls.length).to eq 2
   end
+
+  it 'does not explode on bad external links' do
+    fixture = "#{FIXTURES_DIR}/links/bad_external_links.html"
+    proofer = run_proofer(fixture)
+    expect(proofer.failed_tests.length).to eq 2
+    expect(proofer.failed_tests.first).to match(/is an invalid URL/)
+  end
 end

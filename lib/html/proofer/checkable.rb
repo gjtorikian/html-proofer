@@ -39,7 +39,7 @@ module HTML
 
       def parts
         @parts ||= Addressable::URI.parse url
-      rescue URI::Error
+      rescue URI::Error, Addressable::URI::InvalidURIError
         @parts = nil
       end
 
