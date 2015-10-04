@@ -11,7 +11,7 @@ module HTML
 
       def initialize(obj, check)
         obj.attributes.each_pair do |attribute, value|
-          instance_variable_set("@#{attribute.tr('-:', '_')}".to_sym, value.value)
+          instance_variable_set("@#{attribute.tr('-:.', '_')}".to_sym, value.value)
         end
 
         @text = obj.content
