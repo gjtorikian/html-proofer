@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'vcr'
+require 'timecop'
 require_relative '../lib/html/proofer'
 
 FIXTURES_DIR = 'spec/html/proofer/fixtures'
