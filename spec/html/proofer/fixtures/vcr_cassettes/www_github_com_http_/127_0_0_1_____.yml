@@ -1,0 +1,116 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: ''
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: ''
+  recorded_at: Sun, 04 Oct 2015 23:34:01 GMT
+- request:
+    method: get
+    uri: ''
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: ''
+  recorded_at: Sun, 04 Oct 2015 23:34:01 GMT
+- request:
+    method: head
+    uri: www.github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 04 Oct 2015 23:34:03 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Content-Security-Policy:
+      - 'default-src *; script-src assets-cdn.github.com collector-cdn.github.com;
+        object-src assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com; img-src ''self'' data: assets-cdn.github.com identicons.github.com
+        www.google-analytics.com checkout.paypal.com collector.githubapp.com *.githubusercontent.com
+        *.gravatar.com *.wp.com; media-src ''none''; frame-src ''self'' render.githubusercontent.com
+        gist.github.com www.youtube.com player.vimeo.com checkout.paypal.com; font-src
+        assets-cdn.github.com; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        base-uri ''self''; form-action ''self'' github.com gist.github.com'
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 04 Oct 2035 23:34:03
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiOGVkYTJmN2MwZmQzNmFhNTdjODAxYmY3Y2M2NDNkYmIiLCJfY3NyZl90b2tlbiI6IkgzNWp6L1lQRXI2Vno3SWsyNmFSR1duOTlIVTVGNUFnUEtBaWlrTU9DNms9In0%3D--e98bd9290c51cded11cbf38f8ad8aeea18f01d64;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - a10b4c5e795d618fa9549d4813a678e0
+      X-Runtime:
+      - '0.009348'
+      X-GitHub-Request-Id:
+      - 490F8465:108B:12D9C84A:5611B76B
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - deny
+      X-Served-By:
+      - 9835a984a05caa405eb61faaa1546741
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Sun, 04 Oct 2015 23:34:03 GMT
+recorded_with: VCR 2.9.3

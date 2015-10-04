@@ -30,8 +30,13 @@ module HTML
         return if @external_urls.nil?
         iterable_external_urls = @external_urls.dup
         @external_urls.keys.each do |url|
-          uri = Addressable::URI.parse(url)
-          next if uri.query.nil?
+          uri = begin
+                  Addressable::URI.parse(url)
+                rescue URI::Error, Addressable::URI::InvalidURIError
+                  @logger.log :error, :red, "#{url} is an invalid URL"
+                  nil
+                end
+          next if uri.nil? || uri.query.nil?
           iterable_external_urls.delete(url) unless new_url_query_values?(uri)
         end
         iterable_external_urls
@@ -83,7 +88,13 @@ module HTML
 
       def url_processor(external_urls)
         external_urls.each_pair do |href, filenames|
-          href = clean_url(href)
+          href = begin
+                   clean_url(href)
+                 rescue URI::Error, Addressable::URI::InvalidURIError
+                   add_external_issue(filenames, "#{href} is an invalid URL")
+                   next
+                 end
+
           if hash?(href) && @options[:check_external_hash]
             queue_request(:get, href, filenames)
           else
