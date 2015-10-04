@@ -9,7 +9,7 @@ module HTML
       attr_reader :status
 
       FILENAME = '.htmlproofer.log'
-      DURATIONS = %w(y M w d)
+      DURATIONS = %w(y M w d h)
 
       def initialize(options)
         @status = {}
@@ -59,6 +59,8 @@ module HTML
           time.weeks.ago
         when 'd'
           time.days.ago
+        when 'h'
+          time.hours.ago
         end
       end
 
