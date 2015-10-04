@@ -374,10 +374,15 @@ describe 'Links test' do
     expect(proofer.iterable_external_urls.length).to eq 2
   end
 
-  it 'does not explode on bad external links' do
+  it 'does not explode on bad external links in files' do
     fixture = "#{FIXTURES_DIR}/links/bad_external_links.html"
     proofer = run_proofer(fixture)
     expect(proofer.failed_tests.length).to eq 2
+    expect(proofer.failed_tests.first).to match(/is an invalid URL/)
+  end
+
+  it 'does not explode on bad external links in arrays' do
+    proofer = run_proofer(['www.github.com', 'http://127.0.0.1:____'])
     expect(proofer.failed_tests.first).to match(/is an invalid URL/)
   end
 end
