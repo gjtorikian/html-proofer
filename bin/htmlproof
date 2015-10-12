@@ -65,6 +65,11 @@ Mercenary.program(:htmlproof) do |p|
       end
     end
 
+    # check for ignore_scripts_embeds as it should be set in :validation
+    unless opts['ignore_script_embeds'].nil?
+        options[:validation] = { :ignore_script_embeds => true }
+    end
+
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:verbosity] = opts['verbosity'].to_sym unless opts['verbosity'].nil?
 
