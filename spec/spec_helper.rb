@@ -64,9 +64,8 @@ def delete_cache
   File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
 end
 
-def write_cache(time = Time.now)
-  cache = { :time => time, :urls => [] }.to_json
-  File.write(HTML::Proofer::Cache::FILENAME, cache)
+def read_cache
+  JSON.parse File.read(HTML::Proofer::Cache::FILENAME)
 end
 
 def make_cassette_name(file, opts)

@@ -24,14 +24,15 @@ module HTML
 
         if File.exist?(FILENAME)
           @exists = true
-          @cache_log = JSON.parse(File.read(FILENAME))
+          contents = File.read(FILENAME)
+          @cache_log = contents.empty? ? {} : JSON.parse(contents)
         else
           @exists = false
         end
       end
 
       def within_timeframe?(time)
-        (@parsed_timeframe..time.to_datetime).cover?(time)
+        (@parsed_timeframe..@cache_time).cover?(time)
       end
 
       def urls
