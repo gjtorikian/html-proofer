@@ -26,7 +26,7 @@ module HTML
         @iterable_external_urls = remove_query_values
 
         if @cache.exists && @cache.load
-          urls_to_check = @cache.detect_new_urls(@iterable_external_urls)
+          urls_to_check = @cache.detect_url_changes(@iterable_external_urls)
 
           @cache.cache_log.each_pair do |url, cache|
             if @cache.within_timeframe?(cache['time'])

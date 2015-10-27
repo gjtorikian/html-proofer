@@ -69,9 +69,13 @@ module HTML
         @cache_log[url] = data
       end
 
-      def detect_new_urls(found)
+      def detect_url_changes(found)
         existing_urls = @cache_log.keys
+        found_urls = found.keys
+        # prepare to add new URLs detected
         additions = found.reject { |k, _| existing_urls.include?(k) }
+        # prepare to remove from cache URLs that no longer exist
+        @cache_log.delete_if { |k, _| !found_urls.include?(k) }
 
         additions
       end
