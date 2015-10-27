@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.foofoofoo.biz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: HTTP://www.foofoofoo.biz/
+  recorded_at: Tue, 20 Oct 2015 19:00:00 GMT
+- request:
+    method: get
+    uri: www.foofoofoo.biz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: HTTP://www.foofoofoo.biz/
+  recorded_at: Tue, 20 Oct 2015 19:00:00 GMT
+recorded_with: VCR 2.9.3

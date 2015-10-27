@@ -4,9 +4,9 @@ describe 'Cache test' do
 
   it 'knows how to write to cache' do
     stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.htmlproofer.log")
-    delete_cache
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
     run_proofer(brokenLinkExternalFilepath)
 
     log = read_cache
@@ -19,6 +19,7 @@ describe 'Cache test' do
   it 'knows how to load a cache' do
     stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.simple_load.log")
 
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
     expect_any_instance_of(HTML::Proofer::Cache).to receive(:load).once
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/bad_external_links.html"
@@ -63,6 +64,40 @@ describe 'Cache test' do
     expect_any_instance_of(HTML::Proofer::Cache).to receive(:add)
     run_proofer(['www.github.com'], { :cache => { :timeframe => '4d' } })
 
+    Timecop.return
+  end
+
+  it 'does write file if a new URL is added' do
+    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.new_url.log")
+
+    # this is frozen to within 7 days of the log
+    new_time = Time.local(2015, 10, 20, 12, 0, 0)
+    Timecop.freeze(new_time)
+
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    # we expect a new link to be added, but github.com can stay...
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.google.com', nil, 200)
+
+    # ...because it's within the 30d time frame
+    run_proofer(['www.github.com', 'www.google.com'], { :cache => { :timeframe => '30d' } })
+
+    Timecop.return
+  end
+
+  it 'does recheck failures, regardless of cache' do
+    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.recheck_failure.log")
+
+    # this is frozen to within 7 days of the log
+    new_time = Time.local(2015, 10, 20, 12, 0, 0)
+    Timecop.freeze(new_time)
+
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    # we expect the same link to be readded...
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, "External link www.foofoofoo.biz failed: 0 ")
+
+    # ...even though we are within the 30d time frame,
+    # because it's a failure
+    run_proofer(['www.foofoofoo.biz'], { :cache => { :timeframe => '30d' } })
 
     Timecop.return
   end
