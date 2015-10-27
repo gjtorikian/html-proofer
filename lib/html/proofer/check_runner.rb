@@ -24,7 +24,6 @@ module HTML
         @alt_ignores = @options[:alt_ignore]
         @empty_alt_ignore = @options[:empty_alt_ignore]
         @external_urls = {}
-        @external_domain_paths_with_queries = {}
       end
 
       def run
@@ -37,13 +36,7 @@ module HTML
 
       def add_to_external_urls(url, line)
         return if @external_urls[url]
-        uri = Addressable::URI.parse(url)
-
-        if uri.query.nil?
-          add_path_for_url(url)
-        else
-          new_url_query_values?(uri, url)
-        end
+        add_path_for_url(url)
       end
 
       def add_path_for_url(url)
@@ -52,26 +45,6 @@ module HTML
         else
           @external_urls[url] = [@path]
         end
-      end
-
-      def new_url_query_values?(uri, url)
-        queries = uri.query_values.keys.join('-')
-        domain_path = extract_domain_path(uri)
-        if @external_domain_paths_with_queries[domain_path].nil?
-          add_path_for_url(url)
-          # remember queries we've seen, ignore future ones
-          @external_domain_paths_with_queries[domain_path] = [queries]
-        else
-          # add queries we haven't seen
-          unless @external_domain_paths_with_queries[domain_path].include?(queries)
-            add_path_for_url(url)
-            @external_domain_paths_with_queries[domain_path] << queries
-          end
-        end
-      end
-
-      def extract_domain_path(uri)
-        uri.host + uri.path
       end
 
       def self.checks
@@ -88,7 +61,7 @@ module HTML
       private
 
       def remove_ignored(html)
-        html.css('code, pre').each(&:unlink)
+        html.css('code, pre, tt').each(&:unlink)
         html
       end
     end

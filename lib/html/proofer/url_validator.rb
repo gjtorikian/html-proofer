@@ -8,19 +8,22 @@ module HTML
     class UrlValidator
       include HTML::Proofer::Utils
 
-      attr_accessor :logger, :external_urls, :hydra
+      attr_accessor :logger, :external_urls, :iterable_external_urls, :hydra
 
       def initialize(logger, external_urls, options, typhoeus_opts, hydra_opts)
         @logger = logger
         @external_urls = external_urls
+        @iterable_external_urls = {}
         @failed_tests = []
         @options = options
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
+        @external_domain_paths_with_queries = {}
         @cache = Cache.new(@options[:cache])
       end
 
       def run
+        @iterable_external_urls = remove_query_values
         if @cache.exists?
           urls = @cache.load || []
           [].each do |cache|
@@ -28,11 +31,45 @@ module HTML
             add_external_issue(cache['filenames'], cache['message'], cache['status'])
           end
         else
-          external_link_checker(external_urls)
+          external_link_checker(@iterable_external_urls)
           @cache.write
         end
-
         @failed_tests
+      end
+
+      def remove_query_values
+        return if @external_urls.nil?
+        iterable_external_urls = @external_urls.dup
+        @external_urls.keys.each do |url|
+          uri = begin
+                  Addressable::URI.parse(url)
+                rescue URI::Error, Addressable::URI::InvalidURIError
+                  @logger.log :error, :red, "#{url} is an invalid URL"
+                  nil
+                end
+          next if uri.nil? || uri.query.nil?
+          iterable_external_urls.delete(url) unless new_url_query_values?(uri)
+        end
+        iterable_external_urls
+      end
+
+      # remember queries we've seen, ignore future ones
+      def new_url_query_values?(uri)
+        queries = uri.query_values.keys.join('-')
+        domain_path = extract_domain_path(uri)
+        if @external_domain_paths_with_queries[domain_path].nil?
+          @external_domain_paths_with_queries[domain_path] = [queries]
+          true
+        elsif !@external_domain_paths_with_queries[domain_path].include?(queries)
+          @external_domain_paths_with_queries[domain_path] << queries
+          true
+        else
+          false
+        end
+      end
+
+      def extract_domain_path(uri)
+        uri.host + uri.path
       end
 
       # Proofer runs faster if we pull out all the external URLs and run the checks
@@ -62,7 +99,13 @@ module HTML
 
       def url_processor(external_urls)
         external_urls.each_pair do |href, filenames|
-          href = clean_url(href)
+          href = begin
+                   clean_url(href)
+                 rescue URI::Error, Addressable::URI::InvalidURIError
+                   add_external_issue(filenames, "#{href} is an invalid URL")
+                   next
+                 end
+
           if hash?(href) && @options[:check_external_hash]
             queue_request(:get, href, filenames)
           else

@@ -44,4 +44,11 @@ describe HTML::Proofer::Checkable do
       expect(checkable.ignore?).to eq true
     end
   end
+  describe 'ivar setting' do
+    it 'does not explode if given a bad attribute' do
+      broken_attribute = "#{FIXTURES_DIR}/html/invalid_attribute.html"
+      proofer = run_proofer(broken_attribute)
+      expect(proofer.failed_tests.length).to eq 0
+    end
+  end
 end
