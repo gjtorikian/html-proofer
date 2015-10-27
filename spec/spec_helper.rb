@@ -60,6 +60,15 @@ def make_bin(cmd, path=nil)
   `bin/htmlproof #{cmd} #{path}`
 end
 
+def delete_cache
+  File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
+end
+
+def write_cache(time = Time.now)
+  cache = { :time => time, :urls => [] }.to_json
+  File.write(HTML::Proofer::Cache::FILENAME, cache)
+end
+
 def make_cassette_name(file, opts)
   filename = if file.is_a? Array
                file.join('_')

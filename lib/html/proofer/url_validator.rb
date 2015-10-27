@@ -22,7 +22,8 @@ module HTML
 
       def run
         if @cache.exists?
-          @cache.load.each do |cache|
+          urls = @cache.load || []
+          [].each do |cache|
             next if cache['message'].empty? # these were successes
             add_external_issue(cache['filenames'], cache['message'], cache['status'])
           end
@@ -125,7 +126,7 @@ module HTML
 
         msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
         add_external_issue(filenames, msg, response.code)
-        @cache.add(href, filenames, response_code, msg)
+        @cache.add(href, filenames, response.code, msg)
       end
 
       def handle_timeout(href, filenames, response_code)

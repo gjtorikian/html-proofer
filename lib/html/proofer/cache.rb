@@ -17,9 +17,9 @@ module HTML
         @status[:urls] = []
 
         if options.nil? || options.empty?
-          @store = false
+          @load = false
         else
-          @store = true
+          @load = true
           @timeframe = options[:timeframe] || '30d'
         end
 
@@ -65,17 +65,15 @@ module HTML
       end
 
       def add(url, filenames, status, msg = '')
-        return unless store?
         @status[:urls] << { :url => url, :filenames => filenames, :status => status, :message => msg }
       end
 
       def write
-        return unless store?
         File.write(FILENAME, @status.to_json)
       end
 
-      def store?
-        @store && !within_timeframe?
+      def load?
+        @load.nil?
       end
 
       def cache_log_timestamp
