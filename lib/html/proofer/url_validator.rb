@@ -24,21 +24,29 @@ module HTML
 
       def run
         @iterable_external_urls = remove_query_values
-        if @cache.exists?
-          urls = @cache.load || []
-          [].each do |cache|
-            next if cache['message'].empty? # these were successes
-            add_external_issue(cache['filenames'], cache['message'], cache['status'])
+
+        if @cache.exists && @cache.load
+          urls_to_check = @cache.detect_new_urls(@iterable_external_urls)
+
+          @cache.cache_log.each_pair do |url, cache|
+            if @cache.within_timeframe?(cache['time'])
+              next if cache['message'].empty? # these were successes to skip
+              urls_to_check[url] = cache['filenames'] # these are failures to retry
+            else
+              urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
+            end
           end
+          external_link_checker(urls_to_check, @cache.cache_log.keys.length)
         else
           external_link_checker(@iterable_external_urls)
-          @cache.write
         end
+
+        @cache.write
         @failed_tests
       end
 
       def remove_query_values
-        return if @external_urls.nil?
+        return nil if @external_urls.nil?
         iterable_external_urls = @external_urls.dup
         @external_urls.keys.each do |url|
           uri = begin
@@ -82,12 +90,13 @@ module HTML
       # If the HEAD fails, we'll fall back to GET, as some servers are not configured
       # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
       # not an option.
-      def external_link_checker(external_urls)
+      def external_link_checker(external_urls, cache_count = 0)
         external_urls = Hash[external_urls.sort]
 
         count = external_urls.length
         check_text = "#{count} " << (count == 1 ? 'external link' : 'external links')
-        logger.log :info, :blue, "Checking #{check_text}..."
+        cache_text = "(cached #{cache_count} " << (cache_count == 1 ? 'link)' : 'links)')
+        logger.log :info, :blue, "Checking #{check_text} #{cache_text}..."
 
         Ethon.logger = logger # log from Typhoeus/Ethon
 

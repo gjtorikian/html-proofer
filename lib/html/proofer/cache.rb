@@ -1,27 +1,26 @@
 require 'json'
-require 'active_support'
+require 'active_support/core_ext/string'
 require 'active_support/core_ext/date'
 require 'active_support/core_ext/numeric/time'
 
 module HTML
   class Proofer
     class Cache
-      attr_reader :status
-
       FILENAME = '.htmlproofer.log'
       DURATIONS = %w(y M w d h)
 
+      attr_accessor :exists, :load, :cache_log, :cache_time
+
       def initialize(options)
-        @status = {}
-        @status[:time] = Time.now
-        @status[:urls] = []
+        @cache_log = {}
 
         if options.nil? || options.empty?
           @load = false
         else
           @load = true
-          @timeframe = options[:timeframe] || '30d'
+          @parsed_timeframe = parsed_timeframe(options[:timeframe] || '30d')
         end
+        @cache_time = Time.now
 
         if File.exist?(FILENAME)
           @exists = true
@@ -31,21 +30,16 @@ module HTML
         end
       end
 
-      def exists?
-        @exists && within_timeframe?
+      def within_timeframe?(time)
+        (@parsed_timeframe..time.to_datetime).cover?(time)
       end
 
-      def within_timeframe?
-        return false if @timeframe.nil?
-        (parsed_timeframe..@status[:time]).cover?(cache_log_timestamp)
+      def urls
+        @cache_log['urls'] || []
       end
 
-      def load
-        @cache_log['urls']
-      end
-
-      def parsed_timeframe
-        time, date = @timeframe.match(/(\d+)(\D)/).captures
+      def parsed_timeframe(timeframe)
+        time, date = timeframe.match(/(\d+)(\D)/).captures
         unless DURATIONS.include?(date)
           fail ArgumentError, "#{date} is not a valid date in #{DURATIONS}!"
         end
@@ -65,19 +59,29 @@ module HTML
       end
 
       def add(url, filenames, status, msg = '')
-        @status[:urls] << { :url => url, :filenames => filenames, :status => status, :message => msg }
+        data = {
+                  :time => @cache_time,
+                  :filenames => filenames,
+                  :status => status,
+                  :message => msg
+               }
+
+        @cache_log[url] = data
+      end
+
+      def detect_new_urls(found)
+        existing_urls = @cache_log.keys
+        additions = found.reject { |k, _| existing_urls.include?(k) }
+
+        additions
       end
 
       def write
-        File.write(FILENAME, @status.to_json)
+        File.write(FILENAME, @cache_log.to_json)
       end
 
       def load?
         @load.nil?
-      end
-
-      def cache_log_timestamp
-        @cache_log_timestamp ||= Date.strptime(@cache_log['time'])
       end
     end
   end
