@@ -7,7 +7,6 @@ module HTML
   class Proofer
     class Cache
       FILENAME = '.htmlproofer.log'
-      DURATIONS = %w(y M w d h)
 
       attr_accessor :exists, :load, :cache_log, :cache_time
 
@@ -41,9 +40,6 @@ module HTML
 
       def parsed_timeframe(timeframe)
         time, date = timeframe.match(/(\d+)(\D)/).captures
-        unless DURATIONS.include?(date)
-          fail ArgumentError, "#{date} is not a valid date in #{DURATIONS}!"
-        end
         time = time.to_f
         case date
         when 'M'
@@ -54,6 +50,8 @@ module HTML
           time.days.ago
         when 'h'
           time.hours.ago
+        else
+          fail ArgumentError, "#{date} is not a valid timeframe!"
         end
       end
 
