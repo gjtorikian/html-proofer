@@ -46,8 +46,6 @@ module HTML
         end
         time = time.to_f
         case date
-        when 'y'
-          time.years.ago
         when 'M'
           time.months.ago
         when 'w'
