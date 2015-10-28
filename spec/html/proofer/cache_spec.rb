@@ -43,6 +43,7 @@ describe 'Cache test' do
     log = read_cache
     current_time = log.values.first['time']
 
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
     run_proofer(['www.github.com'], { :cache => { :timeframe => '30d' } })
 
     # note that the timestamp did not change
