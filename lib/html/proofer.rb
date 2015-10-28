@@ -10,13 +10,13 @@ require_all 'proofer/check_runner'
 require_all 'proofer/checks'
 
 require 'parallel'
+require 'fileutils'
 
 begin
   require 'awesome_print'
 rescue LoadError; end
 
 module HTML
-
   class Proofer
     include HTML::Proofer::Utils
 
@@ -30,6 +30,8 @@ module HTML
     }
 
     def initialize(src, opts = {})
+      FileUtils.mkdir(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
+
       @src = src
 
       if opts[:verbose]

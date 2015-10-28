@@ -3,6 +3,8 @@ require 'nokogiri'
 module HTML
   class Proofer
     module Utils
+      STORAGE_DIR = '.htmlproofer'
+
       def create_nokogiri(path)
         if File.exist? path
           content = File.open(path).read

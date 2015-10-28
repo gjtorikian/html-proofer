@@ -1,3 +1,5 @@
+require_relative 'utils'
+
 require 'json'
 require 'active_support/core_ext/string'
 require 'active_support/core_ext/date'
@@ -6,7 +8,9 @@ require 'active_support/core_ext/numeric/time'
 module HTML
   class Proofer
     class Cache
-      FILENAME = '.htmlproofer.log'
+      include HTML::Proofer::Utils
+
+      FILENAME = File.join(STORAGE_DIR, 'cache_log')
 
       attr_accessor :exists, :load, :cache_log, :cache_time
 
