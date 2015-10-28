@@ -176,7 +176,7 @@ In addition, there are a few "namespaced" options. These are:
 * `:validation`
 * `:typhoeus`
 * `:parallel`
-
+* `:cache`
 
 See below for more information.
 
@@ -219,6 +219,33 @@ HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
+
+## Configuring caching
+
+Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external links. Caching simply means to skip links that are valid.
+
+While running tests, HTML::Proofer will always write to a log file called *.htmlproofer.log*. You can enable caching from this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
+
+* `M` means months
+* `w` means weeks
+* `d` means days
+* `h` means hours
+
+So, passing the following options means "recheck links older than thirty days":
+
+``` ruby
+{ :cache => { :timeframe => '30d' } }
+```
+
+And the following options means "recheck links older than two weeks":
+
+``` ruby
+{ :cache => { :timeframe => '2w' } }
+```
+
+Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
+
+The cache currently operates on external links only.
 
 ## Logging
 
