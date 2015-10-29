@@ -30,7 +30,7 @@ module HTML
     }
 
     def initialize(src, opts = {})
-      FileUtils.mkdir(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
+      FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
 
       @src = src
 

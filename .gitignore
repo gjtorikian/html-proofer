@@ -24,5 +24,3 @@ docs/
 _yardoc
 doc/
 .DS_Store
-
-.htmlproofer/

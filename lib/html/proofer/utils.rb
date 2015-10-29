@@ -3,7 +3,7 @@ require 'nokogiri'
 module HTML
   class Proofer
     module Utils
-      STORAGE_DIR = '.htmlproofer'
+      STORAGE_DIR = File.join('tmp', '.htmlproofer')
 
       def create_nokogiri(path)
         if File.exist? path

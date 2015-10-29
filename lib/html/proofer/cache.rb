@@ -10,7 +10,7 @@ module HTML
     class Cache
       include HTML::Proofer::Utils
 
-      FILENAME = File.join(STORAGE_DIR, 'cache_log')
+      FILENAME = File.join(STORAGE_DIR, 'cache.log')
 
       attr_accessor :exists, :load, :cache_log, :cache_time
 
