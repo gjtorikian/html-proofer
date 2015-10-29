@@ -76,7 +76,7 @@ module HTML
         # prepare to add new URLs detected
         additions = found.reject { |k, _| existing_urls.include?(k) }
         # prepare to remove from cache URLs that no longer exist
-        @cache_log.delete_if { |k, _| !found_urls.include?(k) }
+        @cache_log.delete_if { |k, _| !found_urls.include?(k.chomp('/')) }
 
         additions
       end
