@@ -26,6 +26,11 @@ module HTML
         @iterable_external_urls = remove_query_values
 
         if @cache.exists && @cache.load
+          cache_count = @cache.cache_log.length
+          cache_text = cache_count == 1 ? 'link' : 'links'
+
+          logger.log :info, :blue, "Found #{cache_count} #{cache_text} in the cache"
+
           urls_to_check = @cache.detect_url_changes(@iterable_external_urls)
 
           @cache.cache_log.each_pair do |url, cache|
@@ -36,7 +41,12 @@ module HTML
               urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
             end
           end
-          external_link_checker(urls_to_check, @cache.cache_log.keys.length)
+
+          urls_count = urls_to_check.length
+          urls_text = urls_count == 1 ? 'link' : 'links'
+          logger.log :info, :blue, "Acting on #{urls_count} #{urls_text}"
+
+          external_link_checker(urls_to_check)
         else
           external_link_checker(@iterable_external_urls)
         end
@@ -90,13 +100,12 @@ module HTML
       # If the HEAD fails, we'll fall back to GET, as some servers are not configured
       # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
       # not an option.
-      def external_link_checker(external_urls, cache_count = 0)
+      def external_link_checker(external_urls)
         external_urls = Hash[external_urls.sort]
 
         count = external_urls.length
         check_text = "#{count} " << (count == 1 ? 'external link' : 'external links')
-        cache_text = "(cached #{cache_count} " << (cache_count == 1 ? 'link)' : 'links)')
-        logger.log :info, :blue, "Checking #{check_text} #{cache_text}..."
+        logger.log :info, :blue, "Checking #{check_text}..."
 
         Ethon.logger = logger # log from Typhoeus/Ethon
 
