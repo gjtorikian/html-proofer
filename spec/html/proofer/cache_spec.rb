@@ -94,7 +94,7 @@ describe 'Cache test' do
 
     expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
     # we expect the same link to be readded...
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, "External link www.foofoofoo.biz failed: 0 ")
+    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, 'External link www.foofoofoo.biz failed: response code 0 means something\'s wrong')
 
     # ...even though we are within the 30d time frame,
     # because it's a failure

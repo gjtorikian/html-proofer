@@ -83,9 +83,7 @@ module HTML
     end
 
     def run
-      count = checks.length
-      check_text = pluralize(count, 'check', 'checks')
-      logger.log :info, :blue, "Running #{check_text} on #{@src} on *#{@options[:ext]}... \n\n"
+      logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links

@@ -153,8 +153,10 @@ module HTML
         if response_code.between?(200, 299)
           check_hash_in_2xx_response(href, effective_url, response, filenames)
           @cache.add(href, filenames, response_code)
-        elsif response.timed_out? || response.code == 0
+        elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
+        elsif response_code == 0
+          handle_failure(href, filenames, response_code)
         elsif method == :head
           queue_request(:get, href, filenames)
         else
@@ -189,7 +191,14 @@ module HTML
       end
 
       def handle_timeout(href, filenames, response_code)
-        msg = "External link #{href} failed: got a time out"
+        msg = "External link #{href} failed: got a time out (response code #{response_code})"
+        @cache.add(href, filenames, 0, msg)
+        return if @options[:only_4xx]
+        add_external_issue(filenames, msg, response_code)
+      end
+
+      def handle_failure(href, filenames, response_code)
+        msg = "External link #{href} failed: response code #{response_code} means something's wrong"
         @cache.add(href, filenames, 0, msg)
         return if @options[:only_4xx]
         add_external_issue(filenames, msg, response_code)
