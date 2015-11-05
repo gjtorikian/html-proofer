@@ -77,6 +77,8 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
       handle_mailto(link, line)
     when 'tel'
       handle_tel(link, line)
+    when 'http'
+      add_issue("#{link.href} is not an HTTPS link", line) if @options[:enforce_https]
     end
   end
 

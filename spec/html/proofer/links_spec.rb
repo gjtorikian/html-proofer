@@ -385,4 +385,16 @@ describe 'Links test' do
     proofer = run_proofer(['www.github.com', 'http://127.0.0.1:____'])
     expect(proofer.failed_tests.first).to match(/is an invalid URL/)
   end
+
+  it 'passes for non-HTTPS links when not asked' do
+    non_https = "#{FIXTURES_DIR}/links/non_https.html"
+    proofer = run_proofer(non_https )
+    expect(proofer.failed_tests.length).to eq 0
+  end
+
+  it 'fails for non-HTTPS links when asked' do
+    non_https = "#{FIXTURES_DIR}/links/non_https.html"
+    proofer = run_proofer(non_https, { :enforce_https => true } )
+    expect(proofer.failed_tests.first).to match(/ben.balter.com is not an HTTPS link/)
+  end
 end
