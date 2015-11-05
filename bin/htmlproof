@@ -32,6 +32,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'Disables the external link checker (default: `false`)'
   p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `path`, `desc`, or `status` (default: `path`).'
+  p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
   p.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'Comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing `href`s that are safe to ignore.'

@@ -51,6 +51,7 @@ module HTML
         :check_external_hash => false,
         :alt_ignore => [],
         :empty_alt_ignore => false,
+        :enforce_https => false,
         :disable_external => false,
         :verbose => false,
         :only_4xx => false,
