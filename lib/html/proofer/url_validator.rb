@@ -19,7 +19,7 @@ module HTML
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
         @external_domain_paths_with_queries = {}
-        @cache = Cache.new(@options[:cache])
+        @cache = Cache.new(@logger, @options[:cache])
       end
 
       def run
@@ -27,9 +27,9 @@ module HTML
 
         if @cache.exists && @cache.load
           cache_count = @cache.cache_log.length
-          cache_text = cache_count == 1 ? 'link' : 'links'
+          cache_text = pluralize(cache_count, 'link', 'links')
 
-          logger.log :info, :blue, "Found #{cache_count} #{cache_text} in the cache"
+          logger.log :info, :blue, "Found #{cache_text} in the cache..."
 
           urls_to_check = @cache.detect_url_changes(@iterable_external_urls)
 
@@ -41,10 +41,6 @@ module HTML
               urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
             end
           end
-
-          urls_count = urls_to_check.length
-          urls_text = urls_count == 1 ? 'link' : 'links'
-          logger.log :info, :blue, "Acting on #{urls_count} #{urls_text}"
 
           external_link_checker(urls_to_check)
         else
@@ -104,14 +100,16 @@ module HTML
         external_urls = Hash[external_urls.sort]
 
         count = external_urls.length
-        check_text = "#{count} " << (count == 1 ? 'external link' : 'external links')
+        check_text = pluralize(count, 'external link', 'external links')
         logger.log :info, :blue, "Checking #{check_text}..."
 
         Ethon.logger = logger # log from Typhoeus/Ethon
 
         url_processor(external_urls)
 
-        logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
+        logger.log :debug, :yellow, "Running requests for:"
+        logger.log :debug, :yellow, "###\n" + external_urls.keys.join("\n") + "\n###"
+
         hydra.run
       end
 
@@ -155,7 +153,7 @@ module HTML
         if response_code.between?(200, 299)
           check_hash_in_2xx_response(href, effective_url, response, filenames)
           @cache.add(href, filenames, response_code)
-        elsif response.timed_out?
+        elsif response.timed_out? || response.code == 0
           handle_timeout(href, filenames, response_code)
         elsif method == :head
           queue_request(:get, href, filenames)
@@ -191,10 +189,10 @@ module HTML
       end
 
       def handle_timeout(href, filenames, response_code)
-        return if @options[:only_4xx]
         msg = "External link #{href} failed: got a time out"
-        add_external_issue(filenames, msg, response_code)
         @cache.add(href, filenames, 0, msg)
+        return if @options[:only_4xx]
+        add_external_issue(filenames, msg, response_code)
       end
 
       def add_external_issue(filenames, desc, status = nil)

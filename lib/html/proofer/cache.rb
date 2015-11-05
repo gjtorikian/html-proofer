@@ -14,7 +14,8 @@ module HTML
 
       attr_accessor :exists, :load, :cache_log, :cache_time
 
-      def initialize(options)
+      def initialize(logger, options)
+        @logger = logger
         @cache_log = {}
 
         if options.nil? || options.empty?
@@ -67,17 +68,43 @@ module HTML
                   :message => msg
                }
 
-        @cache_log[url.chomp('/')] = data
+        @cache_log[clean_url(url)] = data
       end
 
       def detect_url_changes(found)
-        existing_urls = @cache_log.keys
-        found_urls = found.keys
+        existing_urls = @cache_log.keys.map { |url| clean_url(url) }
+        found_urls = found.keys.map { |url| clean_url(url) }
 
         # prepare to add new URLs detected
-        additions = found.reject { |k, _| existing_urls.include?(k) }
-        # prepare to remove from cache URLs that no longer exist
-        @cache_log.delete_if { |k, _| !found_urls.include?(k) }
+        additions = found.reject do |url, _|
+          url = clean_url(url)
+          if existing_urls.include?(url)
+            true
+          else
+            @logger.log :debug, :yellow, "Adding #{url} to cache check"
+            false
+          end
+        end
+
+        new_link_count = additions.length
+        new_link_text = pluralize(new_link_count, 'link', 'links')
+        @logger.log :info, :blue, "Adding #{new_link_text} to the cache..."
+
+        # remove from cache URLs that no longer exist
+        del = 0
+        @cache_log.delete_if do |url, _|
+          url = clean_url(url)
+          if !found_urls.include?(url)
+            @logger.log :debug, :yellow, "Removing #{url} from cache check"
+            del += 1
+            true
+          else
+            false
+          end
+        end
+
+        del_link_text = pluralize(del, 'link', 'links')
+        @logger.log :info, :blue, "Removing #{del_link_text} from the cache..."
 
         additions
       end
@@ -88,6 +115,26 @@ module HTML
 
       def load?
         @load.nil?
+      end
+
+
+      # FIXME: there seems to be some discrepenacy where Typhoeus occasionally adds
+      # a trailing slash to URL strings, which causes issues with the cache
+      def slashless_url(url)
+        url.chomp('/')
+      end
+
+      # FIXME: it seems that Typhoeus actually acts on escaped URLs,
+      # but there's no way to get at that information, and the cache
+      # stores unescaped URLs. Because of this, some links, such as
+      # github.com/search/issues?q=is:open+is:issue+fig are not matched
+      # as github.com/search/issues?q=is%3Aopen+is%3Aissue+fig
+      def unescape_url(url)
+        Addressable::URI.unescape(url)
+      end
+
+      def clean_url(url)
+        slashless_url(unescape_url(url))
       end
     end
   end

@@ -84,7 +84,7 @@ module HTML
 
     def run
       count = checks.length
-      check_text = "#{checks} " << (count == 1 ? 'check' : 'checks')
+      check_text = pluralize(count, 'check', 'checks')
       logger.log :info, :blue, "Running #{check_text} on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
@@ -124,7 +124,9 @@ module HTML
 
       validate_urls unless @options[:disable_external]
 
-      logger.log :info, :blue, "Ran on #{files.length} files!\n\n"
+      count = files.length
+      file_text = pluralize(count, 'file', 'files')
+      logger.log :info, :blue, "Ran on #{file_text}!\n\n"
     end
 
     # Walks over each implemented check and runs them on the files, in parallel.
@@ -194,7 +196,7 @@ module HTML
 
       sorted_failures.sort_and_report
       count = @failed_tests.length
-      failure_text = "#{count} " << (count == 1 ? 'failure' : 'failures')
+      failure_text = pluralize(count, 'failure', 'failures')
       fail logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
   end
