@@ -74,6 +74,10 @@ Mercenary.program(:htmlproof) do |p|
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:verbosity] = opts['verbosity'].to_sym unless opts['verbosity'].nil?
 
+    # FIXME: this is gross
+    options[:validation] = {}
+    options[:validation][:ignore_script_embeds] = opts['ignore_script_embeds']
+
     path = path.delete(' ').split(',') if opts['as_links']
 
     HTML::Proofer.new(path, options).run
