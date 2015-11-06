@@ -16,7 +16,7 @@ def to_regex?(item)
 end
 
 Mercenary.program(:htmlproof) do |p|
-  p.version Gem::Specification.load(File.join(File.dirname(__FILE__), '..', 'html-proofer.gemspec')).version
+  p.version HTML::Proofer::VERSION
   p.description %(Test your rendered HTML files to make sure they're accurate.)
   p.syntax 'htmlproof PATH [options]'
 
