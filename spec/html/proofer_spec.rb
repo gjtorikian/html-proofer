@@ -62,7 +62,6 @@ describe HTML::Proofer do
       '''.strip)
       end
 
-
       it 'understands sorting by status' do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :verbosity => :info, :typhoeus => { :followlocation => false }, :error_sort => :status)
         expect(output.gsub(/\s*$/, '')).to eq('''
