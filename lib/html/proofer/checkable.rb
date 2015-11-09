@@ -30,7 +30,11 @@ module HTML
       end
 
       def url
-        @src || @srcset || @href || ''
+        url = @src || @srcset || @href || ''
+        if @check.base
+          url = Addressable::URI.join(@check.base.attr("href"), url).to_s
+        end
+        url
       end
 
       def valid?

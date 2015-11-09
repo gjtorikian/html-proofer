@@ -26,6 +26,11 @@ module HTML
         @external_urls = {}
       end
 
+      def base
+        return @base if defined?(@base)
+        @base = @html.at_css("base")
+      end
+
       def run
         fail NotImplementedError, 'HTML::Proofer::CheckRunner subclasses must implement #run'
       end

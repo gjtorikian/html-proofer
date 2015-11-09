@@ -397,4 +397,10 @@ describe 'Links test' do
     proofer = run_proofer(non_https, { :enforce_https => true } )
     expect(proofer.failed_tests.first).to match(/ben.balter.com is not an HTTPS link/)
   end
+
+  it 'passes for relative links with a base' do
+    relativeLinks = "#{FIXTURES_DIR}/links/relativeLinksWithBase.html"
+    proofer = run_proofer(relativeLinks)
+    expect(proofer.failed_tests).to eq []
+  end
 end
