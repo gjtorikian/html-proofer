@@ -9,7 +9,7 @@ module HTML
 
       attr_reader :line
 
-      def initialize(obj, check)
+      def initialize(obj, check, base = nil)
         obj.attributes.each_pair do |attribute, value|
           instance_variable_set("@#{attribute.tr('-:.', '_')}".to_sym, value.value)
         end
@@ -22,6 +22,10 @@ module HTML
 
         if @href && @check.options[:href_swap]
           @href = swap(@href, @check.options[:href_swap])
+        end
+
+        if @href && base
+          @href = Addressable::URI.join(base.attr("href"), @href).to_s
         end
 
         # fix up missing protocols
