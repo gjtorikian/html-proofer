@@ -154,6 +154,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
+| `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |

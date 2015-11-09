@@ -46,6 +46,7 @@ module HTML
         :check_favicon => false,
         :href_swap => [],
         :href_ignore => [],
+        :allow_hash_href => false,
         :file_ignore => [],
         :url_ignore => [],
         :check_external_hash => false,
