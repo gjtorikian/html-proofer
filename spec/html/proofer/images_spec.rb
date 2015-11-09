@@ -72,6 +72,12 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'properly checks relative images with base' do
+    relativeImages = "#{FIXTURES_DIR}/images/relativeWithBase.html"
+    proofer = run_proofer(relativeImages)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'properly ignores data URI images' do
     dataURIImage = "#{FIXTURES_DIR}/images/workingDataURIImage.html"
     proofer = run_proofer(dataURIImage)

@@ -25,10 +25,8 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
   include HTML::Proofer::Utils
 
   def run
-    base = @html.at_css("base")
-
     @html.css('a, link').each do |node|
-      link = LinkCheckable.new(node, self, base)
+      link = LinkCheckable.new(node, self)
       line = node.line
 
       next if link.ignore?
