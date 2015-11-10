@@ -32,6 +32,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
       next if link.ignore?
       next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
       next if link.placeholder?
+      next if link.allow_hash_href? && link.href == '#'
 
       # is it even a valid URL?
       unless link.valid?

@@ -85,4 +85,10 @@ describe 'Command test' do
     output = make_bin('--empty-alt-ignore', broken)
     expect(output).to match('successfully')
   end
+
+  it 'works with allow-hash-href' do
+    broken = "#{FIXTURES_DIR}/html/href_hash.html"
+    output = make_bin('--allow-hash-href', broken)
+    expect(output).to match('successfully')
+  end
 end

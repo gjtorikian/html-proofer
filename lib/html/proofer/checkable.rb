@@ -90,6 +90,10 @@ module HTML
         @check.empty_alt_ignore
       end
 
+      def allow_hash_href?
+        @check.allow_hash_href
+      end
+
       # path is external to the file
       def external?
         !internal?
