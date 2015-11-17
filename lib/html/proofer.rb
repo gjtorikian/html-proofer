@@ -31,6 +31,10 @@ module HTML
       }
     }
 
+    HYDRA_DEFAULTS = {
+      :max_concurrency => 50
+    }
+
     def initialize(src, opts = {})
       @src = src
 
@@ -65,7 +69,7 @@ module HTML
       @typhoeus_opts = TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
       opts.delete(:typhoeus)
 
-      @hydra_opts = opts[:hydra] || {}
+      @hydra_opts = HYDRA_DEFAULTS.merge(opts[:hydra] || {})
       opts.delete(:hydra)
 
       # fall back to parallel defaults

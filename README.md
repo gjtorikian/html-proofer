@@ -211,7 +211,7 @@ This sets `HTML::Proofer`'s extensions to use _.htm_, gives Typhoeus a configura
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
-The default value is `typhoeus => { :followlocation => true }`.
+The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :max_concurrency => 50 } }`.
 
 ### Configuring Parallel
 
