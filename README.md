@@ -294,6 +294,16 @@ HTML::Proofer.new("out/", {
 }}).run
 ```
 
+### Regular expressions
+
+To exclude urls using regular expressions, include them between forward slashes and don't quote them:
+
+``` ruby
+HTML::Proofer.new("out/", {
+  :url_ignore => [/example.com/],
+}).run
+```
+
 ## Real-life examples
 
 Project | Repository
