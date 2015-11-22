@@ -1,0 +1,8 @@
+<p>The container on the Redis server and its volume have now both been moved to the second host, and Flocker has maintained its link to the web application on the first host:</p>
+
+<ul>
+  <li>Visit <a href="http://1.2.3.4/">http://1.2.3.4/</a>.
+You will see the visit count is still persisted on this node even though the application is no longer running on that host</li>
+  <li>Visit <a href="http://5.6.7.8/">http://5.6.7.8/</a>.
+You will see that the count still persists, even though the container with the volume has moved between hosts.</li>
+</ul>

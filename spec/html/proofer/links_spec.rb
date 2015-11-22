@@ -385,4 +385,34 @@ describe 'Links test' do
     proofer = run_proofer(['www.github.com', 'http://127.0.0.1:____'])
     expect(proofer.failed_tests.first).to match(/is an invalid URL/)
   end
+
+  it 'passes for non-HTTPS links when not asked' do
+    non_https = "#{FIXTURES_DIR}/links/non_https.html"
+    proofer = run_proofer(non_https )
+    expect(proofer.failed_tests.length).to eq 0
+  end
+
+  it 'fails for non-HTTPS links when asked' do
+    non_https = "#{FIXTURES_DIR}/links/non_https.html"
+    proofer = run_proofer(non_https, { :enforce_https => true } )
+    expect(proofer.failed_tests.first).to match(/ben.balter.com is not an HTTPS link/)
+  end
+
+  it 'passes for hash href when asked' do
+    hash_href = "#{FIXTURES_DIR}/links/hash_href.html"
+    proofer = run_proofer(hash_href, { :allow_hash_href => true })
+    expect(proofer.failed_tests.length).to eq 0
+  end
+
+  it 'fails for hash href when not asked' do
+    hash_href = "#{FIXTURES_DIR}/links/hash_href.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.first).to match(/linking to internal hash # that does not exist/)
+  end
+
+  it 'fails for broken IP address links' do
+    hash_href = "#{FIXTURES_DIR}/links/ip_href.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.first).to match(/got a time out/)
+  end
 end

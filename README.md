@@ -41,6 +41,7 @@ You can enable or disable most of the following checks.
 * Whether your internal links are working
 * Whether your internal hash references (`#linkToMe`) are working
 * Whether external links are working
+* Whether your links are not HTTPS
 
 ### Scripts
 
@@ -153,6 +154,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
+| `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
@@ -161,6 +163,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 |`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
+| `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `ext` | The extension of your HTML files including the dot. | `.html`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
@@ -208,7 +211,7 @@ This sets `HTML::Proofer`'s extensions to use _.htm_, gives Typhoeus a configura
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
-The default value is `typhoeus => { :followlocation => true }`.
+The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :max_concurrency => 50 } }`.
 
 ### Configuring Parallel
 
@@ -316,6 +319,16 @@ HTML::Proofer.new("out/", {
   :typhoeus => {
     :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run
+```
+
+### Regular expressions
+
+To exclude urls using regular expressions, include them between forward slashes and don't quote them:
+
+``` ruby
+HTML::Proofer.new("out/", {
+  :url_ignore => [/example.com/],
+}).run
 ```
 
 ## Real-life examples

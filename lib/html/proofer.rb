@@ -29,6 +29,10 @@ module HTML
       }
     }
 
+    HYDRA_DEFAULTS = {
+      :max_concurrency => 50
+    }
+
     def initialize(src, opts = {})
       FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
 
@@ -46,11 +50,13 @@ module HTML
         :check_favicon => false,
         :href_swap => [],
         :href_ignore => [],
+        :allow_hash_href => false,
         :file_ignore => [],
         :url_ignore => [],
         :check_external_hash => false,
         :alt_ignore => [],
         :empty_alt_ignore => false,
+        :enforce_https => false,
         :disable_external => false,
         :verbose => false,
         :only_4xx => false,
@@ -63,7 +69,7 @@ module HTML
       @typhoeus_opts = TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
       opts.delete(:typhoeus)
 
-      @hydra_opts = opts[:hydra] || {}
+      @hydra_opts = HYDRA_DEFAULTS.merge(opts[:hydra] || {})
       opts.delete(:hydra)
 
       # fall back to parallel defaults

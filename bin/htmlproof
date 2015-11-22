@@ -16,12 +16,13 @@ def to_regex?(item)
 end
 
 Mercenary.program(:htmlproof) do |p|
-  p.version Gem::Specification.load(File.join(File.dirname(__FILE__), '..', 'html-proofer.gemspec')).version
+  p.version HTML::Proofer::VERSION
   p.description %(Test your rendered HTML files to make sure they're accurate.)
   p.syntax 'htmlproof PATH [options]'
 
   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
+  p.option 'allow_hash_href', '--allow-hash-href', 'Allows the `#` `href`.'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'Comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'empty_alt_ignore', '--empty-alt-ignore', 'Ignores images with empty alt tags.'
@@ -32,6 +33,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'Disables the external link checker (default: `false`)'
   p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `path`, `desc`, or `status` (default: `path`).'
+  p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
   p.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'Comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing `href`s that are safe to ignore.'
@@ -72,6 +74,10 @@ Mercenary.program(:htmlproof) do |p|
 
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:verbosity] = opts['verbosity'].to_sym unless opts['verbosity'].nil?
+
+    # FIXME: this is gross
+    options[:validation] = {}
+    options[:validation][:ignore_script_embeds] = opts['ignore_script_embeds']
 
     path = path.delete(' ').split(',') if opts['as_links']
 
