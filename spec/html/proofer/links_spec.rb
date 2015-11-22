@@ -410,4 +410,9 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/linking to internal hash # that does not exist/)
   end
 
+  it 'fails for broken IP address links' do
+    hash_href = "#{FIXTURES_DIR}/links/ip_href.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.first).to match(/got a time out/)
+  end
 end
