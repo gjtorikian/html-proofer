@@ -413,6 +413,6 @@ describe 'Links test' do
   it 'fails for broken IP address links' do
     hash_href = "#{FIXTURES_DIR}/links/ip_href.html"
     proofer = run_proofer(hash_href)
-    expect(proofer.failed_tests.first).to match(/got a time out/)
+    expect(proofer.failed_tests.first).to match(/response code 0/)
   end
 end
