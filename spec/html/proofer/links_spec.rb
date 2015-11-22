@@ -42,7 +42,7 @@ describe 'Links test' do
   it 'fails for broken external links' do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     proofer = run_proofer(brokenLinkExternalFilepath)
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'passes for different filename without option' do
@@ -55,7 +55,7 @@ describe 'Links test' do
     options = { :ext => '.foo' }
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/file.foo"
     proofer = run_proofer(brokenLinkExternalFilepath, options)
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'fails for broken internal links' do
@@ -199,7 +199,7 @@ describe 'Links test' do
   it 'fails for invalid links missing the protocol' do
     missingProtocolLink = "#{FIXTURES_DIR}/links/link_missing_protocol_invalid.html"
     proofer = run_proofer(missingProtocolLink)
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'works for valid href within link elements' do
@@ -236,7 +236,7 @@ describe 'Links test' do
 
   it 'works for array of links' do
     proofer = run_proofer(['www.github.com', 'foofoofoo.biz'])
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'works for broken anchors within pre' do
@@ -410,4 +410,9 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/linking to internal hash # that does not exist/)
   end
 
+  it 'fails for broken IP address links' do
+    hash_href = "#{FIXTURES_DIR}/links/ip_href.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.first).to match(/response code 0/)
+  end
 end

@@ -8,17 +8,15 @@ end
 require_all 'proofer'
 require_all 'proofer/check_runner'
 require_all 'proofer/checks'
-require_relative './proofer/utils'
-require_relative './proofer/xpathfunctions'
 
 require 'parallel'
+require 'fileutils'
 
 begin
   require 'awesome_print'
 rescue LoadError; end
 
 module HTML
-
   class Proofer
     include HTML::Proofer::Utils
 
@@ -36,6 +34,8 @@ module HTML
     }
 
     def initialize(src, opts = {})
+      FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
+
       @src = src
 
       if opts[:verbose]
@@ -89,9 +89,7 @@ module HTML
     end
 
     def run
-      count = checks.length
-      check_text = "#{checks} " << (count == 1 ? 'check' : 'checks')
-      logger.log :info, :blue, "Running #{check_text} on #{@src} on *#{@options[:ext]}... \n\n"
+      logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
       if @src.is_a?(Array) && !@options[:disable_external]
         check_list_of_links
@@ -130,7 +128,9 @@ module HTML
 
       validate_urls unless @options[:disable_external]
 
-      logger.log :info, :blue, "Ran on #{files.length} files!\n\n"
+      count = files.length
+      file_text = pluralize(count, 'file', 'files')
+      logger.log :info, :blue, "Ran on #{file_text}!\n\n"
     end
 
     # Walks over each implemented check and runs them on the files, in parallel.
@@ -200,7 +200,7 @@ module HTML
 
       sorted_failures.sort_and_report
       count = @failed_tests.length
-      failure_text = "#{count} " << (count == 1 ? 'failure' : 'failures')
+      failure_text = pluralize(count, 'failure', 'failures')
       fail logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
   end

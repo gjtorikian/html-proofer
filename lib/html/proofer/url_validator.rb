@@ -1,6 +1,7 @@
 require 'typhoeus'
 require 'uri'
 require_relative './utils'
+require_relative './cache'
 
 module HTML
   class Proofer
@@ -18,16 +19,40 @@ module HTML
         @hydra = Typhoeus::Hydra.new(hydra_opts)
         @typhoeus_opts = typhoeus_opts
         @external_domain_paths_with_queries = {}
+        @cache = Cache.new(@logger, @options[:cache])
       end
 
       def run
         @iterable_external_urls = remove_query_values
-        external_link_checker(@iterable_external_urls)
+
+        if @cache.exists && @cache.load
+          cache_count = @cache.cache_log.length
+          cache_text = pluralize(cache_count, 'link', 'links')
+
+          logger.log :info, :blue, "Found #{cache_text} in the cache..."
+
+          urls_to_check = @cache.detect_url_changes(@iterable_external_urls)
+
+          @cache.cache_log.each_pair do |url, cache|
+            if @cache.within_timeframe?(cache['time'])
+              next if cache['message'].empty? # these were successes to skip
+              urls_to_check[url] = cache['filenames'] # these are failures to retry
+            else
+              urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
+            end
+          end
+
+          external_link_checker(urls_to_check)
+        else
+          external_link_checker(@iterable_external_urls)
+        end
+
+        @cache.write
         @failed_tests
       end
 
       def remove_query_values
-        return if @external_urls.nil?
+        return nil if @external_urls.nil?
         iterable_external_urls = @external_urls.dup
         @external_urls.keys.each do |url|
           uri = begin
@@ -75,14 +100,16 @@ module HTML
         external_urls = Hash[external_urls.sort]
 
         count = external_urls.length
-        check_text = "#{count} " << (count == 1 ? 'external link' : 'external links')
+        check_text = pluralize(count, 'external link', 'external links')
         logger.log :info, :blue, "Checking #{check_text}..."
 
         Ethon.logger = logger # log from Typhoeus/Ethon
 
         url_processor(external_urls)
 
-        logger.log :debug, :yellow, "Running requests for all #{hydra.queued_requests.size} external URLs..."
+        logger.log :debug, :yellow, "Running requests for:"
+        logger.log :debug, :yellow, "###\n" + external_urls.keys.join("\n") + "\n###"
+
         hydra.run
       end
 
@@ -125,14 +152,19 @@ module HTML
 
         if response_code.between?(200, 299)
           check_hash_in_2xx_response(href, effective_url, response, filenames)
+          @cache.add(href, filenames, response_code)
         elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
+        elsif response_code == 0
+          handle_failure(href, filenames, response_code)
         elsif method == :head
           queue_request(:get, href, filenames)
         else
           return if @options[:only_4xx] && !response_code.between?(400, 499)
           # Received a non-successful http response.
-          add_external_issue(filenames, "External link #{href} failed: #{response_code} #{response.return_message}", response_code)
+          msg = "External link #{href} failed: #{response_code} #{response.return_message}"
+          add_external_issue(filenames, msg, response_code)
+          @cache.add(href, filenames, response_code, msg)
         end
       end
 
@@ -153,12 +185,23 @@ module HTML
 
         return unless body_doc.xpath(xpath).empty?
 
-        add_external_issue filenames, "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not", response.code
+        msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
+        add_external_issue(filenames, msg, response.code)
+        @cache.add(href, filenames, response.code, msg)
       end
 
       def handle_timeout(href, filenames, response_code)
+        msg = "External link #{href} failed: got a time out (response code #{response_code})"
+        @cache.add(href, filenames, 0, msg)
         return if @options[:only_4xx]
-        add_external_issue filenames, "External link #{href} failed: got a time out", response_code
+        add_external_issue(filenames, msg, response_code)
+      end
+
+      def handle_failure(href, filenames, response_code)
+        msg = "External link #{href} failed: response code #{response_code} means something's wrong"
+        @cache.add(href, filenames, 0, msg)
+        return if @options[:only_4xx]
+        add_external_issue(filenames, msg, response_code)
       end
 
       def add_external_issue(filenames, desc, status = nil)

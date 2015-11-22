@@ -35,7 +35,7 @@ describe 'Images test' do
   it 'fails for missing external images' do
     externalImageFilepath = "#{FIXTURES_DIR}/images/missingImageExternal.html"
     proofer = run_proofer(externalImageFilepath)
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'fails for missing internal images' do
@@ -105,7 +105,7 @@ describe 'Images test' do
   it 'properly ignores missing alt tags, but not all URLs, when asked' do
     ignorableLinks = "#{FIXTURES_DIR}/images/ignoreAltButNotLink.html"
     proofer = run_proofer(ignorableLinks, {:alt_ignore => [/.*/]})
-    expect(proofer.failed_tests.first).to match(/failed: 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
     expect(proofer.failed_tests.first).to_not match /does not have an alt attribute/
   end
 

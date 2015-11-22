@@ -3,6 +3,12 @@ require 'nokogiri'
 module HTML
   class Proofer
     module Utils
+      STORAGE_DIR = File.join('tmp', '.htmlproofer')
+
+      def pluralize(count, single, plural)
+        "#{count} " << (count == 1 ? single : plural)
+      end
+
       def create_nokogiri(path)
         if File.exist? path
           content = File.open(path).read

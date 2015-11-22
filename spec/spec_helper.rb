@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'vcr'
+require 'timecop'
 require_relative '../lib/html/proofer'
 
 FIXTURES_DIR = 'spec/html/proofer/fixtures'
@@ -22,12 +23,12 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = fake_out = StringIO.new
+  $stdout = fake_out = StringIO.new unless ENV['NOISE']
   begin
     yield
   rescue RuntimeError
   ensure
-    $stderr = original_stderr
+    $stderr = original_stderr unless ENV['NOISE']
     $stdout = original_stdout
   end
   fake_err.string
@@ -57,6 +58,14 @@ end
 
 def make_bin(cmd, path=nil)
   `bin/htmlproof #{cmd} #{path}`
+end
+
+def delete_cache
+  File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
+end
+
+def read_cache
+  JSON.parse File.read(HTML::Proofer::Cache::FILENAME)
 end
 
 def make_cassette_name(file, opts)

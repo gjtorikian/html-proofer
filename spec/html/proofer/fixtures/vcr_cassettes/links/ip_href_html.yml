@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://1.2.3.4/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.2; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://1.2.3.4/
+  recorded_at: Sun, 22 Nov 2015 17:03:02 GMT
+- request:
+    method: head
+    uri: http://5.6.7.8/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.2; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://5.6.7.8/
+  recorded_at: Sun, 22 Nov 2015 17:03:02 GMT
+- request:
+    method: get
+    uri: http://1.2.3.4/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.2; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://1.2.3.4/
+  recorded_at: Sun, 22 Nov 2015 17:04:42 GMT
+- request:
+    method: get
+    uri: http://5.6.7.8/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.2; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://5.6.7.8/
+  recorded_at: Sun, 22 Nov 2015 17:04:42 GMT
+recorded_with: VCR 2.9.3

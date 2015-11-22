@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 27 Oct 2015 23:45:45 GMT
+      Expires:
+      - "-1"
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657
+        for more info."
+      Server:
+      - gws
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - PREF=ID=1111111111111111:FF=0:TM=1445989545:LM=1445989545:V=1:S=ezJJ4DJwnlbnVVYE;
+        expires=Thu, 31-Dec-2015 16:02:17 GMT; path=/; domain=.google.com
+      - NID=72=PQzL7mmUIdg1rjMewNJvMIhyNDYynWTBbrfJt9f8yrk4kJD8IBT5QVzI8wyUyMh31rrC50xD8K-I0Y_t5Oxur32IVUnVNBJ9B_iq_us63RN17aT5vIOmqf9AHGtILumCDgcqoTQZ5vfv2CdC1h4ZyeSExUG5i_1FInlZLJAqWSVKUNox7Nt3q2IHRg0;
+        expires=Wed, 27-Apr-2016 23:45:45 GMT; path=/; domain=.google.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: HTTP://www.google.com/
+  recorded_at: Tue, 27 Oct 2015 23:45:45 GMT
+- request:
+    method: head
+    uri: www.github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.5.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 27 Oct 2015 23:45:58 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Content-Security-Policy:
+      - 'default-src *; script-src assets-cdn.github.com; object-src assets-cdn.github.com;
+        style-src ''self'' ''unsafe-inline'' ''unsafe-eval'' assets-cdn.github.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; frame-src ''self'' render.githubusercontent.com
+        gist.github.com www.youtube.com player.vimeo.com checkout.paypal.com; font-src
+        assets-cdn.github.com; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        base-uri ''self''; form-action ''self'' github.com gist.github.com'
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Sat, 27 Oct 2035 23:45:58
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiZjg2NTc3MDdmZGFmZmVlMmY0MzBjM2Q4YjZlNWM4NmQiLCJfY3NyZl90b2tlbiI6IlVUVzVNU2c1eFRBRDZNTjFmYWtaV1BEcVNJbUhtVStBdVptZVBtejFrK3c9In0%3D--c4a32d61f67922d7e138e366139eaa0f943a6005;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 5fcecc1ed71d320ba10c3127658b714d
+      X-Runtime:
+      - '0.008166'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - deny
+      X-Served-By:
+      - ef97014f01ea59c1ef337fe51a4d0331
+      X-GitHub-Request-Id:
+      - 490F8465:3709:A9BE601:56300CB5
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Tue, 27 Oct 2015 23:45:58 GMT
+recorded_with: VCR 2.9.3
