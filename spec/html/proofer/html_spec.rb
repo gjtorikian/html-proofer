@@ -61,4 +61,18 @@ describe 'Html test' do
     proofer = run_proofer(ignorableScript, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not fail for weird iframe sources' do
+    opts = { :check_html => true }
+    weird_iframe = "#{FIXTURES_DIR}/html/weird_iframe.html"
+    proofer = run_proofer(weird_iframe, opts)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does not fail for weird onclick sources' do
+    opts = { :check_html => true }
+    weird_onclick = "#{FIXTURES_DIR}/html/weird_onclick.html"
+    proofer = run_proofer(weird_onclick, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
