@@ -32,9 +32,7 @@ module HTML
       # problem from http://git.io/vBYU1
       # solution from http://git.io/vBYUi
       def clean_content(string)
-        matches = string.scan(%r{<url>http(?:s)?://([^<]+)<\/url>}i) +
-                  string.scan(%r{http(?:s)?://([^>]+)}i) +
-                  string.scan(%r{window.open\(['"]http(?:s)?://([^>]+)}i)
+        matches = string.scan(%r{https?://([^>]+)}i)
 
         matches.flatten.each do |url|
           escaped_url = url.gsub(/&(?!amp;)/, '&amp;')
