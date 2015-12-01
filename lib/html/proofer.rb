@@ -126,7 +126,15 @@ module HTML
         @failed_tests.concat(item[:failed_tests])
       end
 
-      validate_urls unless @options[:disable_external]
+      # TODO: lazy. if we're checking only external links,
+      # we'll just trash all the failed tests. really, we should
+      # just not run those other checks at all.
+      if @options[:external_only]
+        @failed_tests = []
+        validate_urls
+      elsif !@options[:disable_external]
+        validate_urls
+      end
 
       count = files.length
       file_text = pluralize(count, 'file', 'files')
