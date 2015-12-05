@@ -5,7 +5,6 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 
 require 'html/proofer'
 require 'mercenary'
-require 'rubygems'
 
 def to_regex?(item)
   if item.start_with?('/') && item.end_with?('/')
@@ -22,26 +21,26 @@ Mercenary.program(:htmlproof) do |p|
 
   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
-  p.option 'allow_hash_href', '--allow-hash-href', 'Allows the `#` `href`.'
+  p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, ignores the `href` `#`'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
-  p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'Comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
-  p.option 'empty_alt_ignore', '--empty-alt-ignore', 'Ignores images with empty alt tags.'
+  p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, ' An array of Strings indicating which checks you\'d like to not perform.'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
-  p.option 'disable_external', '--disable-external', 'Disables the external link checker (default: `false`)'
-  p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `path`, `desc`, or `status` (default: `path`).'
+  p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
+  p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'
+  p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `:path`, `:desc`, or `:status` (default: `path`).'
   p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
-  p.option 'ext', '--ext EXT', String, 'The extension of your HTML files (default: `.html`)'
-  p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'Comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
-  p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing `href`s that are safe to ignore.'
-  p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'Comma-separated list of key-value pairs of `RegExp:String`. Transforms links matching `RegExp` into `String`'
+  p.option 'ext', '--ext EXT', String, 'The extension of your HTML files including the dot. (default: `.html`)'
+  p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
+  p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.**'
+  p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.**'
   p.option 'ignore_script_embeds', '--ignore-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
-  p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4x status code range.'
-  p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'Comma-separated list of Strings or RegExps containing URLs that are safe to ignore.'
-  p.option 'verbose', '--verbose', 'Enables more verbose logging.'
+  p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
+  p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
+  p.option 'verbose', '--verbose', 'If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**'
   p.option 'verbosity', '--verbosity', String, 'Sets the logging level, as determined by Yell'
 
   p.action do |args, opts|

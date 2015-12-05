@@ -91,4 +91,24 @@ describe 'Command test' do
     output = make_bin('--allow-hash-href', broken)
     expect(output).to match('successfully')
   end
+
+  it 'has every option' do
+    config_keys = HTML::Proofer::Configuration::PROOFER_DEFAULTS.keys
+    bin_file = File.read('bin/htmlproof')
+    help_output = make_bin('--help')
+    readme = File.read('README.md')
+    config_keys.map(&:to_s).each do |key|
+      # match options
+      expect(bin_file).to match(key)
+      readme.each_line do |line|
+        next unless line.match(/\| `#{key}`/)
+        description = line.split('|')[2].strip
+        description.gsub!('A hash', 'A comma-separated list')
+        description.gsub!('An array', 'A comma-separated list')
+        description.sub!(/\.$/, '')
+        # match README description for option
+        expect(help_output).to include(description)
+      end
+    end
+  end
 end
