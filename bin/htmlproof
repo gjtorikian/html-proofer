@@ -26,6 +26,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'error_sort', '--error-sort SORT', 'Defines the sort order for error output. Can be `:path`, `:desc`, or `:status` (default: `path`).'
   p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
   p.option 'ext', '--ext EXT', String, 'The extension of your HTML files including the dot. (default: `.html`)'
+  p.option 'external_only', '--external_only', 'Only checks problems with external references'
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.**'
   p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.**'

@@ -166,6 +166,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `ext` | The extension of your HTML files including the dot. | `.html`
+| `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.** | `[]` |
 | `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.** | `{}` |
