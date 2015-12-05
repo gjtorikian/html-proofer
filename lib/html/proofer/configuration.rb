@@ -1,6 +1,7 @@
 module HTML
   class Proofer
     class Configuration < Hash
+      require_relative 'version'
 
       PROOFER_DEFAULTS = {
         :ext => '.html',
@@ -26,14 +27,13 @@ module HTML
       TYPHOEUS_DEFAULTS = {
         :followlocation => true,
         :headers => {
-          'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
+          'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{HTML::Proofer::VERSION}; +https://github.com/gjtorikian/html-proofer)"
         }
       }
 
       HYDRA_DEFAULTS = {
         :max_concurrency => 50
       }
-
     end
   end
 end
