@@ -1,6 +1,6 @@
 module HTML
   class Proofer
-    class Configuration < Hash
+    module Configuration
       require_relative 'version'
 
       PROOFER_DEFAULTS = {
@@ -34,6 +34,14 @@ module HTML
       HYDRA_DEFAULTS = {
         :max_concurrency => 50
       }
+
+      def self.to_regex?(item)
+        if item.start_with?('/') && item.end_with?('/')
+          Regexp.new item[1...-1]
+        else
+          item
+        end
+      end
     end
   end
 end

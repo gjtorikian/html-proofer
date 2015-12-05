@@ -6,14 +6,6 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 require 'html/proofer'
 require 'mercenary'
 
-def to_regex?(item)
-  if item.start_with?('/') && item.end_with?('/')
-    Regexp.new item[1...-1]
-  else
-    item
-  end
-end
-
 Mercenary.program(:htmlproof) do |p|
   p.version HTML::Proofer::VERSION
   p.description %(Test your rendered HTML files to make sure they're accurate.)
@@ -52,7 +44,7 @@ Mercenary.program(:htmlproof) do |p|
     # prepare everything to go to proofer
     p.options.select { |o| !opts[o.config_key].nil? }.each do |option|
       if option.return_type.to_s == 'Array' # TODO: is_a? doesn't work here?
-        opts[option.config_key] = opts[option.config_key].map { |i| to_regex?(i) }
+        opts[option.config_key] = opts[option.config_key].map { |i| HTML::Proofer::Configuration.to_regex?(i) }
       end
       options[option.config_key.to_sym] = opts[option.config_key]
     end
@@ -68,7 +60,7 @@ Mercenary.program(:htmlproof) do |p|
 
     # check for ignore_scripts_embeds as it should be set in :validation
     unless opts['ignore_script_embeds'].nil?
-        options[:validation] = { :ignore_script_embeds => true }
+      options[:validation] = { :ignore_script_embeds => true }
     end
 
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
