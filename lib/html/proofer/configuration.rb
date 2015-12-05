@@ -4,24 +4,24 @@ module HTML
       require_relative 'version'
 
       PROOFER_DEFAULTS = {
-        :ext => '.html',
-        :check_favicon => false,
-        :href_swap => [],
-        :href_ignore => [],
         :allow_hash_href => false,
-        :file_ignore => [],
-        :url_ignore => [],
-        :check_external_hash => false,
         :alt_ignore => [],
+        :check_external_hash => false,
+        :check_favicon => false,
+        :check_html => false,
+        :checks_to_ignore => []
+        :directory_index_file => 'index.html',
+        :disable_external => false,
         :empty_alt_ignore => false,
         :enforce_https => false,
-        :disable_external => false,
-        :verbose => false,
-        :only_4xx => false,
-        :directory_index_file => 'index.html',
-        :check_html => false,
         :error_sort => :path,
-        :checks_to_ignore => []
+        :ext => '.html',
+        :file_ignore => [],
+        :href_ignore => [],
+        :href_swap => [],
+        :only_4xx => false,
+        :url_ignore => [],
+        :verbose => false,
       }
 
       TYPHOEUS_DEFAULTS = {
