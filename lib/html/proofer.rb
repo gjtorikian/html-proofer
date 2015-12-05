@@ -22,17 +22,6 @@ module HTML
 
     attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls, :iterable_external_urls
 
-    TYPHOEUS_DEFAULTS = {
-      :followlocation => true,
-      :headers => {
-        'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{VERSION}; +https://github.com/gjtorikian/html-proofer)"
-      }
-    }
-
-    HYDRA_DEFAULTS = {
-      :max_concurrency => 50
-    }
-
     def initialize(src, opts = {})
       FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
 
@@ -45,31 +34,12 @@ module HTML
         warn '`@options[:href_ignore]` will be renamed in a future 3.x.x release: http://git.io/vGHHy'
       end
 
-      @proofer_opts = {
-        :ext => '.html',
-        :check_favicon => false,
-        :href_swap => [],
-        :href_ignore => [],
-        :allow_hash_href => false,
-        :file_ignore => [],
-        :url_ignore => [],
-        :check_external_hash => false,
-        :alt_ignore => [],
-        :empty_alt_ignore => false,
-        :enforce_https => false,
-        :disable_external => false,
-        :verbose => false,
-        :only_4xx => false,
-        :directory_index_file => 'index.html',
-        :check_html => false,
-        :error_sort => :path,
-        :checks_to_ignore => []
-      }
+      @proofer_opts = HTML::Proofer::Configuration::PROOFER_DEFAULTS
 
-      @typhoeus_opts = TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
+      @typhoeus_opts = HTML::Proofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
       opts.delete(:typhoeus)
 
-      @hydra_opts = HYDRA_DEFAULTS.merge(opts[:hydra] || {})
+      @hydra_opts = HTML::Proofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
       opts.delete(:hydra)
 
       # fall back to parallel defaults
