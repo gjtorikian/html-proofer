@@ -39,7 +39,6 @@ class HtmlCheck < ::HTML::Proofer::CheckRunner
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
       next if @validation_opts[:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
-      next if message =~ /htmlParseEntityRef: expecting ';'/
 
       add_issue(message, line)
     end
