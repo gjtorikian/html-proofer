@@ -36,7 +36,6 @@ module HTML
 
         matches.flatten.each do |url|
           escaped_url = url.gsub(/&(?!amp;)/, '&amp;')
-          escaped_url = escaped_url.gsub(%r{/}, '&#47;')
           string.gsub!(url, escaped_url)
         end
         string

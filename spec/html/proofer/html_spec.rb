@@ -75,4 +75,11 @@ describe 'Html test' do
     proofer = run_proofer(weird_onclick, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'validates normal looking government HTML' do
+    opts = { :check_html => true }
+    normal_looking_page = "#{FIXTURES_DIR}/html/normal_looking_page.html"
+    proofer = run_proofer(normal_looking_page, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
