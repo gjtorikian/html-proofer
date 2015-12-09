@@ -16,7 +16,7 @@ module HTML
           content = path
         end
 
-        Nokogiri::HTML(clean_content(content))
+        Nokogiri::HTML(content)
       end
       module_function :create_nokogiri
 
@@ -31,17 +31,18 @@ module HTML
       # address a problem with Nokogiri's parsing URL entities
       # problem from http://git.io/vBYU1
       # solution from http://git.io/vBYUi
-      def clean_content(string)
-        matches = string.scan(%r{https?://([^>]+)}i)
-
-        matches.flatten.each do |url|
-          escaped_url = url.gsub(/&(?!amp;)/, '&amp;')
-          escaped_url = escaped_url.gsub(%r{/}, '&#47;')
-          string.gsub!(url, escaped_url)
-        end
-        string
-      end
-      module_function :clean_content
+      # UPDATE: Not worth my time to figure out why this is happening.
+      # def clean_content(string)
+      #   matches = string.scan(%r{https?://([^>]+)}i)
+      #
+      #   matches.flatten.each do |url|
+      #     escaped_url = url.gsub(/&(?!amp;)/, '&amp;')
+      #     escaped_url = escaped_url.gsub(%r{/}, '&#47;')
+      #     string.gsub!(url, escaped_url)
+      #   end
+      #   string
+      # end
+      # module_function :clean_content
     end
   end
 end
