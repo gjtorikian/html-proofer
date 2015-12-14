@@ -6,4 +6,9 @@ describe 'Open Graph test' do
     proofer = run_proofer(url_valid, { :check_opengraph => true })
     expect(proofer.failed_tests).to eq []
   end
+  it 'passes for existing external image' do
+    url_valid = "#{FIXTURES_DIR}/opengraph/image-valid.html"
+    proofer = run_proofer(url_valid, { :check_opengraph => true })
+    expect(proofer.failed_tests).to eq []
+  end
 end
