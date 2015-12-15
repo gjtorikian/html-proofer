@@ -19,6 +19,6 @@ describe 'Open Graph test' do
   it 'fails for missing external image' do
     url_valid = "#{FIXTURES_DIR}/opengraph/image-invalid.html"
     proofer = run_proofer(url_valid, { :check_opengraph => true })
-    expect(proofer.failed_tests).not_to eq []
+    expect(proofer.failed_tests.first).to match /failed: 406/
   end
 end
