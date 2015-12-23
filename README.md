@@ -99,10 +99,10 @@ You'll get a new program called `htmlproof` with this gem. Terrific!
 Use it like you'd expect to:
 
 ``` bash
-htmlproof ./out --href-swap wow:cow,mow:doh --ext .html.erb --href-ignore www.github.com
+htmlproof ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
 ```
 
-Note: since `href_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
+Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
 `htmlproof` will figure out what you mean.
 
 ### Using with Jekyll
@@ -168,10 +168,9 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `ext` | The extension of your HTML files including the dot. | `.html`
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.** | `[]` |
-| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.** | `{}` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
+| `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
 | `verbosity` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 

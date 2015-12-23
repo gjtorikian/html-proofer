@@ -20,8 +20,8 @@ module HTML
         @type = self.class.name
         @line = obj.line
 
-        if @href && @check.options[:href_swap]
-          @href = swap(@href, @check.options[:href_swap])
+        if @href && @check.options[:url_swap]
+          @href = swap(@href, @check.options[:url_swap])
         end
 
         # fix up missing protocols
@@ -74,11 +74,6 @@ module HTML
 
         # ignore user defined URLs
         return true if ignores_pattern_check(@check.url_ignores)
-
-        # ignore user defined hrefs
-        if 'LinkCheckable' == @type
-          return true if ignores_pattern_check(@check.href_ignores)
-        end
 
         # ignore user defined alts
         if 'ImageCheckable' == @type

@@ -50,15 +50,15 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with href-ignore' do
+  it 'works with url-ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/links/ignorableLinksViaOptions.html"
-    output = make_bin('--href-ignore /^http:\/\//,/sdadsad/,../whaadadt.html', ignorableLinks)
+    output = make_bin('--url-ignore /^http:\/\//,/sdadsad/,../whaadadt.html', ignorableLinks)
     expect(output).to match('successfully')
   end
 
-  it 'works with href-swap' do
+  it 'works with url-swap' do
     translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    output = make_bin('--href-swap "\A/articles/([\w-]+):\1.html"', translatedLink)
+    output = make_bin('--url-swap "\A/articles/([\w-]+):\1.html"', translatedLink)
     expect(output).to match('successfully')
   end
 

@@ -131,20 +131,20 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'ignores links via href_ignore' do
+  it 'ignores links via url_ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/links/ignorableLinksViaOptions.html"
-    proofer = run_proofer(ignorableLinks, { :href_ignore => [%r{^http://}, /sdadsad/, '../whaadadt.html'] })
+    proofer = run_proofer(ignorableLinks, { :url_ignore => [%r{^http://}, /sdadsad/, '../whaadadt.html'] })
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates links via href_swap' do
+  it 'translates links via url_swap' do
     translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    proofer = run_proofer(translatedLink, { :href_swap => { %r{\A/articles/([\w-]+)} => "\\1.html" } })
+    proofer = run_proofer(translatedLink, { :url_swap => { %r{\A/articles/([\w-]+)} => "\\1.html" } })
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates links via href_swap for list of links' do
-    proofer = run_proofer(['www.garbalarba.com'], { :href_swap => { /garbalarba/ => 'github' } })
+  it 'translates links via url_swap for list of links' do
+    proofer = run_proofer(['www.garbalarba.com'], { :url_swap => { /garbalarba/ => 'github' } })
     expect(proofer.failed_tests).to eq []
   end
 
