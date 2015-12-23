@@ -1,8 +1,8 @@
-class FaviconCheckable < ::HTML::Proofer::Checkable
+class FaviconCheckable < ::HTMLProofer::Checkable
   attr_reader :rel
 end
 
-class FaviconCheck < ::HTML::Proofer::CheckRunner
+class FaviconCheck < ::HTMLProofer::CheckRunner
   def run
     found = false
     @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |node|

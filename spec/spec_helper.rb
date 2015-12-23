@@ -1,9 +1,9 @@
 require 'bundler/setup'
 require 'vcr'
 require 'timecop'
-require_relative '../lib/html/proofer'
+require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html/proofer/fixtures'
+FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -36,7 +36,7 @@ end
 
 def make_proofer(file, opts)
   opts[:verbosity] ||= :fatal
-  HTML::Proofer.new(file, opts)
+  HTMLProofer.new(file, opts)
 end
 
 def run_proofer(file, opts = {})
@@ -57,15 +57,15 @@ def send_proofer_output(file, opts = {})
 end
 
 def make_bin(cmd, path=nil)
-  `bin/htmlproof #{cmd} #{path}`
+  `bin/htmlproofer #{cmd} #{path}`
 end
 
 def delete_cache
-  File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
+  File.delete(HTMLProofer::Cache::FILENAME) if File.exist?(HTMLProofer::Cache::FILENAME)
 end
 
 def read_cache
-  JSON.parse File.read(HTML::Proofer::Cache::FILENAME)
+  JSON.parse File.read(HTMLProofer::Cache::FILENAME)
 end
 
 def make_cassette_name(file, opts)

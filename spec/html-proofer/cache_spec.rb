@@ -3,10 +3,10 @@ require 'spec_helper'
 describe 'Cache test' do
 
   it 'knows how to write to cache' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.htmlproofer.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.htmlproofer.log")
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
     run_proofer(brokenLinkExternalFilepath)
 
     log = read_cache
@@ -17,10 +17,10 @@ describe 'Cache test' do
   end
 
   it 'knows how to load a cache' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.simple_load.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.simple_load.log")
 
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:load).once
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:load).once
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/bad_external_links.html"
     run_proofer(brokenLinkExternalFilepath, { :cache => { :timeframe => '30d' } })
@@ -34,7 +34,7 @@ describe 'Cache test' do
   end
 
   it 'does not write file if timestamp is within date' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.within_date.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.within_date.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -43,7 +43,7 @@ describe 'Cache test' do
     log = read_cache
     current_time = log.values.first['time']
 
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
     run_proofer(['www.github.com'], { :cache => { :timeframe => '30d' } })
 
     # note that the timestamp did not change
@@ -55,29 +55,29 @@ describe 'Cache test' do
   end
 
   it 'does write file if timestamp is not within date' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.not_within_date.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.not_within_date.log")
 
     # this is frozen to within 20 days after the log
     new_time = Time.local(2014, 10, 21, 12, 0, 0)
     Timecop.travel(new_time)
 
     # since the timestamp changed, we expect an add
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
     run_proofer(['www.github.com'], { :cache => { :timeframe => '4d' } })
 
     Timecop.return
   end
 
   it 'does write file if a new URL is added' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.new_url.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.new_url.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
     Timecop.freeze(new_time)
 
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
     # we expect a new link to be added, but github.com can stay...
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.google.com', nil, 200)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.google.com', nil, 200)
 
     # ...because it's within the 30d time frame
     run_proofer(['www.github.com', 'www.google.com'], { :cache => { :timeframe => '30d' } })
@@ -86,15 +86,15 @@ describe 'Cache test' do
   end
 
   it 'does recheck failures, regardless of cache' do
-    stub_const('HTML::Proofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.recheck_failure.log")
+    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.recheck_failure.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
     Timecop.freeze(new_time)
 
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:write)
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
     # we expect the same link to be readded...
-    expect_any_instance_of(HTML::Proofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, 'External link www.foofoofoo.biz failed: response code 0 means something\'s wrong')
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, 'External link www.foofoofoo.biz failed: response code 0 means something\'s wrong')
 
     # ...even though we are within the 30d time frame,
     # because it's a failure

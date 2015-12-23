@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class HtmlCheck < ::HTML::Proofer::CheckRunner
+class HtmlCheck < ::HTMLProofer::CheckRunner
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   # and svg child tags (source: https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
   HTML5_TAGS = %w(article aside bdi details dialog figcaption

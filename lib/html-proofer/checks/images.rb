@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ImageCheckable < ::HTML::Proofer::Checkable
+class ImageCheckable < ::HTMLProofer::Checkable
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
   attr_reader :alt
@@ -18,7 +18,7 @@ class ImageCheckable < ::HTML::Proofer::Checkable
   end
 end
 
-class ImageCheck < ::HTML::Proofer::CheckRunner
+class ImageCheck < ::HTMLProofer::CheckRunner
   def run
     @html.css('img').each do |node|
       img = ImageCheckable.new(node, self)

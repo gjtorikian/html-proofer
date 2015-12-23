@@ -93,8 +93,8 @@ describe 'Command test' do
   end
 
   it 'has every option' do
-    config_keys = HTML::Proofer::Configuration::PROOFER_DEFAULTS.keys
-    bin_file = File.read('bin/htmlproof')
+    config_keys = HTMLProofer::Configuration::PROOFER_DEFAULTS.keys
+    bin_file = File.read('bin/htmlproofer')
     help_output = make_bin('--help')
     readme = File.read('README.md')
     config_keys.map(&:to_s).each do |key|

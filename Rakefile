@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => [:spec, :proof_readme]
 
 task :proof_readme do
-  require 'html/proofer'
+  require 'html-proofer'
   require 'redcarpet'
 
   redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}
@@ -17,5 +17,5 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  HTML::Proofer.new('./out').run
+  HTMLProofer.new('./out').run
 end

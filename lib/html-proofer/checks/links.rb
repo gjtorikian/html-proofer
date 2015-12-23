@@ -1,4 +1,4 @@
-class LinkCheckable < ::HTML::Proofer::Checkable
+class LinkCheckable < ::HTMLProofer::Checkable
   attr_reader :href, :id, :name
 
   def missing_href?
@@ -10,8 +10,8 @@ class LinkCheckable < ::HTML::Proofer::Checkable
   end
 end
 
-class LinkCheck < ::HTML::Proofer::CheckRunner
-  include HTML::Proofer::Utils
+class LinkCheck < ::HTMLProofer::CheckRunner
+  include HTMLProofer::Utils
 
   def run
     @html.css('a, link').each do |node|
@@ -111,7 +111,7 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
                "//*[case_insensitive_equals(@name, '#{href_hash}')]", \
                "//*[case_insensitive_equals(@id, '#{decoded_href_hash}')]", \
                "//*[case_insensitive_equals(@name, '#{decoded_href_hash}')]", \
-               HTML::Proofer::XpathFunctions.new).length > 0
+               HTMLProofer::XpathFunctions.new).length > 0
   end
 
 end
