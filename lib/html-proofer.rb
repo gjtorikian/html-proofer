@@ -30,8 +30,6 @@ class HTMLProofer
       warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
     end
 
-    @proofer_opts = HTMLProofer::Configuration::PROOFER_DEFAULTS
-
     @typhoeus_opts = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
     opts.delete(:typhoeus)
 
@@ -45,7 +43,7 @@ class HTMLProofer
     @validation_opts = opts[:validation] || {}
     opts.delete(:validation)
 
-    @options = @proofer_opts.merge(opts)
+    @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
     @failed_tests = []
   end
@@ -131,19 +129,19 @@ class HTMLProofer
   end
 
   def files
-    if File.directory? @src
-      pattern = File.join(@src, '**', "*#{@options[:ext]}")
-      files = Dir.glob(pattern).select { |fn| File.file? fn }
-      files.reject { |f| ignore_file?(f) }
-    elsif File.extname(@src) == @options[:ext]
-      [@src].reject { |f| ignore_file?(f) }
-    else
-      []
-    end
+    @files ||= if File.directory? @src
+                 pattern = File.join(@src, '**', "*#{@options[:ext]}")
+                 files = Dir.glob(pattern).select { |fn| File.file? fn }
+                 files.reject { |f| ignore_file?(f) }
+               elsif File.extname(@src) == @options[:ext]
+                 [@src].reject { |f| ignore_file?(f) }
+               else
+                 []
+               end
   end
 
   def ignore_file?(file)
-    options[:file_ignore].each do |pattern|
+    @options[:file_ignore].each do |pattern|
       return true if pattern.is_a?(String) && pattern == file
       return true if pattern.is_a?(Regexp) && pattern =~ file
     end
@@ -163,8 +161,8 @@ class HTMLProofer
   end
 
   def failed_tests
-    return [] if @failed_tests.empty?
     result = []
+    return result if @failed_tests.empty?
     @failed_tests.each { |f| result << f.to_s }
     result
   end
