@@ -174,6 +174,9 @@ module HTML
     end
 
     def print_failed_tests
+      unless @options[:http_status_ignore].empty?
+        @failed_tests.reject! { |test| @options[:http_status_ignore].include?(test.status) }
+      end
       sorted_failures = HTML::Proofer::CheckRunner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
 
       sorted_failures.sort_and_report

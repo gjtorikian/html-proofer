@@ -20,6 +20,7 @@ module HTML
         :file_ignore => [],
         :href_ignore => [],
         :href_swap => [],
+        :http_status_ignore => [],
         :only_4xx => false,
         :url_ignore => [],
         :verbose => false

@@ -30,6 +30,7 @@ Mercenary.program(:htmlproof) do |p|
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'href_ignore', '--href-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.**'
   p.option 'href_swap', '--href-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.**'
+  p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
   p.option 'ignore_script_embeds', '--ignore-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
