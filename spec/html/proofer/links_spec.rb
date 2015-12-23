@@ -415,4 +415,10 @@ describe 'Links test' do
     proofer = run_proofer(hash_href)
     expect(proofer.failed_tests.first).to match(/response code 0/)
   end
+
+  it 'works for internal links to weird encoding IDs' do
+    hash_href = "#{FIXTURES_DIR}/links/encodingLink.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.length).to eq 0
+  end
 end
