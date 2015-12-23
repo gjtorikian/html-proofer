@@ -76,9 +76,8 @@ module HTML
         return true if ignores_pattern_check(@check.url_ignores)
 
         # ignore user defined alts
-        if 'ImageCheckable' == @type
-          return true if ignores_pattern_check(@check.alt_ignores)
-        end
+        return false unless 'ImageCheckable' == @type
+        return true if ignores_pattern_check(@check.alt_ignores)
       end
 
       def ignore_empty_alt?

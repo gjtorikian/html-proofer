@@ -22,8 +22,13 @@ describe 'Favicons test' do
   it 'fails for broken favicon' do
     broken = "#{FIXTURES_DIR}/favicon/favicon_broken.html"
     proofer = run_proofer(broken, { :check_favicon => true })
-
     expect(proofer.failed_tests.first).to match(/internally linking to asdadaskdalsdk.png/)
+  end
+
+  it 'ignores with url_ignore' do
+    ignored = "#{FIXTURES_DIR}/favicon/favicon_broken.html"
+    proofer = run_proofer(ignored, { :check_favicon => true, :url_ignore => [/asdadaskdalsdk/] })
+    expect(proofer.failed_tests.length).to eq 0
   end
 
   it 'passes for present favicon' do
