@@ -1,5 +1,3 @@
-module HTML
-  class Proofer
-    VERSION = '2.6.1'
-  end
+class HTMLProofer
+  VERSION = '2.6.1'
 end
