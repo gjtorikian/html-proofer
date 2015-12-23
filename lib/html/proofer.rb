@@ -72,9 +72,9 @@ module HTML
     end
 
     def check_list_of_links
-      if @options[:href_swap]
+      if @options[:url_swap]
         @src = @src.map do |url|
-          swap(url, @options[:href_swap])
+          swap(url, @options[:url_swap])
         end
       end
       @external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]

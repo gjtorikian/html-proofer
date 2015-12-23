@@ -20,8 +20,8 @@ module HTML
         @type = self.class.name
         @line = obj.line
 
-        if @href && @check.options[:href_swap]
-          @href = swap(@href, @check.options[:href_swap])
+        if @href && @check.options[:url_swap]
+          @href = swap(@href, @check.options[:url_swap])
         end
 
         # fix up missing protocols
