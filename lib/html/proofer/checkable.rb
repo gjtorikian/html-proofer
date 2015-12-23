@@ -20,17 +20,16 @@ module HTML
         @type = self.class.name
         @line = obj.line
 
-        if @href && @check.options[:url_swap]
-          @href = swap(@href, @check.options[:url_swap])
-        end
-
         # fix up missing protocols
         @href.insert 0, 'http:' if @href =~ %r{^//}
         @src.insert 0, 'http:' if @src =~ %r{^//}
       end
 
       def url
-        @src || @srcset || @href || ''
+        url = @src || @srcset || @href || ''
+        return url if @check.nil?
+        return url unless @check.options[:url_swap]
+        swap(url, @check.options[:url_swap])
       end
 
       def valid?
@@ -154,8 +153,8 @@ module HTML
 
       private
 
-      def real_attr(attr)
-        attr.to_s unless attr.nil? || attr.empty?
+      def blank?(attr)
+        attr.nil? || attr.empty?
       end
     end
   end

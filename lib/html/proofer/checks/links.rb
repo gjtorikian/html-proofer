@@ -1,23 +1,12 @@
 class LinkCheckable < ::HTML::Proofer::Checkable
-
-  def href
-    real_attr @href
-  end
-
-  def id
-    real_attr @id
-  end
-
-  def name
-    real_attr @name
-  end
+  attr_reader :href, :id, :name
 
   def missing_href?
-    href.nil? && name.nil? && id.nil?
+    blank?(href) && blank?(name) && blank?(id)
   end
 
   def placeholder?
-    (id || name) && href.nil?
+    (!blank?(id) || !blank?(name)) && href.nil?
   end
 end
 

@@ -71,4 +71,25 @@ http_interactions:
     adapter_metadata:
       effective_url: https://github.com/
   recorded_at: Wed, 23 Dec 2015 01:43:28 GMT
+- request:
+    method: head
+    uri: www.garbalarba.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: HTTP://www.garbalarba.com/
+  recorded_at: Wed, 23 Dec 2015 18:51:29 GMT
 recorded_with: VCR 2.9.3
