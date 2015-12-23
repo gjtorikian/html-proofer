@@ -1,9 +1,9 @@
 require 'bundler/setup'
 require 'vcr'
 require 'timecop'
-require_relative '../lib/html/proofer'
+require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html/proofer/fixtures'
+FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
 RSpec.configure do |config|
   # Use color in STDOUT

@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new(:spec)
 task :default => [:spec, :proof_readme]
 
 task :proof_readme do
-  require 'html/proofer'
+  require 'html-proofer'
   require 'redcarpet'
 
   redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}

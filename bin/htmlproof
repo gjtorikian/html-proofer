@@ -3,7 +3,7 @@ STDOUT.sync = true
 
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 
-require 'html/proofer'
+require 'html-proofer'
 require 'mercenary'
 
 Mercenary.program(:htmlproof) do |p|

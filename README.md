@@ -66,7 +66,7 @@ Require the gem; generate some HTML; create a new instance of the `HTMLProofer` 
 your output folder; then `run` it. Here's a simple example:
 
 ```ruby
-require 'html/proofer'
+require 'html-proofer'
 require 'html/pipeline'
 require 'find'
 
@@ -112,7 +112,7 @@ to your `Gemfile` as described above, and add the following to your `Rakefile`,
 using `rake test` to execute:
 
 ```ruby
-require 'html/proofer'
+require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
