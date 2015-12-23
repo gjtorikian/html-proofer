@@ -57,7 +57,7 @@ def send_proofer_output(file, opts = {})
 end
 
 def make_bin(cmd, path=nil)
-  `bin/htmlproof #{cmd} #{path}`
+  `bin/htmlproofer #{cmd} #{path}`
 end
 
 def delete_cache

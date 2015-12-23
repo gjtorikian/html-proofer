@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %(A set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your documentation output.)
   gem.homepage      = 'https://github.com/gjtorikian/html-proofer'
   gem.license       = 'MIT'
-  gem.executables   = ['htmlproof']
+  gem.executables   = ['htmlproofer']
   all_files         = `git ls-files -z`.split("\x0")
   gem.files         = all_files.grep(%r{^(bin|lib)/})
   gem.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }

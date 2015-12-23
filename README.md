@@ -94,16 +94,16 @@ HTMLProofer.new("./out").run
 
 ### Using on the command-line
 
-You'll get a new program called `htmlproof` with this gem. Terrific!
+You'll get a new program called `htmlproofer` with this gem. Terrific!
 
 Use it like you'd expect to:
 
 ``` bash
-htmlproof ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
+htmlproofer ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
 ```
 
 Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
-`htmlproof` will figure out what you mean.
+`htmlproofer` will figure out what you mean.
 
 ### Using with Jekyll
 
@@ -123,7 +123,7 @@ end
 Don't have or want a `Rakefile`? You can also do something like the following:
 
 ```bash
-htmlproof ./_site
+htmlproofer ./_site
 ```
 
 ### Array of links
@@ -137,7 +137,7 @@ HTMLProofer.new(["http://github.com", "http://jekyllrb.com"])
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
 
 ``` bash
-htmlproof www.google.com,www.github.com --as-links
+htmlproofer www.google.com,www.github.com --as-links
 ```
 
 ## Ignoring content

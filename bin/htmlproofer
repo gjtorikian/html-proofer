@@ -6,10 +6,10 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
 require 'html-proofer'
 require 'mercenary'
 
-Mercenary.program(:htmlproof) do |p|
+Mercenary.program(:htmlproofer) do |p|
   p.version HTMLProofer::VERSION
   p.description %(Test your rendered HTML files to make sure they're accurate.)
-  p.syntax 'htmlproof PATH [options]'
+  p.syntax 'htmlproofer PATH [options]'
 
   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
