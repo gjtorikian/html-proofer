@@ -17,5 +17,5 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  HTML::Proofer.new('./out').run
+  HTMLProofer.new('./out').run
 end

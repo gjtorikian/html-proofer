@@ -36,7 +36,7 @@ end
 
 def make_proofer(file, opts)
   opts[:verbosity] ||= :fatal
-  HTML::Proofer.new(file, opts)
+  HTMLProofer.new(file, opts)
 end
 
 def run_proofer(file, opts = {})
@@ -61,11 +61,11 @@ def make_bin(cmd, path=nil)
 end
 
 def delete_cache
-  File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
+  File.delete(HTMLProofer::Cache::FILENAME) if File.exist?(HTMLProofer::Cache::FILENAME)
 end
 
 def read_cache
-  JSON.parse File.read(HTML::Proofer::Cache::FILENAME)
+  JSON.parse File.read(HTMLProofer::Cache::FILENAME)
 end
 
 def make_cassette_name(file, opts)

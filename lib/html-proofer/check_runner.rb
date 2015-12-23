@@ -27,7 +27,7 @@ module HTML
       end
 
       def run
-        fail NotImplementedError, 'HTML::Proofer::CheckRunner subclasses must implement #run'
+        fail NotImplementedError, 'HTMLProofer::CheckRunner subclasses must implement #run'
       end
 
       def add_issue(desc, line_number = nil, status = -1)

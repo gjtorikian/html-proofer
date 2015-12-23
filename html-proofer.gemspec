@@ -4,7 +4,7 @@ require 'html/proofer/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'html-proofer'
-  gem.version       = HTML::Proofer::VERSION
+  gem.version       = HTMLProofer::VERSION
   gem.authors       = ['Garen Torikian']
   gem.email         = ['gjtorikian@gmail.com']
   gem.description   = %(Test your rendered HTML files to make sure they're accurate.)

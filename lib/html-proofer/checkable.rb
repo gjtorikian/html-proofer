@@ -5,7 +5,7 @@ module HTML
   class Proofer
     # Represents the superclass from which all checks derive.
     class Checkable
-      include HTML::Proofer::Utils
+      include HTMLProofer::Utils
 
       attr_reader :line
 

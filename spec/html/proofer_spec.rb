@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe HTML::Proofer do
+describe HTMLProofer do
 
   describe '#failed_tests' do
     it 'is a list of the formatted errors' do
@@ -13,7 +13,7 @@ describe HTML::Proofer do
   describe '#files' do
     it 'works for directory that ends with .html' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
-      proofer = HTML::Proofer.new folder
+      proofer = HTMLProofer.new folder
       expect(proofer.files).to eq(["#{folder}/index.html"])
     end
   end
@@ -21,14 +21,14 @@ describe HTML::Proofer do
   describe '#options' do
     it 'strips out undesired Typhoeus options' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
-      proofer = HTML::Proofer.new folder, :verbose => true
+      proofer = HTMLProofer.new folder, :verbose => true
       expect(proofer.options[:verbose]).to eq(true)
       expect(proofer.typhoeus_opts[:verbose]).to eq(nil)
     end
 
     it 'takes options for Parallel' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
-      proofer = HTML::Proofer.new folder, :parallel => { :in_processes => 3 }
+      proofer = HTMLProofer.new folder, :parallel => { :in_processes => 3 }
       expect(proofer.parallel_opts[:in_processes]).to eq(3)
       expect(proofer.typhoeus_opts[:in_processes]).to eq(nil)
       expect(proofer.options[:parallel]).to eq(nil)

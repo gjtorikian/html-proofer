@@ -8,7 +8,7 @@ require 'active_support/core_ext/numeric/time'
 module HTML
   class Proofer
     class Cache
-      include HTML::Proofer::Utils
+      include HTMLProofer::Utils
 
       FILENAME = File.join(STORAGE_DIR, 'cache.log')
 

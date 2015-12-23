@@ -1,4 +1,4 @@
-class ScriptCheckable < ::HTML::Proofer::Checkable
+class ScriptCheckable < ::HTMLProofer::Checkable
   attr_reader :src
 
   def missing_src?
@@ -11,7 +11,7 @@ class ScriptCheckable < ::HTML::Proofer::Checkable
 
 end
 
-class ScriptCheck < ::HTML::Proofer::CheckRunner
+class ScriptCheck < ::HTMLProofer::CheckRunner
   def run
     @html.css('script').each do |node|
       script = ScriptCheckable.new(node, self)

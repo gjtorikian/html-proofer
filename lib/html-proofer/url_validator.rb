@@ -6,7 +6,7 @@ require_relative './cache'
 module HTML
   class Proofer
     class UrlValidator
-      include HTML::Proofer::Utils
+      include HTMLProofer::Utils
 
       attr_accessor :logger, :external_urls, :iterable_external_urls, :hydra
 

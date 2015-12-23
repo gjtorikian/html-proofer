@@ -14,7 +14,7 @@ module HTML
                     end
 
         @logger = Yell.new(:format => false, \
-                           :name => 'HTML::Proofer', \
+                           :name => 'HTMLProofer', \
                            :level => "gte.#{log_level}") do |l|
           l.adapter :stdout, :level => [:debug, :info, :warn]
           l.adapter :stderr, :level => [:error, :fatal]
