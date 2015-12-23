@@ -117,8 +117,11 @@ class LinkCheck < ::HTML::Proofer::CheckRunner
   end
 
   def hash_check(html, href_hash)
+    decoded_href_hash = URI.decode(href_hash)
     html.xpath("//*[case_insensitive_equals(@id, '#{href_hash}')]", \
                "//*[case_insensitive_equals(@name, '#{href_hash}')]", \
+               "//*[case_insensitive_equals(@id, '#{decoded_href_hash}')]", \
+               "//*[case_insensitive_equals(@name, '#{decoded_href_hash}')]", \
                HTML::Proofer::XpathFunctions.new).length > 0
   end
 
