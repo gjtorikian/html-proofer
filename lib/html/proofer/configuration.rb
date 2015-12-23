@@ -18,7 +18,6 @@ module HTML
         :ext => '.html',
         :external_only => false,
         :file_ignore => [],
-        :href_ignore => [],
         :href_swap => [],
         :only_4xx => false,
         :url_ignore => [],

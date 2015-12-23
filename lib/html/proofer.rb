@@ -30,9 +30,6 @@ module HTML
       if opts[:verbose]
         warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
       end
-      if opts[:href_ignore]
-        warn '`@options[:href_ignore]` will be renamed in a future 3.x.x release: http://git.io/vGHHy'
-      end
 
       @proofer_opts = HTML::Proofer::Configuration::PROOFER_DEFAULTS
 

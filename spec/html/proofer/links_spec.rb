@@ -131,9 +131,9 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'ignores links via href_ignore' do
+  it 'ignores links via url_ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/links/ignorableLinksViaOptions.html"
-    proofer = run_proofer(ignorableLinks, { :href_ignore => [%r{^http://}, /sdadsad/, '../whaadadt.html'] })
+    proofer = run_proofer(ignorableLinks, { :url_ignore => [%r{^http://}, /sdadsad/, '../whaadadt.html'] })
     expect(proofer.failed_tests).to eq []
   end
 

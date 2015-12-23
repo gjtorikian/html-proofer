@@ -75,11 +75,6 @@ module HTML
         # ignore user defined URLs
         return true if ignores_pattern_check(@check.url_ignores)
 
-        # ignore user defined hrefs
-        if 'LinkCheckable' == @type
-          return true if ignores_pattern_check(@check.href_ignores)
-        end
-
         # ignore user defined alts
         if 'ImageCheckable' == @type
           return true if ignores_pattern_check(@check.alt_ignores)
