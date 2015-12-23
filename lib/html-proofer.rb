@@ -19,7 +19,8 @@ rescue LoadError; end
 class HTMLProofer
   include HTMLProofer::Utils
 
-  attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls, :iterable_external_urls
+  attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
+              :validation_opts, :external_urls
 
   def initialize(src, opts = {})
     FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
@@ -112,7 +113,7 @@ class HTMLProofer
 
       checks.each do |klass|
         logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-        check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts, @validation_opts)
+        check = Object.const_get(klass).new(@src, path, html, self)
         check.run
         result[:external_urls].merge!(check.external_urls)
         result[:failed_tests].concat(check.issues) if check.issues.length > 0

@@ -79,11 +79,11 @@ class HTMLProofer
     end
 
     def ignore_empty_alt?
-      @check.empty_alt_ignore
+      @check.options[:empty_alt_ignore]
     end
 
     def allow_hash_href?
-      @check.allow_hash_href
+      @check.options[:allow_hash_href]
     end
 
     # path is external to the file
