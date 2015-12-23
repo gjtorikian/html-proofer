@@ -62,6 +62,18 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'ignores images via url_ignore' do
+    ignorableImage = "#{FIXTURES_DIR}/images/terribleImageName.html"
+    proofer = run_proofer(ignorableImage, { :url_ignore => [%r{./Screen.+}] })
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'translates images via url_swap' do
+    translatedLink = "#{FIXTURES_DIR}/images/terribleImageName.html"
+    proofer = run_proofer(translatedLink, { :url_swap => { %r{./Screen.+} => 'gpl.png' } })
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'properly checks relative images' do
     relativeImages = "#{FIXTURES_DIR}/images/rootRelativeImages.html"
     proofer = run_proofer(relativeImages)

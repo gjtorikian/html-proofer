@@ -20,17 +20,16 @@ module HTML
         @type = self.class.name
         @line = obj.line
 
-        if @href && @check.options[:href_swap]
-          @href = swap(@href, @check.options[:href_swap])
-        end
-
         # fix up missing protocols
         @href.insert 0, 'http:' if @href =~ %r{^//}
         @src.insert 0, 'http:' if @src =~ %r{^//}
       end
 
       def url
-        @src || @srcset || @href || ''
+        url = @src || @srcset || @href || ''
+        return url if @check.nil?
+        return url unless @check.options[:url_swap]
+        swap(url, @check.options[:url_swap])
       end
 
       def valid?
@@ -75,15 +74,9 @@ module HTML
         # ignore user defined URLs
         return true if ignores_pattern_check(@check.url_ignores)
 
-        # ignore user defined hrefs
-        if 'LinkCheckable' == @type
-          return true if ignores_pattern_check(@check.href_ignores)
-        end
-
         # ignore user defined alts
-        if 'ImageCheckable' == @type
-          return true if ignores_pattern_check(@check.alt_ignores)
-        end
+        return false unless 'ImageCheckable' == @type
+        return true if ignores_pattern_check(@check.alt_ignores)
       end
 
       def ignore_empty_alt?
@@ -160,8 +153,8 @@ module HTML
 
       private
 
-      def real_attr(attr)
-        attr.to_s unless attr.nil? || attr.empty?
+      def blank?(attr)
+        attr.nil? || attr.empty?
       end
     end
   end

@@ -1,0 +1,95 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 23 Dec 2015 01:43:28 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Sun, 23 Dec 2035 01:43:28
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNTM5ODYwNjc2YzgwMzIwMjY3NDdkNWI5NmQ3OTAwMmIiLCJfY3NyZl90b2tlbiI6ImNkdkI5K0QzU3d4aGxIKy8yUDBhM2RlV3ZtT3Z1eDB2TWdWcVE0U2pzWnc9In0%3D--21d75dd02dd5083c0f9dd0c89bea56fca0045340;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 5c537e4545afd19b6111fd2b9971572f
+      X-Runtime:
+      - '0.015607'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com www.youtube.com
+        player.vimeo.com checkout.paypal.com; img-src ''self'' data: assets-cdn.github.com
+        identicons.github.com www.google-analytics.com checkout.paypal.com collector.githubapp.com
+        *.githubusercontent.com *.gravatar.com *.wp.com; media-src ''none''; object-src
+        assets-cdn.github.com; script-src assets-cdn.github.com; style-src ''self''
+        ''unsafe-inline'' ''unsafe-eval'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 7d2a2d05162492046d9960cdbc326796
+      X-GitHub-Request-Id:
+      - BDBE5267:448B:2557B0EC:5679FC40
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Wed, 23 Dec 2015 01:43:28 GMT
+- request:
+    method: head
+    uri: www.garbalarba.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: HTTP://www.garbalarba.com/
+  recorded_at: Wed, 23 Dec 2015 18:51:29 GMT
+recorded_with: VCR 2.9.3

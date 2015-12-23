@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class FaviconCheckable < ::HTML::Proofer::Checkable
   attr_reader :rel
 end

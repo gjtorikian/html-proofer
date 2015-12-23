@@ -1,10 +1,5 @@
-# encoding: utf-8
-
 class ScriptCheckable < ::HTML::Proofer::Checkable
-
-  def src
-    real_attr @src
-  end
+  attr_reader :src
 
   def missing_src?
     !src

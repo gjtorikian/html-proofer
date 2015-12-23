@@ -6,7 +6,7 @@ module HTML
     class CheckRunner
 
       attr_reader :issues, :src, :path, :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
-                  :validation_opts, :external_urls, :href_ignores, :url_ignores, :alt_ignores, \
+                  :validation_opts, :external_urls, :url_ignores, :alt_ignores, \
                   :empty_alt_ignore, :allow_hash_href
 
       def initialize(src, path, html, options, typhoeus_opts, hydra_opts, parallel_opts, validation_opts)
@@ -19,7 +19,6 @@ module HTML
         @parallel_opts = parallel_opts
         @validation_opts = validation_opts
         @issues = []
-        @href_ignores = @options[:href_ignore]
         @url_ignores = @options[:url_ignore]
         @alt_ignores = @options[:alt_ignore]
         @empty_alt_ignore = @options[:empty_alt_ignore]
