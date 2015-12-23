@@ -18,7 +18,7 @@ class ImageCheckable < ::HTMLProofer::Checkable
   end
 end
 
-class ImageCheck < ::HTMLProofer::CheckRunner
+class ImageCheck < ::HTMLProofer::Check
   def run
     @html.css('img').each do |node|
       img = ImageCheckable.new(node, self)

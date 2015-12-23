@@ -261,9 +261,9 @@ HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to lo
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTMLProofer::Checkable`, and another that inherits from `HTMLProofer::CheckRunner`.
+Want to write your own test? Sure! Just create two classes--one that inherits from `HTMLProofer::Checkable`, and another that inherits from `HTMLProofer::Check`.
 
-The `CheckRunner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+The `Check` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
 
 The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
 
@@ -282,7 +282,7 @@ class OctocatLinkCheck < ::HTMLProofer::Checkable
 
 end
 
-class MailToOctocat < ::HTMLProofer::CheckRunner
+class MailToOctocat < ::HTMLProofer::Check
   def run
     @html.css('a').each do |node|
       link = OctocatLinkCheck.new(node, self)

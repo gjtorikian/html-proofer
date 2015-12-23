@@ -1,5 +1,4 @@
-# encoding: utf-8
-class HTMLProofer::CheckRunner
+class HTMLProofer::Check
 
   class Issue
     attr_reader :path, :desc, :status, :line_number

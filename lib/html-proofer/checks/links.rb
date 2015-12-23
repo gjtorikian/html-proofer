@@ -10,7 +10,7 @@ class LinkCheckable < ::HTMLProofer::Checkable
   end
 end
 
-class LinkCheck < ::HTMLProofer::CheckRunner
+class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 
   def run

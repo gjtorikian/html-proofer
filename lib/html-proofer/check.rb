@@ -1,30 +1,18 @@
 class HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
-  class CheckRunner
+  class Check
+    attr_reader :issues, :src, :path, :external_urls
 
-    attr_reader :issues, :src, :path, :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
-                :validation_opts, :external_urls, :url_ignores, :alt_ignores, \
-                :empty_alt_ignore, :allow_hash_href
-
-    def initialize(src, path, html, options, typhoeus_opts, hydra_opts, parallel_opts, validation_opts)
+    def initialize(src, path, html)
       @src    = src
       @path   = path
       @html   = remove_ignored(html)
-      @options = options
-      @typhoeus_opts = typhoeus_opts
-      @hydra_opts = hydra_opts
-      @parallel_opts = parallel_opts
-      @validation_opts = validation_opts
       @issues = []
-      @url_ignores = @options[:url_ignore]
-      @alt_ignores = @options[:alt_ignore]
-      @empty_alt_ignore = @options[:empty_alt_ignore]
-      @allow_hash_href = @options[:allow_hash_href]
       @external_urls = {}
     end
 
     def run
-      fail NotImplementedError, 'HTMLProofer::CheckRunner subclasses must implement #run'
+      fail NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
     def add_issue(desc, line_number = nil, status = -1)
@@ -44,7 +32,7 @@ class HTMLProofer
       end
     end
 
-    def self.checks
+    def self.subchecks
       classes = []
 
       ObjectSpace.each_object(Class) do |c|

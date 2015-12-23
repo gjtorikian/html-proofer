@@ -11,7 +11,7 @@ class ScriptCheckable < ::HTMLProofer::Checkable
 
 end
 
-class ScriptCheck < ::HTMLProofer::CheckRunner
+class ScriptCheck < ::HTMLProofer::Check
   def run
     @html.css('script').each do |node|
       script = ScriptCheckable.new(node, self)

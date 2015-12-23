@@ -71,7 +71,7 @@ class HTMLProofer
       end
 
       # ignore user defined URLs
-      return true if ignores_pattern_check(@check.url_ignores)
+      return true if ignores_pattern_check(@check.options[:url_ignore])
 
       # ignore user defined alts
       return false unless 'ImageCheckable' == @type

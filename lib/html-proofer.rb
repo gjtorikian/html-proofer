@@ -83,9 +83,8 @@ class HTMLProofer
   # Sends the external URLs to Typhoeus for batch processing.
   def check_directory_of_files
     @external_urls = {}
-    results = check_files_for_internal_woes
 
-    results.each do |item|
+    check_files_for_internal_woes.each do |item|
       @external_urls.merge!(item[:external_urls])
       @failed_tests.concat(item[:failed_tests])
     end
@@ -151,12 +150,10 @@ class HTMLProofer
 
   def checks
     return @checks unless @checks.nil?
-    @checks = HTMLProofer::CheckRunner.checks.map(&:name)
+    @checks = HTMLProofer::Check.subchecks.map(&:name)
     @checks.delete('FaviconCheck') unless @options[:check_favicon]
     @checks.delete('HtmlCheck') unless @options[:check_html]
-    @options[:checks_to_ignore].each do |ignored|
-      @checks.delete(ignored)
-    end
+    @options[:checks_to_ignore].each { |ignored| @checks.delete(ignored) }
     @checks
   end
 
@@ -168,7 +165,7 @@ class HTMLProofer
   end
 
   def print_failed_tests
-    sorted_failures = HTMLProofer::CheckRunner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
+    sorted_failures = HTMLProofer::Check::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
 
     sorted_failures.sort_and_report
     count = @failed_tests.length
