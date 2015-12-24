@@ -9,6 +9,7 @@ class HTMLProofer::Check
     attr_reader :id, :name, :alt, :href, :link, :src, :line
 
     def initialize(obj, check)
+      # Contruct readable ivars for every element
       obj.attributes.each_pair do |attribute, value|
         name = "#{attribute.tr('-:.', '_')}".to_sym
         (class << self; self; end).send(:attr_reader, name)
@@ -28,8 +29,7 @@ class HTMLProofer::Check
 
     def url
       url = @src || @srcset || @href || ''
-      return url if @check.nil?
-      return url unless @check.options[:url_swap]
+      return url if @check.options[:url_swap].empty?
       swap(url, @check.options[:url_swap])
     end
 

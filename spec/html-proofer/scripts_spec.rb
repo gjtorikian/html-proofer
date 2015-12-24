@@ -40,7 +40,7 @@ describe 'Scripts test' do
 
   it 'ignores links via url_ignore' do
     ignorableLinks = "#{FIXTURES_DIR}/scripts/ignorableLinksViaOptions.html"
-    proofer = run_proofer(ignorableLinks, { :url_ignore => [/\/assets\/.*(js|css|png|svg)/] })
+    proofer = run_proofer(ignorableLinks, { :url_ignore => [%r{/assets/.*(js|css|png|svg)}] })
     expect(proofer.failed_tests).to eq []
   end
 end
