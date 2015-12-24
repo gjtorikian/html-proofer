@@ -1,5 +1,5 @@
 require 'addressable/uri'
-require_relative './utils'
+require_relative '../utils'
 
 class HTMLProofer::Check
   # Represents the element currently being processed

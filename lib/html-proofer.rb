@@ -6,8 +6,7 @@ def require_all(path)
 end
 
 require_all 'html-proofer'
-require_all 'html-proofer/check_runner'
-require_all 'html-proofer/checks'
+require_all 'html-proofer/check'
 
 require 'parallel'
 require 'fileutils'
@@ -159,7 +158,7 @@ class HTMLProofer
   end
 
   def print_failed_tests
-    sorted_failures = HTMLProofer::Check::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
+    sorted_failures = SortedIssues.new(@failed_tests, @options[:error_sort], logger)
 
     sorted_failures.sort_and_report
     count = @failed_tests.length
