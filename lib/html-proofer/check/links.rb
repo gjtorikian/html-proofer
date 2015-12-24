@@ -1,8 +1,6 @@
 class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 
-  attr_reader :href, :id, :name
-
   def missing_href?
     blank?(@link.href) && blank?(@link.name) && blank?(@link.id)
   end
@@ -17,7 +15,7 @@ class LinkCheck < ::HTMLProofer::Check
       line = @node.line
 
       next if @link.ignore?
-      next if @link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
+
       next if placeholder?
       next if @link.allow_hash_href? && @link.href == '#'
 
@@ -29,7 +27,7 @@ class LinkCheck < ::HTMLProofer::Check
 
       check_schemes(@link, line)
 
-      # is there even a href?
+      # is there even an href?
       if missing_href?
         add_issue('anchor has no href attribute', line_number: line)
         next
@@ -65,7 +63,8 @@ class LinkCheck < ::HTMLProofer::Check
     when 'tel'
       handle_tel(link, line)
     when 'http'
-      add_issue("#{link.href} is not an HTTPS link", line_number: line) if @options[:enforce_https]
+      return unless @options[:enforce_https]
+      add_issue("#{link.href} is not an HTTPS link", line_number: line)
     end
   end
 

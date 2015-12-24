@@ -67,6 +67,8 @@ class HTMLProofer::Check
     def ignore?
       return true if @data_proofer_ignore
 
+      return true if url.match(/^javascript:/)
+
       # ignore base64 encoded images
       if %w(ImageCheck FaviconCheck).include? @type
         return true if url.match(/^data:image/)

@@ -1,8 +1,6 @@
 class ImageCheck < ::HTMLProofer::Check
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
-  attr_reader :alt
-
   def empty_alt_tag?
     @img.alt.strip.empty?
   end
@@ -34,8 +32,8 @@ class ImageCheck < ::HTMLProofer::Check
       else
         if @img.remote?
           add_to_external_urls(@img.url, line)
-        else
-          add_issue("internal image #{@img.url} does not exist", line_number: line) unless @img.exists?
+        elsif !@img.exists?
+          add_issue("internal image #{@img.url} does not exist", line_number: line)
         end
       end
 
