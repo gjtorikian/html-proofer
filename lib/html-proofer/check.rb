@@ -25,7 +25,7 @@ class HTMLProofer
       @issues << Issue.new(@path, desc, line_number: line_number, status: status)
     end
 
-    def add_to_external_urls(url, line)
+    def add_to_external_urls(url, _)
       return if @external_urls[url]
       add_path_for_url(url)
     end

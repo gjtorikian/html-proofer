@@ -51,7 +51,9 @@ class HTMLProofer
     if @src.is_a?(Array) && !@options[:disable_external]
       check_list_of_links
     else
-      check_directory_of_files
+      check_files_in_directory
+      file_text = pluralize(files.length, 'file', 'files')
+      logger.log :info, :blue, "Ran on #{file_text}!\n\n"
     end
 
     if @failed_tests.empty?
@@ -72,12 +74,12 @@ class HTMLProofer
   end
 
   # Collects any external URLs found in a directory of files. Also collectes
-  # every failed test from check_files_for_internal_woes.
+  # every failed test from process_files.
   # Sends the external URLs to Typhoeus for batch processing.
-  def check_directory_of_files
+  def check_files_in_directory
     @external_urls = {}
 
-    check_files_for_internal_woes.each do |item|
+    process_files.each do |item|
       @external_urls.merge!(item[:external_urls])
       @failed_tests.concat(item[:failed_tests])
     end
@@ -91,14 +93,10 @@ class HTMLProofer
     elsif !@options[:disable_external]
       validate_urls
     end
-
-    count = files.length
-    file_text = pluralize(count, 'file', 'files')
-    logger.log :info, :blue, "Ran on #{file_text}!\n\n"
   end
 
   # Walks over each implemented check and runs them on the files, in parallel.
-  def check_files_for_internal_woes
+  def process_files
     Parallel.map(files, @options[:parallel]) do |path|
       result = { :external_urls => {}, :failed_tests => [] }
       html = create_nokogiri(path)
