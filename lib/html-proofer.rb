@@ -40,18 +40,18 @@ class HTMLProofer
   end
 
   def run
-    @logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
+    @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
     if @src.is_a?(Array) && !@options[:disable_external]
       check_list_of_links
     else
       check_files_in_directory
       file_text = pluralize(files.length, 'file', 'files')
-      @logger.log :info, :blue, "Ran on #{file_text}!\n\n"
+      @logger.log :info, "Ran on #{file_text}!\n\n"
     end
 
     if @failed_tests.empty?
-      @logger.log :info, :green, 'HTML-Proofer finished successfully.'
+      @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
     else
       print_failed_tests
     end
@@ -96,7 +96,7 @@ class HTMLProofer
       html = create_nokogiri(path)
 
       checks.each do |klass|
-        @logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
+        @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
         check = Object.const_get(klass).new(@src, path, html, @options)
         check.run
         result[:external_urls].merge!(check.external_urls)

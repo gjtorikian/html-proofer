@@ -46,13 +46,13 @@ class HTMLProofer
 
       sorted_issues.each do |issue|
         if matcher != issue.send(first_report)
-          @logger.log :error, :red, "- #{issue.send(first_report)}"
+          @logger.log :error, "- #{issue.send(first_report)}"
           matcher = issue.send(first_report)
         end
         if first_report == :status
-          @logger.log :error, :red, "  *  #{issue}"
+          @logger.log :error, "  *  #{issue}"
         else
-          @logger.log :error, :red, "  *  #{issue.send(second_report)}#{issue.line_number}"
+          @logger.log :error, "  *  #{issue.send(second_report)}#{issue.line_number}"
         end
       end
     end
