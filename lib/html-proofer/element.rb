@@ -1,22 +1,24 @@
 require 'addressable/uri'
 require_relative './utils'
 
-class HTMLProofer
-  # Represents the superclass from which all checks derive.
-  class Checkable
+class HTMLProofer::Check
+  # Represents the element currently being processed
+  class Element
     include HTMLProofer::Utils
 
-    attr_reader :line
+    attr_reader :id, :name, :alt, :href, :link, :src, :line
 
     def initialize(obj, check)
       obj.attributes.each_pair do |attribute, value|
-        instance_variable_set("@#{attribute.tr('-:.', '_')}".to_sym, value.value)
+        name = "#{attribute.tr('-:.', '_')}".to_sym
+        (class << self; self; end).send(:attr_reader, name)
+        instance_variable_set("@#{name}", value.value)
       end
 
       @text = obj.content
       @check = check
       @checked_paths = {}
-      @type = self.class.name
+      @type = check.class.name
       @line = obj.line
 
       # fix up missing protocols
@@ -66,7 +68,7 @@ class HTMLProofer
       return true if @data_proofer_ignore
 
       # ignore base64 encoded images
-      if %w(ImageCheckable FaviconCheckable).include? @type
+      if %w(ImageCheck FaviconCheck).include? @type
         return true if url.match(/^data:image/)
       end
 
@@ -74,8 +76,8 @@ class HTMLProofer
       return true if ignores_pattern_check(@check.options[:url_ignore])
 
       # ignore user defined alts
-      return false unless 'ImageCheckable' == @type
-      return true if ignores_pattern_check(@check.alt_ignores)
+      return false unless 'ImageCheck' == @type
+      return true if ignores_pattern_check(@check.options[:alt_ignore])
     end
 
     def ignore_empty_alt?
@@ -147,13 +149,7 @@ class HTMLProofer
     end
 
     def follow_location?
-      @check.typhoeus_opts && @check.typhoeus_opts[:followlocation]
-    end
-
-    private
-
-    def blank?(attr)
-      attr.nil? || attr.empty?
+      @check.options[:typhoeus] && @check.options[:typhoeus][:followlocation]
     end
   end
 end

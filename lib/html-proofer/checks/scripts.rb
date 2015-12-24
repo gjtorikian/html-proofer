@@ -1,32 +1,25 @@
-class ScriptCheckable < ::HTMLProofer::Checkable
+class ScriptCheck < ::HTMLProofer::Check
   attr_reader :src
 
   def missing_src?
-    !src
+    !@script.src
   end
 
-  def blank?
-    @text.strip.empty?
-  end
-
-end
-
-class ScriptCheck < ::HTMLProofer::Check
   def run
     @html.css('script').each do |node|
-      script = ScriptCheckable.new(node, self)
+      @script = create_element(node)
       line = node.line
 
-      next if script.ignore?
-      next unless script.blank?
+      next if @script.ignore?
+      next unless node.text.strip.empty?
 
       # does the script exist?
-      if script.missing_src?
+      if missing_src?
         add_issue('script is empty and has no src attribute', line)
-      elsif script.remote?
-        add_to_external_urls(script.src, line)
+      elsif @script.remote?
+        add_to_external_urls(@script.src, line)
       else
-        add_issue("internal script #{script.src} does not exist", line) unless script.exists?
+        add_issue("internal script #{@script.src} does not exist", line) unless @script.exists?
       end
     end
 

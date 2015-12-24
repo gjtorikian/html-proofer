@@ -1,7 +1,7 @@
 class HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
-    attr_reader :src, :path, :issues, :external_urls
+    attr_reader :node, :element, :src, :path, :options, :issues, :external_urls
 
     def initialize(src, path, html, options)
       @src    = src
@@ -12,8 +12,9 @@ class HTMLProofer
       @external_urls = {}
     end
 
-    def options
-      @options ||= @proofer.options
+    def create_element(node)
+      @node = node
+      Element.new(node, self)
     end
 
     def run
@@ -46,6 +47,10 @@ class HTMLProofer
       end
 
       classes
+    end
+
+    def blank?(attr)
+      attr.nil? || attr.empty?
     end
 
     private

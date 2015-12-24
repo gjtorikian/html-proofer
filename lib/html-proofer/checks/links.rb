@@ -1,61 +1,58 @@
-class LinkCheckable < ::HTMLProofer::Checkable
-  attr_reader :href, :id, :name
-
-  def missing_href?
-    blank?(href) && blank?(name) && blank?(id)
-  end
-
-  def placeholder?
-    (!blank?(id) || !blank?(name)) && href.nil?
-  end
-end
-
 class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 
+  attr_reader :href, :id, :name
+
+  def missing_href?
+    blank?(@link.href) && blank?(@link.name) && blank?(@link.id)
+  end
+
+  def placeholder?
+    (!blank?(@link.id) || !blank?(@link.name)) && @link.href.nil?
+  end
+
   def run
     @html.css('a, link').each do |node|
-      link = LinkCheckable.new(node, self)
-      line = node.line
+      @link = create_element(node)
+      line = @node.line
 
-      next if link.ignore?
-      next if link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
-      next if link.placeholder?
-      next if link.allow_hash_href? && link.href == '#'
+      next if @link.ignore?
+      next if @link.href =~ /^javascript:/ # can't put this in ignore? because the URI does not parse
+      next if placeholder?
+      next if @link.allow_hash_href? && @link.href == '#'
 
       # is it even a valid URL?
-      unless link.valid?
-        add_issue("#{link.href} is an invalid URL", line)
+      unless @link.valid?
+        add_issue("#{@link.href} is an invalid URL", line)
         next
       end
 
-      check_schemes(link, line)
+      check_schemes(@link, line)
 
       # is there even a href?
-      if link.missing_href?
+      if missing_href?
         add_issue('anchor has no href attribute', line)
         next
       end
 
       # intentionally here because we still want valid? & missing_href? to execute
-      next if link.non_http_remote?
-
+      next if @link.non_http_remote?
       # does the file even exist?
-      if link.remote?
-        add_to_external_urls(link.href, line)
+      if @link.remote?
+        add_to_external_urls(@link.href, line)
         next
-      elsif !link.internal?
-        add_issue("internally linking to #{link.href}, which does not exist", line) unless link.exists?
+      elsif !@link.internal? && !@link.exists?
+        add_issue("internally linking to #{@link.href}, which does not exist", line)
       end
 
       # does the local directory have a trailing slash?
-      if link.unslashed_directory? link.absolute_path
-        add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", line)
+      if @link.unslashed_directory? @link.absolute_path
+        add_issue("internally linking to a directory #{@link.absolute_path} without trailing slash", line)
         next
       end
 
       # verify the target hash
-      handle_hash(link, line) if link.hash
+      handle_hash(@link, line) if @link.hash
     end
 
     external_urls

@@ -99,16 +99,16 @@ class HTMLProofer
 
   # Walks over each implemented check and runs them on the files, in parallel.
   def check_files_for_internal_woes
-    Parallel.map(files, @parallel_opts) do |path|
-      html = create_nokogiri(path)
+    Parallel.map(files, @options[:parallel]) do |path|
       result = { :external_urls => {}, :failed_tests => [] }
+      html = create_nokogiri(path)
 
       checks.each do |klass|
         logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-        check = Object.const_get(klass).new(@src, path, html, self)
+        check = Object.const_get(klass).new(@src, path, html, @options)
         check.run
         result[:external_urls].merge!(check.external_urls)
-        result[:failed_tests].concat(check.issues) if check.issues.length > 0
+        result[:failed_tests].concat(check.issues)
       end
       result
     end
