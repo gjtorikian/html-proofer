@@ -2,7 +2,7 @@ class HTMLProofer
   class Issue
     attr_reader :path, :desc, :status, :line_number
 
-    def initialize(path, desc, line_number = nil, status = -1)
+    def initialize(path, desc, line_number: nil, status: -1)
       @line_number = line_number.nil? ? '' : " (line #{line_number})"
       @path = path
       @desc = desc

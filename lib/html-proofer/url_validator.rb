@@ -203,9 +203,9 @@ class HTMLProofer
 
     def add_external_issue(filenames, desc, status = nil)
       if filenames.nil?
-        @failed_tests << Issue.new('', desc, nil, status)
+        @failed_tests << Issue.new('', desc, status: status)
       else
-        filenames.each { |f| @failed_tests << Issue.new(f, desc, nil, status) }
+        filenames.each { |f| @failed_tests << Issue.new(f, desc, status: status) }
       end
     end
 

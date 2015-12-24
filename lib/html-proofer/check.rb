@@ -21,8 +21,8 @@ class HTMLProofer
       fail NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_issue(desc, line_number = nil, status = -1)
-      @issues << Issue.new(@path, desc, line_number, status)
+    def add_issue(desc, line_number: nil, status: -1)
+      @issues << Issue.new(@path, desc, line_number: line_number, status: status)
     end
 
     def add_to_external_urls(url, line)
