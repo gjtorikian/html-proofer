@@ -132,5 +132,10 @@ describe HTMLProofer do
       proofer = run_proofer(external, options)
       expect(proofer.failed_tests.length).to eq 1
     end
+
+    it 'ignores status codes when asked' do
+      proofer = run_proofer(['www.github.com/github/notreallyhere'], :http_status_ignore => [404])
+      expect(proofer.failed_tests.length).to eq 0
+    end
   end
 end

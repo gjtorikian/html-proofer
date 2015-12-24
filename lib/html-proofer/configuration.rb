@@ -17,6 +17,7 @@ class HTMLProofer
       :ext => '.html',
       :external_only => false,
       :file_ignore => [],
+      :http_status_ignore => [],
       :only_4xx => false,
       :url_ignore => [],
       :url_swap => [],

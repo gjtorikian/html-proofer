@@ -151,7 +151,9 @@ class HTMLProofer
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
       @logger.log :debug, :yellow, debug_msg
 
-      if response_code.between?(200, 299)
+      if @options[:http_status_ignore].include?(response_code)
+        # no op
+      elsif response_code.between?(200, 299)
         check_hash_in_2xx_response(href, effective_url, response, filenames)
         @cache.add(href, filenames, response_code)
       elsif response.timed_out?
