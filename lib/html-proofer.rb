@@ -115,9 +115,9 @@ class HTMLProofer
   end
 
   def validate_urls
-    url_validator = HTMLProofer::UrlValidator.new(logger, @external_urls, @options, @typhoeus_opts, @hydra_opts)
+    url_validator = HTMLProofer::UrlValidator.new(logger, @external_urls, @options)
     @failed_tests.concat(url_validator.run)
-    @iterable_external_urls = url_validator.iterable_external_urls
+    @external_urls = url_validator.external_urls
   end
 
   def files

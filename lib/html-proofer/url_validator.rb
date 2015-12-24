@@ -12,7 +12,6 @@ class HTMLProofer
     def initialize(logger, external_urls, options)
       @logger = logger
       @external_urls = external_urls
-      @iterable_external_urls = {}
       @failed_tests = []
       @options = options
       @hydra = Typhoeus::Hydra.new(options[:hydra])
@@ -21,7 +20,7 @@ class HTMLProofer
     end
 
     def run
-      @iterable_external_urls = remove_query_values
+      @external_urls = remove_query_values
 
       if @cache.exists && @cache.load
         cache_count = @cache.cache_log.length
@@ -29,7 +28,7 @@ class HTMLProofer
 
         logger.log :info, :blue, "Found #{cache_text} in the cache..."
 
-        urls_to_check = @cache.detect_url_changes(@iterable_external_urls)
+        urls_to_check = @cache.detect_url_changes(@external_urls)
 
         @cache.cache_log.each_pair do |url, cache|
           if @cache.within_timeframe?(cache['time'])
@@ -42,7 +41,7 @@ class HTMLProofer
 
         external_link_checker(urls_to_check)
       else
-        external_link_checker(@iterable_external_urls)
+        external_link_checker(@external_urls)
       end
 
       @cache.write
