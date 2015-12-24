@@ -19,8 +19,7 @@ rescue LoadError; end
 class HTMLProofer
   include HTMLProofer::Utils
 
-  attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, \
-              :validation_opts, :external_urls
+  attr_reader :options, :external_urls
 
   def initialize(src, opts = {})
     FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
@@ -31,20 +30,13 @@ class HTMLProofer
       warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
     end
 
-    @typhoeus_opts = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
-    opts.delete(:typhoeus)
-
-    @hydra_opts = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
-    opts.delete(:hydra)
-
-    # fall back to parallel defaults
-    @parallel_opts = opts[:parallel] || {}
-    opts.delete(:parallel)
-
-    @validation_opts = opts[:validation] || {}
-    opts.delete(:validation)
-
     @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
+
+    @options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
+    @options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
+
+    @options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
+    @options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.merge(opts[:validation] || {})
 
     @failed_tests = []
   end

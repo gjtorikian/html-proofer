@@ -3,11 +3,11 @@ class HTMLProofer
   class Check
     attr_reader :src, :path, :issues, :external_urls
 
-    def initialize(src, path, html, proofer)
+    def initialize(src, path, html, options)
       @src    = src
       @path   = path
       @html   = remove_ignored(html)
-      @proofer = proofer
+      @options = options
       @issues = []
       @external_urls = {}
     end

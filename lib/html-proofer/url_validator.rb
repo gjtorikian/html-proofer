@@ -7,16 +7,15 @@ class HTMLProofer
   class UrlValidator
     include HTMLProofer::Utils
 
-    attr_accessor :logger, :external_urls, :iterable_external_urls, :hydra
+    attr_accessor :logger, :external_urls, :hydra
 
-    def initialize(logger, external_urls, options, typhoeus_opts, hydra_opts)
+    def initialize(logger, external_urls, options)
       @logger = logger
       @external_urls = external_urls
       @iterable_external_urls = {}
       @failed_tests = []
       @options = options
-      @hydra = Typhoeus::Hydra.new(hydra_opts)
-      @typhoeus_opts = typhoeus_opts
+      @hydra = Typhoeus::Hydra.new(options[:hydra])
       @external_domain_paths_with_queries = {}
       @cache = Cache.new(@logger, @options[:cache])
     end
@@ -134,7 +133,7 @@ class HTMLProofer
     end
 
     def queue_request(method, href, filenames)
-      request = Typhoeus::Request.new(href, @typhoeus_opts.merge({ :method => method }))
+      request = Typhoeus::Request.new(href, @options[:typhoeus].merge({ :method => method }))
       request.on_complete { |response| response_handler(response, filenames) }
       hydra.queue request
     end

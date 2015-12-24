@@ -38,7 +38,7 @@ class HtmlCheck < ::HTMLProofer::Check
       next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-      next if @validation_opts[:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
+      next if options[:validation][:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
 
       add_issue(message, line)
     end

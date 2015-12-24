@@ -34,6 +34,12 @@ class HTMLProofer
       :max_concurrency => 50
     }
 
+    PARALLEL_DEFAULTS = {}
+
+    VALIDATION_DEFAULTS = {
+      :ignore_script_embeds => false
+    }
+
     def self.to_regex?(item)
       if item.start_with?('/') && item.end_with?('/')
         Regexp.new item[1...-1]
