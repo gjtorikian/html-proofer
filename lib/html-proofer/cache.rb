@@ -21,7 +21,7 @@ class HTMLProofer
         @load = false
       else
         @load = true
-        @parsed_timeframe = parsed_timeframe(options[:timeframe] || '30d')
+        @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
       @cache_time = Time.now
 

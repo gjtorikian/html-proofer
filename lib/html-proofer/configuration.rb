@@ -40,6 +40,10 @@ class HTMLProofer
       :ignore_script_embeds => false
     }
 
+    CACHE_DEFAULTS = {
+      :timeframe => '30d'
+    }
+
     def self.to_regex?(item)
       if item.start_with?('/') && item.end_with?('/')
         Regexp.new item[1...-1]
