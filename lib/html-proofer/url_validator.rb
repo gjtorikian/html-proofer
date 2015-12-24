@@ -7,7 +7,7 @@ class HTMLProofer
   class UrlValidator
     include HTMLProofer::Utils
 
-    attr_accessor :external_urls
+    attr_reader :external_urls
 
     def initialize(logger, external_urls, options)
       @logger = logger
@@ -69,22 +69,12 @@ class HTMLProofer
     end
 
     def load_cache
-      cache_count = @cache.cache_log.length
+      cache_count = @cache.size
       cache_text = pluralize(cache_count, 'link', 'links')
 
       @logger.log :info, :blue, "Found #{cache_text} in the cache..."
 
-      urls_to_check = @cache.detect_url_changes(@external_urls)
-
-      @cache.cache_log.each_pair do |url, cache|
-        if @cache.within_timeframe?(cache['time'])
-          next if cache['message'].empty? # these were successes to skip
-          urls_to_check[url] = cache['filenames'] # these are failures to retry
-        else
-          urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
-        end
-      end
-      urls_to_check
+      @cache.retrieve_urls(@external_urls)
     end
 
     # Proofer runs faster if we pull out all the external URLs and run the checks

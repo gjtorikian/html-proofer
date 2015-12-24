@@ -11,7 +11,7 @@ class HTMLProofer
 
     FILENAME = File.join(STORAGE_DIR, 'cache.log')
 
-    attr_accessor :exists, :load, :cache_log, :cache_time
+    attr_reader :exists, :load, :cache_log
 
     def initialize(logger, options)
       @logger = logger
@@ -40,6 +40,10 @@ class HTMLProofer
 
     def urls
       @cache_log['urls'] || []
+    end
+
+    def size
+      @cache_log.length
     end
 
     def parsed_timeframe(timeframe)
@@ -116,6 +120,18 @@ class HTMLProofer
       @load.nil?
     end
 
+    def retrieve_urls(external_urls)
+      urls_to_check = detect_url_changes(external_urls)
+      @cache_log.each_pair do |url, cache|
+        if within_timeframe?(cache['time'])
+          next if cache['message'].empty? # these were successes to skip
+          urls_to_check[url] = cache['filenames'] # these are failures to retry
+        else
+          urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
+        end
+      end
+      urls_to_check
+    end
 
     # FIXME: there seems to be some discrepenacy where Typhoeus occasionally adds
     # a trailing slash to URL strings, which causes issues with the cache
