@@ -261,34 +261,31 @@ HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to lo
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTMLProofer::Checkable`, and another that inherits from `HTMLProofer::Check`.
+Want to write your own test? Sure, that's possible!
 
-The `Check` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+Just create a classes that inherits from inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line)` to explain the error.
 
-The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This contructs an object that contains all the attributes of the HTML element you're iterating on.
 
-Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
+Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class OctocatLinkCheck < ::HTMLProofer::Checkable
+class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @data_ignore_proofer || @href.nil? || @href.empty?
-    return @href.match /^mailto\:/
+    return false if @link.data_ignore_proofer || blank?(@link.href)
+    return @link.href.match /^mailto\:/
   end
 
   def octocat?
-    return @href.match /\:octocat@github.com\Z/
+    return @link.href.match /\:octocat@github.com\Z/
   end
 
-end
-
-class MailToOctocat < ::HTMLProofer::Check
   def run
     @html.css('a').each do |node|
-      link = OctocatLinkCheck.new(node, self)
+      @link = create_element(node)
       line = node.line
 
-      if link.mailto? && link.octocat?
+      if mailto? && octocat?
         return add_issue("Don't email the Octocat directly!", line)
       end
     end
