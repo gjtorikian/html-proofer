@@ -25,10 +25,6 @@ class HTMLProofer
 
     @src = src
 
-    if opts[:verbose]
-      warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
-    end
-
     @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
     @options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
@@ -38,26 +34,24 @@ class HTMLProofer
     @options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.merge(opts[:validation] || {})
     @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
+    @logger = HTMLProofer::Log.new(@options[:log_level])
+
     @failed_tests = []
   end
 
-  def logger
-    @logger ||= HTMLProofer::Log.new(@options[:verbose], @options[:verbosity])
-  end
-
   def run
-    logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
+    @logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
     if @src.is_a?(Array) && !@options[:disable_external]
       check_list_of_links
     else
       check_files_in_directory
       file_text = pluralize(files.length, 'file', 'files')
-      logger.log :info, :blue, "Ran on #{file_text}!\n\n"
+      @logger.log :info, :blue, "Ran on #{file_text}!\n\n"
     end
 
     if @failed_tests.empty?
-      logger.log :info, :green, 'HTML-Proofer finished successfully.'
+      @logger.log :info, :green, 'HTML-Proofer finished successfully.'
     else
       print_failed_tests
     end
@@ -102,7 +96,7 @@ class HTMLProofer
       html = create_nokogiri(path)
 
       checks.each do |klass|
-        logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
+        @logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
         check = Object.const_get(klass).new(@src, path, html, @options)
         check.run
         result[:external_urls].merge!(check.external_urls)
@@ -113,7 +107,7 @@ class HTMLProofer
   end
 
   def validate_urls
-    url_validator = HTMLProofer::UrlValidator.new(logger, @external_urls, @options)
+    url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
     @failed_tests.concat(url_validator.run)
     @external_urls = url_validator.external_urls
   end
@@ -156,11 +150,11 @@ class HTMLProofer
   end
 
   def print_failed_tests
-    sorted_failures = SortedIssues.new(@failed_tests, @options[:error_sort], logger)
+    sorted_failures = SortedIssues.new(@failed_tests, @options[:error_sort], @logger)
 
     sorted_failures.sort_and_report
     count = @failed_tests.length
     failure_text = pluralize(count, 'failure', 'failures')
-    fail logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+    fail @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
   end
 end

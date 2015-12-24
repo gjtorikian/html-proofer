@@ -169,11 +169,11 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
-| `verbosity` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -253,12 +253,7 @@ The cache operates on external links only.
 
 ## Logging
 
-HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to log information:
-
-* If you set the `:verbose` option to `true`, HTML-Proofer will provide some debug information.
-* If you set the `:verbosity` option, you can better define the level of logging. See the configuration table above for more information.
-
-`:verbosity` is newer and offers better configuration. `:verbose` will be deprecated in a future 3.x.x release.
+HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_level` option, you can better define the level of logging.
 
 ## Custom tests
 

@@ -105,6 +105,7 @@ describe 'Command test' do
         description = line.split('|')[2].strip
         description.gsub!('A hash', 'A comma-separated list')
         description.gsub!('An array', 'A comma-separated list')
+        description.gsub!(/\[(.+?)\]\(.+?\)/, '\1')
         description.sub!(/\.$/, '')
         # match README description for option
         expect(help_output).to include(description)

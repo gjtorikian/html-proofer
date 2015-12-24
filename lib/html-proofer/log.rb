@@ -5,13 +5,7 @@ class HTMLProofer
   class Log
     include Yell::Loggable
 
-    def initialize(verbose, verbosity = nil)
-      log_level = if verbosity.nil?
-                    verbose ? :debug : :info
-                  else
-                    verbosity
-                  end
-
+    def initialize(log_level)
       @logger = Yell.new(:format => false, \
                          :name => 'HTMLProofer', \
                          :level => "gte.#{log_level}") do |l|
