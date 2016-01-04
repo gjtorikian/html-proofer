@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class HtmlCheck < ::HTMLProofer::CheckRunner
+class HtmlCheck < ::HTMLProofer::Check
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   # and svg child tags (source: https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
   HTML5_TAGS = %w(article aside bdi details dialog figcaption
@@ -38,9 +38,9 @@ class HtmlCheck < ::HTMLProofer::CheckRunner
       next if HTML5_TAGS.include? message[/Tag ([\w-]+) invalid/o, 1]
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-      next if @validation_opts[:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
+      next if options[:validation][:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
 
-      add_issue(message, line)
+      add_issue(message, line_number: line)
     end
   end
 end

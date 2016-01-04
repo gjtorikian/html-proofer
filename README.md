@@ -168,11 +168,12 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `ext` | The extension of your HTML files including the dot. | `.html`
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
+| `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
-| `verbosity` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -252,44 +253,36 @@ The cache operates on external links only.
 
 ## Logging
 
-HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to log information:
-
-* If you set the `:verbose` option to `true`, HTML-Proofer will provide some debug information.
-* If you set the `:verbosity` option, you can better define the level of logging. See the configuration table above for more information.
-
-`:verbosity` is newer and offers better configuration. `:verbose` will be deprecated in a future 3.x.x release.
+HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_level` option, you can better define the level of logging.
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTMLProofer::Checkable`, and another that inherits from `HTMLProofer::CheckRunner`.
+Want to write your own test? Sure, that's possible!
 
-The `CheckRunner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+Just create a classes that inherits from inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line_number: line)` to explain the error.
 
-The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This contructs an object that contains all the attributes of the HTML element you're iterating on.
 
-Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
+Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class OctocatLinkCheck < ::HTMLProofer::Checkable
+class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @data_ignore_proofer || @href.nil? || @href.empty?
-    return @href.match /^mailto\:/
+    return false if @link.data_ignore_proofer || blank?(@link.href)
+    return @link.href.match /^mailto\:/
   end
 
   def octocat?
-    return @href.match /\:octocat@github.com\Z/
+    return @link.href.match /\:octocat@github.com\Z/
   end
 
-end
-
-class MailToOctocat < ::HTMLProofer::CheckRunner
   def run
     @html.css('a').each do |node|
-      link = OctocatLinkCheck.new(node, self)
+      @link = create_element(node)
       line = node.line
 
-      if link.mailto? && link.octocat?
-        return add_issue("Don't email the Octocat directly!", line)
+      if mailto? && octocat?
+        return add_issue("Don't email the Octocat directly!", line_number: line)
       end
     end
   end

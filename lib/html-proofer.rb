@@ -6,8 +6,7 @@ def require_all(path)
 end
 
 require_all 'html-proofer'
-require_all 'html-proofer/check_runner'
-require_all 'html-proofer/checks'
+require_all 'html-proofer/check'
 
 require 'parallel'
 require 'fileutils'
@@ -19,52 +18,40 @@ rescue LoadError; end
 class HTMLProofer
   include HTMLProofer::Utils
 
-  attr_reader :options, :typhoeus_opts, :hydra_opts, :parallel_opts, :validation_opts, :external_urls, :iterable_external_urls
+  attr_reader :options, :external_urls
 
   def initialize(src, opts = {})
     FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
 
     @src = src
 
-    if opts[:verbose]
-      warn '`@options[:verbose]` will be removed in a future 3.x.x release: http://git.io/vGHHh'
-    end
+    @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
-    @proofer_opts = HTMLProofer::Configuration::PROOFER_DEFAULTS
+    @options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
+    @options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
 
-    @typhoeus_opts = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
-    opts.delete(:typhoeus)
+    @options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
+    @options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.merge(opts[:validation] || {})
+    @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
-    @hydra_opts = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
-    opts.delete(:hydra)
-
-    # fall back to parallel defaults
-    @parallel_opts = opts[:parallel] || {}
-    opts.delete(:parallel)
-
-    @validation_opts = opts[:validation] || {}
-    opts.delete(:validation)
-
-    @options = @proofer_opts.merge(opts)
+    @logger = HTMLProofer::Log.new(@options[:log_level])
 
     @failed_tests = []
   end
 
-  def logger
-    @logger ||= HTMLProofer::Log.new(@options[:verbose], @options[:verbosity])
-  end
-
   def run
-    logger.log :info, :blue, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
+    @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
     if @src.is_a?(Array) && !@options[:disable_external]
       check_list_of_links
     else
-      check_directory_of_files
+      check_files_in_directory
+      file_text = pluralize(files.length, 'file', 'files')
+      @logger.log :info, "Ran on #{file_text}!\n\n"
     end
 
     if @failed_tests.empty?
-      logger.log :info, :green, 'HTML-Proofer finished successfully.'
+      @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
     else
       print_failed_tests
     end
@@ -81,13 +68,12 @@ class HTMLProofer
   end
 
   # Collects any external URLs found in a directory of files. Also collectes
-  # every failed test from check_files_for_internal_woes.
+  # every failed test from process_files.
   # Sends the external URLs to Typhoeus for batch processing.
-  def check_directory_of_files
+  def check_files_in_directory
     @external_urls = {}
-    results = check_files_for_internal_woes
 
-    results.each do |item|
+    process_files.each do |item|
       @external_urls.merge!(item[:external_urls])
       @failed_tests.concat(item[:failed_tests])
     end
@@ -101,49 +87,45 @@ class HTMLProofer
     elsif !@options[:disable_external]
       validate_urls
     end
-
-    count = files.length
-    file_text = pluralize(count, 'file', 'files')
-    logger.log :info, :blue, "Ran on #{file_text}!\n\n"
   end
 
   # Walks over each implemented check and runs them on the files, in parallel.
-  def check_files_for_internal_woes
-    Parallel.map(files, @parallel_opts) do |path|
-      html = create_nokogiri(path)
+  def process_files
+    Parallel.map(files, @options[:parallel]) do |path|
       result = { :external_urls => {}, :failed_tests => [] }
+      html = create_nokogiri(path)
 
       checks.each do |klass|
-        logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-        check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts, @validation_opts)
+        @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
+        check = Object.const_get(klass).new(@src, path, html, @options)
         check.run
         result[:external_urls].merge!(check.external_urls)
-        result[:failed_tests].concat(check.issues) if check.issues.length > 0
+        result[:failed_tests].concat(check.issues)
       end
       result
     end
   end
 
   def validate_urls
-    url_validator = HTMLProofer::UrlValidator.new(logger, @external_urls, @options, @typhoeus_opts, @hydra_opts)
+    url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
     @failed_tests.concat(url_validator.run)
-    @iterable_external_urls = url_validator.iterable_external_urls
+    @external_urls = url_validator.external_urls
   end
 
   def files
-    if File.directory? @src
-      pattern = File.join(@src, '**', "*#{@options[:ext]}")
-      files = Dir.glob(pattern).select { |fn| File.file? fn }
-      files.reject { |f| ignore_file?(f) }
-    elsif File.extname(@src) == @options[:ext]
-      [@src].reject { |f| ignore_file?(f) }
-    else
-      []
-    end
+    @files ||= if File.directory? @src
+                 pattern = File.join(@src, '**', "*#{@options[:ext]}")
+                 files = Dir.glob(pattern).select { |fn| File.file? fn }
+                 files.reject { |f| ignore_file?(f) }
+               elsif File.extname(@src) == @options[:ext]
+                 [@src].reject { |f| ignore_file?(f) }
+               else
+                 []
+               end
   end
 
   def ignore_file?(file)
-    options[:file_ignore].each do |pattern|
+    @options[:file_ignore].each do |pattern|
       return true if pattern.is_a?(String) && pattern == file
       return true if pattern.is_a?(Regexp) && pattern =~ file
     end
@@ -153,28 +135,26 @@ class HTMLProofer
 
   def checks
     return @checks unless @checks.nil?
-    @checks = HTMLProofer::CheckRunner.checks.map(&:name)
+    @checks = HTMLProofer::Check.subchecks.map(&:name)
     @checks.delete('FaviconCheck') unless @options[:check_favicon]
     @checks.delete('HtmlCheck') unless @options[:check_html]
-    @options[:checks_to_ignore].each do |ignored|
-      @checks.delete(ignored)
-    end
+    @options[:checks_to_ignore].each { |ignored| @checks.delete(ignored) }
     @checks
   end
 
   def failed_tests
-    return [] if @failed_tests.empty?
     result = []
+    return result if @failed_tests.empty?
     @failed_tests.each { |f| result << f.to_s }
     result
   end
 
   def print_failed_tests
-    sorted_failures = HTMLProofer::CheckRunner::SortedIssues.new(@failed_tests, @options[:error_sort], logger)
+    sorted_failures = SortedIssues.new(@failed_tests, @options[:error_sort], @logger)
 
     sorted_failures.sort_and_report
     count = @failed_tests.length
     failure_text = pluralize(count, 'failure', 'failures')
-    fail logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+    fail @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
   end
 end

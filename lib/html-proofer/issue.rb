@@ -1,10 +1,8 @@
-# encoding: utf-8
-class HTMLProofer::CheckRunner
-
+class HTMLProofer
   class Issue
     attr_reader :path, :desc, :status, :line_number
 
-    def initialize(path, desc, line_number = nil, status = -1)
+    def initialize(path, desc, line_number: nil, status: -1)
       @line_number = line_number.nil? ? '' : " (line #{line_number})"
       @path = path
       @desc = desc
@@ -48,13 +46,13 @@ class HTMLProofer::CheckRunner
 
       sorted_issues.each do |issue|
         if matcher != issue.send(first_report)
-          @logger.log :error, :red, "- #{issue.send(first_report)}"
+          @logger.log :error, "- #{issue.send(first_report)}"
           matcher = issue.send(first_report)
         end
         if first_report == :status
-          @logger.log :error, :red, "  *  #{issue}"
+          @logger.log :error, "  *  #{issue}"
         else
-          @logger.log :error, :red, "  *  #{issue.send(second_report)}#{issue.line_number}"
+          @logger.log :error, "  *  #{issue.send(second_report)}#{issue.line_number}"
         end
       end
     end

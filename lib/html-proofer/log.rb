@@ -5,13 +5,7 @@ class HTMLProofer
   class Log
     include Yell::Loggable
 
-    def initialize(verbose, verbosity = nil)
-      log_level = if verbosity.nil?
-                    verbose ? :debug : :info
-                  else
-                    verbosity
-                  end
-
+    def initialize(log_level)
       @logger = Yell.new(:format => false, \
                          :name => 'HTMLProofer', \
                          :level => "gte.#{log_level}") do |l|
@@ -20,7 +14,22 @@ class HTMLProofer
       end
     end
 
-    def log(level, color, message)
+    def log(level, message)
+      color = case level
+              when :debug
+                :light_blue
+              when :info
+                :blue
+              when :warn
+                :yellow
+              when :error, :fatal
+                :red
+              end
+
+      log_with_color(level, color, message)
+    end
+
+    def log_with_color(level, color, message)
       @logger.send level, colorize(color, message)
     end
 
@@ -34,7 +43,7 @@ class HTMLProofer
 
     # dumb override to play nice with Typhoeus/Ethon
     def debug(message = nil)
-      log(:debug, :yellow, message) unless message.nil?
+      log(:debug, message) unless message.nil?
     end
   end
 end

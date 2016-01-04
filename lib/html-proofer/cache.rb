@@ -11,7 +11,7 @@ class HTMLProofer
 
     FILENAME = File.join(STORAGE_DIR, 'cache.log')
 
-    attr_accessor :exists, :load, :cache_log, :cache_time
+    attr_reader :exists, :load, :cache_log
 
     def initialize(logger, options)
       @logger = logger
@@ -21,7 +21,7 @@ class HTMLProofer
         @load = false
       else
         @load = true
-        @parsed_timeframe = parsed_timeframe(options[:timeframe] || '30d')
+        @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
       @cache_time = Time.now
 
@@ -40,6 +40,10 @@ class HTMLProofer
 
     def urls
       @cache_log['urls'] || []
+    end
+
+    def size
+      @cache_log.length
     end
 
     def parsed_timeframe(timeframe)
@@ -80,21 +84,21 @@ class HTMLProofer
         if existing_urls.include?(url)
           true
         else
-          @logger.log :debug, :yellow, "Adding #{url} to cache check"
+          @logger.log :debug, "Adding #{url} to cache check"
           false
         end
       end
 
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, 'link', 'links')
-      @logger.log :info, :blue, "Adding #{new_link_text} to the cache..."
+      @logger.log :info, "Adding #{new_link_text} to the cache..."
 
       # remove from cache URLs that no longer exist
       del = 0
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
         if !found_urls.include?(url)
-          @logger.log :debug, :yellow, "Removing #{url} from cache check"
+          @logger.log :debug, "Removing #{url} from cache check"
           del += 1
           true
         else
@@ -103,7 +107,7 @@ class HTMLProofer
       end
 
       del_link_text = pluralize(del, 'link', 'links')
-      @logger.log :info, :blue, "Removing #{del_link_text} from the cache..."
+      @logger.log :info, "Removing #{del_link_text} from the cache..."
 
       additions
     end
@@ -116,6 +120,18 @@ class HTMLProofer
       @load.nil?
     end
 
+    def retrieve_urls(external_urls)
+      urls_to_check = detect_url_changes(external_urls)
+      @cache_log.each_pair do |url, cache|
+        if within_timeframe?(cache['time'])
+          next if cache['message'].empty? # these were successes to skip
+          urls_to_check[url] = cache['filenames'] # these are failures to retry
+        else
+          urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
+        end
+      end
+      urls_to_check
+    end
 
     # FIXME: there seems to be some discrepenacy where Typhoeus occasionally adds
     # a trailing slash to URL strings, which causes issues with the cache

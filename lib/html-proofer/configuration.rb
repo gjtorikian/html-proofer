@@ -17,10 +17,11 @@ class HTMLProofer
       :ext => '.html',
       :external_only => false,
       :file_ignore => [],
+      :http_status_ignore => [],
+      :log_level => :info,
       :only_4xx => false,
       :url_ignore => [],
-      :url_swap => [],
-      :verbose => false
+      :url_swap => []
     }
 
     TYPHOEUS_DEFAULTS = {
@@ -32,6 +33,16 @@ class HTMLProofer
 
     HYDRA_DEFAULTS = {
       :max_concurrency => 50
+    }
+
+    PARALLEL_DEFAULTS = {}
+
+    VALIDATION_DEFAULTS = {
+      :ignore_script_embeds => false
+    }
+
+    CACHE_DEFAULTS = {
+      :timeframe => '30d'
     }
 
     def self.to_regex?(item)

@@ -23,15 +23,14 @@ describe HTMLProofer do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
       proofer = HTMLProofer.new folder, :verbose => true
       expect(proofer.options[:verbose]).to eq(true)
-      expect(proofer.typhoeus_opts[:verbose]).to eq(nil)
+      expect(proofer.options[:typhoeus][:verbose]).to eq(nil)
     end
 
     it 'takes options for Parallel' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
       proofer = HTMLProofer.new folder, :parallel => { :in_processes => 3 }
-      expect(proofer.parallel_opts[:in_processes]).to eq(3)
-      expect(proofer.typhoeus_opts[:in_processes]).to eq(nil)
-      expect(proofer.options[:parallel]).to eq(nil)
+      expect(proofer.options[:parallel][:in_processes]).to eq(3)
+      expect(proofer.options[:typhoeus][:in_processes]).to eq(nil)
     end
 
     describe 'sorting' do
@@ -132,6 +131,11 @@ describe HTMLProofer do
       external = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
       proofer = run_proofer(external, options)
       expect(proofer.failed_tests.length).to eq 1
+    end
+
+    it 'ignores status codes when asked' do
+      proofer = run_proofer(['www.github.com/github/notreallyhere'], :http_status_ignore => [404])
+      expect(proofer.failed_tests.length).to eq 0
     end
   end
 end
