@@ -3,7 +3,7 @@ require 'uri'
 require_relative './utils'
 require_relative './cache'
 
-class HTMLProofer
+module HTMLProofer
   class UrlValidator
     include HTMLProofer::Utils
 

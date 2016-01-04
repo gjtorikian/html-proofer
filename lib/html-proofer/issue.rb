@@ -1,4 +1,4 @@
-class HTMLProofer
+module HTMLProofer
   class Issue
     attr_reader :path, :desc, :status, :line_number
 

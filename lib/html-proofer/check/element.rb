@@ -1,9 +1,9 @@
 require 'addressable/uri'
 require_relative '../utils'
 
-class HTMLProofer::Check
+module HTMLProofer
   # Represents the element currently being processed
-  class Element
+  class Element < Check
     include HTMLProofer::Utils
 
     attr_reader :id, :name, :alt, :href, :link, :src, :line

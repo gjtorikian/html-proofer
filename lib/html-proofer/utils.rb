@@ -1,6 +1,6 @@
 require 'nokogiri'
 
-class HTMLProofer
+module HTMLProofer
   module Utils
     STORAGE_DIR = File.join('tmp', '.htmlproofer')
 

@@ -15,7 +15,7 @@ begin
   require 'awesome_print'
 rescue LoadError; end
 
-class HTMLProofer
+module HTMLProofer
   include HTMLProofer::Utils
 
   attr_reader :options, :external_urls

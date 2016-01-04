@@ -5,7 +5,7 @@ require 'active_support/core_ext/string'
 require 'active_support/core_ext/date'
 require 'active_support/core_ext/numeric/time'
 
-class HTMLProofer
+module HTMLProofer
   class Cache
     include HTMLProofer::Utils
 
