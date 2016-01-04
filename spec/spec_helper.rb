@@ -36,7 +36,7 @@ end
 
 def make_proofer(file, opts)
   opts[:verbosity] ||= :fatal
-  HTMLProofer.new(file, opts)
+  HTMLProofer::check_file(file, opts)
 end
 
 def run_proofer(file, opts = {})
