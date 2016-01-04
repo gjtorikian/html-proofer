@@ -416,6 +416,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/response code 0/)
   end
 
+  it 'works for internal links to weird encoding IDs' do
+    hash_href = "#{FIXTURES_DIR}/links/encodingLink.html"
+    proofer = run_proofer(hash_href)
+    expect(proofer.failed_tests.length).to eq 0
+  end
+
   it 'does not expect href for anchors in HTML5' do
     missing_href = "#{FIXTURES_DIR}/links/blank_href_html5.html"
     proofer = run_proofer(missing_href)

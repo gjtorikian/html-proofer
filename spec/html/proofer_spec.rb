@@ -118,4 +118,20 @@ describe HTML::Proofer do
       expect(proofer.checks.length).to eq 3
     end
   end
+
+  describe 'external only' do
+    it 'knows how to ignore non-external link failures' do
+      options = { :external_only => true }
+      missingAltFilepath = "#{FIXTURES_DIR}/images/missingImageAlt.html"
+      proofer = run_proofer(missingAltFilepath, options)
+      expect(proofer.failed_tests).to eq []
+    end
+
+    it 'still reports external link failures' do
+      options = { :external_only => true }
+      external = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
+      proofer = run_proofer(external, options)
+      expect(proofer.failed_tests.length).to eq 1
+    end
+  end
 end
