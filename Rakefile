@@ -17,5 +17,6 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  HTMLProofer.new('./out').run
+  opts = { :url_ignore => [/badge.fury.io/] }
+  HTMLProofer.check_directories(['./out'], opts).run
 end
