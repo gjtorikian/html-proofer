@@ -60,10 +60,16 @@ You can enable or disable most of the following checks.
 
 ## Usage
 
+You can configure HTMLProofer to run on a file, an array of directories, or an array of links.
+
 ### Using in a script
 
-Require the gem; generate some HTML; create a new instance of the `HTMLProofer` on
-your output folder; then `run` it. Here's a simple example:
+1. Require the gem.
+2. Generate some HTML.
+3. Create a new instance of the `HTMLProofer` on your output folder.
+4. `run` that instance.
+
+Here's a simple example:
 
 ```ruby
 require 'html-proofer'
@@ -89,14 +95,22 @@ Find.find("./docs") do |path|
 end
 
 # test your out dir!
-HTMLProofer.new("./out").run
+HTMLProofer.check_directories(["./out"]).run
+```
+
+### Checking a single file
+
+If you simply want to check a single file, use the `check_file` method:
+
+``` ruby
+HTMLProofer.check_file("/path/to/a/file.html").run
 ```
 
 ### Using on the command-line
 
 You'll get a new program called `htmlproofer` with this gem. Terrific!
 
-Use it like you'd expect to:
+Pass in options through the command-line, like this:
 
 ``` bash
 htmlproofer ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
@@ -116,7 +130,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  HTMLProofer.new("./_site").run
+  HTMLProofer.check_directories(["./_site"]).run
 end
 ```
 
@@ -131,7 +145,7 @@ htmlproofer ./_site
 Instead of a directory as the first argument, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.new(["http://github.com", "http://jekyllrb.com"])
+HTMLProofer.check_links(["http://github.com", "http://jekyllrb.com"])
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
@@ -219,7 +233,7 @@ The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :m
 [Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
+HTMLProofer.check_directories(["out/"], {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
@@ -296,7 +310,7 @@ end
 To ignore certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
-HTMLProofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :typhoeus => {
     :ssl_verifypeer => false,
     :ssl_verifyhost => 0}
@@ -308,7 +322,7 @@ HTMLProofer.new("out/", {
 To change the User-Agent used by Typhoeus:
 
 ``` ruby
-HTMLProofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :typhoeus => {
     :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run
@@ -319,7 +333,7 @@ HTMLProofer.new("out/", {
 To exclude urls using regular expressions, include them between forward slashes and don't quote them:
 
 ``` ruby
-HTMLProofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :url_ignore => [/example.com/],
 }).run
 ```
