@@ -17,27 +17,21 @@ rescue LoadError; end
 
 module HTMLProofer
 
-  def check_file(file, options)
+  def check_file(file, options = {})
     fail ArgumentError unless file.is_a?(String)
     options[:type] = :file
     HTMLProofer::Runner.new(file, options)
   end
   module_function :check_file
 
-  def check_directory(directory, options)
-    fail ArgumentError unless directory.is_a?(Array)
+  def check_directories(directories, options = {})
+    fail ArgumentError unless directories.is_a?(Array)
     options[:type] = :directory
-    HTMLProofer::Runner.new(directory, options)
+    HTMLProofer::Runner.new(directories, options)
   end
-  module_function :check_directory
+  module_function :check_directories
 
-  def check_link(link, options)
-    fail ArgumentError unless link.is_a?(String)
-    check_links([link], options)
-  end
-  module_function :check_link
-
-  def check_links(links, options)
+  def check_links(links, options = {})
     fail ArgumentError unless links.is_a?(Array)
     options[:type] = :links
     HTMLProofer::Runner.new(links, options)

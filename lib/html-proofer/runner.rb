@@ -80,12 +80,16 @@ module HTMLProofer
         result = { :external_urls => {}, :failures => [] }
         html = create_nokogiri(path)
 
-        checks.each do |klass|
-          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(@src, path, html, @options)
-          check.run
-          result[:external_urls].merge!(check.external_urls)
-          result[:failures].concat(check.issues)
+        @src = [@src] if @type == :file
+
+        @src.each do |src|
+          checks.each do |klass|
+            @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
+            check = Object.const_get(klass).new(src, path, html, @options)
+            check.run
+            result[:external_urls].merge!(check.external_urls)
+            result[:failures].concat(check.issues)
+          end
         end
         result
       end
