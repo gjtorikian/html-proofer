@@ -103,9 +103,11 @@ module HTMLProofer
 
     def files
       @files ||= if @type == :directory
-                   pattern = File.join(@src, '**', "*#{@options[:ext]}")
-                   files = Dir.glob(pattern).select { |fn| File.file? fn }
-                   files.reject { |f| ignore_file?(f) }
+                   @src.map do |src|
+                     pattern = File.join(src, '**', "*#{@options[:ext]}")
+                     files = Dir.glob(pattern).select { |fn| File.file? fn }
+                     files.reject { |f| ignore_file?(f) }
+                   end.flatten
                  elsif @type == :file && File.extname(@src) == @options[:ext]
                    [@src].reject { |f| ignore_file?(f) }
                  else

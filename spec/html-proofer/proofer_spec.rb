@@ -78,28 +78,28 @@ describe HTMLProofer do
         options = { :file_ignore => ["#{FIXTURES_DIR}/links/brokenHashInternal.html"] }
         brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
         proofer = run_proofer(brokenHashInternalFilepath, :file, options)
-        expect(proofer.failed_tests).to eq []
+        expect(proofer.failed_tests).to eq([])
       end
 
       it 'knows how to ignore a file by regexp' do
         options = { :file_ignore => [/brokenHash/] }
         brokenHashInternalFilepath = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
         proofer = run_proofer(brokenHashInternalFilepath, :file, options)
-        expect(proofer.failed_tests).to eq []
+        expect(proofer.failed_tests).to eq([])
       end
 
       it 'knows how to ignore multiple files by regexp' do
         options = { :file_ignore => [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
         brokenFolders = "#{FIXTURES_DIR}/links/folder/multiples"
         proofer = run_proofer([brokenFolders], :directory, options)
-        expect(proofer.failed_tests).to eq []
+        expect(proofer.failed_tests).to eq([])
       end
 
       it 'knows how to ignore a directory by regexp' do
         options = { :file_ignore => [/\S\.html/] }
         linksDir = "#{FIXTURES_DIR}/links"
         proofer = run_proofer([linksDir], :directory, options)
-        expect(proofer.failed_tests).to eq []
+        expect(proofer.failed_tests).to eq([])
       end
     end
   end
@@ -114,7 +114,7 @@ describe HTMLProofer do
     it 'does not care about phoney ignored checks' do
       options = { :checks_to_ignore => ['This is nothing.'] }
       proofer = make_proofer('', :file, options)
-      expect(proofer.checks.length).to eq 3
+      expect(proofer.checks.length).to eq(3)
     end
   end
 
@@ -123,19 +123,30 @@ describe HTMLProofer do
       options = { :external_only => true }
       missingAltFilepath = "#{FIXTURES_DIR}/images/missingImageAlt.html"
       proofer = run_proofer(missingAltFilepath, :file, options)
-      expect(proofer.failed_tests).to eq []
+      expect(proofer.failed_tests).to eq([])
     end
 
     it 'still reports external link failures' do
       options = { :external_only => true }
       external = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
       proofer = run_proofer(external, :file, options)
-      expect(proofer.failed_tests.length).to eq 1
+      expect(proofer.failed_tests.length).to eq(1)
     end
 
     it 'ignores status codes when asked' do
       proofer = run_proofer(['www.github.com/github/notreallyhere'], :links, :http_status_ignore => [404])
-      expect(proofer.failed_tests.length).to eq 0
+      expect(proofer.failed_tests.length).to eq(0)
+    end
+  end
+
+  describe 'multiple directories' do
+    it 'works' do
+      dirs = ["#{FIXTURES_DIR}/sorting/path", "#{FIXTURES_DIR}/sorting/issue"]
+      output = send_proofer_output(dirs, :directory)
+
+      expect(output).to match('sorting/path')
+      expect(output).to match('sorting/issue')
+      expect(output).to_not match('sorting/status')
     end
   end
 end
