@@ -1,0 +1,364 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html
+      Location:
+      - http://gjtorikian.com/mathematical/
+      X-GitHub-Request-Id:
+      - 17EB2F1F:448E:39DFF58E:568C6794
+      Content-Length:
+      - '178'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2016 01:02:12 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3131-SJC
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1452042132.662747,VS0,VE71
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 188f04104fc4318b0a2e704b6f8ef6f1635c3b4a
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://gjtorikian.github.io/mathematical/
+  recorded_at: Wed, 06 Jan 2016 01:02:12 GMT
+- request:
+    method: head
+    uri: http://github.github.com/github-flavored-markdown/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Thu, 31 Jul 2014 23:48:53 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Wed, 06 Jan 2016 01:12:12 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 17EB2F18:448F:3B5365C4:568C6794
+      Content-Length:
+      - '480'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2016 01:02:12 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3124-SJC
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1452042132.665812,VS0,VE82
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - a670830f143f5402c5ee2426609e6960424b987e
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://github.github.com/github-flavored-markdown/
+  recorded_at: Wed, 06 Jan 2016 01:02:12 GMT
+- request:
+    method: get
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html
+      Location:
+      - http://gjtorikian.com/mathematical/
+      X-GitHub-Request-Id:
+      - 17EB2F1F:448E:39DFF58E:568C6794
+      Content-Length:
+      - '178'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2016 01:02:12 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3131-SJC
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1452042132.758509,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - dd5044a274b5a9d8d30daf30cdd50d18fd42132f
+    body:
+      encoding: UTF-8
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
+        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://gjtorikian.github.io/mathematical/
+  recorded_at: Wed, 06 Jan 2016 01:02:12 GMT
+- request:
+    method: head
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Tue, 05 Jan 2016 00:34:36 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Tue, 05 Jan 2016 23:17:02 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 17EB2F22:448E:39B761FD:568C4C96
+      Content-Length:
+      - '400'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2016 01:02:12 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-sjc3134-SJC
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 18c46ca6aa7ec0bddc9f81aaaa149f3233c41751
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/changing-author-info/
+  recorded_at: Wed, 06 Jan 2016 01:02:12 GMT
+- request:
+    method: head
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 06 Jan 2016 01:02:12 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 301 Moved Permanently
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      Location:
+      - https://github.com/gjtorikian/repository-sync
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      X-Request-Id:
+      - a7a7e4f78c8a2c94589ccfbf7b651a56
+      X-Runtime:
+      - '0.010354'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - a128136e4734a9f74c013356c773ece7
+      X-GitHub-Request-Id:
+      - 490F8465:35CD:48C334F6:568C6794
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/github/repository-sync
+  recorded_at: Wed, 06 Jan 2016 01:02:13 GMT
+- request:
+    method: get
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Wed, 06 Jan 2016 01:02:13 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 301 Moved Permanently
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      Location:
+      - https://github.com/gjtorikian/repository-sync
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      X-Request-Id:
+      - 477efb6b64ebd77648b496ba42b01743
+      X-Runtime:
+      - '0.011365'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - f0ee042be143fcba78041fc2f69c0aa7
+      X-GitHub-Request-Id:
+      - 490F8465:35CD:48C3354F:568C6794
+    body:
+      encoding: UTF-8
+      string: <html><body>You are being <a href="https://github.com/gjtorikian/repository-sync">redirected</a>.</body></html>
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/github/repository-sync
+  recorded_at: Wed, 06 Jan 2016 01:02:13 GMT
+recorded_with: VCR 2.9.3

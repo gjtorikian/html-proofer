@@ -34,23 +34,30 @@ def capture_stderr(*)
   fake_err.string
 end
 
-def make_proofer(file, opts)
+def make_proofer(item, type, opts)
   opts[:verbosity] ||= :fatal
-  HTMLProofer::check_file(file, opts)
+  case type
+  when :file
+    HTMLProofer.check_file(item, opts)
+  when :directory
+    HTMLProofer.check_directories(item, opts)
+  when :links
+    HTMLProofer.check_links(item, opts)
+  end
 end
 
-def run_proofer(file, opts = {})
-  cassette_name = make_cassette_name(file, opts)
-  proofer = make_proofer(file, opts)
+def run_proofer(item, type, opts = {})
+  proofer = make_proofer(item, type, opts)
+  cassette_name = make_cassette_name(item, opts)
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
     capture_stderr { proofer.run }
     proofer
   end
 end
 
-def send_proofer_output(file, opts = {})
+def send_proofer_output(file, type, opts = {})
+  proofer = make_proofer(file, type, opts)
   cassette_name = make_cassette_name(file, opts)
-  proofer = make_proofer(file, opts)
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
     capture_stderr { proofer.run }
   end

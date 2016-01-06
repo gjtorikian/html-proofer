@@ -7,7 +7,7 @@ describe 'Cache test' do
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    run_proofer(brokenLinkExternalFilepath)
+    run_proofer(brokenLinkExternalFilepath, :file)
 
     log = read_cache
     expect(log.keys.length).to eq(2)
@@ -23,13 +23,13 @@ describe 'Cache test' do
     expect_any_instance_of(HTMLProofer::Cache).to receive(:load).once
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/bad_external_links.html"
-    run_proofer(brokenLinkExternalFilepath, { :cache => { :timeframe => '30d' } })
+    run_proofer(brokenLinkExternalFilepath, :file, { :cache => { :timeframe => '30d' } })
   end
 
   it 'fails on an invalid date' do
     file = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     expect {
-      run_proofer(file, { :cache => { :timeframe => '30x' } })
+      run_proofer(file, :file, { :cache => { :timeframe => '30x' } })
     }.to raise_error ArgumentError
   end
 
@@ -44,7 +44,7 @@ describe 'Cache test' do
     current_time = log.values.first['time']
 
     expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    run_proofer(['www.github.com'], { :cache => { :timeframe => '30d' } })
+    run_proofer(['www.github.com'], :links, { :cache => { :timeframe => '30d' } })
 
     # note that the timestamp did not change
     log = read_cache
@@ -63,7 +63,7 @@ describe 'Cache test' do
 
     # since the timestamp changed, we expect an add
     expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
-    run_proofer(['www.github.com'], { :cache => { :timeframe => '4d' } })
+    run_proofer(['www.github.com'], :links, { :cache => { :timeframe => '4d' } })
 
     Timecop.return
   end
@@ -80,7 +80,7 @@ describe 'Cache test' do
     expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.google.com', nil, 200)
 
     # ...because it's within the 30d time frame
-    run_proofer(['www.github.com', 'www.google.com'], { :cache => { :timeframe => '30d' } })
+    run_proofer(['www.github.com', 'www.google.com'], :links, { :cache => { :timeframe => '30d' } })
 
     Timecop.return
   end
@@ -98,7 +98,7 @@ describe 'Cache test' do
 
     # ...even though we are within the 30d time frame,
     # because it's a failure
-    run_proofer(['www.foofoofoo.biz'], { :cache => { :timeframe => '30d' } })
+    run_proofer(['www.foofoofoo.biz'], :links, { :cache => { :timeframe => '30d' } })
 
     Timecop.return
   end

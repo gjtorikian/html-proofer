@@ -14,12 +14,6 @@ describe 'Maliciousness test' do
     }.to raise_error ArgumentError
   end
 
-  it 'does not accept non-string input for single link' do
-    expect {
-      run_proofer(23, :link)
-    }.to raise_error ArgumentError
-  end
-
   it 'does not accept string input for links' do
     expect {
       run_proofer('woo', :links)
