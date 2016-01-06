@@ -2,6 +2,8 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
+    attr_reader :options, :external_urls
+
     def initialize(src, opts = {})
       FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
 
@@ -16,23 +18,24 @@ module HTMLProofer
       @options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.merge(opts[:validation] || {})
       @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
+      @type = @options.delete(:type)
       @logger = HTMLProofer::Log.new(@options[:log_level])
 
-      @failed_tests = []
+      @failures = []
     end
 
     def run
       @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
 
-      if @src.is_a?(Array) && !@options[:disable_external]
-        check_list_of_links
+      if @type == :links
+        check_list_of_links unless @options[:disable_external]
       else
-        check_files_in_directory
+        check_files
         file_text = pluralize(files.length, 'file', 'files')
         @logger.log :info, "Ran on #{file_text}!\n\n"
       end
 
-      if @failed_tests.empty?
+      if @failures.empty?
         @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
       else
         print_failed_tests
@@ -52,19 +55,19 @@ module HTMLProofer
     # Collects any external URLs found in a directory of files. Also collectes
     # every failed test from process_files.
     # Sends the external URLs to Typhoeus for batch processing.
-    def check_files_in_directory
+    def check_files
       @external_urls = {}
 
       process_files.each do |item|
         @external_urls.merge!(item[:external_urls])
-        @failed_tests.concat(item[:failed_tests])
+        @failures.concat(item[:failures])
       end
 
       # TODO: lazy. if we're checking only external links,
       # we'll just trash all the failed tests. really, we should
       # just not run those other checks at all.
       if @options[:external_only]
-        @failed_tests = []
+        @failures = []
         validate_urls
       elsif !@options[:disable_external]
         validate_urls
@@ -74,7 +77,7 @@ module HTMLProofer
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
       Parallel.map(files, @options[:parallel]) do |path|
-        result = { :external_urls => {}, :failed_tests => [] }
+        result = { :external_urls => {}, :failures => [] }
         html = create_nokogiri(path)
 
         checks.each do |klass|
@@ -82,7 +85,7 @@ module HTMLProofer
           check = Object.const_get(klass).new(@src, path, html, @options)
           check.run
           result[:external_urls].merge!(check.external_urls)
-          result[:failed_tests].concat(check.issues)
+          result[:failures].concat(check.issues)
         end
         result
       end
@@ -90,16 +93,16 @@ module HTMLProofer
 
     def validate_urls
       url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
-      @failed_tests.concat(url_validator.run)
+      @failures.concat(url_validator.run)
       @external_urls = url_validator.external_urls
     end
 
     def files
-      @files ||= if File.directory? @src
+      @files ||= if @type == :directory
                    pattern = File.join(@src, '**', "*#{@options[:ext]}")
                    files = Dir.glob(pattern).select { |fn| File.file? fn }
                    files.reject { |f| ignore_file?(f) }
-                 elsif File.extname(@src) == @options[:ext]
+                 elsif @type == :file && File.extname(@src) == @options[:ext]
                    [@src].reject { |f| ignore_file?(f) }
                  else
                    []
@@ -126,16 +129,16 @@ module HTMLProofer
 
     def failed_tests
       result = []
-      return result if @failed_tests.empty?
-      @failed_tests.each { |f| result << f.to_s }
+      return result if @failures.empty?
+      @failures.each { |f| result << f.to_s }
       result
     end
 
     def print_failed_tests
-      sorted_failures = SortedIssues.new(@failed_tests, @options[:error_sort], @logger)
+      sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger)
 
       sorted_failures.sort_and_report
-      count = @failed_tests.length
+      count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
       fail @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
