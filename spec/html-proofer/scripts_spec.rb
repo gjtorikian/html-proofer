@@ -43,4 +43,11 @@ describe 'Scripts test' do
     proofer = run_proofer(ignorableLinks, :file, { :url_ignore => [%r{/assets/.*(js|css|png|svg)}] })
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'translates src via url_swap' do
+    file = "#{FIXTURES_DIR}/scripts/script_abs_url.html"
+    proofer = run_proofer(file, { :url_swap => { %r{^http://example.com} => "" } })
+    expect(proofer.failed_tests).to eq []
+  end
 end
+
