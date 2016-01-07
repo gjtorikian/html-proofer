@@ -34,6 +34,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.'
+  p.option 'verbosity', '--verbosity', String, 'If `true`, outputs extra information as the checking happens. Useful for debugging.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
