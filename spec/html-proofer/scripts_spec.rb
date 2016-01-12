@@ -46,8 +46,7 @@ describe 'Scripts test' do
 
   it 'translates src via url_swap' do
     file = "#{FIXTURES_DIR}/scripts/script_abs_url.html"
-    proofer = run_proofer(file, { :url_swap => { %r{^http://example.com} => "" } })
+    proofer = run_proofer(file, :file, { :url_swap => { %r{^http://example.com} => "" } })
     expect(proofer.failed_tests).to eq []
   end
 end
-
