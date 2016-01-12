@@ -350,8 +350,8 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  # URL seems broken now.
-  skip 'reports failures for the original link, not the redirection' do
+  it 'reports failures for the original link, not the redirection' do
+    skip 'URL seems broken now. Need to find a new one'
     fixture = "#{FIXTURES_DIR}/links/redirected_error.html"
     proofer = run_proofer(fixture, :file)
     expect(proofer.failed_tests.first).to match(/failed: 404/)
