@@ -113,19 +113,25 @@ module HTML
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def check_files_for_internal_woes
-      Parallel.map(files, @parallel_opts) do |path|
-        html = create_nokogiri(path)
-        result = { :external_urls => {}, :failed_tests => [] }
-
-        checks.each do |klass|
-          logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts, @validation_opts)
-          check.run
-          result[:external_urls].merge!(check.external_urls)
-          result[:failed_tests].concat(check.issues) if check.issues.length > 0
-        end
-        result
+      if @parallel_opts.empty?
+        Parallel.map(files) { |path| check_path(path) }
+      else
+        Parallel.map(files, @parallel_opts) { |path| check_path(path) }
       end
+    end
+
+    def check_path(path)
+      html = create_nokogiri(path)
+      result = { :external_urls => {}, :failed_tests => [] }
+
+      checks.each do |klass|
+        logger.log :debug, :yellow, "Checking #{klass.to_s.downcase} on #{path} ..."
+        check = Object.const_get(klass).new(@src, path, html, @options, @typhoeus_opts, @hydra_opts, @parallel_opts, @validation_opts)
+        check.run
+        result[:external_urls].merge!(check.external_urls)
+        result[:failed_tests].concat(check.issues) if check.issues.length > 0
+      end
+      result
     end
 
     def validate_urls
