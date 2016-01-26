@@ -32,13 +32,9 @@ module HTML
       # problem from http://git.io/vBYU1
       # solution from http://git.io/vBYUi
       def clean_content(string)
-        matches = string.scan(%r{https?://([^>]+)}i)
-
-        matches.flatten.each do |url|
-          escaped_url = url.gsub(/&(?!amp;)/, '&amp;')
-          string.gsub!(url, escaped_url)
+        string.gsub(%r{https?://([^>]+)}i) do |url|
+          url.gsub(/&(?!amp;)/, '&amp;')
         end
-        string
       end
       module_function :clean_content
     end
