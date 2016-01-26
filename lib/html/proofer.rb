@@ -114,7 +114,7 @@ module HTML
     # Walks over each implemented check and runs them on the files, in parallel.
     def check_files_for_internal_woes
       if @parallel_opts.empty?
-        Parallel.map(files) { |path| check_path(path) }
+        files.map { |path| check_path(path) }
       else
         Parallel.map(files, @parallel_opts) { |path| check_path(path) }
       end

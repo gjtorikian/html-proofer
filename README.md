@@ -216,7 +216,7 @@ The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :m
 
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
 HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
