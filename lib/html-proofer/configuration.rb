@@ -1,4 +1,4 @@
-class HTMLProofer
+module HTMLProofer
   module Configuration
     require_relative 'version'
 

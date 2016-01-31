@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Tue, 05 Jan 2016 14:50:56 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Wed, 06 Jan 2016 01:12:09 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - C71B4F20:448F:3B535FD1:568C6791
+      Content-Length:
+      - '45448'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 06 Jan 2016 01:02:09 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lax1432-LAX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1452042129.435929,VS0,VE212
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 090363bda4b8cf882bbdd8534886f9189db024f4
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/
+  recorded_at: Wed, 06 Jan 2016 01:02:09 GMT
+recorded_with: VCR 2.9.3

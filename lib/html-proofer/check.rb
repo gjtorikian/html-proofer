@@ -1,4 +1,4 @@
-class HTMLProofer
+module HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
     attr_reader :node, :element, :src, :path, :options, :issues, :external_urls

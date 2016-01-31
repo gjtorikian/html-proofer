@@ -1,7 +1,7 @@
 require 'yell'
 require 'colored'
 
-class HTMLProofer
+module HTMLProofer
   class Log
     include Yell::Loggable
 

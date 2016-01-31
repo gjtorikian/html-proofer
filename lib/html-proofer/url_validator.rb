@@ -3,7 +3,7 @@ require 'uri'
 require_relative './utils'
 require_relative './cache'
 
-class HTMLProofer
+module HTMLProofer
   class UrlValidator
     include HTMLProofer::Utils
 
@@ -141,9 +141,9 @@ class HTMLProofer
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
       @logger.log :debug, debug_msg
 
-      if @options[:http_status_ignore].include?(response_code)
-        # no op
-      elsif response_code.between?(200, 299)
+      return if @options[:http_status_ignore].include?(response_code)
+
+      if response_code.between?(200, 299)
         check_hash_in_2xx_response(href, effective_url, response, filenames)
         @cache.add(href, filenames, response_code)
       elsif response.timed_out?
