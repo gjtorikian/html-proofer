@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class HtmlCheck < ::HTMLProofer::Check
   # new html5 tags (source: http://www.w3schools.com/html/html5_new_elements.asp)
   # and svg child tags (source: https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
@@ -8,7 +6,7 @@ class HtmlCheck < ::HTMLProofer::Check
                   nav progress rp rt ruby section summary
                   time wbr datalist keygen output color date
                   datetime datetime-local email month number
-                  range search tel time url week canvas
+                  range search picture tel time url week canvas
                   svg audio embed source track video
                   altGlyph altGlyphDef altGlyphItem animate
                   animateColor animateMotion animateTransform
