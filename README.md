@@ -207,6 +207,7 @@ You can pass in additional options to configure this validation.
 | Option | Description | Default |
 | :----- | :---------- | :------ |
 | `ignore_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
+| `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogiri are reported as errors. | `false`
 
 For example:
 

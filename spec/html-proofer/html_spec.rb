@@ -21,7 +21,7 @@ describe 'Html test' do
 
   it 'fails for an invalid tag' do
     html = "#{FIXTURES_DIR}/html/invalid_tag.html"
-    proofer = run_proofer(html, :file, { :check_html => true })
+    proofer = run_proofer(html, :file, { :check_html => true, :validation => { :report_invalid_tags => true} })
     expect(proofer.failed_tests.first).to match(/Tag myfancytag invalid \(line 2\)/)
   end
 

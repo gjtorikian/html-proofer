@@ -39,6 +39,7 @@ module HTMLProofer
 
     VALIDATION_DEFAULTS = {
       :ignore_script_embeds => false
+      :report_script_embeds => false,
     }
 
     CACHE_DEFAULTS = {
