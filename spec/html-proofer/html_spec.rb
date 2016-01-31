@@ -82,4 +82,11 @@ describe 'Html test' do
     proofer = run_proofer(normal_looking_page, :file, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not fail for tag picture' do
+    opts = { :check_html => true }
+    normal_looking_page = "#{FIXTURES_DIR}/html/tag_picture.html"
+    proofer = run_proofer(normal_looking_page, :file, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
