@@ -206,13 +206,13 @@ You can pass in additional options to configure this validation.
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `ignore_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 | `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogiri are reported as errors. | `false`
+| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 
 For example:
 
 ``` ruby
-opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+opts = { :check_html => true, :validation => { :report_script_embeds => true } }
 ```
 
 ### Configuring Typhoeus and Hydra

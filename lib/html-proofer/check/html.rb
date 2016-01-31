@@ -10,7 +10,7 @@ class HtmlCheck < ::HTMLProofer::Check
       next if !options[:validation][:report_invalid_tags] && message =~ INVALID_TAG_MSG
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-      next if options[:validation][:ignore_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
+      next if !options[:validation][:report_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
 
       add_issue(message, line_number: line)
     end

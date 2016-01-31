@@ -56,7 +56,7 @@ describe 'Html test' do
   end
 
   it 'ignores embeded scripts when asked' do
-    opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+    opts = { :check_html => true, :validation => { :report_script_embeds => true } }
     ignorableScript = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"
     proofer = run_proofer(ignorableScript, :file, opts)
     expect(proofer.failed_tests).to eq []
