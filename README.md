@@ -106,6 +106,20 @@ If you simply want to check a single file, use the `check_file` method:
 HTMLProofer.check_file("/path/to/a/file.html").run
 ```
 
+### Checking an array of links
+
+With `check_links`, you can also pass in an array of links:
+
+``` ruby
+HTMLProofer.check_links(["http://github.com", "http://jekyllrb.com"])
+```
+
+This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
+
+``` bash
+htmlproofer www.google.com,www.github.com --as-links
+```
+
 ### Using on the command-line
 
 You'll get a new program called `htmlproofer` with this gem. Terrific!
@@ -138,20 +152,6 @@ Don't have or want a `Rakefile`? You can also do something like the following:
 
 ```bash
 htmlproofer ./_site
-```
-
-### Array of links
-
-Instead of a directory as the first argument, you can also pass in an array of links:
-
-``` ruby
-HTMLProofer.check_links(["http://github.com", "http://jekyllrb.com"])
-```
-
-This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
-
-``` bash
-htmlproofer www.google.com,www.github.com --as-links
 ```
 
 ## Ignoring content
