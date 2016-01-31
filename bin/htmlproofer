@@ -72,7 +72,7 @@ Mercenary.program(:htmlproofer) do |p|
       links = path.delete(' ').split(',')
       HTMLProofer.check_links(links, options).run
     elsif File.directory?(path)
-      HTMLProofer.check_directories(path, options).run
+      HTMLProofer.check_directories([path], options).run
     else
       HTMLProofer.check_file(path, options).run
     end
