@@ -10,6 +10,7 @@ module HTML
         :check_favicon => false,
         :check_html => false,
         :checks_to_ignore => [],
+        :check_opengraph => false,
         :directory_index_file => 'index.html',
         :disable_external => false,
         :empty_alt_ignore => false,
