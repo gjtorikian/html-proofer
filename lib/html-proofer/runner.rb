@@ -76,23 +76,29 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
-      Parallel.map(files, @options[:parallel]) do |path|
-        result = { :external_urls => {}, :failures => [] }
-        html = create_nokogiri(path)
-
-        @src = [@src] if @type == :file
-
-        @src.each do |src|
-          checks.each do |klass|
-            @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-            check = Object.const_get(klass).new(src, path, html, @options)
-            check.run
-            result[:external_urls].merge!(check.external_urls)
-            result[:failures].concat(check.issues)
-          end
-        end
-        result
+      if @options[:parallel].empty?
+        files.map { |path| check_path(path) }
+      else
+        Parallel.map(files, @options[:parallel]) { |path| check_path(path) }
       end
+    end
+
+    def check_path(path)
+      result = { :external_urls => {}, :failures => [] }
+      html = create_nokogiri(path)
+
+      @src = [@src] if @type == :file
+
+      @src.each do |src|
+        checks.each do |klass|
+          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
+          check = Object.const_get(klass).new(src, path, html, @options)
+          check.run
+          result[:external_urls].merge!(check.external_urls)
+          result[:failures].concat(check.issues)
+        end
+      end
+      result
     end
 
     def validate_urls
