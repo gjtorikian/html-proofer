@@ -422,4 +422,20 @@ describe 'Links test' do
     proofer = run_proofer(hash_href, :file)
     expect(proofer.failed_tests.length).to eq 0
   end
+
+  it 'does not expect href for anchors in HTML5' do
+    missing_href = "#{FIXTURES_DIR}/links/blank_href_html5.html"
+    proofer = run_proofer(missing_href, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does expect href for anchors in non-HTML5' do
+    missing_href = "#{FIXTURES_DIR}/links/blank_href_html4.html"
+    proofer = run_proofer(missing_href, :file)
+    expect(proofer.failed_tests.length).to eq 1
+
+    missing_href = "#{FIXTURES_DIR}/links/blank_href_htmlunknown.html"
+    proofer = run_proofer(missing_href, :file)
+    expect(proofer.failed_tests.length).to eq 1
+  end
 end

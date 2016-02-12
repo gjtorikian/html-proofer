@@ -206,12 +206,13 @@ You can pass in additional options to configure this validation.
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `ignore_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
+| `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogiri are reported as errors. | `false`
+| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 
 For example:
 
 ``` ruby
-opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+opts = { :check_html => true, :validation => { :report_script_embeds => true } }
 ```
 
 ### Configuring Typhoeus and Hydra
@@ -230,7 +231,7 @@ The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :m
 
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
 HTMLProofer.check_directories(["out/"], {:ext => ".htm", :parallel => { :in_processes => 3} })

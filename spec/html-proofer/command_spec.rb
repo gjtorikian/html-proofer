@@ -76,7 +76,7 @@ describe 'Command test' do
 
   it 'works with check-html' do
     broken = "#{FIXTURES_DIR}/html/invalid_tag.html"
-    output = make_bin('--check-html', broken)
+    output = make_bin('--check-html --report-invalid-tags', broken)
     expect(output).to match('1 failure')
   end
 
