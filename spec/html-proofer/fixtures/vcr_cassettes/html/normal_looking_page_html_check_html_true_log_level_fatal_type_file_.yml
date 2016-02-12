@@ -1,0 +1,550 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://help.github.com/security
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Thu, 11 Feb 2016 22:12:52 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 12 Feb 2016 18:17:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F131C:3F6C:61F4BDF:56BE1F69
+      Content-Length:
+      - '380'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 12 Feb 2016 18:07:37 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lhr6324-LHR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - e86849a99d8ad56f3ccc368ccb43d0ad29a45eb2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/security/
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://help.github.com/articles/github-glossary
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Thu, 11 Feb 2016 22:12:52 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 12 Feb 2016 18:17:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F131C:3F6C:61F4C67:56BE1F69
+      Content-Length:
+      - '17026'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lhr6329-LHR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - af23e6eeb33f50f7fe5eb4023af5d333652b3dbd
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articles/github-glossary/
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://github.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Tue, 12 Feb 2036 18:07:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiM2YyNGFlYTA2MzYyNTQ3ZGRmYmM1MDFhMmIxZDE5ZDciLCJfY3NyZl90b2tlbiI6Im0xYXd4R2JtUU83azdDc0xRSW1PU3pPTURqV2MrNGVQSHZQL0E3SUdjU3M9In0%3D--fa050b1eedfbc938c5135368433471d511cf8e54;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - b31947692155b9c9d3a0974e2d772f8f
+      X-Runtime:
+      - '0.011071'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 87f5c5d7dd60f60a2cf951a9aeddef08
+      X-GitHub-Request-Id:
+      - 5695B365:11CD:2EB9C2A:56BE1F69
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://github.com/features/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Tue, 12 Feb 2036 18:07:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNmM1NDI2YTA4NzczZDg5YWRhZjQ1NDlhYTQ2ODM4NDAiLCJfY3NyZl90b2tlbiI6Im1oWVZ4c3hia0QybDd0WmI3R0ZhL0owU3ZydVh2L2NFekswdS9rZWNEejQ9In0%3D--72436e583da5ba4ab30535c97d8f03d12722e650;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 505580725b0ac731341ba821e93e5712
+      X-Runtime:
+      - '0.017934'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - a0387c52951b3c2853740ef9cede1dec
+      X-GitHub-Request-Id:
+      - 5695B365:11D3:81ACD49:56BE1F69
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/features/
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://github.com/government/welcome#readme
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Tue, 12 Feb 2036 18:07:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYTdjY2NhODQ1MmRkYzdiODU0NDBkZWQ2MTVhYzE3ZmEiLCJzcHlfcmVwbyI6ImdvdmVybm1lbnQvd2VsY29tZSIsInNweV9yZXBvX2F0IjoxNDU1MzAwNDU4LCJfY3NyZl90b2tlbiI6ImMwQlNyMElQY2FLSEtGcmVhcUFPYWIwL1BoVytrTDhmQ3EvRnpVVFZKMEk9IiwiZmxhc2giOnsiZGlzY2FyZCI6WyJhbmFseXRpY3NfbG9jYXRpb24iXSwiZmxhc2hlcyI6eyJhbmFseXRpY3NfbG9jYXRpb24iOiIvPHVzZXItbmFtZT4vPHJlcG8tbmFtZT4ifX19--b2beca59197a1e3e85b91a02f6833a7d6de68407;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 48b0bf73b3bd00068334b6e62e4ab758
+      X-Runtime:
+      - '0.048438'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 50b06cef3698e972f044d7dc2cb41530
+      X-GitHub-Request-Id:
+      - 5695B365:11D4:84007B6:56BE1F69
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/government/welcome
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://github.com/about
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Tue, 12 Feb 2036 18:07:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNDJjYmM4YjNmMzUwOTM2YTRhMzg5ZjJkOTg2OTJiYTUiLCJfY3NyZl90b2tlbiI6ImZUU09FRFR5RWFqdFR6MG1EVUphb3lVSHh1enlMRzNjWHZWOEJ4dnAzU1E9In0%3D--0f71582051ad6384c142cca7257c374b48d2d230;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - e8d38b384c3db1350032f9b62fdebe83
+      X-Runtime:
+      - '0.027536'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 926b734ea1992f8ee1f88ab967a93dac
+      X-GitHub-Request-Id:
+      - 5695B365:11D1:7091596:56BE1F69
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/about
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: http://government.github.com/404.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sun, 31 Jan 2016 22:11:11 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 12 Feb 2016 17:51:51 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F1317:11D6:623F679:56BE195C
+      Content-Length:
+      - '4964'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lhr6325-LHR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 70cbe94aa05fb78512a680060d841784f02e4eef
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://government.github.com/404.html
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/css
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Cache-Control:
+      - private, max-age=86400
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic,p=1
+      Alt-Svc:
+      - quic=":443"; ma=604800; v="30,29,28,27,26,25"
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+- request:
+    method: head
+    uri: http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Date:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Expires:
+      - Fri, 12 Feb 2016 18:07:38 GMT
+      Cache-Control:
+      - public, max-age=0
+      Server:
+      - HTTP server (unknown)
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 12 Feb 2016 18:07:34 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - close
+      Expires:
+      - Fri, 12 Feb 2016 18:17:34 GMT
+      Cache-Control:
+      - max-age=600
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.asdo3irj395295jsingrkrg4.com/asdo3IRJ.js
+  recorded_at: Fri, 12 Feb 2016 18:07:34 GMT
+recorded_with: VCR 2.9.3

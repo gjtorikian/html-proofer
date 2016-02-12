@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/typhoeus/typhoeus#other-curl-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Fri, 12 Feb 2016 18:05:55 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Tue, 12 Feb 2036 18:05:55
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNjI5NTdhNWNlYmMxMzQ0ZDk1ZjI2OTRlYTY3ZDliOTEiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0NTUzMDAzNTUsIl9jc3JmX3Rva2VuIjoiS1dKa2FUWHBnalZPdDlKVGN2VFBiTzZhZWo5NDJSYUNSWU42b3g1MzRkbz0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--1c3f69281a2d4518fa76a102fb93fabac71183ce;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - e83b1ca19f910a60cdaddd9aed013e0e
+      X-Runtime:
+      - '0.068033'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - a4e77e68361b6b21519d8422c6815f62
+      X-GitHub-Request-Id:
+      - 5695B365:3F63:2BC91D5:56BE1F03
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/typhoeus/typhoeus
+  recorded_at: Fri, 12 Feb 2016 18:05:55 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.kakakakakaakkakakakakakakaakakak.biz.foo.net/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 12 Feb 2016 18:07:39 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - close
+      Expires:
+      - Fri, 12 Feb 2016 18:17:39 GMT
+      Cache-Control:
+      - max-age=600
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.kakakakakaakkakakakakakakaakakak.biz.foo.net/
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+recorded_with: VCR 2.9.3
