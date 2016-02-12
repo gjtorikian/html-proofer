@@ -21,7 +21,7 @@ describe 'Html test' do
 
   it 'fails for an invalid tag' do
     html = "#{FIXTURES_DIR}/html/invalid_tag.html"
-    proofer = run_proofer(html, :file, { :check_html => true })
+    proofer = run_proofer(html, :file, { :check_html => true, :validation => { :report_invalid_tags => true} })
     expect(proofer.failed_tests.first).to match(/Tag myfancytag invalid \(line 2\)/)
   end
 
@@ -56,10 +56,17 @@ describe 'Html test' do
   end
 
   it 'ignores embeded scripts when asked' do
-    opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+    opts = { :check_html => true, :validation => { :report_script_embeds => false } }
     ignorableScript = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"
     proofer = run_proofer(ignorableScript, :file, opts)
     expect(proofer.failed_tests).to eq []
+  end
+
+  it 'reports embeded scripts when asked' do
+    opts = { :check_html => true, :validation => { :report_script_embeds => true } }
+    ignorableScript = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"
+    proofer = run_proofer(ignorableScript, :file, opts)
+    expect(proofer.failed_tests.length).to eq 2
   end
 
   it 'does not fail for weird iframe sources' do
@@ -79,6 +86,13 @@ describe 'Html test' do
   it 'validates normal looking government HTML' do
     opts = { :check_html => true }
     normal_looking_page = "#{FIXTURES_DIR}/html/normal_looking_page.html"
+    proofer = run_proofer(normal_looking_page, :file, opts)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does not fail for tag picture' do
+    opts = { :check_html => true }
+    normal_looking_page = "#{FIXTURES_DIR}/html/tag_picture.html"
     proofer = run_proofer(normal_looking_page, :file, opts)
     expect(proofer.failed_tests).to eq []
   end

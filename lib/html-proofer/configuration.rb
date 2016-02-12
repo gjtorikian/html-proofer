@@ -38,7 +38,8 @@ module HTMLProofer
     PARALLEL_DEFAULTS = {}
 
     VALIDATION_DEFAULTS = {
-      :ignore_script_embeds => false
+      :report_script_embeds => false,
+      :report_invalid_tags => false
     }
 
     CACHE_DEFAULTS = {
