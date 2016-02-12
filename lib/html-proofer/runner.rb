@@ -5,8 +5,6 @@ module HTMLProofer
     attr_reader :options, :external_urls
 
     def initialize(src, opts = {})
-      FileUtils.mkdir_p(STORAGE_DIR) unless File.exist?(STORAGE_DIR)
-
       @src = src
 
       @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
@@ -20,6 +18,10 @@ module HTMLProofer
 
       @type = @options.delete(:type)
       @logger = HTMLProofer::Log.new(@options[:log_level])
+
+      if !@options[:cache].empty? && !File.exist?(STORAGE_DIR)
+        FileUtils.mkdir_p(STORAGE_DIR)
+      end
 
       @failures = []
     end
