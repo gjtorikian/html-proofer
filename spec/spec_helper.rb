@@ -40,7 +40,7 @@ def make_proofer(item, type, opts)
   when :file
     HTMLProofer.check_file(item, opts)
   when :directory
-    HTMLProofer.check_directories([item], opts)
+    HTMLProofer.check_directories(item, opts)
   when :links
     HTMLProofer.check_links(item, opts)
   end
