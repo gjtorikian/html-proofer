@@ -16,16 +16,6 @@ describe 'Cache test' do
     expect(statuses.count(0)).to eq(1)
   end
 
-  it 'knows how to load a cache' do
-    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.simple_load.log")
-
-    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    expect_any_instance_of(HTMLProofer::Cache).to receive(:load).once
-
-    brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/bad_external_links.html"
-    run_proofer(brokenLinkExternalFilepath, :file, { :cache => { :timeframe => '30d' } })
-  end
-
   it 'fails on an invalid date' do
     file = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     expect {
