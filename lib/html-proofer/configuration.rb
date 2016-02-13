@@ -42,9 +42,7 @@ module HTMLProofer
       :report_invalid_tags => false
     }
 
-    CACHE_DEFAULTS = {
-      :timeframe => '30d'
-    }
+    CACHE_DEFAULTS = {}
 
     def self.to_regex?(item)
       if item.start_with?('/') && item.end_with?('/')

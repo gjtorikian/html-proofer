@@ -3,27 +3,17 @@ require 'spec_helper'
 describe 'Cache test' do
 
   it 'knows how to write to cache' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.htmlproofer.log")
+    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.htmlproofer.log")
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    run_proofer(brokenLinkExternalFilepath, :file)
+    run_proofer(brokenLinkExternalFilepath, :file, :cache => { :timeframe => '30d' })
 
     log = read_cache
     expect(log.keys.length).to eq(2)
     statuses = log.values.map { |h| h['status'] }
     expect(statuses.count(200)).to eq(1)
     expect(statuses.count(0)).to eq(1)
-  end
-
-  it 'knows how to load a cache' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.simple_load.log")
-
-    expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    expect_any_instance_of(HTMLProofer::Cache).to receive(:load).once
-
-    brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/bad_external_links.html"
-    run_proofer(brokenLinkExternalFilepath, :file, { :cache => { :timeframe => '30d' } })
   end
 
   it 'fails on an invalid date' do
@@ -34,7 +24,7 @@ describe 'Cache test' do
   end
 
   it 'does not write file if timestamp is within date' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.within_date.log")
+    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.within_date.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -55,7 +45,7 @@ describe 'Cache test' do
   end
 
   it 'does write file if timestamp is not within date' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.not_within_date.log")
+    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.not_within_date.log")
 
     # this is frozen to within 20 days after the log
     new_time = Time.local(2014, 10, 21, 12, 0, 0)
@@ -69,7 +59,7 @@ describe 'Cache test' do
   end
 
   it 'does write file if a new URL is added' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.new_url.log")
+    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.new_url.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -86,7 +76,7 @@ describe 'Cache test' do
   end
 
   it 'does recheck failures, regardless of cache' do
-    stub_const('HTMLProofer::Cache::FILENAME', "#{FIXTURES_DIR}/cache/.recheck_failure.log")
+    stub_const('HTMLProofer::Cache::CACHE_LOG', "#{FIXTURES_DIR}/cache/.recheck_failure.log")
 
     # this is frozen to within 7 days of the log
     new_time = Time.local(2015, 10, 20, 12, 0, 0)
