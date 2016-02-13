@@ -35,7 +35,7 @@ def capture_stderr(*)
 end
 
 def make_proofer(item, type, opts)
-  opts[:log_level] ||= :fatal
+  opts[:log_level] ||= :info
   case type
   when :file
     HTMLProofer.check_file(item, opts)
