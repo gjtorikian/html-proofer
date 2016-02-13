@@ -1,9 +1,9 @@
 require 'bundler/setup'
 require 'vcr'
 require 'timecop'
-require_relative '../lib/html/proofer'
+require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html/proofer/fixtures'
+FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -28,44 +28,51 @@ def capture_stderr(*)
     yield
   rescue RuntimeError
   ensure
-    $stderr = original_stderr unless ENV['NOISE']
-    $stdout = original_stdout
+    $stderr = original_stderr
+    $stdout = original_stdout unless ENV['NOISE']
   end
   fake_err.string
 end
 
-def make_proofer(file, opts)
-  opts[:verbosity] ||= :fatal
-  HTML::Proofer.new(file, opts)
+def make_proofer(item, type, opts)
+  opts[:log_level] ||= :error
+  case type
+  when :file
+    HTMLProofer.check_file(item, opts)
+  when :directory
+    HTMLProofer.check_directories(item, opts)
+  when :links
+    HTMLProofer.check_links(item, opts)
+  end
 end
 
-def run_proofer(file, opts = {})
-  cassette_name = make_cassette_name(file, opts)
-  proofer = make_proofer(file, opts)
+def run_proofer(item, type, opts = {})
+  proofer = make_proofer(item, type, opts)
+  cassette_name = make_cassette_name(item, opts)
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
     capture_stderr { proofer.run }
     proofer
   end
 end
 
-def send_proofer_output(file, opts = {})
+def send_proofer_output(file, type, opts = {})
+  proofer = make_proofer(file, type, opts)
   cassette_name = make_cassette_name(file, opts)
-  proofer = make_proofer(file, opts)
   VCR.use_cassette(cassette_name, :record => :new_episodes) do
     capture_stderr { proofer.run }
   end
 end
 
 def make_bin(cmd, path=nil)
-  `bin/htmlproof #{cmd} #{path}`
+  `bin/htmlproofer #{cmd} #{path}`
 end
 
 def delete_cache
-  File.delete(HTML::Proofer::Cache::FILENAME) if File.exist?(HTML::Proofer::Cache::FILENAME)
+  File.delete(HTMLProofer::Cache::CACHE_LOG) if File.exist?(HTMLProofer::Cache::CACHE_LOG)
 end
 
 def read_cache
-  JSON.parse File.read(HTML::Proofer::Cache::FILENAME)
+  JSON.parse File.read(HTMLProofer::Cache::CACHE_LOG)
 end
 
 def make_cassette_name(file, opts)

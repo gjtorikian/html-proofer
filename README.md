@@ -1,8 +1,8 @@
-# HTML::Proofer
+# HTMLProofer
 
 If you generate HTML files, _then this tool might be for you_.
 
-`HTML::Proofer` is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
+`HTMLProofer` is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
 
 [![Build Status](https://travis-ci.org/gjtorikian/html-proofer.svg?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.svg)](http://badge.fury.io/rb/html-proofer)
 
@@ -60,13 +60,19 @@ You can enable or disable most of the following checks.
 
 ## Usage
 
+You can configure HTMLProofer to run on a file, an array of directories, or an array of links.
+
 ### Using in a script
 
-Require the gem; generate some HTML; create a new instance of the `HTML::Proofer` on
-your output folder; then `run` it. Here's a simple example:
+1. Require the gem.
+2. Generate some HTML.
+3. Create a new instance of the `HTMLProofer` on your output folder.
+4. `run` that instance.
+
+Here's a simple example:
 
 ```ruby
-require 'html/proofer'
+require 'html-proofer'
 require 'html/pipeline'
 require 'find'
 
@@ -89,21 +95,43 @@ Find.find("./docs") do |path|
 end
 
 # test your out dir!
-HTML::Proofer.new("./out").run
+HTMLProofer.check_directories(["./out"]).run
+```
+
+### Checking a single file
+
+If you simply want to check a single file, use the `check_file` method:
+
+``` ruby
+HTMLProofer.check_file("/path/to/a/file.html").run
+```
+
+### Checking an array of links
+
+With `check_links`, you can also pass in an array of links:
+
+``` ruby
+HTMLProofer.check_links(["http://github.com", "http://jekyllrb.com"])
+```
+
+This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
+
+``` bash
+htmlproofer www.google.com,www.github.com --as-links
 ```
 
 ### Using on the command-line
 
-You'll get a new program called `htmlproof` with this gem. Terrific!
+You'll get a new program called `htmlproofer` with this gem. Terrific!
 
-Use it like you'd expect to:
+Pass in options through the command-line, like this:
 
 ``` bash
-htmlproof ./out --href-swap wow:cow,mow:doh --ext .html.erb --href-ignore www.github.com
+htmlproofer ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
 ```
 
-Note: since `href_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
-`htmlproof` will figure out what you mean.
+Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
+`htmlproofer` will figure out what you mean.
 
 ### Using with Jekyll
 
@@ -112,32 +140,18 @@ to your `Gemfile` as described above, and add the following to your `Rakefile`,
 using `rake test` to execute:
 
 ```ruby
-require 'html/proofer'
+require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  HTML::Proofer.new("./_site").run
+  HTMLProofer.check_directories(["./_site"]).run
 end
 ```
 
 Don't have or want a `Rakefile`? You can also do something like the following:
 
 ```bash
-htmlproof ./_site
-```
-
-### Array of links
-
-Instead of a directory as the first argument, you can also pass in an array of links:
-
-``` ruby
-HTML::Proofer.new(["http://github.com", "http://jekyllrb.com"])
-```
-
-This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
-
-``` bash
-htmlproof www.google.com,www.github.com --as-links
+htmlproofer ./_site
 ```
 
 ## Ignoring content
@@ -150,7 +164,7 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from every check
 
 ## Configuration
 
-The `HTML::Proofer` constructor takes an optional hash of additional options:
+The `HTMLProofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
@@ -168,12 +182,12 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | `ext` | The extension of your HTML files including the dot. | `.html`
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `href_ignore` | An array of Strings or RegExps containing `href`s that are safe to ignore. Note that non-HTTP(S) URIs are always ignored. **Will be renamed in a future release.** | `[]` |
-| `href_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms links that match `RegExp` into `String` via `gsub`. **Will be renamed in a future release.** | `{}` |
+| `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
+| `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
-| `verbosity` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -192,12 +206,13 @@ You can pass in additional options to configure this validation.
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `ignore_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
+| `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogiri are reported as errors. | `false`
+| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 
 For example:
 
 ``` ruby
-opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
+opts = { :check_html => true, :validation => { :report_script_embeds => true } }
 ```
 
 ### Configuring Typhoeus and Hydra
@@ -205,10 +220,10 @@ opts = { :check_html => true, :validation => { :ignore_script_embeds => true } }
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
+HTMLProofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
-This sets `HTML::Proofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
@@ -219,7 +234,7 @@ The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :m
 [Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTML::Proofer.new("out/", {:ext => ".htm", :parallel => { :in_processes => 3} })
+HTMLProofer.check_directories(["out/"], {:ext => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
@@ -228,7 +243,7 @@ In this example, `:in_processes => 3` is passed into Parallel as a configuration
 
 Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external links. Caching simply means to skip links that are valid for a certain period of time.
 
-While running tests, HTML::Proofer will always write to a log file within a directory called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system. You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
+While running tests, HTMLProofer will always write to a log file within a directory called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system. You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
 
 * `M` means months
 * `w` means weeks
@@ -253,44 +268,36 @@ The cache operates on external links only.
 
 ## Logging
 
-HTML-Proofer can be as noisy or as quiet as you'd like. There are two ways to log information:
-
-* If you set the `:verbose` option to `true`, HTML-Proofer will provide some debug information.
-* If you set the `:verbosity` option, you can better define the level of logging. See the configuration table above for more information.
-
-`:verbosity` is newer and offers better configuration. `:verbose` will be deprecated in a future 3.x.x release.
+HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_level` option, you can better define the level of logging.
 
 ## Custom tests
 
-Want to write your own test? Sure! Just create two classes--one that inherits from `HTML::Proofer::Checkable`, and another that inherits from `HTML::Proofer::CheckRunner`.
+Want to write your own test? Sure, that's possible!
 
-The `CheckRunner` subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message)` to explain the error.
+Just create a classes that inherits from inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line_number: line)` to explain the error.
 
-The `Checkable` subclass defines various helper methods you can use as part of your test. Usually, you'll want to instantiate it within `run`. You have access to all of your element's attributes.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This contructs an object that contains all the attributes of the HTML element you're iterating on.
 
-Here's an example custom test that protects against `mailto` links that point to `octocat@github.com`:
+Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class OctocatLinkCheck < ::HTML::Proofer::Checkable
+class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @data_ignore_proofer || @href.nil? || @href.empty?
-    return @href.match /^mailto\:/
+    return false if @link.data_ignore_proofer || blank?(@link.href)
+    return @link.href.match /^mailto\:/
   end
 
   def octocat?
-    return @href.match /\:octocat@github.com\Z/
+    return @link.href.match /\:octocat@github.com\Z/
   end
 
-end
-
-class MailToOctocat < ::HTML::Proofer::CheckRunner
   def run
     @html.css('a').each do |node|
-      link = OctocatLinkCheck.new(node, self)
+      @link = create_element(node)
       line = node.line
 
-      if link.mailto? && link.octocat?
-        return add_issue("Don't email the Octocat directly!", line)
+      if mailto? && octocat?
+        return add_issue("Don't email the Octocat directly!", line_number: line)
       end
     end
   end
@@ -304,7 +311,7 @@ end
 To ignore certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
-HTML::Proofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :typhoeus => {
     :ssl_verifypeer => false,
     :ssl_verifyhost => 0}
@@ -316,7 +323,7 @@ HTML::Proofer.new("out/", {
 To change the User-Agent used by Typhoeus:
 
 ``` ruby
-HTML::Proofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :typhoeus => {
     :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run
@@ -327,7 +334,7 @@ HTML::Proofer.new("out/", {
 To exclude urls using regular expressions, include them between forward slashes and don't quote them:
 
 ``` ruby
-HTML::Proofer.new("out/", {
+HTMLProofer.check_directories(["out/"], {
   :url_ignore => [/example.com/],
 }).run
 ```
