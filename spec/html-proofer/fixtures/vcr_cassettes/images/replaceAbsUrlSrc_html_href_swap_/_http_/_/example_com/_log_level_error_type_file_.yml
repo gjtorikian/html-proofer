@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://baseurl.com/gpl.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 13 Feb 2016 14:51:00 GMT
+      Server:
+      - Apache
+      Set-Cookie:
+      - gvc=922vr2029206610219994; expires=Thu, 11-Feb-2021 14:51:01 GMT; path=/;
+        domain=baseurl.com; httponly
+      Vary:
+      - Accept-Encoding,User-Agent
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://baseurl.com/gpl.png
+  recorded_at: Sat, 13 Feb 2016 14:51:01 GMT
+recorded_with: VCR 2.9.3
