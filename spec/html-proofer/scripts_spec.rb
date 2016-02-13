@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'Scripts test' do
-
   it 'fails for broken external src' do
     file = "#{FIXTURES_DIR}/scripts/script_broken_external.html"
     proofer = run_proofer(file, :file)

@@ -28,14 +28,14 @@ def capture_stderr(*)
     yield
   rescue RuntimeError
   ensure
-    $stderr = original_stderr unless ENV['NOISE']
-    $stdout = original_stdout
+    $stderr = original_stderr
+    $stdout = original_stdout unless ENV['NOISE']
   end
   fake_err.string
 end
 
 def make_proofer(item, type, opts)
-  opts[:log_level] ||= :info
+  opts[:log_level] ||= :error
   case type
   when :file
     HTMLProofer.check_file(item, opts)
