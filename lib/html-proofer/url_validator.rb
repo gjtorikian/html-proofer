@@ -28,7 +28,7 @@ module HTMLProofer
         external_link_checker(@external_urls)
       end
 
-      @cache.write
+      @cache.write if @cache.load
       @failed_tests
     end
 
