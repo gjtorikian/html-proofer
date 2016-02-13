@@ -68,11 +68,11 @@ def make_bin(cmd, path=nil)
 end
 
 def delete_cache
-  File.delete(HTMLProofer::Cache::FILENAME) if File.exist?(HTMLProofer::Cache::FILENAME)
+  File.delete(HTMLProofer::Cache::CACHE_LOG) if File.exist?(HTMLProofer::Cache::CACHE_LOG)
 end
 
 def read_cache
-  JSON.parse File.read(HTMLProofer::Cache::FILENAME)
+  JSON.parse File.read(HTMLProofer::Cache::CACHE_LOG)
 end
 
 def make_cassette_name(file, opts)

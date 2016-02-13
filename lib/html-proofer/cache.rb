@@ -9,7 +9,7 @@ module HTMLProofer
   class Cache
     include HTMLProofer::Utils
 
-    FILENAME = File.join(STORAGE_DIR, 'cache.log')
+    CACHE_LOG = File.join(STORAGE_DIR, 'cache.log')
 
     attr_reader :exists, :load, :cache_log
 
@@ -25,9 +25,9 @@ module HTMLProofer
       end
       @cache_time = Time.now
 
-      if File.exist?(FILENAME)
+      if File.exist?(CACHE_LOG)
         @exists = true
-        contents = File.read(FILENAME)
+        contents = File.read(CACHE_LOG)
         @cache_log = contents.empty? ? {} : JSON.parse(contents)
       else
         @exists = false
@@ -113,7 +113,7 @@ module HTMLProofer
     end
 
     def write
-      File.write(FILENAME, @cache_log.to_json)
+      File.write(CACHE_LOG, @cache_log.to_json)
     end
 
     def load?
