@@ -7,7 +7,7 @@ describe 'Cache test' do
 
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-    run_proofer(brokenLinkExternalFilepath, :file)
+    run_proofer(brokenLinkExternalFilepath, :file, :cache => { :timeframe => '30d' })
 
     log = read_cache
     expect(log.keys.length).to eq(2)
