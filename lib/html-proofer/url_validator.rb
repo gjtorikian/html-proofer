@@ -21,14 +21,14 @@ module HTMLProofer
     def run
       @external_urls = remove_query_values
 
-      if @cache.exists && @cache.load
+      if @cache.use_cache?
         urls_to_check = load_cache
         external_link_checker(urls_to_check)
+        @cache.write
       else
         external_link_checker(@external_urls)
       end
 
-      @cache.write if @cache.load
       @failed_tests
     end
 
