@@ -144,8 +144,9 @@ module HTMLProofer
       return if @options[:http_status_ignore].include?(response_code)
 
       if response_code.between?(200, 299)
-        check_hash_in_2xx_response(href, effective_url, response, filenames)
-        @cache.add(href, filenames, response_code)
+        unless check_hash_in_2xx_response(href, effective_url, response, filenames)
+          @cache.add(href, filenames, response_code)
+        end
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
@@ -164,9 +165,9 @@ module HTMLProofer
     # Even though the response was a success, we may have been asked to check
     # if the hash on the URL exists on the page
     def check_hash_in_2xx_response(href, effective_url, response, filenames)
-      return if @options[:only_4xx]
-      return unless @options[:check_external_hash]
-      return unless (hash = hash?(href))
+      return false if @options[:only_4xx]
+      return false unless @options[:check_external_hash]
+      return false unless (hash = hash?(href))
 
       body_doc = create_nokogiri(response.body)
 
@@ -181,6 +182,7 @@ module HTMLProofer
       msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
       add_external_issue(filenames, msg, response.code)
       @cache.add(href, filenames, response.code, msg)
+      true
     end
 
     def handle_timeout(href, filenames, response_code)
