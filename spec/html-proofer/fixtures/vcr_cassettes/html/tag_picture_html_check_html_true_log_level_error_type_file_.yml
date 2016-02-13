@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://placehold.it/350x150
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - imgix-fe
+      Cache-Control:
+      - max-age=1800
+      Fastly-Debug-Digest:
+      - 9a057a961a2b8a289986dbe6beb7b7a1d04ea8a18c458086020848aaf1040b2f
+      Content-Length:
+      - '6486'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:52:59 GMT
+      Age:
+      - '927929'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - image/png
+      X-Imgix-Request-ID:
+      - a602f7d7fb7ec1c64713254236df7461d09b29d0
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150
+  recorded_at: Sat, 13 Feb 2016 14:52:59 GMT
+recorded_with: VCR 2.9.3

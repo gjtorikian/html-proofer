@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/octocat/Spoon-Knife/issues
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 13 Feb 2016 14:51:03 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Wed, 13 Feb 2036 14:51:03
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMDRiZDg0NzJkOWIzMWQ5Mjk4ZjlkZDM1NGMxODkwNDIiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ1NTM3NTA2MywiX2NzcmZfdG9rZW4iOiJIZTVxNmhOaXBLTjVuaEVpK0ZBck9GY2psMFVEUzNncDFVMXVuSGhXSlJvPSJ9--18fcf387efc79908fddf25db0212fcfa4d2ddb1d;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 0d3db020b9307a11db9c0c4c9d7ada1a
+      X-Runtime:
+      - '0.136729'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 53e13e5d66f560f3e2b04e74a099de0d
+      X-GitHub-Request-Id:
+      - 5695B365:11D3:A66BC14:56BF42D6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/octocat/Spoon-Knife/issues
+  recorded_at: Sat, 13 Feb 2016 14:51:03 GMT
+recorded_with: VCR 2.9.3

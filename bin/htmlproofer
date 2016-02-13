@@ -35,7 +35,6 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.'
-  p.option 'verbosity', '--verbosity', String, 'If `true`, outputs extra information as the checking happens. Useful for debugging.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -61,18 +60,19 @@ Mercenary.program(:htmlproofer) do |p|
     end
 
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
-    options[:verbosity] = opts['verbosity'].to_sym unless opts['verbosity'].nil?
+    options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
 
     # FIXME: this is gross
     options[:validation] = {}
     options[:validation][:report_script_embeds] = opts['report_script_embeds']
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags']
 
+    paths = path.split(',')
     if opts['as_links']
       links = path.delete(' ').split(',')
       HTMLProofer.check_links(links, options).run
-    elsif File.directory?(path)
-      HTMLProofer.check_directories(path, options).run
+    elsif File.directory?(paths.first)
+      HTMLProofer.check_directories(paths, options).run
     else
       HTMLProofer.check_file(path, options).run
     end
