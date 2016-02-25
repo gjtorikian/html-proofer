@@ -96,4 +96,11 @@ describe 'Html test' do
     proofer = run_proofer(normal_looking_page, :file, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'ignores namespaces' do
+    opts = { :check_html => true }
+    ignorableNamespace = "#{FIXTURES_DIR}/html/ignore_namespace.html"
+    proofer = run_proofer(ignorableNamespace, :file, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end
