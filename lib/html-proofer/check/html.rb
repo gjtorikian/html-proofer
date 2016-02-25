@@ -15,7 +15,7 @@ class HtmlCheck < ::HTMLProofer::Check
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
       next if !options[:validation][:report_script_embeds] && message =~ SCRIPT_EMBEDS_MSG
 
-      add_issue(message, line_number: line)
+      add_issue(message, line: line)
     end
   end
 end

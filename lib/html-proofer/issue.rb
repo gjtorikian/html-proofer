@@ -1,16 +1,16 @@
 module HTMLProofer
   class Issue
-    attr_reader :path, :desc, :status, :line_number
+    attr_reader :path, :desc, :status, :line
 
-    def initialize(path, desc, line_number: nil, status: -1)
-      @line_number = line_number.nil? ? '' : " (line #{line_number})"
+    def initialize(path, desc, line: nil, status: -1)
+      @line = line.nil? ? '' : " (line #{line})"
       @path = path
       @desc = desc
       @status = status
     end
 
     def to_s
-      "#{@path}: #{@desc}#{@line_number}"
+      "#{@path}: #{@desc}#{@line}"
     end
   end
 
@@ -52,7 +52,7 @@ module HTMLProofer
         if first_report == :status
           @logger.log :error, "  *  #{issue}"
         else
-          @logger.log :error, "  *  #{issue.send(second_report)}#{issue.line_number}"
+          @logger.log :error, "  *  #{issue.send(second_report)}#{issue.line}"
         end
       end
     end

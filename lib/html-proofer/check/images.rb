@@ -22,23 +22,23 @@ class ImageCheck < ::HTMLProofer::Check
 
       # screenshot filenames should return because of terrible names
       if terrible_filename?
-        add_issue("image has a terrible filename (#{@img.url})", line_number: line)
+        add_issue("image has a terrible filename (#{@img.url})", line: line)
         next
       end
 
       # does the image exist?
       if missing_src?
-        add_issue('image has no src or srcset attribute', line_number: line)
+        add_issue('image has no src or srcset attribute', line: line)
       else
         if @img.remote?
           add_to_external_urls(@img.url, line)
         elsif !@img.exists?
-          add_issue("internal image #{@img.url} does not exist", line_number: line)
+          add_issue("internal image #{@img.url} does not exist", line: line)
         end
       end
 
       if @img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?)
-        add_issue("image #{@img.url} does not have an alt attribute", line_number: line)
+        add_issue("image #{@img.url} does not have an alt attribute", line: line)
       end
     end
 

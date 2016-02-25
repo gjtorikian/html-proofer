@@ -21,7 +21,7 @@ class LinkCheck < ::HTMLProofer::Check
 
       # is it even a valid URL?
       unless @link.valid?
-        add_issue("#{@link.href} is an invalid URL", line_number: line)
+        add_issue("#{@link.href} is an invalid URL", line: line)
         next
       end
 
@@ -31,7 +31,7 @@ class LinkCheck < ::HTMLProofer::Check
       if missing_href?
         # HTML5 allows dropping the href: http://git.io/vBX0z
         next if @html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?
-        add_issue('anchor has no href attribute', line_number: line)
+        add_issue('anchor has no href attribute', line: line)
         next
       end
 
@@ -42,12 +42,12 @@ class LinkCheck < ::HTMLProofer::Check
         add_to_external_urls(@link.href, line)
         next
       elsif !@link.internal? && !@link.exists?
-        add_issue("internally linking to #{@link.href}, which does not exist", line_number: line)
+        add_issue("internally linking to #{@link.href}, which does not exist", line: line)
       end
 
       # does the local directory have a trailing slash?
       if @link.unslashed_directory? @link.absolute_path
-        add_issue("internally linking to a directory #{@link.absolute_path} without trailing slash", line_number: line)
+        add_issue("internally linking to a directory #{@link.absolute_path} without trailing slash", line: line)
         next
       end
 
@@ -66,26 +66,26 @@ class LinkCheck < ::HTMLProofer::Check
       handle_tel(link, line)
     when 'http'
       return unless @options[:enforce_https]
-      add_issue("#{link.href} is not an HTTPS link", line_number: line)
+      add_issue("#{link.href} is not an HTTPS link", line: line)
     end
   end
 
   def handle_mailto(link, line)
     if link.path.empty?
-      add_issue("#{link.href} contains no email address", line_number: line)
+      add_issue("#{link.href} contains no email address", line: line)
     elsif !link.path.include?('@')
-      add_issue("#{link.href} contains an invalid email address", line_number: line)
+      add_issue("#{link.href} contains an invalid email address", line: line)
     end
   end
 
   def handle_tel(link, line)
-    add_issue("#{link.href} contains no phone number", line_number: line) if link.path.empty?
+    add_issue("#{link.href} contains no phone number", line: line) if link.path.empty?
   end
 
   def handle_hash(link, line)
     if link.internal?
       unless hash_check @html, link.hash
-        add_issue("linking to internal hash ##{link.hash} that does not exist", line_number: line)
+        add_issue("linking to internal hash ##{link.hash} that does not exist", line: line)
       end
     elsif link.external?
       external_link_check(link, line)
@@ -94,11 +94,11 @@ class LinkCheck < ::HTMLProofer::Check
 
   def external_link_check(link, line)
     if !link.exists?
-      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line_number: line)
+      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line)
     else
       target_html = create_nokogiri link.absolute_path
       unless hash_check target_html, link.hash
-        add_issue("linking to #{link.href}, but #{link.hash} does not exist", line_number: line)
+        add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line)
       end
     end
   end
