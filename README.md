@@ -276,7 +276,7 @@ HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_lev
 
 Want to write your own test? Sure, that's possible!
 
-Just create a classes that inherits from inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line_number: line)` to explain the error.
+Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line)` to explain the error.
 
 If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This contructs an object that contains all the attributes of the HTML element you're iterating on.
 
@@ -290,7 +290,7 @@ class MailToOctocat < ::HTMLProofer::Check
   end
 
   def octocat?
-    return @link.href.match /\:octocat@github.com\Z/
+    return @link.href.match /octocat@github.com/
   end
 
   def run
@@ -299,7 +299,7 @@ class MailToOctocat < ::HTMLProofer::Check
       line = node.line
 
       if mailto? && octocat?
-        return add_issue("Don't email the Octocat directly!", line_number: line)
+        return add_issue("Don't email the Octocat directly!", line: line)
       end
     end
   end
