@@ -243,7 +243,7 @@ In this example, `:in_processes => 3` is passed into Parallel as a configuration
 
 Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external links. Caching simply means to skip links that are valid for a certain period of time.
 
-While running tests, HTMLProofer will always write to a log file within a directory called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system. You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
+You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
 
 * `M` means months
 * `w` means weeks
@@ -265,6 +265,8 @@ And the following options means "recheck links older than two weeks":
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
 
 The cache operates on external links only.
+
+If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system.
 
 ## Logging
 
