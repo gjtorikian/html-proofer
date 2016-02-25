@@ -1,6 +1,6 @@
 class HtmlCheck < ::HTMLProofer::Check
   SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
-  INVALID_TAG_MSG = /Tag ([\w-:]+) invalid/
+  INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/
   INVALID_PREFIX = /Namespace prefix/
 
   def run
