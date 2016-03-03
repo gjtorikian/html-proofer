@@ -156,6 +156,7 @@ The `HTML::Proofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
+| `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and Github Pages) | `nil` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
