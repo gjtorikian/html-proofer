@@ -124,8 +124,8 @@ module HTML
         # implicit index support
         if File.directory?(file) && !unslashed_directory?(file)
           file = File.join file, @check.options[:directory_index_file]
-        elsif File.file?("#{file}.html")
-          file = "#{file}.html"
+        elsif File.file?("#{file}#{@check.options[:assume_extension]}")
+          file = "#{file}#{@check.options[:assume_extension]}"
         end
 
         file
