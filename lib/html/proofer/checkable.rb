@@ -107,14 +107,14 @@ module HTML
       def file_path
         return if path.nil?
 
-        auto_html_extension = true # This will be a command-line switch
-        path_dot_html = auto_html_extension ? path + ".html" : path
+        auto_extension = true # This will be a command-line switch
+        path_dot_ext = auto_extension ? path + @check.options[:ext] : path
 
         if path =~ %r{^/} # path relative to root
           base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
-        elsif File.exist?(File.expand_path path, @check.src) || File.exist?(File.expand_path path_dot_html, @check.src) # relative links, path is a file
+        elsif File.exist?(File.expand_path path, @check.src) || File.exist?(File.expand_path path_dot_ext, @check.src) # relative links, path is a file
           base = File.dirname @check.path
-        elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_html)) # relative links in nested dir, path is a file
+        elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # relative links in nested dir, path is a file
           base = File.dirname @check.path
         else # relative link, path is a directory
           base = @check.path
