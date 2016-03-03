@@ -107,8 +107,7 @@ module HTML
       def file_path
         return if path.nil?
 
-        auto_extension = true # This will be a command-line switch
-        path_dot_ext = auto_extension ? path + @check.options[:ext] : path
+        path_dot_ext = path + @check.options[:assume_extension].to_s
 
         if path =~ %r{^/} # path relative to root
           base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)

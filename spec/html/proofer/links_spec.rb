@@ -362,11 +362,27 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'does not complain when the link drops the .html extension' do
-    fixture = "#{FIXTURES_DIR}/links/no_html_extension.html"
-    proofer = run_proofer(fixture)
-    expect(proofer.failed_tests).to eq []
+  context 'automatically adding default extensions to files' do
+    
+    before :each do
+      @fixture = "#{FIXTURES_DIR}/links/no_html_extension.html"
+      @options = { assume_extension: ".html" }
+    end
+    
+    it 'is not enabled by default' do
+      # Default behaviour does not change
+      proofer = run_proofer(@fixture)
+      expect(proofer.failed_tests.count).to eq 3
+    end
+    
+    it 'accepts extensionless file links when enabled' do
+      # With command-line option
+      proofer = run_proofer(@fixture, @options)
+      expect(proofer.failed_tests).to eq []
+    end
+
   end
+
   
   it 'does not complain for internal links with mismatched cases' do
     fixture = "#{FIXTURES_DIR}/links/ignores_cases.html"
