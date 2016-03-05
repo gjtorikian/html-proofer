@@ -27,7 +27,7 @@ module HTMLProofer
     end
 
     def run
-      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:ext]}... \n\n"
+      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
 
       if @type == :links
         check_list_of_links unless @options[:disable_external]
@@ -112,11 +112,11 @@ module HTMLProofer
     def files
       @files ||= if @type == :directory
                    @src.map do |src|
-                     pattern = File.join(src, '**', "*#{@options[:ext]}")
+                     pattern = File.join(src, '**', "*#{@options[:extension]}")
                      files = Dir.glob(pattern).select { |fn| File.file? fn }
                      files.reject { |f| ignore_file?(f) }
                    end.flatten
-                 elsif @type == :file && File.extname(@src) == @options[:ext]
+                 elsif @type == :file && File.extname(@src) == @options[:extension]
                    [@src].reject { |f| ignore_file?(f) }
                  else
                    []

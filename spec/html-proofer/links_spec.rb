@@ -52,7 +52,7 @@ describe 'Links test' do
   end
 
   it 'fails for different filenames' do
-    options = { :ext => '.foo' }
+    options = { :extension => '.foo' }
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/file.foo"
     proofer = run_proofer(brokenLinkExternalFilepath, :file, options)
     expect(proofer.failed_tests.first).to match(/failed: response code 0/)

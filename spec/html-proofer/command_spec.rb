@@ -14,7 +14,7 @@ describe 'Command test' do
 
   it 'works with checks_to_ignore' do
     external = "#{FIXTURES_DIR}/links/file.foo"
-    output = make_bin('--ext .foo --checks-to-ignore LinkCheck', external)
+    output = make_bin('--extension .foo --checks-to-ignore LinkCheck', external)
     expect(output).to match('successfully')
     expect(output).to_not match('LinkCheck')
   end
@@ -37,9 +37,9 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with ext' do
+  it 'works with extension' do
     external = "#{FIXTURES_DIR}/links/file.foo"
-    output = make_bin('--ext .foo', external)
+    output = make_bin('--extension .foo', external)
     expect(output).to match('1 failure')
     expect(output).to match('LinkCheck')
   end

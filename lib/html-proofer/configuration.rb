@@ -15,7 +15,7 @@ module HTMLProofer
       :empty_alt_ignore => false,
       :enforce_https => false,
       :error_sort => :path,
-      :ext => '.html',
+      :extension => '.html',
       :external_only => false,
       :file_ignore => [],
       :http_status_ignore => [],

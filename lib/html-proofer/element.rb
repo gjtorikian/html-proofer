@@ -103,7 +103,11 @@ module HTMLProofer
     def file_path
       return if path.nil?
 
-      path_dot_ext = path + @check.options[:assume_extension].to_s
+      path_dot_ext = ''
+
+      if @check.options[:assume_extension]
+        path_dot_ext = path + @check.options[:extension]
+      end
 
       if path =~ %r{^/} # path relative to root
         base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
@@ -120,8 +124,8 @@ module HTMLProofer
       # implicit index support
       if File.directory?(file) && !unslashed_directory?(file)
         file = File.join file, @check.options[:directory_index_file]
-      elsif File.file?("#{file}#{@check.options[:assume_extension]}")
-        file = "#{file}#{@check.options[:assume_extension]}"
+      elsif @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
+        file = "#{file}#{@check.options[:extension]}"
       end
 
       file

@@ -127,7 +127,7 @@ You'll get a new program called `htmlproofer` with this gem. Terrific!
 Pass in options through the command-line, like this:
 
 ``` bash
-htmlproofer ./out --url-swap wow:cow,mow:doh --ext .html.erb --url-ignore www.github.com
+htmlproofer ./out --url-swap wow:cow,mow:doh --extension .html.erb --url-ignore www.github.com
 ```
 
 Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
@@ -170,7 +170,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
-| `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `nil` |
+| `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the website exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
@@ -180,7 +180,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
-| `ext` | The extension of your HTML files including the dot. | `.html`
+| `extension` | The extension of your HTML files including the dot. | `.html`
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
@@ -221,7 +221,7 @@ opts = { :check_html => true, :validation => { :report_script_embeds => true } }
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {:ext => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
+HTMLProofer.new("out/", {:extension => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
 This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
@@ -235,7 +235,7 @@ The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :m
 [Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {:ext => ".htm", :parallel => { :in_processes => 3} })
+HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { :in_processes => 3} })
 ```
 
 In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
