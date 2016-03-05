@@ -207,7 +207,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 In addition, there are a few "namespaced" options. These are:
 
 * `:validation`
-* `:typhoeus`
+* `:typhoeus` / `:hydra`
 * `:parallel`
 * `:cache`
 
