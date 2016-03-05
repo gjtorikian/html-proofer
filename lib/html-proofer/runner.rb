@@ -96,7 +96,12 @@ module HTMLProofer
           @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
           check = Object.const_get(klass).new(src, path, html, @options)
           check.run
-          result[:external_urls].merge!(check.external_urls)
+          external_urls = check.external_urls
+          if @options[:url_swap]
+            external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }]
+          end
+          puts check.external_urls
+          result[:external_urls].merge!(external_urls)
           result[:failures].concat(check.issues)
         end
       end
