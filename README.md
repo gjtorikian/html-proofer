@@ -279,19 +279,19 @@ Want to write your own test? Sure, that's possible!
 
 Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line)` to explain the error.
 
-If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This contructs an object that contains all the attributes of the HTML element you're iterating on.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
 
 Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @link.data_ignore_proofer || blank?(@link.href)
-    return @link.href.match /^mailto\:/
+    return false if @link.data_ignore_proofer || @link.href.nil?
+    @link.href.match /^mailto\:/
   end
 
   def octocat?
-    return @link.href.match /octocat@github.com/
+    @link.href.match /octocat@github.com/
   end
 
   def run
