@@ -1,0 +1,69 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.9.4
+      Date:
+      - Sat, 13 Feb 2016 14:51:01 GMT
+      Content-Type:
+      - image/png
+      Content-Length:
+      - '27063'
+      Connection:
+      - keep-alive
+      X-Object-Meta-Sha1base36:
+      - mm95ioarmv2n0yvfyg4czr9qxzhf44v
+      Last-Modified:
+      - Fri, 18 Oct 2013 02:15:06 GMT
+      Etag:
+      - b02df8baa52837645bd58a219be4d9dc
+      X-Timestamp:
+      - '1382062505.22715'
+      X-Trans-Id:
+      - txbe456a8be6a84fada0ecc-0056bddce2
+      X-Varnish:
+      - 2095047446 2008650251, 2340016199 2194907535, 1963083918 1962792987
+      Via:
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Age:
+      - '91635'
+      X-Cache:
+      - cp1099 hit(32), cp3045 hit(31), cp3045 frontend hit(3)
+      Strict-Transport-Security:
+      - max-age=31536000
+      Set-Cookie:
+      - WMF-Last-Access=13-Feb-2016;Path=/;HttpOnly;Expires=Wed, 16 Mar 2016 12:00:00
+        GMT
+      X-Analytics:
+      - https=1;nocookies=1
+      X-Client-IP:
+      - 86.149.179.101
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+  recorded_at: Sat, 13 Feb 2016 14:51:01 GMT
+recorded_with: VCR 2.9.3

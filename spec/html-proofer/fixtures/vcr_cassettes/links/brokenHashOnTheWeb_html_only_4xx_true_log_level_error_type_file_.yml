@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://help.github.com/articles/searching-issues#no
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Fri, 12 Feb 2016 21:07:03 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 12:22:07 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 17EB2B28:11D6:7903AD0:56BF1D97
+      Content-Length:
+      - '30693'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:52:56 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '3'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4120-AMS
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 76fdc0c8229e52f946e4dd10c760e1a98f7565ea
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articles/searching-issues/
+  recorded_at: Sat, 13 Feb 2016 14:52:56 GMT
+recorded_with: VCR 2.9.3

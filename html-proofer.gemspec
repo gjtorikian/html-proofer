@@ -1,17 +1,16 @@
-# -*- encoding: utf-8 -*-
 $LOAD_PATH.push File.expand_path('../lib', __FILE__)
-require 'html/proofer/version'
+require 'html-proofer/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'html-proofer'
-  gem.version       = HTML::Proofer::VERSION
+  gem.version       = HTMLProofer::VERSION
   gem.authors       = ['Garen Torikian']
   gem.email         = ['gjtorikian@gmail.com']
   gem.description   = %(Test your rendered HTML files to make sure they're accurate.)
   gem.summary       = %(A set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your documentation output.)
   gem.homepage      = 'https://github.com/gjtorikian/html-proofer'
   gem.license       = 'MIT'
-  gem.executables   = ['htmlproof']
+  gem.executables   = ['htmlproofer']
   all_files         = `git ls-files -z`.split("\x0")
   gem.files         = all_files.grep(%r{^(bin|lib)/})
   gem.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }

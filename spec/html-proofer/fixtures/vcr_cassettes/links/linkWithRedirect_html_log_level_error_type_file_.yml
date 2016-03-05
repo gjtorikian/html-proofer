@@ -1,0 +1,249 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://github.github.com/github-flavored-markdown/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Thu, 31 Jul 2014 23:48:53 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 12:56:40 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F1316:3F6C:792DB22:56BF25AF
+      Content-Length:
+      - '480'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:51:04 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '2'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lhr6331-LHR
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1455375064.472588,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 84c215e6671a2232aad04b8cb2cc55b169912840
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://github.github.com/github-flavored-markdown/
+  recorded_at: Sat, 13 Feb 2016 14:51:04 GMT
+- request:
+    method: head
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Fri, 12 Feb 2016 21:07:03 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 15:01:02 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F1314:3F6C:7C04C38:56BF42D5
+      Content-Length:
+      - '400'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:51:04 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '2'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-lhr6325-LHR
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '2'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - b4d0e6506a3e30f3beab8d1681d7c4839923acaf
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/changing-author-info/
+  recorded_at: Sat, 13 Feb 2016 14:51:04 GMT
+- request:
+    method: head
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 13 Feb 2016 14:51:05 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Wed, 13 Feb 2036 14:51:05
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYTNlOTRlMzdkNGM5OTBmOTNlMjIyYTNlZWVhYTMwMmEiLCJzcHlfcmVwbyI6ImdqdG9yaWtpYW4vcmVwb3NpdG9yeS1zeW5jIiwic3B5X3JlcG9fYXQiOjE0NTUzNzUwNjUsIl9jc3JmX3Rva2VuIjoiRkdFbjd4UzdYdzBKRzRXampkalZNSHRIV2U1UXMrUFBEWENkOTlhVC9vYz0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--b7a9ed9b8ee4c3411627812a4876aa280bab2305;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 932f9cfeb2deff3892646230beb87729
+      X-Runtime:
+      - '0.054305'
+      Content-Security-Policy:
+      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
+        uploads.github.com status.github.com api.github.com www.google-analytics.com
+        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
+        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
+        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
+        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
+        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
+        assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - ea1e1d06ad877450adf08d122b863cf0
+      X-GitHub-Request-Id:
+      - 5695B365:11CD:35EF8D7:56BF42D8
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/repository-sync
+  recorded_at: Sat, 13 Feb 2016 14:51:05 GMT
+- request:
+    method: head
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Wed, 19 Aug 2015 15:46:31 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Fri, 12 Feb 2016 18:34:52 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 17EB2B2C:3F6C:625F1DA:56BE2373
+      Content-Length:
+      - '30745'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:51:05 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4139-AMS
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1455375065.061727,VS0,VE115
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 583916ba3f1976e1a9d44411bd0eca0248f7517d
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://gjtorikian.com/mathematical/
+  recorded_at: Sat, 13 Feb 2016 14:51:05 GMT
+recorded_with: VCR 2.9.3

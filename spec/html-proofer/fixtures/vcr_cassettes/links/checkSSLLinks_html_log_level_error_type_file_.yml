@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://developers.google.com/university
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains
+      X-Content-Type-Options:
+      - nosniff
+      Content-Language:
+      - en
+      Expires:
+      - Sat, 13 Feb 2016 15:51:10 GMT
+      Vary:
+      - Accept-Language
+      Last-Modified:
+      - Wed, 20 May 2015 15:23:14 GMT
+      Cache-Control:
+      - must_revalidate, public, max-age=3600
+      X-Frame-Options:
+      - SAMEORIGIN
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 13 Feb 2016 14:51:10 GMT
+      Server:
+      - Google Frontend
+      Alternate-Protocol:
+      - 443:quic,p=1
+      Alt-Svc:
+      - quic=":443"; ma=604800; v="30,29,28,27,26,25"
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://developers.google.com/university/
+  recorded_at: Sat, 13 Feb 2016 14:51:10 GMT
+recorded_with: VCR 2.9.3

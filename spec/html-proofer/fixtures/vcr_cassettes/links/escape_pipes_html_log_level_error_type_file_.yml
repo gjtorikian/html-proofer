@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/css
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 14:52:56 GMT
+      Date:
+      - Sat, 13 Feb 2016 14:52:56 GMT
+      Cache-Control:
+      - private, max-age=86400
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      Server:
+      - GSE
+      Alternate-Protocol:
+      - 443:quic,p=1
+      Alt-Svc:
+      - quic=":443"; ma=604800; v="30,29,28,27,26,25"
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400
+  recorded_at: Sat, 13 Feb 2016 14:52:56 GMT
+recorded_with: VCR 2.9.3

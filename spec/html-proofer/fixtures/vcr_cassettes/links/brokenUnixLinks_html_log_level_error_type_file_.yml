@@ -1,0 +1,169 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 13 Feb 2016 14:51:01 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=da655645207bca1d1f6908213f8dc1d021455375061; expires=Sun, 12-Feb-17
+        14:51:01 GMT; path=/; domain=.jekyllrb.com; HttpOnly
+      Last-Modified:
+      - Mon, 08 Feb 2016 19:09:57 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 15:01:01 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 8D656304:0C2A:B2EA3A0:56BF42D5
+      Server:
+      - cloudflare-nginx
+      CF-RAY:
+      - 27415957666834e8-LHR
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://jekyllrb.com/docs/configuration/
+  recorded_at: Sat, 13 Feb 2016 14:51:01 GMT
+- request:
+    method: head
+    uri: http://rtyley.github.io/bfg-repo-cleaner/#usage
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Wed, 13 Jan 2016 21:21:28 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 15:01:01 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - B91F1121:11D6:7C84400:56BF42D5
+      Content-Length:
+      - '17091'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:51:01 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-fra1237-FRA
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1455375061.681650,VS0,VE181
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - fb739e928cf5d7d834ef49b2e43dcce8ad32c24a
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://rtyley.github.io/bfg-repo-cleaner/
+  recorded_at: Sat, 13 Feb 2016 14:51:01 GMT
+- request:
+    method: head
+    uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.9.4
+      Date:
+      - Sat, 13 Feb 2016 14:51:01 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - HHVM/3.6.5
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      Last-Modified:
+      - Fri, 12 Feb 2016 01:36:19 GMT
+      Backend-Timing:
+      - D=950259 t=1455256092880561
+      X-Varnish:
+      - 2621678307 2617819501, 1926406449 1683966270, 2843937855 2833558292
+      Via:
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
+      Age:
+      - '118969'
+      X-Cache:
+      - cp1053 hit(5), cp3005 hit(65), cp3010 frontend hit(2)
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=13-Feb-2016;Path=/;HttpOnly;Expires=Wed, 16 Mar 2016 12:00:00
+        GMT
+      - GeoIP=GB:H9:London:51.51:-0.09:v4; Path=/; Domain=.wikipedia.org
+      X-Analytics:
+      - page_id=41548;ns=0;https=1;nocookies=1
+      X-Client-IP:
+      - 86.149.179.101
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
+  recorded_at: Sat, 13 Feb 2016 14:51:02 GMT
+recorded_with: VCR 2.9.3

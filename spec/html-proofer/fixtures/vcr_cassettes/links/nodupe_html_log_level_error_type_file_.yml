@@ -1,0 +1,189 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://help.github.com/articlezzz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      ETag:
+      - '"56be4977-df4"'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-GitHub-Request-Id:
+      - 17EB2B21:11D6:7C901EC:56BF4345
+      Content-Length:
+      - '3572'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:52:55 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4146-AMS
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 55eff37e14b5400e79e07892dd50d55e1bd584c3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articlezzz
+  recorded_at: Sat, 13 Feb 2016 14:52:55 GMT
+- request:
+    method: get
+    uri: https://help.github.com/articlezzz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      ETag:
+      - '"56be4977-df4"'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-GitHub-Request-Id:
+      - 17EB2B21:11D6:7C901EC:56BF4345
+      Content-Length:
+      - '3572'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:52:55 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4146-AMS
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 6342b171dd667cc8022314a6e5d96f6e05ae19bc
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8bGluayByZWw9InNl
+        YXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9u
+        K3htbCIgaHJlZj0iL29wZW5zZWFyY2gueG1sIiB0aXRsZT0iR2l0SHViOkhl
+        bHAiIC8+CiAgPHRpdGxlPiBHaXRIdWIgSGVscDwvdGl0bGU+CiAgCjxsaW5r
+        IHJlbD0iaWNvbiIgdHlwZT0iaW1hZ2UveC1pY29uIiBocmVmPSIvYXNzZXRz
+        L2ltYWdlcy9zaXRlL2Zhdmljb24uaWNvIj4KPGxpbmsgcmVsPSJzdHlsZXNo
+        ZWV0IiBocmVmPSIvYXNzZXRzL3N0eWxlc2hlZXRzL2FwcGxpY2F0aW9uLmNz
+        cyI+CjxzY3JpcHQgc3JjPSIvYXNzZXRzL2phdmFzY3JpcHRzL2FwcGxpY2F0
+        aW9uLmpzIj48L3NjcmlwdD4KCjxtZXRhIG5hbWU9IkRlc2NyaXB0aW9uIiBj
+        b250ZW50PSIgV2hvb3BzLCBsb29rcyBsaWtlIHRoYXQgcGFnZSBkb2Vzbid0
+        IGV4aXN0LiBNYXliZSB0cnkgc2VhcmNoaW5nIGZvciB3aGF0IHlvdSdyZSBs
+        b29raW5nIGZvcj8g4oCmIj4KCjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2Ny
+        aXB0Ij4KICAkKGZ1bmN0aW9uKCkgewogICAgJCgnI3F1aWNrc2VhcmNoLXF1
+        ZXJ5JykubHVuclNlYXJjaCh7CiAgICAgIAogICAgICBpbmRleFVybDogJy9z
+        ZWFyY2gvc2VhcmNoLmpzb24nLAogICAgICAKICAgICAgcXVpY2tTZWFyY2hS
+        ZXN1bHRzOiAgJy5hdXRvY29tcGxldGUtcmVzdWx0cycsCiAgICAgIHF1aWNr
+        U2VhcmNoRW50cmllczogICcucmVzdWx0LWdyb3VwJywKICAgICAgcXVpY2tT
+        ZWFyY2hUZW1wbGF0ZTogJyNxdWlja3NlYXJjaC1yZXN1bHRzLXRlbXBsYXRl
+        JywKCiAgICAgIHNlYXJjaFJlc3VsdHM6ICcuc2VhcmNoLWNvbnRhaW5lcics
+        CiAgICAgIHNlYXJjaEVudHJpZXM6ICcuc2VhcmNoLXJlc3VsdHMnLAogICAg
+        ICBzZWFyY2hUZW1wbGF0ZTogJyNzZWFyY2gtcmVzdWx0cy10ZW1wbGF0ZScK
+        ICAgIH0pOwogIH0pOwo8L3NjcmlwdD4KCjxzY3JpcHQgdHlwZT0idGV4dC9q
+        YXZhc2NyaXB0Ij4KCiAgdmFyIF9nYXEgPSBfZ2FxIHx8IFtdOwogIF9nYXEu
+        cHVzaChbJ19zZXRBY2NvdW50JywgJ1VBLTM3Njk2OTEtMjcnXSk7CiAgX2dh
+        cS5wdXNoKFsnX3RyYWNrUGFnZXZpZXcnXSk7CgogIChmdW5jdGlvbigpIHsK
+        ICAgIHZhciBnYSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NjcmlwdCcp
+        OyBnYS50eXBlID0gJ3RleHQvamF2YXNjcmlwdCc7IGdhLmFzeW5jID0gdHJ1
+        ZTsKICAgIGdhLnNyYyA9ICgnaHR0cHM6JyA9PSBkb2N1bWVudC5sb2NhdGlv
+        bi5wcm90b2NvbCA/ICdodHRwczovL3NzbCcgOiAnaHR0cDovL3d3dycpICsg
+        Jy5nb29nbGUtYW5hbHl0aWNzLmNvbS9nYS5qcyc7CiAgICB2YXIgcyA9IGRv
+        Y3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCdzY3JpcHQnKVswXTsgcy5w
+        YXJlbnROb2RlLmluc2VydEJlZm9yZShnYSwgcyk7CiAgfSkoKTsKCjwvc2Ny
+        aXB0Pgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9
+        InRleHQvaHRtbDtjaGFyc2V0PXV0Zi04IiAvPgoKPC9oZWFkPgoKPGJvZHkg
+        aWQ9ImNvbSI+Cgo8ZGl2IGlkPSJub3QtZm9vdGVyIj4KICAKCgogIDxkaXYg
+        aWQ9ImhlYWRlciI+CiAgICA8ZGl2IGNsYXNzPSJjbGVhcmZpeCI+CiAgICAg
+        IDxoMSBjbGFzcz0ic2l0ZS1sb2dvIj48YSBocmVmPSIvIj5HaXRIdWIgSGVs
+        cDwvYT48L2gxPgoKICAgICAgPHVsIGNsYXNzPSJ0b3AtbmF2Ij4KICAgICAg
+        ICAKICAgICAgICA8bGk+CiAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJqcy1k
+        cm9wZG93bi1idXR0b24gZHJvcGRvd24tYnV0dG9uIj5WZXJzaW9uIDxkaXYg
+        Y2xhc3M9ImRyb3Bkb3duLWNhcmV0Ij48L2Rpdj48L2J1dHRvbj4KICAgICAg
+        ICAgIDxkaXYgY2xhc3M9ImRyb3Bkb3duLW1lbnUganMtZHJvcGRvd24tbWVu
+        dSI+CiAgICAgICAgICAgIDxhIGhyZWY9Ii8iPkdpdEh1Yi5jb208L2E+CiAg
+        ICAgICAgICAgIAogICAgICAgICAgICA8YSBocmVmPSIvZW50ZXJwcmlzZS8y
+        LjUvdXNlciI+R2l0SHViIEVudGVycHJpc2UgMi41PC9hPgogICAgICAgICAg
+        ICAKICAgICAgICAgICAgPGEgaHJlZj0iL2VudGVycHJpc2UvMi40L3VzZXIi
+        PkdpdEh1YiBFbnRlcnByaXNlIDIuNDwvYT4KICAgICAgICAgICAgCiAgICAg
+        ICAgICAgIDxhIGhyZWY9Ii9lbnRlcnByaXNlLzIuMy91c2VyIj5HaXRIdWIg
+        RW50ZXJwcmlzZSAyLjM8L2E+CiAgICAgICAgICAgIAogICAgICAgICAgICA8
+        YSBocmVmPSIvZW50ZXJwcmlzZS8yLjIvdXNlciI+R2l0SHViIEVudGVycHJp
+        c2UgMi4yPC9hPgogICAgICAgICAgICAKICAgICAgICAgICAgPGEgaHJlZj0i
+        L2VudGVycHJpc2UvMi4xL3VzZXIiPkdpdEh1YiBFbnRlcnByaXNlIDIuMTwv
+        YT4KICAgICAgICAgICAgCiAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2xp
+        PgogICAgICAgIAogICAgICAgIAogICAgICAgIDxsaT48YSBocmVmPSJodHRw
+        czovL2dpdGh1Yi5jb20vY29udGFjdCI+Q29udGFjdCBTdXBwb3J0PC9hPjwv
+        bGk+CiAgICAgICAgPGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cuZ2l0aHViLmNv
+        bS8iPlJldHVybiB0byBHaXRIdWI8L2E+PC9saT4KICAgICAgICAKICAgICAg
+        PC91bD4KICAgIDwvZGl2PgogIDwvZGl2PgoKICA8ZGl2IGlkPSJjb250ZW50
+        LXdyYXBwZXIiPgoKICAgIDxkaXYgY2xhc3M9InNpdGUiPgogICAgICAKCgog
+        ICAgICA8ZGl2IGNsYXNzPSJub3QtZm91bmQtY29udGFpbmVyIj4KCiAgPGgy
+        Pldob29wcywgbG9va3MgbGlrZSB0aGF0IHBhZ2UgZG9lc24ndCBleGlzdC48
+        L2gyPgogIDxwPk1heWJlIHRyeSA8YSBocmVmPSIvIj5zZWFyY2hpbmc8L2E+
+        IGZvciB3aGF0IHlvdSdyZSBsb29raW5nIGZvcj88L3A+CjwvZGl2PgoKCiAg
+        ICAgIDxkaXYgY2xhc3M9ImNsZWFyIj48L2Rpdj4KICAgIDwvZGl2PgogIDwv
+        ZGl2Pgo8L2Rpdj4KCjxkaXYgaWQ9ImZvb3RlciI+CiAgPGRpdiBjbGFzcz0i
+        aW5uZXIiPgogICAgPGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29tIiBjbGFz
+        cz0iaW52ZXJ0b2NhdCI+CiAgICAgIDxpbWcgYWx0PSJUaGUgR2l0SHViIExv
+        Z28iIHNyYz0iL2Fzc2V0cy9pbWFnZXMvc2l0ZS9pbnZlcnRvY2F0LnBuZyIg
+        d2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiAvPgogICAgPC9hPgogICAgPHAgY2xh
+        c3M9ImxlZnQiPgogICAgICAmY29weTsgPHNwYW4gaWQ9InllYXIiPjIwMTY8
+        L3NwYW4+IEdpdEh1YiBJbmMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuCiAgICA8
+        L3A+CiAgICAgIDx1bCBjbGFzcz0ibGlua3MgcmlnaHQiPgogICAgICAgIDxs
+        aT48YSBocmVmPSIvdGVybXMtb2Ytc2VydmljZSI+VGVybXMgb2YgU2Vydmlj
+        ZTwvYT48L2xpPgogICAgICAgIDxsaT48YSBocmVmPSIvcHJpdmFjeS1wb2xp
+        Y3kiPlByaXZhY3k8L2E+PC9saT4KICAgICAgICA8bGk+PGEgaHJlZj0iL3Nl
+        Y3VyaXR5Ij5TZWN1cml0eTwvYT48L2xpPgogICAgICAgIAogICAgICAgICAg
+        PGxpPjxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9jb250YWN0Ij5TdXBw
+        b3J0PC9hPjwvbGk+CiAgICAgICAgCiAgICAgIDwvdWw+CiAgPC9kaXY+Cjwv
+        ZGl2PgoKCjxkaXYgY2xhc3M9ImZ1bGxzY3JlZW4tb3ZlcmxheSI+PC9kaXY+
+        CjwvYm9keT4KPC9odG1sPgo=
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articlezzz
+  recorded_at: Sat, 13 Feb 2016 14:52:55 GMT
+recorded_with: VCR 2.9.3
