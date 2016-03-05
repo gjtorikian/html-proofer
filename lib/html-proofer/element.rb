@@ -6,7 +6,7 @@ module HTMLProofer
   class Element
     include HTMLProofer::Utils
 
-    attr_reader :id, :name, :alt, :href, :link, :src, :line
+    attr_reader :id, :name, :alt, :href, :link, :src, :line, :data_proofer_ignore
 
     def initialize(obj, check)
       # Contruct readable ivars for every element
