@@ -24,6 +24,13 @@ module HTMLProofer
   end
   module_function :check_file
 
+  def check_directory(directory, options = {})
+    fail ArgumentError unless directory.is_a?(String)
+    options[:type] = :directory
+    HTMLProofer::Runner.new([directory], options)
+  end
+  module_function :check_directory
+
   def check_directories(directories, options = {})
     fail ArgumentError unless directories.is_a?(Array)
     options[:type] = :directory

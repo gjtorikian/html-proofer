@@ -13,7 +13,7 @@ describe HTMLProofer do
   describe '#files' do
     it 'works for directory that ends with .html' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
-      proofer = HTMLProofer::check_directories([folder])
+      proofer = HTMLProofer::check_directory(folder)
       expect(proofer.files).to eq(["#{folder}/index.html"])
     end
   end
@@ -35,7 +35,7 @@ describe HTMLProofer do
 
     describe 'sorting' do
       it 'understands sorting by path' do
-        output = send_proofer_output(["#{FIXTURES_DIR}/sorting/path"], :directory, :log_level => :info)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/path", :directory, :log_level => :info)
 
         expect(output.strip).to eq('''
 - spec/html-proofer/fixtures/sorting/path/multiple_issues.html
@@ -48,7 +48,7 @@ describe HTMLProofer do
       end
 
       it 'understands sorting by issue' do
-        output = send_proofer_output(["#{FIXTURES_DIR}/sorting/issue"], :directory, :log_level => :info, :error_sort => :desc)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/issue", :directory, :log_level => :info, :error_sort => :desc)
         expect(output.strip).to eq('''
 - image ./gpl.png does not have an alt attribute
   *  spec/html-proofer/fixtures/sorting/issue/broken_image_one.html (line 1)
@@ -62,7 +62,7 @@ describe HTMLProofer do
       end
 
       it 'understands sorting by status' do
-        output = send_proofer_output(["#{FIXTURES_DIR}/sorting/status"], :directory, :typhoeus => { :followlocation => false }, :log_level => :info, :error_sort => :status)
+        output = send_proofer_output("#{FIXTURES_DIR}/sorting/status", :directory, :typhoeus => { :followlocation => false }, :log_level => :info, :error_sort => :status)
         expect(output.gsub(/\s*$/, '')).to eq('''
 - -1
   *  spec/html-proofer/fixtures/sorting/status/broken_link.html: internally linking to nowhere.fooof, which does not exist (line 3)
@@ -91,14 +91,14 @@ describe HTMLProofer do
       it 'knows how to ignore multiple files by regexp' do
         options = { :file_ignore => [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
         brokenFolders = "#{FIXTURES_DIR}/links/folder/multiples"
-        proofer = run_proofer([brokenFolders], :directory, options)
+        proofer = run_proofer([brokenFolders], :directories, options)
         expect(proofer.failed_tests).to eq([])
       end
 
       it 'knows how to ignore a directory by regexp' do
         options = { :file_ignore => [/\S\.html/] }
         linksDir = "#{FIXTURES_DIR}/links"
-        proofer = run_proofer([linksDir], :directory, options)
+        proofer = run_proofer([linksDir], :directories, options)
         expect(proofer.failed_tests).to eq([])
       end
     end
@@ -142,7 +142,7 @@ describe HTMLProofer do
   describe 'multiple directories' do
     it 'works' do
       dirs = ["#{FIXTURES_DIR}/sorting/path", "#{FIXTURES_DIR}/sorting/issue"]
-      output = send_proofer_output(dirs, :directory)
+      output = send_proofer_output(dirs, :directories)
 
       expect(output).to match('sorting/path')
       expect(output).to match('sorting/issue')

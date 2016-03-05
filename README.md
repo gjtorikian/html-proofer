@@ -60,7 +60,7 @@ You can enable or disable most of the following checks.
 
 ## Usage
 
-You can configure HTMLProofer to run on a file, an array of directories, or an array of links.
+You can configure HTMLProofer to run on a file, a directory, an array of directories, or an array of links.
 
 ### Using in a script
 
@@ -95,7 +95,7 @@ Find.find("./docs") do |path|
 end
 
 # test your out dir!
-HTMLProofer.check_directories(["./out"]).run
+HTMLProofer.check_directory(["./out"]).run
 ```
 
 ### Checking a single file
@@ -103,7 +103,21 @@ HTMLProofer.check_directories(["./out"]).run
 If you simply want to check a single file, use the `check_file` method:
 
 ``` ruby
-HTMLProofer.check_file("/path/to/a/file.html").run
+HTMLProofer.check_file('/path/to/a/file.html').run
+```
+
+### Checking directories
+
+If you want to check a directory, use `check_directory`:
+
+``` ruby
+HTMLProofer.check_directory('./out').run
+```
+
+If you want to check multiple directories, use `check_directories`:
+
+``` ruby
+HTMLProofer.check_directories(['./one', './two']).run
 ```
 
 ### Checking an array of links
@@ -111,7 +125,7 @@ HTMLProofer.check_file("/path/to/a/file.html").run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(["http://github.com", "http://jekyllrb.com"])
+HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com'])
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
@@ -144,7 +158,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  HTMLProofer.check_directories(["./_site"]).run
+  HTMLProofer.check_directory("./_site").run
 end
 ```
 
@@ -314,7 +328,7 @@ end
 To ignore certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {
+HTMLProofer.check_directory("out/", {
   :typhoeus => {
     :ssl_verifypeer => false,
     :ssl_verifyhost => 0}
@@ -326,7 +340,7 @@ HTMLProofer.check_directories(["out/"], {
 To change the User-Agent used by Typhoeus:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {
+HTMLProofer.check_directory("out/", {
   :typhoeus => {
     :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run

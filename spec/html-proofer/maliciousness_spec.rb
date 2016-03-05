@@ -8,9 +8,15 @@ describe 'Maliciousness test' do
     }.to raise_error ArgumentError
   end
 
+  it 'does not accept non-string input for directory' do
+    expect {
+      run_proofer(['wow/wow'], :directory)
+    }.to raise_error ArgumentError
+  end
+
   it 'does not accept string input for directories' do
     expect {
-      run_proofer('wow/wow', :directory)
+      run_proofer('wow/wow', :directories)
     }.to raise_error ArgumentError
   end
 
