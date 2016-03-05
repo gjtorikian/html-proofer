@@ -5,7 +5,7 @@ module HTMLProofer
     PROOFER_DEFAULTS = {
       :allow_hash_href => false,
       :alt_ignore => [],
-      :assume_extension => nil,
+      :assume_extension => false,
       :check_external_hash => false,
       :check_favicon => false,
       :check_html => false,

@@ -367,7 +367,7 @@ describe 'Links test' do
 
     before :each do
       @fixture = "#{FIXTURES_DIR}/links/no_html_extension.html"
-      @options = { assume_extension: ".html" }
+      @options = { assume_extension: true }
     end
 
     it 'is not enabled by default' do
