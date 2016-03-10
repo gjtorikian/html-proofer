@@ -1,10 +1,11 @@
 def require_all(path)
-  glob = File.join(File.dirname(__FILE__), path, '*.rb')
-  Dir[glob].each do |f|
+  dir = File.join(File.dirname(__FILE__), path)
+  Dir[File.join(dir, '*.rb')].each do |f|
     require f
   end
 end
 
+require_relative 'html-proofer/utils'
 require_all 'html-proofer'
 require_all 'html-proofer/check'
 
