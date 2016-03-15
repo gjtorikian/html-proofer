@@ -37,7 +37,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
-  p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.'
+  p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` and `\\\\` should be used to produce literal `:`s and `\\`s.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -57,8 +57,37 @@ Mercenary.program(:htmlproofer) do |p|
     unless opts['url_swap'].nil?
       options[:url_swap] = {}
       opts['url_swap'].each do |s|
-        pair = s.split(':', 2)
-        options[:url_swap][Regexp.new(pair[0])] = pair[1]
+        re = string = ''
+
+        is_re = true
+        is_escaped = false
+
+        s.each_char do |c|
+          value = c
+
+          case c
+          when '\\'
+            value = '' unless is_escaped
+            is_escaped = !is_escaped
+          when ':'
+            if is_escaped
+              is_escaped = false
+            else
+              value = ''
+              is_re = false
+            end
+          else
+            is_escaped = false
+          end
+
+          if is_re
+            re += value
+          else
+            string += value
+          end
+        end
+
+        options[:url_swap][Regexp.new(re)] = string
       end
     end
 
