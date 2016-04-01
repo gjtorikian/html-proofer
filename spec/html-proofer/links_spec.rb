@@ -234,7 +234,7 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'ignores external links with colons when asked' do
+  it 'validates links with external characters' do
     options = { :disable_external => true }
     external = "#{FIXTURES_DIR}/links/external_colon_link.html"
     proofer = run_proofer(external, :file, options)

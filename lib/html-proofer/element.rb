@@ -28,7 +28,7 @@ module HTMLProofer
     end
 
     def url
-      url = @src || @srcset || @href || ''
+      url = (@src || @srcset || @href || '').gsub("\u200b", '')
       return url if @check.options[:url_swap].empty?
       swap(url, @check.options[:url_swap])
     end
@@ -39,7 +39,7 @@ module HTMLProofer
 
     def parts
       @parts ||= Addressable::URI.parse url
-    rescue URI::Error, Addressable::URI::InvalidURIError
+    rescue URI::Error, Addressable::URI::InvalidURIError => e
       @parts = nil
     end
 
