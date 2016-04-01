@@ -71,6 +71,8 @@ Mercenary.program(:htmlproofer) do |p|
 
     options[:cache] = {}
     options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?
+    
+    options[:http_status_ignore] = Array(options[:http_status_ignore]).map(&:to_i)
 
     paths = path.split(',')
     if opts['as_links']
