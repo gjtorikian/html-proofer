@@ -234,6 +234,13 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'validates links with external characters' do
+    options = { :disable_external => true }
+    external = "#{FIXTURES_DIR}/links/external_colon_link.html"
+    proofer = run_proofer(external, :file, options)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'works for array of links' do
     proofer = run_proofer(['www.github.com', 'foofoofoo.biz'], :links)
     expect(proofer.failed_tests.first).to match(/failed: response code 0/)
