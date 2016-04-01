@@ -193,7 +193,10 @@ module HTMLProofer
     end
 
     def handle_failure(href, filenames, response_code, return_message)
-      msg = "External link #{href} failed: response code #{response_code} means something's wrong; return message says '#{return_message}'"
+      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
+             It's possible libcurl couldn't connect to the server or perhaps the request timed out.
+             Sometimes, making too many requests at once also breaks things.
+             Either way, the return message (if any) from the server is: #{return_message}"
       @cache.add(href, filenames, 0, msg)
       return if @options[:only_4xx]
       add_external_issue(filenames, msg, response_code)
