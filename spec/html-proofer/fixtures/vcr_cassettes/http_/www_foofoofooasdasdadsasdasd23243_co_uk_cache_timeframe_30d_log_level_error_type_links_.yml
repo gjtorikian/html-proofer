@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.foofoofooasdasdadsasdasd23243.co.uk/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.0.4; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.8.1
+      Date:
+      - Fri, 01 Apr 2016 06:33:48 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '612'
+      Last-Modified:
+      - Tue, 26 Jan 2016 14:39:38 GMT
+      Connection:
+      - keep-alive
+      ETag:
+      - '"56a7852a-264"'
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://localhost/
+  recorded_at: Tue, 20 Oct 2015 19:00:00 GMT
+recorded_with: VCR 2.9.3

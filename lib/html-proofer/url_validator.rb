@@ -150,7 +150,7 @@ module HTMLProofer
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
-        handle_failure(href, filenames, response_code)
+        handle_failure(href, filenames, response_code, response.return_message)
       elsif method == :head
         queue_request(:get, href, filenames)
       else
@@ -192,8 +192,11 @@ module HTMLProofer
       add_external_issue(filenames, msg, response_code)
     end
 
-    def handle_failure(href, filenames, response_code)
-      msg = "External link #{href} failed: response code #{response_code} means something's wrong"
+    def handle_failure(href, filenames, response_code, return_message)
+      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
+             It's possible libcurl couldn't connect to the server or perhaps the request timed out.
+             Sometimes, making too many requests at once also breaks things.
+             Either way, the return message (if any) from the server is: #{return_message}"
       @cache.add(href, filenames, 0, msg)
       return if @options[:only_4xx]
       add_external_issue(filenames, msg, response_code)

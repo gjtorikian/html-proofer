@@ -84,11 +84,10 @@ describe 'Cache test' do
 
     expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
     # we expect the same link to be readded...
-    expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.foofoofoo.biz', nil, 0, 'External link www.foofoofoo.biz failed: response code 0 means something\'s wrong')
+    expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
 
-    # ...even though we are within the 30d time frame,
-    # because it's a failure
-    run_proofer(['www.foofoofoo.biz'], :links, { :cache => { :timeframe => '30d' } })
+    # ...even though we are within the 30d time frame, because it's a failure
+    run_proofer(['http://www.foofoofoo.biz'], :links, { :cache => { :timeframe => '30d' } })
 
     Timecop.return
   end
