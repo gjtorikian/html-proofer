@@ -25,6 +25,7 @@ module HTMLProofer
       # fix up missing protocols
       @href.insert 0, 'http:' if @href =~ %r{^//}
       @src.insert 0, 'http:' if @src =~ %r{^//}
+      @srcset.insert 0, 'http:' if @srcset =~ %r{^//}
     end
 
     def url
@@ -76,9 +77,9 @@ module HTMLProofer
 
       # ignore user defined URLs
       return true if ignores_pattern_check(@check.options[:url_ignore])
+    end
 
-      # ignore user defined alts
-      return false unless 'ImageCheck' == @type
+    def ignore_alt?
       return true if ignores_pattern_check(@check.options[:alt_ignore])
     end
 

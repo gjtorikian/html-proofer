@@ -37,7 +37,7 @@ class ImageCheck < ::HTMLProofer::Check
         end
       end
 
-      if @img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?)
+      if !@img.ignore_alt? && (@img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?))
         add_issue("image #{@img.url} does not have an alt attribute", line: line)
       end
     end
