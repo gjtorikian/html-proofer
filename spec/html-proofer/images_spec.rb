@@ -38,6 +38,12 @@ describe 'Images test' do
     expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
+  it 'fails for missing internal images even when alt_ignore is set' do
+    internalImageFilepath = "#{FIXTURES_DIR}/images/missingImageInternal.html"
+    proofer = run_proofer(internalImageFilepath, :file, {:alt_ignore => [/.*/]})
+    expect(proofer.failed_tests.first).to match(/doesnotexist.png does not exist/)
+  end
+
   it 'fails for missing internal images' do
     internalImageFilepath = "#{FIXTURES_DIR}/images/missingImageInternal.html"
     proofer = run_proofer(internalImageFilepath, :file)
