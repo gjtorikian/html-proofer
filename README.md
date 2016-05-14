@@ -56,7 +56,7 @@ You can enable or disable most of the following checks.
 
 ### HTML
 
-* Whether your HTML markup is valid. This is done via [Nokogiri, to ensure well-formed markup](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html).
+* Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html), to ensure well-formed markup.
 
 ## Usage
 
@@ -238,7 +238,7 @@ opts = { :check_html => true, :validation => { :report_script_embeds => true } }
 HTMLProofer.new("out/", {:extension => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
-This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check [the Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
+This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check the [Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
