@@ -222,6 +222,7 @@ You can pass in additional options to configure this validation.
 | Option | Description | Default |
 | :----- | :---------- | :------ |
 | `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogiri are reported as errors. | `false`
+| `report_missing_names` | When `check_html` is enabled, HTML markup that are missing entity names are reported as errors. | `false`
 | `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
 
 For example:

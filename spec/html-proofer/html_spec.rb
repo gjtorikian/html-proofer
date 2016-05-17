@@ -55,6 +55,18 @@ describe 'Html test' do
     expect(proofer.failed_tests.to_s).to match(/Couldn't find end of Start Tag a \(line 6\)/)
   end
 
+  it "doesn't fail for single ampersand" do
+    html = "#{FIXTURES_DIR}/html/single_amp.html"
+    proofer = run_proofer(html, :file, { :check_html => true })
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it "fails for single ampersand when asked" do
+    html = "#{FIXTURES_DIR}/html/single_amp.html"
+    proofer = run_proofer(html, :file, { :check_html => true, :validation => { :report_missing_names => true } })
+    expect(proofer.failed_tests.first).to match('htmlParseEntityRef: no name')
+  end
+
   it 'ignores embeded scripts when asked' do
     opts = { :check_html => true, :validation => { :report_script_embeds => false } }
     ignorableScript = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"

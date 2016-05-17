@@ -2,6 +2,7 @@ class HtmlCheck < ::HTMLProofer::Check
   SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
   INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/
   INVALID_PREFIX = /Namespace prefix/
+  PARSE_ENTITY_REF = /htmlParseEntityRef: no name/
 
   def run
     @html.errors.each do |error|
@@ -10,6 +11,10 @@ class HtmlCheck < ::HTMLProofer::Check
 
       if message =~ INVALID_TAG_MSG || message =~ INVALID_PREFIX
         next unless options[:validation][:report_invalid_tags]
+      end
+
+      if message =~ PARSE_ENTITY_REF
+        next unless options[:validation][:report_missing_names]
       end
 
       # tags embedded in scripts are used in templating languages: http://git.io/vOovv
