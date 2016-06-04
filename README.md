@@ -147,10 +147,6 @@ htmlproofer ./out --url-swap wow:cow,mow:doh --extension .html.erb --url-ignore 
 Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
 `htmlproofer` will figure out what you mean.
 
-#### Using through Docker
-
-If you have trouble with (or don't want to) install Ruby/Nokogiri, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
-
 ### Using with Jekyll
 
 Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'`
@@ -171,6 +167,10 @@ Don't have or want a `Rakefile`? You can also do something like the following:
 ```bash
 htmlproofer ./_site
 ```
+
+### Using through Docker
+
+If you have trouble with (or don't want to) install Ruby/Nokogiri, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
 
 ## Ignoring content
 
