@@ -168,6 +168,10 @@ Don't have or want a `Rakefile`? You can also do something like the following:
 htmlproofer ./_site
 ```
 
+### Using through Docker
+
+If you have trouble with (or don't want to) install Ruby/Nokogiri, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
+
 ## Ignoring content
 
 Add the `data-proofer-ignore` attribute to any tag to ignore it from every check.
