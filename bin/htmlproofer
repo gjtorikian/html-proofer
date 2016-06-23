@@ -18,7 +18,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'assume_extension', '--assume-extension', 'Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) (default: `false`).'
   p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, ' An array of Strings indicating which checks you\'d like to not perform.'
-  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the website exists). This slows the checker down (default: `false`).'
+  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
@@ -73,7 +73,7 @@ Mercenary.program(:htmlproofer) do |p|
 
     options[:cache] = {}
     options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?
-    
+
     options[:http_status_ignore] = Array(options[:http_status_ignore]).map(&:to_i)
 
     paths = path.split(',')
