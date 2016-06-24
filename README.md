@@ -144,8 +144,9 @@ Pass in options through the command-line, like this:
 htmlproofer ./out --url-swap wow:cow,mow:doh --extension .html.erb --url-ignore www.github.com
 ```
 
-Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String` values.
-`htmlproofer` will figure out what you mean.
+Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
+values. The escape sequences `\:` and `\\` should be used to produce literal
+`:`s and `\`s. `htmlproofer` will figure out what you mean.
 
 ### Using with Jekyll
 
