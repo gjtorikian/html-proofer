@@ -83,7 +83,7 @@ describe 'Links test' do
   end
 
   it "does not fail on redirects we're not following" do
-    # this test should emit a 301--see above--but we're intentionally supressing it
+    # this test should emit a 301--see above--but we're intentionally suppressing it
     linkWithRedirectFilepath = "#{FIXTURES_DIR}/links/linkWithRedirect.html"
     proofer = run_proofer(linkWithRedirectFilepath, :file, { :only_4xx => true, :typhoeus => { :followlocation => false } })
     expect(proofer.failed_tests).to eq []
