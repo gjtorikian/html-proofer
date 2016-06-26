@@ -9,7 +9,7 @@ module HTMLProofer
     attr_reader :id, :name, :alt, :href, :link, :src, :line, :data_proofer_ignore
 
     def initialize(obj, check)
-      # Contruct readable ivars for every element
+      # Construct readable ivars for every element
       obj.attributes.each_pair do |attribute, value|
         name = "#{attribute.tr('-:.', '_')}".to_sym
         (class << self; self; end).send(:attr_reader, name)
