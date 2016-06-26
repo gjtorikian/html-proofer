@@ -14,6 +14,7 @@ module HTMLProofer
       :disable_external => false,
       :empty_alt_ignore => false,
       :enforce_https => false,
+      :enforce_img_https => false,
       :error_sort => :path,
       :extension => '.html',
       :external_only => false,

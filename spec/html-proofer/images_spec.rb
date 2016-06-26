@@ -168,4 +168,22 @@ describe 'Images test' do
     proofer = run_proofer(translatedSrc, :file, { :href_swap => { %r{^http://example.com} => "" } })
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'passes for non-HTTPS images when not asked' do
+    non_https = "#{FIXTURES_DIR}/images/non_https.html"
+    proofer   = run_proofer(non_https, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'fails for non-HTTPS images when asked' do
+    non_https = "#{FIXTURES_DIR}/images/non_https.html"
+    proofer   = run_proofer(non_https, :file, { :enforce_img_https => true })
+    expect(proofer.failed_tests.first).to match(/does not use the https scheme/)
+  end
+
+  it 'passes for HTTPS images when asked' do
+    https   = "#{FIXTURES_DIR}/images/https.html"
+    proofer = run_proofer(https, :file, { :enforce_img_https => true })
+    expect(proofer.failed_tests).to eq []
+  end
 end

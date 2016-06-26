@@ -40,6 +40,10 @@ class ImageCheck < ::HTMLProofer::Check
       if !@img.ignore_alt? && (@img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?))
         add_issue("image #{@img.url} does not have an alt attribute", line: line)
       end
+
+      if @img.enforce_img_https? && @img.scheme.to_s != 'https'
+        add_issue("image #{@img.url} does not use the https scheme", line: line)
+      end
     end
 
     external_urls
