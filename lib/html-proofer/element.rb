@@ -91,6 +91,10 @@ module HTMLProofer
       @check.options[:allow_hash_href]
     end
 
+    def enforce_img_https?
+      @check.options[:enforce_img_https]
+    end
+
     # path is external to the file
     def external?
       !internal?
