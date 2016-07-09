@@ -370,3 +370,5 @@ Project | Repository
 [Open Whisper Systems' website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
 [Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
 [Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
+[Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
+
