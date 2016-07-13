@@ -41,7 +41,7 @@ class ImageCheck < ::HTMLProofer::Check
         add_issue("image #{@img.url} does not have an alt attribute", line: line)
       end
 
-      if @img.check_img_http? && node.attributes['src'].try(:value) =~ %r{^http:}
+      if @img.check_img_http? && @img.scheme == 'http'
         add_issue("image #{@img.url} uses the http scheme", line: line)
       end
     end
