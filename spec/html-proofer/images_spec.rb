@@ -168,4 +168,16 @@ describe 'Images test' do
     proofer = run_proofer(translatedSrc, :file, { :href_swap => { %r{^http://example.com} => "" } })
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'passes for HTTP images when not asked' do
+    http    = "#{FIXTURES_DIR}/images/src_http.html"
+    proofer = run_proofer(http, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'fails for HTTP images when asked' do
+    http    = "#{FIXTURES_DIR}/images/src_http.html"
+    proofer = run_proofer(http, :file, { :check_img_http => true })
+    expect(proofer.failed_tests.first).to match(/uses the http scheme/)
+  end
 end

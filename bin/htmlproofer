@@ -21,6 +21,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
+  p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
   p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'

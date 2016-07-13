@@ -33,6 +33,7 @@ You can enable or disable most of the following checks.
 * Whether all your images have alt tags
 * Whether your internal image references are not broken
 * Whether external images are showing
+* Whether your images are HTTP
 
 ### Links
 

@@ -9,6 +9,7 @@ module HTMLProofer
       :check_external_hash => false,
       :check_favicon => false,
       :check_html => false,
+      :check_img_http => false,
       :checks_to_ignore => [],
       :directory_index_file => 'index.html',
       :disable_external => false,
