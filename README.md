@@ -96,7 +96,7 @@ Find.find("./docs") do |path|
 end
 
 # test your out dir!
-HTMLProofer.check_directory(["./out"]).run
+HTMLProofer.check_directory("./out").run
 ```
 
 ### Checking a single file
