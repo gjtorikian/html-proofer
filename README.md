@@ -146,8 +146,8 @@ htmlproofer ./out --url-swap wow:cow,mow:doh --extension .html.erb --url-ignore 
 ```
 
 Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
-values. The escape sequences `\:` and `\\` should be used to produce literal
-`:`s and `\`s. `htmlproofer` will figure out what you mean.
+values. The escape sequences `\:` should be used to produce literal
+`:`s `htmlproofer` will figure out what you mean.
 
 ### Using with Jekyll
 
