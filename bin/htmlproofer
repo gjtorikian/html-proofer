@@ -39,6 +39,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` and `\\\\` should be used to produce literal `:`s and `\\`s.'
+  p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing URLs that will be treated as internal urls. It removes the url'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?

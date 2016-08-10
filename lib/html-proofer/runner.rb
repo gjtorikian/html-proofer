@@ -7,6 +7,18 @@ module HTMLProofer
     def initialize(src, opts = {})
       @src = src
 
+      # Add swap patterns for internal domains
+      unless opts[:internal_domains].nil?
+        if opts[:url_swap].nil?
+          opts[:url_swap] = {}
+        end
+        opts[:internal_domains].each do |dom|
+          opts[:url_swap][Regexp.new("^http://#{dom}")] = ""
+          opts[:url_swap][Regexp.new("^https://#{dom}")] = ""
+          opts[:url_swap][Regexp.new("^//#{dom}")] = ""
+        end
+      end
+
       @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
       @options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
