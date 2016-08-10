@@ -64,7 +64,13 @@ describe 'Command test' do
 
   it 'works with url-swap' do
     translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    output = make_bin('--url-swap "\\\\\\\\A/articles/([\\\\\\\\w-]+):\\\\\\\\1.html"', translatedLink)
+    output = make_bin('--url-swap "\A/articles/([\w-]+):\1.html"', translatedLink)
+    expect(output).to match('successfully')
+  end
+  
+  it 'works with url-swap and colon' do
+    translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap2.html"
+    output = make_bin('--url-swap "http\://www.example.com:"', translatedLink)
     expect(output).to match('successfully')
   end
 
