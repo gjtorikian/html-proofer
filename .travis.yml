@@ -1,8 +1,6 @@
 language: ruby
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
+  - 2.3.1
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
