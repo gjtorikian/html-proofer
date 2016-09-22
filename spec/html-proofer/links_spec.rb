@@ -467,4 +467,11 @@ describe 'Links test' do
     proofer = run_proofer(missing_href, :file)
     expect(proofer.failed_tests.length).to eq 1
   end
+
+  it 'works with internal_domains' do
+    translated_link = "#{FIXTURES_DIR}/links/linkTranslatedInternalDomains.html"
+    proofer = run_proofer(translated_link, :file, { :internal_domains => ['www.example.com', 'example.com'] })
+    expect(proofer.failed_tests).to eq []
+  end
+
 end

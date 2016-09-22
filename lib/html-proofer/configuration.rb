@@ -20,6 +20,7 @@ module HTMLProofer
       :external_only => false,
       :file_ignore => [],
       :http_status_ignore => [],
+      :internal_domains => [],
       :log_level => :info,
       :only_4xx => false,
       :url_ignore => [],
