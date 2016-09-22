@@ -137,17 +137,37 @@ htmlproofer www.google.com,www.github.com --as-links
 
 ### Using on the command-line
 
-You'll get a new program called `htmlproofer` with this gem. Terrific!
+You'll also get a new program called `htmlproofer` with this gem. Terrific!
 
-Pass in options through the command-line, like this:
+Pass in options through the command-line as flags, like this:
 
 ``` bash
-htmlproofer ./out --url-swap wow:cow,mow:doh --extension .html.erb --url-ignore www.github.com
+htmlproofer --extension .html.erb ./out
 ```
 
-Note: since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
+#### Special cases for the command-line
+
+For options which require an array of input, surrounded the value with quotes, and don't use
+any spaces. For example, to exclude an array of HTTP status code, you might do:
+
+``` bash
+htmlproofer --http-status-ignore "999,401,404" ./out
+```
+
+For something like `url-ignore`, and other options that require an array of regular expressions,
+you can pass in a syntax like this:
+
+``` bash
+htmlproofer --url-ignore "/www.github.com/,/foo.com/" ./out
+```
+
+Since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
 values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
+
+``` bash
+htmlproofer --url-swap "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
+```
 
 ### Using with Jekyll
 
@@ -373,4 +393,3 @@ Project | Repository
 [Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
 [Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
 [Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
-

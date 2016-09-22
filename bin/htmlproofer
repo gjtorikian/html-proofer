@@ -59,7 +59,7 @@ Mercenary.program(:htmlproofer) do |p|
     unless opts['url_swap'].nil?
       options[:url_swap] = {}
       opts['url_swap'].each do |s|
-        splt = s.split(/(?<!\\):/,2)
+        splt = s.split(/(?<!\\):/, 2)
 
         re = splt[0].gsub(/\\:/, ':')
         string = splt[1].gsub(/\\:/, ':')
