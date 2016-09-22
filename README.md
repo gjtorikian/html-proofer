@@ -299,7 +299,7 @@ HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_lev
 
 Want to write your own test? Sure, that's possible!
 
-Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line)` to explain the error.
+Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
 
 If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
 
@@ -373,4 +373,3 @@ Project | Repository
 [Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
 [Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
 [Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
-

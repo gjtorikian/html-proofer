@@ -10,6 +10,6 @@ class FaviconCheck < ::HTMLProofer::Check
 
     return if found
 
-    add_issue 'no favicon specified'
+    add_issue('no favicon specified')
   end
 end
