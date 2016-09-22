@@ -24,7 +24,7 @@ module HTMLProofer
       :log_level => :info,
       :only_4xx => false,
       :url_ignore => [],
-      :url_swap => []
+      :url_swap => {}
     }
 
     TYPHOEUS_DEFAULTS = {

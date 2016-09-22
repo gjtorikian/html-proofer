@@ -7,15 +7,6 @@ module HTMLProofer
     def initialize(src, opts = {})
       @src = src
 
-      # Add swap patterns for internal domains
-      unless opts[:internal_domains].empty?
-        opts[:internal_domains].each do |dom|
-          opts[:url_swap][Regexp.new("^http://#{dom}")] = ''
-          opts[:url_swap][Regexp.new("^https://#{dom}")] = ''
-          opts[:url_swap][Regexp.new("^//#{dom}")] = ''
-        end
-      end
-
       @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
       @options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
@@ -30,6 +21,15 @@ module HTMLProofer
 
       if !@options[:cache].empty? && !File.exist?(STORAGE_DIR)
         FileUtils.mkdir_p(STORAGE_DIR)
+      end
+
+      # Add swap patterns for internal domains
+      unless @options[:internal_domains].empty?
+        @options[:internal_domains].each do |dom|
+          @options[:url_swap][Regexp.new("^http://#{dom}")] = ''
+          @options[:url_swap][Regexp.new("^https://#{dom}")] = ''
+          @options[:url_swap][Regexp.new("^//#{dom}")] = ''
+        end
       end
 
       @failures = []
