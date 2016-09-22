@@ -8,14 +8,11 @@ module HTMLProofer
       @src = src
 
       # Add swap patterns for internal domains
-      unless opts[:internal_domains].nil?
-        if opts[:url_swap].nil?
-          opts[:url_swap] = {}
-        end
+      unless opts[:internal_domains].empty?
         opts[:internal_domains].each do |dom|
-          opts[:url_swap][Regexp.new("^http://#{dom}")] = ""
-          opts[:url_swap][Regexp.new("^https://#{dom}")] = ""
-          opts[:url_swap][Regexp.new("^//#{dom}")] = ""
+          opts[:url_swap][Regexp.new("^http://#{dom}")] = ''
+          opts[:url_swap][Regexp.new("^https://#{dom}")] = ''
+          opts[:url_swap][Regexp.new("^//#{dom}")] = ''
         end
       end
 
