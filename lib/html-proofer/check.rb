@@ -18,14 +18,14 @@ module HTMLProofer
     end
 
     def run
-      fail NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
+      raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_issue(desc, line: nil, status: -1)
-      @issues << Issue.new(@path, desc, line: line, status: status)
+    def add_issue(desc, line: nil, status: -1, content: nil)
+      @issues << Issue.new(@path, desc, line: line, status: status, content: content)
     end
 
-    def add_to_external_urls(url, _)
+    def add_to_external_urls(url)
       return if @external_urls[url]
       add_path_for_url(url)
     end

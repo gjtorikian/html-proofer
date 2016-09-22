@@ -17,32 +17,33 @@ class ImageCheck < ::HTMLProofer::Check
     @html.css('img').each do |node|
       @img = create_element(node)
       line = node.line
+      content = node.content
 
       next if @img.ignore?
 
       # screenshot filenames should return because of terrible names
       if terrible_filename?
-        add_issue("image has a terrible filename (#{@img.url})", line: line)
+        add_issue("image has a terrible filename (#{@img.url})", line: line, content: content)
         next
       end
 
       # does the image exist?
       if missing_src?
-        add_issue('image has no src or srcset attribute', line: line)
+        add_issue('image has no src or srcset attribute', line: line, content: content)
       else
         if @img.remote?
-          add_to_external_urls(@img.url, line)
+          add_to_external_urls(@img.url)
         elsif !@img.exists?
-          add_issue("internal image #{@img.url} does not exist", line: line)
+          add_issue("internal image #{@img.url} does not exist", line: line, content: content)
         end
       end
 
       if !@img.ignore_alt? && (@img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?))
-        add_issue("image #{@img.url} does not have an alt attribute", line: line)
+        add_issue("image #{@img.url} does not have an alt attribute", line: line, content: content)
       end
 
       if @img.check_img_http? && @img.scheme == 'http'
-        add_issue("image #{@img.url} uses the http scheme", line: line)
+        add_issue("image #{@img.url} uses the http scheme", line: line, content: content)
       end
     end
 

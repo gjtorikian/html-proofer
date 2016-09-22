@@ -42,6 +42,7 @@ describe HTMLProofer do
   *  image gpl.png does not have an alt attribute (line 7)
   *  internal image gpl.png does not exist (line 7)
   *  tel: contains no phone number (line 5)
+     <a href="tel:">Tel me</a>
 - spec/html-proofer/fixtures/sorting/path/single_issue.html
   *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png) (line 1)
       '''.strip)
