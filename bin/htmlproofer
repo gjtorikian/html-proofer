@@ -49,7 +49,7 @@ Mercenary.program(:htmlproofer) do |p|
 
     # prepare everything to go to proofer
     p.options.select { |o| !opts[o.config_key].nil? }.each do |option|
-      if option.return_type.to_s == 'Array' # TODO: is_a? doesn't work here?
+      if opts[option.config_key].is_a?(Array)
         opts[option.config_key] = opts[option.config_key].map { |i| HTMLProofer::Configuration.to_regex?(i) }
       end
       options[option.config_key.to_sym] = opts[option.config_key]
