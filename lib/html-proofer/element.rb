@@ -22,6 +22,8 @@ module HTMLProofer
       @type = check.class.name
       @line = obj.line
 
+      @html = check.html
+
       # fix up missing protocols
       @href.insert 0, 'http:' if @href =~ %r{^//}
       @src.insert 0, 'http:' if @src =~ %r{^//}
@@ -29,9 +31,13 @@ module HTMLProofer
     end
 
     def url
-      url = (@src || @srcset || @href || '').gsub("\u200b", '')
-      return url if @check.options[:url_swap].empty?
-      swap(url, @check.options[:url_swap])
+      return @url if defined?(@url)
+      @url = (@src || @srcset || @href || '').gsub("\u200b", '')
+      if base
+        @url = Addressable::URI.join(base.attr('href'), url).to_s
+      end
+      return @url if @check.options[:url_swap].empty?
+      @url = swap(@url, @check.options[:url_swap])
     end
 
     def valid?
@@ -68,11 +74,11 @@ module HTMLProofer
     def ignore?
       return true if @data_proofer_ignore
 
-      return true if url.match(/^javascript:/)
+      return true if url =~ /^javascript:/
 
       # ignore base64 encoded images
       if %w(ImageCheck FaviconCheck).include? @type
-        return true if url.match(/^data:image/)
+        return true if url =~ /^data:image/
       end
 
       # ignore user defined URLs
@@ -165,6 +171,10 @@ module HTMLProofer
 
     def follow_location?
       @check.options[:typhoeus] && @check.options[:typhoeus][:followlocation]
+    end
+
+    def base
+      @base ||= @html.at_css('base')
     end
   end
 end

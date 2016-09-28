@@ -1,7 +1,7 @@
 module HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
-    attr_reader :node, :element, :src, :path, :options, :issues, :external_urls
+    attr_reader :node, :html, :element, :src, :path, :options, :issues, :external_urls
 
     def initialize(src, path, html, options)
       @src    = src

@@ -180,4 +180,10 @@ describe 'Images test' do
     proofer = run_proofer(http, :file, { :check_img_http => true })
     expect(proofer.failed_tests.first).to match(/uses the http scheme/)
   end
+
+  it 'properly checks relative images with base' do
+    relativeImages = "#{FIXTURES_DIR}/images/relativeWithBase.html"
+    proofer = run_proofer(relativeImages, :file)
+    expect(proofer.failed_tests).to eq []
+  end
 end

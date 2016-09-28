@@ -474,4 +474,9 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'passes for relative links with a base' do
+    relativeLinks = "#{FIXTURES_DIR}/links/relativeLinksWithBase.html"
+    proofer = run_proofer(relativeLinks, :file)
+    expect(proofer.failed_tests).to eq []
+  end
 end
