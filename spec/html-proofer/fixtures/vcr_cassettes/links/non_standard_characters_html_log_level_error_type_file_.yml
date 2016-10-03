@@ -1,0 +1,125 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Wed, 10 Feb 2016 17:58:33 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 13 Feb 2016 14:41:12 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 17EB2B19:11D7:8AED265:56BF3E30
+      Content-Length:
+      - '512'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 13 Feb 2016 14:51:07 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ams4146-AMS
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1455375067.829977,VS0,VE91
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 83f9c8ab58818da44557f8b28230ce8fed09cc20
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Sat, 13 Feb 2016 14:51:07 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/Coup_d'%C3%A9tat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.9.4
+      Date:
+      - Sat, 13 Feb 2016 14:51:07 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - HHVM/3.6.5
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      Last-Modified:
+      - Wed, 03 Feb 2016 01:28:38 GMT
+      Backend-Timing:
+      - D=93142 t=1455265266870721
+      X-Varnish:
+      - 2640636851, 2472676742 2235235077, 2843958533 2842758007
+      Via:
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
+      Age:
+      - '109801'
+      X-Cache:
+      - cp1053 miss(0), cp3003 hit(65), cp3010 frontend hit(2)
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=13-Feb-2016;Path=/;HttpOnly;Expires=Wed, 16 Mar 2016 12:00:00
+        GMT
+      - GeoIP=GB:H9:London:51.51:-0.09:v4; Path=/; Domain=.wikipedia.org
+      X-Analytics:
+      - page_id=25914154;ns=0;https=1;nocookies=1
+      X-Client-IP:
+      - 86.149.179.101
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
+  recorded_at: Sat, 13 Feb 2016 14:51:08 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.google.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.0.4; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 01 Apr 2016 06:38:09 GMT
+      Expires:
+      - "-1"
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en
+        for more info."
+      Server:
+      - gws
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - NID=78=LllsygAKMBL3E7TRC9msIFI6D0bChM-hyd3A5YRObJfNFypf2qzUU4W2vfl6c_hct052DPyQMe3RMamyINTQF8YZULG5lMnjld4w0iq3S2dULuQ_P9-NgWpF1nINH1BfNCJrIt4N1b8i4WE;
+        expires=Sat, 01-Oct-2016 06:38:09 GMT; path=/; domain=.google.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Tue, 20 Oct 2015 19:00:00 GMT
+recorded_with: VCR 2.9.3
