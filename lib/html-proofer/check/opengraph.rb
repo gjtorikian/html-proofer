@@ -24,11 +24,11 @@ class OpenGraphCheck < ::HTMLProofer::Check
 
       # does the opengraph exist?
       if missing_src?
-        add_issue('open graph is empty and has no content attribute', m.line, m.content)
+        add_issue('open graph is empty and has no content attribute', line: m.line, content: m.content)
       elsif @opengraph.remote?
         add_to_external_urls opengraph.src, m.line
       else
-        add_issue("internal open graph #{@opengraph.src} does not exist", m.line, m.content) unless @opengraph.exists?
+        add_issue("internal open graph #{@opengraph.src} does not exist", line: m.line, content: m.content) unless @opengraph.exists?
       end
     end
 
