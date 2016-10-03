@@ -2,7 +2,7 @@
 
 class OpenGraphCheck < ::HTMLProofer::Check
   def src
-    @content
+    @opengraph
   end
 
 
