@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class OpengraphCheckable < ::HTML::Proofer::Checkable
+class OpenGraphCheckable < ::HTML::Proofer::Checkable
 
   def src
     @content
@@ -15,10 +15,10 @@ class OpengraphCheckable < ::HTML::Proofer::Checkable
   end
 end
 
-class OpengraphCheck < ::HTML::Proofer::CheckRunner
+class OpenGraphCheck < ::HTML::Proofer::CheckRunner
   def run
     @html.css('meta[property="og:url"], meta[property="og:image"]').each do |m|
-      opengraph = OpengraphCheckable.new m, self
+      opengraph = OpenGraphCheckable.new m, self
 
       next if opengraph.ignore?
 
