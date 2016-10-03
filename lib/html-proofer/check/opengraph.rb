@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class OpenGraphCheckable < ::HTML::Proofer::Checkable
+class OpenGraphCheckable < ::HTMLProofer::Checkable
 
   def src
     @content
