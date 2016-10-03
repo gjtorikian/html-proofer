@@ -7,12 +7,12 @@ class OpenGraphCheck < ::HTMLProofer::Check
 
 
   def missing_src?
-    !src
+    blank?(src.url)
   end
 
 
   def url
-    src
+    src.url
   end
 
 
@@ -26,7 +26,7 @@ class OpenGraphCheck < ::HTMLProofer::Check
       if missing_src?
         add_issue('open graph is empty and has no content attribute', line: m.line, content: m.content)
       elsif @opengraph.remote?
-        add_to_external_urls opengraph.src, m.line
+        add_to_external_urls(@opengraph.src)
       else
         add_issue("internal open graph #{@opengraph.src} does not exist", line: m.line, content: m.content) unless @opengraph.exists?
       end
