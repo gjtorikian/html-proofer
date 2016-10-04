@@ -1,24 +1,23 @@
 # encoding: utf-8
 
-class OpenGraphCheck < ::HTMLProofer::Check
+class OpenGraphElement < ::HTMLProofer::Element
   def src
-    @opengraph.instance_variable_get(:@content)
+    @content
   end
-
-
-  def missing_src?
-    blank?(src)
-  end
-
 
   def url
     src
   end
+end
 
-
+class OpenGraphCheck < ::HTMLProofer::CheckRunner
+  def missing_src?
+    blank?(@opengraph.src)
+  end
+  
   def run
     @html.css('meta[property="og:url"], meta[property="og:image"]').each do |m|
-      @opengraph = create_element(m)
+      @opengraph = OpenGraphElement.new(m, self)
 
       next if @opengraph.ignore?
 
