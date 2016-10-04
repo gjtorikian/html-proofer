@@ -27,7 +27,7 @@ class OpenGraphCheck < ::HTMLProofer::Check
       elsif !@opengraph.valid?
         add_issue("#{@opengraph.src} is an invalid URL", line: m.line)
       elsif @opengraph.remote?
-        add_to_external_urls(@opengraph.url, m.line)
+        add_to_external_urls(@opengraph.url)
       else
         add_issue("internal open graph #{@opengraph.url} does not exist", line: m.line, content: m.content) unless @opengraph.exists?
       end
