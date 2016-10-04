@@ -10,7 +10,7 @@ class OpenGraphElement < ::HTMLProofer::Element
   end
 end
 
-class OpenGraphCheck < ::HTMLProofer::CheckRunner
+class OpenGraphCheck < ::HTMLProofer::Check
   def missing_src?
     blank?(@opengraph.src)
   end
