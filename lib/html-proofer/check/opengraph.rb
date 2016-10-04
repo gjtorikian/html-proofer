@@ -7,12 +7,12 @@ class OpenGraphCheck < ::HTMLProofer::Check
 
 
   def missing_src?
-    blank?(src.url)
+    blank?(src.instance_variable_get(:@content))
   end
 
 
   def url
-    src.url
+    src.instance_variable_get(:@content)
   end
 
 
