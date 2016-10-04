@@ -1,8 +1,12 @@
 # encoding: utf-8
 
 class OpenGraphElement < ::HTMLProofer::Element
-  def @src
+  def src
     @content
+  end
+
+  def url
+    src
   end
 end
 
