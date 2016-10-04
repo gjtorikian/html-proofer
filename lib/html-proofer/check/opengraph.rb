@@ -2,17 +2,17 @@
 
 class OpenGraphCheck < ::HTMLProofer::Check
   def src
-    @opengraph
+    @opengraph.instance_variable_get(:@content)
   end
 
 
   def missing_src?
-    blank?(src.instance_variable_get(:@content))
+    blank?(src)
   end
 
 
   def url
-    src.instance_variable_get(:@content)
+    src
   end
 
 
