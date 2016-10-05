@@ -15,6 +15,10 @@ class OpenGraphCheck < ::HTMLProofer::Check
     !@opengraph.src
   end
   
+  def empty_src?
+    blank?(@opengraph.src)
+  end
+  
   def run
     @html.css('meta[property="og:url"], meta[property="og:image"]').each do |m|
       @opengraph = OpenGraphElement.new(m, self)
@@ -23,7 +27,9 @@ class OpenGraphCheck < ::HTMLProofer::Check
 
       # does the opengraph exist?
       if missing_src?
-        add_issue('open graph is empty and has no content attribute', line: m.line, content: m.content)
+        add_issue('open graph has no content attribute', line: m.line, content: m.content)
+      elsif empty_src?
+        add_issue('open graph content attribute is empty', line: m.line, content: m.content)
       elsif !@opengraph.valid?
         add_issue("#{@opengraph.src} is an invalid URL", line: m.line)
       elsif @opengraph.remote?
