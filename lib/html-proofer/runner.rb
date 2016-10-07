@@ -150,6 +150,7 @@ module HTMLProofer
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
       @checks.delete('HtmlCheck') unless @options[:check_html]
+      @checks.delete('OpenGraphCheck') unless @options[:check_opengraph]
       @options[:checks_to_ignore].each { |ignored| @checks.delete(ignored) }
       @checks
     end

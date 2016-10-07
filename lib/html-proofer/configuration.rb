@@ -10,6 +10,7 @@ module HTMLProofer
       :check_favicon => false,
       :check_html => false,
       :check_img_http => false,
+      :check_opengraph => false,
       :checks_to_ignore => [],
       :directory_index_file => 'index.html',
       :disable_external => false,

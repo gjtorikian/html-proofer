@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.example.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=604800
+      Content-Type:
+      - text/html
+      Date:
+      - Mon, 14 Dec 2015 23:51:46 GMT
+      Etag:
+      - '"359670651"'
+      Expires:
+      - Mon, 21 Dec 2015 23:51:46 GMT
+      Last-Modified:
+      - Fri, 09 Aug 2013 23:54:35 GMT
+      Server:
+      - ECS (fll/0761)
+      X-Cache:
+      - HIT
+      x-ec-custom-error:
+      - '1'
+      Content-Length:
+      - '1270'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.example.com/
+  recorded_at: Mon, 14 Dec 2015 23:51:46 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,115 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 406
+      message: Not Acceptable
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 15 Dec 2015 00:00:53 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 406 Not Acceptable
+      Content-Security-Policy:
+      - default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src
+        data:; connect-src 'self'; form-action 'self'; base-uri 'self'
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      X-Request-Id:
+      - 503f8c75d2b99420c6c32fef3be767fa
+      X-Runtime:
+      - '0.004616'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - deny
+      X-GitHub-Request-Id:
+      - 55B4DA9B:6922:D09F2B1:566F5835
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Tue, 15 Dec 2015 00:00:53 GMT
+- request:
+    method: get
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 406
+      message: Not Acceptable
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 15 Dec 2015 00:00:53 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 406 Not Acceptable
+      Content-Security-Policy:
+      - default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src
+        data:; connect-src 'self'; form-action 'self'; base-uri 'self'
+      Public-Key-Pins:
+      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+        includeSubDomains
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      X-Request-Id:
+      - c90daf0f47b3f47202c6e29b69b94095
+      X-Runtime:
+      - '0.004213'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - deny
+      X-GitHub-Request-Id:
+      - 55B4DA9B:6922:D09F310:566F5835
+    body:
+      encoding: UTF-8
+      string: " "
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Tue, 15 Dec 2015 00:00:53 GMT
+recorded_with: VCR 2.9.3
