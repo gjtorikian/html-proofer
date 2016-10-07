@@ -55,6 +55,10 @@ You can enable or disable most of the following checks.
 
 * Whether your favicons are valid.
 
+### OpenGraph
+
+* Whether the images and URLs in the OpenGraph metadata are valid.
+
 ### HTML
 
 * Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html), to ensure well-formed markup.
