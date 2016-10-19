@@ -55,6 +55,10 @@ You can enable or disable most of the following checks.
 
 * Whether your favicons are valid.
 
+### OpenGraph
+
+* Whether the images and URLs in the OpenGraph metadata are valid.
+
 ### HTML
 
 * Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html), to ensure well-formed markup.
@@ -213,6 +217,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
+| `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
 |`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
