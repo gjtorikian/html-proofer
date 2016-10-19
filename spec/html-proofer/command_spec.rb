@@ -12,7 +12,7 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with checks_to_ignore' do
+  it 'works with checks-to-ignore' do
     external = "#{FIXTURES_DIR}/links/file.foo"
     output = make_bin('--extension .foo --checks-to-ignore LinkCheck', external)
     expect(output).to match('successfully')
