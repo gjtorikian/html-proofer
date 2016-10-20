@@ -1,12 +1,14 @@
 # encoding: utf-8
 
 class OpenGraphElement < ::HTMLProofer::Element
-  def src
-    @content
-  end
-
-  def url
-    src
+  attr_reader :src
+  
+  def initialize(obj, check)
+    super(obj, check)
+    # Fake up src from the content attribute
+    instance_variable_set("@src", @content)
+    
+    @src.insert 0, 'http:' if @src =~ %r{^//}
   end
 end
 
