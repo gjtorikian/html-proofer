@@ -66,4 +66,10 @@ describe 'Open Graph test' do
     proofer = run_proofer(url_valid, :file, { :check_opengraph => false })
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'passes for internal domains' do
+    translated_link = "#{FIXTURES_DIR}/opengraph/translated-internal.html"
+    proofer = run_proofer(translated_link, :file, { :check_opengraph => true, :internal_domains => ['www.example.com', 'example.com'] })
+    expect(proofer.failed_tests).to eq []
+  end
 end
