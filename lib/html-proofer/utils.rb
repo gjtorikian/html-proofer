@@ -1,4 +1,4 @@
-require 'nokogiri'
+require 'nokogumbo'
 
 module HTMLProofer
   module Utils
@@ -13,7 +13,7 @@ module HTMLProofer
                   path
                 end
 
-      Nokogiri::HTML(clean_content(content))
+      Nokogiri::HTML5(content)
     end
     module_function :create_nokogiri
 
@@ -24,15 +24,5 @@ module HTMLProofer
       href
     end
     module_function :swap
-
-    # address a problem with Nokogiri's parsing URL entities
-    # problem from http://git.io/vBYU1
-    # solution from http://git.io/vBYUi
-    def clean_content(string)
-      string.gsub(%r{(?:https?:)?//([^>]+)}i) do |url|
-        url.gsub(/&(?!amp;)/, '&amp;')
-      end
-    end
-    module_function :clean_content
   end
 end

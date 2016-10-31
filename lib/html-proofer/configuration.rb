@@ -49,7 +49,8 @@ module HTMLProofer
     VALIDATION_DEFAULTS = {
       report_script_embeds: false,
       report_missing_names: false,
-      report_invalid_tags: false
+      report_invalid_tags: false,
+      report_missing_doctype: false
     }.freeze
 
     CACHE_DEFAULTS = {}.freeze

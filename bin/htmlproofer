@@ -21,7 +21,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, ' An array of Strings indicating which checks you\'d like to not perform.'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
+  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogumbo (default: `false`).'
   p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
   p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources do use SRI (default: `false`).'
@@ -34,9 +34,10 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'external_only', '--external_only', 'Only checks problems with external references'
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
-  p.option 'report_invalid_tags', '--report-invalid-tags', 'Ignore `check_html` errors associated with unknown markup (default: `false`)'
-  p.option 'report_missing_names', '--report-missing-names', 'Ignore `check_html` errors associated with missing entities (default: `false`)'
-  p.option 'report_script_embeds', '--report-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
+  p.option 'report_invalid_tags', '--report-invalid-tags', 'Report `check_html` errors associated with unknown markup (default: `false`)'
+  p.option 'report_missing_names', '--report-missing-names', 'Report `check_html` errors associated with missing entities (default: `false`)'
+  p.option 'report_script_embeds', '--report-script-embeds', 'Report `check_html` errors associated with `script`s (default: `false`)'
+  p.option 'report_missing_doctype', '--report-missing-doctype', 'Report `check_html` errors associated with missing or out-of-order DOCTYPE (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
@@ -79,6 +80,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_script_embeds] = opts['report_script_embeds']
     options[:validation][:report_missing_names] = opts['report_missing_names']
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags']
+    options[:validation][:report_missing_doctype] = opts['report_missing_doctype']
 
     options[:cache] = {}
     options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?

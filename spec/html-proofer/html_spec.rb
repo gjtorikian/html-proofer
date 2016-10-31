@@ -19,40 +19,40 @@ describe 'Html test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for an invalid tag' do
+  it 'works for custom tags' do
     html = "#{FIXTURES_DIR}/html/invalid_tag.html"
     proofer = run_proofer(html, :file, check_html: true, validation: { report_invalid_tags: true })
-    expect(proofer.failed_tests.first).to match(/Tag myfancytag invalid \(line 2\)/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for an unmatched end tag' do
+  it 'allows an unmatched end tag' do
     html = "#{FIXTURES_DIR}/html/unmatched_end_tag.html"
     proofer = run_proofer(html, :file, check_html: true)
-    expect(proofer.failed_tests.first).to match(/Unexpected end tag : div \(line 3\)/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for an unescaped ampersand in attribute' do
+  it 'allows an unescaped ampersand in attribute' do
     html = "#{FIXTURES_DIR}/html/unescaped_ampersand_in_attribute.html"
     proofer = run_proofer(html, :file, check_html: true)
-    expect(proofer.failed_tests.first).to match(/htmlParseEntityRef: expecting ';' \(line 2\)/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for mismatch between opening and ending tag' do
+  it 'allows mismatch between opening and ending tag' do
     html = "#{FIXTURES_DIR}/html/opening_and_ending_tag_mismatch.html"
     proofer = run_proofer(html, :file, check_html: true)
-    expect(proofer.failed_tests.first).to match(/Opening and ending tag mismatch: p and strong/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for div inside head' do
+  it 'allows div inside head' do
     html = "#{FIXTURES_DIR}/html/div_inside_head.html"
     proofer = run_proofer(html, :file, check_html: true)
-    expect(proofer.failed_tests.first).to match(/Unexpected end tag : head \(line 5\)/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for missing closing quotation mark in href' do
+  it 'allows missing closing quotation mark in href' do
     html = "#{FIXTURES_DIR}/html/missing_closing_quotes.html"
     proofer = run_proofer(html, :file, check_html: true)
-    expect(proofer.failed_tests.to_s).to match(/Couldn't find end of Start Tag a \(line 6\)/)
+    expect(proofer.failed_tests).to eq []
   end
 
   it "doesn't fail for single ampersand" do
@@ -61,10 +61,10 @@ describe 'Html test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for single ampersand when asked' do
+  it "allows single ampersand" do
     html = "#{FIXTURES_DIR}/html/single_amp.html"
     proofer = run_proofer(html, :file, check_html: true, validation: { report_missing_names: true })
-    expect(proofer.failed_tests.first).to match('htmlParseEntityRef: no name')
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'ignores embeded scripts when asked' do
@@ -78,7 +78,7 @@ describe 'Html test' do
     opts = { check_html: true, validation: { report_script_embeds: true } }
     ignorable_script = "#{FIXTURES_DIR}/html/ignore_script_embeds.html"
     proofer = run_proofer(ignorable_script, :file, opts)
-    expect(proofer.failed_tests.length).to eq 2
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'does not fail for weird iframe sources' do
