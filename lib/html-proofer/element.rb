@@ -16,6 +16,7 @@ module HTMLProofer
         instance_variable_set("@#{name}", value.value)
       end
 
+      @aria_hidden = obj.attributes['aria-hidden']
       @text = obj.content
       @check = check
       @checked_paths = {}
@@ -86,7 +87,7 @@ module HTMLProofer
     end
 
     def ignore_alt?
-      return true if ignores_pattern_check(@check.options[:alt_ignore])
+      return true if ignores_pattern_check(@check.options[:alt_ignore]) || @aria_hidden
     end
 
     def ignore_empty_alt?
@@ -108,7 +109,7 @@ module HTMLProofer
 
     # path is an anchor or a query
     def internal?
-      url.start_with? '#', '?'
+      url.start_with? '#', '?', '/'
     end
 
     def file_path
@@ -175,6 +176,18 @@ module HTMLProofer
 
     def base
       @base ||= @html.at_css('base')
+    end
+
+    def html
+      if (internal?)
+        # If link starts with #, then URL is on the current page so can use the same HTML as for current page
+        if (@href.start_with? '#')
+          @html
+        else
+          # link on another page, e.g. /about#Team - need to get HTML from the other page
+          create_nokogiri(absolute_path)
+        end
+      end
     end
   end
 end
