@@ -124,14 +124,14 @@ module HTMLProofer
       Addressable::URI.parse(href).normalize
     end
 
-    def queue_request(method, href, filenames)
+    def queue_request(method, href, filenames, fail_count = 0)
       opts = @options[:typhoeus].merge({ :method => method })
       request = Typhoeus::Request.new(href, opts)
-      request.on_complete { |response| response_handler(response, filenames) }
+      request.on_complete { |response| response_handler(response, filenames, fail_count) }
       @hydra.queue request
     end
 
-    def response_handler(response, filenames)
+    def response_handler(response, filenames, fail_count)
       effective_url = response.options[:effective_url]
       href = response.request.base_url.to_s
       method = response.request.options[:method]
@@ -150,7 +150,11 @@ module HTMLProofer
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
-        handle_failure(effective_url, filenames, response_code, response.return_message)
+        if fail_count < 5
+          queue_request(:get, href, filenames, fail_count + 1)
+        else
+          handle_failure(effective_url, filenames, response_code, response.return_message, fail_count)
+        end
       elsif method == :head
         queue_request(:get, href, filenames)
       else
@@ -192,8 +196,8 @@ module HTMLProofer
       add_external_issue(filenames, msg, response_code)
     end
 
-    def handle_failure(href, filenames, response_code, return_message)
-      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
+    def handle_failure(href, filenames, response_code, return_message, failure_count = 1)
+      msg = "External link #{href} failed after #{failure_count} attempts: response code #{response_code} means something's wrong.
              It's possible libcurl couldn't connect to the server or perhaps the request timed out.
              Sometimes, making too many requests at once also breaks things.
              Either way, the return message (if any) from the server is: #{return_message}"
