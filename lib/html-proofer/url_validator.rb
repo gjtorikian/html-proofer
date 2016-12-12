@@ -147,16 +147,12 @@ module HTMLProofer
         unless check_hash_in_2xx_response(href, effective_url, response, filenames)
           @cache.add(href, filenames, response_code)
         end
+      elsif fail_count < @options[:num_external_retries] || method == :head
+        queue_request(:get, href, filenames, fail_count + 1)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
-        if fail_count < 5
-          queue_request(:get, href, filenames, fail_count + 1)
-        else
-          handle_failure(effective_url, filenames, response_code, response.return_message, fail_count)
-        end
-      elsif method == :head
-        queue_request(:get, href, filenames)
+        handle_failure(effective_url, filenames, response_code, response.return_message, fail_count)
       else
         return if @options[:only_4xx] && !response_code.between?(400, 499)
         # Received a non-successful http response.

@@ -22,7 +22,7 @@ describe 'Open Graph test' do
   it 'fails for missing external url' do
     url_valid = "#{FIXTURES_DIR}/opengraph/url-broken.html"
     proofer = run_proofer(url_valid, :file, { :check_opengraph => true })
-    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
   end
 
   it 'passes for existing external image' do
