@@ -84,10 +84,8 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_hash(link, line, content)
-    if link.internal?
-      unless hash_check link.html, link.hash
-        add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
-      end
+    if link.internal? && !hash_check(link.html, link.hash)
+      add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
     elsif link.external?
       external_link_check(link, line, content)
     end
