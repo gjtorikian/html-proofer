@@ -39,7 +39,7 @@ class LinkCheck < ::HTMLProofer::Check
       # intentionally here because we still want valid? & missing_href? to execute
       next if @link.non_http_remote?
       # does the file even exist?
-      if @link.remote?
+      if !@link.internal? && @link.remote?
         add_to_external_urls(@link.href)
         next
       elsif !@link.internal? && !@link.exists?
@@ -84,10 +84,8 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_hash(link, line, content)
-    if link.internal?
-      unless hash_check @html, link.hash
-        add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
-      end
+    if link.internal? && !hash_check(link.html, link.hash)
+      add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
     elsif link.external?
       external_link_check(link, line, content)
     end

@@ -150,7 +150,7 @@ module HTMLProofer
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
-        handle_failure(href, filenames, response_code, response.return_message)
+        handle_failure(effective_url, filenames, response_code, response.return_message)
       elsif method == :head
         queue_request(:get, href, filenames)
       else

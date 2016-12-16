@@ -23,13 +23,13 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = fake_out = StringIO.new unless ENV['NOISE']
+  $stdout = fake_out = StringIO.new unless ENV['VERBOSE']
   begin
     yield
   rescue RuntimeError
   ensure
     $stderr = original_stderr
-    $stdout = original_stdout unless ENV['NOISE']
+    $stdout = original_stdout unless ENV['VERBOSE']
   end
   fake_err.string
 end
