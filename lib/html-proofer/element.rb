@@ -16,6 +16,8 @@ module HTMLProofer
         instance_variable_set("@#{name}", value.value)
       end
 
+      @aria_hidden = @aria_hidden == "true" ? true : false
+
       @text = obj.content
       @check = check
       @checked_paths = {}
@@ -108,7 +110,19 @@ module HTMLProofer
 
     # path is an anchor or a query
     def internal?
-      url.start_with? '#', '?', '/'
+      hash_link || param_link || slash_link
+    end
+
+    def hash_link
+      url.start_with?('#')
+    end
+
+    def param_link
+      url.start_with?('?')
+    end
+
+    def slash_link
+      url.start_with?('|')
     end
 
     def file_path
@@ -178,11 +192,11 @@ module HTMLProofer
     end
 
     def html
-      if (internal?)
-        # If link starts with #, then URL is on the current page so can use the same HTML as for current page
-        if (@href.start_with? '#')
+      if internal?
+        # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
+        if hash_link || param_link
           @html
-        else
+        elsif slash_link
           # link on another page, e.g. /about#Team - need to get HTML from the other page
           create_nokogiri(absolute_path)
         end

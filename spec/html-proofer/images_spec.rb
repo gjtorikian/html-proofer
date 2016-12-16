@@ -145,6 +145,13 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'skips missing alt tag for images marked as aria-hidden' do
+    srcSetCheck = "#{FIXTURES_DIR}/images/ariaHidden.html"
+    proofer = run_proofer(srcSetCheck, :file)
+    expect(proofer.failed_tests.size).to eq 1
+    expect(proofer.failed_tests.first).to match(/image .\/gpl.png does not have an alt attribute/)
+  end
+
   it 'fails for images with a srcset but missing alt' do
     srcSetMissingAlt = "#{FIXTURES_DIR}/images/srcSetMissingAlt.html"
     proofer = run_proofer(srcSetMissingAlt, :file)
