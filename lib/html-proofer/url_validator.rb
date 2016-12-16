@@ -124,14 +124,14 @@ module HTMLProofer
       Addressable::URI.parse(href).normalize
     end
 
-    def queue_request(method, href, filenames, fail_count = 0)
+    def queue_request(method, href, filenames)
       opts = @options[:typhoeus].merge({ :method => method })
       request = Typhoeus::Request.new(href, opts)
-      request.on_complete { |response| response_handler(response, filenames, fail_count) }
+      request.on_complete { |response| response_handler(response, filenames) }
       @hydra.queue request
     end
 
-    def response_handler(response, filenames, fail_count)
+    def response_handler(response, filenames)
       effective_url = response.options[:effective_url]
       href = response.request.base_url.to_s
       method = response.request.options[:method]
@@ -147,12 +147,12 @@ module HTMLProofer
         unless check_hash_in_2xx_response(href, effective_url, response, filenames)
           @cache.add(href, filenames, response_code)
         end
-      elsif fail_count < @options[:num_external_retries] || method == :head
-        queue_request(:get, href, filenames, fail_count + 1)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code == 0
-        handle_failure(effective_url, filenames, response_code, response.return_message, fail_count)
+        handle_failure(effective_url, filenames, response_code, response.return_message)
+      elsif method == :head
+        queue_request(:get, href, filenames)
       else
         return if @options[:only_4xx] && !response_code.between?(400, 499)
         # Received a non-successful http response.
@@ -192,8 +192,8 @@ module HTMLProofer
       add_external_issue(filenames, msg, response_code)
     end
 
-    def handle_failure(href, filenames, response_code, return_message, failure_count = 1)
-      msg = "External link #{href} failed after #{failure_count} attempts: response code #{response_code} means something's wrong.
+    def handle_failure(href, filenames, response_code, return_message)
+      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
              It's possible libcurl couldn't connect to the server or perhaps the request timed out.
              Sometimes, making too many requests at once also breaks things.
              Either way, the return message (if any) from the server is: #{return_message}"
