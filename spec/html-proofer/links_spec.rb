@@ -270,6 +270,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/linking to internal hash #example that does not exist/)
   end
 
+  it 'passes when linking to hash on another page' do
+    hash_on_another_page = "#{FIXTURES_DIR}/links/hash_on_another_page.html"
+    proofer = run_proofer(hash_on_another_page, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'works for directory index file' do
     options = { :directory_index_file => "index.php" }
     link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
