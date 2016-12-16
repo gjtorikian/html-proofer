@@ -16,7 +16,6 @@ module HTMLProofer
         instance_variable_set("@#{name}", value.value)
       end
 
-      @aria_hidden = obj.attributes['aria-hidden']
       @text = obj.content
       @check = check
       @checked_paths = {}
