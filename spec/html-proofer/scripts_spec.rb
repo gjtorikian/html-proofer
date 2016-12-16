@@ -4,7 +4,7 @@ describe 'Scripts test' do
   it 'fails for broken external src' do
     file = "#{FIXTURES_DIR}/scripts/script_broken_external.html"
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'works for valid internal src' do

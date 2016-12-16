@@ -42,7 +42,7 @@ describe 'Links test' do
   it 'fails for broken external links' do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     proofer = run_proofer(brokenLinkExternalFilepath, :file)
-    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'passes for different filename without option' do
@@ -55,7 +55,7 @@ describe 'Links test' do
     options = { :extension => '.foo' }
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/file.foo"
     proofer = run_proofer(brokenLinkExternalFilepath, :file, options)
-    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'fails for broken internal links' do
@@ -199,7 +199,7 @@ describe 'Links test' do
   it 'fails for invalid links missing the protocol' do
     missingProtocolLink = "#{FIXTURES_DIR}/links/link_missing_protocol_invalid.html"
     proofer = run_proofer(missingProtocolLink, :file)
-    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'works for valid href within link elements' do
@@ -243,7 +243,7 @@ describe 'Links test' do
 
   it 'works for array of links' do
     proofer = run_proofer(['www.github.com', 'foofoofoo.biz'], :links)
-    expect(proofer.failed_tests.first).to match(/failed after 5 attempts: response code 0/)
+    expect(proofer.failed_tests.first).to match(/failed: response code 0/)
   end
 
   it 'works for broken anchors within pre' do
@@ -268,12 +268,6 @@ describe 'Links test' do
     broken_hash = "#{FIXTURES_DIR}/links/broken_hash_with_query.html"
     proofer = run_proofer(broken_hash, :file)
     expect(proofer.failed_tests.first).to match(/linking to internal hash #example that does not exist/)
-  end
-
-  it 'passes when linking to hash on another page' do
-    hash_on_another_page = "#{FIXTURES_DIR}/links/hash_on_another_page.html"
-    proofer = run_proofer(hash_on_another_page, :file)
-    expect(proofer.failed_tests).to eq []
   end
 
   it 'works for directory index file' do
