@@ -219,6 +219,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `check_img_http` | Fails an image if it's marked as http | `false` |
 |`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
