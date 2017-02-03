@@ -135,6 +135,11 @@ HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com'])
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
 
+**Note:** flags are different from the default ones provided above. The underscores are replaced with dashes.
+
+`allow_hash_href` will be `--allow-hash-href`
+
+
 ``` bash
 htmlproofer www.google.com,www.github.com --as-links
 ```
