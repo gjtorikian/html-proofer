@@ -154,6 +154,8 @@ Pass in options through the command-line as flags, like this:
 htmlproofer --extension .html.erb ./out
 ```
 
+Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/master/bin/htmlproofer).
+
 #### Special cases for the command-line
 
 For options which require an array of input, surrounded the value with quotes, and don't use
