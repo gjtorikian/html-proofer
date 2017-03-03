@@ -48,4 +48,28 @@ describe 'Scripts test' do
     proofer = run_proofer(file, :file, { :url_swap => { %r{^http://example.com} => "" } })
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'SRI and CORS not provided' do
+    file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_not_provided.html"
+    proofer = run_proofer(file, :file, {:check_sri => true})
+    expect(proofer.failed_tests.first).to match(%r{SRI and CORS not provided})
+  end
+
+  it 'SRI not provided' do
+    file = "#{FIXTURES_DIR}/scripts/cors_not_provided.html"
+    proofer = run_proofer(file, :file, {:check_sri => true})
+    expect(proofer.failed_tests.first).to match(%r{CORS not provided})
+  end
+
+  it 'CORS not provided' do
+    file = "#{FIXTURES_DIR}/scripts/integrity_not_provided.html"
+    proofer = run_proofer(file, :file, {:check_sri => true})
+    expect(proofer.failed_tests.first).to match(%r{Integrity is missing})
+  end
+
+  it 'SRI and CORS provided' do
+    file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_provided.html"
+    proofer = run_proofer(file, :file, {:check_sri => true})
+    expect(proofer.failed_tests).to eq []
+  end
 end

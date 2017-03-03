@@ -103,6 +103,10 @@ module HTMLProofer
       @check.options[:check_img_http]
     end
 
+    def check_sri?
+      @check.options[:check_sri]
+    end
+
     # path is external to the file
     def external?
       !internal?
