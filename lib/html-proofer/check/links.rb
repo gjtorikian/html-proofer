@@ -38,8 +38,11 @@ class LinkCheck < ::HTMLProofer::Check
 
       # intentionally here because we still want valid? & missing_href? to execute
       next if @link.non_http_remote?
-      # does the file even exist?
+
       if !@link.internal? && @link.remote?
+        # we need to skip these for now; although the domain main be valid,
+        # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
+        next if @link.try(:rel) == 'dns-prefetch'
         add_to_external_urls(@link.href)
         next
       elsif !@link.internal? && !@link.exists?
