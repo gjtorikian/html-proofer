@@ -42,7 +42,8 @@ You can enable or disable most of the following checks.
 * Whether your internal links are working
 * Whether your internal hash references (`#linkToMe`) are working
 * Whether external links are working
-* Whether your links are not HTTPS
+* Whether your links are HTTPS
+* Whether CORS/SRI is enabled
 
 ### Scripts
 
@@ -50,6 +51,7 @@ You can enable or disable most of the following checks.
 
 * Whether your internal script references are working
 * Whether external scripts are loading
+* Whether CORS/SRI is enabled
 
 ### Favicon
 
@@ -74,7 +76,7 @@ You can configure HTMLProofer to run on a file, a directory, an array of directo
 3. Create a new instance of the `HTMLProofer` on your output folder.
 4. `run` that instance.
 
-Here's a simple example:
+Here's an example:
 
 ```ruby
 require 'html-proofer'
@@ -191,14 +193,15 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  HTMLProofer.check_directory("./_site").run
+  options = { :assume_extension => true }
+  HTMLProofer.check_directory("./_site", options).run
 end
 ```
 
 Don't have or want a `Rakefile`? You can also do something like the following:
 
 ```bash
-htmlproofer ./_site
+htmlproofer --assume-extension ./_site
 ```
 
 ### Using through Docker
@@ -324,6 +327,16 @@ The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system.
 
+### Caching with Travis
+
+If you want to enable caching with Travis CI, be sure to add these lines into your _.travis.yml_ file:
+
+```
+cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+```
+
 ## Logging
 
 HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_level` option, you can better define the level of logging.
@@ -366,7 +379,7 @@ end
 
 ### Certificates
 
-To ignore certificates, turn off Typhoeus' SSL verification:
+To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
