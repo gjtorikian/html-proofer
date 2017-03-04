@@ -37,4 +37,25 @@ http_interactions:
     adapter_metadata:
       effective_url: http://localhost/
   recorded_at: Sat, 04 Mar 2017 00:06:38 GMT
+- request:
+    method: head
+    uri: http://thisisnotareallink/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://thisisnotareallink/
+  recorded_at: Sat, 04 Mar 2017 00:58:01 GMT
 recorded_with: VCR 2.9.3
