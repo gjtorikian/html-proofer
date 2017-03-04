@@ -45,7 +45,7 @@ describe 'Links test' do
     failure = proofer.failed_tests.first
     expect(failure).to match(/failed: response code 0/)
     # ensure lack of slash in error message
-    expect(failure).to match(%r{External link http://www.asdo3irj395295jsingrkrg4.com failed:})
+    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com failed:})
   end
 
   it 'passes for different filename without option' do
