@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://www.github.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sat, 04 Mar 2017 00:06:39 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _octo=GH1.1.1908594367.1488585999; domain=.github.com; path=/; expires=Mon,
+        04 Mar 2019 00:06:39 -0000
+      - logged_in=no; domain=.github.com; path=/; expires=Wed, 04 Mar 2037 00:06:39
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMTc3NGUwZjc1ZDUxNDlhNzg4ZTI3OTcyNzAwZjA5N2QiLCJfY3NyZl90b2tlbiI6Iko0RjBmWWEwa0xSbXQ4bDI0VUc1YW1LSFVsSlBWM2VIMXpTT0h6cXFLWDg9In0%3D--35105755965eac5531756ae49f8dccbdeed98e66;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 4dcbbd62274818c06e6111db1c1ee417
+      X-Runtime:
+      - '0.031527'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - b1dc34043a1d591184b9516321167848
+      X-GitHub-Request-Id:
+      - 45DA:1A99:20E024:35466A:58BA050E
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Sat, 04 Mar 2017 00:06:37 GMT
+recorded_with: VCR 2.9.3
