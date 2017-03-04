@@ -494,7 +494,13 @@ describe 'Links test' do
   end
 
   it 'ignores links when the parent element is ignored' do
-    prefetch = "#{FIXTURES_DIR}/links/ignored_by_parent.html"
+    parent_ignore = "#{FIXTURES_DIR}/links/ignored_by_parent.html"
+    proofer = run_proofer(parent_ignore, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does not cgi encode link' do
+    prefetch = "#{FIXTURES_DIR}/links/do_not_cgi_encode.html"
     proofer = run_proofer(prefetch, :file)
     expect(proofer.failed_tests).to eq []
   end

@@ -1,0 +1,110 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7+1.290_amd64.deb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      x-amz-request-id:
+      - 2419621166F31120
+      x-amz-id-2:
+      - 0AsOj6kCLtSAyAdBido06DtLDUvU2/AapIdelCVKSGS71Zy+iN1mo8Am62lWI6iVI9yK68CJAXw=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Sat, 04 Mar 2017 01:12:31 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7+1.290_amd64.deb
+  recorded_at: Sat, 04 Mar 2017 01:12:32 GMT
+- request:
+    method: get
+    uri: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7+1.290_amd64.deb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      x-amz-request-id:
+      - B3AA2B21F78B4064
+      x-amz-id-2:
+      - s77DwGMh3TNR1KuH9tGRptjxdkMlLWKFEQLf7Ral/9wsXGbrcysVlLJEv/7VOv7nBXUmHWZD0B4=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Sat, 04 Mar 2017 01:12:31 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>B3AA2B21F78B4064</RequestId><HostId>s77DwGMh3TNR1KuH9tGRptjxdkMlLWKFEQLf7Ral/9wsXGbrcysVlLJEv/7VOv7nBXUmHWZD0B4=</HostId></Error>
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7+1.290_amd64.deb
+  recorded_at: Sat, 04 Mar 2017 01:12:32 GMT
+- request:
+    method: head
+    uri: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-amz-id-2:
+      - nVrX9bO2V7zfaGbinbx7hpLalIftVOqJCRy5rnVmlt18ehloSKl5M2+SV781m3UVoWyld39bRkA=
+      x-amz-request-id:
+      - 6ECAAF9F6BA0B0EF
+      Date:
+      - Sat, 04 Mar 2017 01:17:36 GMT
+      Last-Modified:
+      - Thu, 16 Feb 2017 22:58:48 GMT
+      ETag:
+      - '"29818ab714021692a380ac83ea0af7d4"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/x-debian-package
+      Content-Length:
+      - '3323820'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+  recorded_at: Sat, 04 Mar 2017 01:17:35 GMT
+recorded_with: VCR 2.9.3
