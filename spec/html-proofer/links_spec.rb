@@ -45,7 +45,7 @@ describe 'Links test' do
     failure = proofer.failed_tests.first
     expect(failure).to match(/failed: response code 0/)
     # ensure lack of slash in error message
-    expect(failure).to match(%r{External link http://www.asdo3irj395295jsingrkrg4.com failed:})
+    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com failed:})
   end
 
   it 'passes for different filename without option' do
@@ -494,7 +494,13 @@ describe 'Links test' do
   end
 
   it 'ignores links when the parent element is ignored' do
-    prefetch = "#{FIXTURES_DIR}/links/ignored_by_parent.html"
+    parent_ignore = "#{FIXTURES_DIR}/links/ignored_by_parent.html"
+    proofer = run_proofer(parent_ignore, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does not cgi encode link' do
+    prefetch = "#{FIXTURES_DIR}/links/do_not_cgi_encode.html"
     proofer = run_proofer(prefetch, :file)
     expect(proofer.failed_tests).to eq []
   end

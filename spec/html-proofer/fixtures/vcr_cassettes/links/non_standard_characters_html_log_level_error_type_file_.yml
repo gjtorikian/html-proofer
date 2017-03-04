@@ -122,4 +122,76 @@ http_interactions:
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
   recorded_at: Sat, 13 Feb 2016 14:51:08 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 04 Mar 2017 01:37:20 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Server:
+      - mw1214.eqiad.wmnet
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      X-Powered-By:
+      - HHVM/3.12.14
+      X-UA-Compatible:
+      - IE=Edge
+      Content-language:
+      - en
+      P3P:
+      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
+        for more info."
+      X-Content-Type-Options:
+      - nosniff
+      Last-Modified:
+      - Thu, 02 Mar 2017 17:44:43 GMT
+      Backend-Timing:
+      - D=114173 t=1488476706434283
+      X-Varnish:
+      - 600836325 594316096, 320919217, 846713740 782237721, 229063873 2018606
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '28186'
+      X-Cache:
+      - cp1067 hit/5, cp2004 miss, cp4018 hit/6, cp4016 hit/11
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=04-Mar-2017;Path=/;HttpOnly;secure;Expires=Wed, 05 Apr 2017
+        00:00:00 GMT
+      - WMF-Last-Access-Global=04-Mar-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Wed,
+        05 Apr 2017 00:00:00 GMT
+      - GeoIP=US:CA:San_Francisco:37.76:-122.48:v4; Path=/; secure; Domain=.wikipedia.org
+      X-Analytics:
+      - ns=0;page_id=25914154;https=1;nocookies=1
+      X-Client-IP:
+      - 2601:645:4100:77ab:4575:aca:433d:d9c0
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
+  recorded_at: Sat, 04 Mar 2017 01:37:20 GMT
 recorded_with: VCR 2.9.3

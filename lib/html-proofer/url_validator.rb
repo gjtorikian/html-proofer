@@ -121,7 +121,13 @@ module HTMLProofer
     end
 
     def clean_url(href)
-      Addressable::URI.parse(href).normalize
+      # catch any obvious issues, like strings in port numbers
+      parsed = Addressable::URI.parse(href)
+      if href !~ %r{^([!#$&-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$}
+        parsed.normalize
+      else
+        href
+      end
     end
 
     def queue_request(method, href, filenames)
