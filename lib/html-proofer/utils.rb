@@ -2,8 +2,6 @@ require 'nokogiri'
 
 module HTMLProofer
   module Utils
-    STORAGE_DIR = File.join('tmp', '.htmlproofer')
-
     def pluralize(count, single, plural)
       "#{count} " << (count == 1 ? single : plural)
     end
