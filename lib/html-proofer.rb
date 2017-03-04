@@ -14,6 +14,7 @@ require 'fileutils'
 
 begin
   require 'awesome_print'
+  require 'pry'
 rescue LoadError; end
 
 module HTMLProofer

@@ -394,9 +394,7 @@ describe 'Links test' do
       proofer = run_proofer(@fixture, :file, @options)
       expect(proofer.failed_tests).to eq []
     end
-
   end
-
 
   it 'does not complain for internal links with mismatched cases' do
     fixture = "#{FIXTURES_DIR}/links/ignores_cases.html"
@@ -483,6 +481,12 @@ describe 'Links test' do
   it 'passes for relative links with a base' do
     relativeLinks = "#{FIXTURES_DIR}/links/relativeLinksWithBase.html"
     proofer = run_proofer(relativeLinks, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'does not bomb on dns-prefetch' do
+    prefetch = "#{FIXTURES_DIR}/links/dns-prefetch.html"
+    proofer = run_proofer(prefetch, :file)
     expect(proofer.failed_tests).to eq []
   end
 end
