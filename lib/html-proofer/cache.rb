@@ -9,9 +9,10 @@ module HTMLProofer
   class Cache
     include HTMLProofer::Utils
 
-    CACHE_LOG = File.join(STORAGE_DIR, 'cache.log')
+    DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
+    DEFAULT_CACHE_FILE_NAME = "cache.log"
 
-    attr_reader :exists, :cache_log
+    attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
     def initialize(logger, options)
       @logger = logger
@@ -21,15 +22,11 @@ module HTMLProofer
         define_singleton_method('use_cache?') { false }
       else
         define_singleton_method('use_cache?') { true }
+        setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
 
       @cache_time = Time.now
-
-      if File.exist?(CACHE_LOG)
-        contents = File.read(CACHE_LOG)
-        @cache_log = contents.empty? ? {} : JSON.parse(contents)
-      end
     end
 
     def within_timeframe?(time)
@@ -111,7 +108,7 @@ module HTMLProofer
     end
 
     def write
-      File.write(CACHE_LOG, @cache_log.to_json)
+      File.write(cache_file, @cache_log.to_json)
     end
 
     def load?
@@ -148,6 +145,31 @@ module HTMLProofer
 
     def clean_url(url)
       slashless_url(unescape_url(url))
+    end
+
+    def setup_cache!(options)
+      if options[:storage_dir]
+        @storage_dir = options[:storage_dir]
+      else
+        @storage_dir = DEFAULT_STORAGE_DIR
+      end
+
+      if !Dir.exist?(storage_dir)
+        FileUtils.mkdir_p(storage_dir)
+      end
+
+      if options[:cache_file]
+        cache_file_name = options[:cache_file]
+      else
+        cache_file_name = DEFAULT_CACHE_FILE_NAME
+      end
+
+      @cache_file = File.join(storage_dir, cache_file_name)
+
+      if File.exist?(cache_file)
+        contents = File.read(cache_file)
+        @cache_log = contents.empty? ? {} : JSON.parse(contents)
+      end
     end
   end
 end

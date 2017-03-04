@@ -19,10 +19,6 @@ module HTMLProofer
       @type = @options.delete(:type)
       @logger = HTMLProofer::Log.new(@options[:log_level])
 
-      if !@options[:cache].empty? && !File.exist?(STORAGE_DIR)
-        FileUtils.mkdir_p(STORAGE_DIR)
-      end
-
       # Add swap patterns for internal domains
       unless @options[:internal_domains].empty?
         @options[:internal_domains].each do |dom|
