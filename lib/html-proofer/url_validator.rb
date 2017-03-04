@@ -156,7 +156,7 @@ module HTMLProofer
       else
         return if @options[:only_4xx] && !response_code.between?(400, 499)
         # Received a non-successful http response.
-        msg = "External link #{href} failed: #{response_code} #{response.return_message}"
+        msg = "External link #{href.chomp('/')} failed: #{response_code} #{response.return_message}"
         add_external_issue(filenames, msg, response_code)
         @cache.add(href, filenames, response_code, msg)
       end
@@ -179,21 +179,21 @@ module HTMLProofer
 
       return unless body_doc.xpath(xpath).empty?
 
-      msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
+      msg = "External link #{href.chomp('/')} failed: #{effective_url} exists, but the hash '#{hash}' does not"
       add_external_issue(filenames, msg, response.code)
       @cache.add(href, filenames, response.code, msg)
       true
     end
 
     def handle_timeout(href, filenames, response_code)
-      msg = "External link #{href} failed: got a time out (response code #{response_code})"
+      msg = "External link #{href.chomp('/')} failed: got a time out (response code #{response_code})"
       @cache.add(href, filenames, 0, msg)
       return if @options[:only_4xx]
       add_external_issue(filenames, msg, response_code)
     end
 
     def handle_failure(href, filenames, response_code, return_message)
-      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
+      msg = "External link #{href.chomp('/')} failed: response code #{response_code} means something's wrong.
              It's possible libcurl couldn't connect to the server or perhaps the request timed out.
              Sometimes, making too many requests at once also breaks things.
              Either way, the return message (if any) from the server is: #{return_message}"
