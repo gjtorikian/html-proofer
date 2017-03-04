@@ -216,6 +216,13 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from every check
 <a href="http://notareallink" data-proofer-ignore>Not checked.</a>
 ```
 
+This can also apply to parent elements, all the way up to the `<html>` tag:
+
+``` html
+<div data-proofer-ignore>
+  <a href="http://notareallink">Not checked because of parent.</a>
+</div>
+```
 ## Configuration
 
 The `HTMLProofer` constructor takes an optional hash of additional options:

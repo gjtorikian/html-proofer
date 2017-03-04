@@ -489,4 +489,10 @@ describe 'Links test' do
     proofer = run_proofer(prefetch, :file)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'ignores links when the parent element is ignored' do
+    prefetch = "#{FIXTURES_DIR}/links/ignored_by_parent.html"
+    proofer = run_proofer(prefetch, :file)
+    expect(proofer.failed_tests).to eq []
+  end
 end

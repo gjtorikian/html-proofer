@@ -26,6 +26,10 @@ module HTMLProofer
 
       @html = check.html
 
+      parent_attributes = obj.ancestors.map { |a| a.try(:attributes) }
+      parent_attributes.pop # remove document at the end
+      @parent_ignorable = parent_attributes.any? { |a| !a["data-proofer-ignore"].nil? }
+
       # fix up missing protocols
       @href.insert 0, 'http:' if @href =~ %r{^//}
       @src.insert 0, 'http:' if @src =~ %r{^//}
@@ -75,6 +79,7 @@ module HTMLProofer
 
     def ignore?
       return true if @data_proofer_ignore
+      return true if @parent_ignorable
 
       return true if url =~ /^javascript:/
 
