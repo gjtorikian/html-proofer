@@ -332,7 +332,7 @@ Links that were failures are kept in the cache and *always* rechecked. If they p
 
 The cache operates on external links only.
 
-If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system.
+If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
 
 ### Caching with Travis
 
