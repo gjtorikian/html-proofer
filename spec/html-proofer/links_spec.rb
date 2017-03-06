@@ -44,8 +44,8 @@ describe 'Links test' do
     proofer = run_proofer(brokenLinkExternalFilepath, :file)
     failure = proofer.failed_tests.first
     expect(failure).to match(/failed: response code 0/)
-    # ensure lack of slash in error message
-    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com failed:})
+    # ensure slash is added to redirected URL
+    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com/ failed:})
   end
 
   it 'passes for different filename without option' do
