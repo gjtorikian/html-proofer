@@ -499,9 +499,10 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'does not cgi encode link' do
-    prefetch = "#{FIXTURES_DIR}/links/do_not_cgi_encode.html"
-    proofer = run_proofer(prefetch, :file)
-    expect(proofer.failed_tests).to eq []
+  it 'works with quotes in the hash href' do
+    hash_href = "#{FIXTURES_DIR}/links/quote.html"
+    proofer = run_proofer(hash_href, :file, { :allow_hash_href => true })
+    expect(proofer.failed_tests.length).to eq 0
   end
+
 end
