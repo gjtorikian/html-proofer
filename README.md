@@ -426,3 +426,4 @@ Project | Repository | Notes
 [Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
 [Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
 [Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
+[HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites)
