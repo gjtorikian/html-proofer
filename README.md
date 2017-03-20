@@ -22,7 +22,7 @@ Or install it yourself as:
 
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
-## What's Tested?
+## What's tested?
 
 You can enable or disable most of the following checks.
 
