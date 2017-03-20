@@ -33,7 +33,9 @@ module HTMLProofer
       :followlocation => true,
       :headers => {
         'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{HTMLProofer::VERSION}; +https://github.com/gjtorikian/html-proofer)"
-      }
+      },
+      :connecttimeout => 10,
+      :timeout => 30
     }
 
     HYDRA_DEFAULTS = {
