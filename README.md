@@ -293,7 +293,19 @@ This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configurati
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
-The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :max_concurrency => 50 } }`.
+The default value is:
+
+``` ruby
+{
+  :typhoeus =>
+  {
+    :followlocation => true,
+    :connecttimeout => 10,
+    :timeout => 30
+  },
+  :hydra => { :max_concurrency => 50 }
+}
+```
 
 ### Configuring Parallel
 
