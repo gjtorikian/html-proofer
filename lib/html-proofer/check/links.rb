@@ -107,10 +107,12 @@ class LinkCheck < ::HTMLProofer::Check
 
   def hash_check(html, href_hash)
     decoded_href_hash = URI.decode(href_hash)
-    html.xpath("//*[case_insensitive_equals(@id, '#{href_hash}')]", \
-               "//*[case_insensitive_equals(@name, '#{href_hash}')]", \
-               "//*[case_insensitive_equals(@id, '#{decoded_href_hash}')]", \
-               "//*[case_insensitive_equals(@name, '#{decoded_href_hash}')]", \
+    href_hash = "'#{href_hash.split("'").join("', \"'\", '")}', ''"
+    decoded_href_hash = "'#{decoded_href_hash.split("'").join("', \"'\", '")}', ''"
+    html.xpath("//*[case_insensitive_equals(@id, concat(#{href_hash}))]", \
+               "//*[case_insensitive_equals(@name, concat(#{href_hash}))]", \
+               "//*[case_insensitive_equals(@id, concat(#{decoded_href_hash}))]", \
+               "//*[case_insensitive_equals(@name, concat(#{decoded_href_hash}))]", \
                XpathFunctions.new).length > 0
   end
 
