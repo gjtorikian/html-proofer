@@ -72,4 +72,10 @@ describe 'Scripts test' do
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'Not checking local scripts' do
+    file = "#{FIXTURES_DIR}/scripts/local_script.html"
+    proofer = run_proofer(file, :file, {:check_sri => true})
+    expect(proofer.failed_tests).to eq []
+  end
 end
