@@ -40,6 +40,7 @@ class LinkCheck < ::HTMLProofer::Check
       next if @link.non_http_remote?
 
       if !@link.internal? && @link.remote?
+        check_sri(line, content) if @link.check_sri?
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
         next if @link.try(:rel) == 'dns-prefetch'
@@ -114,6 +115,16 @@ class LinkCheck < ::HTMLProofer::Check
                "//*[case_insensitive_equals(@id, concat(#{decoded_href_hash}))]", \
                "//*[case_insensitive_equals(@name, concat(#{decoded_href_hash}))]", \
                XpathFunctions.new).length > 0
+  end
+
+  def check_sri(line, content)
+    if !defined? @link.integrity and !defined? @link.crossorigin
+      add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
+    elsif !defined? @link.integrity
+      add_issue("Integrity is missing in: #{@link.src}", line: line, content: content)
+    elsif !defined? @link.crossorigin
+      add_issue("CORS not provided for external resource in: #{@link.src}", line: line, content: content)
+    end
   end
 
   class XpathFunctions
