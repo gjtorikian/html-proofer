@@ -510,4 +510,10 @@ describe 'Links test' do
     proofer = run_proofer(hash_href, :file, { :allow_hash_href => true })
     expect(proofer.failed_tests.length).to eq 0
   end
+
+  it 'works with base without href' do
+    base_no_href = "#{FIXTURES_DIR}/links/base_no_href.html"
+    proofer = run_proofer(base_no_href, :file)
+    expect(proofer.failed_tests).to eq []
+  end
 end
