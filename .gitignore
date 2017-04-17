@@ -18,6 +18,7 @@ sample.rb
 run_sample.rb
 src/
 docs/
+_site/
 
 # YARD artifacts
 .yardoc
