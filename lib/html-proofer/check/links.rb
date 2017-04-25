@@ -107,13 +107,20 @@ class LinkCheck < ::HTMLProofer::Check
 
   def hash_check(html, href_hash)
     decoded_href_hash = URI.decode(href_hash)
-    href_hash = "'#{href_hash.split("'").join("', \"'\", '")}', ''"
-    decoded_href_hash = "'#{decoded_href_hash.split("'").join("', \"'\", '")}', ''"
-    html.xpath("//*[case_insensitive_equals(@id, concat(#{href_hash}))]", \
-               "//*[case_insensitive_equals(@name, concat(#{href_hash}))]", \
-               "//*[case_insensitive_equals(@id, concat(#{decoded_href_hash}))]", \
-               "//*[case_insensitive_equals(@name, concat(#{decoded_href_hash}))]", \
-               XpathFunctions.new).length > 0
+    find_fragments(html, [href_hash, decoded_href_hash]).length > 0
+  end
+
+  def find_fragments(html, fragment_ids)
+    xpaths = fragment_ids.flat_map do |frag_id|
+      escaped_frag_id = "'#{frag_id.split("'").join("', \"'\", '")}', ''"
+      [
+        "//*[case_insensitive_equals(@id, concat(#{escaped_frag_id}))]",
+        "//*[case_insensitive_equals(@name, concat(#{escaped_frag_id}))]"
+      ]
+    end
+    xpaths << XpathFunctions.new
+
+    html.xpath(*xpaths)
   end
 
   class XpathFunctions
