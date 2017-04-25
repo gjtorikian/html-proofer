@@ -107,7 +107,8 @@ class LinkCheck < ::HTMLProofer::Check
 
   def hash_check(html, href_hash)
     decoded_href_hash = URI.decode(href_hash)
-    find_fragments(html, [href_hash, decoded_href_hash]).length > 0
+    fragment_ids = [href_hash, decoded_href_hash]
+    fragment_ids.include?('top') || find_fragments(html, fragment_ids).length > 0
   end
 
   def find_fragments(html, fragment_ids)
