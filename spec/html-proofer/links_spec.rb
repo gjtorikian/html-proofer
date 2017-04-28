@@ -39,6 +39,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/linking to internal hash #noHash that does not exist/)
   end
 
+  it 'passes when linking to the top' do
+    path = "#{FIXTURES_DIR}/links/topHashInternal.html"
+    proofer = run_proofer(path, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'fails for broken external links' do
     brokenLinkExternalFilepath = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
     proofer = run_proofer(brokenLinkExternalFilepath, :file)
