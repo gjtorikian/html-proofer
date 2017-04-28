@@ -511,31 +511,31 @@ describe 'Links test' do
     expect(proofer.failed_tests.length).to eq 0
   end
 
-  it 'SRI and CORS not provided' do
+  it 'complains if SRI and CORS not provided' do
     file = "#{FIXTURES_DIR}/links/integrity_and_cors_not_provided.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests.first).to match(%r{SRI and CORS not provided})
   end
 
-  it 'SRI not provided' do
+  it 'complains if SRI not provided' do
     file = "#{FIXTURES_DIR}/links/cors_not_provided.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests.first).to match(%r{CORS not provided})
   end
 
-  it 'CORS not provided' do
+  it 'complains if CORS not provided' do
     file = "#{FIXTURES_DIR}/links/integrity_not_provided.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests.first).to match(%r{Integrity is missing})
   end
 
-  it 'SRI and CORS provided' do
+  it 'is happy if SRI and CORS provided' do
     file = "#{FIXTURES_DIR}/links/integrity_and_cors_provided.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'not checking local scripts' do
+  it 'does not check local scripts' do
     file = "#{FIXTURES_DIR}/links/local_stylesheet.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
     expect(proofer.failed_tests).to eq []

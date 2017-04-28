@@ -118,11 +118,11 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def check_sri(line, content)
-    if !defined? @link.integrity and !defined? @link.crossorigin
+    if !defined?(@link.integrity) && !defined?(@link.crossorigin)
       add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
-    elsif !defined? @link.integrity
+    elsif !defined?(@link.integrity)
       add_issue("Integrity is missing in: #{@link.src}", line: line, content: content)
-    elsif !defined? @link.crossorigin
+    elsif !defined?(@link.crossorigin)
       add_issue("CORS not provided for external resource in: #{@link.src}", line: line, content: content)
     end
   end
