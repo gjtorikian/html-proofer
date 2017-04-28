@@ -511,6 +511,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.length).to eq 0
   end
 
+  it 'works with base without href' do
+    base_no_href = "#{FIXTURES_DIR}/links/base_no_href.html"
+    proofer = run_proofer(base_no_href, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'complains if SRI and CORS not provided' do
     file = "#{FIXTURES_DIR}/links/integrity_and_cors_not_provided.html"
     proofer = run_proofer(file, :file, {:check_sri => true})
