@@ -385,6 +385,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'passes for links hash-referencing itself' do
+    fixture = "#{FIXTURES_DIR}/links/self_ref.html"
+    proofer = run_proofer(fixture, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   context 'automatically adding default extensions to files' do
 
     before :each do
