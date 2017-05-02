@@ -2,9 +2,15 @@
 
 If you generate HTML files, _then this tool might be for you_.
 
-`HTMLProofer` is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
-
 [![Build Status](https://travis-ci.org/gjtorikian/html-proofer.svg?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.svg)](http://badge.fury.io/rb/html-proofer)
+
+## Project scope
+
+HTMLProofer is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
+
+In scope for this project is any well-known and widely-used test for HTML document quality. A major use for this project is continuous integration -- so we must have reliable results. We usually balance correctness over performance. And, if necessary, we should be able to trace this program's detection of HTML errors back to documented best practices or standards, such as W3 specifications.
+
+**Third-party modules.** We want this product to be useful for continuous integration so we prefer to avoid subjective tests which are prone to false positive results, such as spell checkers, indentation checkers, etc. If you want to work on these items, please see [the section on custom tests](#custom-tests) and consider adding an implementation as a third-party module.
 
 ## Installation
 
@@ -24,7 +30,7 @@ Or install it yourself as:
 
 ## What's tested?
 
-You can enable or disable most of the following checks.
+Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ### Images
 
@@ -63,7 +69,7 @@ You can enable or disable most of the following checks.
 
 ### HTML
 
-* Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html), to ensure well-formed markup.
+* Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) to ensure well-formed markup.
 
 ## Usage
 

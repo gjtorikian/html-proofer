@@ -11,7 +11,9 @@ task :proof_readme do
   require 'html-proofer'
   require 'redcarpet'
 
-  redcarpet = Redcarpet::Markdown.new Redcarpet::Render::HTML.new({}), {}
+  renderer = Redcarpet::Render::HTML.new \
+                                          with_toc_data: true
+  redcarpet = Redcarpet::Markdown.new(renderer)
   html = redcarpet.render File.read('README.md')
 
   mkdir_p 'out'
