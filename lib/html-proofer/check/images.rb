@@ -30,12 +30,10 @@ class ImageCheck < ::HTMLProofer::Check
       # does the image exist?
       if missing_src?
         add_issue('image has no src or srcset attribute', line: line, content: content)
-      else
-        if @img.remote?
-          add_to_external_urls(@img.url)
-        elsif !@img.exists?
-          add_issue("internal image #{@img.url} does not exist", line: line, content: content)
-        end
+      elsif @img.remote?
+        add_to_external_urls(@img.url)
+      elsif !@img.exists?
+        add_issue("internal image #{@img.url} does not exist", line: line, content: content)
       end
 
       if !@img.ignore_alt? && (@img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?))

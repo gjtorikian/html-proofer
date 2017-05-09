@@ -11,12 +11,12 @@ module HTMLProofer
     def initialize(obj, check)
       # Construct readable ivars for every element
       obj.attributes.each_pair do |attribute, value|
-        name = "#{attribute.tr('-:.', '_')}".to_sym
+        name = attribute.tr('-:.', '_').to_s.to_sym
         (class << self; self; end).send(:attr_reader, name)
         instance_variable_set("@#{name}", value.value)
       end
 
-      @aria_hidden = @aria_hidden == "true" ? true : false
+      @aria_hidden = @aria_hidden == 'true' ? true : false
 
       @text = obj.content
       @check = check
@@ -28,7 +28,7 @@ module HTMLProofer
 
       parent_attributes = obj.ancestors.map { |a| a.try(:attributes) }
       parent_attributes.pop # remove document at the end
-      @parent_ignorable = parent_attributes.any? { |a| !a["data-proofer-ignore"].nil? }
+      @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
 
       # fix up missing protocols
       @href.insert 0, 'http:' if @href =~ %r{^//}
@@ -38,10 +38,8 @@ module HTMLProofer
 
     def url
       return @url if defined?(@url)
-      @url = (@src || @srcset || @href || '').gsub("\u200b", '')
-      if base
-        @url = Addressable::URI.join(base.attr('href') || '', url).to_s
-      end
+      @url = (@src || @srcset || @href || '').delete("\u200b")
+      @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
       @url = swap(@url, @check.options[:url_swap])
     end
@@ -70,7 +68,7 @@ module HTMLProofer
 
     # path is to an external server
     def remote?
-      %w( http https ).include? scheme
+      %w[http https].include? scheme
     end
 
     def non_http_remote?
@@ -84,7 +82,7 @@ module HTMLProofer
       return true if url =~ /^javascript:/
 
       # ignore base64 encoded images
-      if %w(ImageCheck FaviconCheck).include? @type
+      if %w[ImageCheck FaviconCheck].include? @type
         return true if url =~ /^data:image/
       end
 
@@ -201,14 +199,12 @@ module HTMLProofer
     end
 
     def html
-      if internal?
-        # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
-        if hash_link || param_link
-          @html
-        elsif slash_link
-          # link on another page, e.g. /about#Team - need to get HTML from the other page
-          create_nokogiri(absolute_path)
-        end
+      # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
+      if (hash_link || param_link) && internal?
+        @html
+      elsif slash_link && internal?
+        # link on another page, e.g. /about#Team - need to get HTML from the other page
+        create_nokogiri(absolute_path)
       end
     end
   end

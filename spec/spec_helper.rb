@@ -3,7 +3,7 @@ require 'vcr'
 require 'timecop'
 require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html-proofer/fixtures'
+FIXTURES_DIR = 'spec/html-proofer/fixtures'.freeze
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -51,7 +51,7 @@ end
 def run_proofer(item, type, opts = {})
   proofer = make_proofer(item, type, opts)
   cassette_name = make_cassette_name(item, opts)
-  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+  VCR.use_cassette(cassette_name, record: :new_episodes) do
     capture_stderr { proofer.run }
     proofer
   end
@@ -60,12 +60,12 @@ end
 def send_proofer_output(file, type, opts = {})
   proofer = make_proofer(file, type, opts)
   cassette_name = make_cassette_name(file, opts)
-  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+  VCR.use_cassette(cassette_name, record: :new_episodes) do
     capture_stderr { proofer.run }
   end
 end
 
-def make_bin(cmd, path=nil)
+def make_bin(cmd, path = nil)
   `bin/htmlproofer #{cmd} #{path}`
 end
 

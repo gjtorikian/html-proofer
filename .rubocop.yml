@@ -1,0 +1,14 @@
+Style/LineLength:
+  Enabled: false
+Style/MethodLength:
+  Enabled: false
+Style/ClassLength:
+  Enabled: false
+Style/BlockLength:
+  Enabled: false
+Style/CyclomaticComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false

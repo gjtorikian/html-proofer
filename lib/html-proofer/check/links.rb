@@ -109,7 +109,7 @@ class LinkCheck < ::HTMLProofer::Check
   def hash_check(html, href_hash)
     decoded_href_hash = URI.decode(href_hash)
     fragment_ids = [href_hash, decoded_href_hash]
-    fragment_ids.include?('top') || find_fragments(html, fragment_ids).length > 0
+    fragment_ids.include?('top') || !find_fragments(html, fragment_ids).empty?
   end
 
   def find_fragments(html, fragment_ids)
@@ -137,7 +137,7 @@ class LinkCheck < ::HTMLProofer::Check
 
   class XpathFunctions
     def case_insensitive_equals(node_set, str_to_match)
-      node_set.find_all {|node| node.to_s.downcase == str_to_match.to_s.downcase }
+      node_set.find_all { |node| node.to_s.casecmp(str_to_match.to_s.downcase).zero? }
     end
   end
 end

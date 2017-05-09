@@ -91,7 +91,7 @@ module HTMLProofer
     end
 
     def check_path(path)
-      result = { :external_urls => {}, :failures => [] }
+      result = { external_urls: {}, failures: [] }
       html = create_nokogiri(path)
 
       @src = [@src] if @type == :file
@@ -164,7 +164,7 @@ module HTMLProofer
       sorted_failures.sort_and_report
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
-      fail @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+      raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
   end
 end

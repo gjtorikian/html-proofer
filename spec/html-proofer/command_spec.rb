@@ -7,8 +7,8 @@ describe 'Command test' do
   end
 
   it 'works with alt-ignore' do
-    ignorableLinks = "#{FIXTURES_DIR}/images/ignorableAltViaOptions.html"
-    output = make_bin('--alt-ignore /wikimedia/,gpl.png', ignorableLinks)
+    ignorable_links = "#{FIXTURES_DIR}/images/ignorable_alt_via_options.html"
+    output = make_bin('--alt-ignore /wikimedia/,gpl.png', ignorable_links)
     expect(output).to match('successfully')
   end
 
@@ -20,8 +20,8 @@ describe 'Command test' do
   end
 
   it 'works with check-external-hash' do
-    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    output = make_bin('--check-external-hash', brokenHashOnTheWeb)
+    broken_hash_on_the_web = "#{FIXTURES_DIR}/links/broken_hash_on_the_web.html"
+    output = make_bin('--check-external-hash', broken_hash_on_the_web)
     expect(output).to match('1 failure')
   end
 
@@ -32,7 +32,7 @@ describe 'Command test' do
   end
 
   it 'works with disable-external' do
-    external = "#{FIXTURES_DIR}/links/brokenLinkExternal.html"
+    external = "#{FIXTURES_DIR}/links/broken_link_external.html"
     output = make_bin('--disable-external', external)
     expect(output).to match('successfully')
   end
@@ -51,32 +51,32 @@ describe 'Command test' do
   end
 
   it 'works with internal-domains' do
-    translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedInternalDomains.html"
-    output = make_bin('--internal-domains www.example.com,example.com', translatedLink)
+    translated_link = "#{FIXTURES_DIR}/links/link_translated_internal_domains.html"
+    output = make_bin('--internal-domains www.example.com,example.com', translated_link)
     expect(output).to match('successfully')
   end
 
   it 'works with url-ignore' do
-    ignorableLinks = "#{FIXTURES_DIR}/links/ignorableLinksViaOptions.html"
-    output = make_bin('--url-ignore /^http:\/\//,/sdadsad/,../whaadadt.html', ignorableLinks)
+    ignorable_links = "#{FIXTURES_DIR}/links/ignorable_links_via_options.html"
+    output = make_bin('--url-ignore /^http:\/\//,/sdadsad/,../whaadadt.html', ignorable_links)
     expect(output).to match('successfully')
   end
 
   it 'works with url-swap' do
-    translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap.html"
-    output = make_bin('--url-swap "\A/articles/([\w-]+):\1.html"', translatedLink)
+    translated_link = "#{FIXTURES_DIR}/links/link_translated_via_href_swap.html"
+    output = make_bin('--url-swap "\A/articles/([\w-]+):\1.html"', translated_link)
     expect(output).to match('successfully')
   end
-  
+
   it 'works with url-swap and colon' do
-    translatedLink = "#{FIXTURES_DIR}/links/linkTranslatedViaHrefSwap2.html"
-    output = make_bin('--url-swap "http\://www.example.com:"', translatedLink)
+    translated_link = "#{FIXTURES_DIR}/links/link_translated_via_href_swap2.html"
+    output = make_bin('--url-swap "http\://www.example.com:"', translated_link)
     expect(output).to match('successfully')
   end
 
   it 'works with only-4xx' do
-    brokenHashOnTheWeb = "#{FIXTURES_DIR}/links/brokenHashOnTheWeb.html"
-    output = make_bin('--only-4xx', brokenHashOnTheWeb)
+    broken_hash_on_the_web = "#{FIXTURES_DIR}/links/broken_hash_on_the_web.html"
+    output = make_bin('--only-4xx', broken_hash_on_the_web)
     expect(output).to match('successfully')
   end
 
@@ -93,7 +93,7 @@ describe 'Command test' do
   end
 
   it 'works with empty-alt-ignore' do
-    broken = "#{FIXTURES_DIR}/html/emptyImageAltText.html"
+    broken = "#{FIXTURES_DIR}/html/empty_image_alt_text.html"
     output = make_bin('--empty-alt-ignore', broken)
     expect(output).to match('successfully')
   end
@@ -113,7 +113,7 @@ describe 'Command test' do
       # match options
       expect(bin_file).to match(key)
       readme.each_line do |line|
-        next unless line.match(/\| `#{key}`/)
+        next unless line =~ /\| `#{key}`/
         description = line.split('|')[2].strip
         description.gsub!('A hash', 'A comma-separated list')
         description.gsub!('An array', 'A comma-separated list')
