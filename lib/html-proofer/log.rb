@@ -6,11 +6,11 @@ module HTMLProofer
     include Yell::Loggable
 
     def initialize(log_level)
-      @logger = Yell.new(:format => false, \
-                         :name => 'HTMLProofer', \
-                         :level => "gte.#{log_level}") do |l|
-        l.adapter :stdout, :level => [:debug, :info, :warn]
-        l.adapter :stderr, :level => [:error, :fatal]
+      @logger = Yell.new(format: false, \
+                         name: 'HTMLProofer', \
+                         level: "gte.#{log_level}") do |l|
+        l.adapter :stdout, level: %i[debug info warn]
+        l.adapter :stderr, level: %i[error fatal]
       end
     end
 

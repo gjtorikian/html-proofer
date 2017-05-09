@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 STDOUT.sync = true
 
-$LOAD_PATH.unshift File.join(File.dirname(__FILE__), *%w( .. lib ))
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'html-proofer'
 require 'mercenary'
@@ -51,7 +51,7 @@ Mercenary.program(:htmlproofer) do |p|
     options = {}
 
     # prepare everything to go to proofer
-    p.options.select { |o| !opts[o.config_key].nil? }.each do |option|
+    p.options.reject { |o| opts[o.config_key].nil? }.each do |option|
       if opts[option.config_key].is_a?(Array)
         opts[option.config_key] = opts[option.config_key].map { |i| HTMLProofer::Configuration.to_regex?(i) }
       end

@@ -7,11 +7,11 @@ module HTMLProofer
     end
 
     def create_nokogiri(path)
-      if File.exist? path
-        content = File.open(path).read
-      else
-        content = path
-      end
+      content = if File.exist? path
+                  File.open(path).read
+                else
+                  path
+                end
 
       Nokogiri::HTML(clean_content(content))
     end
