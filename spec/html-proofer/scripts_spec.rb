@@ -38,44 +38,44 @@ describe 'Scripts test' do
   end
 
   it 'ignores links via url_ignore' do
-    ignorableLinks = "#{FIXTURES_DIR}/scripts/ignorableLinksViaOptions.html"
-    proofer = run_proofer(ignorableLinks, :file, { :url_ignore => [%r{/assets/.*(js|css|png|svg)}] })
+    ignorable_links = "#{FIXTURES_DIR}/scripts/ignorable_links_via_options.html"
+    proofer = run_proofer(ignorable_links, :file, url_ignore: [%r{/assets/.*(js|css|png|svg)}])
     expect(proofer.failed_tests).to eq []
   end
 
   it 'translates src via url_swap' do
     file = "#{FIXTURES_DIR}/scripts/script_abs_url.html"
-    proofer = run_proofer(file, :file, { :url_swap => { %r{^http://example.com} => "" } })
+    proofer = run_proofer(file, :file, url_swap: { %r{^http://example.com} => '' })
     expect(proofer.failed_tests).to eq []
   end
 
   it 'SRI and CORS not provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_not_provided.html"
-    proofer = run_proofer(file, :file, {:check_sri => true})
-    expect(proofer.failed_tests.first).to match(%r{SRI and CORS not provided})
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests.first).to match(/SRI and CORS not provided/)
   end
 
   it 'SRI not provided' do
     file = "#{FIXTURES_DIR}/scripts/cors_not_provided.html"
-    proofer = run_proofer(file, :file, {:check_sri => true})
-    expect(proofer.failed_tests.first).to match(%r{CORS not provided})
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests.first).to match(/CORS not provided/)
   end
 
   it 'CORS not provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_not_provided.html"
-    proofer = run_proofer(file, :file, {:check_sri => true})
-    expect(proofer.failed_tests.first).to match(%r{Integrity is missing})
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests.first).to match(/Integrity is missing/)
   end
 
   it 'SRI and CORS provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_provided.html"
-    proofer = run_proofer(file, :file, {:check_sri => true})
+    proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []
   end
 
   it 'does not check SRI/CORS for local scripts' do
     file = "#{FIXTURES_DIR}/scripts/local_script.html"
-    proofer = run_proofer(file, :file, {:check_sri => true})
+    proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []
   end
 end

@@ -123,7 +123,7 @@ module HTMLProofer
     def clean_url(href)
       # catch any obvious issues, like strings in port numbers
       parsed = Addressable::URI.parse(href)
-      if href !~ %r{^([!#$&-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$}
+      if href !~ /^([!#{$&}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
         parsed.normalize
       else
         href
@@ -131,7 +131,7 @@ module HTMLProofer
     end
 
     def queue_request(method, href, filenames)
-      opts = @options[:typhoeus].merge({ :method => method })
+      opts = @options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
       request.on_complete { |response| response_handler(response, filenames) }
       @hydra.queue request
@@ -179,7 +179,7 @@ module HTMLProofer
 
       # user-content is a special addition by GitHub.
       xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
-      if URI.parse(href).host.match(/github\.com/i)
+      if URI.parse(href).host =~ /github\.com/i
         xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
       end
 

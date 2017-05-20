@@ -10,7 +10,7 @@ module HTMLProofer
     include HTMLProofer::Utils
 
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
-    DEFAULT_CACHE_FILE_NAME = "cache.log"
+    DEFAULT_CACHE_FILE_NAME = 'cache.log'.freeze
 
     attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
@@ -54,17 +54,17 @@ module HTMLProofer
       when 'h'
         time.hours.ago
       else
-        fail ArgumentError, "#{date} is not a valid timeframe!"
+        raise ArgumentError, "#{date} is not a valid timeframe!"
       end
     end
 
     def add(url, filenames, status, msg = '')
       data = {
-                :time => @cache_time,
-                :filenames => filenames,
-                :status => status,
-                :message => msg
-             }
+        time: @cache_time,
+        filenames: filenames,
+        status: status,
+        message: msg
+      }
 
       @cache_log[clean_url(url)] = data
     end
@@ -148,28 +148,25 @@ module HTMLProofer
     end
 
     def setup_cache!(options)
-      if options[:storage_dir]
-        @storage_dir = options[:storage_dir]
-      else
-        @storage_dir = DEFAULT_STORAGE_DIR
-      end
+      @storage_dir = if options[:storage_dir]
+                       options[:storage_dir]
+                     else
+                       DEFAULT_STORAGE_DIR
+                     end
 
-      if !Dir.exist?(storage_dir)
-        FileUtils.mkdir_p(storage_dir)
-      end
+      FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
 
-      if options[:cache_file]
-        cache_file_name = options[:cache_file]
-      else
-        cache_file_name = DEFAULT_CACHE_FILE_NAME
-      end
+      cache_file_name = if options[:cache_file]
+                          options[:cache_file]
+                        else
+                          DEFAULT_CACHE_FILE_NAME
+                        end
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      if File.exist?(cache_file)
-        contents = File.read(cache_file)
-        @cache_log = contents.empty? ? {} : JSON.parse(contents)
-      end
+      return unless File.exist?(cache_file)
+      contents = File.read(cache_file)
+      @cache_log = contents.empty? ? {} : JSON.parse(contents)
     end
   end
 end
