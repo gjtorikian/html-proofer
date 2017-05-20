@@ -1,3 +1,5 @@
+# rubocop:disable Style/FileName
+
 def require_all(path)
   dir = File.join(File.dirname(__FILE__), path)
   Dir[File.join(dir, '*.rb')].each do |f|

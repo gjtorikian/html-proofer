@@ -1,14 +1,7 @@
-Metrics/LineLength:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Metrics/BlockLength:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
+inherit_gem:
+  rubocop-github:
+    - config/default.yml
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
