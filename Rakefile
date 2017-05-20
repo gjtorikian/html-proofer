@@ -9,7 +9,7 @@ require 'rubocop/rake_task'
 
 RuboCop::RakeTask.new(:rubocop)
 
-task default: %i[spec proof_readme]
+task default: %i(spec proof_readme)
 
 task :proof_readme do
   require 'html-proofer'
