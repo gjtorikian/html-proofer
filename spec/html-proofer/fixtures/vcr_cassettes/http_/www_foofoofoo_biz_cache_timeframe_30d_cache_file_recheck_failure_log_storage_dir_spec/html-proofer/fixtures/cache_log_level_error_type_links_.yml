@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.foofoofoo.biz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 21 May 2017 15:53:31 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - close
+      Expires:
+      - Sun, 21 May 2017 16:03:31 GMT
+      Cache-Control:
+      - max-age=600
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.foofoofoo.biz/
+  recorded_at: Tue, 20 Oct 2015 16:00:00 GMT
+recorded_with: VCR 2.9.3

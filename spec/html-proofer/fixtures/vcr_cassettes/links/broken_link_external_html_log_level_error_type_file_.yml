@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 15:53:02 GMT
+      Expires:
+      - "-1"
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en
+        for more info."
+      Server:
+      - gws
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - NID=103=fRlhPwIWxCJE8wmX-ScDEBiOtvA5GHp8ourjNfFmgwzQgywozVw8vEZ7GIeKrvadvqnEepXt7WCA37u0KT0WxpGafW7A4VJKiXHSmGJKnnbZGlATT_XbzDB8-VK1NxQ9LVXkotd2VIPRY1zk;
+        expires=Mon, 20-Nov-2017 15:53:02 GMT; path=/; domain=.google.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Sun, 21 May 2017 15:53:02 GMT
+- request:
+    method: head
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 21 May 2017 15:53:02 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - close
+      Expires:
+      - Sun, 21 May 2017 16:03:02 GMT
+      Cache-Control:
+      - max-age=600
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Sun, 21 May 2017 15:53:02 GMT
+recorded_with: VCR 2.9.3

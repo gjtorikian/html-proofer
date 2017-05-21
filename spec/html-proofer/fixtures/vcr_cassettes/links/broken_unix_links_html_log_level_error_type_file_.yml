@@ -1,0 +1,183 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://rtyley.github.io/bfg-repo-cleaner/#usage
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Wed, 23 Mar 2016 22:13:09 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 15:52:02 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - AA72:6A1B:644E708:855FD8B:5921B549
+      Content-Length:
+      - '17166'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 15:53:29 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8127-JFK
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1495382010.834956,VS0,VE11
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - e47f0ac7f244731aa2732254196dd2c470edc547
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://rtyley.github.io/bfg-repo-cleaner/
+  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+- request:
+    method: head
+    uri: http://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 15:53:29 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d8d2a54093bece7026e25ebd0d7c0f1551495382009; expires=Mon, 21-May-18
+        15:53:29 GMT; path=/; domain=.jekyllrb.com; HttpOnly
+      Last-Modified:
+      - Mon, 15 May 2017 20:07:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 16:03:29 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 81D6:1D8CA:61B141A:7FF3430:5921B7F9
+      Server:
+      - cloudflare-nginx
+      CF-RAY:
+      - 3628b57997791894-EWR
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://jekyllrb.com/docs/configuration/
+  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+- request:
+    method: head
+    uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 15:53:29 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Server:
+      - mw1211.eqiad.wmnet
+      X-Powered-By:
+      - HHVM/3.18.2
+      P3P:
+      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
+        for more info."
+      X-Content-Type-Options:
+      - nosniff
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      Link:
+      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
+        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
+        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
+        2dppx)"
+      Last-Modified:
+      - Sun, 21 May 2017 04:35:38 GMT
+      Backend-Timing:
+      - D=110843 t=1495341584505493
+      X-Varnish:
+      - 394090013 362916510, 203029674 98570269
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '40425'
+      X-Cache:
+      - cp1068 hit/5, cp1066 hit/6
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
+      X-Analytics:
+      - ns=0;page_id=41548;https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
+  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+recorded_with: VCR 2.9.3

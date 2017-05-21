@@ -2,51 +2,37 @@
 http_interactions:
 - request:
     method: head
-    uri: http://www.google.com/
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
-      Date:
-      - Sat, 13 Feb 2016 14:52:57 GMT
-      Expires:
-      - "-1"
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/html; charset=UTF-8
-      P3P:
-      - CP="This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en
-        for more info."
       Server:
-      - gws
-      X-XSS-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - SAMEORIGIN
-      Set-Cookie:
-      - NID=76=vkGDvdvXEf_KYhLXuvZwBRwN0Hexu2G0qQtcI__d6Ov4tzjtn3LYxo5wRqDO6FinZhS_K4RzR2ruqTpY0p0txrFP7MfPWHJbkqMBRlp4aDcH8zAP3QexVULTVI12TX3N;
-        expires=Sun, 14-Aug-2016 14:52:57 GMT; path=/; domain=.google.co.uk; HttpOnly
-      Transfer-Encoding:
-      - chunked
-      Accept-Ranges:
-      - none
-      Vary:
-      - Accept-Encoding
+      - nginx
+      Date:
+      - Sun, 21 May 2017 15:53:32 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - close
+      Expires:
+      - Sun, 21 May 2017 16:03:32 GMT
+      Cache-Control:
+      - max-age=600
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
-      effective_url: http://www.google.co.uk/?gfe_rd=cr&ei=SEO_VsarO-HS8Afe5pOwDQ
-  recorded_at: Sat, 13 Feb 2016 14:52:57 GMT
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Sun, 21 May 2017 15:53:32 GMT
 - request:
     method: head
     uri: http://www.google.com
@@ -62,7 +48,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 21 May 2017 15:53:31 GMT
+      - Sun, 21 May 2017 15:53:32 GMT
       Expires:
       - "-1"
       Cache-Control:
@@ -79,8 +65,8 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Set-Cookie:
-      - NID=103=jHF7h0nceUHqpXbOcJEojp5UdML4u_qPVmFHOOSiWWlGShWpG6P3xcKa9EFt2SmA6zxJFQGHxfS9Mn6PNXmEkDl9PB-XIQwnKrkBU7hpSa5FJ0j0fNOqp3ldzdMb2pYdFFXUISEx54jdP26Drw;
-        expires=Mon, 20-Nov-2017 15:53:31 GMT; path=/; domain=.google.com; HttpOnly
+      - NID=103=FqmcXpRvzjsTZZwD2ESq7b4bA_G7jT5Yx4aRsZKOd61MqJhgeFXLIIaa2xIozudIXUtwfVyDjlrhe21gyXrFAoSpGF1KviX6UnwZLmhgjZz9IMlmnjLo7FVpau4S4t_dqRF8VUgy1pn58CXSCw;
+        expires=Mon, 20-Nov-2017 15:53:32 GMT; path=/; domain=.google.com; HttpOnly
       Transfer-Encoding:
       - chunked
       Accept-Ranges:
@@ -93,5 +79,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://www.google.com/
-  recorded_at: Sun, 21 May 2017 15:53:31 GMT
+  recorded_at: Sun, 21 May 2017 15:53:32 GMT
 recorded_with: VCR 2.9.3
