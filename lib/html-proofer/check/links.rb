@@ -107,7 +107,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def hash_check(html, href_hash)
-    decoded_href_hash = URI.decode(href_hash)
+    decoded_href_hash = Addressable::URI.unescape(href_hash)
     fragment_ids = [href_hash, decoded_href_hash]
     fragment_ids.include?('top') || !find_fragments(html, fragment_ids).empty?
   end
