@@ -5,3 +5,6 @@ inherit_gem:
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
+
+RequireParentheses:
+  Enabled: true

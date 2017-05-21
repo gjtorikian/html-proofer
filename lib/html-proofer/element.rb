@@ -66,7 +66,7 @@ module HTMLProofer
 
     def parts
       @parts ||= Addressable::URI.parse url
-    rescue URI::Error, Addressable::URI::InvalidURIError => e
+    rescue URI::Error, Addressable::URI::InvalidURIError
       @parts = nil
     end
 
