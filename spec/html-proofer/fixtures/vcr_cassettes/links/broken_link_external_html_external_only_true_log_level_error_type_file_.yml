@@ -11,28 +11,16 @@ http_interactions:
       - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Sun, 21 May 2017 15:53:32 GMT
-      Content-Type:
-      - text/html; charset=utf-8
-      Connection:
-      - close
-      Expires:
-      - Sun, 21 May 2017 16:03:32 GMT
-      Cache-Control:
-      - max-age=600
+      code: 0
+      message: 
+    headers: {}
     body:
       encoding: UTF-8
       string: ''
-    http_version: '1.1'
+    http_version: 
     adapter_metadata:
       effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
-  recorded_at: Sun, 21 May 2017 15:53:32 GMT
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
 - request:
     method: head
     uri: http://www.google.com
@@ -48,7 +36,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 21 May 2017 15:53:32 GMT
+      - Sun, 21 May 2017 22:25:39 GMT
       Expires:
       - "-1"
       Cache-Control:
@@ -65,8 +53,8 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Set-Cookie:
-      - NID=103=FqmcXpRvzjsTZZwD2ESq7b4bA_G7jT5Yx4aRsZKOd61MqJhgeFXLIIaa2xIozudIXUtwfVyDjlrhe21gyXrFAoSpGF1KviX6UnwZLmhgjZz9IMlmnjLo7FVpau4S4t_dqRF8VUgy1pn58CXSCw;
-        expires=Mon, 20-Nov-2017 15:53:32 GMT; path=/; domain=.google.com; HttpOnly
+      - NID=103=Ia6Vy1ic6nbr0j_KE9LPRdik3B1sy1ppIPlMw-VXXivw4iEXZWIj-JoLzy94moxctMcDhNpDQNLO5k1-CBUjtxUcRr1BVIwxXQd6WWk3HS1Rr9Ib8rkZSlxZYrlB5BMjQ_JAeGAH-o5sqnEt;
+        expires=Mon, 20-Nov-2017 22:25:39 GMT; path=/; domain=.google.com; HttpOnly
       Transfer-Encoding:
       - chunked
       Accept-Ranges:
@@ -79,5 +67,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://www.google.com/
-  recorded_at: Sun, 21 May 2017 15:53:32 GMT
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
 recorded_with: VCR 2.9.3

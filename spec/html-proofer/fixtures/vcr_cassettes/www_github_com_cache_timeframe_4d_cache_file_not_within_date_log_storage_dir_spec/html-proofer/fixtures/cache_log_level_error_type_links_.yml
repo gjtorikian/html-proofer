@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 21 May 2017 15:53:31 GMT
+      - Sun, 21 May 2017 22:25:40 GMT
       Content-Type:
       - text/html; charset=utf-8
       Status:
@@ -26,17 +26,18 @@ http_interactions:
       - no-cache
       Vary:
       - X-PJAX
+      - Accept-Encoding
       X-UA-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 15:53:31
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:40
         -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiY2RjMWFjOTVjM2ZkZmNkMjVkMjYyYjI5MDJmZGRiOGQiLCJfY3NyZl90b2tlbiI6ImxzNDFiVmVkcXhFZ1RTb1lDbnF4NldXRXdCNDhmOTBhZHphT3FwN2hrWXM9In0%3D--61090ffd6b286f0b07821d4740398b9cb8f3bb1b;
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYjhmZWJlNzk4ZjQxYWY0Y2UzNjhkNWQwYTM5MDg3Y2EiLCJfY3NyZl90b2tlbiI6InZiRVVxZHRjMkFKWEJQVktBUUJ6eC8wbDdJMWpUQ3B0ZS9peXptNFJvdE09In0%3D--f19fc6e60b7a5874cd14ce8f7f31d6d20c68ede9;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - fdbfed54bbde20597801784ad83ed371
+      - 3b3f3375b1a1af1e7322b1ad0a7531af
       X-Runtime:
-      - '0.059793'
+      - '0.053895'
       Content-Security-Policy:
       - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
         render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
@@ -61,8 +62,10 @@ http_interactions:
       - deny
       X-XSS-Protection:
       - 1; mode=block
+      X-Served-By:
+      - 93e250bfa62a70489edea0a57475ced6
       X-GitHub-Request-Id:
-      - FE95:45BD:432E4EE:64281C8:5921B7FB
+      - C40F:45BC:39C50A1:564BDF3:592213E4
     body:
       encoding: UTF-8
       string: ''

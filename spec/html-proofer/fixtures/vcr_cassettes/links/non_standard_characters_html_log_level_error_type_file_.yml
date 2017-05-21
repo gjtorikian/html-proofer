@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
@@ -19,21 +19,21 @@ http_interactions:
       Content-Type:
       - text/html; charset=utf-8
       Last-Modified:
-      - Wed, 10 Feb 2016 17:58:33 GMT
+      - Mon, 15 May 2017 14:06:04 GMT
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Sat, 13 Feb 2016 14:41:12 GMT
+      - Sun, 21 May 2017 22:35:37 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - 17EB2B19:11D7:8AED265:56BF3E30
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
       Content-Length:
-      - '512'
+      - '534'
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 13 Feb 2016 14:51:07 GMT
+      - Sun, 21 May 2017 22:25:38 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -41,87 +41,24 @@ http_interactions:
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-ams4146-AMS
+      - cache-iad2150-IAD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1455375067.829977,VS0,VE91
+      - S1495405538.243021,VS0,VE0
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - 83f9c8ab58818da44557f8b28230ce8fed09cc20
+      - 74a9938c10ca1eafcb59f0a79399c38f81587be4
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sat, 13 Feb 2016 14:51:07 GMT
-- request:
-    method: head
-    uri: https://en.wikipedia.org/wiki/Coup_d'%C3%A9tat
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.9.4
-      Date:
-      - Sat, 13 Feb 2016 14:51:07 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Connection:
-      - keep-alive
-      X-Content-Type-Options:
-      - nosniff
-      X-Powered-By:
-      - HHVM/3.6.5
-      Content-language:
-      - en
-      X-UA-Compatible:
-      - IE=Edge
-      Vary:
-      - Accept-Encoding,Cookie,Authorization
-      Last-Modified:
-      - Wed, 03 Feb 2016 01:28:38 GMT
-      Backend-Timing:
-      - D=93142 t=1455265266870721
-      X-Varnish:
-      - 2640636851, 2472676742 2235235077, 2843958533 2842758007
-      Via:
-      - 1.1 varnish, 1.1 varnish, 1.1 varnish
-      Age:
-      - '109801'
-      X-Cache:
-      - cp1053 miss(0), cp3003 hit(65), cp3010 frontend hit(2)
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Set-Cookie:
-      - WMF-Last-Access=13-Feb-2016;Path=/;HttpOnly;Expires=Wed, 16 Mar 2016 12:00:00
-        GMT
-      - GeoIP=GB:H9:London:51.51:-0.09:v4; Path=/; Domain=.wikipedia.org
-      X-Analytics:
-      - page_id=25914154;ns=0;https=1;nocookies=1
-      X-Client-IP:
-      - 86.149.179.101
-      Cache-Control:
-      - private, s-maxage=0, max-age=0, must-revalidate
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
-  recorded_at: Sat, 13 Feb 2016 14:51:08 GMT
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
 - request:
     method: head
     uri: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
@@ -130,59 +67,64 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Sat, 04 Mar 2017 01:37:20 GMT
+      - Sun, 21 May 2017 22:25:38 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Connection:
       - keep-alive
       Server:
-      - mw1214.eqiad.wmnet
+      - mw1254.eqiad.wmnet
       Vary:
       - Accept-Encoding,Cookie,Authorization
       X-Powered-By:
       - HHVM/3.12.14
-      X-UA-Compatible:
-      - IE=Edge
-      Content-language:
-      - en
       P3P:
       - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
         for more info."
       X-Content-Type-Options:
       - nosniff
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Link:
+      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
+        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
+        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
+        2dppx)"
       Last-Modified:
-      - Thu, 02 Mar 2017 17:44:43 GMT
+      - Sat, 20 May 2017 11:45:00 GMT
       Backend-Timing:
-      - D=114173 t=1488476706434283
+      - D=94706 t=1495280787762719
       X-Varnish:
-      - 600836325 594316096, 320919217, 846713740 782237721, 229063873 2018606
+      - 463856154 428976936, 485861072 239396873
       Via:
-      - 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4, 1.1 varnish-v4
+      - 1.1 varnish-v4, 1.1 varnish-v4
       Age:
-      - '28186'
+      - '36268'
       X-Cache:
-      - cp1067 hit/5, cp2004 miss, cp4018 hit/6, cp4016 hit/11
+      - cp1067 hit/7, cp1066 hit/20
       X-Cache-Status:
       - hit
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Set-Cookie:
-      - WMF-Last-Access=04-Mar-2017;Path=/;HttpOnly;secure;Expires=Wed, 05 Apr 2017
-        00:00:00 GMT
-      - WMF-Last-Access-Global=04-Mar-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Wed,
-        05 Apr 2017 00:00:00 GMT
-      - GeoIP=US:CA:San_Francisco:37.76:-122.48:v4; Path=/; secure; Domain=.wikipedia.org
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
       X-Analytics:
       - ns=0;page_id=25914154;https=1;nocookies=1
       X-Client-IP:
-      - 2601:645:4100:77ab:4575:aca:433d:d9c0
+      - 100.37.221.161
       Cache-Control:
       - private, s-maxage=0, max-age=0, must-revalidate
       Accept-Ranges:
@@ -193,5 +135,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
-  recorded_at: Sat, 04 Mar 2017 01:37:20 GMT
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
 recorded_with: VCR 2.9.3

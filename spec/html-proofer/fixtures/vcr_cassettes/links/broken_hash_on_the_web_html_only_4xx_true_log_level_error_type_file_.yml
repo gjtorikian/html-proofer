@@ -23,40 +23,40 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Sun, 21 May 2017 15:51:49 GMT
+      - Sun, 21 May 2017 22:17:47 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - 1644:3E22:4FEE723:6E64F27:5921B53C
+      - 5B8A:3E22:51CE230:710406A:59220FB2
       Content-Length:
       - '34163'
       Accept-Ranges:
       - bytes
       Date:
-      - Sun, 21 May 2017 15:53:29 GMT
+      - Sun, 21 May 2017 22:25:25 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '5'
+      - '12'
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-jfk8143-JFK
+      - cache-jfk8141-JFK
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1495382009.166880,VS0,VE1
+      - S1495405525.046581,VS0,VE0
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - fa2365ac69e12c43c141328bcbcbf5e7466db611
+      - 38ae44abc72a1544eb6f8e1ef393b4b60095f4a4
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://help.github.com/articles/searching-issues/
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+  recorded_at: Sun, 21 May 2017 22:25:25 GMT
 recorded_with: VCR 2.9.3

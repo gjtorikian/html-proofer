@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 21 May 2017 15:53:29 GMT
+      - Sun, 21 May 2017 22:25:36 GMT
       Content-Type:
       - text/html; charset=utf-8
       Status:
@@ -30,14 +30,14 @@ http_interactions:
       X-UA-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 15:53:29
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:36
         -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMWE4YzAyNTExMWUzNzAwNjk1NjBiOWJhZjQ4ZDUwZmIiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTUzODIwMDksIl9jc3JmX3Rva2VuIjoidlYzcGdOenRZRmpZY0luUERxdld4Vmx0ZGtRR2lQTFFSY1NnQmNaY05kWT0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--2e32bfc41c8d171de8e21b17f31fbf2ea9014ae1;
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNjFiNzZhM2YzZWFjNzUwNGQxZGMyNzEyZjMyOGU3MmIiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTU0MDU1MzYsIl9jc3JmX3Rva2VuIjoiMERwbnFCR0V3bGs3Nmwzd2tWeFRTa1lqTCtBVDN4aktzc1JFSHJRSGVwYz0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--b1f1f763f55f8038d1bd27805d6187047751508e;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - 477a93cc53e0dca1ed1529a47a3fad26
+      - 41a2aa511189f4a16000caaef3880f82
       X-Runtime:
-      - '0.109604'
+      - '0.121874'
       Content-Security-Policy:
       - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
         render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
@@ -63,16 +63,16 @@ http_interactions:
       X-XSS-Protection:
       - 1; mode=block
       X-Served-By:
-      - 754c17816f710dcfa41a1db728c46d2d
+      - 39cfeffd1b48c8f62b6e4b4849a9236c
       X-GitHub-Request-Id:
-      - FE7C:45BD:432E3A2:6427FEC:5921B7F9
+      - C3E0:45BD:47DF161:6B376FA:592213E0
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://github.com/typhoeus/typhoeus
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 - request:
     method: head
     uri: https://github.com/typhoeus/typhoeus#top
@@ -90,7 +90,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 21 May 2017 15:53:29 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Content-Type:
       - text/html; charset=utf-8
       Status:
@@ -103,14 +103,14 @@ http_interactions:
       X-UA-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 15:53:29
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:37
         -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiZWUxYzFlODE5NWYyYmJhNGFjZDUyZmQwZjA2MjA4MWEiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTUzODIwMDksIl9jc3JmX3Rva2VuIjoiRW9jMkFGVmNpbkNHcWE1NzJEZGZjTmVEbG9UajVwOUdHL0U0c1ZIaThZdz0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--0fe8239db260bf9ef43674b7a730d53e7040626f;
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYjMxMTk1ZDEyMWNkMTdkZjA1MGM0OGEwOTdmMGRiYWIiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTU0MDU1MzYsIl9jc3JmX3Rva2VuIjoicnhRS1RRUVRGWFBFcGpzSDk1MDNHU09LdEgrWTFWdis1cXIxY3BpSElrST0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--3b6fcbb3f0b319e6e924e060110b00cc019c24b9;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - b1315b6720837517f9ae275bc56c0b9e
+      - 60a0b9a73fc4306e7d7c5786c8e5db49
       X-Runtime:
-      - '0.196579'
+      - '0.141576'
       Content-Security-Policy:
       - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
         render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
@@ -136,14 +136,14 @@ http_interactions:
       X-XSS-Protection:
       - 1; mode=block
       X-Served-By:
-      - 4de19d255dfc4c289f8712ef895a968c
+      - 5b42481b4f9fd7828f4e35d2c7b2fdf0
       X-GitHub-Request-Id:
-      - FE7D:45BC:3620821:50CECD8:5921B7F9
+      - C3E1:45BD:47DF15F:6B376F9:592213E0
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://github.com/typhoeus/typhoeus
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 recorded_with: VCR 2.9.3

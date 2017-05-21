@@ -23,17 +23,17 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Sun, 21 May 2017 15:52:02 GMT
+      - Sun, 21 May 2017 22:35:37 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - AA72:6A1B:644E708:855FD8B:5921B549
+      - 77E0:6A18:3BBC04E:4F4C5F6:592213DF
       Content-Length:
       - '17166'
       Accept-Ranges:
       - bytes
       Date:
-      - Sun, 21 May 2017 15:53:29 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -41,68 +41,24 @@ http_interactions:
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-jfk8127-JFK
+      - cache-jfk8149-JFK
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1495382010.834956,VS0,VE11
+      - S1495405537.157094,VS0,VE11
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - e47f0ac7f244731aa2732254196dd2c470edc547
+      - 556582c9d65bcdd6d7d7bde35103024c975e5cb4
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://rtyley.github.io/bfg-repo-cleaner/
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
-- request:
-    method: head
-    uri: http://jekyllrb.com/docs/configuration/#markdown-options
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Sun, 21 May 2017 15:53:29 GMT
-      Content-Type:
-      - text/html; charset=utf-8
-      Connection:
-      - keep-alive
-      Set-Cookie:
-      - __cfduid=d8d2a54093bece7026e25ebd0d7c0f1551495382009; expires=Mon, 21-May-18
-        15:53:29 GMT; path=/; domain=.jekyllrb.com; HttpOnly
-      Last-Modified:
-      - Mon, 15 May 2017 20:07:04 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 16:03:29 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 81D6:1D8CA:61B141A:7FF3430:5921B7F9
-      Server:
-      - cloudflare-nginx
-      CF-RAY:
-      - 3628b57997791894-EWR
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://jekyllrb.com/docs/configuration/
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 - request:
     method: head
     uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
@@ -118,7 +74,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 21 May 2017 15:53:29 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Connection:
@@ -148,13 +104,13 @@ http_interactions:
       Backend-Timing:
       - D=110843 t=1495341584505493
       X-Varnish:
-      - 394090013 362916510, 203029674 98570269
+      - 394090013 362916510, 488639115 98570269
       Via:
       - 1.1 varnish-v4, 1.1 varnish-v4
       Age:
-      - '40425'
+      - '63952'
       X-Cache:
-      - cp1068 hit/5, cp1066 hit/6
+      - cp1068 hit/5, cp1066 hit/11
       X-Cache-Status:
       - hit
       Strict-Transport-Security:
@@ -179,5 +135,49 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
-  recorded_at: Sun, 21 May 2017 15:53:29 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: http://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d73c992e52a9b073ea0aa002fa04cf76c1495405537; expires=Mon, 21-May-18
+        22:25:37 GMT; path=/; domain=.jekyllrb.com; HttpOnly
+      Last-Modified:
+      - Mon, 15 May 2017 20:07:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 27B3:1D8CA:63FDAE6:82F84C5:592213E1
+      Server:
+      - cloudflare-nginx
+      CF-RAY:
+      - 362af3dfa6a52186-EWR
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://jekyllrb.com/docs/configuration/
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 recorded_with: VCR 2.9.3

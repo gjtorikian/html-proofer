@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sat, 13 Feb 2016 14:52:52 GMT
+      - Sun, 21 May 2017 22:25:38 GMT
       Content-Type:
       - text/html; charset=utf-8
       Status:
@@ -30,29 +30,31 @@ http_interactions:
       X-UA-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Wed, 13 Feb 2036 14:52:52
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:38
         -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMjU4MzI3YWMwZjlhNmNjYmMwMjE3YmExYTFmZmNjYmQiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ1NTM3NTE3MiwiX2NzcmZfdG9rZW4iOiJlUkFrbHp6MGFqd1Q3bFJYYTZ1QWpqdXNSdFNQSTEvNmpyQXo2TzlEVkFjPSJ9--ee2e41f0f95c17bbf259d8aee596e035b1a24c11;
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiZGE1NWYxNjM4MGQ3Y2I0ZjJmNTMyY2MxNmNkN2Q1NGUiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ5NTQwNTUzOCwiX2NzcmZfdG9rZW4iOiJnZys0bThVR1g5RmZBRndKWWZ0UU16N0VrZVBmZU4wOFQ3a0FKOGtXR09vPSJ9--715da7b62326a1e647442b8158e5051e4417ec24;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - 00a56e67e97b3e62b78eb17cf0d8fb4b
+      - 95093ba6a4777c212ac1174fc87696b6
       X-Runtime:
-      - '0.187262'
+      - '0.176933'
       Content-Security-Policy:
-      - 'default-src *; base-uri ''self''; connect-src ''self'' live.github.com wss://live.github.com
-        uploads.github.com status.github.com api.github.com www.google-analytics.com
-        api.braintreegateway.com client-analytics.braintreegateway.com github-cloud.s3.amazonaws.com;
-        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com;
-        frame-src ''self'' render.githubusercontent.com gist.github.com checkout.paypal.com;
-        img-src ''self'' data: assets-cdn.github.com identicons.github.com www.google-analytics.com
-        checkout.paypal.com collector.githubapp.com *.githubusercontent.com *.gravatar.com
-        *.wp.com; media-src ''none''; object-src assets-cdn.github.com; script-src
-        assets-cdn.github.com; style-src ''self'' ''unsafe-inline'' ''unsafe-eval''
-        assets-cdn.github.com'
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
       Strict-Transport-Security:
       - max-age=31536000; includeSubdomains; preload
       Public-Key-Pins:
-      - max-age=300; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=";
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
         includeSubDomains
       X-Content-Type-Options:
       - nosniff
@@ -61,14 +63,14 @@ http_interactions:
       X-XSS-Protection:
       - 1; mode=block
       X-Served-By:
-      - f75e9d2841ba49dfdb3929780833971c
+      - c30838693aa1c1bbbec523094efb09e7
       X-GitHub-Request-Id:
-      - 5695B365:11D0:795BAEB:56BF4344
+      - C3F5:45BC:39C4F81:564BC39:592213E2
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://github.com/octocat/Spoon-Knife/issues
-  recorded_at: Sat, 13 Feb 2016 14:52:53 GMT
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
 recorded_with: VCR 2.9.3

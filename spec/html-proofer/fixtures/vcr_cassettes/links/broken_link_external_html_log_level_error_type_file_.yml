@@ -2,6 +2,27 @@
 http_interactions:
 - request:
     method: head
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
+- request:
+    method: head
     uri: http://www.google.com
     body:
       encoding: US-ASCII
@@ -15,7 +36,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sun, 21 May 2017 15:53:02 GMT
+      - Sun, 21 May 2017 22:25:36 GMT
       Expires:
       - "-1"
       Cache-Control:
@@ -32,8 +53,8 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Set-Cookie:
-      - NID=103=fRlhPwIWxCJE8wmX-ScDEBiOtvA5GHp8ourjNfFmgwzQgywozVw8vEZ7GIeKrvadvqnEepXt7WCA37u0KT0WxpGafW7A4VJKiXHSmGJKnnbZGlATT_XbzDB8-VK1NxQ9LVXkotd2VIPRY1zk;
-        expires=Mon, 20-Nov-2017 15:53:02 GMT; path=/; domain=.google.com; HttpOnly
+      - NID=103=QfQiFlnMHjpZ1rr15XuJ3r9HbPlSww30lHUCGlUT_j8GCcMUkoi4Fan4SvrFyJC4W_x4odlbT4VbM9d6yunzSUIehz9CnYKtGNVBEtAcCm_ZzU9h6JiJ7RyGriAxQOrpql-q8DuAxsFpWqc5TA;
+        expires=Mon, 20-Nov-2017 22:25:36 GMT; path=/; domain=.google.com; HttpOnly
       Transfer-Encoding:
       - chunked
       Accept-Ranges:
@@ -46,38 +67,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://www.google.com/
-  recorded_at: Sun, 21 May 2017 15:53:02 GMT
-- request:
-    method: head
-    uri: http://www.asdo3IRJ395295jsingrkrg4.com
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Sun, 21 May 2017 15:53:02 GMT
-      Content-Type:
-      - text/html; charset=utf-8
-      Connection:
-      - close
-      Expires:
-      - Sun, 21 May 2017 16:03:02 GMT
-      Cache-Control:
-      - max-age=600
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
-  recorded_at: Sun, 21 May 2017 15:53:02 GMT
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
 recorded_with: VCR 2.9.3

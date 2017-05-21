@@ -35,30 +35,30 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Sun, 21 May 2017 15:53:28 GMT
+      - Sun, 21 May 2017 22:25:25 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '687'
+      - '24204'
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-jfk8122-JFK
+      - cache-jfk8149-JFK
       X-Cache:
       - HIT
       X-Cache-Hits:
-      - '2'
+      - '1'
       X-Timer:
-      - S1495382009.873028,VS0,VE0
+      - S1495405525.141724,VS0,VE3
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - 9d242847468fe920993a7b9d203140231f464c1d
+      - 4bda7b94d09aa30c0334b169f47dadf9605be13c
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-  recorded_at: Sun, 21 May 2017 15:53:28 GMT
+  recorded_at: Sun, 21 May 2017 22:25:25 GMT
 recorded_with: VCR 2.9.3

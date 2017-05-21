@@ -2,72 +2,13 @@
 http_interactions:
 - request:
     method: head
-    uri: http://ben.balter.com/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Wed, 10 Feb 2016 17:58:33 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Fri, 12 Feb 2016 03:31:10 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 17EB2B16:11D6:4E8F163:56BD4FA6
-      Content-Length:
-      - '46002'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sat, 13 Feb 2016 14:52:51 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '171'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-ams4129-AMS
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '1'
-      X-Timer:
-      - S1455375171.867282,VS0,VE0
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - d8e831008cfaa9ca5d701faa1ac0eb4a0435b760
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://ben.balter.com/
-  recorded_at: Sat, 13 Feb 2016 14:52:51 GMT
-- request:
-    method: head
     uri: http://ben.balter.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
@@ -78,44 +19,44 @@ http_interactions:
       Content-Type:
       - text/html; charset=utf-8
       Last-Modified:
-      - Thu, 02 Mar 2017 15:43:59 GMT
+      - Mon, 15 May 2017 14:06:04 GMT
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Thu, 02 Mar 2017 15:54:09 GMT
+      - Sun, 21 May 2017 22:35:25 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - 12A0:74B6:2350BFC:2E53C78:58B83DC9
+      - 3D2C:1D8D0:3961CCF:4B225BF:592213D4
       Content-Length:
-      - '48575'
+      - '49802'
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 04 Mar 2017 01:37:20 GMT
+      - Sun, 21 May 2017 22:25:25 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '275'
+      - '0'
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-sjc3129-SJC
+      - cache-iad2649-IAD
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1488591440.626171,VS0,VE0
+      - S1495405525.251017,VS0,VE7
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - 5f7593bddbf3db40eae498d213557d04c82fd19c
+      - 417f58de2400f872a53b01cb7cc39f6fb8df0cd1
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://ben.balter.com/
-  recorded_at: Sat, 04 Mar 2017 01:37:20 GMT
+  recorded_at: Sun, 21 May 2017 22:25:25 GMT
 recorded_with: VCR 2.9.3

@@ -23,17 +23,17 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Sun, 21 May 2017 15:52:03 GMT
+      - Sun, 21 May 2017 22:35:37 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - ED60:62C0:62D9C16:8180D5B:5921B54A
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
       Content-Length:
       - '534'
       Accept-Ranges:
       - bytes
       Date:
-      - Sun, 21 May 2017 15:53:30 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -41,24 +41,24 @@ http_interactions:
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-iad2624-IAD
+      - cache-iad2140-IAD
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1495382010.263246,VS0,VE3
+      - S1495405538.808838,VS0,VE7
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - 00eff136b80f9bdb0ed6f9d59358953ce68d7606
+      - 86eba9cb638f2c5c8c1f374baf484a3c520481a9
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sun, 21 May 2017 15:53:30 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 - request:
     method: head
     uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
@@ -82,17 +82,17 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Expires:
-      - Sun, 21 May 2017 15:52:03 GMT
+      - Sun, 21 May 2017 22:35:37 GMT
       Cache-Control:
       - max-age=600
       X-GitHub-Request-Id:
-      - ED60:62C0:62D9C16:8180D5B:5921B54A
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
       Content-Length:
       - '534'
       Accept-Ranges:
       - bytes
       Date:
-      - Sun, 21 May 2017 15:53:30 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Via:
       - 1.1 varnish
       Age:
@@ -100,22 +100,22 @@ http_interactions:
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-iad2136-IAD
+      - cache-iad2151-IAD
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       X-Timer:
-      - S1495382010.254250,VS0,VE6
+      - S1495405538.807666,VS0,VE7
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - b25710989f0c52eca86473caa0bb00cd8c4777c7
+      - cd7229fa5121fa1319d3782422ca8e6dfcb27062
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sun, 21 May 2017 15:53:30 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 recorded_with: VCR 2.9.3

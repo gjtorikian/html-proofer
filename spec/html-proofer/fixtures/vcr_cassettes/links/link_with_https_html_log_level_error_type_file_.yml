@@ -17,7 +17,7 @@ http_interactions:
       Server:
       - GitHub.com
       Date:
-      - Sun, 21 May 2017 15:53:28 GMT
+      - Sun, 21 May 2017 22:25:24 GMT
       Content-Type:
       - text/html; charset=utf-8
       Status:
@@ -26,17 +26,18 @@ http_interactions:
       - no-cache
       Vary:
       - X-PJAX
+      - Accept-Encoding
       X-UA-Compatible:
       - IE=Edge,chrome=1
       Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 15:53:28
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:24
         -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMTcxMjc1OGMyYzEyMDViNWRiZjM3YmQxZGViZTQ3NjkiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ5NTM4MjAwOCwiX2NzcmZfdG9rZW4iOiIxK0p6TW5ISUFDNkt4MGZoZmRwS3Z0UHVyK0s2RXFuT2FocXBLQWdNZW9jPSJ9--07a9897e712065d218ed1b8f844c6690280e1bdb;
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiM2RiMTYyMTRkZGUyMWVmYzBjYzM1OWNhNjU2NWY2NzUiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ5NTQwNTUyNCwiX2NzcmZfdG9rZW4iOiJPWWlhbFN2cllkRG5aRzVNeWJKdmJvYUdEL0ZTUTErNlkrS2RqZTQyVXdRPSJ9--fc3f5981df55e212b694d06d3b884aa613a12bb3;
         path=/; secure; HttpOnly
       X-Request-Id:
-      - eab5482ea120bf73ac4530a91ac6844c
+      - 07f946b4adbbd409f76128c425858cc6
       X-Runtime:
-      - '0.220981'
+      - '0.157835'
       Content-Security-Policy:
       - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
         render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
@@ -61,13 +62,15 @@ http_interactions:
       - deny
       X-XSS-Protection:
       - 1; mode=block
+      X-Served-By:
+      - 6aca4ad039b350239ed28dd19335fa67
       X-GitHub-Request-Id:
-      - FE75:45BC:3620780:50CEBE7:5921B7F8
+      - C3BA:45BB:28FF32D:3D74D11:592213D4
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://github.com/octocat/Spoon-Knife/issues
-  recorded_at: Sun, 21 May 2017 15:53:28 GMT
+  recorded_at: Sun, 21 May 2017 22:25:24 GMT
 recorded_with: VCR 2.9.3

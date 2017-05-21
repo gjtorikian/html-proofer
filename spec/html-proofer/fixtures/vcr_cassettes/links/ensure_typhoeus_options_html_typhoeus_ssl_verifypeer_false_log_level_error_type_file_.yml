@@ -8,26 +8,26 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
       Set-Cookie:
-      - TRACKID=52d858b51ae09028593a95b25c3aa18f; Path=/; Version=1
+      - TRACKID=fa4e76f09e7101ea0b614afe0c910da0; Path=/; Version=1
       Content-Type:
       - text/html; charset=utf-8
       Accept-Ranges:
       - bytes
       ETag:
-      - '"2573640712"'
+      - '"1364369660"'
       Last-Modified:
-      - Thu, 28 Jan 2016 17:13:07 GMT
+      - Sun, 11 Sep 2016 18:38:15 GMT
       Content-Length:
-      - '26038'
+      - '25380'
       Date:
-      - Sat, 13 Feb 2016 14:51:09 GMT
+      - Sun, 21 May 2017 22:25:37 GMT
       Server:
       - fuck your bits
     body:
@@ -36,5 +36,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://blog.patternsinthevoid.net/
-  recorded_at: Sat, 13 Feb 2016 14:51:09 GMT
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
 recorded_with: VCR 2.9.3

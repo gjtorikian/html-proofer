@@ -11,26 +11,14 @@ http_interactions:
       - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Date:
-      - Sun, 21 May 2017 15:53:28 GMT
-      Content-Type:
-      - text/html; charset=utf-8
-      Connection:
-      - close
-      Expires:
-      - Sun, 21 May 2017 16:03:28 GMT
-      Cache-Control:
-      - max-age=600
+      code: 0
+      message: 
+    headers: {}
     body:
       encoding: UTF-8
       string: ''
-    http_version: '1.1'
+    http_version: 
     adapter_metadata:
       effective_url: http://www.whatthehell/
-  recorded_at: Sun, 21 May 2017 15:53:28 GMT
+  recorded_at: Sun, 21 May 2017 22:24:58 GMT
 recorded_with: VCR 2.9.3
