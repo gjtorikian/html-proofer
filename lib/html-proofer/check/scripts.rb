@@ -29,11 +29,11 @@ class ScriptCheck < ::HTMLProofer::Check
   end
 
   def check_sri(line, content)
-    if !defined? @script.integrity && !defined? @script.crossorigin
+    if !defined?(@script.integrity) && !defined?(@script.crossorigin)
       add_issue("SRI and CORS not provided in: #{@script.src}", line: line, content: content)
-    elsif !defined? @script.integrity
+    elsif !defined?(@script.integrity)
       add_issue("Integrity is missing in: #{@script.src}", line: line, content: content)
-    elsif !defined? @script.crossorigin
+    elsif !defined?(@script.crossorigin)
       add_issue("CORS not provided for external resource in: #{@script.src}", line: line, content: content)
     end
   end

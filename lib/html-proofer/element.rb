@@ -16,7 +16,9 @@ module HTMLProofer
         instance_variable_set("@#{name}", value.value)
       end
 
-      @aria_hidden = @aria_hidden == 'true' ? true : false
+      @aria_hidden = (defined?(@aria_hidden) && @aria_hidden == 'true') ? true : false
+
+      @data_proofer_ignore = defined?(@data_proofer_ignore)
 
       @text = obj.content
       @check = check
@@ -31,9 +33,23 @@ module HTMLProofer
       @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
 
       # fix up missing protocols
-      @href.insert 0, 'http:' if @href =~ %r{^//}
-      @src.insert 0, 'http:' if @src =~ %r{^//}
-      @srcset.insert 0, 'http:' if @srcset =~ %r{^//}
+      if defined?(@href)
+        @href.insert(0, 'http:') if @href =~ %r{^//}
+      else
+        @href = nil
+      end
+
+      if defined?(@src)
+        @src.insert(0, 'http:') if @src =~ %r{^//}
+      else
+        @src = nil
+      end
+
+      if defined?(@srcset)
+        @srcset.insert(0, 'http:') if @srcset =~ %r{^//}
+      else
+        @srcset = nil
+      end
     end
 
     def url
@@ -50,7 +66,7 @@ module HTMLProofer
 
     def parts
       @parts ||= Addressable::URI.parse url
-    rescue URI::Error, Addressable::URI::InvalidURIError => e
+    rescue URI::Error, Addressable::URI::InvalidURIError
       @parts = nil
     end
 

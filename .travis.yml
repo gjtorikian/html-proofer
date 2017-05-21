@@ -2,6 +2,10 @@ language: ruby
 rvm:
   - 2.3.4
   - 2.4.0
+
+git:
+  depth: 10
+
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true

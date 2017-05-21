@@ -1,0 +1,121 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Mon, 15 May 2017 14:06:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
+      Content-Length:
+      - '534'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-iad2140-IAD
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1495405538.808838,VS0,VE7
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 86eba9cb638f2c5c8c1f374baf484a3c520481a9
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Mon, 15 May 2017 14:06:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
+      Content-Length:
+      - '534'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-iad2151-IAD
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405538.807666,VS0,VE7
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - cd7229fa5121fa1319d3782422ca8e6dfcb27062
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+recorded_with: VCR 2.9.3

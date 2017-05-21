@@ -142,7 +142,7 @@ module HTMLProofer
     end
 
     def checks
-      return @checks unless @checks.nil?
+      return @checks if defined?(@checks) && !@checks.nil?
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
       @checks.delete('HtmlCheck') unless @options[:check_html]

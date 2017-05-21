@@ -2,20 +2,20 @@
 http_interactions:
 - request:
     method: head
-    uri: http://code.jquery.com/
+    uri: http://code.jquery.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.4.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Sat, 04 Mar 2017 00:06:37 GMT
+      - Sun, 21 May 2017 22:25:39 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Connection:
@@ -38,5 +38,5 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://code.jquery.com/
-  recorded_at: Sat, 04 Mar 2017 00:06:35 GMT
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
 recorded_with: VCR 2.9.3
