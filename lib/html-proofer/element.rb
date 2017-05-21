@@ -18,6 +18,8 @@ module HTMLProofer
 
       @aria_hidden = (defined?(@aria_hidden) && @aria_hidden == 'true') ? true : false
 
+      @data_proofer_ignore = defined?(@data_proofer_ignore)
+
       @text = obj.content
       @check = check
       @checked_paths = {}
@@ -31,31 +33,28 @@ module HTMLProofer
       @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
 
       # fix up missing protocols
-      if defined?(@href) && @href =~ %r{^//}
-        @href.insert(0, 'http:')
+      if defined?(@href)
+        @href.insert(0, 'http:') if @href =~ %r{^//}
+      else
+        @href = nil
       end
 
-      if defined?(@src) && @src =~ %r{^//}
-        @src.insert(0, 'http:')
+      if defined?(@src)
+        @src.insert(0, 'http:') if @src =~ %r{^//}
+      else
+        @src = nil
       end
 
-      if defined?(@srcset) && @srcset =~ %r{^//}
-        @srcset.insert(0, 'http:')
+      if defined?(@srcset)
+        @srcset.insert(0, 'http:') if @srcset =~ %r{^//}
+      else
+        @srcset = nil
       end
     end
 
     def url
       return @url if defined?(@url)
-      @url = if defined?(@src)
-                @url = @src
-             elsif defined?(@srcset)
-                @url = @srcset
-             elsif defined?(@href)
-                @url = @href
-             else
-                ''
-             end.delete("\u200b")
-
+      @url = (@src || @srcset || @href || '').delete("\u200b")
       @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
       @url = swap(@url, @check.options[:url_swap])
@@ -93,8 +92,8 @@ module HTMLProofer
     end
 
     def ignore?
-      return true if defined?(@data_proofer_ignore)
-      return true if defined?(@parent_ignorable)
+      return true if @data_proofer_ignore
+      return true if @parent_ignorable
 
       return true if url =~ /^javascript:/
 
