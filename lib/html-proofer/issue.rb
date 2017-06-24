@@ -25,10 +25,10 @@ module HTMLProofer
     end
 
     def line
-      unless line.location.begin_line.nil?
-        " (line #{@finding.location.begin_line})"
-      else
+      if @finding.location.begin_line.nil?
         ''
+      else
+        " (line #{@finding.location.begin_line})"
       end
     end
 
