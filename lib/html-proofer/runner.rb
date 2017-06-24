@@ -17,7 +17,7 @@ module HTMLProofer
       @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
       @type = @options.delete(:type)
-      @logger = HTMLProofer::Log.new(@options[:log_level])
+      @logger = HTMLProofer::Log.new(@options[:log_level], @options[:stat])
 
       # Add swap patterns for internal domains
       unless @options[:internal_domains].empty?
@@ -159,9 +159,12 @@ module HTMLProofer
     end
 
     def print_failed_tests
-      sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger)
+      sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger, @options[:stat])
 
       sorted_failures.sort_and_report
+
+      return if @options[:stat]
+
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
       raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"

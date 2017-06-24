@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'stat'
 
 module HTMLProofer
   module Utils
@@ -34,5 +35,17 @@ module HTMLProofer
       end
     end
     module_function :clean_content
+
+
+    def init_stat
+      process = StatModule::Process.new('HTMLProofer')
+      process.version = "#{HTMLProofer::VERSION}"
+      process.description = 'If you generate HTML files, then this tool might be for you.'
+      process.maintainer = 'William Entriken'
+      process.email = 'github.com@phor.net'
+      process.website = 'https://github.com/gjtorikian/html-proofer'
+      StatModule::Stat.new(process)
+    end
+    module_function :init_stat
   end
 end

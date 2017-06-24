@@ -1,27 +1,46 @@
+require 'stat'
 module HTMLProofer
   class Issue
-    attr_reader :path, :desc, :status, :line, :content
+    attr_reader :status, :finding, :content
 
-    def initialize(path, desc, line: nil, status: -1, content: nil)
-      @line = line.nil? ? '' : " (line #{line})"
-      @path = path
-      @desc = desc
+    def initialize(path, desc, rule, line: nil, status: -1, content: nil)
       @status = status
       @content = content
+
+      @finding = StatModule::Finding.new(true, rule, desc)
+      location = StatModule::Location.new(path)
+      location.begin_line = line.to_i
+      location.end_line = line.to_i
+      @finding.location = location
+    end
+
+    def path
+      @finding.location.path
+    end
+
+    def desc
+      @finding.description
+    end
+
+    def line
+      " (line #{@finding.location.begin_line})"
     end
 
     def to_s
-      "#{@path}: #{@desc}#{@line}"
+      "#{path}: #{desc}#{line}"
     end
   end
 
   class SortedIssues
+    include HTMLProofer::Utils
+
     attr_reader :issues
 
-    def initialize(issues, error_sort, logger)
+    def initialize(issues, error_sort, logger, is_stat)
       @issues = issues
       @error_sort = error_sort
       @logger = logger
+      @is_stat = is_stat
     end
 
     def sort_and_report
@@ -44,6 +63,15 @@ module HTMLProofer
 
     def report(sorted_issues, first_report, second_report)
       matcher = nil
+
+      if @is_stat
+        stat = init_stat
+        sorted_issues.each do |issue|
+          stat.findings.push(issue.finding)
+        end
+        puts stat.to_json
+        return
+      end
 
       sorted_issues.each do |issue|
         if matcher != issue.send(first_report)

@@ -36,6 +36,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'report_invalid_tags', '--report-invalid-tags', 'Ignore `check_html` errors associated with unknown markup (default: `false`)'
   p.option 'report_missing_names', '--report-missing-names', 'Ignore `check_html` errors associated with missing entities (default: `false`)'
   p.option 'report_script_embeds', '--report-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
+  p.option 'stat', '--stat', 'Output in STAT format (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'

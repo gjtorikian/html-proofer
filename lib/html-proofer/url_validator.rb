@@ -211,9 +211,9 @@ module HTMLProofer
     def add_external_issue(filenames, desc, status = nil)
       # possible if we're checking an array of links
       if filenames.nil?
-        @failed_tests << Issue.new('', desc, status: status)
+        @failed_tests << Issue.new('', desc, 'URL validation failed', status: status)
       else
-        filenames.each { |f| @failed_tests << Issue.new(f, desc, status: status) }
+        filenames.each { |f| @failed_tests << Issue.new(f, desc, 'URL validation failed', status: status) }
       end
     end
 

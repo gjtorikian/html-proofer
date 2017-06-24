@@ -22,7 +22,7 @@ module HTMLProofer
     end
 
     def add_issue(desc, line: nil, status: -1, content: nil)
-      @issues << Issue.new(@path, desc, line: line, status: status, content: content)
+      @issues << Issue.new(@path, desc, "#{self::class } failed", line: line, status: status, content: content)
     end
 
     def add_to_external_urls(url)
