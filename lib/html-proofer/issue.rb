@@ -9,8 +9,10 @@ module HTMLProofer
 
       @finding = StatModule::Finding.new(true, rule, desc)
       location = StatModule::Location.new(path)
-      location.begin_line = line.to_i
-      location.end_line = line.to_i
+      unless line.nil?
+        location.begin_line = line.to_i
+        location.end_line = line.to_i
+      end
       @finding.location = location
     end
 
@@ -23,7 +25,11 @@ module HTMLProofer
     end
 
     def line
-      " (line #{@finding.location.begin_line})"
+      unless line.location.begin_line.nil?
+        " (line #{@finding.location.begin_line})"
+      else
+        ''
+      end
     end
 
     def to_s
@@ -45,15 +51,15 @@ module HTMLProofer
 
     def sort_and_report
       case @error_sort
-      when :path
-        sorted_issues = sort(:path, :desc)
-        report(sorted_issues, :path, :desc)
-      when :desc
-        sorted_issues = sort(:desc, :path)
-        report(sorted_issues, :desc, :path)
-      when :status
-        sorted_issues = sort(:status, :path)
-        report(sorted_issues, :status, :path)
+        when :path
+          sorted_issues = sort(:path, :desc)
+          report(sorted_issues, :path, :desc)
+        when :desc
+          sorted_issues = sort(:desc, :path)
+          report(sorted_issues, :desc, :path)
+        when :status
+          sorted_issues = sort(:status, :path)
+          report(sorted_issues, :status, :path)
       end
     end
 
