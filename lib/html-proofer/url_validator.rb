@@ -9,10 +9,10 @@ module HTMLProofer
 
     attr_reader :external_urls
 
-    def initialize(logger, external_urls, options)
+    def initialize(logger, external_urls, options, stat)
       @logger = logger
       @external_urls = external_urls
-      @failed_tests = []
+      @stat = stat
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
       @cache = Cache.new(@logger, @options[:cache])
@@ -28,8 +28,6 @@ module HTMLProofer
       else
         external_link_checker(@external_urls)
       end
-
-      @failed_tests
     end
 
     def remove_query_values
@@ -211,10 +209,11 @@ module HTMLProofer
     def add_external_issue(filenames, desc, status = nil)
       # possible if we're checking an array of links
       if filenames.nil?
-        @failed_tests << Issue.new('', desc, 'URL validation failed', status: status)
+        @stat.findings.push(Issue.new('', desc, 'URL validation failed', status: status))
       else
-        filenames.each { |f| @failed_tests << Issue.new(f, desc, 'URL validation failed', status: status) }
+        filenames.each { |f| @stat.findings.push(Issue.new(f, desc, 'URL validation failed', status: status)) }
       end
+      @stat.print_finding if @options[:stat]
     end
 
     # Does the URL have a hash?

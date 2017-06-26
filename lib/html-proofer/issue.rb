@@ -1,52 +1,51 @@
 require 'stat'
 module HTMLProofer
-  class Issue
-    attr_reader :status, :finding, :content
+  class Issue < StatModule::Finding
 
     def initialize(path, desc, rule, line: nil, status: -1, content: nil)
-      @status = status
-      @content = content
+      super(true, rule, desc)
+      define_singleton_method(:status) { status }
+      @detail = StatModule::Detail.new(content)
 
-      @finding = StatModule::Finding.new(true, rule, desc)
-      location = StatModule::Location.new(path)
+      @location = StatModule::Location.new(path)
       unless line.nil?
-        location.begin_line = line.to_i
-        location.end_line = line.to_i
+        @location.begin_line = line.to_i
+        @location.end_line = line.to_i
       end
-      @finding.location = location
     end
 
     def path
-      @finding.location.path
+      @location.path
     end
 
     def desc
-      @finding.description
+      @description
+    end
+
+    def content
+      @detail.body
     end
 
     def line
-      if @finding.location.begin_line.nil?
+      if @location.begin_line.nil?
         ''
       else
-        " (line #{@finding.location.begin_line})"
+        " (line #{@location.begin_line})"
       end
     end
 
     def to_s
-      "#{path}: #{desc}#{line}"
+      "#{path}: #{@description}#{line}"
     end
   end
 
   class SortedIssues
-    include HTMLProofer::Utils
-
     attr_reader :issues
 
-    def initialize(issues, error_sort, logger, is_stat)
+    def initialize(issues, error_sort, logger)
       @issues = issues
       @error_sort = error_sort
       @logger = logger
-      @is_stat = is_stat
     end
 
     def sort_and_report
@@ -69,15 +68,6 @@ module HTMLProofer
 
     def report(sorted_issues, first_report, second_report)
       matcher = nil
-
-      if @is_stat
-        stat = init_stat
-        sorted_issues.each do |issue|
-          stat.findings.push(issue.finding)
-        end
-        puts stat.to_json
-        return
-      end
 
       sorted_issues.each do |issue|
         if matcher != issue.send(first_report)

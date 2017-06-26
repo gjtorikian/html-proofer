@@ -1,8 +1,11 @@
 require 'spec_helper'
 
 describe HTMLProofer::Element do
+  include HTMLProofer::Utils
+
   before(:each) do
-    @check = HTMLProofer::Check.new('', '', Nokogiri::HTML(''), HTMLProofer::Configuration::PROOFER_DEFAULTS)
+    @stat = init_stat
+    @check = HTMLProofer::Check.new('', '', Nokogiri::HTML(''), HTMLProofer::Configuration::PROOFER_DEFAULTS, @stat)
   end
 
   describe '#initialize' do

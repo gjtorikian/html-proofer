@@ -1,13 +1,14 @@
 module HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
-    attr_reader :node, :html, :element, :src, :path, :options, :issues, :external_urls
+    attr_reader :node, :html, :element, :src, :path, :options, :external_urls, :stat
 
-    def initialize(src, path, html, options)
+    def initialize(src, path, html, options, stat)
       @src    = src
       @path   = path
       @html   = remove_ignored(html)
       @options = options
+      @stat   = stat
       @issues = []
       @external_urls = {}
     end
@@ -23,6 +24,8 @@ module HTMLProofer
 
     def add_issue(desc, line: nil, status: -1, content: nil)
       @issues << Issue.new(@path, desc, "#{self::class } failed", line: line, status: status, content: content)
+      @stat.findings.push(Issue.new(@path, desc, "#{self::class } failed", line: line, status: status, content: content))
+      @stat.print_finding if @options[:stat]
     end
 
     def add_to_external_urls(url)

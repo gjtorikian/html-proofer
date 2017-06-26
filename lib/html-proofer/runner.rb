@@ -27,11 +27,14 @@ module HTMLProofer
           @options[:url_swap][Regexp.new("^//#{dom}")] = ''
         end
       end
-
-      @failures = []
     end
 
     def run
+      @stat = init_stat
+      if @options[:stat]
+        @stat.print_header
+      end
+
       @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
 
       if @type == :links
@@ -42,7 +45,12 @@ module HTMLProofer
         @logger.log :info, "Ran on #{file_text}!\n\n"
       end
 
-      if @failures.empty?
+      if @options[:stat]
+        @stat.print_footer
+        return
+      end
+
+      if @stat.findings.empty?
         @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
       else
         print_failed_tests
@@ -67,14 +75,13 @@ module HTMLProofer
 
       process_files.each do |item|
         @external_urls.merge!(item[:external_urls])
-        @failures.concat(item[:failures])
       end
 
       # TODO: lazy. if we're checking only external links,
       # we'll just trash all the failed tests. really, we should
       # just not run those other checks at all.
       if @options[:external_only]
-        @failures = []
+        @stat = init_stat
         validate_urls
       elsif !@options[:disable_external]
         validate_urls
@@ -99,22 +106,21 @@ module HTMLProofer
       @src.each do |src|
         checks.each do |klass|
           @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(src, path, html, @options)
+          check = Object.const_get(klass).new(src, path, html, @options, @stat)
           check.run
           external_urls = check.external_urls
           if @options[:url_swap]
             external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }]
           end
           result[:external_urls].merge!(external_urls)
-          result[:failures].concat(check.issues)
         end
       end
       result
     end
 
     def validate_urls
-      url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
-      @failures.concat(url_validator.run)
+      url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options, @stat)
+      url_validator.run
       @external_urls = url_validator.external_urls
     end
 
@@ -153,19 +159,16 @@ module HTMLProofer
 
     def failed_tests
       result = []
-      return result if @failures.empty?
-      @failures.each { |f| result << f.to_s }
+      return result if @stat.findings.empty?
+      @stat.findings.each { |f| result << f.to_s }
       result
     end
 
     def print_failed_tests
-      sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger, @options[:stat])
+      sorted_failures = SortedIssues.new(@stat.findings, @options[:error_sort], @logger)
 
       sorted_failures.sort_and_report
-
-      return if @options[:stat]
-
-      count = @failures.length
+      count = @stat.findings.length
       failure_text = pluralize(count, 'failure', 'failures')
       raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end

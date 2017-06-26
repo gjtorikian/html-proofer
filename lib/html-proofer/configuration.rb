@@ -25,6 +25,7 @@ module HTMLProofer
       internal_domains: [],
       log_level: :info,
       only_4xx: false,
+      stat: false,
       url_ignore: [],
       url_swap: {}
     }.freeze
