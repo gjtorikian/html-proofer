@@ -51,15 +51,15 @@ module HTMLProofer
 
     def sort_and_report
       case @error_sort
-        when :path
-          sorted_issues = sort(:path, :desc)
-          report(sorted_issues, :path, :desc)
-        when :desc
-          sorted_issues = sort(:desc, :path)
-          report(sorted_issues, :desc, :path)
-        when :status
-          sorted_issues = sort(:status, :path)
-          report(sorted_issues, :status, :path)
+      when :path
+        sorted_issues = sort(:path, :desc)
+        report(sorted_issues, :path, :desc)
+      when :desc
+        sorted_issues = sort(:desc, :path)
+        report(sorted_issues, :desc, :path)
+      when :status
+        sorted_issues = sort(:status, :path)
+        report(sorted_issues, :status, :path)
       end
     end
 

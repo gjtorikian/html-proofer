@@ -41,8 +41,8 @@ module HTMLProofer
       process = StatModule::Process.new('HTMLProofer')
       process.version = "#{HTMLProofer::VERSION}"
       process.description = 'If you generate HTML files, then this tool might be for you.'
-      process.maintainer = 'William Entriken'
-      process.email = 'github.com@phor.net'
+      process.maintainer = 'Garen Torikian'
+      process.email = 'gjtorikian@gmail.com'
       process.website = 'https://github.com/gjtorikian/html-proofer'
       StatModule::Stat.new(process)
     end
