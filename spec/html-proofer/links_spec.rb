@@ -556,4 +556,9 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'timeout' do
+    proofer = run_proofer(['https://www.google.com:81'], :links)
+    expect(proofer.failed_tests.first).to match(/time out/)
+  end
 end
