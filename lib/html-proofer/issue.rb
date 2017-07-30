@@ -71,17 +71,17 @@ module HTMLProofer
 
       sorted_issues.each do |issue|
         if matcher != issue.send(first_report)
-          @logger.log :error, "- #{issue.send(first_report)}"
+          @logger.log :error, "- #{issue.send(first_report)}"  unless @logger.nil?
           matcher = issue.send(first_report)
         end
         if first_report == :status
-          @logger.log :error, "  *  #{issue}"
+          @logger.log :error, "  *  #{issue}"  unless @logger.nil?
         else
-          msg = "  *  #{issue.send(second_report)}#{issue.line}"
+          msg = "  *  #{issue.send(second_report)}#{issue.line}"  unless @logger.nil?
           if !issue.content.nil? && !issue.content.empty?
             msg = "#{msg}\n     #{issue.content}"
           end
-          @logger.log(:error, msg)
+          @logger.log(:error, msg)  unless @logger.nil?
         end
       end
     end

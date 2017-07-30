@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'stat'
+require 'rubygems'
 
 module HTMLProofer
   module Utils
@@ -36,14 +37,15 @@ module HTMLProofer
     end
     module_function :clean_content
 
-
     def init_stat
-      process = StatModule::Process.new('HTMLProofer')
+      spec = Gem::Specification::load('html-proofer.gemspec')
+
+      process = StatModule::Process.new(spec.name)
       process.version = "#{HTMLProofer::VERSION}"
-      process.description = 'If you generate HTML files, then this tool might be for you.'
-      process.maintainer = 'Garen Torikian'
-      process.email = 'gjtorikian@gmail.com'
-      process.website = 'https://github.com/gjtorikian/html-proofer'
+      process.description = spec.description
+      process.maintainer = spec.authors.join(', ')
+      process.email = spec.email.join(',')
+      process.website = spec.homepage
       StatModule::Stat.new(process)
     end
     module_function :init_stat

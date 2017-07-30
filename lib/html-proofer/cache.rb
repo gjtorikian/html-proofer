@@ -79,21 +79,21 @@ module HTMLProofer
         if existing_urls.include?(url)
           true
         else
-          @logger.log :debug, "Adding #{url} to cache check"
+          @logger.log :debug, "Adding #{url} to cache check" unless @logger.nil?
           false
         end
       end
 
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, 'link', 'links')
-      @logger.log :info, "Adding #{new_link_text} to the cache..."
+      @logger.log :info, "Adding #{new_link_text} to the cache..." unless @logger.nil?
 
       # remove from cache URLs that no longer exist
       del = 0
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
         if !found_urls.include?(url)
-          @logger.log :debug, "Removing #{url} from cache check"
+          @logger.log :debug, "Removing #{url} from cache check" unless @logger.nil?
           del += 1
           true
         else
@@ -102,7 +102,7 @@ module HTMLProofer
       end
 
       del_link_text = pluralize(del, 'link', 'links')
-      @logger.log :info, "Removing #{del_link_text} from the cache..."
+      @logger.log :info, "Removing #{del_link_text} from the cache..." unless @logger.nil?
 
       additions
     end

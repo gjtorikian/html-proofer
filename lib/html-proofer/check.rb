@@ -3,7 +3,7 @@ module HTMLProofer
   class Check
     attr_reader :node, :html, :element, :src, :path, :options, :external_urls, :stat
 
-    def initialize(src, path, html, options, stat)
+    def initialize(stat, src, path, html, options)
       @src    = src
       @path   = path
       @html   = remove_ignored(html)

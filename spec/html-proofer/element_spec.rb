@@ -5,7 +5,7 @@ describe HTMLProofer::Element do
 
   before(:each) do
     @stat = init_stat
-    @check = HTMLProofer::Check.new('', '', Nokogiri::HTML(''), HTMLProofer::Configuration::PROOFER_DEFAULTS, @stat)
+    @check = HTMLProofer::Check.new(@stat, '', '', Nokogiri::HTML(''), HTMLProofer::Configuration::PROOFER_DEFAULTS)
   end
 
   describe '#initialize' do

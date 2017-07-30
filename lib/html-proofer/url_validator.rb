@@ -38,7 +38,7 @@ module HTMLProofer
         uri = begin
                 Addressable::URI.parse(url)
               rescue URI::Error, Addressable::URI::InvalidURIError
-                @logger.log :error, "#{url} is an invalid URL"
+                @logger.log :error, "#{url} is an invalid URL"  unless @logger.nil?
                 nil
               end
         next if uri.nil? || uri.query.nil?
@@ -70,7 +70,7 @@ module HTMLProofer
       cache_count = @cache.size
       cache_text = pluralize(cache_count, 'link', 'links')
 
-      @logger.log :info, "Found #{cache_text} in the cache..."
+      @logger.log :info, "Found #{cache_text} in the cache..."  unless @logger.nil?
 
       @cache.retrieve_urls(@external_urls)
     end
@@ -90,10 +90,10 @@ module HTMLProofer
 
       count = external_urls.length
       check_text = pluralize(count, 'external link', 'external links')
-      @logger.log :info, "Checking #{check_text}..."
+      @logger.log :info, "Checking #{check_text}..."  unless @logger.nil?
 
       # Route log from Typhoeus/Ethon to our own logger
-      Ethon.logger = @logger
+      Ethon.logger = @logger unless @logger.nil?
 
       establish_queue(external_urls)
 
@@ -143,7 +143,7 @@ module HTMLProofer
 
       debug_msg = "Received a #{response_code} for #{href}"
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
-      @logger.log :debug, debug_msg
+      @logger.log :debug, debug_msg  unless @logger.nil?
 
       return if @options[:http_status_ignore].include?(response_code)
 

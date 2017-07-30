@@ -17,7 +17,7 @@ module HTMLProofer
       @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
       @type = @options.delete(:type)
-      @logger = HTMLProofer::Log.new(@options[:log_level], @options[:stat])
+      @logger = HTMLProofer::Log.new(@options[:log_level]) unless @options[:stat]
 
       # Add swap patterns for internal domains
       unless @options[:internal_domains].empty?
@@ -35,14 +35,14 @@ module HTMLProofer
         @stat.print_header
       end
 
-      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
+      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n" unless @logger.nil?
 
       if @type == :links
         check_list_of_links unless @options[:disable_external]
       else
         check_files
         file_text = pluralize(files.length, 'file', 'files')
-        @logger.log :info, "Ran on #{file_text}!\n\n"
+        @logger.log :info, "Ran on #{file_text}!\n\n" unless @logger.nil?
       end
 
       if @options[:stat]
@@ -51,7 +51,7 @@ module HTMLProofer
       end
 
       if @stat.findings.empty?
-        @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
+        @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.' unless @logger.nil?
       else
         print_failed_tests
       end
@@ -105,8 +105,8 @@ module HTMLProofer
 
       @src.each do |src|
         checks.each do |klass|
-          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(src, path, html, @options, @stat)
+          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..." unless @logger.nil?
+          check = Object.const_get(klass).new(@stat, src, path, html, @options)
           check.run
           external_urls = check.external_urls
           if @options[:url_swap]
