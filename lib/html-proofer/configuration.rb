@@ -32,7 +32,8 @@ module HTMLProofer
     TYPHOEUS_DEFAULTS = {
       followlocation: true,
       headers: {
-        'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{HTMLProofer::VERSION}; +https://github.com/gjtorikian/html-proofer)"
+        'User-Agent' => "Mozilla/5.0 (compatible; HTML Proofer/#{HTMLProofer::VERSION}; +https://github.com/gjtorikian/html-proofer)",
+        'Accept' => 'application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5'
       },
       connecttimeout: 10,
       timeout: 30
