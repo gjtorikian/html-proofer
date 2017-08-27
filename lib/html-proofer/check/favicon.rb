@@ -10,6 +10,10 @@ class FaviconCheck < ::HTMLProofer::Check
 
     return if found
 
+    # specific match for Jekyll's redirect_from template:
+    # https://git.io/v5stq
+    return if @html.xpath('//title').text == "Redirecting…"
+
     add_issue('no favicon specified')
   end
 end
