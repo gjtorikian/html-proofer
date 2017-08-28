@@ -54,4 +54,10 @@ describe 'Favicons test' do
     proofer = run_proofer(broken_but_ignored, :file, check_favicon: true)
     expect(proofer.failed_tests.first).to match(/no favicon specified/)
   end
+
+  it 'specifically ignores jekyll redirect_from template' do
+    broken_but_ignored = "#{FIXTURES_DIR}/favicon/jekyll_redirect_from.html"
+    proofer = run_proofer(broken_but_ignored, :file, check_favicon: true)
+    expect(proofer.failed_tests).to eq []
+  end
 end
