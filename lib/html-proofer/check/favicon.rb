@@ -10,15 +10,14 @@ class FaviconCheck < ::HTMLProofer::Check
 
     return if found
 
-    return if is_redirect_only?
+    return if is_immediate_redirect?
 
     add_issue('no favicon specified')
   end
   
-  def is_redirect_only?
-    # specific match for Jekyll's redirect_from template:
-    # https://git.io/v5stq
-    @html.xpath('//title').text == 'Redirecting…'
+  def is_immediate_redirect?
+    # allow any instant-redirect meta tag
+    @html.xpath("//meta[@http-equiv='refresh']").attribute('content').value.starts_with? "0;"
   end
   
 end
