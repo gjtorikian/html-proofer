@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'mercenary',       '~> 0.3.2'
   gem.add_dependency 'nokogiri',        '~> 1.7'
-  gem.add_dependency 'colored',         '~> 1.2'
+  gem.add_dependency 'colorize',        '~> 0.8'
   gem.add_dependency 'typhoeus',        '~> 0.7'
   gem.add_dependency 'yell',            '~> 2.0'
   gem.add_dependency 'parallel',        '~> 1.3'
