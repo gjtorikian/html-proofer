@@ -36,7 +36,7 @@ module HTMLProofer
       return nil if @external_urls.nil?
       paths_with_queries = {}
       iterable_external_urls = @external_urls.dup
-      @external_urls.keys.each do |url|
+      @external_urls.each_key do |url|
         uri = begin
                 Addressable::URI.parse(url)
               rescue URI::Error, Addressable::URI::InvalidURIError
