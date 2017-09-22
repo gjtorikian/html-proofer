@@ -1,5 +1,5 @@
 require 'yell'
-require 'colored'
+require 'colorized_string'
 
 module HTMLProofer
   class Log
@@ -35,7 +35,7 @@ module HTMLProofer
 
     def colorize(color, message)
       if $stdout.isatty && $stderr.isatty
-        Colored.colorize(message, foreground: color)
+        ColorizedString.new(message).colorize(color)
       else
         message
       end
