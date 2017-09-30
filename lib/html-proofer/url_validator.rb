@@ -175,7 +175,7 @@ module HTMLProofer
       return false unless @options[:check_external_hash]
       return false unless (hash = hash?(href))
 
-      body_doc = create_nokogiri(response.body)
+      body_doc = create_nokogiri(response.body.gsub("\u0000", ''))
 
       # user-content is a special addition by GitHub.
       xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
