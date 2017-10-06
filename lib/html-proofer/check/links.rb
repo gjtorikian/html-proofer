@@ -126,6 +126,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def check_sri(line, content)
+    return if (@link.rel == 'canonical' || @link.rel == 'alternate')
     if !defined?(@link.integrity) && !defined?(@link.crossorigin)
       add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
     elsif !defined?(@link.integrity)
