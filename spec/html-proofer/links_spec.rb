@@ -567,4 +567,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, check_external_hash: true)
     expect(proofer.failed_tests.length).to eq 1
   end
+
+  it 'is not checking SRI and CORS for links with rel canonical or alternate' do
+    file = "#{FIXTURES_DIR}/links/link_with_rel.html"
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests).to eq []
+  end
 end
