@@ -562,6 +562,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/time out/)
   end
 
+  it 'correctly handles empty href' do
+    file = "#{FIXTURES_DIR}/links/empty_href.html"
+    proofer = run_proofer(file, :file, check_external_hash: true)
+    expect(proofer.failed_tests.length).to eq 1
+  end
+  
   it 'is not checking SRI and CORS for links with rel canonical or alternate' do
     file = "#{FIXTURES_DIR}/links/link_with_rel.html"
     proofer = run_proofer(file, :file, check_sri: true)
