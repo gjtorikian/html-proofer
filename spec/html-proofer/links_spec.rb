@@ -561,4 +561,10 @@ describe 'Links test' do
     proofer = run_proofer(['https://www.google.com:81'], :links)
     expect(proofer.failed_tests.first).to match(/time out/)
   end
+
+  it 'correctly handles empty href' do
+    file = "#{FIXTURES_DIR}/links/empty_href.html"
+    proofer = run_proofer(file, :file, check_external_hash: true)
+    expect(proofer.failed_tests.length).to eq 1
+  end
 end
