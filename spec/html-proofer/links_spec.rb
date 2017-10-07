@@ -562,7 +562,7 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/time out/)
   end
 
-  it 'correct handle empty href' do
+  it 'correctly handles empty href' do
     file = "#{FIXTURES_DIR}/links/empty_href.html"
     proofer = run_proofer(file, :file, check_external_hash: true)
     expect(proofer.failed_tests.length).to eq 1
