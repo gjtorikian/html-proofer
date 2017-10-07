@@ -142,6 +142,7 @@ module HTMLProofer
       href = response.request.base_url.to_s
       method = response.request.options[:method]
       response_code = response.code
+      response.body.gsub!("\x00", '')
 
       debug_msg = "Received a #{response_code} for #{href}"
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
@@ -175,7 +176,7 @@ module HTMLProofer
       return false unless @options[:check_external_hash]
       return false unless (hash = hash?(href))
 
-      body_doc = create_nokogiri(response.body.gsub("\u0000", ''))
+      body_doc = create_nokogiri(response.body)
 
       # user-content is a special addition by GitHub.
       xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
