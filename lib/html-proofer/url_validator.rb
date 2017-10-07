@@ -142,6 +142,7 @@ module HTMLProofer
       href = response.request.base_url.to_s
       method = response.request.options[:method]
       response_code = response.code
+      response.body.gsub!("\x00", '')
 
       debug_msg = "Received a #{response_code} for #{href}"
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
