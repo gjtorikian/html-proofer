@@ -371,6 +371,8 @@ cache:
   - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
 ```
 
+For more information on using HTML-Proofer with Travis CI, see [this wiki page](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
+
 ## Logging
 
 HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_level` option, you can better define the level of logging.
@@ -411,7 +413,11 @@ end
 
 ## Troubleshooting
 
-### Certificates
+Here are some brief snippets identifying some common problems that you can work around. For more information, check out [our wiki](https://github.com/gjtorikian/html-proofer/wiki).
+
+[Our wiki page](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis) on using HTML-Proofer with Travis CI might also be useful.
+
+### Ignoring SSL certificates
 
 To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
