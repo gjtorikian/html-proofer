@@ -1,0 +1,149 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/contact?form%5Bsubject%5D=New+Assigned+Events
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiOWYwOTYyOTJhMzU1YzNiOTVjODI5MmUyYzE3MmI5MmMiLCJfY3NyZl90b2tlbiI6IjYyOUVIQURHTFp1TEpmL3o3MkNkZHcxb1VZN3o2OGxrV1Y2bkE4dVkyRDA9In0%3D--b2bd57fb039e61e880a93b270596c2be5ec8cd92;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 87cc7008062a7cac1230e271ecc98edb
+      X-Runtime:
+      - '0.068968'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 26049f47774ecce22e876a1fa55b2a77
+      X-GitHub-Request-Id:
+      - C3FB:45BC:39C4FB7:564BC8D:592213E2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/contact?form%5Bsubject%5D=New+Assigned+Events
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+- request:
+    method: head
+    uri: https://github.com/contact#false?form%5Bsubject%5D=Organization+and+Team+Membership+APIs
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:38 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:38
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNzNhZmY4NDQ0ZjkzNzEwZWFjYmEyNGYzYTUzODJjYzgiLCJfY3NyZl90b2tlbiI6InAyVjVQRFJjRE5IVTJ6T1FQb3Q2dWxLR2VzeTV5Z0xSeS9keFEvS3crUGs9In0%3D--dae9ee7d1ce5ca5329e471f3fea649ec74446251;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - d6e811b3654be0eb06a450403b88bdd1
+      X-Runtime:
+      - '0.066527'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - bc4c952d089501afbfc8f7ff525da31c
+      X-GitHub-Request-Id:
+      - C3FA:45BD:47DF29A:6B378F3:592213E2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/contact
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+recorded_with: VCR 2.9.3

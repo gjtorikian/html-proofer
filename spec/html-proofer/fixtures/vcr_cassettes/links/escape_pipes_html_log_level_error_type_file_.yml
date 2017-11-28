@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/css; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '2875'
+      Expires:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Cache-Control:
+      - private, max-age=86400
+      Server:
+      - ESF
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="37,36,35"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,238 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sun, 21 May 2017 03:21:01 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:35 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - F710:52E3:6012A04:7D9CAE3:592213DF
+      Content-Length:
+      - '400'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '4'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8131-JFK
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1495405540.606652,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 6de37ec114dac57a0c63c914fa33e26cdb30d8b3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/changing-author-info/
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Server:
+      - Varnish
+      X-Varnish:
+      - '208856991'
+      X-Cache:
+      - cp1072 int
+      X-Cache-Status:
+      - int
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikimedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      X-Client-IP:
+      - 100.37.221.161
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Server:
+      - Varnish
+      X-Varnish:
+      - '209373712'
+      X-Cache:
+      - cp1072 int
+      X-Cache-Status:
+      - int
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikimedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      X-Client-IP:
+      - 100.37.221.161
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+- request:
+    method: get
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Server:
+      - Varnish
+      X-Varnish:
+      - '208856992'
+      X-Cache:
+      - cp1072 int
+      X-Cache-Status:
+      - int
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikimedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      X-Client-IP:
+      - 100.37.221.161
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+- request:
+    method: get
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Server:
+      - Varnish
+      X-Varnish:
+      - '209373713'
+      X-Cache:
+      - cp1072 int
+      X-Cache-Status:
+      - int
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikimedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      X-Client-IP:
+      - 100.37.221.161
+      Location:
+      - https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+recorded_with: VCR 2.9.3

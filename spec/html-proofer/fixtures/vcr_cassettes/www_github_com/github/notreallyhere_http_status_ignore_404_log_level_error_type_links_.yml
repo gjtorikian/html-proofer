@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.github.com/github/notreallyhere
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Status:
+      - 404 Not Found
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiODUyY2QzYjI2MDViNzgzMzYwZWM4ZWNiODE0M2ZkMmQifQ%3D%3D--a04c5d86ef09168fe0303469fb6d91fea657c6d0;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 3fdd1f959a6f9c238255eb4df64af982
+      X-Runtime:
+      - '0.008077'
+      Content-Security-Policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src data:; script-src 'self'; style-src 'unsafe-inline'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-GitHub-Request-Id:
+      - C405:45BD:47DF2FD:6B37983:592213E3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/github/notreallyhere
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+recorded_with: VCR 2.9.3

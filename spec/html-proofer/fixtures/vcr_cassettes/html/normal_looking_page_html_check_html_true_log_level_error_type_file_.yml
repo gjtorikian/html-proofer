@@ -1,0 +1,554 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/css; charset=utf-8
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      Content-Length:
+      - '828'
+      Expires:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Cache-Control:
+      - private, max-age=86400
+      Server:
+      - ESF
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="37,36,35"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: http://government.github.com/404.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Tue, 16 May 2017 23:59:00 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:10 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 9E08:3E22:51E1D79:711F2CF:592213C6
+      Content-Length:
+      - '4298'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8122-JFK
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405510.422753,VS0,VE12
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - eb28b6e7043cc357d2937c3fb2d0c050e75a5f54
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://government.github.com/404.html
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://github.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:10
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYzhiZmY5ODQwMGQ1M2Y4NDQ5OGQyNGQ5MGFiNjIzMzYiLCJfY3NyZl90b2tlbiI6InhFM2RmUWF1UUY3ZWxCQmt4REJnQTd0SmtkeldKaGMvOWo5ckttZzRwU1k9In0%3D--376838fd65247ac382f8a1b451ca0489372a1c60;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 22632c00ec2d63aef140ba3e4d4e01af
+      X-Runtime:
+      - '0.059403'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - a0387c52951b3c2853740ef9cede1dec
+      X-GitHub-Request-Id:
+      - C38F:45BE:40D8923:60B85B9:592213C6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://help.github.com/articles/github-glossary
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sun, 21 May 2017 03:21:01 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:10 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - C088:1D8D0:396199A:4B22219:592213C6
+      Content-Length:
+      - '17478'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8151-JFK
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405510.438767,VS0,VE10
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - d6eea11281c9f981c77653dea8c4a8025c6f3bef
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articles/github-glossary/
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://github.com/features/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:10
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMjZjOGFiNmFjZmIxZjQ1MDBiZTQzZDQ0NGQ1NTg4M2YiLCJfY3NyZl90b2tlbiI6IktYZDIyNjhWYStaeTNiaklpQUVDVjF3cjN5ZURFai80K0JxMDJUWDVWNW89In0%3D--d28d64c7b2f27052c64bcf26aea524181bed001c;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - d099d9e0900148bee6ed7db164d489e6
+      X-Runtime:
+      - '0.059575'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com www.youtube.com www.ustream.tv; connect-src ''self''
+        uploads.github.com status.github.com collector.githubapp.com api.github.com
+        www.google-analytics.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-user-asset-79cafe.s3.amazonaws.com wss://live.github.com;
+        font-src assets-cdn.github.com; form-action ''self'' github.com gist.github.com
+        github.us11.list-manage.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - cbc5fb89a0e5c9db5298b4b976ca7aca
+      X-GitHub-Request-Id:
+      - C391:45BE:40D8925:60B85BC:592213C6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/features/
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://help.github.com/security
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Sun, 21 May 2017 03:21:02 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:10 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - CE6C:385B:599C591:7AB28EE:592213C5
+      Content-Length:
+      - '380'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8143-JFK
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405510.441781,VS0,VE10
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 20733bd211552df6747bdd4b68cff41be91653e6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/security/
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://github.com/government/welcome#readme
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:10
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiOGFhMmMwYjZjYWNhZWE4MzMyNGI0ZWFjZTk5ZDUyNDciLCJzcHlfcmVwbyI6ImdvdmVybm1lbnQvd2VsY29tZSIsInNweV9yZXBvX2F0IjoxNDk1NDA1NTEwLCJfY3NyZl90b2tlbiI6IllXMExDakZiUSsrS2lmSTViZkZubXhjYmNBb3lTSTFZTU9yMDVzcm9EaEE9IiwiZmxhc2giOnsiZGlzY2FyZCI6WyJhbmFseXRpY3NfbG9jYXRpb24iXSwiZmxhc2hlcyI6eyJhbmFseXRpY3NfbG9jYXRpb24iOiIvPHVzZXItbmFtZT4vPHJlcG8tbmFtZT4ifX19--8ecda440dca168f7c091b411ee76867b9df8b3cd;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 7c57ac6c285d83b2cf1933b17bff44d6
+      X-Runtime:
+      - '0.129566'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 33cb64b6845aaab9c9912480e87d4fb8
+      X-GitHub-Request-Id:
+      - C392:45BD:47DDFEF:6B35C22:592213C6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/government/welcome
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: https://github.com/about
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:10
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiMGJjMmMwNTQ1NDg2NTllZTkwODE0YWU2ZTc0NDQ4OWYiLCJfY3NyZl90b2tlbiI6IkdzQlNoTGVoQmt0a3FQZ0RIV3pPbFBnTHh5SUo0dExHRlZTSzRKdmRkRlk9In0%3D--1655bb7d83ddbf7517190f3edcb9175775f37e5f;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 6b707ddf394f6499be2f5a07a0368379
+      X-Runtime:
+      - '0.137902'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-GitHub-Request-Id:
+      - C390:45BB:28FED1A:3D743FD:592213C6
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/about
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+- request:
+    method: head
+    uri: http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Date:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Expires:
+      - Sun, 21 May 2017 22:25:10 GMT
+      Cache-Control:
+      - public, max-age=0
+      Server:
+      - HTTP server (unknown)
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js
+  recorded_at: Sun, 21 May 2017 22:25:10 GMT
+recorded_with: VCR 2.9.3

@@ -1,8 +1,19 @@
 language: ruby
 rvm:
-  - 1.9
-  - 2.0
-  - 2.1
+  - 2.3.4
+  - 2.4.0
+
+git:
+  depth: 10
+
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+sudo: false
+cache: bundler
+
+matrix:
+  include:
+    - script: bundle exec rake rubocop
+      rvm: 2.4.0

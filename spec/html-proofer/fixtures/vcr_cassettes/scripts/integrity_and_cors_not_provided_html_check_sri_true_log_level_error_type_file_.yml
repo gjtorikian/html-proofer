@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://code.jquery.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:39 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Vary:
+      - Accept-Encoding
+      X-Powered-By:
+      - PHP/5.4.45-1~dotdeb+7.1
+      X-Pingback:
+      - http://codeorigin.jquery.com/xmlrpc.php
+      Link:
+      - <//codeorigin.jquery.com/wp-json/>; rel="https://api.w.org/"
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - HIT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://code.jquery.com/
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+recorded_with: VCR 2.9.3

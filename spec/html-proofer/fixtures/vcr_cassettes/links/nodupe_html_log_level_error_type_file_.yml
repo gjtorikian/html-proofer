@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://help.github.com/articlezzz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      ETag:
+      - '"5921079d-d6e"'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-GitHub-Request-Id:
+      - F710:52E3:6012A3B:7D9CB40:592213DF
+      Content-Length:
+      - '3438'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:36 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8151-JFK
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405536.341019,VS0,VE15
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 67f860404c9f73a4e4f6f763d2fb2c2f2831347c
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articlezzz
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
+- request:
+    method: get
+    uri: https://help.github.com/articlezzz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      ETag:
+      - '"5921079d-d6e"'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-GitHub-Request-Id:
+      - F710:52E3:6012A3B:7D9CB40:592213DF
+      Content-Length:
+      - '3438'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:36 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8151-JFK
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1495405536.361155,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 0315afe52adaee7fd83d9900102ead4df3f5cca3
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PCFET0NUWVBFIGh0bWw+CjxodG1sPgo8aGVhZD4KICA8bGluayByZWw9InNlYXJjaCIgdHlwZT0iYXBwbGljYXRpb24vb3BlbnNlYXJjaGRlc2NyaXB0aW9uK3htbCIgaHJlZj0iL29wZW5zZWFyY2gueG1sIiB0aXRsZT0iR2l0SHViOkhlbHAiIC8+CiAgPHRpdGxlPiBHaXRIdWIgSGVscDwvdGl0bGU+CiAgCjxsaW5rIHJlbD0iaWNvbiIgdHlwZT0iaW1hZ2UveC1pY29uIiBocmVmPSIvYXNzZXRzL2ltYWdlcy9zaXRlL2Zhdmljb24uaWNvIj4KPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSIvYXNzZXRzL3N0eWxlc2hlZXRzL2FwcGxpY2F0aW9uLmNzcyI+CjxzY3JpcHQgc3JjPSIvYXNzZXRzL2phdmFzY3JpcHRzL2FwcGxpY2F0aW9uLmpzIj48L3NjcmlwdD4KCjxtZXRhIG5hbWU9IkRlc2NyaXB0aW9uIiBjb250ZW50PSIgV2hvb3BzLCBsb29rcyBsaWtlIHRoYXQgcGFnZSBkb2Vzbid0IGV4aXN0LiBNYXliZSB0cnkgc2VhcmNoaW5nIGZvciB3aGF0IHlvdSdyZSBsb29raW5nIGZvcj8g4oCmIj4KCjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4KICAkKGZ1bmN0aW9uKCkgewogICAgJCgnI3F1aWNrc2VhcmNoLXF1ZXJ5JykubHVuclNlYXJjaCh7CiAgICAgIAogICAgICBpbmRleFVybDogJy9zZWFyY2gvc2VhcmNoLmpzb24nLAogICAgICAKICAgICAgcXVpY2tTZWFyY2hSZXN1bHRzOiAgJy5hdXRvY29tcGxldGUtcmVzdWx0cycsCiAgICAgIHF1aWNrU2VhcmNoRW50cmllczogICcucmVzdWx0LWdyb3VwJywKICAgICAgcXVpY2tTZWFyY2hUZW1wbGF0ZTogJyNxdWlja3NlYXJjaC1yZXN1bHRzLXRlbXBsYXRlJywKCiAgICAgIHNlYXJjaFJlc3VsdHM6ICcuc2VhcmNoLWNvbnRhaW5lcicsCiAgICAgIHNlYXJjaEVudHJpZXM6ICcuc2VhcmNoLXJlc3VsdHMnLAogICAgICBzZWFyY2hUZW1wbGF0ZTogJyNzZWFyY2gtcmVzdWx0cy10ZW1wbGF0ZScKICAgIH0pOwogIH0pOwo8L3NjcmlwdD4KCjxzY3JpcHQgdHlwZT0idGV4dC9qYXZhc2NyaXB0Ij4KCiAgdmFyIF9nYXEgPSBfZ2FxIHx8IFtdOwogIF9nYXEucHVzaChbJ19zZXRBY2NvdW50JywgJ1VBLTM3Njk2OTEtMjcnXSk7CiAgX2dhcS5wdXNoKFsnX3RyYWNrUGFnZXZpZXcnXSk7CgogIChmdW5jdGlvbigpIHsKICAgIHZhciBnYSA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NjcmlwdCcpOyBnYS50eXBlID0gJ3RleHQvamF2YXNjcmlwdCc7IGdhLmFzeW5jID0gdHJ1ZTsKICAgIGdhLnNyYyA9ICgnaHR0cHM6JyA9PSBkb2N1bWVudC5sb2NhdGlvbi5wcm90b2NvbCA/ICdodHRwczovL3NzbCcgOiAnaHR0cDovL3d3dycpICsgJy5nb29nbGUtYW5hbHl0aWNzLmNvbS9nYS5qcyc7CiAgICB2YXIgcyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlUYWdOYW1lKCdzY3JpcHQnKVswXTsgcy5wYXJlbnROb2RlLmluc2VydEJlZm9yZShnYSwgcyk7CiAgfSkoKTsKCjwvc2NyaXB0Pgo8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQvaHRtbDtjaGFyc2V0PXV0Zi04IiAvPgoKPC9oZWFkPgoKPGJvZHkgaWQ9ImNvbSI+Cgo8ZGl2IGlkPSJub3QtZm9vdGVyIj4KICAKCgogIDxkaXYgaWQ9ImhlYWRlciI+CiAgICA8ZGl2IGNsYXNzPSJjbGVhcmZpeCI+CiAgICAgIDxoMSBjbGFzcz0ic2l0ZS1sb2dvIj48YSBocmVmPSIvIj5HaXRIdWIgSGVscDwvYT48L2gxPgoKICAgICAgPHVsIGNsYXNzPSJ0b3AtbmF2Ij4KICAgICAgICAKICAgICAgICA8bGk+CiAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJqcy1kcm9wZG93bi1idXR0b24gZHJvcGRvd24tYnV0dG9uIj5WZXJzaW9uIDxkaXYgY2xhc3M9ImRyb3Bkb3duLWNhcmV0Ij48L2Rpdj48L2J1dHRvbj4KICAgICAgICAgIDxkaXYgY2xhc3M9ImRyb3Bkb3duLW1lbnUganMtZHJvcGRvd24tbWVudSI+CiAgICAgICAgICAgIDxhIGhyZWY9Ii8iPkdpdEh1Yi5jb208L2E+CiAgICAgICAgICAgIAogICAgICAgICAgICA8YSBocmVmPSIvZW50ZXJwcmlzZS8yLjkvdXNlciI+R2l0SHViIEVudGVycHJpc2UgMi45PC9hPgogICAgICAgICAgICAKICAgICAgICAgICAgPGEgaHJlZj0iL2VudGVycHJpc2UvMi44L3VzZXIiPkdpdEh1YiBFbnRlcnByaXNlIDIuODwvYT4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxhIGhyZWY9Ii9lbnRlcnByaXNlLzIuNy91c2VyIj5HaXRIdWIgRW50ZXJwcmlzZSAyLjc8L2E+CiAgICAgICAgICAgIAogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9saT4KICAgICAgICAKICAgICAgICAKICAgICAgICA8bGk+PGEgaHJlZj0iaHR0cHM6Ly9naXRodWIuY29tL2NvbnRhY3QiPkNvbnRhY3QgU3VwcG9ydDwvYT48L2xpPgogICAgICAgIDxsaT48YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vIj5SZXR1cm4gdG8gR2l0SHViPC9hPjwvbGk+CiAgICAgICAgCiAgICAgIDwvdWw+CiAgICA8L2Rpdj4KICA8L2Rpdj4KCiAgPGRpdiBpZD0iY29udGVudC13cmFwcGVyIj4KCiAgICA8ZGl2IGNsYXNzPSJzaXRlIj4KICAgICAgCgoKCgoKCgoKCgoKCgoKCiAgICAgIDxkaXYgY2xhc3M9Im5vdC1mb3VuZC1jb250YWluZXIiPgoKICA8aDI+V2hvb3BzLCBsb29rcyBsaWtlIHRoYXQgcGFnZSBkb2Vzbid0IGV4aXN0LjwvaDI+CiAgPHA+TWF5YmUgdHJ5IDxhIGhyZWY9Ii8iPnNlYXJjaGluZzwvYT4gZm9yIHdoYXQgeW91J3JlIGxvb2tpbmcgZm9yPzwvcD4KPC9kaXY+CgoKICAgICAgPGRpdiBjbGFzcz0iY2xlYXIiPjwvZGl2PgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgoKPGRpdiBpZD0iZm9vdGVyIj4KICA8ZGl2IGNsYXNzPSJpbm5lciI+CiAgICA8YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20iIGNsYXNzPSJpbnZlcnRvY2F0Ij4KICAgICAgPGltZyBhbHQ9IlRoZSBHaXRIdWIgTG9nbyIgc3JjPSIvYXNzZXRzL2ltYWdlcy9zaXRlL2ludmVydG9jYXQucG5nIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIC8+CiAgICA8L2E+CiAgICA8cCBjbGFzcz0ibGVmdCI+CiAgICAgICZjb3B5OyA8c3BhbiBpZD0ieWVhciI+MjAxNzwvc3Bhbj4gR2l0SHViIEluYy4gQWxsIHJpZ2h0cyByZXNlcnZlZC4KICAgIDwvcD4KICAgICAgPHVsIGNsYXNzPSJsaW5rcyByaWdodCI+CiAgICAgICAgPGxpPjxhIGhyZWY9Ii90ZXJtcy1vZi1zZXJ2aWNlIj5UZXJtcyBvZiBTZXJ2aWNlPC9hPjwvbGk+CiAgICAgICAgPGxpPjxhIGhyZWY9Ii9wcml2YWN5LXBvbGljeSI+UHJpdmFjeTwvYT48L2xpPgogICAgICAgIAogICAgICAgICAgPGxpPjxhIGhyZWY9Ii9zZWN1cml0eSI+U2VjdXJpdHk8L2E+PC9saT4KICAgICAgICAKICAgICAgICAKICAgICAgICAgIDxsaT48YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vY29udGFjdCI+U3VwcG9ydDwvYT48L2xpPgogICAgICAgIAogICAgICA8L3VsPgogIDwvZGl2Pgo8L2Rpdj4KCgo8ZGl2IGNsYXNzPSJmdWxsc2NyZWVuLW92ZXJsYXkiPjwvZGl2Pgo8L2JvZHk+CjwvaHRtbD4K
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://help.github.com/articlezzz
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
+recorded_with: VCR 2.9.3

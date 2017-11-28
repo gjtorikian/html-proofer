@@ -1,0 +1,139 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Mon, 15 May 2017 14:06:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
+      Content-Length:
+      - '534'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:38 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-iad2150-IAD
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1495405538.243021,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 74a9938c10ca1eafcb59f0a79399c38f81587be4
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:38 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Server:
+      - mw1254.eqiad.wmnet
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      X-Powered-By:
+      - HHVM/3.12.14
+      P3P:
+      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
+        for more info."
+      X-Content-Type-Options:
+      - nosniff
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Link:
+      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
+        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
+        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
+        2dppx)"
+      Last-Modified:
+      - Sat, 20 May 2017 11:45:00 GMT
+      Backend-Timing:
+      - D=94706 t=1495280787762719
+      X-Varnish:
+      - 463856154 428976936, 485861072 239396873
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '36268'
+      X-Cache:
+      - cp1067 hit/7, cp1066 hit/20
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
+      X-Analytics:
+      - ns=0;page_id=25914154;https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
+  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+recorded_with: VCR 2.9.3

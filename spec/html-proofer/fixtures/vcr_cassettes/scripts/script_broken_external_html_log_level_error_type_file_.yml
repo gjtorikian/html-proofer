@@ -1,0 +1,24 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com/asdo3IRJ.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/asdo3IRJ.js
+  recorded_at: Sun, 21 May 2017 22:25:39 GMT
+recorded_with: VCR 2.9.3

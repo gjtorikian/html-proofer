@@ -1,0 +1,123 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      X-Trans-Id:
+      - txd469d64dcead4249a3d9f-00592213d3
+      Vary:
+      - Accept-Encoding
+      X-Varnish:
+      - 180062360, 209907495
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '0'
+      X-Cache:
+      - cp1063 miss, cp1072 pass
+      X-Cache-Status:
+      - miss
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Analytics:
+      - https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+- request:
+    method: get
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Trans-Id:
+      - txd469d64dcead4249a3d9f-00592213d3
+      Vary:
+      - Accept-Encoding
+      X-Varnish:
+      - 178431626 180062361, 209542015
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '0'
+      X-Cache:
+      - cp1063 hit/1, cp1072 pass
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Analytics:
+      - https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+    body:
+      encoding: UTF-8
+      string: |-
+        <html>
+         <head>
+          <title>404 Not Found</title>
+         </head>
+         <body>
+          <h1>404 Not Found</h1>
+          The resource could not be found.<br /><br />
+        Regexp failed to match URI: &quot;/wikipedia/en/thumb/fooooof.png&quot;
+
+
+         </body>
+        </html>
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Sun, 21 May 2017 22:25:24 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - image/png
+      Content-Length:
+      - '27296'
+      Connection:
+      - keep-alive
+      X-Object-Meta-Sha1base36:
+      - p7dqlbd9lri1tjjq0gtkrbdxjr6r4zs
+      Content-Disposition:
+      - inline;filename*=UTF-8''Heckert_GNU_white.svg.png
+      Last-Modified:
+      - Tue, 21 Mar 2017 16:19:29 GMT
+      Etag:
+      - 9085b06269273ae6924dd1292427ec2a
+      X-Timestamp:
+      - '1490113168.79562'
+      X-Trans-Id:
+      - txcb3eb7ee27814904af689-005921b53a
+      X-Varnish:
+      - 187158396 187913948, 206489452 158683398
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '24216'
+      X-Cache:
+      - cp1048 hit/4, cp1072 hit/12
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Analytics:
+      - https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
+      Timing-Allow-Origin:
+      - "*"
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+recorded_with: VCR 2.9.3

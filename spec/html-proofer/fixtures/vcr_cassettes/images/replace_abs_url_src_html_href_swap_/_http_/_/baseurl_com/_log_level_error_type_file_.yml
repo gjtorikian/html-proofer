@@ -1,0 +1,24 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://baseurl.com/gpl.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: http://baseurl.com/gpl.png
+  recorded_at: Sun, 21 May 2017 22:32:58 GMT
+recorded_with: VCR 2.9.3
