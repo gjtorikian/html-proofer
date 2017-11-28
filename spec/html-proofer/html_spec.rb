@@ -115,4 +115,11 @@ describe 'Html test' do
     proofer = run_proofer(ignorable_namespace, :file, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'passes for scripts with ampersands' do
+    opts = { check_html: true }
+    file = "#{FIXTURES_DIR}/html/parse_error.html"
+    proofer = run_proofer(file, :file, opts)
+    expect(proofer.failed_tests).to eq []
+  end
 end

@@ -37,12 +37,6 @@ describe 'Scripts test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'passes for scripts with ampersands' do
-    file = "#{FIXTURES_DIR}/scripts/parse_error.html"
-    proofer = run_proofer(file, :file)
-    expect(proofer.failed_tests).to eq []
-  end
-
   it 'ignores links via url_ignore' do
     ignorable_links = "#{FIXTURES_DIR}/scripts/ignorable_links_via_options.html"
     proofer = run_proofer(ignorable_links, :file, url_ignore: [%r{/assets/.*(js|css|png|svg)}])
