@@ -29,7 +29,7 @@ module HTMLProofer
     # problem from http://git.io/vBYU1
     # solution from http://git.io/vBYUi
     def clean_content(string)
-      string.gsub(%r{https?://([^>]+)}i) do |url|
+      string.gsub(%r{(?:https?:)?//([^>]+)}i) do |url|
         url.gsub(/&(?!amp;)/, '&amp;')
       end
     end

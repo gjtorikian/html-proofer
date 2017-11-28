@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://maps.googleapis.com/maps/api/js?callback=boing&key=xyz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Date:
+      - Sun, 27 Aug 2017 20:18:08 GMT
+      Expires:
+      - Sun, 27 Aug 2017 20:48:08 GMT
+      Cache-Control:
+      - public, max-age=1800
+      Server:
+      - mafe
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Language,Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://maps.googleapis.com/maps/api/js?callback=boing&key=xyz
+  recorded_at: Sun, 27 Aug 2017 20:18:08 GMT
+- request:
+    method: head
+    uri: http://maps.googleapis.com/maps/api/js?v=3.exp&callback=xyz&key=abc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/javascript; charset=UTF-8
+      Date:
+      - Tue, 28 Nov 2017 22:47:42 GMT
+      Expires:
+      - Tue, 28 Nov 2017 23:17:42 GMT
+      Cache-Control:
+      - public, max-age=1800
+      Server:
+      - mafe
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Language,Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://maps.googleapis.com/maps/api/js?v=3.exp&callback=xyz&key=abc
+  recorded_at: Tue, 28 Nov 2017 22:47:42 GMT
+recorded_with: VCR 2.9.3
