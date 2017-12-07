@@ -49,8 +49,7 @@ describe 'Links test' do
     proofer = run_proofer(broken_link_external_filepath, :file)
     failure = proofer.failed_tests.first
     expect(failure).to match(/failed: response code 0/)
-    # ensure lack of slash in error message
-    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com failed:})
+    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com/ failed:})
   end
 
   it 'passes for different filename without option' do
@@ -559,7 +558,7 @@ describe 'Links test' do
 
   it 'timeout' do
     proofer = run_proofer(['https://www.google.com:81'], :links)
-    expect(proofer.failed_tests.first).to match(/time out/)
+    expect(proofer.failed_tests.first).to match(/Couldn't connect to server/)
   end
 
   it 'correctly handles empty href' do
