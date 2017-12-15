@@ -1,7 +1,7 @@
 module HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
-    attr_reader :node, :html, :element, :src, :path, :options, :issues, :external_urls
+    attr_reader :node, :html, :element, :src, :path, :options, :issues, :external_urls, :check_sri_issues
 
     def initialize(src, path, html, options)
       @src    = src
@@ -10,6 +10,7 @@ module HTMLProofer
       @options = options
       @issues = []
       @external_urls = {}
+      @check_sri_issues = {}
     end
 
     def create_element(node)
@@ -21,8 +22,16 @@ module HTMLProofer
       raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_issue(desc, line: nil, status: -1, content: nil)
-      @issues << Issue.new(@path, desc, line: line, status: status, content: content)
+    def add_issue(desc, line: nil, status: -1, content: nil, check_sri_url: nil)
+      issue = Issue.new(@path, desc, line: line, status: status, content: content)
+      @issues << issue
+      unless check_sri_url.nil?
+        if @check_sri_issues.has_key? (check_sri_url)
+          @check_sri_issues[check_sri_url] << issue
+        else
+          @check_sri_issues.update({check_sri_url => [issue]})
+        end
+      end
     end
 
     def add_to_external_urls(url)

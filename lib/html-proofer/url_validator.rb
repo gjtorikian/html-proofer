@@ -7,12 +7,13 @@ module HTMLProofer
   class UrlValidator
     include HTMLProofer::Utils
 
-    attr_reader :external_urls
+    attr_reader :external_urls, :check_sri_issues_exclude
 
-    def initialize(logger, external_urls, options)
+    def initialize(logger, external_urls, check_sri_url, options)
       @logger = logger
       @external_urls = external_urls
       @failed_tests = []
+      @check_sri_issues_exclude = check_sri_url
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
       @cache = Cache.new(@logger, @options[:cache])
@@ -153,6 +154,9 @@ module HTMLProofer
       if response_code.between?(200, 299)
         unless check_hash_in_2xx_response(href, effective_url, response, filenames)
           @cache.add(href, filenames, response_code)
+        end
+        if @options[:check_sri] && (@check_sri_issues_exclude.has_key? (href)) && (response.response_headers.include? 'Access-Control-Allow-Origin: *')
+          @check_sri_issues_exclude.delete href
         end
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)

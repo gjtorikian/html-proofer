@@ -6,6 +6,7 @@ module HTMLProofer
 
     def initialize(src, opts = {})
       @src = src
+      @check_sri_issues = {}
 
       @options = HTMLProofer::Configuration::PROOFER_DEFAULTS.merge(opts)
 
@@ -107,15 +108,29 @@ module HTMLProofer
           end
           result[:external_urls].merge!(external_urls)
           result[:failures].concat(check.issues)
+          @check_sri_issues.deep_merge!(check.check_sri_issues) do |key, oldval, newval|
+            (newval.is_a?(Array) ? (oldval + newval) : (oldval << newval)).uniq
+          end
         end
       end
       result
     end
 
     def validate_urls
-      url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
+      url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @check_sri_issues, @options)
       @failures.concat(url_validator.run)
       @external_urls = url_validator.external_urls
+
+      url_validator.check_sri_issues_exclude.each { |url, arr_issue_to_exclude|
+        arr_issue_to_exclude.each{ |issue_to_exclude|
+        @failures.each {|issue|
+          if issue_to_exclude.equal? issue
+              @failures.delete issue
+              break
+            end
+          }
+        }
+      }
     end
 
     def files
