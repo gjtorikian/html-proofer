@@ -92,7 +92,7 @@ module HTMLProofer
     end
 
     def check_path(path)
-      result = { external_urls: {}, failures: [] }
+      result = {external_urls: {}, failures: []}
       html = create_nokogiri(path)
 
       @src = [@src] if @type == :file
@@ -121,10 +121,10 @@ module HTMLProofer
       @failures.concat(url_validator.run)
       @external_urls = url_validator.external_urls
 
-      url_validator.check_sri_issues_exclude.each { |url, arr_issue_to_exclude|
-        arr_issue_to_exclude.each{ |issue_to_exclude|
-        @failures.each {|issue|
-          if issue_to_exclude.equal? issue
+      url_validator.check_sri_issues_exclude.each_value { |arr_issue_to_exclude|
+        arr_issue_to_exclude.each { |issue_to_exclude|
+          @failures.each_value { |issue|
+            if issue_to_exclude.equal? issue
               @failures.delete issue
               break
             end
