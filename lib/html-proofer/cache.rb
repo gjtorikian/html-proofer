@@ -128,12 +128,6 @@ module HTMLProofer
       urls_to_check
     end
 
-    # FIXME: there seems to be some discrepenacy where Typhoeus occasionally adds
-    # a trailing slash to URL strings, which causes issues with the cache
-    def slashless_url(url)
-      url.chomp('/')
-    end
-
     # FIXME: it seems that Typhoeus actually acts on escaped URLs,
     # but there's no way to get at that information, and the cache
     # stores unescaped URLs. Because of this, some links, such as
@@ -144,7 +138,7 @@ module HTMLProofer
     end
 
     def clean_url(url)
-      slashless_url(unescape_url(url))
+      unescape_url(url)
     end
 
     def setup_cache!(options)
