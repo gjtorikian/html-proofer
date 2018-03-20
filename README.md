@@ -390,11 +390,12 @@ Here's an example custom test demonstrating these concepts. It reports `mailto` 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @link.data_ignore_proofer || @link.href.nil?
+    return false if @link.data_proofer_ignore || @link.href.nil?
     @link.href.match /mailto/
   end
 
   def octocat?
+    return false if @link.data_proofer_ignore || @link.href.nil?
     @link.href.match /octocat@github.com/
   end
 
