@@ -1,4 +1,4 @@
-# rubocop:disable Style/FileName
+# rubocop:disable Naming/FileName
 
 def require_all(path)
   dir = File.join(File.dirname(__FILE__), path)
