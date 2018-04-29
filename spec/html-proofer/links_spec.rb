@@ -572,4 +572,11 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'is only checks links uniquely' do
+    file = "#{FIXTURES_DIR}/links/multiple_links.html"
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.external_urls.keys.size).to eq 1
+    expect(proofer.failed_tests).to eq []
+  end
 end
