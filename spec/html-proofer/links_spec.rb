@@ -484,6 +484,16 @@ describe 'Links test' do
     expect(proofer.failed_tests.length).to eq 1
   end
 
+  it 'can skip expecting href for anchors in non-HTML5' do
+    missing_href = "#{FIXTURES_DIR}/links/blank_href_html4.html"
+    proofer = run_proofer(missing_href, :file, allow_missing_href: true)
+    expect(proofer.failed_tests.length).to eq 0
+
+    missing_href = "#{FIXTURES_DIR}/links/blank_href_htmlunknown.html"
+    proofer = run_proofer(missing_href, :file, allow_missing_href: true)
+    expect(proofer.failed_tests.length).to eq 0
+  end
+
   it 'works with internal_domains' do
     translated_link = "#{FIXTURES_DIR}/links/link_translated_internal_domains.html"
     proofer = run_proofer(translated_link, :file, internal_domains: ['www.example.com', 'example.com'])

@@ -114,6 +114,10 @@ module HTMLProofer
       @check.options[:empty_alt_ignore]
     end
 
+    def allow_missing_href?
+      @check.options[:allow_missing_href]
+    end
+
     def allow_hash_href?
       @check.options[:allow_hash_href]
     end

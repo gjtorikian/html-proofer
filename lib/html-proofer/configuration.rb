@@ -3,6 +3,7 @@ module HTMLProofer
     require_relative 'version'
 
     PROOFER_DEFAULTS = {
+      allow_missing_href: false,
       allow_hash_href: false,
       alt_ignore: [],
       assume_extension: false,

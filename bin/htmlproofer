@@ -13,6 +13,7 @@ Mercenary.program(:htmlproofer) do |p|
 
   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
+  p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href` (this is the default for HTML5).'
   p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, ignores the `href` `#`'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
