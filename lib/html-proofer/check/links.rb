@@ -30,6 +30,7 @@ class LinkCheck < ::HTMLProofer::Check
 
       # is there even an href?
       if missing_href?
+        next if @link.allow_missing_href?
         # HTML5 allows dropping the href: http://git.io/vBX0z
         next if @html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?
         add_issue('anchor has no href attribute', line: line, content: content)
