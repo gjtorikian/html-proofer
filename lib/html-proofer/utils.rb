@@ -7,7 +7,7 @@ module HTMLProofer
     end
 
     def create_nokogiri(path)
-      content = if File.exist? path
+      content = if File.exist?(path) && !File.directory?(path)
                   File.open(path).read
                 else
                   path
