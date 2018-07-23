@@ -239,7 +239,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | Option | Description | Default |
 | :----- | :---------- | :------ |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
-| `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
+| `allow_hash_href` | If `true`, ignores the `href="#"`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
