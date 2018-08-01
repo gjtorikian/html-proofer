@@ -14,7 +14,7 @@ require 'fileutils'
 
 begin
   require 'awesome_print'
-  require 'pry'
+  require 'pry-byebug'
 rescue LoadError; end
 module HTMLProofer
   def check_file(file, options = {})

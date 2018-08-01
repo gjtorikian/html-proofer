@@ -32,7 +32,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'codecov'
   gem.add_development_dependency 'rspec', '~> 3.1'
   gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'pry', '~> 0.10.0'
+  gem.add_development_dependency 'pry-byebug'
   gem.add_development_dependency 'awesome_print'
   gem.add_development_dependency 'vcr', '~> 2.9'
   gem.add_development_dependency 'timecop', '~> 0.8'
