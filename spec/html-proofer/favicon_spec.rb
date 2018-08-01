@@ -60,4 +60,10 @@ describe 'Favicons test' do
     proofer = run_proofer(broken_but_ignored, :file, check_favicon: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'ignores SRI/CORS requirements for favicons' do
+    file = "#{FIXTURES_DIR}/favicon/cors_not_needed.html"
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests).to eq []
+  end
 end

@@ -49,25 +49,25 @@ describe 'Scripts test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'SRI and CORS not provided' do
+  it 'is unhappy if SRI and CORS not provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_not_provided.html"
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests.first).to match(/SRI and CORS not provided/)
   end
 
-  it 'SRI not provided' do
+  it 'is unhappy if SRI not provided' do
     file = "#{FIXTURES_DIR}/scripts/cors_not_provided.html"
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests.first).to match(/CORS not provided/)
   end
 
-  it 'CORS not provided' do
+  it 'is unhappy if CORS not provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_not_provided.html"
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests.first).to match(/Integrity is missing/)
   end
 
-  it 'SRI and CORS provided' do
+  it 'is happy if SRI and CORS provided' do
     file = "#{FIXTURES_DIR}/scripts/integrity_and_cors_provided.html"
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []

@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://monitortech.org/favicon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.9.1; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - public, max-age=604800
+      Expires:
+      - Wed, 08 Aug 2018 18:54:31 GMT
+      Last-Modified:
+      - Tue, 20 Dec 2016 18:33:34 GMT
+      Content-Type:
+      - image/x-icon
+      Content-Length:
+      - '1150'
+      Date:
+      - Wed, 01 Aug 2018 18:54:31 GMT
+      Accept-Ranges:
+      - bytes
+      Server:
+      - LiteSpeed
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="35,37,38,39"
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://monitortech.org/favicon.ico
+  recorded_at: Wed, 01 Aug 2018 18:54:31 GMT
+recorded_with: VCR 2.9.3
