@@ -352,6 +352,18 @@ describe 'Links test' do
     expect(proofer.failed_tests.length).to eq 1
   end
 
+  it 'allows unicode domains' do
+    fixture = "#{FIXTURES_DIR}/links/unicode_domain.html"
+    proofer = run_proofer(fixture, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'allows punnycode domains' do
+    fixture = "#{FIXTURES_DIR}/links/punnycode.html"
+    proofer = run_proofer(fixture, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'passes for broken *nix links' do
     fixture = "#{FIXTURES_DIR}/links/broken_unix_links.html"
     proofer = run_proofer(fixture, :file)
