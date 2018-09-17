@@ -24,10 +24,7 @@ task :proof_readme do
   File.write('out/README.html', html)
 
   opts = {
-    url_ignore: [/badge.fury.io/],
-    typhoeus: {
-      headers: { "User-Agent" => "Mozilla/5.0 (compatible; Some User-Agent)" }
-    }
+    url_ignore: [/badge.fury.io/, /codecov.io/]
   }
   HTMLProofer.check_directory('./out', opts).run
 end
