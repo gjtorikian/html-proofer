@@ -8,3 +8,6 @@ Style/StringLiterals:
 
 RequireParentheses:
   Enabled: true
+
+Naming/FileName:
+  Enabled: false

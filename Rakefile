@@ -23,6 +23,8 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  opts = { url_ignore: [/badge.fury.io/] }
+  opts = {
+    url_ignore: [/badge.fury.io/, /codecov.io/]
+  }
   HTMLProofer.check_directory('./out', opts).run
 end
