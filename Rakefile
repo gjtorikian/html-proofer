@@ -23,6 +23,11 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  opts = { url_ignore: [/badge.fury.io/] }
+  opts = {
+    url_ignore: [/badge.fury.io/],
+    typhoeus: {
+      headers: { "User-Agent" => "Mozilla/5.0 (compatible; Some User-Agent)" }
+    }
+  }
   HTMLProofer.check_directory('./out', opts).run
 end
