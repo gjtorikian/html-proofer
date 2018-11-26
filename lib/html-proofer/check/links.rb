@@ -110,6 +110,7 @@ class LinkCheck < ::HTMLProofer::Check
   def hash_check(html, href_hash)
     decoded_href_hash = Addressable::URI.unescape(href_hash)
     fragment_ids = [href_hash, decoded_href_hash]
+    # https://www.w3.org/TR/html5/single-page.html#scroll-to-fragid
     fragment_ids.include?('top') || !find_fragments(html, fragment_ids).empty?
   end
 
@@ -117,8 +118,8 @@ class LinkCheck < ::HTMLProofer::Check
     xpaths = fragment_ids.flat_map do |frag_id|
       escaped_frag_id = "'#{frag_id.split("'").join("', \"'\", '")}', ''"
       [
-        "//*[case_insensitive_equals(@id, concat(#{escaped_frag_id}))]",
-        "//*[case_insensitive_equals(@name, concat(#{escaped_frag_id}))]"
+        "//*[case_sensitive_equals(@id, concat(#{escaped_frag_id}))]",
+        "//*[case_sensitive_equals(@name, concat(#{escaped_frag_id}))]"
       ]
     end
     xpaths << XpathFunctions.new
@@ -140,8 +141,8 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   class XpathFunctions
-    def case_insensitive_equals(node_set, str_to_match)
-      node_set.find_all { |node| node.to_s.casecmp(str_to_match.to_s.downcase).zero? }
+    def case_sensitive_equals(node_set, str_to_match)
+      node_set.find_all { |node| node.to_s. == str_to_match.to_s }
     end
   end
 end
