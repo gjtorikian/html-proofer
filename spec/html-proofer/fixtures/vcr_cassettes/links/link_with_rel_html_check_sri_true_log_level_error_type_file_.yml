@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.9.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Nov 2018 16:00:50 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      Set-Cookie:
+      - has_recent_activity=1; path=/; expires=Mon, 26 Nov 2018 17:00:50 -0000
+      - logged_in=no; domain=.github.com; path=/; expires=Fri, 26 Nov 2038 16:00:50
+        -0000; secure; HttpOnly
+      - _gh_sess=d3hEdHJNc082elIwSE5EbklNdENVVmxPalgvbm9iQnIwS1AvR01UVVZuT3lyWVZLRFFZTlhndS9IT2Z5aFBMQmQyWll6YTJBc3doU0RuSXZxSFNUbW8vL1RLR3Bna3Fnb29VcGpPNCtiYVBQUjZ2ZGd3b1hQNmQzQjllVTJLbkRlbURYWUcxa01uVng3SDZkS2RiRndRTk5uV1J6RFJuTUZlMkhOUU9sMHg1SjdlOFN3dmkrNXB4TWdCMm1nU3VOLS1EYWo1clM5OHVEaGpGTlp5YTVIemVBPT0%3D--a709112fb5c9c394c9ee6449bf8e2e4b8a1d573a;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - d5d24ff8-2991-4f85-b137-2488d7d60dc5
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Expect-CT:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com status.github.com collector.githubapp.com api.github.com
+        www.google-analytics.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; frame-src render.githubusercontent.com;
+        img-src ''self'' data: assets-cdn.github.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com *.githubusercontent.com; manifest-src ''self'';
+        media-src ''none''; script-src assets-cdn.github.com; style-src ''unsafe-inline''
+        assets-cdn.github.com'
+      X-GitHub-Request-Id:
+      - C942:1966B:10771A33:184FC6F8:5BFC18B2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Mon, 26 Nov 2018 16:00:41 GMT
+recorded_with: VCR 2.9.3
