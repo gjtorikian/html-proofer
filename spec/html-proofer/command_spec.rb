@@ -99,7 +99,7 @@ describe 'Command test' do
   end
 
   it 'works with allow-hash-href' do
-    broken = "#{FIXTURES_DIR}/links/href_hash.html"
+    broken = "#{FIXTURES_DIR}/links/hash_href.html"
     output = make_bin('--allow-hash-href', broken)
     expect(output).to match('successfully')
   end
