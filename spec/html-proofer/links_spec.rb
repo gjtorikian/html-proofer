@@ -127,7 +127,7 @@ describe 'Links test' do
   end
 
   it 'properly checks ssl links' do
-    check_ssl_links = "#{FIXTURES_DIR}/links/check_ssl_links.html"
+    check_ssl_links = "#{FIXTURES_DIR}/links/checkSSLLinks.html"
     proofer = run_proofer(check_ssl_links, :file)
     expect(proofer.failed_tests).to eq []
   end
@@ -283,6 +283,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'fails for mismatched hash casing' do
+    hash_on_another_page = "#{FIXTURES_DIR}/links/hash_mismatched_case.html"
+    proofer = run_proofer(hash_on_another_page, :file)
+    expect(proofer.failed_tests.first).to match('internal hash #MainMenu that does not exist')
+  end
+
   it 'works for directory index file' do
     options = { directory_index_file: 'index.php' }
     link_pointing_to_directory = "#{FIXTURES_DIR}/links/link_pointing_to_directory.html"
@@ -420,12 +426,6 @@ describe 'Links test' do
     end
   end
 
-  it 'does not complain for internal links with mismatched cases' do
-    fixture = "#{FIXTURES_DIR}/links/ignores_cases.html"
-    proofer = run_proofer(fixture, :file)
-    expect(proofer.failed_tests).to eq []
-  end
-
   it 'does not check links with parameters multiple times' do
     fixture = "#{FIXTURES_DIR}/links/check_just_once.html"
     proofer = run_proofer(fixture, :file)
@@ -475,7 +475,7 @@ describe 'Links test' do
   end
 
   it 'works for internal links to weird encoding IDs' do
-    hash_href = "#{FIXTURES_DIR}/links/encoding_link.html"
+    hash_href = "#{FIXTURES_DIR}/links/encodingLink.html"
     proofer = run_proofer(hash_href, :file)
     expect(proofer.failed_tests.length).to eq 0
   end
@@ -579,8 +579,8 @@ describe 'Links test' do
   end
 
   it 'handles timeout' do
-    proofer = run_proofer(['https://www.google.com:81'], :links)
-    expect(proofer.failed_tests.first).to match(/Couldn't connect to server/)
+    proofer = run_proofer(['https://www.sdskafnlkn3rl3204uasfilfkmakmefalkm.com:81'], :links)
+    expect(proofer.failed_tests.first).to match(/got a time out|the request timed out/)
   end
 
   it 'correctly handles empty href' do
@@ -592,6 +592,12 @@ describe 'Links test' do
   it 'is not checking SRI and CORS for links with rel canonical or alternate' do
     file = "#{FIXTURES_DIR}/links/link_with_rel.html"
     proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'can link to external non-unicode hash' do
+    file = "#{FIXTURES_DIR}/links/hash_to_unicode_ref.html"
+    proofer = run_proofer(file, :file, check_external_hash: true)
     expect(proofer.failed_tests).to eq []
   end
 end

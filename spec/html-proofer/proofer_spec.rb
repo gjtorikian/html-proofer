@@ -107,13 +107,13 @@ describe HTMLProofer do
   describe 'ignored checks' do
     it 'knows how to ignore checks' do
       options = { checks_to_ignore: ['ImageRunner'] }
-      proofer = make_proofer('', :file, options)
+      proofer = make_proofer("#{FIXTURES_DIR}/links/broken_link_external.html", :file, options)
       expect(proofer.checks).to_not include 'ImageRunner'
     end
 
     it 'does not care about phoney ignored checks' do
       options = { checks_to_ignore: ['This is nothing.'] }
-      proofer = make_proofer('', :file, options)
+      proofer = make_proofer("#{FIXTURES_DIR}/links/broken_link_external.html", :file, options)
       expect(proofer.checks.length).to eq(3)
     end
   end

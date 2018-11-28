@@ -45,7 +45,7 @@ describe 'Command test' do
   end
 
   it 'works with file-ignore' do
-    external = "#{FIXTURES_DIR}/links/brokenHashInternal.html"
+    external = "#{FIXTURES_DIR}/links/broken_hash_internal.html"
     output = make_bin("--file-ignore #{external}", external)
     expect(output).to match('successfully')
   end
@@ -93,13 +93,13 @@ describe 'Command test' do
   end
 
   it 'works with empty-alt-ignore' do
-    broken = "#{FIXTURES_DIR}/html/empty_image_alt_text.html"
+    broken = "#{FIXTURES_DIR}/images/empty_image_alt_text.html"
     output = make_bin('--empty-alt-ignore', broken)
     expect(output).to match('successfully')
   end
 
   it 'works with allow-hash-href' do
-    broken = "#{FIXTURES_DIR}/html/href_hash.html"
+    broken = "#{FIXTURES_DIR}/links/hash_href.html"
     output = make_bin('--allow-hash-href', broken)
     expect(output).to match('successfully')
   end

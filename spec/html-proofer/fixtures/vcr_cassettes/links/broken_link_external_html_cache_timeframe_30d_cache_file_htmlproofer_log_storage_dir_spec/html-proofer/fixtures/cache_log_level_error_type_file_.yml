@@ -68,4 +68,55 @@ http_interactions:
     adapter_metadata:
       effective_url: http://www.google.com/
   recorded_at: Sun, 21 May 2017 22:25:40 GMT
+- request:
+    method: head
+    uri: http://www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.9.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Nov 2018 16:26:29 GMT
+      Expires:
+      - "-1"
+      Cache-Control:
+      - private, max-age=0
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Server:
+      - gws
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Set-Cookie:
+      - 1P_JAR=2018-11-26-16; expires=Wed, 26-Dec-2018 16:26:29 GMT; path=/; domain=.google.com
+      - NID=148=rSjCF9PGv8Ea-j47fyGRKhMlo9Zy_0YzehEq23x0AEv5N4HFvoby9g6VX90ufB7Pc1g3VkqCPjDvXw-SWsiuftnclgXCccJYwmVGYuGJFRvg2bEsiM2Mq7uVhDSH9bkduDRer-5VsgSI-YXFZQJUvWWZslv7EmqrVIUYa7IAq4s;
+        expires=Tue, 28-May-2019 16:26:29 GMT; path=/; domain=.google.com; HttpOnly
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - none
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Mon, 26 Nov 2018 16:26:19 GMT
 recorded_with: VCR 2.9.3
