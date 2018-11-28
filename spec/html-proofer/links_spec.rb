@@ -594,4 +594,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, check_sri: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'can link to external non-unicode hash' do
+    file = "#{FIXTURES_DIR}/links/hash_to_unicode_ref.html"
+    proofer = run_proofer(file, :file, check_external_hash: true)
+    expect(proofer.failed_tests).to eq []
+  end
 end
