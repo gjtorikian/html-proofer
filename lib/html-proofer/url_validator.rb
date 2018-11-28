@@ -178,8 +178,9 @@ module HTMLProofer
 
       body_doc = create_nokogiri(response.body)
 
+      unencoded_hash = Addressable::URI.unescape(hash)
+      xpath = %(//*[@name="#{hash}"]|/*[@name="#{unencoded_hash}"]|//*[@id="#{hash}"]|//*[@id="#{unencoded_hash}"])
       # user-content is a special addition by GitHub.
-      xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
       if URI.parse(href).host =~ /github\.com/i
         xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
       end
