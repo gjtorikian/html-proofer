@@ -572,6 +572,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'does not check sri for pagination' do
+    file = "#{FIXTURES_DIR}/links/integrity_and_cors_pagination_rels.html"
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'does not check local scripts' do
     file = "#{FIXTURES_DIR}/links/local_stylesheet.html"
     proofer = run_proofer(file, :file, check_sri: true)
