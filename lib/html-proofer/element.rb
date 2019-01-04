@@ -173,11 +173,10 @@ module HTMLProofer
 
       file = File.join base, path
 
-      # implicit index support
-      if File.directory?(file) && !unslashed_directory?(file)
-        file = File.join file, @check.options[:directory_index_file]
-      elsif @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
+      if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
+      elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
+        file = File.join file, @check.options[:directory_index_file]
       end
 
       file
