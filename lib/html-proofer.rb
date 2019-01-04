@@ -17,26 +17,6 @@ begin
   require 'pry-byebug'
 rescue LoadError; end
 module HTMLProofer
-  def parse_json_option(option_name, config)
-    raise ArgumentError.new('Must provide an option name in string format.') unless option_name.is_a?(String)
-    raise ArgumentError.new('Must provide an option name in string format.') unless !option_name.strip.empty?
-
-    if config.nil? then {}
-    else
-      raise ArgumentError.new('Must provide a JSON configuration in string format.') unless config.is_a?(String)
-
-    if config.strip.empty? then {}
-    else
-      begin
-        JSON.parse(config)
-      rescue
-        raise ArgumentError.new("Option '" + option_name + "' did not contain valid JSON.")
-      end
-    end
-    end
-  end
-  module_function :parse_json_option
-
   def check_file(file, options = {})
     raise ArgumentError unless file.is_a?(String)
     raise ArgumentError, "#{file} does not exist" unless File.exist?(file)

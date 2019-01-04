@@ -82,7 +82,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags']
 
     options[:typhoeus] = {}
-    options[:typhoeus] = HTMLProofer.parse_json_option('typhoeus_config', opts['typhoeus_config'])
+    options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'])
 
     options[:cache] = {}
     options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?
