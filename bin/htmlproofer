@@ -34,16 +34,17 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'external_only', '--external_only', 'Only checks problems with external references'
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
+  p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
   p.option 'report_invalid_tags', '--report-invalid-tags', 'Ignore `check_html` errors associated with unknown markup (default: `false`)'
   p.option 'report_missing_names', '--report-missing-names', 'Ignore `check_html` errors associated with missing entities (default: `false`)'
   p.option 'report_script_embeds', '--report-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
+  p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
+  p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
-  p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
-  p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -79,6 +80,9 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_script_embeds] = opts['report_script_embeds']
     options[:validation][:report_missing_names] = opts['report_missing_names']
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags']
+
+    options[:typhoeus] = {}
+    options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'])
 
     options[:cache] = {}
     options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?
