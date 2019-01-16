@@ -32,11 +32,11 @@ module HTMLProofer
     end
 
     def run
-      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
-
       if @type == :links
+        @logger.log :info, "Running #{checks} on #{@src}... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
+        @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
         check_files
         file_text = pluralize(files.length, 'file', 'files')
         @logger.log :info, "Ran on #{file_text}!\n\n"
