@@ -13,6 +13,10 @@ class ImageCheck < ::HTMLProofer::Check
     blank?(@img.url)
   end
 
+  def clean_url
+    @img.url.strip!
+  end
+
   def run
     @html.css('img').each do |node|
       @img = create_element(node)
@@ -20,6 +24,9 @@ class ImageCheck < ::HTMLProofer::Check
       content = node.content
 
       next if @img.ignore?
+
+      # remove spaces and new lines from urls
+      clean_url
 
       # screenshot filenames should return because of terrible names
       if terrible_filename?
