@@ -54,7 +54,7 @@ module HTMLProofer
 
     def url
       return @url if defined?(@url)
-      @url = (@src || @srcset || @href || '').delete("\u200b")
+      @url = (@src || @srcset || @href || '').delete("\u200b").strip
       @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
       @url = swap(@url, @check.options[:url_swap])

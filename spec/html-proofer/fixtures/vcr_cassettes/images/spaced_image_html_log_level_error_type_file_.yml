@@ -1,0 +1,68 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://octodex.github.com/images/mona-lovelace.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.10.1; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - image/jpeg
+      Last-Modified:
+      - Wed, 16 Jan 2019 19:52:56 GMT
+      ETag:
+      - '"5c3f8b98-46c92"'
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sat, 19 Jan 2019 20:02:29 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 1888:44A1:D1EE43:FF57F4:5C437FFC
+      Content-Length:
+      - '289938'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 19 Jan 2019 19:57:08 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '279'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8141-JFK
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1547927828.424743,VS0,VE1
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 6a1b0014d3809622da6292667c0331bb172b4e5a
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://octodex.github.com/images/mona-lovelace.jpg
+  recorded_at: Sat, 19 Jan 2019 19:57:08 GMT
+recorded_with: VCR 2.9.3
