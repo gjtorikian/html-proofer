@@ -2,7 +2,7 @@ class ImageCheck < ::HTMLProofer::Check
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
   def empty_alt_tag?
-    @img.alt.strip.empty?
+    @img.alt.nil? || @img.alt.strip.empty?
   end
 
   def terrible_filename?
@@ -30,15 +30,13 @@ class ImageCheck < ::HTMLProofer::Check
       # does the image exist?
       if missing_src?
         add_issue('image has no src or srcset attribute', line: line, content: content)
-      else
-        if @img.remote?
-          add_to_external_urls(@img.url)
-        elsif !@img.exists?
-          add_issue("internal image #{@img.url} does not exist", line: line, content: content)
-        end
+      elsif @img.remote?
+        add_to_external_urls(@img.url)
+      elsif !@img.exists?
+        add_issue("internal image #{@img.url} does not exist", line: line, content: content)
       end
 
-      if !@img.ignore_alt? && (@img.alt.nil? || (empty_alt_tag? && !@img.ignore_empty_alt?))
+      if empty_alt_tag? && !@img.ignore_empty_alt? && !@img.ignore_alt?
         add_issue("image #{@img.url} does not have an alt attribute", line: line, content: content)
       end
 

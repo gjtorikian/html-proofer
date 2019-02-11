@@ -30,6 +30,7 @@ class LinkCheck < ::HTMLProofer::Check
 
       # is there even an href?
       if missing_href?
+        next if @link.allow_missing_href?
         # HTML5 allows dropping the href: http://git.io/vBX0z
         next if @html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?
         add_issue('anchor has no href attribute', line: line, content: content)
@@ -38,8 +39,12 @@ class LinkCheck < ::HTMLProofer::Check
 
       # intentionally here because we still want valid? & missing_href? to execute
       next if @link.non_http_remote?
-      # does the file even exist?
+
       if !@link.internal? && @link.remote?
+        check_sri(line, content) if @link.check_sri? && node.name == 'link'
+        # we need to skip these for now; although the domain main be valid,
+        # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
+        next if @link.try(:rel) == 'dns-prefetch'
         add_to_external_urls(@link.href)
         next
       elsif !@link.internal? && !@link.exists?
@@ -103,17 +108,41 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def hash_check(html, href_hash)
-    decoded_href_hash = URI.decode(href_hash)
-    html.xpath("//*[case_insensitive_equals(@id, '#{href_hash}')]", \
-               "//*[case_insensitive_equals(@name, '#{href_hash}')]", \
-               "//*[case_insensitive_equals(@id, '#{decoded_href_hash}')]", \
-               "//*[case_insensitive_equals(@name, '#{decoded_href_hash}')]", \
-               XpathFunctions.new).length > 0
+    decoded_href_hash = Addressable::URI.unescape(href_hash)
+    fragment_ids = [href_hash, decoded_href_hash]
+    # https://www.w3.org/TR/html5/single-page.html#scroll-to-fragid
+    fragment_ids.include?('top') || !find_fragments(html, fragment_ids).empty?
+  end
+
+  def find_fragments(html, fragment_ids)
+    xpaths = fragment_ids.flat_map do |frag_id|
+      escaped_frag_id = "'#{frag_id.split("'").join("', \"'\", '")}', ''"
+      [
+        "//*[case_sensitive_equals(@id, concat(#{escaped_frag_id}))]",
+        "//*[case_sensitive_equals(@name, concat(#{escaped_frag_id}))]"
+      ]
+    end
+    xpaths << XpathFunctions.new
+
+    html.xpath(*xpaths)
+  end
+
+  IGNORABE_REL = %(canonical alternate next prev previous icon manifest apple-touch-icon)
+
+  def check_sri(line, content)
+    return if IGNORABE_REL.include?(@link.rel)
+    if !defined?(@link.integrity) && !defined?(@link.crossorigin)
+      add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
+    elsif !defined?(@link.integrity)
+      add_issue("Integrity is missing in: #{@link.src}", line: line, content: content)
+    elsif !defined?(@link.crossorigin)
+      add_issue("CORS not provided for external resource in: #{@link.src}", line: line, content: content)
+    end
   end
 
   class XpathFunctions
-    def case_insensitive_equals(node_set, str_to_match)
-      node_set.find_all {|node| node.to_s.downcase == str_to_match.to_s.downcase }
+    def case_sensitive_equals(node_set, str_to_match)
+      node_set.find_all { |node| node.to_s. == str_to_match.to_s }
     end
   end
 end

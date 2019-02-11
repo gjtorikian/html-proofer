@@ -29,7 +29,7 @@ describe HTMLProofer::Element do
     it 'works for regex patterns' do
       nokogiri = Nokogiri::HTML('<script src=/assets/main.js></script>')
       checkable = HTMLProofer::Element.new(nokogiri.css('script').first, @check)
-      expect(checkable.ignores_pattern_check([/\/assets\/.*(js|css|png|svg)/])).to eq true
+      expect(checkable.ignores_pattern_check([%r{\/assets\/.*(js|css|png|svg)}])).to eq true
     end
 
     it 'works for string patterns' do

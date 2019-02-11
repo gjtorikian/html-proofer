@@ -10,6 +10,16 @@ class FaviconCheck < ::HTMLProofer::Check
 
     return if found
 
+    return if is_immediate_redirect?
+
     add_issue('no favicon specified')
   end
+
+  private
+
+  def is_immediate_redirect?
+    # allow any instant-redirect meta tag
+    @html.xpath("//meta[@http-equiv='refresh']").attribute('content').value.starts_with? '0;' rescue false
+  end
+
 end

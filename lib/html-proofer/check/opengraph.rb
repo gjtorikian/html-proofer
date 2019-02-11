@@ -2,12 +2,12 @@
 
 class OpenGraphElement < ::HTMLProofer::Element
   attr_reader :src
-  
+
   def initialize(obj, check)
     super(obj, check)
     # Fake up src from the content attribute
-    instance_variable_set("@src", @content)
-    
+    instance_variable_set('@src', @content)
+
     @src.insert 0, 'http:' if @src =~ %r{^//}
   end
 end
@@ -16,11 +16,11 @@ class OpenGraphCheck < ::HTMLProofer::Check
   def missing_src?
     !@opengraph.src
   end
-  
+
   def empty_src?
     blank?(@opengraph.src)
   end
-  
+
   def run
     @html.css('meta[property="og:url"], meta[property="og:image"]').each do |m|
       @opengraph = OpenGraphElement.new(m, self)

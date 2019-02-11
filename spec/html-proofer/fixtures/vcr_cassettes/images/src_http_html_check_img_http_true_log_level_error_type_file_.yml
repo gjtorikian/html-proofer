@@ -8,57 +8,61 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.0.6; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Tue, 28 Jun 2016 20:23:14 GMT
+      - Sun, 21 May 2017 22:25:23 GMT
       Content-Type:
       - image/png
       Content-Length:
-      - '27063'
+      - '27296'
       Connection:
       - keep-alive
       X-Object-Meta-Sha1base36:
-      - mm95ioarmv2n0yvfyg4czr9qxzhf44v
+      - p7dqlbd9lri1tjjq0gtkrbdxjr6r4zs
+      Content-Disposition:
+      - inline;filename*=UTF-8''Heckert_GNU_white.svg.png
       Last-Modified:
-      - Fri, 18 Oct 2013 02:15:06 GMT
+      - Tue, 21 Mar 2017 16:19:29 GMT
       Etag:
-      - b02df8baa52837645bd58a219be4d9dc
+      - 9085b06269273ae6924dd1292427ec2a
       X-Timestamp:
-      - '1382062505.22715'
+      - '1490113168.79562'
       X-Trans-Id:
-      - txe64c62d1f9114e088c0e6-005772bfb2
+      - txcb3eb7ee27814904af689-005921b53a
       X-Varnish:
-      - 2987082290 2975906087, 3669059457 3666092870, 606371344 605004656
+      - 187158396 187913948, 212147849 158683398
       Via:
-      - 1.1 varnish, 1.1 varnish, 1.1 varnish
-      Accept-Ranges:
-      - bytes
+      - 1.1 varnish-v4, 1.1 varnish-v4
       Age:
-      - '7424'
+      - '24216'
       X-Cache:
-      - cp1099 hit/4, cp3045 hit/2, cp3047 hit/1
+      - cp1048 hit/4, cp1072 hit/15
+      X-Cache-Status:
+      - hit
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       X-Analytics:
       - https=1;nocookies=1
       X-Client-IP:
-      - 82.123.125.188
+      - 100.37.221.161
       Access-Control-Allow-Origin:
       - "*"
       Access-Control-Expose-Headers:
       - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
       Timing-Allow-Origin:
       - "*"
+      Accept-Ranges:
+      - bytes
     body:
       encoding: UTF-8
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
-  recorded_at: Tue, 28 Jun 2016 20:23:14 GMT
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
 recorded_with: VCR 2.9.3

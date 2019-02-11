@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/favicon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - image/x-icon
+      Content-Length:
+      - '6518'
+      Last-Modified:
+      - Tue, 29 Oct 2013 06:45:13 GMT
+      ETag:
+      - '"526f5979-1976"'
+      Expires:
+      - Wed, 19 May 2027 22:25:23 GMT
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
+      X-Served-By:
+      - b9c2a2d2339d471239b174dbbc6d8be2
+      Accept-Ranges:
+      - bytes
+      X-GitHub-Request-Id:
+      - C3A7:45BB:28FF2B2:3D74C53:592213D3
+      X-Frame-Options:
+      - DENY
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/favicon.ico
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+recorded_with: VCR 2.9.3

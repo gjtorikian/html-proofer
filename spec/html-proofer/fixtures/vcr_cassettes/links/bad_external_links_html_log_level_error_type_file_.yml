@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: head
-    uri: http://www.asdo3irj395295jsingrkrg4.com/
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 0
@@ -19,24 +19,24 @@ http_interactions:
       string: ''
     http_version: 
     adapter_metadata:
-      effective_url: http://www.asdo3irj395295jsingrkrg4.com/
-  recorded_at: Sat, 13 Feb 2016 14:51:12 GMT
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
 - request:
     method: head
-    uri: http://www.google.com/
+    uri: http://www.google.com
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/2.6.1; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
   response:
     status:
       code: 200
       message: OK
     headers:
       Date:
-      - Sat, 13 Feb 2016 14:51:12 GMT
+      - Sun, 21 May 2017 22:25:36 GMT
       Expires:
       - "-1"
       Cache-Control:
@@ -53,9 +53,8 @@ http_interactions:
       X-Frame-Options:
       - SAMEORIGIN
       Set-Cookie:
-      - NID=76=HutDHRSV_gvsLipZATxtpS3Nt3nFpV_cUPh_knOawmRlJkX2xs077LCcW2DmA-mr3NOY9CwRCz8iG5dxXoqSW_lWh85ZXWAYHRYs761H-NJSpTu0VdsaJjQHov3zhwEf;
-        expires=Sun, 14-Aug-2016 14:51:12 GMT; path=/; domain=.google.co.uk; HttpOnly
-      - CONSENT=CG.250319; expires=Tue, 15-Mar-2016 14:51:12 GMT; path=/; domain=.google.co.uk
+      - NID=103=lJQszECWAt4qnMqAYxP_6-qNg_QFFOHOB6BMBUW6THwTOSXMocP7Mj8xE4s75M4kxJAaxt7Dnt-Bh5FdLmryZDnoHCNzeg-vPRpI8PGlzHiYRXmmO_Nge4JVtxM7OMXPE0HPreLQzZaMCF2g;
+        expires=Mon, 20-Nov-2017 22:25:36 GMT; path=/; domain=.google.com; HttpOnly
       Transfer-Encoding:
       - chunked
       Accept-Ranges:
@@ -67,6 +66,6 @@ http_interactions:
       string: ''
     http_version: '1.1'
     adapter_metadata:
-      effective_url: http://www.google.co.uk/?gfe_rd=cr&ei=4EK_VpDiC-PS8AebsI-IAQ
-  recorded_at: Sat, 13 Feb 2016 14:51:12 GMT
+      effective_url: http://www.google.com/
+  recorded_at: Sun, 21 May 2017 22:25:36 GMT
 recorded_with: VCR 2.9.3

@@ -1,16 +1,16 @@
 require 'yell'
-require 'colored'
+require 'colorized_string'
 
 module HTMLProofer
   class Log
     include Yell::Loggable
 
     def initialize(log_level)
-      @logger = Yell.new(:format => false, \
-                         :name => 'HTMLProofer', \
-                         :level => "gte.#{log_level}") do |l|
-        l.adapter :stdout, :level => [:debug, :info, :warn]
-        l.adapter :stderr, :level => [:error, :fatal]
+      @logger = Yell.new(format: false, \
+                         name: 'HTMLProofer', \
+                         level: "gte.#{log_level}") do |l|
+        l.adapter :stdout, level: %i[debug info warn]
+        l.adapter :stderr, level: %i[error fatal]
       end
     end
 
@@ -35,7 +35,7 @@ module HTMLProofer
 
     def colorize(color, message)
       if $stdout.isatty && $stderr.isatty
-        Colored.colorize(message, foreground: color)
+        ColorizedString.new(message).colorize(color)
       else
         message
       end

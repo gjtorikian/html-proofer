@@ -1,0 +1,183 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://rtyley.github.io/bfg-repo-cleaner/#usage
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html; charset=utf-8
+      Last-Modified:
+      - Wed, 23 Mar 2016 22:13:09 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 77E0:6A18:3BBC04E:4F4C5F6:592213DF
+      Content-Length:
+      - '17166'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8149-JFK
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1495405537.157094,VS0,VE11
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 556582c9d65bcdd6d7d7bde35103024c975e5cb4
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://rtyley.github.io/bfg-repo-cleaner/
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      Server:
+      - mw1211.eqiad.wmnet
+      X-Powered-By:
+      - HHVM/3.18.2
+      P3P:
+      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
+        for more info."
+      X-Content-Type-Options:
+      - nosniff
+      Content-language:
+      - en
+      X-UA-Compatible:
+      - IE=Edge
+      Vary:
+      - Accept-Encoding,Cookie,Authorization
+      Link:
+      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
+        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
+        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
+        2dppx)"
+      Last-Modified:
+      - Sun, 21 May 2017 04:35:38 GMT
+      Backend-Timing:
+      - D=110843 t=1495341584505493
+      X-Varnish:
+      - 394090013 362916510, 488639115 98570269
+      Via:
+      - 1.1 varnish-v4, 1.1 varnish-v4
+      Age:
+      - '63952'
+      X-Cache:
+      - cp1068 hit/5, cp1066 hit/11
+      X-Cache-Status:
+      - hit
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Set-Cookie:
+      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
+        22 Jun 2017 12:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
+      X-Analytics:
+      - ns=0;page_id=41548;https=1;nocookies=1
+      X-Client-IP:
+      - 100.37.221.161
+      Cache-Control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: http://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - __cfduid=d73c992e52a9b073ea0aa002fa04cf76c1495405537; expires=Mon, 21-May-18
+        22:25:37 GMT; path=/; domain=.jekyllrb.com; HttpOnly
+      Last-Modified:
+      - Mon, 15 May 2017 20:07:04 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Expires:
+      - Sun, 21 May 2017 22:35:37 GMT
+      Cache-Control:
+      - max-age=600
+      X-GitHub-Request-Id:
+      - 27B3:1D8CA:63FDAE6:82F84C5:592213E1
+      Server:
+      - cloudflare-nginx
+      CF-RAY:
+      - 362af3dfa6a52186-EWR
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://jekyllrb.com/docs/configuration/
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+recorded_with: VCR 2.9.3

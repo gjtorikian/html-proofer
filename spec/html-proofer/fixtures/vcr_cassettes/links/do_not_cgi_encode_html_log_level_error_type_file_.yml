@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-amz-id-2:
+      - VXCQvTBDb5ViQvRQ6dNri4ECD4hOr/LBRtPnPk29K5JQ7kIAxIPSXhVt3GpZFX0LstF7osq30g4=
+      x-amz-request-id:
+      - 93D07932059835D5
+      Date:
+      - Sun, 21 May 2017 22:25:26 GMT
+      Last-Modified:
+      - Thu, 16 Feb 2017 22:58:48 GMT
+      ETag:
+      - '"29818ab714021692a380ac83ea0af7d4"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/x-debian-package
+      Content-Length:
+      - '3323820'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+  recorded_at: Sun, 21 May 2017 22:25:25 GMT
+recorded_with: VCR 2.9.3

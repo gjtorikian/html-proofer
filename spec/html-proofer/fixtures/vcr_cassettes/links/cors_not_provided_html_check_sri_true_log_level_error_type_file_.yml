@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/css
+      Last-Modified:
+      - Tue, 21 Mar 2017 14:41:26 GMT
+      Expires:
+      - Mon, 21 May 2018 15:42:01 GMT
+      Cache-Control:
+      - max-age=31536000, public
+      Access-Control-Allow-Origin:
+      - "*"
+      Timing-Allow-Origin:
+      - "*"
+      X-GitHub-Request-Id:
+      - B7FA:4570:123E1E:132F8C:5921B549
+      Content-Length:
+      - '121557'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sun, 21 May 2017 22:25:25 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '24204'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-jfk8143-JFK
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '5'
+      X-Timer:
+      - S1495405525.095022,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 50b5cd6719c92c760cfc71153124a1090c44a219
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
+  recorded_at: Sun, 21 May 2017 22:25:25 GMT
+recorded_with: VCR 2.9.3

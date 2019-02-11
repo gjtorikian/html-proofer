@@ -19,10 +19,6 @@ module HTMLProofer
       @type = @options.delete(:type)
       @logger = HTMLProofer::Log.new(@options[:log_level])
 
-      if !@options[:cache].empty? && !File.exist?(STORAGE_DIR)
-        FileUtils.mkdir_p(STORAGE_DIR)
-      end
-
       # Add swap patterns for internal domains
       unless @options[:internal_domains].empty?
         @options[:internal_domains].each do |dom|
@@ -95,7 +91,7 @@ module HTMLProofer
     end
 
     def check_path(path)
-      result = { :external_urls => {}, :failures => [] }
+      result = { external_urls: {}, failures: [] }
       html = create_nokogiri(path)
 
       @src = [@src] if @type == :file
@@ -146,7 +142,7 @@ module HTMLProofer
     end
 
     def checks
-      return @checks unless @checks.nil?
+      return @checks if defined?(@checks) && !@checks.nil?
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
       @checks.delete('HtmlCheck') unless @options[:check_html]
@@ -168,7 +164,7 @@ module HTMLProofer
       sorted_failures.sort_and_report
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
-      fail @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+      raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
     end
   end
 end

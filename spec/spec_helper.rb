@@ -1,9 +1,15 @@
+require 'simplecov'
+SimpleCov.start
+if ENV['CI'] == 'true'
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 require 'bundler/setup'
 require 'vcr'
 require 'timecop'
 require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html-proofer/fixtures'
+FIXTURES_DIR = 'spec/html-proofer/fixtures'.freeze
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -51,7 +57,7 @@ end
 def run_proofer(item, type, opts = {})
   proofer = make_proofer(item, type, opts)
   cassette_name = make_cassette_name(item, opts)
-  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+  VCR.use_cassette(cassette_name, record: :new_episodes) do
     capture_stderr { proofer.run }
     proofer
   end
@@ -60,21 +66,13 @@ end
 def send_proofer_output(file, type, opts = {})
   proofer = make_proofer(file, type, opts)
   cassette_name = make_cassette_name(file, opts)
-  VCR.use_cassette(cassette_name, :record => :new_episodes) do
+  VCR.use_cassette(cassette_name, record: :new_episodes) do
     capture_stderr { proofer.run }
   end
 end
 
-def make_bin(cmd, path=nil)
+def make_bin(cmd, path = nil)
   `bin/htmlproofer #{cmd} #{path}`
-end
-
-def delete_cache
-  File.delete(HTMLProofer::Cache::CACHE_LOG) if File.exist?(HTMLProofer::Cache::CACHE_LOG)
-end
-
-def read_cache
-  JSON.parse File.read(HTMLProofer::Cache::CACHE_LOG)
 end
 
 def make_cassette_name(file, opts)

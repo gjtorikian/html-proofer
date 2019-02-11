@@ -1,6 +1,13 @@
 language: ruby
 rvm:
-  - 2.3.1
+  - 2.3.6
+  - 2.4.3
+  - 2.5.0
+  - 2.6.0
+
+git:
+  depth: 10
+
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
@@ -8,5 +15,7 @@ env:
 sudo: false
 cache: bundler
 
-git:
-  depth: 10
+matrix:
+  include:
+    - script: bundle exec rake rubocop
+      rvm: 2.6.0

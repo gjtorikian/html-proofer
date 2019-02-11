@@ -2,9 +2,18 @@
 
 If you generate HTML files, _then this tool might be for you_.
 
-`HTMLProofer` is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
+[![Build Status](https://travis-ci.org/gjtorikian/html-proofer.svg?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.svg)](http://badge.fury.io/rb/html-proofer) [![codecov](https://codecov.io/gh/gjtorikian/html-proofer/branch/master/graph/badge.svg)](https://codecov.io/gh/gjtorikian/html-proofer)
 
-[![Build Status](https://travis-ci.org/gjtorikian/html-proofer.svg?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.svg)](http://badge.fury.io/rb/html-proofer)
+
+## Project scope
+
+HTMLProofer is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
+
+In scope for this project is any well-known and widely-used test for HTML document quality. A major use for this project is continuous integration -- so we must have reliable results. We usually balance correctness over performance. And, if necessary, we should be able to trace this program's detection of HTML errors back to documented best practices or standards, such as W3 specifications.
+
+**Third-party modules.** We want this product to be useful for continuous integration so we prefer to avoid subjective tests which are prone to false positive results, such as spell checkers, indentation checkers, etc. If you want to work on these items, please see [the section on custom tests](#custom-tests) and consider adding an implementation as a third-party module.
+
+**Advanced configuration.** Most front-end developers can test their HTML using [our command line program](#using-on-the-command-line). Advanced configuration will [require using Ruby](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
 
 ## Installation
 
@@ -22,9 +31,9 @@ Or install it yourself as:
 
 **NOTE:** When installation speed matters, set `NOKOGIRI_USE_SYSTEM_LIBRARIES` to `true` in your environment. This is useful for increasing the speed of your Continuous Integration builds.
 
-## What's Tested?
+## What's tested?
 
-You can enable or disable most of the following checks.
+Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ### Images
 
@@ -42,7 +51,8 @@ You can enable or disable most of the following checks.
 * Whether your internal links are working
 * Whether your internal hash references (`#linkToMe`) are working
 * Whether external links are working
-* Whether your links are not HTTPS
+* Whether your links are HTTPS
+* Whether CORS/SRI is enabled
 
 ### Scripts
 
@@ -50,6 +60,7 @@ You can enable or disable most of the following checks.
 
 * Whether your internal script references are working
 * Whether external scripts are loading
+* Whether CORS/SRI is enabled
 
 ### Favicon
 
@@ -61,7 +72,7 @@ You can enable or disable most of the following checks.
 
 ### HTML
 
-* Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html), to ensure well-formed markup.
+* Whether your HTML markup is valid. This is done via [Nokogiri](http://www.nokogiri.org/tutorials/ensuring_well_formed_markup.html) to ensure well-formed markup.
 
 ## Usage
 
@@ -74,7 +85,7 @@ You can configure HTMLProofer to run on a file, a directory, an array of directo
 3. Create a new instance of the `HTMLProofer` on your output folder.
 4. `run` that instance.
 
-Here's a simple example:
+Here's an example:
 
 ```ruby
 require 'html-proofer'
@@ -135,6 +146,11 @@ HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com'])
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
 
+**Note:** flags are different from the default ones provided above. The underscores are replaced with dashes.
+
+`allow_hash_href` will be `--allow-hash-href`
+
+
 ``` bash
 htmlproofer www.google.com,www.github.com --as-links
 ```
@@ -148,6 +164,8 @@ Pass in options through the command-line as flags, like this:
 ``` bash
 htmlproofer --extension .html.erb ./out
 ```
+
+Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/master/bin/htmlproofer).
 
 #### Special cases for the command-line
 
@@ -184,14 +202,15 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  HTMLProofer.check_directory("./_site").run
+  options = { :assume_extension => true }
+  HTMLProofer.check_directory("./_site", options).run
 end
 ```
 
 Don't have or want a `Rakefile`? You can also do something like the following:
 
 ```bash
-htmlproofer ./_site
+htmlproofer --assume-extension ./_site
 ```
 
 ### Using through Docker
@@ -206,19 +225,28 @@ Add the `data-proofer-ignore` attribute to any tag to ignore it from every check
 <a href="http://notareallink" data-proofer-ignore>Not checked.</a>
 ```
 
+This can also apply to parent elements, all the way up to the `<html>` tag:
+
+``` html
+<div data-proofer-ignore>
+  <a href="http://notareallink">Not checked because of parent.</a>
+</div>
+```
 ## Configuration
 
 The `HTMLProofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `allow_hash_href` | If `true`, ignores the `href` `#`. | `false` |
+| `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
+| `allow_hash_href` | If `true`, ignores the `href="#"`. | `false` |
 | `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogiri | `false` |
+| `check_img_http` | Fails an image if it's marked as `http` | `false` |
 |`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
@@ -230,8 +258,9 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
 | `internal_domains`| An array of Strings containing domains that will be treated as internal urls. | `[]` |
-| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). | `:info`
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
+| `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
@@ -275,7 +304,19 @@ This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configurati
 
 You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
-The default value is `{ :typhoeus => { :followlocation => true }, :hydra => { :max_concurrency => 50 } }`.
+The default value is:
+
+``` ruby
+{
+  :typhoeus =>
+  {
+    :followlocation => true,
+    :connecttimeout => 10,
+    :timeout => 30
+  },
+  :hydra => { :max_concurrency => 50 }
+}
+```
 
 ### Configuring Parallel
 
@@ -310,11 +351,29 @@ And the following options means "recheck links older than two weeks":
 { :cache => { :timeframe => '2w' } }
 ```
 
+You can change the directory where the cachefile is kept by also providing the `storage_dir` key:
+
+``` ruby
+{ :cache => { :storage_dir => '/tmp/html-proofer-cache-money' } }
+```
+
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
 
 The cache operates on external links only.
 
-If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer*. You should probably ignore this folder in your version control system.
+If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
+
+### Caching with Travis
+
+If you want to enable caching with Travis CI, be sure to add these lines into your _.travis.yml_ file:
+
+```
+cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+```
+
+For more information on using HTML-Proofer with Travis CI, see [this wiki page](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
 
 ## Logging
 
@@ -333,11 +392,12 @@ Here's an example custom test demonstrating these concepts. It reports `mailto` 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
   def mailto?
-    return false if @link.data_ignore_proofer || @link.href.nil?
+    return false if @link.data_proofer_ignore || @link.href.nil?
     @link.href.match /mailto/
   end
 
   def octocat?
+    return false if @link.data_proofer_ignore || @link.href.nil?
     @link.href.match /octocat@github.com/
   end
 
@@ -354,11 +414,17 @@ class MailToOctocat < ::HTMLProofer::Check
 end
 ```
 
+See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
+
 ## Troubleshooting
 
-### Certificates
+Here are some brief snippets identifying some common problems that you can work around. For more information, check out [our wiki](https://github.com/gjtorikian/html-proofer/wiki).
 
-To ignore certificates, turn off Typhoeus' SSL verification:
+[Our wiki page](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis) on using HTML-Proofer with Travis CI might also be useful.
+
+### Ignoring SSL certificates
+
+To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
@@ -391,10 +457,11 @@ HTMLProofer.check_directories(["out/"], {
 
 ## Real-life examples
 
-Project | Repository
-:------ | :---------
-[Jekyll's website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll)
-[Open Whisper Systems' website](https://whispersystems.org/) | [WhisperSystems/whispersystems.org](https://github.com/WhisperSystems/whispersystems.org)
+Project | Repository | Notes
+:------ | :--------- | :----
+[Jekyll's website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
 [Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
 [Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
 [Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
+[HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites)
+[Project Calico Documentation](http://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)

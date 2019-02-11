@@ -1,0 +1,149 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/typhoeus/typhoeus#other-curl-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:36 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:36
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNjFiNzZhM2YzZWFjNzUwNGQxZGMyNzEyZjMyOGU3MmIiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTU0MDU1MzYsIl9jc3JmX3Rva2VuIjoiMERwbnFCR0V3bGs3Nmwzd2tWeFRTa1lqTCtBVDN4aktzc1JFSHJRSGVwYz0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--b1f1f763f55f8038d1bd27805d6187047751508e;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 41a2aa511189f4a16000caaef3880f82
+      X-Runtime:
+      - '0.121874'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 39cfeffd1b48c8f62b6e4b4849a9236c
+      X-GitHub-Request-Id:
+      - C3E0:45BD:47DF161:6B376FA:592213E0
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/typhoeus/typhoeus
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: https://github.com/typhoeus/typhoeus#top
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:37 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      - Accept-Encoding
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:37
+        -0000; secure; HttpOnly
+      - _gh_sess=eyJzZXNzaW9uX2lkIjoiYjMxMTk1ZDEyMWNkMTdkZjA1MGM0OGEwOTdmMGRiYWIiLCJzcHlfcmVwbyI6InR5cGhvZXVzL3R5cGhvZXVzIiwic3B5X3JlcG9fYXQiOjE0OTU0MDU1MzYsIl9jc3JmX3Rva2VuIjoicnhRS1RRUVRGWFBFcGpzSDk1MDNHU09LdEgrWTFWdis1cXIxY3BpSElrST0iLCJmbGFzaCI6eyJkaXNjYXJkIjpbImFuYWx5dGljc19sb2NhdGlvbiJdLCJmbGFzaGVzIjp7ImFuYWx5dGljc19sb2NhdGlvbiI6Ii88dXNlci1uYW1lPi88cmVwby1uYW1lPiJ9fX0%3D--3b6fcbb3f0b319e6e924e060110b00cc019c24b9;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 60a0b9a73fc4306e7d7c5786c8e5db49
+      X-Runtime:
+      - '0.141576'
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
+        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
+        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
+        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
+        style-src ''unsafe-inline'' assets-cdn.github.com'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Served-By:
+      - 5b42481b4f9fd7828f4e35d2c7b2fdf0
+      X-GitHub-Request-Id:
+      - C3E1:45BD:47DF15F:6B376F9:592213E0
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/typhoeus/typhoeus
+  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+recorded_with: VCR 2.9.3

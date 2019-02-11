@@ -11,12 +11,14 @@ module HTMLProofer
     def initialize(obj, check)
       # Construct readable ivars for every element
       obj.attributes.each_pair do |attribute, value|
-        name = "#{attribute.tr('-:.', '_')}".to_sym
+        name = attribute.tr('-:.', '_').to_s.to_sym
         (class << self; self; end).send(:attr_reader, name)
         instance_variable_set("@#{name}", value.value)
       end
 
-      @aria_hidden = @aria_hidden == "true" ? true : false
+      @aria_hidden = (defined?(@aria_hidden) && @aria_hidden == 'true') ? true : false
+
+      @data_proofer_ignore = defined?(@data_proofer_ignore)
 
       @text = obj.content
       @check = check
@@ -26,18 +28,34 @@ module HTMLProofer
 
       @html = check.html
 
+      parent_attributes = obj.ancestors.map { |a| a.try(:attributes) }
+      parent_attributes.pop # remove document at the end
+      @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
+
       # fix up missing protocols
-      @href.insert 0, 'http:' if @href =~ %r{^//}
-      @src.insert 0, 'http:' if @src =~ %r{^//}
-      @srcset.insert 0, 'http:' if @srcset =~ %r{^//}
+      if defined?(@href)
+        @href.insert(0, 'http:') if @href =~ %r{^//}
+      else
+        @href = nil
+      end
+
+      if defined?(@src)
+        @src.insert(0, 'http:') if @src =~ %r{^//}
+      else
+        @src = nil
+      end
+
+      if defined?(@srcset)
+        @srcset.insert(0, 'http:') if @srcset =~ %r{^//}
+      else
+        @srcset = nil
+      end
     end
 
     def url
       return @url if defined?(@url)
-      @url = (@src || @srcset || @href || '').gsub("\u200b", '')
-      if base
-        @url = Addressable::URI.join(base.attr('href'), url).to_s
-      end
+      @url = (@src || @srcset || @href || '').delete("\u200b")
+      @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
       @url = swap(@url, @check.options[:url_swap])
     end
@@ -48,7 +66,7 @@ module HTMLProofer
 
     def parts
       @parts ||= Addressable::URI.parse url
-    rescue URI::Error, Addressable::URI::InvalidURIError => e
+    rescue URI::Error, Addressable::URI::InvalidURIError
       @parts = nil
     end
 
@@ -66,7 +84,7 @@ module HTMLProofer
 
     # path is to an external server
     def remote?
-      %w( http https ).include? scheme
+      %w[http https].include? scheme
     end
 
     def non_http_remote?
@@ -75,11 +93,12 @@ module HTMLProofer
 
     def ignore?
       return true if @data_proofer_ignore
+      return true if @parent_ignorable
 
       return true if url =~ /^javascript:/
 
       # ignore base64 encoded images
-      if %w(ImageCheck FaviconCheck).include? @type
+      if %w[ImageCheck FaviconCheck].include? @type
         return true if url =~ /^data:image/
       end
 
@@ -95,12 +114,20 @@ module HTMLProofer
       @check.options[:empty_alt_ignore]
     end
 
+    def allow_missing_href?
+      @check.options[:allow_missing_href]
+    end
+
     def allow_hash_href?
       @check.options[:allow_hash_href]
     end
 
     def check_img_http?
       @check.options[:check_img_http]
+    end
+
+    def check_sri?
+      @check.options[:check_sri]
     end
 
     # path is external to the file
@@ -146,11 +173,10 @@ module HTMLProofer
 
       file = File.join base, path
 
-      # implicit index support
-      if File.directory?(file) && !unslashed_directory?(file)
-        file = File.join file, @check.options[:directory_index_file]
-      elsif @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
+      if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
+      elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
+        file = File.join file, @check.options[:directory_index_file]
       end
 
       file
@@ -192,14 +218,12 @@ module HTMLProofer
     end
 
     def html
-      if internal?
-        # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
-        if hash_link || param_link
-          @html
-        elsif slash_link
-          # link on another page, e.g. /about#Team - need to get HTML from the other page
-          create_nokogiri(absolute_path)
-        end
+      # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
+      if (hash_link || param_link) && internal?
+        @html
+      elsif slash_link && internal?
+        # link on another page, e.g. /about#Team - need to get HTML from the other page
+        create_nokogiri(absolute_path)
       end
     end
   end

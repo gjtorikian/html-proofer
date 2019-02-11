@@ -1,0 +1,127 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Status:
+      - 404 Not Found
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:23
+        -0000; secure; HttpOnly
+      X-Request-Id:
+      - e64d77d6e277e3f8945c97398011341e
+      X-Runtime:
+      - '0.010291'
+      Content-Security-Policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src data:; script-src 'self'; style-src 'unsafe-inline'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-GitHub-Request-Id:
+      - C3A8:45BE:40D9374:60B949C:592213D3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+- request:
+    method: get
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Sun, 21 May 2017 22:25:23 GMT
+      Content-Type:
+      - text/plain; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Status:
+      - 404 Not Found
+      Cache-Control:
+      - no-cache
+      Vary:
+      - X-PJAX
+      X-UA-Compatible:
+      - IE=Edge,chrome=1
+      Set-Cookie:
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:23
+        -0000; secure; HttpOnly
+      X-Request-Id:
+      - 8a64c2996983fbb5217312b5c65a4ff1
+      X-Runtime:
+      - '0.005258'
+      Content-Security-Policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src data:; script-src 'self'; style-src 'unsafe-inline'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Public-Key-Pins:
+      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
+        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
+        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
+        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
+        includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      X-GitHub-Request-Id:
+      - C3A8:45BE:40D937A:60B94A3:592213D3
+    body:
+      encoding: UTF-8
+      string: Not Found
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+recorded_with: VCR 2.9.3

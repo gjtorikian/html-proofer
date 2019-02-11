@@ -36,7 +36,7 @@ module HTMLProofer
       return nil if @external_urls.nil?
       paths_with_queries = {}
       iterable_external_urls = @external_urls.dup
-      @external_urls.keys.each do |url|
+      @external_urls.each_key do |url|
         uri = begin
                 Addressable::URI.parse(url)
               rescue URI::Error, Addressable::URI::InvalidURIError
@@ -121,11 +121,17 @@ module HTMLProofer
     end
 
     def clean_url(href)
-      Addressable::URI.parse(href).normalize
+      # catch any obvious issues, like strings in port numbers
+      parsed = Addressable::URI.parse(href)
+      if href !~ /^([!#{$&}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
+        parsed.normalize
+      else
+        href
+      end
     end
 
     def queue_request(method, href, filenames)
-      opts = @options[:typhoeus].merge({ :method => method })
+      opts = @options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
       request.on_complete { |response| response_handler(response, filenames) }
       @hydra.queue request
@@ -136,6 +142,7 @@ module HTMLProofer
       href = response.request.base_url.to_s
       method = response.request.options[:method]
       response_code = response.code
+      response.body.gsub!("\x00", '')
 
       debug_msg = "Received a #{response_code} for #{href}"
       debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
@@ -149,7 +156,7 @@ module HTMLProofer
         end
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
-      elsif response_code == 0
+      elsif response_code.zero?
         handle_failure(effective_url, filenames, response_code, response.return_message)
       elsif method == :head
         queue_request(:get, href, filenames)
@@ -171,9 +178,10 @@ module HTMLProofer
 
       body_doc = create_nokogiri(response.body)
 
+      unencoded_hash = Addressable::URI.unescape(hash)
+      xpath = %(//*[@name="#{hash}"]|/*[@name="#{unencoded_hash}"]|//*[@id="#{hash}"]|//*[@id="#{unencoded_hash}"])
       # user-content is a special addition by GitHub.
-      xpath = %(//*[@name="#{hash}"]|//*[@id="#{hash}"])
-      if URI.parse(href).host.match(/github\.com/i)
+      if URI.parse(href).host =~ /github\.com/i
         xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
       end
 
