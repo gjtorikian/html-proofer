@@ -1,0 +1,143 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/gjtorikian/html-proofer/blob/19c55fdbf4cd2d35c037ffc864681f4d7b2c0a3d/Rakefile#L14-L29
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.10.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 07 Mar 2019 22:19:15 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Vary:
+      - X-PJAX
+      ETag:
+      - W/"f6d9baef8a7c523095c6907b5713c4eb"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - has_recent_activity=1; path=/; expires=Thu, 07 Mar 2019 23:19:14 -0000
+      - logged_in=no; domain=.github.com; path=/; expires=Mon, 07 Mar 2039 22:19:15
+        -0000; secure; HttpOnly
+      - _gh_sess=d1ZONFU3dVQwMk5XdmhvRWE0a0ZGRnNZSW1hcXA3ZnBJK29QY09MV3k3Q0dyd2pmeUVWN2NGQ2lpNU9wUDZpN1h4YXZhSXdaTFFabWN0WDJIeGpDYU9HYXBlUUJBcUVOTE5zUHZDTVQ3eGF3aERCK2JERHhpOGdQSnNzRjAxWFIrVzFKa3Q2aHBDcngrSFRrVTZNcVlBOXltQVY4d0lWUithbzl4UndHenVreWZaS210ZlVwMDVwUDVQUkhzdVFGTHU2d01DNjROd3RVY0xZbW1iek5kaWFXNXlBNERZNm42cVhsVXhXM2oyQjAzWm5GSVRpQndSQjFBYnZmVEJPQ3NmcGxRWkdUdklrNTlFRWtMeFZIb3IxcHRaZ2UxeXZIa1dBa0MwUWlBVFE9LS1iQjJYNWhwMi9FcEprZjJ5dkZQS0JnPT0%3D--090e077b87bf31e1d95235ed5206b29d29751f98;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - d932fe37-6120-4696-90ba-e3deedf2ed19
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      Expect-CT:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        www.google-analytics.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        wss://live.github.com; font-src github.githubassets.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; frame-src render.githubusercontent.com
+        launch-editor.github.com ''self''; img-src ''self'' data: github.githubassets.com
+        identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; manifest-src ''self''; media-src ''none''; script-src
+        github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com'
+      X-GitHub-Request-Id:
+      - DF85:2B7B:2E79C:573C5:5C8198E2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/html-proofer/blob/19c55fdbf4cd2d35c037ffc864681f4d7b2c0a3d/Rakefile
+  recorded_at: Thu, 07 Mar 2019 22:19:15 GMT
+- request:
+    method: head
+    uri: https://github.com/gjtorikian/html-proofer/blob/master/Rakefile#L14-L29
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.10.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Thu, 07 Mar 2019 22:19:15 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Status:
+      - 200 OK
+      Vary:
+      - X-PJAX
+      ETag:
+      - W/"bac211366ffff62881b10801014a24a2"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - has_recent_activity=1; path=/; expires=Thu, 07 Mar 2019 23:19:15 -0000
+      - logged_in=no; domain=.github.com; path=/; expires=Mon, 07 Mar 2039 22:19:15
+        -0000; secure; HttpOnly
+      - _gh_sess=UHFCVVBMc25MZWptMjhSUkgwdnAxcTg2UCs2QUg0ZWdWd1NOTmphUnF5NWFNZ3ZJci91aENHRVYvNCsxVHFlWjZqUE9YZm8yYUYxK29Ea2Q4dHA5Tm9LWHVweWo1cDFRWkJlWXN4SDRSUUVjOThZR1lDYTgyVnZiOW5hYWNtakhDRENEblNXRllhaGIxRkp2bDdBWEJHK3I2amg2Y1NvUmViVWQxbTZncGowc3FPdk9WSlRFOEdWMUlhY3p3NW9jMGRIaVJKZVI0Q0YxZ3E5ZlFJUDFVODFzRFRTVTBuVjVuZ0hMamVmUWxqWUVVa1ZMOW1mTUZsVjlZd0tNUDFPNzZDNjd0WWFwVEdzN2V4NGtTRDJGbUQ1TFZndytNZVJuam5jZ3RobW5yaFk9LS1qdTUyU3NUT3IwODhQdUZyNjVudU1BPT0%3D--3aec1e6c8fae06e6436c56163089725ace75bd3b;
+        path=/; secure; HttpOnly
+      X-Request-Id:
+      - 5208e0a5-be5f-4f34-9c54-ce0c73676290
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      Expect-CT:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        www.google-analytics.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        wss://live.github.com; font-src github.githubassets.com; form-action ''self''
+        github.com gist.github.com; frame-ancestors ''none''; frame-src render.githubusercontent.com
+        launch-editor.github.com ''self''; img-src ''self'' data: github.githubassets.com
+        identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
+        *.githubusercontent.com; manifest-src ''self''; media-src ''none''; script-src
+        github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com'
+      X-GitHub-Request-Id:
+      - DF86:31DA:19938:3411C:5C8198E2
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/html-proofer/blob/master/Rakefile
+  recorded_at: Thu, 07 Mar 2019 22:19:15 GMT
+recorded_with: VCR 2.9.3
