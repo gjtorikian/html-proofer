@@ -90,9 +90,8 @@ module HTMLProofer
       end
     end
 
-    def check_path(path)
+    def check_parsed(html, path)
       result = { external_urls: {}, failures: [] }
-      html = create_nokogiri(path)
 
       @src = [@src] if @type == :file
 
@@ -110,6 +109,10 @@ module HTMLProofer
         end
       end
       result
+    end
+
+    def check_path(path)
+      check_parsed create_nokogiri(path), path
     end
 
     def validate_urls
