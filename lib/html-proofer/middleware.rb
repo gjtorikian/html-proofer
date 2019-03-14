@@ -14,41 +14,41 @@ module HTMLProofer
       }
     end
 
-    def initialize app
+    def initialize(app)
       @app = app
     end
 
     HTML_SIGNATURE = [
-      "<!DOCTYPE HTML",
-      "<HTML",
-      "<HEAD",
-      "<SCRIPT",
-      "<IFRAME",
-      "<H1",
-      "<DIV",
-      "<FONT",
-      "<TABLE",
-      "<A",
-      "<STYLE",
-      "<TITLE",
-      "<B",
-      "<BODY",
-      "<BR",
-      "<P",
-      "<!--"
+      '<!DOCTYPE HTML',
+      '<HTML',
+      '<HEAD',
+      '<SCRIPT',
+      '<IFRAME',
+      '<H1',
+      '<DIV',
+      '<FONT',
+      '<TABLE',
+      '<A',
+      '<STYLE',
+      '<TITLE',
+      '<B',
+      '<BODY',
+      '<BR',
+      '<P',
+      '<!--'
     ]
 
-    def call env
+    def call(env)
       result = @app.call(env)
-      return result if env["REQUEST_METHOD"] != "GET"
-      return result if env["QUERY_STRING"] =~ /SKIP_VALIDATION/
+      return result if env['REQUEST_METHOD'] != 'GET'
+      return result if env['QUERY_STRING'] =~ /SKIP_VALIDATION/
       return result if result.first != 200
 
       # [@status, @headers, @response]
       body = []
-      result.last.each {|e| body << e}
+      result.last.each { |e| body << e }
       html = body.join('').lstrip
-      if HTML_SIGNATURE.any? {|sig| html.downcase.starts_with? sig.downcase}
+      if HTML_SIGNATURE.any? { |sig| html.downcase.starts_with? sig.downcase }
         parsed = HTMLProofer::Runner.new(
           'response',
           Middleware.options
@@ -64,4 +64,3 @@ module HTMLProofer
     end
   end
 end
-
