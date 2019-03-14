@@ -45,7 +45,9 @@ module HTMLProofer
       return result if result.first != 200
 
       # [@status, @headers, @response]
-      html = result.last.each.to_a.join('').lstrip
+      body = []
+      result.last.each {|e| body << e}
+      html = body.join('').lstrip
       if HTML_SIGNATURE.any? {|sig| html.downcase.starts_with? sig.downcase}
         parsed = HTMLProofer::Runner.new(
           'response',
