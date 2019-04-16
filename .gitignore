@@ -26,3 +26,4 @@ doc/
 .DS_Store
 .idea
 .byebug_history
+.vscode
