@@ -28,7 +28,8 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rubocop'
-  gem.add_development_dependency 'rubocop-github'
+  gem.add_development_dependency 'rubocop-standard'
+  gem.add_development_dependency 'rubocop-performance'
   gem.add_development_dependency 'codecov'
   gem.add_development_dependency 'rspec', '~> 3.1'
   gem.add_development_dependency 'rake'
