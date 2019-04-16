@@ -25,6 +25,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'passes for GitHub hashes to a file on the web when asked' do
+    github_hash = "#{FIXTURES_DIR}/links/github_file_hash.html"
+    proofer = run_proofer(github_hash, :file, {check_external_hash: true})
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'passes for broken hashes on the web (when we look only for 4xx)' do
     options = { only_4xx: true }
     broken_hash_on_the_web = "#{FIXTURES_DIR}/links/broken_hash_on_the_web.html"

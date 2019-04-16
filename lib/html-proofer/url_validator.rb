@@ -183,6 +183,11 @@ module HTMLProofer
       # user-content is a special addition by GitHub.
       if URI.parse(href).host =~ /github\.com/i
         xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
+        # when linking to a file on GitHub, like #L12-L34, only the first "L" portion
+        # will be identified as a linkable portion
+        if hash =~ /\A(L\d)+/
+          xpath << %(|//td[@id="#{Regexp.last_match[1]}"])
+        end
       end
 
       return unless body_doc.xpath(xpath).empty?

@@ -1,5 +1,5 @@
 inherit_gem:
-  rubocop-github:
+  rubocop-standard:
     - config/default.yml
 
 Style/StringLiterals:
