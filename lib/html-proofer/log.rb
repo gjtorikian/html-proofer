@@ -1,5 +1,5 @@
 require 'yell'
-require 'colorized_string'
+require 'rainbow'
 
 module HTMLProofer
   class Log
@@ -17,7 +17,7 @@ module HTMLProofer
     def log(level, message)
       color = case level
               when :debug
-                :light_blue
+                :cyan
               when :info
                 :blue
               when :warn
@@ -35,7 +35,7 @@ module HTMLProofer
 
     def colorize(color, message)
       if $stdout.isatty && $stderr.isatty
-        ColorizedString.new(message).colorize(color)
+        Rainbow(message).send(color)
       else
         message
       end
