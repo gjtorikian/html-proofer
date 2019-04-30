@@ -3,6 +3,16 @@
 module HTMLProofer
   class Middleware
 
+    class InvalidHtmlError < StandardError
+      def initialize(failures)
+        @failures = failures
+      end
+
+      def message
+          "HTML Validation errors (skip by adding ?SKIP_VALIDATION to URL): \n#{@failures.join("\n")}"
+      end
+    end
+
     def self.options
       @options ||= {
         type:                :file,
@@ -43,12 +53,16 @@ module HTMLProofer
       return result if env['REQUEST_METHOD'] != 'GET'
       return result if env['QUERY_STRING'] =~ /SKIP_VALIDATION/
       return result if result.first != 200
-
-      # [@status, @headers, @response]
       body = []
       result.last.each { |e| body << e }
-      html = body.join('').lstrip
-      if HTML_SIGNATURE.any? { |sig| html.downcase.starts_with? sig.downcase }
+
+      body = body.join('')
+      begin
+        html = body.lstrip
+      rescue
+        return result # Invalid encoding; it's not gonna be html.
+      end
+      if HTML_SIGNATURE.any? { |sig| html.upcase.starts_with? sig }
         parsed = HTMLProofer::Runner.new(
           'response',
           Middleware.options
@@ -57,7 +71,7 @@ module HTMLProofer
         )
 
         if parsed[:failures].length > 0
-          raise "HTML Validation errors (skip by adding ?SKIP_VALIDATION to URL): \n#{parsed[:failures].join("\n")}"
+          raise InvalidHtmlError.new(parsed[:failures])
         end
       end
       result
