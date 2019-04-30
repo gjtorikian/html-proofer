@@ -78,6 +78,19 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 You can configure HTMLProofer to run on a file, a directory, an array of directories, or an array of links.
 
+There's also a rack middleware.
+
+### Using in a rails app
+
+Add to `config/application.rb`
+
+    config.middleware.use HTMLProofer::Middleware if Rails.env.test?
+    config.middleware.use HTMLProofer::Middleware if Rails.env.development?
+
+This will raise an error at runtime if your HTML is invalid.
+
+Particularly helpful for projects which have extensive CI, since any invalid HTML will fail your build.
+
 ### Using in a script
 
 1. Require the gem.
