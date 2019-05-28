@@ -154,7 +154,7 @@ HTMLProofer.check_directories(['./one', './two']).run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com'])
+HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com']).run
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
