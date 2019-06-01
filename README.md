@@ -232,6 +232,23 @@ This can also apply to parent elements, all the way up to the `<html>` tag:
   <a href="http://notareallink">Not checked because of parent.</a>
 </div>
 ```
+
+## Ignoring new files
+
+Say you've got some new files in a pull request, and your tests are failing because links to those files are not live yet. One thing you can do is run a diff against your base branch and explicitly ignore the new files, like this:
+
+```ruby
+  directories = %w(content)
+  merge_base = `git merge-base origin/production HEAD`.chomp
+  diffable_files = `git diff -z --name-only --diff-filter=AC #{merge_base}`.split("\0")
+  diffable_files = diffable_files.select do |filename|
+    next true if directories.include?(File.dirname(filename))
+    filename.end_with?('.md')
+  end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
+
+  HTMLProofer.check_directory('./output', { url_ignore: diffable_files }).run
+```
+
 ## Configuration
 
 The `HTMLProofer` constructor takes an optional hash of additional options:
