@@ -146,8 +146,12 @@ module HTMLProofer
       response_code = response.code
       response.body.gsub!("\x00", '')
 
-      debug_msg = "Received a #{response_code} for #{href}"
-      debug_msg << " in #{filenames.join(' ')}" unless filenames.nil?
+      if filenames.nil?
+        debug_msg = "Received a #{response_code} for #{href}"
+      else
+        debug_msg = "Received a #{response_code} for #{href}  in #{filenames.join(' ')}"
+      end
+
       @logger.log :debug, debug_msg
 
       return if @options[:http_status_ignore].include?(response_code)
@@ -181,18 +185,18 @@ module HTMLProofer
       body_doc = create_nokogiri(response.body)
 
       unencoded_hash = Addressable::URI.unescape(hash)
-      xpath = %(//*[@name="#{hash}"]|/*[@name="#{unencoded_hash}"]|//*[@id="#{hash}"]|//*[@id="#{unencoded_hash}"])
+      xpath = [%(//*[@name="#{hash}"]|/*[@name="#{unencoded_hash}"]|//*[@id="#{hash}"]|//*[@id="#{unencoded_hash}"])]
       # user-content is a special addition by GitHub.
       if URI.parse(href).host =~ /github\.com/i
-        xpath << %(|//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])
+        xpath << [%(//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])]
         # when linking to a file on GitHub, like #L12-L34, only the first "L" portion
         # will be identified as a linkable portion
         if hash =~ /\A(L\d)+/
-          xpath << %(|//td[@id="#{Regexp.last_match[1]}"])
+          xpath << [%(//td[@id="#{Regexp.last_match[1]}"])]
         end
       end
 
-      return unless body_doc.xpath(xpath).empty?
+      return unless body_doc.xpath(xpath.join('|')).empty?
 
       msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
       add_external_issue(filenames, msg, response.code)
