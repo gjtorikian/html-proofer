@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HtmlCheck < ::HTMLProofer::Check
   SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
   INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/

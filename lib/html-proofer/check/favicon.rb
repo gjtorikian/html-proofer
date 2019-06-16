@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FaviconCheck < ::HTMLProofer::Check
   def run
     found = false

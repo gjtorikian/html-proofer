@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'typhoeus'
 require 'uri'
 require_relative './utils'
