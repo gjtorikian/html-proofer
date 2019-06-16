@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  VERSION = '3.10.2'.freeze
+  VERSION = '3.11.0'.freeze
 end
