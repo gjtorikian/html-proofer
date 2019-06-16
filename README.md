@@ -76,20 +76,14 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ## Usage
 
-You can configure HTMLProofer to run on a file, a directory, an array of directories, or an array of links.
+You can configure HTMLProofer to run onL
 
-There's also a rack middleware.
+* a file
+* a directory
+* an array of directories
+* an array of links
 
-### Using in a rails app
-
-Add to `config/application.rb`
-
-    config.middleware.use HTMLProofer::Middleware if Rails.env.test?
-    config.middleware.use HTMLProofer::Middleware if Rails.env.development?
-
-This will raise an error at runtime if your HTML is invalid.
-
-Particularly helpful for projects which have extensive CI, since any invalid HTML will fail your build.
+It can also run through the command-line, Docker, or as Rack middleware.
 
 ### Using in a script
 
@@ -229,6 +223,19 @@ htmlproofer --assume-extension ./_site
 ### Using through Docker
 
 If you have trouble with (or don't want to) install Ruby/Nokogiri, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
+
+### Using as Rack middleware
+
+You can run html-proofer as part of your Rack middleware to validate your HTML at runtime. For example, in Rails, add these lines to `config/application.rb`:
+
+```ruby
+  config.middleware.use HTMLProofer::Middleware if Rails.env.test?
+  config.middleware.use HTMLProofer::Middleware if Rails.env.development?
+```
+
+This will raise an error at runtime if your HTML is invalid. You can choose to skip validation of a page by adding `?proofer-ignore` to the URL.
+
+This is particularly helpful for projects which have extensive CI, since any invalid HTML will fail your build.
 
 ## Ignoring content
 
