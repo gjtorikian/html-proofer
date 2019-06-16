@@ -1,4 +1,4 @@
-
+# frozen_string_literal: true
 
 module HTMLProofer
   class Middleware
@@ -9,7 +9,7 @@ module HTMLProofer
       end
 
       def message
-          "HTML Validation errors (skip by adding ?SKIP_VALIDATION to URL): \n#{@failures.join("\n")}"
+          "HTML Validation errors (skip by adding `?proofer-ignore` to URL): \n#{@failures.join("\n")}"
       end
     end
 
@@ -51,7 +51,7 @@ module HTMLProofer
     def call(env)
       result = @app.call(env)
       return result if env['REQUEST_METHOD'] != 'GET'
-      return result if env['QUERY_STRING'] =~ /SKIP_VALIDATION/
+      return result if env['QUERY_STRING'] =~ /proofer-ignore/
       return result if result.first != 200
       body = []
       result.last.each { |e| body << e }

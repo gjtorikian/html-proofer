@@ -30,4 +30,12 @@ describe 'Middleware test' do
     end
   end
 
+  context 'proofer-ignore' do
+    let(:skip_request) { {'REQUEST_METHOD' => 'GET', 'QUERY_STRING' => 'proofer-ignore'} }
+    let(:subject) { middleware.call(skip_request) }
+    let(:response_fixture) { File.join(FIXTURES_DIR, 'html', 'missing_closing_quotes.html') }
+    it 'does not raise an error' do
+      subject
+    end
+  end
 end
