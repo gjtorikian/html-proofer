@@ -76,7 +76,7 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ## Usage
 
-You can configure HTMLProofer to run onL
+You can configure HTMLProofer to run on:
 
 * a file
 * a directory
