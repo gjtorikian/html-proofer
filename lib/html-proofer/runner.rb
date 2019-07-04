@@ -167,9 +167,7 @@ module HTMLProofer
       sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger)
 
       sorted_failures.sort_and_report
-      count = @failures.length
-      failure_text = pluralize(count, 'failure', 'failures')
-      raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+      return @failures
     end
   end
 end
