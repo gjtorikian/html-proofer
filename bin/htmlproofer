@@ -77,10 +77,10 @@ Mercenary.program(:htmlproofer) do |p|
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
 
-    options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.clone
-    options[:validation][:report_script_embeds] = opts['report_script_embeds'] unless opts['report_script_embeds'] .nil?
-    options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'] .nil?
-    options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'] .nil?
+    options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.dup
+    options[:validation][:report_script_embeds] = opts['report_script_embeds'] unless opts['report_script_embeds'].nil?
+    options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'].nil?
+    options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'].nil?
 
     unless opts['typhoeus_config'].nil?
       options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'])
