@@ -129,7 +129,7 @@ class LinkCheck < ::HTMLProofer::Check
     html.xpath(*xpaths)
   end
 
-  IGNORABE_REL = %(canonical alternate next prev previous icon manifest apple-touch-icon)
+  IGNORABE_REL = %(canonical alternate next prev previous icon manifest apple-touch-icon me pingback webmention)
 
   def check_sri(line, content)
     return if IGNORABE_REL.include?(@link.rel)
