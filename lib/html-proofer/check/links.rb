@@ -129,10 +129,10 @@ class LinkCheck < ::HTMLProofer::Check
     html.xpath(*xpaths)
   end
 
-  IGNORABE_REL = %(canonical alternate next prev previous icon manifest apple-touch-icon)
+  SRI_REL_TYPES = %(stylesheet)
 
   def check_sri(line, content)
-    return if IGNORABE_REL.include?(@link.rel)
+    return unless SRI_REL_TYPES.include?(@link.rel)
     if !defined?(@link.integrity) && !defined?(@link.crossorigin)
       add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
     elsif !defined?(@link.integrity)
