@@ -291,6 +291,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'fails for mismatched path casing' do
+    link_mismatched_case = "#{FIXTURES_DIR}/links/link_mismatched_case.html"
+    proofer = run_proofer(link_mismatched_case, :file)
+    expect(proofer.failed_tests.first).to match('internally linking to ancHors_iN_pRe.html, which does not exist')
+  end
+
   it 'fails for mismatched hash casing' do
     hash_on_another_page = "#{FIXTURES_DIR}/links/hash_mismatched_case.html"
     proofer = run_proofer(hash_on_another_page, :file)
