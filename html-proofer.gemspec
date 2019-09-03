@@ -19,8 +19,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'mercenary',       '~> 0.3.2'
-  gem.add_dependency 'nokogiri',        '~> 1.10.4'
+  gem.add_dependency 'mercenary',       '~> 0.3'
+  gem.add_dependency 'nokogiri',        '~> 1.10'
   gem.add_dependency 'rainbow',         '~> 3.0'
   gem.add_dependency 'typhoeus',        '~> 1.3'
   gem.add_dependency 'yell',            '~> 2.0'
