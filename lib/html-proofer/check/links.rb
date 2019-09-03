@@ -46,7 +46,7 @@ class LinkCheck < ::HTMLProofer::Check
         check_sri(line, content) if @link.check_sri? && node.name == 'link'
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
-        next if @link.try(:rel) == 'dns-prefetch'
+        next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
         add_to_external_urls(@link.href)
         next
       elsif !@link.internal? && !@link.exists?

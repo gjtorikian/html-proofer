@@ -62,7 +62,7 @@ module HTMLProofer
       rescue
         return result # Invalid encoding; it's not gonna be html.
       end
-      if HTML_SIGNATURE.any? { |sig| html.upcase.starts_with? sig }
+      if HTML_SIGNATURE.any? { |sig| html.upcase.start_with? sig }
         parsed = HTMLProofer::Runner.new(
           'response',
           Middleware.options

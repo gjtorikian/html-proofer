@@ -21,7 +21,7 @@ class FaviconCheck < ::HTMLProofer::Check
 
   def is_immediate_redirect?
     # allow any instant-redirect meta tag
-    @html.xpath("//meta[@http-equiv='refresh']").attribute('content').value.starts_with? '0;' rescue false
+    @html.xpath("//meta[@http-equiv='refresh']").attribute('content').value.start_with? '0;' rescue false
   end
 
 end
