@@ -3,9 +3,7 @@
 require_relative 'utils'
 
 require 'json'
-require 'active_support/core_ext/string'
-require 'active_support/core_ext/date'
-require 'active_support/core_ext/numeric/time'
+require 'timerizer'
 
 module HTMLProofer
   class Cache
@@ -32,7 +30,7 @@ module HTMLProofer
     end
 
     def within_timeframe?(time)
-      (@parsed_timeframe..@cache_time).cover?(time)
+      (@parsed_timeframe..@cache_time).cover?(Time.parse(time))
     end
 
     def urls
@@ -45,7 +43,7 @@ module HTMLProofer
 
     def parsed_timeframe(timeframe)
       time, date = timeframe.match(/(\d+)(\D)/).captures
-      time = time.to_f
+      time = time.to_i
       case date
       when 'M'
         time.months.ago

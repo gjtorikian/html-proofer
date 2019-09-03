@@ -30,7 +30,7 @@ module HTMLProofer
 
       @html = check.html
 
-      parent_attributes = obj.ancestors.map { |a| a.try(:attributes) }
+      parent_attributes = obj.ancestors.map { |a| a.respond_to?(:attributes) && a.attributes }
       parent_attributes.pop # remove document at the end
       @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
 
