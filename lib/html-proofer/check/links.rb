@@ -129,6 +129,8 @@ class LinkCheck < ::HTMLProofer::Check
     html.xpath(*xpaths)
   end
 
+  # Whitelist for affected elements from Subresource Integrity specification
+  # https://w3c.github.io/webappsec-subresource-integrity/#link-element-for-stylesheets
   SRI_REL_TYPES = %(stylesheet)
 
   def check_sri(line, content)
