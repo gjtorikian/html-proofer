@@ -17,6 +17,9 @@ module HTMLProofer
       @logger = logger
       @cache_log = {}
 
+      @cache_datetime = DateTime.now
+      @cache_time = @cache_datetime.to_time
+
       if options.nil? || options.empty?
         define_singleton_method('use_cache?') { false }
       else
@@ -24,8 +27,6 @@ module HTMLProofer
         setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
-
-      @cache_time = Time.now
     end
 
     def within_timeframe?(time)
@@ -165,16 +166,15 @@ module HTMLProofer
     private
 
     def time_ago(measurement, unit)
-      d = DateTime.now
       case unit
       when :months
-        d >> -measurement
+        @cache_datetime >> -measurement
       when :weeks
-        d - measurement * 7
+        @cache_datetime - measurement * 7
       when :days
-        d - measurement
+        @cache_datetime - measurement
       when :hours
-        d - Rational(72/24.0)
+        @cache_datetime - Rational(measurement/24.0)
       end.to_time
     end
   end
