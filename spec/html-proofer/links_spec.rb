@@ -609,6 +609,12 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'is not checking SRI and CORS for indieweb links with rel "me", "webmention", or "pingback"' do
+    file = "#{FIXTURES_DIR}/links/link_with_me.html"
+    proofer = run_proofer(file, :file, check_sri: true)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'can link to external non-unicode hash' do
     file = "#{FIXTURES_DIR}/links/hash_to_unicode_ref.html"
     proofer = run_proofer(file, :file, check_external_hash: true)

@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://asia.cnet.com/blogs/geekonomics/post.htm?id=63009224
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.11.1; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Last-Modified:
+      - Wed, 15 Aug 2018 23:50:35 GMT
+      ETag:
+      - '"4fb11788e70bf2113c303a1656f55c60"'
+      x-goog-meta-gcsfuse_mtime:
+      - '2016-10-11T15:31:20.13343685Z'
+      Content-Type:
+      - text/html
+      Server:
+      - UploadServer
+      Cache-Control:
+      - private, max-age=0
+      Expires:
+      - Sat, 07 Sep 2019 11:17:38 GMT
+      Date:
+      - Sat, 07 Sep 2019 11:17:38 GMT
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - bm_cnet=UB-D60BA1A32D9B1E9CAF58F26A0029BDB9; path=/; secure
+      Vary:
+      - Accept-Encoding, User-Agent
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://www.cnet.com/html/404.html
+  recorded_at: Sat, 07 Sep 2019 11:17:38 GMT
+recorded_with: VCR 2.9.3
