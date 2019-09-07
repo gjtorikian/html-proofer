@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'utils'
-
+require 'date'
 require 'json'
-require 'timerizer'
 
 module HTMLProofer
   class Cache
@@ -18,6 +17,9 @@ module HTMLProofer
       @logger = logger
       @cache_log = {}
 
+      @cache_datetime = DateTime.now
+      @cache_time = @cache_datetime.to_time
+
       if options.nil? || options.empty?
         define_singleton_method('use_cache?') { false }
       else
@@ -25,8 +27,6 @@ module HTMLProofer
         setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
-
-      @cache_time = Time.now
     end
 
     def within_timeframe?(time)
@@ -46,13 +46,13 @@ module HTMLProofer
       time = time.to_i
       case date
       when 'M'
-        time.months.ago
+        time_ago(time, :months)
       when 'w'
-        time.weeks.ago
+        time_ago(time, :weeks)
       when 'd'
-        time.days.ago
+        time_ago(time, :days)
       when 'h'
-        time.hours.ago
+        time_ago(time, :hours)
       else
         raise ArgumentError, "#{date} is not a valid timeframe!"
       end
@@ -161,6 +161,21 @@ module HTMLProofer
       return unless File.exist?(cache_file)
       contents = File.read(cache_file)
       @cache_log = contents.empty? ? {} : JSON.parse(contents)
+    end
+
+    private
+
+    def time_ago(measurement, unit)
+      case unit
+      when :months
+        @cache_datetime >> -measurement
+      when :weeks
+        @cache_datetime - measurement * 7
+      when :days
+        @cache_datetime - measurement
+      when :hours
+        @cache_datetime - Rational(measurement/24.0)
+      end.to_time
     end
   end
 end

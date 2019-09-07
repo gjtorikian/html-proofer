@@ -9,8 +9,80 @@ describe 'Cache test' do
 
   let(:default_cache_options) { { storage_dir: storage_dir } }
 
+  let (:logger) { HTMLProofer::Log.new(:debug) }
+
   def read_cache(cache_file)
     JSON.parse File.read(cache_file)
+  end
+
+  context 'with time parser' do
+    it 'understands months' do
+      now_time = Time.local(2019, 9, 6, 12, 0, 0)
+      Timecop.freeze(now_time)
+
+      cache = HTMLProofer::Cache.new(logger, { timeframe: '2M' })
+
+      check_time = Time.local(2019, 8, 6, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be true
+
+      check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be false
+
+      Timecop.return
+    end
+
+    it 'understands days' do
+      now_time = Time.local(2019, 9, 6, 12, 0, 0)
+      Timecop.freeze(now_time)
+
+      cache = HTMLProofer::Cache.new(logger, { timeframe: '2d' })
+
+      check_time = Time.local(2019, 9, 5, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be true
+
+      check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be false
+
+      Timecop.return
+    end
+
+    it 'understands weeks' do
+      now_time = Time.local(2019, 9, 6, 12, 0, 0)
+      Timecop.freeze(now_time)
+
+      cache = HTMLProofer::Cache.new(logger, { timeframe: '2w' })
+
+      check_time = Time.local(2019, 8, 30, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be true
+
+      check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be false
+
+      Timecop.return
+    end
+
+    it 'understands hours' do
+      now_time = Time.local(2019, 9, 6, 12, 0, 0)
+      Timecop.freeze(now_time)
+
+      cache = HTMLProofer::Cache.new(logger, { timeframe: '3h' })
+
+      check_time = Time.local(2019, 9, 6, 9, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be true
+
+      check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
+
+      expect(cache.within_timeframe?(check_time)).to be false
+
+      Timecop.return
+    end
   end
 
   context 'with .htmlproofer.log' do
