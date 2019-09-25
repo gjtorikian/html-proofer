@@ -4,7 +4,7 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :external_urls
+    attr_reader :options, :external_urls, :failures
 
     def initialize(src, opts = {})
       @src = src
