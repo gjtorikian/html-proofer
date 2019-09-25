@@ -11,6 +11,17 @@ describe HTMLProofer do
     end
   end
 
+  describe '#failures' do
+    it 'is an array of Issue' do
+      broken_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_link_internal.html"
+      proofer = run_proofer(broken_link_internal_filepath, :file)
+      expect(proofer.failures.length).to eq(2)
+      expect(proofer.failures[0].class).to eq(HTMLProofer::Issue)
+      expect(proofer.failures[0].path).to eq('spec/html-proofer/fixtures/links/broken_link_internal.html')
+      expect(proofer.failures[0].desc).to eq('internally linking to ./notreal.html, which does not exist')
+    end
+  end
+
   describe '#files' do
     it 'works for directory that ends with .html' do
       folder = "#{FIXTURES_DIR}/links/_site/folder.html"
