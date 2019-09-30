@@ -137,7 +137,7 @@ module HTMLProofer
       !internal?
     end
 
-    # path is an anchor or a query
+    # path is an anchor, a query or refers to root
     def internal?
       hash_link || param_link || slash_link
     end
@@ -151,7 +151,7 @@ module HTMLProofer
     end
 
     def slash_link
-      url.start_with?('|')
+      url.start_with?('/')
     end
 
     def file_path
