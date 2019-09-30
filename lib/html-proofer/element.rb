@@ -221,9 +221,9 @@ module HTMLProofer
 
     def html
       # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
-      if (hash_link || param_link) && internal?
+      if (hash_link || param_link)
         @html
-      elsif slash_link && internal?
+      elsif slash_link
         # link on another page, e.g. /about#Team - need to get HTML from the other page
         create_nokogiri(absolute_path)
       end
