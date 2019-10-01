@@ -49,7 +49,7 @@ class LinkCheck < ::HTMLProofer::Check
         next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
         add_to_external_urls(@link.href)
         next
-      elsif !@link.internal? && !@link.exists?
+      elsif !@link.remote? && !@link.exists?
         add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
       end
 
@@ -79,7 +79,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_mailto(link, line, content)
-    if link.path.empty?
+    if link.path.nil?
       add_issue("#{link.href} contains no email address", line: line, content: content)
     elsif !link.path.include?('@')
       add_issue("#{link.href} contains an invalid email address", line: line, content: content)
@@ -87,7 +87,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_tel(link, line, content)
-    add_issue("#{link.href} contains no phone number", line: line, content: content) if link.path.empty?
+    add_issue("#{link.href} contains no phone number", line: line, content: content) if link.path.nil?
   end
 
   def handle_hash(link, line, content)

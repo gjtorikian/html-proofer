@@ -73,7 +73,7 @@ module HTMLProofer
     end
 
     def path
-      Addressable::URI.unencode parts.path unless parts.nil?
+      Addressable::URI.unencode parts.path unless (parts.nil? || parts.path.empty?)
     end
 
     def hash
@@ -174,7 +174,6 @@ module HTMLProofer
       end
 
       file = File.join base, path
-
       if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
       elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
