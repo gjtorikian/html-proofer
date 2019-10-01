@@ -155,7 +155,7 @@ module HTMLProofer
     end
 
     def file_path
-      return if path.nil?
+      return if path.nil? || path.empty?
 
       path_dot_ext = ''
 
