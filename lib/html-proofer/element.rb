@@ -73,7 +73,7 @@ module HTMLProofer
     end
 
     def path
-      Addressable::URI.unencode parts.path unless (parts.nil? || parts.path.empty?)
+      Addressable::URI.unencode parts.path unless parts.nil?
     end
 
     def hash

@@ -79,7 +79,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_mailto(link, line, content)
-    if link.path.nil?
+    if link.path.empty?
       add_issue("#{link.href} contains no email address", line: line, content: content)
     elsif !link.path.include?('@')
       add_issue("#{link.href} contains an invalid email address", line: line, content: content)
@@ -87,7 +87,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_tel(link, line, content)
-    add_issue("#{link.href} contains no phone number", line: line, content: content) if link.path.nil?
+    add_issue("#{link.href} contains no phone number", line: line, content: content) if link.path.empty?
   end
 
   def handle_hash(link, line, content)
