@@ -49,7 +49,7 @@ class LinkCheck < ::HTMLProofer::Check
         next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
         add_to_external_urls(@link.href)
         next
-      elsif !@link.remote? && !@link.exists?
+      elsif @link.internal? && !@link.exists?
         add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
       end
 

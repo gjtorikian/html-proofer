@@ -6,7 +6,7 @@ describe 'Links test' do
   it 'fails for broken internal hash (even if the file exists)' do
     broken_hash_external_filepath = "#{FIXTURES_DIR}/links/broken_hash_external.html"
     proofer = run_proofer(broken_hash_external_filepath, :file)
-    expect(proofer.failed_tests.last).to match(%r{linking to ../images/missing_image_alt.html#asdfasfdkafl, but asdfasfdkafl does not exist})
+    expect(proofer.failed_tests.last).to match(%r{linking to internal hash #asdfasfdkafl that does not exist})
   end
 
   it 'fails for broken hashes on the web when asked (even if the file exists)' do
