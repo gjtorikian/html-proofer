@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ScriptCheck < ::HTMLProofer::Check
   attr_reader :src
 

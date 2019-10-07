@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://www.sdskafnlkn3rl3204uasfilfkmakmefalkm.com:81
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.9.2; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message: 
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+    adapter_metadata:
+      effective_url: https://www.sdskafnlkn3rl3204uasfilfkmakmefalkm.com:81/
+  recorded_at: Mon, 26 Nov 2018 16:18:58 GMT
+recorded_with: VCR 2.9.3

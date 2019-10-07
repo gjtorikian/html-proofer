@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLProofer
   module Configuration
     require_relative 'version'
@@ -60,6 +62,23 @@ module HTMLProofer
         Regexp.new item[1...-1]
       else
         item
+      end
+    end
+
+    def self.parse_json_option(option_name, config)
+      raise ArgumentError.new('Must provide an option name in string format.') unless option_name.is_a?(String)
+      raise ArgumentError.new('Must provide an option name in string format.') unless !option_name.strip.empty?
+
+      return {} if config.nil?
+
+      raise ArgumentError.new('Must provide a JSON configuration in string format.') unless config.is_a?(String)
+
+      return {} if config.strip.empty?
+
+      begin
+        JSON.parse(config)
+      rescue
+        raise ArgumentError.new("Option '" + option_name + "' did not contain valid JSON.")
       end
     end
   end

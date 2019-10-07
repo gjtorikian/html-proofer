@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'nokogumbo'
 
 module HTMLProofer
   module Utils
     def pluralize(count, single, plural)
-      "#{count} " << (count == 1 ? single : plural)
+      "#{count} #{(count == 1 ? single : plural)}"
     end
 
     def create_nokogiri(path)

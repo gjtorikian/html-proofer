@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HTMLProofer
   class Issue
     attr_reader :path, :desc, :status, :line, :content

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'addressable/uri'
 require_relative './utils'
 
@@ -28,7 +30,7 @@ module HTMLProofer
 
       @html = check.html
 
-      parent_attributes = obj.ancestors.map { |a| a.try(:attributes) }
+      parent_attributes = obj.ancestors.map { |a| a.respond_to?(:attributes) && a.attributes }
       parent_attributes.pop # remove document at the end
       @parent_ignorable = parent_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
 
@@ -54,7 +56,7 @@ module HTMLProofer
 
     def url
       return @url if defined?(@url)
-      @url = (@src || @srcset || @href || '').delete("\u200b")
+      @url = (@src || @srcset || @href || '').delete("\u200b").strip
       @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
       @url = swap(@url, @check.options[:url_swap])
@@ -173,11 +175,10 @@ module HTMLProofer
 
       file = File.join base, path
 
-      # implicit index support
-      if File.directory?(file) && !unslashed_directory?(file)
-        file = File.join file, @check.options[:directory_index_file]
-      elsif @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
+      if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
+      elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
+        file = File.join file, @check.options[:directory_index_file]
       end
 
       file

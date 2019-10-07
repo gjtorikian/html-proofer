@@ -76,7 +76,14 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ## Usage
 
-You can configure HTMLProofer to run on a file, a directory, an array of directories, or an array of links.
+You can configure HTMLProofer to run on:
+
+* a file
+* a directory
+* an array of directories
+* an array of links
+
+It can also run through the command-line, Docker, or as Rack middleware.
 
 ### Using in a script
 
@@ -141,7 +148,7 @@ HTMLProofer.check_directories(['./one', './two']).run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com'])
+HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com']).run
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
@@ -217,6 +224,19 @@ htmlproofer --assume-extension ./_site
 
 If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
 
+### Using as Rack middleware
+
+You can run html-proofer as part of your Rack middleware to validate your HTML at runtime. For example, in Rails, add these lines to `config/application.rb`:
+
+```ruby
+  config.middleware.use HTMLProofer::Middleware if Rails.env.test?
+  config.middleware.use HTMLProofer::Middleware if Rails.env.development?
+```
+
+This will raise an error at runtime if your HTML is invalid. You can choose to skip validation of a page by adding `?proofer-ignore` to the URL.
+
+This is particularly helpful for projects which have extensive CI, since any invalid HTML will fail your build.
+
 ## Ignoring content
 
 Add the `data-proofer-ignore` attribute to any tag to ignore it from every check.
@@ -232,6 +252,23 @@ This can also apply to parent elements, all the way up to the `<html>` tag:
   <a href="http://notareallink">Not checked because of parent.</a>
 </div>
 ```
+
+## Ignoring new files
+
+Say you've got some new files in a pull request, and your tests are failing because links to those files are not live yet. One thing you can do is run a diff against your base branch and explicitly ignore the new files, like this:
+
+```ruby
+  directories = %w(content)
+  merge_base = `git merge-base origin/production HEAD`.chomp
+  diffable_files = `git diff -z --name-only --diff-filter=AC #{merge_base}`.split("\0")
+  diffable_files = diffable_files.select do |filename|
+    next true if directories.include?(File.dirname(filename))
+    filename.end_with?('.md')
+  end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
+
+  HTMLProofer.check_directory('./output', { url_ignore: diffable_files }).run
+```
+
 ## Configuration
 
 The `HTMLProofer` constructor takes an optional hash of additional options:
@@ -260,6 +297,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `internal_domains`| An array of Strings containing domains that will be treated as internal urls. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
+| `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
@@ -412,6 +450,8 @@ class MailToOctocat < ::HTMLProofer::Check
   end
 end
 ```
+
+See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
 
 ## Troubleshooting
 

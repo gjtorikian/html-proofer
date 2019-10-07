@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe HTMLProofer do
@@ -6,6 +8,17 @@ describe HTMLProofer do
       broken_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_link_internal.html"
       proofer = run_proofer(broken_link_internal_filepath, :file)
       expect(proofer.failed_tests).to eq(['spec/html-proofer/fixtures/links/broken_link_internal.html: internally linking to ./notreal.html, which does not exist (line 5)', 'spec/html-proofer/fixtures/links/broken_link_internal.html: internally linking to ./missingImageAlt.html, which does not exist (line 6)'])
+    end
+  end
+
+  describe '#failures' do
+    it 'is an array of Issue' do
+      broken_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_link_internal.html"
+      proofer = run_proofer(broken_link_internal_filepath, :file)
+      expect(proofer.failures.length).to eq(2)
+      expect(proofer.failures[0].class).to eq(HTMLProofer::Issue)
+      expect(proofer.failures[0].path).to eq('spec/html-proofer/fixtures/links/broken_link_internal.html')
+      expect(proofer.failures[0].desc).to eq('internally linking to ./notreal.html, which does not exist')
     end
   end
 
@@ -107,13 +120,13 @@ describe HTMLProofer do
   describe 'ignored checks' do
     it 'knows how to ignore checks' do
       options = { checks_to_ignore: ['ImageRunner'] }
-      proofer = make_proofer('', :file, options)
+      proofer = make_proofer("#{FIXTURES_DIR}/links/broken_link_external.html", :file, options)
       expect(proofer.checks).to_not include 'ImageRunner'
     end
 
     it 'does not care about phoney ignored checks' do
       options = { checks_to_ignore: ['This is nothing.'] }
-      proofer = make_proofer('', :file, options)
+      proofer = make_proofer("#{FIXTURES_DIR}/links/broken_link_external.html", :file, options)
       expect(proofer.checks.length).to eq(3)
     end
   end

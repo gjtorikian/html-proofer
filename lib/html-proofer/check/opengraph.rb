@@ -1,4 +1,5 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 class OpenGraphElement < ::HTMLProofer::Element
   attr_reader :src

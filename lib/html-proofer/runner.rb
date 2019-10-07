@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :external_urls
+    attr_reader :options, :external_urls, :failures
 
     def initialize(src, opts = {})
       @src = src
@@ -32,11 +34,11 @@ module HTMLProofer
     end
 
     def run
-      @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
-
       if @type == :links
+        @logger.log :info, "Running #{checks} on #{@src}... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
+        @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
         check_files
         file_text = pluralize(files.length, 'file', 'files')
         @logger.log :info, "Ran on #{file_text}!\n\n"
@@ -90,9 +92,8 @@ module HTMLProofer
       end
     end
 
-    def check_path(path)
+    def check_parsed(html, path)
       result = { external_urls: {}, failures: [] }
-      html = create_nokogiri(path)
 
       @src = [@src] if @type == :file
 
@@ -110,6 +111,10 @@ module HTMLProofer
         end
       end
       result
+    end
+
+    def check_path(path)
+      check_parsed create_nokogiri(path), path
     end
 
     def validate_urls

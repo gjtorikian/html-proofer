@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'Images test' do
@@ -32,6 +34,12 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
+  it 'passes for images with spaces all over' do
+    spaced_filepath = "#{FIXTURES_DIR}/images/spaced_image.html"
+    proofer = run_proofer(spaced_filepath, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'fails for missing external images' do
     external_image_filepath = "#{FIXTURES_DIR}/images/missing_image_external.html"
     proofer = run_proofer(external_image_filepath, :file)
@@ -63,7 +71,7 @@ describe 'Images test' do
   end
 
   it 'ignores images marked as ignore data-proofer-ignore' do
-    ignorable_images = "#{FIXTURES_DIR}/images/ignorable_images.html"
+    ignorable_images = "#{FIXTURES_DIR}/images/ignorableImages.html"
     proofer = run_proofer(ignorable_images, :file)
     expect(proofer.failed_tests).to eq []
   end
@@ -85,7 +93,7 @@ describe 'Images test' do
     proofer = run_proofer(relative_images, :file)
     expect(proofer.failed_tests).to eq []
 
-    relative_images = "#{FIXTURES_DIR}/resources/books/nested_relative_images.html"
+    relative_images = "#{FIXTURES_DIR}/resources/books/nestedRelativeImages.html"
     proofer = run_proofer(relative_images, :file)
     expect(proofer.failed_tests).to eq []
   end

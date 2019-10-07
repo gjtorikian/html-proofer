@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HtmlCheck < ::HTMLProofer::Check
   # tags embedded in scripts are used in templating languages: http://git.io/vOovv
   SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
