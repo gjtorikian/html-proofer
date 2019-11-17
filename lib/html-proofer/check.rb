@@ -29,6 +29,7 @@ module HTMLProofer
 
     def add_to_external_urls(url)
       return if @external_urls[url]
+
       add_path_for_url(url)
     end
 
@@ -45,6 +46,7 @@ module HTMLProofer
 
       ObjectSpace.each_object(Class) do |c|
         next unless c.superclass == self
+
         classes << c
       end
 

@@ -9,7 +9,7 @@ describe 'Cache test' do
 
   let(:default_cache_options) { { storage_dir: storage_dir } }
 
-  let (:logger) { HTMLProofer::Log.new(:debug) }
+  let(:logger) { HTMLProofer::Log.new(:debug) }
 
   def read_cache(cache_file)
     JSON.parse File.read(cache_file)
@@ -20,7 +20,7 @@ describe 'Cache test' do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time)
 
-      cache = HTMLProofer::Cache.new(logger, { timeframe: '2M' })
+      cache = HTMLProofer::Cache.new(logger, timeframe: '2M')
 
       check_time = Time.local(2019, 8, 6, 12, 0, 0).to_s
 
@@ -37,7 +37,7 @@ describe 'Cache test' do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time)
 
-      cache = HTMLProofer::Cache.new(logger, { timeframe: '2d' })
+      cache = HTMLProofer::Cache.new(logger, timeframe: '2d')
 
       check_time = Time.local(2019, 9, 5, 12, 0, 0).to_s
 
@@ -54,7 +54,7 @@ describe 'Cache test' do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time)
 
-      cache = HTMLProofer::Cache.new(logger, { timeframe: '2w' })
+      cache = HTMLProofer::Cache.new(logger, timeframe: '2w')
 
       check_time = Time.local(2019, 8, 30, 12, 0, 0).to_s
 
@@ -71,7 +71,7 @@ describe 'Cache test' do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time)
 
-      cache = HTMLProofer::Cache.new(logger, { timeframe: '3h' })
+      cache = HTMLProofer::Cache.new(logger, timeframe: '3h')
 
       check_time = Time.local(2019, 9, 6, 9, 0, 0).to_s
 

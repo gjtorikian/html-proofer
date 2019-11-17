@@ -36,6 +36,7 @@ module HTMLProofer
 
     def remove_query_values
       return nil if @external_urls.nil?
+
       paths_with_queries = {}
       iterable_external_urls = @external_urls.dup
       @external_urls.each_key do |url|
@@ -46,6 +47,7 @@ module HTMLProofer
                 nil
               end
         next if uri.nil? || uri.query.nil?
+
         iterable_external_urls.delete(url) unless new_url_query_values?(uri, paths_with_queries)
       end
       iterable_external_urls
@@ -108,9 +110,9 @@ module HTMLProofer
       external_urls.each_pair do |url, filenames|
         url = begin
                  clean_url(url)
-               rescue URI::Error, Addressable::URI::InvalidURIError
-                 add_external_issue(filenames, "#{url} is an invalid URL")
-                 next
+              rescue URI::Error, Addressable::URI::InvalidURIError
+                add_external_issue(filenames, "#{url} is an invalid URL")
+                next
                end
 
         method = if hash?(url) && @options[:check_external_hash]
@@ -146,20 +148,18 @@ module HTMLProofer
       response_code = response.code
       response.body.gsub!("\x00", '')
 
-      if filenames.nil?
-        debug_msg = "Received a #{response_code} for #{href}"
-      else
-        debug_msg = "Received a #{response_code} for #{href}  in #{filenames.join(' ')}"
-      end
+      debug_msg = if filenames.nil?
+                    "Received a #{response_code} for #{href}"
+                  else
+                    "Received a #{response_code} for #{href}  in #{filenames.join(' ')}"
+                  end
 
       @logger.log :debug, debug_msg
 
       return if @options[:http_status_ignore].include?(response_code)
 
       if response_code.between?(200, 299)
-        unless check_hash_in_2xx_response(href, effective_url, response, filenames)
-          @cache.add(href, filenames, response_code)
-        end
+        @cache.add(href, filenames, response_code) unless check_hash_in_2xx_response(href, effective_url, response, filenames)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
@@ -168,6 +168,7 @@ module HTMLProofer
         queue_request(:get, href, filenames)
       else
         return if @options[:only_4xx] && !response_code.between?(400, 499)
+
         # Received a non-successful http response.
         msg = "External link #{href} failed: #{response_code} #{response.return_message}"
         add_external_issue(filenames, msg, response_code)
@@ -191,9 +192,7 @@ module HTMLProofer
         xpath << [%(//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])]
         # when linking to a file on GitHub, like #L12-L34, only the first "L" portion
         # will be identified as a linkable portion
-        if hash =~ /\A(L\d)+/
-          xpath << [%(//td[@id="#{Regexp.last_match[1]}"])]
-        end
+        xpath << [%(//td[@id="#{Regexp.last_match[1]}"])] if hash =~ /\A(L\d)+/
       end
 
       return unless body_doc.xpath(xpath.join('|')).empty?
@@ -208,6 +207,7 @@ module HTMLProofer
       msg = "External link #{href} failed: got a time out (response code #{response_code})"
       @cache.add(href, filenames, 0, msg)
       return if @options[:only_4xx]
+
       add_external_issue(filenames, msg, response_code)
     end
 
@@ -218,6 +218,7 @@ module HTMLProofer
              Either way, the return message (if any) from the server is: #{return_message}"
       @cache.add(href, filenames, 0, msg)
       return if @options[:only_4xx]
+
       add_external_issue(filenames, msg, response_code)
     end
 

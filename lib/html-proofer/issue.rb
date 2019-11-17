@@ -56,9 +56,7 @@ module HTMLProofer
           @logger.log :error, "  *  #{issue}"
         else
           msg = "  *  #{issue.send(second_report)}#{issue.line}"
-          if !issue.content.nil? && !issue.content.empty?
-            msg = "#{msg}\n     #{issue.content}"
-          end
+          msg = "#{msg}\n     #{issue.content}" if !issue.content.nil? && !issue.content.empty?
           @logger.log(:error, msg)
         end
       end

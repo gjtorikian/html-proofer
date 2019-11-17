@@ -29,7 +29,7 @@ describe 'Links test' do
 
   it 'passes for GitHub hashes to a file on the web when asked' do
     github_hash = "#{FIXTURES_DIR}/links/github_file_hash.html"
-    proofer = run_proofer(github_hash, :file, {check_external_hash: true})
+    proofer = run_proofer(github_hash, :file, check_external_hash: true)
     expect(proofer.failed_tests).to eq []
   end
 
@@ -79,8 +79,20 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(%r{internally linking to .\/notreal.html, which does not exist})
   end
 
-  it 'succeeds for working internal-root-links pointing to other folder' do
+  it 'fails for broken internal root links' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_root_link_internal.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file)
+    expect(proofer.failed_tests.first).to match(%r{internally linking to \/broken_root_link_internalz.html, which does not exist})
+  end
+
+  it 'succeeds for working internal root links' do
     broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/working_root_link_internal.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'succeeds for working internal-root-links pointing to other folder' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/link_to_another_folder.html"
     proofer = run_proofer(broken_root_link_internal_filepath, :file, root_dir: 'spec/html-proofer/fixtures')
     expect(proofer.failed_tests).to eq []
   end

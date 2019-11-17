@@ -65,19 +65,19 @@ module HTMLProofer
     end
 
     def self.parse_json_option(option_name, config)
-      raise ArgumentError.new('Must provide an option name in string format.') unless option_name.is_a?(String)
-      raise ArgumentError.new('Must provide an option name in string format.') unless !option_name.strip.empty?
+      raise ArgumentError, 'Must provide an option name in string format.' unless option_name.is_a?(String)
+      raise ArgumentError, 'Must provide an option name in string format.' if option_name.strip.empty?
 
       return {} if config.nil?
 
-      raise ArgumentError.new('Must provide a JSON configuration in string format.') unless config.is_a?(String)
+      raise ArgumentError, 'Must provide a JSON configuration in string format.' unless config.is_a?(String)
 
       return {} if config.strip.empty?
 
       begin
         JSON.parse(config)
-      rescue
-        raise ArgumentError.new("Option '" + option_name + "' did not contain valid JSON.")
+      rescue StandardError
+        raise ArgumentError, "Option '" + option_name + "' did not contain valid JSON."
       end
     end
   end

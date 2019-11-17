@@ -57,9 +57,7 @@ Mercenary.program(:htmlproofer) do |p|
 
     # prepare everything to go to proofer
     p.options.reject { |o| opts[o.config_key].nil? }.each do |option|
-      if opts[option.config_key].is_a?(Array)
-        opts[option.config_key] = opts[option.config_key].map { |i| HTMLProofer::Configuration.to_regex?(i) }
-      end
+      opts[option.config_key] = opts[option.config_key].map { |i| HTMLProofer::Configuration.to_regex?(i) } if opts[option.config_key].is_a?(Array)
       options[option.config_key.to_sym] = opts[option.config_key]
     end
 
@@ -83,9 +81,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'].nil?
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'].nil?
 
-    unless opts['typhoeus_config'].nil?
-      options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'])
-    end
+    options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config']) unless opts['typhoeus_config'].nil?
 
     unless opts['timeframe'].nil?
       options[:cache] ||= {}

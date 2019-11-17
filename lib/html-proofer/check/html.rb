@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class HtmlCheck < ::HTMLProofer::Check
-  SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
-  INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/
-  INVALID_PREFIX = /Namespace prefix/
-  PARSE_ENTITY_REF = /htmlParseEntityRef: no name/
+  SCRIPT_EMBEDS_MSG = /Element script embeds close tag/.freeze
+  INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/.freeze
+  INVALID_PREFIX = /Namespace prefix/.freeze
+  PARSE_ENTITY_REF = /htmlParseEntityRef: no name/.freeze
 
   def run
     @html.errors.each do |error|
