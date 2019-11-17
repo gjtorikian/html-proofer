@@ -150,7 +150,7 @@ module HTMLProofer
     def relative_link?
       return false if remote?
 
-      hash_link || param_link || url.start_with?('.') || url =~ /^\w/
+      hash_link || param_link || url.start_with?('.') || url =~ /^\S/
     end
 
     def link_points_to_same_page?
@@ -237,9 +237,11 @@ module HTMLProofer
       # If link is on the same page, then URL is on the current page. use the same HTML as for current page
       if link_points_to_same_page?
         @html
-      elsif internal_absolute_link?
+      elsif internal?
         # link on another page, e.g. /about#Team - need to get HTML from the other page
         create_nokogiri(absolute_path)
+      else
+        raise NotImplementedError, 'HTMLProofer should not have gotten here. Please report this as a bug.'
       end
     end
   end
