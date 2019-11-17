@@ -164,7 +164,12 @@ module HTMLProofer
       end
 
       if path =~ %r{^/} # path relative to root
-        base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
+        if File.directory?(@check.src)
+          base = @check.src
+        else
+          root_dir = @check.options[:root_dir]
+          base = root_dir ? root_dir : File.dirname(@check.src)
+        end
       elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
         base = File.dirname @check.path
       elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # relative links in nested dir, path is a file
