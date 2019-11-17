@@ -234,10 +234,10 @@ module HTMLProofer
     end
 
     def html
-      # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
+      # If link is on the same page, then URL is on the current page. use the same HTML as for current page
       if link_points_to_same_page?
         @html
-      elsif relative_link?
+      elsif internal_absolute_link?
         # link on another page, e.g. /about#Team - need to get HTML from the other page
         create_nokogiri(absolute_path)
       end

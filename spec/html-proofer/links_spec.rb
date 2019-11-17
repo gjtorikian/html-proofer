@@ -134,6 +134,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/linking to internal hash #25-method-not-allowed that does not exist/)
   end
 
+  it 'should understand relative hash' do
+    link_with_https_filepath = "#{FIXTURES_DIR}/links/relative_hash.html"
+    proofer = run_proofer(link_with_https_filepath, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'properly resolves implicit /index.html in link paths' do
     link_to_folder = "#{FIXTURES_DIR}/links/link_to_folder.html"
     proofer = run_proofer(link_to_folder, :file)
