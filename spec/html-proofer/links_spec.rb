@@ -29,7 +29,7 @@ describe 'Links test' do
 
   it 'passes for GitHub hashes to a file on the web when asked' do
     github_hash = "#{FIXTURES_DIR}/links/github_file_hash.html"
-    proofer = run_proofer(github_hash, :file, {check_external_hash: true})
+    proofer = run_proofer(github_hash, :file, check_external_hash: true)
     expect(proofer.failed_tests).to eq []
   end
 

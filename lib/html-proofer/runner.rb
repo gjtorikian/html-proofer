@@ -103,9 +103,7 @@ module HTMLProofer
           check = Object.const_get(klass).new(src, path, html, @options)
           check.run
           external_urls = check.external_urls
-          if @options[:url_swap]
-            external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }]
-          end
+          external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }] if @options[:url_swap]
           result[:external_urls].merge!(external_urls)
           result[:failures].concat(check.issues)
         end
@@ -148,6 +146,7 @@ module HTMLProofer
 
     def checks
       return @checks if defined?(@checks) && !@checks.nil?
+
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
       @checks.delete('HtmlCheck') unless @options[:check_html]
@@ -159,6 +158,7 @@ module HTMLProofer
     def failed_tests
       result = []
       return result if @failures.empty?
+
       @failures.each { |f| result << f.to_s }
       result
     end

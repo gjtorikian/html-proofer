@@ -2,25 +2,24 @@
 
 module HTMLProofer
   class Middleware
-
     class InvalidHtmlError < StandardError
       def initialize(failures)
         @failures = failures
       end
 
       def message
-          "HTML Validation errors (skip by adding `?proofer-ignore` to URL): \n#{@failures.join("\n")}"
+        "HTML Validation errors (skip by adding `?proofer-ignore` to URL): \n#{@failures.join("\n")}"
       end
     end
 
     def self.options
       @options ||= {
-        type:                :file,
-        allow_missing_href:  true, # Permitted in html5
-        allow_hash_href:     true,
+        type: :file,
+        allow_missing_href: true, # Permitted in html5
+        allow_hash_href: true,
         check_external_hash: true,
-        check_html:          true,
-        url_ignore:          [/.*/], # Don't try to check local files exist
+        check_html: true,
+        url_ignore: [/.*/] # Don't try to check local files exist
       }
     end
 
@@ -46,20 +45,21 @@ module HTMLProofer
       '<BR',
       '<P',
       '<!--'
-    ]
+    ].freeze
 
     def call(env)
       result = @app.call(env)
       return result if env['REQUEST_METHOD'] != 'GET'
       return result if env['QUERY_STRING'] =~ /proofer-ignore/
       return result if result.first != 200
+
       body = []
       result.last.each { |e| body << e }
 
       body = body.join('')
       begin
         html = body.lstrip
-      rescue
+      rescue StandardError
         return result # Invalid encoding; it's not gonna be html.
       end
       if HTML_SIGNATURE.any? { |sig| html.upcase.start_with? sig }
@@ -70,9 +70,7 @@ module HTMLProofer
           Nokogiri::HTML(Utils.clean_content(html)), 'response'
         )
 
-        if parsed[:failures].length > 0
-          raise InvalidHtmlError.new(parsed[:failures])
-        end
+        raise InvalidHtmlError, parsed[:failures] unless parsed[:failures].empty?
       end
       result
     end
