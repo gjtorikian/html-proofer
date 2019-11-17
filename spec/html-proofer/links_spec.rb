@@ -79,6 +79,12 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(%r{internally linking to .\/notreal.html, which does not exist})
   end
 
+  it 'succeeds for working internal-root-links pointing to other folder' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/working_root_link_internal.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file, root_dir: 'spec/html-proofer/fixtures')
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'fails for link with no href' do
     missing_link_href_filepath = "#{FIXTURES_DIR}/links/missing_link_href.html"
     proofer = run_proofer(missing_link_href_filepath, :file)

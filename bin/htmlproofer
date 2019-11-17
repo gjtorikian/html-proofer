@@ -47,6 +47,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
+  p.option 'root_dir', '--root-folder PATH', String, 'The absolute path to the directory serving your html-files. Used when running html-proofer on a file, rather than a directory.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
