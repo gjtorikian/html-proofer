@@ -18,7 +18,7 @@ module HTMLProofer
         instance_variable_set("@#{name}", value.value)
       end
 
-      @aria_hidden = (defined?(@aria_hidden) && @aria_hidden == 'true') ? true : false
+      @aria_hidden = defined?(@aria_hidden) && @aria_hidden == 'true' ? true : false
 
       @data_proofer_ignore = defined?(@data_proofer_ignore)
 
@@ -56,9 +56,11 @@ module HTMLProofer
 
     def url
       return @url if defined?(@url)
+
       @url = (@src || @srcset || @href || '').delete("\u200b").strip
       @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
+
       @url = swap(@url, @check.options[:url_swap])
     end
 
@@ -77,11 +79,11 @@ module HTMLProofer
     end
 
     def hash
-      parts.fragment unless parts.nil?
+      parts&.fragment
     end
 
     def scheme
-      parts.scheme unless parts.nil?
+      parts&.scheme
     end
 
     # path is to an external server
@@ -168,12 +170,15 @@ module HTMLProofer
 
       path_dot_ext = ''
 
-      if @check.options[:assume_extension]
-        path_dot_ext = path + @check.options[:extension]
-      end
+      path_dot_ext = path + @check.options[:extension] if @check.options[:assume_extension]
 
       if path =~ %r{^/} # path relative to root
-        base = File.directory?(@check.src) ? @check.src : File.dirname(@check.src)
+        if File.directory?(@check.src)
+          base = @check.src
+        else
+          root_dir = @check.options[:root_dir]
+          base = root_dir || File.dirname(@check.src)
+        end
       elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
         base = File.dirname @check.path
       elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # relative links in nested dir, path is a file
@@ -195,6 +200,7 @@ module HTMLProofer
     # checks if a file exists relative to the current pwd
     def exists?
       return @checked_paths[absolute_path] if @checked_paths.key? absolute_path
+
       @checked_paths[absolute_path] = File.exist? absolute_path
     end
 

@@ -35,6 +35,7 @@ class LinkCheck < ::HTMLProofer::Check
         next if @link.allow_missing_href?
         # HTML5 allows dropping the href: http://git.io/vBX0z
         next if @html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?
+
         add_issue('anchor has no href attribute', line: line, content: content)
         next
       end
@@ -47,6 +48,7 @@ class LinkCheck < ::HTMLProofer::Check
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
         next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
+
         add_to_external_urls(@link.href)
         next
       elsif @link.internal? && !@link.exists?
@@ -74,6 +76,7 @@ class LinkCheck < ::HTMLProofer::Check
       handle_tel(link, line, content)
     when 'http'
       return unless @options[:enforce_https]
+
       add_issue("#{link.href} is not an HTTPS link", line: line, content: content)
     end
   end
@@ -103,9 +106,7 @@ class LinkCheck < ::HTMLProofer::Check
       add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
     else
       target_html = create_nokogiri link.absolute_path
-      unless hash_check target_html, link.hash
-        add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content)
-      end
+      add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content) unless hash_check target_html, link.hash
     end
   end
 
@@ -135,6 +136,7 @@ class LinkCheck < ::HTMLProofer::Check
 
   def check_sri(line, content)
     return unless SRI_REL_TYPES.include?(@link.rel)
+
     if !defined?(@link.integrity) && !defined?(@link.crossorigin)
       add_issue("SRI and CORS not provided in: #{@link.src}", line: line, content: content)
     elsif !defined?(@link.integrity)

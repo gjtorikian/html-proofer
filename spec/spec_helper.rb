@@ -11,7 +11,7 @@ require 'vcr'
 require 'timecop'
 require_relative '../lib/html-proofer'
 
-FIXTURES_DIR = 'spec/html-proofer/fixtures'.freeze
+FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -31,10 +31,10 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = fake_out = StringIO.new unless ENV['VERBOSE']
+  $stdout = StringIO.new unless ENV['VERBOSE']
   begin
     yield
-  rescue RuntimeError
+  rescue RuntimeError # rubocop:disable Lint/HandleExceptions
   ensure
     $stderr = original_stderr
     $stdout = original_stdout unless ENV['VERBOSE']
