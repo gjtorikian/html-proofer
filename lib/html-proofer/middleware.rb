@@ -2,6 +2,8 @@
 
 module HTMLProofer
   class Middleware
+    include HTMLProofer::Utils
+
     class InvalidHtmlError < StandardError
       def initialize(failures)
         @failures = failures
@@ -67,7 +69,7 @@ module HTMLProofer
           'response',
           Middleware.options
         ).check_parsed(
-          Nokogiri::HTML(Utils.clean_content(html)), 'response'
+          Nokogiri::HTML(clean_content(html)), 'response'
         )
 
         raise InvalidHtmlError, parsed[:failures] unless parsed[:failures].empty?
