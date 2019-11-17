@@ -139,9 +139,22 @@ module HTMLProofer
       !internal?
     end
 
-    # path is an anchor, a query or refers to root
     def internal?
-      hash_link || param_link || slash_link
+      relative_link? || internal_absolute_link?
+    end
+
+    def internal_absolute_link?
+      url.start_with?('/')
+    end
+
+    def relative_link?
+      return false if remote?
+
+      hash_link || param_link || url.start_with?('.') || url =~ /^\w/
+    end
+
+    def link_points_to_same_page?
+      hash_link || param_link
     end
 
     def hash_link
@@ -150,10 +163,6 @@ module HTMLProofer
 
     def param_link
       url.start_with?('?')
-    end
-
-    def slash_link
-      url.start_with?('/')
     end
 
     def file_path
@@ -226,9 +235,9 @@ module HTMLProofer
 
     def html
       # If link is on the same page, then URL is on the current page so can use the same HTML as for current page
-      if hash_link || param_link
+      if link_points_to_same_page?
         @html
-      elsif slash_link
+      elsif relative_link?
         # link on another page, e.g. /about#Team - need to get HTML from the other page
         create_nokogiri(absolute_path)
       end

@@ -8,7 +8,7 @@ module HTMLProofer
       "#{count} #{(count == 1 ? single : plural)}"
     end
 
-    def self.create_nokogiri(path)
+    def create_nokogiri(path)
       content = if File.exist?(path) && !File.directory?(path)
                   File.open(path).read
                 else
@@ -18,7 +18,7 @@ module HTMLProofer
       Nokogiri::HTML(clean_content(content))
     end
 
-    def self.swap(href, replacement)
+    def swap(href, replacement)
       replacement.each do |link, replace|
         href = href.gsub(link, replace)
       end
@@ -28,7 +28,7 @@ module HTMLProofer
     # address a problem with Nokogiri's parsing URL entities
     # problem from http://git.io/vBYU1
     # solution from http://git.io/vBYUi
-    def self.clean_content(string)
+    def clean_content(string)
       string.gsub(%r{(?:https?:)?//([^>]+)}i) do |url|
         url.gsub(/&(?!amp;)/, '&amp;')
       end
