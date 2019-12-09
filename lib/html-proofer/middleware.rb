@@ -67,7 +67,7 @@ module HTMLProofer
           'response',
           Middleware.options
         ).check_parsed(
-          Nokogiri::HTML5(html), 'response'
+          Nokogiri::HTML5(html, max_errors: -1), 'response'
         )
 
         if parsed[:failures].length > 0
