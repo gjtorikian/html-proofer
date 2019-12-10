@@ -284,7 +284,8 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogumbo | `false` |
 | `check_img_http` | Fails an image if it's marked as `http` | `false` |
-|`checks_to_ignore`| An array of Strings indicating which checks you'd like to not perform. | `[]`
+| `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
+| `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
@@ -321,8 +322,9 @@ You can pass in additional options to configure this validation.
 | Option | Description | Default |
 | :----- | :---------- | :------ |
 | `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors. | `false`
+| `report_missing_doctype` | When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors. | `false`
 | `report_missing_names` | When `check_html` is enabled, HTML markup that are missing entity names are reported as errors. | `false`
-| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup [are reported as errors](http://git.io/vOovv). Enabling this option ignores those errors. | `false`
+| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup are reported as errors. | `false`
 
 For example:
 
