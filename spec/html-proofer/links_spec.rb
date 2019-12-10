@@ -6,7 +6,7 @@ describe 'Links test' do
   it 'fails for broken internal hash (even if the file exists)' do
     broken_hash_external_filepath = "#{FIXTURES_DIR}/links/broken_hash_external.html"
     proofer = run_proofer(broken_hash_external_filepath, :file)
-    expect(proofer.failed_tests.last).to match(%r{linking to ../images/missing_image_alt.html#asdfasfdkafl, but asdfasfdkafl does not exist})
+    expect(proofer.failed_tests.last).to match(/linking to internal hash #asdfasfdkafl that does not exist/)
   end
 
   it 'fails for broken hashes on the web when asked (even if the file exists)' do
@@ -29,7 +29,7 @@ describe 'Links test' do
 
   it 'passes for GitHub hashes to a file on the web when asked' do
     github_hash = "#{FIXTURES_DIR}/links/github_file_hash.html"
-    proofer = run_proofer(github_hash, :file, {check_external_hash: true})
+    proofer = run_proofer(github_hash, :file, check_external_hash: true)
     expect(proofer.failed_tests).to eq []
   end
 
@@ -79,6 +79,24 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(%r{internally linking to .\/notreal.html, which does not exist})
   end
 
+  it 'fails for broken internal root links' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_root_link_internal.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file)
+    expect(proofer.failed_tests.first).to match(%r{internally linking to \/broken_root_link_internalz.html, which does not exist})
+  end
+
+  it 'succeeds for working internal root links' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/working_root_link_internal.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'succeeds for working internal-root-links pointing to other folder' do
+    broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/link_to_another_folder.html"
+    proofer = run_proofer(broken_root_link_internal_filepath, :file, root_dir: 'spec/html-proofer/fixtures')
+    expect(proofer.failed_tests).to eq []
+  end
+
   it 'allows link with no href' do
     missing_link_href_filepath = "#{FIXTURES_DIR}/links/missing_link_href.html"
     proofer = run_proofer(missing_link_href_filepath, :file)
@@ -114,6 +132,12 @@ describe 'Links test' do
     broken_link_with_number_filepath = "#{FIXTURES_DIR}/links/broken_link_with_number.html"
     proofer = run_proofer(broken_link_with_number_filepath, :file)
     expect(proofer.failed_tests.first).to match(/linking to internal hash #25-method-not-allowed that does not exist/)
+  end
+
+  it 'should understand relative hash' do
+    link_with_https_filepath = "#{FIXTURES_DIR}/links/relative_hash.html"
+    proofer = run_proofer(link_with_https_filepath, :file)
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'properly resolves implicit /index.html in link paths' do

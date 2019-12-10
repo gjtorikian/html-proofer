@@ -9,7 +9,7 @@ module HTMLProofer
     include HTMLProofer::Utils
 
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
-    DEFAULT_CACHE_FILE_NAME = 'cache.log'.freeze
+    DEFAULT_CACHE_FILE_NAME = 'cache.log'
 
     attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
@@ -120,9 +120,8 @@ module HTMLProofer
       @cache_log.each_pair do |url, cache|
         if within_timeframe?(cache['time'])
           next if cache['message'].empty? # these were successes to skip
-          urls_to_check[url] = cache['filenames'] # these are failures to retry
         else
-          urls_to_check[url] = cache['filenames'] # pass or fail, recheck expired links
+          urls_to_check[url] = cache['filenames'] # recheck expired links
         end
       end
       urls_to_check
@@ -142,23 +141,16 @@ module HTMLProofer
     end
 
     def setup_cache!(options)
-      @storage_dir = if options[:storage_dir]
-                       options[:storage_dir]
-                     else
-                       DEFAULT_STORAGE_DIR
-                     end
+      @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
 
-      cache_file_name = if options[:cache_file]
-                          options[:cache_file]
-                        else
-                          DEFAULT_CACHE_FILE_NAME
-                        end
+      cache_file_name = options[:cache_file] || DEFAULT_CACHE_FILE_NAME
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
       return unless File.exist?(cache_file)
+
       contents = File.read(cache_file)
       @cache_log = contents.empty? ? {} : JSON.parse(contents)
     end
@@ -174,7 +166,7 @@ module HTMLProofer
       when :days
         @cache_datetime - measurement
       when :hours
-        @cache_datetime - Rational(measurement/24.0)
+        @cache_datetime - Rational(measurement / 24.0)
       end.to_time
     end
   end

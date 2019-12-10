@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ImageCheck < ::HTMLProofer::Check
-  SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
+  SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
 
   def empty_alt_tag?
     @img.alt.nil? || @img.alt.strip.empty?
@@ -38,13 +38,9 @@ class ImageCheck < ::HTMLProofer::Check
         add_issue("internal image #{@img.url} does not exist", line: line, content: content)
       end
 
-      if empty_alt_tag? && !@img.ignore_empty_alt? && !@img.ignore_alt?
-        add_issue("image #{@img.url} does not have an alt attribute", line: line, content: content)
-      end
+      add_issue("image #{@img.url} does not have an alt attribute", line: line, content: content) if empty_alt_tag? && !@img.ignore_empty_alt? && !@img.ignore_alt?
 
-      if @img.check_img_http? && @img.scheme == 'http'
-        add_issue("image #{@img.url} uses the http scheme", line: line, content: content)
-      end
+      add_issue("image #{@img.url} uses the http scheme", line: line, content: content) if @img.check_img_http? && @img.scheme == 'http'
     end
 
     external_urls

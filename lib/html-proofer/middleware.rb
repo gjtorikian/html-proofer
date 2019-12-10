@@ -2,6 +2,7 @@
 
 module HTMLProofer
   class Middleware
+    include HTMLProofer::Utils
 
     class InvalidHtmlError < StandardError
       def initialize(failures)
@@ -20,7 +21,7 @@ module HTMLProofer
         allow_hash_href:     true,
         check_external_hash: true,
         check_html:          true,
-        url_ignore:          [/.*/], # Don't try to check local files exist
+        url_ignore: [/.*/] # Don't try to check local files exist
       }
     end
 
@@ -46,20 +47,21 @@ module HTMLProofer
       '<BR',
       '<P',
       '<!--'
-    ]
+    ].freeze
 
     def call(env)
       result = @app.call(env)
       return result if env['REQUEST_METHOD'] != 'GET'
       return result if env['QUERY_STRING'] =~ /proofer-ignore/
       return result if result.first != 200
+
       body = []
       result.last.each { |e| body << e }
 
       body = body.join('')
       begin
         html = body.lstrip
-      rescue
+      rescue StandardError
         return result # Invalid encoding; it's not gonna be html.
       end
       if HTML_SIGNATURE.any? { |sig| html.upcase.start_with? sig }
@@ -70,9 +72,7 @@ module HTMLProofer
           Nokogiri::HTML5(html, max_errors: -1), 'response'
         )
 
-        if parsed[:failures].length > 0
-          raise InvalidHtmlError.new(parsed[:failures])
-        end
+        raise InvalidHtmlError, parsed[:failures] unless parsed[:failures].empty?
       end
       result
     end

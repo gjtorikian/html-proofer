@@ -4,18 +4,20 @@ require 'spec_helper'
 
 describe HTMLProofer::Utils do
   describe '::create_nokogiri' do
+    include HTMLProofer::Utils
+
     it 'passes for a string' do
-      noko = HTMLProofer::Utils.create_nokogiri '<html lang="jp">'
+      noko = create_nokogiri '<html lang="jp">'
       expect(noko.css('html').first['lang']).to eq 'jp'
     end
 
     it 'passes for a file' do
-      noko = HTMLProofer::Utils.create_nokogiri "#{FIXTURES_DIR}/utils/lang-jp.html"
+      noko = create_nokogiri "#{FIXTURES_DIR}/utils/lang-jp.html"
       expect(noko.css('html').first['lang']).to eq 'jp'
     end
 
     it 'ignores directories' do
-      noko = HTMLProofer::Utils.create_nokogiri "#{FIXTURES_DIR}/utils"
+      noko = create_nokogiri "#{FIXTURES_DIR}/utils"
       expect(noko.content).to eq 'spec/html-proofer/fixtures/utils'
     end
   end

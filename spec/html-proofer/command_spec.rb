@@ -116,6 +116,7 @@ describe 'Command test' do
       expect(bin_file).to match(key)
       readme.each_line do |line|
         next unless line =~ /\| `#{key}`/
+
         description = line.split('|')[2].strip
         description.gsub!('A hash', 'A comma-separated list')
         description.gsub!('An array', 'A comma-separated list')

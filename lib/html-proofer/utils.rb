@@ -17,7 +17,6 @@ module HTMLProofer
 
       Nokogiri::HTML5(content)
     end
-    module_function :create_nokogiri
 
     def swap(href, replacement)
       replacement.each do |link, replace|
@@ -25,6 +24,5 @@ module HTMLProofer
       end
       href
     end
-    module_function :swap
   end
 end

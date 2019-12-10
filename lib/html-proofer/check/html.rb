@@ -2,16 +2,16 @@
 
 class HtmlCheck < ::HTMLProofer::Check
   # tags embedded in scripts are used in templating languages: http://git.io/vOovv
-  SCRIPT_EMBEDS_MSG = /Element script embeds close tag/
-  INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/
-  INVALID_PREFIX = /Namespace prefix/
-  PARSE_ENTITY_REF = /htmlParseEntityRef: no name/
-  DOCTYPE_MSG = /The doctype must be the first token in the document/
+  SCRIPT_EMBEDS_MSG = /Element script embeds close tag/.freeze
+  INVALID_TAG_MSG = /Tag ([\w\-:]+) invalid/.freeze
+  INVALID_PREFIX = /Namespace prefix/.freeze
+  PARSE_ENTITY_REF = /htmlParseEntityRef: no name/.freeze
+  DOCTYPE_MSG = /The doctype must be the first token in the document/.freeze
 
   def run
     @html.errors.each do |error|
       add_issue(error.message, line: error.line) if report?(error.message)
-    end
+      end
   end
 
   def report?(message)
