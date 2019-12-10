@@ -11,7 +11,7 @@ class HtmlCheck < ::HTMLProofer::Check
   def run
     @html.errors.each do |error|
       add_issue(error.message, line: error.line) if report?(error.message)
-      end
+    end
   end
 
   def report?(message)

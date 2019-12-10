@@ -10,17 +10,17 @@ module HTMLProofer
       end
 
       def message
-          "HTML Validation errors (skip by adding `?proofer-ignore` to URL): \n#{@failures.join("\n")}"
+        "HTML Validation errors (skip by adding `?proofer-ignore` to URL): \n#{@failures.join("\n")}"
       end
     end
 
     def self.options
       @options ||= {
-        type:                :file,
-        allow_missing_href:  true, # Permitted in html5
-        allow_hash_href:     true,
+        type: :file,
+        allow_missing_href: true, # Permitted in html5
+        allow_hash_href: true,
         check_external_hash: true,
-        check_html:          true,
+        check_html: true,
         url_ignore: [/.*/] # Don't try to check local files exist
       }
     end

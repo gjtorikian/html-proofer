@@ -63,7 +63,7 @@ describe 'Html test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it "allows single ampersand" do
+  it 'allows single ampersand' do
     html = "#{FIXTURES_DIR}/html/single_amp.html"
     proofer = run_proofer(html, :file, check_html: true, validation: { report_missing_names: true })
     expect(proofer.failed_tests).to eq []
