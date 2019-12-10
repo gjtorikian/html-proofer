@@ -138,8 +138,6 @@ def match_command_help(config)
       expect(help_output).to include(description)
     end
 
-    unless matched
-      expect(matched).to be(true), "Could not find `#{key}` explained in README!"
-    end
+    expect(matched).to be(true), "Could not find `#{key}` explained in README!" unless matched
   end
 end
