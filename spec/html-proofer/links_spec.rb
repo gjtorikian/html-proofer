@@ -97,10 +97,10 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for link with no href' do
+  it 'allows link with no href' do
     missing_link_href_filepath = "#{FIXTURES_DIR}/links/missing_link_href.html"
     proofer = run_proofer(missing_link_href_filepath, :file)
-    expect(proofer.failed_tests.first).to match(/anchor has no href attribute/)
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'should follow redirects' do
@@ -247,16 +247,16 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for empty href within link elements' do
+  it 'allows empty href on link elements' do
     head_link = "#{FIXTURES_DIR}/links/head_link_href_empty.html"
     proofer = run_proofer(head_link, :file)
-    expect(proofer.failed_tests.first).to match(/anchor has no href attribute/)
+    expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for absent href within link elements' do
+  it 'allows missing href on link elements' do
     head_link = "#{FIXTURES_DIR}/links/head_link_href_absent.html"
     proofer = run_proofer(head_link, :file)
-    expect(proofer.failed_tests.first).to match(/anchor has no href attribute/)
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'fails for internal linking to a directory without trailing slash' do
@@ -366,10 +366,10 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for placeholder with empty id' do
+  it 'allows placeholder with empty id' do
     empty_id = "#{FIXTURES_DIR}/links/placeholder_with_empty_id.html"
     proofer = run_proofer(empty_id, :file)
-    expect(proofer.failed_tests.first).to match(/anchor has no href attribute/)
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'ignores non-http(s) protocols' do
@@ -525,7 +525,7 @@ describe 'Links test' do
 
     missing_href = "#{FIXTURES_DIR}/links/blank_href_htmlunknown.html"
     proofer = run_proofer(missing_href, :file)
-    expect(proofer.failed_tests.length).to eq 1
+    expect(proofer.failed_tests).to eq []
   end
 
   it 'can skip expecting href for anchors in non-HTML5' do

@@ -89,9 +89,9 @@ describe 'Command test' do
   end
 
   it 'works with check-html' do
-    broken = "#{FIXTURES_DIR}/html/invalid_tag.html"
+    broken = "#{FIXTURES_DIR}/html/unmatched_end_tag.html"
     output = make_bin('--check-html --report-invalid-tags', broken)
-    expect(output).to match('1 failure')
+    expect(output).to match('HTML-Proofer finished successfully')
   end
 
   it 'works with empty-alt-ignore' do
@@ -106,25 +106,38 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'has every option' do
-    config_keys = HTMLProofer::Configuration::PROOFER_DEFAULTS.keys
-    bin_file = File.read('bin/htmlproofer')
-    help_output = make_bin('--help')
-    readme = File.read('README.md')
-    config_keys.map(&:to_s).each do |key|
-      # match options
-      expect(bin_file).to match(key)
-      readme.each_line do |line|
-        next unless line =~ /\| `#{key}`/
+  it 'has every option for proofer defaults' do
+    match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
+  end
 
-        description = line.split('|')[2].strip
-        description.gsub!('A hash', 'A comma-separated list')
-        description.gsub!('An array', 'A comma-separated list')
-        description.gsub!(/\[(.+?)\]\(.+?\)/, '\1')
-        description.sub!(/\.$/, '')
-        # match README description for option
-        expect(help_output).to include(description)
-      end
+  it 'has every option for validation defaults' do
+    match_command_help(HTMLProofer::Configuration::VALIDATION_DEFAULTS)
+  end
+end
+
+def match_command_help(config)
+  config_keys = config.keys
+  bin_file = File.read('bin/htmlproofer')
+  help_output = make_bin('--help')
+  readme = File.read('README.md')
+
+  config_keys.map(&:to_s).each do |key|
+    # match options
+    expect(bin_file).to match(key)
+    matched = false
+    readme.each_line do |line|
+      next unless line =~ /\| `#{key}`/
+
+      matched = true
+      description = line.split('|')[2].strip
+      description.gsub!('A hash', 'A comma-separated list')
+      description.gsub!('An array', 'A comma-separated list')
+      description.gsub!(/\[(.+?)\]\(.+?\)/, '\1')
+      description.sub!(/\.$/, '')
+      # match README description for option
+      expect(help_output).to include(description)
     end
+
+    expect(matched).to be(true), "Could not find `#{key}` explained in README!" unless matched
   end
 end

@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'addressable',     '~> 2.3'
   gem.add_dependency 'mercenary',       '~> 0.3'
-  gem.add_dependency 'nokogiri',        '~> 1.10'
+  gem.add_dependency 'nokogumbo',       '~> 2.0'
   gem.add_dependency 'parallel',        '~> 1.3'
   gem.add_dependency 'rainbow',         '~> 3.0'
   gem.add_dependency 'typhoeus',        '~> 1.3'

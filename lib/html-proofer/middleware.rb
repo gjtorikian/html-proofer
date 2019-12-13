@@ -69,7 +69,7 @@ module HTMLProofer
           'response',
           Middleware.options
         ).check_parsed(
-          Nokogiri::HTML(clean_content(html)), 'response'
+          Nokogiri::HTML5(html, max_errors: -1), 'response'
         )
 
         raise InvalidHtmlError, parsed[:failures] unless parsed[:failures].empty?

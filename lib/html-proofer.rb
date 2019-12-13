@@ -17,7 +17,7 @@ require 'fileutils'
 begin
   require 'awesome_print'
   require 'pry-byebug'
-rescue LoadError; end # rubocop:disable Lint/HandleExceptions
+rescue LoadError; end # rubocop:disable Lint/SuppressedException
 module HTMLProofer
   def self.check_file(file, options = {})
     raise ArgumentError unless file.is_a?(String)

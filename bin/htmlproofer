@@ -20,13 +20,13 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'assume_extension', '--assume-extension', 'Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) (default: `false`).'
-  p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, ' An array of Strings indicating which checks you\'d like to not perform.'
+  p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you do not want to run (default: `[]`)'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogiri (default: `false`).'
+  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogumbo (default: `false`).'
   p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
   p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
-  p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources do use SRI (default: `false`).'
+  p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
   p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'
@@ -37,9 +37,10 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
   p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
-  p.option 'report_invalid_tags', '--report-invalid-tags', 'Ignore `check_html` errors associated with unknown markup (default: `false`)'
-  p.option 'report_missing_names', '--report-missing-names', 'Ignore `check_html` errors associated with missing entities (default: `false`)'
-  p.option 'report_script_embeds', '--report-script-embeds', 'Ignore `check_html` errors associated with `script`s (default: `false`)'
+  p.option 'report_invalid_tags', '--report-invalid-tags', 'When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors (default: `false`)'
+  p.option 'report_missing_names', '--report-missing-names', 'When `check_html` is enabled, HTML markup that are missing entity names are reported as errors (default: `false`)'
+  p.option 'report_script_embeds', '--report-script-embeds', 'When `check_html` is enabled, `script` tags containing markup are reported as errors (default: `false`)'
+  p.option 'report_missing_doctype', '--report-missing-doctype', 'When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
@@ -80,6 +81,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_script_embeds] = opts['report_script_embeds'] unless opts['report_script_embeds'].nil?
     options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'].nil?
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'].nil?
+    options[:validation][:report_missing_doctype] = opts['report_missing_doctype'] unless opts['report_missing_doctype'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config']) unless opts['typhoeus_config'].nil?
 
