@@ -4,6 +4,8 @@ rvm:
   - 2.4.3
   - 2.5.0
   - 2.6.0
+  - 2.7.0
+  - ruby-head
 
 git:
   depth: 10
@@ -16,6 +18,8 @@ sudo: false
 cache: bundler
 
 matrix:
+  allow_failures:
+    - rvm: ruby-head
   include:
     - script: bundle exec rake rubocop
-      rvm: 2.6.0
+      rvm: 2.7.0
