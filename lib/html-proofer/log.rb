@@ -7,16 +7,27 @@ module HTMLProofer
   class Log
     include Yell::Loggable
 
+    STDOUT_LEVELS = %i[debug info warn].freeze
+    STDERR_LEVELS = %i[error fatal].freeze
+
     def initialize(log_level)
       @logger = Yell.new(format: false, \
                          name: 'HTMLProofer', \
                          level: "gte.#{log_level}") do |l|
-        l.adapter :stdout, level: %i[debug info warn]
-        l.adapter :stderr, level: %i[error fatal]
+        l.adapter :stdout, level: "lte.warn"
+        l.adapter :stderr, level: "gte.error"
       end
     end
 
     def log(level, message)
+      log_with_color(level, message)
+    end
+
+    def log_with_color(level, message)
+      @logger.send level, colorize(level, message)
+    end
+
+    def colorize(level, message)
       color = case level
               when :debug
                 :cyan
@@ -28,15 +39,8 @@ module HTMLProofer
                 :red
               end
 
-      log_with_color(level, color, message)
-    end
-
-    def log_with_color(level, color, message)
-      @logger.send level, colorize(color, message)
-    end
-
-    def colorize(color, message)
-      if $stdout.isatty && $stderr.isatty
+      if (STDOUT_LEVELS.include?(level) && $stdout.isatty) || \
+          (STDERR_LEVELS.include?(level) && $stderr.isatty)
         Rainbow(message).send(color)
       else
         message

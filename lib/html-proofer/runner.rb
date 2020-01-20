@@ -45,7 +45,7 @@ module HTMLProofer
       end
 
       if @failures.empty?
-        @logger.log_with_color :info, :green, 'HTML-Proofer finished successfully.'
+        @logger.log :info, 'HTML-Proofer finished successfully.'
       else
         print_failed_tests
       end
@@ -169,7 +169,7 @@ module HTMLProofer
       sorted_failures.sort_and_report
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
-      raise @logger.colorize :red, "HTML-Proofer found #{failure_text}!"
+      raise @logger.colorize :fatal, "HTML-Proofer found #{failure_text}!"
     end
   end
 end
