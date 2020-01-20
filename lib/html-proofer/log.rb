@@ -14,8 +14,8 @@ module HTMLProofer
       @logger = Yell.new(format: false, \
                          name: 'HTMLProofer', \
                          level: "gte.#{log_level}") do |l|
-        l.adapter :stdout, level: "lte.warn"
-        l.adapter :stderr, level: "gte.error"
+        l.adapter :stdout, level: 'lte.warn'
+        l.adapter :stderr, level: 'gte.error'
       end
     end
 
@@ -40,7 +40,7 @@ module HTMLProofer
               end
 
       if (STDOUT_LEVELS.include?(level) && $stdout.isatty) || \
-          (STDERR_LEVELS.include?(level) && $stderr.isatty)
+         (STDERR_LEVELS.include?(level) && $stderr.isatty)
         Rainbow(message).send(color)
       else
         message
