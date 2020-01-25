@@ -176,7 +176,7 @@ Use `htmlproofer --help` to see all command line options, or [take a peek here](
 
 #### Special cases for the command-line
 
-For options which require an array of input, surrounded the value with quotes, and don't use
+For options which require an array of input, surround the value with quotes, and don't use
 any spaces. For example, to exclude an array of HTTP status code, you might do:
 
 ``` bash
