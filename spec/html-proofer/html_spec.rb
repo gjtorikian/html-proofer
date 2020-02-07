@@ -124,4 +124,11 @@ describe 'Html test' do
     proofer = run_proofer(file, :file, opts)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'reports failures' do
+    opts = { check_html: true }
+    file = "#{FIXTURES_DIR}/html/parse_failure.html"
+    proofer = run_proofer(file, :file, opts)
+    expect(proofer.failed_tests.first).to match(/ERROR: That tag isn't allowed here/)
+  end
 end

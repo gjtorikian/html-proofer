@@ -15,7 +15,7 @@ module HTMLProofer
                   path
                 end
 
-      Nokogiri::HTML5(content)
+      Nokogiri::HTML5(content, max_errors: -1)
     end
 
     def swap(href, replacement)
