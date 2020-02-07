@@ -52,7 +52,9 @@ module HTMLProofer
       report_script_embeds: false,
       report_missing_names: false,
       report_invalid_tags: false,
-      report_missing_doctype: false
+      report_missing_doctype: false,
+      report_eof_tags: false,
+      report_mismatched_tags: false
     }.freeze
 
     CACHE_DEFAULTS = {}.freeze
