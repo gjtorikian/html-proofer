@@ -126,7 +126,7 @@ describe 'Html test' do
   end
 
   it 'reports failures' do
-    opts = { check_html: true }
+    opts = { check_html: true, validation: { report_mismatched_tags: true } }
     file = "#{FIXTURES_DIR}/html/parse_failure.html"
     proofer = run_proofer(file, :file, opts)
     expect(proofer.failed_tests.first).to match(/ERROR: That tag isn't allowed here/)

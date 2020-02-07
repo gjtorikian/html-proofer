@@ -321,7 +321,9 @@ You can pass in additional options to configure this validation.
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
+| `report_eof_tags` | When `check_html` is enabled, HTML markup with mismatched tags are reported as errors | `false`
 | `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors. | `false`
+| `report_mismatched_tags` | When `check_html` is enabled, HTML markup with tags that are malformed are reported as errors | `false`
 | `report_missing_doctype` | When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors. | `false`
 | `report_missing_names` | When `check_html` is enabled, HTML markup that are missing entity names are reported as errors. | `false`
 | `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup are reported as errors. | `false`
