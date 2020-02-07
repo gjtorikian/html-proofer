@@ -115,7 +115,7 @@ describe 'Cache test' do
 
       # we expect no add...
       expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add)
-      # ...since we are mocking within_timeframe? to be true
+      # ...since we are mocking :within_timeframe? to be true
       within = true
       expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
@@ -126,12 +126,11 @@ describe 'Cache test' do
   context 'not within date' do
     let(:cache_file_name) { '.not_within_date.log' }
     it 'does write file if timestamp is not within date' do
-      # mock within_timeframe
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
       # we expect an add...
       expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.github.com', nil, 200)
-      # ...since we are mocking within_timeframe? to be true
+      # ...since we are mocking :within_timeframe? to be false
       within = false
       expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
