@@ -110,9 +110,7 @@ describe 'Cache test' do
 
   context 'within date' do
     let(:cache_file_name) { '.within_date.log' }
-
     it 'does not write file if timestamp is within date' do
-
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
       # we expect no add...
@@ -122,15 +120,12 @@ describe 'Cache test' do
       expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['www.github.com'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
-
     end
   end
 
   context 'not within date' do
     let(:cache_file_name) { '.not_within_date.log' }
-
     it 'does write file if timestamp is not within date' do
-
       # mock within_timeframe
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
@@ -141,13 +136,11 @@ describe 'Cache test' do
       expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['www.github.com'], :links, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
-
     end
   end
 
   context 'new url added' do
     let(:cache_file_name) { '.new_url.log' }
-
     it 'does write file if a new URL is added' do
       # this is frozen to within 7 days of the log
       new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -166,9 +159,7 @@ describe 'Cache test' do
 
   context 'recheck failure' do
     let(:cache_file_name) { '.recheck_failure.log' }
-
     it 'does recheck failures, regardless of cache' do
-
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
       # we expect the same link to be readded...
@@ -178,7 +169,6 @@ describe 'Cache test' do
       expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
-
     end
   end
 end
