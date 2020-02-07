@@ -112,22 +112,17 @@ describe 'Cache test' do
     let(:cache_file_name) { '.within_date.log' }
 
     it 'does not write file if timestamp is within date' do
-      # this is frozen to within 7 days of the log
-      new_time = Time.local(2015, 10, 20, 12, 0, 0)
-      Timecop.freeze(new_time)
-
-      log = read_cache(cache_file)
-      current_time = log.values.first['time']
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+      # we expect no add...
+      expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add)
+      # ...since we are mocking within_timeframe? to be true
+      within = true
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
+
       run_proofer(['www.github.com'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
 
-      # note that the timestamp did not change
-      log = read_cache(cache_file)
-      new_time = log.values.first['time']
-      expect(current_time).to eq(new_time)
-
-      Timecop.return
     end
   end
 
@@ -135,15 +130,18 @@ describe 'Cache test' do
     let(:cache_file_name) { '.not_within_date.log' }
 
     it 'does write file if timestamp is not within date' do
-      # this is frozen to within 20 days after the log
-      new_time = Time.local(2014, 10, 21, 12, 0, 0)
-      Timecop.travel(new_time)
 
-      # since the timestamp changed, we expect an add
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
+      # mock within_timeframe
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+      # we expect an add...
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.github.com', nil, 200)
+      # ...since we are mocking within_timeframe? to be true
+      within = false
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
+
       run_proofer(['www.github.com'], :links, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
 
-      Timecop.return
     end
   end
 
@@ -170,18 +168,17 @@ describe 'Cache test' do
     let(:cache_file_name) { '.recheck_failure.log' }
 
     it 'does recheck failures, regardless of cache' do
-      # this is frozen to within 7 days of the log
-      new_time = Time.local(2015, 10, 20, 12, 0, 0)
-      Timecop.freeze(new_time)
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
       # we expect the same link to be readded...
       expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
+      # ...even though we are within the time frame
+      within = true
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
-      # ...even though we are within the 30d time frame, because it's a failure
       run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
 
-      Timecop.return
     end
   end
 end
