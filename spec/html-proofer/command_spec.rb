@@ -91,7 +91,7 @@ describe 'Command test' do
   it 'works with check-html' do
     broken = "#{FIXTURES_DIR}/html/missing_closing_quotes.html"
     output = make_bin('--check-html --report-eof-tags', broken)
-    expect(output).to match('ERROR: End of input in tag')
+    expect(output).to match('1 failure')
   end
 
   it 'works with empty-alt-ignore' do
