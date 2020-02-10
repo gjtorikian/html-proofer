@@ -13,6 +13,10 @@ RuboCop::RakeTask.new(:rubocop)
 
 task default: %i[spec proof_readme]
 
+task :test do
+  Rake::Task["spec"].invoke
+end
+
 task :proof_readme do
   require 'html-proofer'
   require 'redcarpet'
