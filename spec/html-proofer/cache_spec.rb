@@ -111,30 +111,36 @@ describe 'Cache test' do
   context 'within date' do
     let(:cache_file_name) { '.within_date.log' }
     it 'does not write file if timestamp is within date' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 27, 12, 0, 0)
+      Timecop.freeze(new_time)
+
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
-      # we expect no add...
+      # we expect no add since we are within the timeframe
       expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add)
-      # ...since we are mocking :within_timeframe? to be true
-      within = true
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['www.github.com'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
     end
   end
 
   context 'not within date' do
-    let(:cache_file_name) { '.not_within_date.log' }
+    let(:cache_file_name) { '.within_date.log' }
     it 'does write file if timestamp is not within date' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 27, 12, 0, 0)
+      Timecop.freeze(new_time)
+
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
-      # we expect an add...
+      # we expect an add since we are mocking outside the timeframe
       expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.github.com', nil, 200)
-      # ...since we are mocking :within_timeframe? to be false
-      within = false
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['www.github.com'], :links, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
     end
   end
 
@@ -146,7 +152,7 @@ describe 'Cache test' do
       Timecop.freeze(new_time)
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-      # we expect a new link to be added, but github.com can stay...
+      # we expect one new link to be added, but github.com can stay...
       expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.google.com', nil, 200)
 
       # ...because it's within the 30d time frame
@@ -159,15 +165,19 @@ describe 'Cache test' do
   context 'recheck failure' do
     let(:cache_file_name) { '.recheck_failure.log' }
     it 'does recheck failures, regardless of cache' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 27, 12, 0, 0)
+      Timecop.freeze(new_time)
+
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
-      # we expect the same link to be readded...
+      # we expect the same link to be re-added, even though we are within the time frame,
+      # because `foofoofoo.biz` was a failure
       expect_any_instance_of(HTMLProofer::Cache).to receive(:add)
-      # ...even though we are within the time frame
-      within = true
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:within_timeframe?).and_return(within)
 
       run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
     end
   end
 end
