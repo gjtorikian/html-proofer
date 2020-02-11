@@ -14,7 +14,7 @@ RuboCop::RakeTask.new(:rubocop)
 task default: %i[spec proof_readme]
 
 task :test do
-  Rake::Task["spec"].invoke
+  Rake::Task['spec'].invoke
 end
 
 task :proof_readme do
