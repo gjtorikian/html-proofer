@@ -10,12 +10,18 @@ module HTMLProofer
 
     attr_reader :id, :name, :alt, :href, :link, :src, :line, :data_proofer_ignore
 
-    def initialize(obj, check)
+    def initialize(obj, check, logger)
+      @logger = logger
       # Construct readable ivars for every element
-      obj.attributes.each_pair do |attribute, value|
-        name = attribute.tr('-:.', '_').to_s.to_sym
-        (class << self; self; end).send(:attr_reader, name)
-        instance_variable_set("@#{name}", value.value)
+      begin
+        obj.attributes.each_pair do |attribute, value|
+          name = attribute.tr('-:.', '_').to_s.to_sym
+          (class << self; self; end).send(:attr_reader, name)
+          instance_variable_set("@#{name}", value.value)
+        end
+      rescue NameError => e
+        @logger.log :error, "Attribute set `#{obj}` contains an error!"
+        raise e
       end
 
       @aria_hidden = defined?(@aria_hidden) && @aria_hidden == 'true' ? true : false

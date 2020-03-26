@@ -5,10 +5,11 @@ module HTMLProofer
   class Check
     attr_reader :node, :html, :element, :src, :path, :options, :issues, :external_urls
 
-    def initialize(src, path, html, options)
+    def initialize(src, path, html, logger, options)
       @src    = src
       @path   = path
       @html   = remove_ignored(html)
+      @logger = logger
       @options = options
       @issues = []
       @external_urls = {}
@@ -16,7 +17,7 @@ module HTMLProofer
 
     def create_element(node)
       @node = node
-      Element.new(node, self)
+      Element.new(node, self, @logger)
     end
 
     def run
