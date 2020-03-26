@@ -15,7 +15,7 @@ module HTMLProofer
       # Construct readable ivars for every element
       begin
         obj.attributes.each_pair do |attribute, value|
-          name = attribute.tr('-:.', '_').to_s.to_sym
+          name = attribute.tr('-:.;', '_').to_s.to_sym
           (class << self; self; end).send(:attr_reader, name)
           instance_variable_set("@#{name}", value.value)
         end
