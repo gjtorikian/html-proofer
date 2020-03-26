@@ -201,4 +201,10 @@ describe 'Images test' do
     proofer = run_proofer(relative_images, :file)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'ignores semicolon outside attribute name' do
+    relative_images = "#{FIXTURES_DIR}/images/semicolon.html"
+    proofer = run_proofer(relative_images, :file)
+    expect(proofer.failed_tests).to eq []
+  end
 end
