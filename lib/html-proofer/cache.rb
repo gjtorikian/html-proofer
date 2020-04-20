@@ -120,9 +120,8 @@ module HTMLProofer
       @cache_log.each_pair do |url, cache|
         if within_timeframe?(cache['time'])
           next if cache['message'].empty? # these were successes to skip
-        else
-          urls_to_check[url] = cache['filenames'] # recheck expired links
         end
+        urls_to_check[url] = cache['filenames'] # recheck expired links
       end
       urls_to_check
     end
