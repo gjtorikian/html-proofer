@@ -41,6 +41,8 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'report_missing_names', '--report-missing-names', 'When `check_html` is enabled, HTML markup that are missing entity names are reported as errors (default: `false`)'
   p.option 'report_script_embeds', '--report-script-embeds', 'When `check_html` is enabled, `script` tags containing markup are reported as errors (default: `false`)'
   p.option 'report_missing_doctype', '--report-missing-doctype', 'When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors (default: `false`)'
+  p.option 'report_eof_tags', '--report-eof-tags', 'When `check_html` is enabled, HTML markup with tags that are malformed are reported as errors (default: `false`)'
+  p.option 'report_mismatched_tags', '--report-mismatched-tags', 'When `check_html` is enabled, HTML markup with mismatched tags are reported as errors (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
@@ -82,6 +84,8 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'].nil?
     options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'].nil?
     options[:validation][:report_missing_doctype] = opts['report_missing_doctype'] unless opts['report_missing_doctype'].nil?
+    options[:validation][:report_eof_tags] = opts['report_eof_tags'] unless opts['report_eof_tags'].nil?
+    options[:validation][:report_mismatched_tags] = opts['report_mismatched_tags'] unless opts['report_mismatched_tags'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config']) unless opts['typhoeus_config'].nil?
 

@@ -89,9 +89,9 @@ describe 'Command test' do
   end
 
   it 'works with check-html' do
-    broken = "#{FIXTURES_DIR}/html/unmatched_end_tag.html"
-    output = make_bin('--check-html --report-invalid-tags', broken)
-    expect(output).to match('HTML-Proofer finished successfully')
+    broken = "#{FIXTURES_DIR}/html/missing_closing_quotes.html"
+    output = make_bin('--check-html --report-eof-tags', broken)
+    expect(output).to match('1 failure')
   end
 
   it 'works with empty-alt-ignore' do

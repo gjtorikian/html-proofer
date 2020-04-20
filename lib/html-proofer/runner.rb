@@ -100,7 +100,7 @@ module HTMLProofer
       @src.each do |src|
         checks.each do |klass|
           @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-          check = Object.const_get(klass).new(src, path, html, @options)
+          check = Object.const_get(klass).new(src, path, html, @logger, @options)
           check.run
           external_urls = check.external_urls
           external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }] if @options[:url_swap]
@@ -146,6 +146,8 @@ module HTMLProofer
 
     def checks
       return @checks if defined?(@checks) && !@checks.nil?
+
+      return (@checks = ['LinkCheck']) if @type == :links
 
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
