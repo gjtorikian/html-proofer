@@ -122,13 +122,13 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'properly ignores missing alt tags when asked' do
+  it 'properly ignores missing alt attributes when asked' do
     ignoreable_links = "#{FIXTURES_DIR}/images/ignorable_alt_via_options.html"
     proofer = run_proofer(ignoreable_links, :file, alt_ignore: [/wikimedia/, 'gpl.png'])
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'properly ignores missing alt tags, but not all URLs, when asked' do
+  it 'properly ignores missing alt attributes, but not all URLs, when asked' do
     ignoreable_links = "#{FIXTURES_DIR}/images/ignore_alt_but_not_link.html"
     proofer = run_proofer(ignoreable_links, :file, alt_ignore: [/.*/])
     expect(proofer.failed_tests.first).to match(/failed: response code 0/)
@@ -153,7 +153,7 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'skips missing alt tag for images marked as aria-hidden' do
+  it 'skips missing alt attributes for images marked as aria-hidden' do
     src_set_check = "#{FIXTURES_DIR}/images/aria_hidden.html"
     proofer = run_proofer(src_set_check, :file)
     expect(proofer.failed_tests.size).to eq 1
@@ -166,13 +166,13 @@ describe 'Images test' do
     expect(proofer.failed_tests.first).to match(/image gpl.png does not have an alt attribute/)
   end
 
-  it 'fails for images with an alt but missing src or srcset' do
+  it 'fails for images with an alt attribute but missing src or srcset' do
     src_set_missing_alt = "#{FIXTURES_DIR}/images/src_set_missing_image.html"
     proofer = run_proofer(src_set_missing_alt, :file)
     expect(proofer.failed_tests.first).to match(/internal image notreal.png does not exist/)
   end
 
-  it 'properly ignores missing alt tags when asked for srcset' do
+  it 'properly ignores missing alt attributes when asked for srcset' do
     ignoreable_links = "#{FIXTURES_DIR}/images/src_set_ignorable.html"
     proofer = run_proofer(ignoreable_links, :file, alt_ignore: [/wikimedia/, 'gpl.png'])
     expect(proofer.failed_tests).to eq []

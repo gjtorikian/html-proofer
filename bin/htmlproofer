@@ -29,7 +29,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
-  p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'
+  p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt attributes'
   p.option 'error_sort', '--error-sort <sort>', String, 'Defines the sort order for error output. Can be `:path`, `:desc`, or `:status` (default: `:path`).'
   p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
   p.option 'extension', '--extension <ext>', String, 'The extension of your HTML files including the dot. (default: `.html`)'

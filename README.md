@@ -7,7 +7,7 @@ If you generate HTML files, _then this tool might be for you_.
 
 ## Project scope
 
-HTMLProofer is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
+HTMLProofer is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt attributes, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.
 
 In scope for this project is any well-known and widely-used test for HTML document quality. A major use for this project is continuous integration -- so we must have reliable results. We usually balance correctness over performance. And, if necessary, we should be able to trace this program's detection of HTML errors back to documented best practices or standards, such as W3 specifications.
 
@@ -39,7 +39,7 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 `img` elements:
 
-* Whether all your images have alt tags
+* Whether all your images have alt attributes
 * Whether your internal image references are not broken
 * Whether external images are showing
 * Whether your images are HTTP
@@ -288,7 +288,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
+| `empty_alt_ignore` | If `true`, ignores images with empty alt attributes. | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `extension` | The extension of your HTML files including the dot. | `.html`
