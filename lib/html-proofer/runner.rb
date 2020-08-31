@@ -31,6 +31,7 @@ module HTMLProofer
       end
 
       @failures = []
+      @before_request = []
     end
 
     def run
@@ -117,6 +118,7 @@ module HTMLProofer
 
     def validate_urls
       url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
+      url_validator.before_request = @before_request
       @failures.concat(url_validator.run)
       @external_urls = url_validator.external_urls
     end
@@ -172,6 +174,22 @@ module HTMLProofer
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
       raise @logger.colorize :fatal, "HTML-Proofer found #{failure_text}!"
+    end
+
+    # Set before_request callback.
+    #
+    # @example Set before_request.
+    #   request.before_request { |request| p "yay" }
+    #
+    # @param [ Block ] block The block to execute.
+    #
+    # @yield [ Typhoeus::Request ]
+    #
+    # @return [ Array<Block> ] All before_request blocks.
+    def before_request(&block)
+      @before_request ||= []
+      @before_request << block if block_given?
+      @before_request
     end
   end
 end

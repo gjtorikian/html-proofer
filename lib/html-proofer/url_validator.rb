@@ -10,6 +10,7 @@ module HTMLProofer
     include HTMLProofer::Utils
 
     attr_reader :external_urls
+    attr_writer :before_request
 
     def initialize(logger, external_urls, options)
       @logger = logger
@@ -18,6 +19,7 @@ module HTMLProofer
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
       @cache = Cache.new(@logger, @options[:cache])
+      @before_request = []
     end
 
     def run
@@ -137,6 +139,9 @@ module HTMLProofer
     def queue_request(method, href, filenames)
       opts = @options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
+      @before_request.each do |callback|
+        callback.call(request)
+      end
       request.on_complete { |response| response_handler(response, filenames) }
       @hydra.queue request
     end
