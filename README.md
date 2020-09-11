@@ -360,6 +360,20 @@ The default value is:
 }
 ```
 
+#### Setting `before-request` callback
+
+You can provide a block to set some logic before an external link is checked. For example, say you want to provide an authentication token every time a GitHub URL is checked. You can do that like this:
+
+```ruby
+proofer = HTMLProofer.check_directory(item, opts)
+proofer.before_request do |request|
+  request.options[:headers]['Authorization'] = "Bearer <TOKEN>" if request.base_url == "https://github.com"
+end
+proofer.run
+```
+
+The `Authorization` header is being set if and only if the `base_url` is `https://github.com`, and it is excluded for all other URLs.
+
 ### Configuring Parallel
 
 [Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
