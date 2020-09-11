@@ -15,7 +15,7 @@ module HTMLProofer
       # Construct readable ivars for every element
       begin
         obj.attributes.each_pair do |attribute, value|
-          name = attribute.tr('-:.;', '_').to_s.to_sym
+          name = attribute.tr('-:.;@', '_').to_s.to_sym
           (class << self; self; end).send(:attr_reader, name)
           instance_variable_set("@#{name}", value.value)
         end
@@ -42,19 +42,19 @@ module HTMLProofer
 
       # fix up missing protocols
       if defined?(@href)
-        @href.insert(0, 'http:') if @href =~ %r{^//}
+        @href.insert(0, 'http:') if %r{^//}.match?(@href)
       else
         @href = nil
       end
 
       if defined?(@src)
-        @src.insert(0, 'http:') if @src =~ %r{^//}
+        @src.insert(0, 'http:') if %r{^//}.match?(@src)
       else
         @src = nil
       end
 
       if defined?(@srcset)
-        @srcset.insert(0, 'http:') if @srcset =~ %r{^//}
+        @srcset.insert(0, 'http:') if %r{^//}.match?(@srcset)
       else
         @srcset = nil
       end
@@ -105,11 +105,11 @@ module HTMLProofer
       return true if @data_proofer_ignore
       return true if @parent_ignorable
 
-      return true if url =~ /^javascript:/
+      return true if /^javascript:/.match?(url)
 
       # ignore base64 encoded images
       if %w[ImageCheck FaviconCheck].include? @type
-        return true if url =~ /^data:image/
+        return true if /^data:image/.match?(url)
       end
 
       # ignore user defined URLs
@@ -178,7 +178,7 @@ module HTMLProofer
 
       path_dot_ext = path + @check.options[:extension] if @check.options[:assume_extension]
 
-      if path =~ %r{^/} # path relative to root
+      if %r{^/}.match?(path) # path relative to root
         if File.directory?(@check.src)
           base = @check.src
         else
@@ -217,10 +217,11 @@ module HTMLProofer
 
     def ignores_pattern_check(links)
       links.each do |ignore|
-        if ignore.is_a? String
+        case ignore
+        when String
           return true if ignore == url
-        elsif ignore.is_a? Regexp
-          return true if ignore =~ url
+        when Regexp
+          return true if ignore&.match?(url)
         end
       end
 

@@ -76,13 +76,13 @@ describe 'Links test' do
   it 'fails for broken internal links' do
     broken_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_link_internal.html"
     proofer = run_proofer(broken_link_internal_filepath, :file)
-    expect(proofer.failed_tests.first).to match(%r{internally linking to .\/notreal.html, which does not exist})
+    expect(proofer.failed_tests.first).to match(%r{internally linking to ./notreal.html, which does not exist})
   end
 
   it 'fails for broken internal root links' do
     broken_root_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_root_link_internal.html"
     proofer = run_proofer(broken_root_link_internal_filepath, :file)
-    expect(proofer.failed_tests.first).to match(%r{internally linking to \/broken_root_link_internalz.html, which does not exist})
+    expect(proofer.failed_tests.first).to match(%r{internally linking to /broken_root_link_internalz.html, which does not exist})
   end
 
   it 'succeeds for working internal root links' do
@@ -642,6 +642,18 @@ describe 'Links test' do
   it 'can link to external non-unicode hash' do
     file = "#{FIXTURES_DIR}/links/hash_to_unicode_ref.html"
     proofer = run_proofer(file, :file, check_external_hash: true)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'allows for at-sign attribute' do
+    file = "#{FIXTURES_DIR}/links/at_sign.html"
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_tests.first).to match(/linking to internal hash/)
+  end
+
+  it 'allows for at-sign attribute to be ignored' do
+    file = "#{FIXTURES_DIR}/links/at_sign_ignorable.html"
+    proofer = run_proofer(file, :file)
     expect(proofer.failed_tests).to eq []
   end
 end
