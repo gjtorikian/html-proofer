@@ -8,7 +8,7 @@ class OpenGraphElement < ::HTMLProofer::Element
     # Fake up src from the content attribute
     instance_variable_set('@src', @content)
 
-    @src.insert 0, 'http:' if @src =~ %r{^//}
+    @src.insert 0, 'http:' if %r{^//}.match?(@src)
   end
 end
 

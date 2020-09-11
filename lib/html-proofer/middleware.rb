@@ -53,7 +53,7 @@ module HTMLProofer
     def call(env)
       result = @app.call(env)
       return result if env['REQUEST_METHOD'] != 'GET'
-      return result if env['QUERY_STRING'] =~ /proofer-ignore/
+      return result if /proofer-ignore/.match?(env['QUERY_STRING'])
       return result if result.first != 200
 
       body = []

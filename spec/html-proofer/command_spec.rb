@@ -126,7 +126,7 @@ def match_command_help(config)
     expect(bin_file).to match(key)
     matched = false
     readme.each_line do |line|
-      next unless line =~ /\| `#{key}`/
+      next unless /\| `#{key}`/.match?(line)
 
       matched = true
       description = line.split('|')[2].strip
