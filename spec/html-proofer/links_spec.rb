@@ -648,7 +648,7 @@ describe 'Links test' do
   it 'allows for at-sign attribute' do
     file = "#{FIXTURES_DIR}/links/at_sign.html"
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_tests).to eq []
+    expect(proofer.failed_tests.first).to match(/linking to internal hash/)
   end
 
   it 'allows for at-sign attribute to be ignored' do
