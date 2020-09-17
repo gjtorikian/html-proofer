@@ -93,12 +93,7 @@ module HTMLProofer
       if @options[:parallel].empty?
         files.map { |path| check_path(path) }
       else
-        begin
-          Parallel.map(files, @options[:parallel]) { |path| check_path(path) }
-        rescue => e
-          @logger.log :warn, "Process #{Process.pid} failed"
-          @logger.log :warn, e.backtrace
-        end
+        Parallel.map(files, @options[:parallel]) { |path| check_path(path) }
       end
     end
 
