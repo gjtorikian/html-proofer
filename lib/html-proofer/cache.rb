@@ -21,8 +21,10 @@ module HTMLProofer
       @cache_time = @cache_datetime.to_time
 
       if options.nil? || options.empty?
+        @logger.log :info, "Not using cache???????????"
         define_singleton_method('use_cache?') { false }
       else
+        @logger.log :info, "Using cache!!!!!!!!!!"
         define_singleton_method('use_cache?') { true }
         setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
@@ -66,6 +68,7 @@ module HTMLProofer
         message: msg
       }
 
+      @logger.log :info, "Adding #{url}"
       @cache_log[clean_url(url)] = data
     end
 
@@ -79,7 +82,7 @@ module HTMLProofer
         if existing_urls.include?(url)
           true
         else
-          @logger.log :debug, "Adding #{url} to cache check"
+          @logger.log :info, "Adding #{url} to cache check"
           false
         end
       end
@@ -93,7 +96,7 @@ module HTMLProofer
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
         if !found_urls.include?(url)
-          @logger.log :debug, "Removing #{url} from cache check"
+          @logger.log :info, "Removing #{url} from cache check"
           del += 1
           true
         else
@@ -140,6 +143,7 @@ module HTMLProofer
     end
 
     def setup_cache!(options)
+      @logger.log :info, "Setting up cache"
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)

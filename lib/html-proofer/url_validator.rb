@@ -18,7 +18,9 @@ module HTMLProofer
       @failed_tests = []
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
+      @logger.log :info, "Cahce info: #{@options[:cache]}"
       @cache = Cache.new(@logger, @options[:cache])
+      @logger.log :info, "Created a new cache #{@cache}"
       @before_request = []
     end
 
@@ -26,10 +28,12 @@ module HTMLProofer
       @external_urls = remove_query_values
 
       if @cache.use_cache?
+        @logger.log :info, "I am using cache!"
         urls_to_check = load_cache
         external_link_checker(urls_to_check)
         @cache.write
       else
+        @logger.log :info, "I aint using cache!?!?!?!?!?!?!?!?"
         external_link_checker(@external_urls)
       end
 
@@ -137,6 +141,7 @@ module HTMLProofer
     end
 
     def queue_request(method, href, filenames)
+      @logger.log :info, "Queue up #{href}"
       opts = @options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
       @before_request.each do |callback|
