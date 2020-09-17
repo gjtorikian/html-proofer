@@ -36,14 +36,14 @@ module HTMLProofer
 
     def run
       if @type == :links
-        @logger.log :info, "Running #{checks} on #{@src}... \n\n"
+        @logger.log :warn, "Running #{checks} on #{@src}... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
-        @logger.log :info, "Cache is set to #{@options[:cache].inspect}"
+        @logger.log :warn, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
+        @logger.log :warn, "Cache is set to #{@options[:cache].inspect}"
         check_files
         file_text = pluralize(files.length, 'file', 'files')
-        @logger.log :info, "Ran on #{file_text}!\n\n"
+        @logger.log :warn, "Ran on #{file_text}!\n\n"
       end
 
       if @failures.empty?
@@ -93,7 +93,12 @@ module HTMLProofer
       if @options[:parallel].empty?
         files.map { |path| check_path(path) }
       else
-        Parallel.map(files, @options[:parallel]) { |path| check_path(path) }
+        begin
+          Parallel.map(files, @options[:parallel]) { |path| check_path(path) }
+        rescue => e
+          @logger.log :warn, "Process #{Process.pid} failed"
+          @logger.log :warn, e.backtrace
+        end
       end
     end
 
