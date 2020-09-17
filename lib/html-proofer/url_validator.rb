@@ -18,10 +18,13 @@ module HTMLProofer
       @failed_tests = []
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
-      @logger.log :info, "Cahce info: #{@options[:cache]}"
       @cache = Cache.new(@logger, @options[:cache])
-      @logger.log :info, "Created a new cache #{@cache}"
       @before_request = []
+    end
+
+    def cache?
+      @logger.log :info, "We have: #{@cache}"
+      @cache
     end
 
     def run

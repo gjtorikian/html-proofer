@@ -123,6 +123,9 @@ module HTMLProofer
     def validate_urls
       @logger.log :info, "Cache being made with #{@options[:cache]}"
       url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
+      cache = url_validator.cache?
+      @logger.log :info, "We have a cache? #{cache.inspect}"
+      @logger.log :info, "We have set up cache? #{cache.use_cache?}"
       url_validator.before_request = @before_request
       @failures.concat(url_validator.run)
       @external_urls = url_validator.external_urls
