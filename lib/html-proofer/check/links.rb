@@ -1,12 +1,18 @@
 # frozen_string_literal: true
 
+require_relative '../cache'
+
 class LinkCheck < ::HTMLProofer::Check
-  include HTMLProofer::Utils
   attr_reader :cache
+  include HTMLProofer::Utils
 
   def initialize(src, path, html, logger, options)
     super
-    @cache = Cache.new(@logger, @options[:cache])
+    @logger = logger
+    @failed_tests = []
+    @options = options
+    cache = HTMLProofer::Cache.new(@logger, @options[:cache])
+    @cache = cache
   end
 
   def missing_href?
