@@ -12,6 +12,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def run
+    @logger.log :info, "We have link check!"
     @html.css('a, link').each do |node|
       @link = create_element(node)
       line = node.line
