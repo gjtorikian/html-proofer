@@ -72,6 +72,7 @@ module HTMLProofer
       @external_urls = {}
 
       process_files.each do |item|
+        @logger.log :info, "Processing file #{item}"
         @external_urls.merge!(item[:external_urls])
         @failures.concat(item[:failures])
       end
