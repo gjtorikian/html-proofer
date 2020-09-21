@@ -2,6 +2,12 @@
 
 class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
+  attr_reader :cache
+
+  def initialize(src, path, html, logger, options)
+    super
+    @cache = Cache.new(@logger, @options[:cache])
+  end
 
   def missing_href?
     blank?(@link.href) && blank?(@link.name) && blank?(@link.id)
@@ -12,7 +18,26 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def run
-    @logger.log :info, "We have link check!"
+    if @cache.use_cache?
+      urls_to_check = load_cache
+      check_links(urls_to_check)
+      @cache.write
+    else
+      check_links
+    end
+    @failed_tests
+  end
+
+  def load_cache
+    cache_count = @cache.size
+    cache_text = pluralize(cache_count, 'link', 'links')
+
+    @logger.log :info, "Found #{cache_text} in the cache..."
+
+    @cache.retrieve_urls(@external_urls)
+  end
+
+  def check_links
     @html.css('a, link').each do |node|
       @link = create_element(node)
       line = node.line
