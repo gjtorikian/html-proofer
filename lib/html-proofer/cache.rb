@@ -141,7 +141,6 @@ module HTMLProofer
     end
 
     def setup_cache!(options)
-      @logger.log :info, "Setting up cache"
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
