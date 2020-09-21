@@ -21,15 +21,11 @@ module HTMLProofer
       @cache_time = @cache_datetime.to_time
 
       if options.nil? || options.empty?
-        @logger.log :info, "Not using cache???????????"
         define_singleton_method('use_cache?') { false }
-        raise "heaven"
       else
-        @logger.log :info, "Using cache!!!!!!!!!!"
         define_singleton_method('use_cache?') { true }
         setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
-        raise "hell"
       end
     end
 

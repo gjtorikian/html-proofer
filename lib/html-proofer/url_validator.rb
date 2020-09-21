@@ -22,26 +22,18 @@ module HTMLProofer
       @before_request = []
     end
 
-    def cache?
-      @logger.log :info, "We have: #{@cache}"
-      @cache
-    end
-
     def run
       @external_urls = remove_query_values
 
       if @cache.use_cache?
-        @logger.log :info, "I am using cache!"
         urls_to_check = load_cache
         external_link_checker(urls_to_check)
         @cache.write
       else
-        @logger.log :info, "I aint using cache!?!?!?!?!?!?!?!?"
         external_link_checker(@external_urls)
       end
 
       @failed_tests
-      raise "UrlValidator"
     end
 
     def remove_query_values
