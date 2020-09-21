@@ -37,10 +37,11 @@ module HTMLProofer
     def run
       if @type == :links
         @logger.log :warn, "Running #{checks} on #{@src}... \n\n"
+        @logger.log :warn, "Links: Cache is set to #{@options[:cache].inspect}"
         check_list_of_links unless @options[:disable_external]
       else
         @logger.log :warn, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
-        @logger.log :warn, "Cache is set to #{@options[:cache].inspect}"
+        @logger.log :warn, "Not links: Cache is set to #{@options[:cache].inspect}"
         check_files
         file_text = pluralize(files.length, 'file', 'files')
         @logger.log :warn, "Ran on #{file_text}!\n\n"
