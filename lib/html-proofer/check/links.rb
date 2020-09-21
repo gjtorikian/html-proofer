@@ -19,11 +19,12 @@ class LinkCheck < ::HTMLProofer::Check
 
   def run
     if @cache.use_cache?
+      @logger.log :info, "We are USING CACHE"
       urls_to_check = load_cache
       check_links(urls_to_check)
       @cache.write
     else
-      check_links
+      check_links(@external_urls)
     end
     @failed_tests
   end
@@ -37,7 +38,8 @@ class LinkCheck < ::HTMLProofer::Check
     @cache.retrieve_urls(@external_urls)
   end
 
-  def check_links
+  def check_links(urls)
+    @logger.log :info, "Urls we have are: #{urls.inspect}"
     @html.css('a, link').each do |node|
       @link = create_element(node)
       line = node.line
