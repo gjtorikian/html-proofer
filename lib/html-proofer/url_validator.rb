@@ -41,6 +41,7 @@ module HTMLProofer
       end
 
       @failed_tests
+      raise "UrlValidator"
     end
 
     def remove_query_values
