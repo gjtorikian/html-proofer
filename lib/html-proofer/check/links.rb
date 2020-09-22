@@ -29,11 +29,10 @@ class LinkCheck < ::HTMLProofer::Check
       check_links(urls_to_check)
       @logger.log :info, "#{@external_urls.inspect}"
       @external_urls.each_key do |url|
-        @cache.add url, @src, 200, "internal url"
+        @cache.add url, @src, 200
       end
       @cache.write
     else
-      @logger.log :info, "We ain't using cache"
       check_links(@external_urls)
     end
     @failed_tests
@@ -44,7 +43,7 @@ class LinkCheck < ::HTMLProofer::Check
     cache_text = pluralize(cache_count, 'link', 'links')
 
     @logger.log :info, "Found #{cache_text} in the cache..."
-
+    @logger.log :info, "We will be checking for #{@external_urls}"
     @cache.retrieve_urls(@external_urls)
   end
 
