@@ -25,6 +25,7 @@ class LinkCheck < ::HTMLProofer::Check
 
   def run
     check_links
+    @failed_tests
   end
 
   def load_cache
@@ -49,15 +50,12 @@ class LinkCheck < ::HTMLProofer::Check
                 })
     end
 
-    @logger.log :info, "We have urls: #{urls.inspect}"
     if @cache.use_cache?
       @external_urls = urls.map { |a|  a.link}
       urls_to_check = load_cache
-      @logger.log :info, "Urls_to_check: #{urls_to_check.inspect}"
       urls.delete_if do |url|
-        urls_to_check.include? url
+        @external_urls.include? url
       end
-      @logger.log :info, "After removal: #{urls}"
     end
 
     urls.each do |url|
