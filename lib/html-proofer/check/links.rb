@@ -28,8 +28,7 @@ class LinkCheck < ::HTMLProofer::Check
       urls_to_check = load_cache
       check_links(urls_to_check)
       @external_urls.each_key do |url|
-        @logger.log :info, "Adding #{url} from #{@src}"
-        @cache.add(url, @src, 0) unless @src.nil?
+        @cache.add(url, @src, 200) unless @src.nil?
       end
       @cache.write
     else
