@@ -33,6 +33,7 @@ class LinkCheck < ::HTMLProofer::Check
       end
       @cache.write
     else
+      @logger.log :info, "We ain't using cache"
       check_links(@external_urls)
     end
     @failed_tests
