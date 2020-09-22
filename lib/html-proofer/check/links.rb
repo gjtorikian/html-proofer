@@ -57,8 +57,8 @@ class LinkCheck < ::HTMLProofer::Check
       if !urls.empty? && urls.include?(@link.href)
         @logger.log :info, "Found #{@link.href} in cache!"
         next
-      else
-        @logger.log :info, "#{@link.href} NOT in cache!"
+      elsif urls.empty?
+        @logger.log :warn, "Urls is empty"
       end
 
       next if @link.ignore?

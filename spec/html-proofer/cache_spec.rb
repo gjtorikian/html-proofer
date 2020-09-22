@@ -160,6 +160,20 @@ describe 'Cache test' do
 
       Timecop.return
     end
+    it 'does write file if a new URL relative is added' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 20, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      # we expect one new link to be added, but github.com can stay...
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('/test', nil, 200)
+
+      # ...because it's within the 30d time frame
+      run_proofer(['/test'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
+    end
   end
 
   context 'recheck failure' do
