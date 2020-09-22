@@ -24,16 +24,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def run
-    if @cache.use_cache?
-      urls_to_check = load_cache
-      check_links(urls_to_check)
-      @external_urls.each_key do |url|
-        @cache.add url, @src, 200
-      end
-      @cache.write
-    else
-      check_links(@external_urls)
-    end
+    check_links
     @failed_tests
   end
 
@@ -46,13 +37,31 @@ class LinkCheck < ::HTMLProofer::Check
     @cache.retrieve_urls(@external_urls)
   end
 
-  def check_links(urls)
+  def check_links
+    urls = []
     @logger.log :info, "Urls we have are: #{urls.inspect}"
     @html.css('a, link').each do |node|
 
       @link = create_element(node)
-      line = node.line
-      content = node.to_s
+      urls.push({
+                    line: node.line,
+                    content: node.to_s,
+                    link: @link
+                })
+    end
+
+    if @cache.use_cache?
+      @external_urls = urls.map { |a|  a.link}
+      urls_to_check = load_cache
+      urls.delete_if do |url|
+        @external_urls.include? url
+      end
+    end
+
+    urls.each do |url|
+      line = url.line
+      content = url.content
+      @link = url.link
 
       if !urls.empty? && urls.include?(@link.href)
         @logger.log :info, "Found #{@link.href} in cache!"
