@@ -54,6 +54,13 @@ class LinkCheck < ::HTMLProofer::Check
       line = node.line
       content = node.to_s
 
+      if !urls.empty? && urls.include?(@link.href)
+        @logger.log :info, "Found #{@link.href} in cache!"
+        next
+      else
+        @logger.log :info, "#{@link.href} NOT in cache!"
+      end
+
       next if @link.ignore?
 
       next if placeholder?

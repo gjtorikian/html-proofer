@@ -75,7 +75,7 @@ module HTMLProofer
       found_urls = found.keys.map { |url| clean_url(url) }
 
       return  existing_urls if found.empty?
-      
+
       # prepare to add new URLs detected
       additions = found.reject do |url, _|
         url = clean_url(url)
