@@ -66,7 +66,7 @@ module HTMLProofer
         message: msg
       }
 
-      @logger.log :info, "Adding #{url}"
+      #@logger.log :info, "Adding #{url}"
       @cache_log[clean_url(url)] = data
     end
 
