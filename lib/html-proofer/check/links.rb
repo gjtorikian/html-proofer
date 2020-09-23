@@ -59,7 +59,7 @@ class LinkCheck < ::HTMLProofer::Check
 
       next if cached_urls.include? @link.href
 
-      @cache.add @link.href, @path, 200
+      @cache.add @link.href, "notRelevant", 200
 
       next if @link.ignore?
 
