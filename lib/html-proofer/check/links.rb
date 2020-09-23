@@ -26,7 +26,12 @@ class LinkCheck < ::HTMLProofer::Check
   def run
     check_links
 
-    @cache.write if @cache.use_cache?
+    if @cache.use_cache?
+      @external_urls.each_key do |url|
+        @cache.add url, @path, 200
+      end
+      @cache.write
+    end
 
     @failed_tests
   end
@@ -64,8 +69,6 @@ class LinkCheck < ::HTMLProofer::Check
         add_issue("#{@link.href} is an invalid URL", line: line, content: content)
         next
       end
-
-      check_schemes(@link, line, content)
 
       # is there even an href?
       if missing_href?
