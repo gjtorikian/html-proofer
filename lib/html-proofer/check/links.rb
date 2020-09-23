@@ -24,12 +24,10 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def run
-    if @cache.use_cache?
-      check_links
-      @cache.write
-    else
-      check_links
-    end
+    check_links
+
+    @cache.write if @cache.use_cache?
+
     @failed_tests
   end
 
@@ -54,7 +52,7 @@ class LinkCheck < ::HTMLProofer::Check
         next if cached_urls.include? @link.href
       end
 
-      @cache.add @link.href, @path.first, 200
+      @cache.add @link.href, @path, 200
 
       next if @link.ignore?
 
@@ -104,7 +102,7 @@ class LinkCheck < ::HTMLProofer::Check
       handle_hash(@link, line, content) if @link.hash
     end
 
-    external_urls
+    @external_urls
   end
 
   def check_schemes(link, line, content)
