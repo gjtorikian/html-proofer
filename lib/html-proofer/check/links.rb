@@ -46,16 +46,18 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def check_links
+    cached_urls = []
+    if @cache.use_cache?
+      cached_urls = load_cache
+    end
+
     @html.css('a, link').each do |node|
 
       @link = create_element(node)
       line = node.line
       content = node.to_s
 
-      if @cache.use_cache?
-        cached_urls = load_cache
-        next if cached_urls.include? @link.href
-      end
+      next if cached_urls.include? @link.href
 
       @cache.add @link.href, @path, 200
 
