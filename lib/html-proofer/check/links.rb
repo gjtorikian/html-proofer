@@ -27,9 +27,6 @@ class LinkCheck < ::HTMLProofer::Check
     if @cache.use_cache?
       urls_to_check = load_cache
       check_links(urls_to_check)
-      @external_urls.each_pair do |url, filenames|
-        @cache.add url, filenames, 200
-      end
       @cache.write
     else
       check_links(@external_urls)
@@ -58,6 +55,8 @@ class LinkCheck < ::HTMLProofer::Check
         @logger.log :info, "Found #{@link.href} in cache!"
         next
       end
+
+      @cache.add @link.href, @src, 200
 
       next if @link.ignore?
 
