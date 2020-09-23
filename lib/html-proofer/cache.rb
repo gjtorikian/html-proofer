@@ -108,7 +108,6 @@ module HTMLProofer
     end
 
     def write
-      @logger.log :info, "Writing to file: #{@cache_log}"
       File.write(cache_file, @cache_log.to_json)
     end
 
