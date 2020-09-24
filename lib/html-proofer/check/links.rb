@@ -41,7 +41,6 @@ class LinkCheck < ::HTMLProofer::Check
     cache_text = pluralize(cache_count, 'link', 'links')
 
     @logger.log :info, "Found #{cache_text} in the cache..."
-    @logger.log :info, "We will be checking for #{@external_urls}"
     @cache.retrieve_urls(@external_urls, true)
   end
 
@@ -71,6 +70,8 @@ class LinkCheck < ::HTMLProofer::Check
         add_issue("#{@link.href} is an invalid URL", line: line, content: content)
         next
       end
+
+      check_schemes(@link, line, content)
 
       # is there even an href?
       if missing_href?

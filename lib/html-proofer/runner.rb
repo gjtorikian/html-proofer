@@ -36,13 +36,13 @@ module HTMLProofer
 
     def run
       if @type == :links
-        @logger.log :warn, "Running #{checks} on #{@src}... \n\n"
+        @logger.log :info, "Running #{checks} on #{@src}... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :warn, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
+        @logger.log :info, "Running #{checks} on #{@src} on *#{@options[:extension]}... \n\n"
         check_files
         file_text = pluralize(files.length, 'file', 'files')
-        @logger.log :warn, "Ran on #{file_text}!\n\n"
+        @logger.log :info, "Ran on #{file_text}!\n\n"
       end
 
       if @failures.empty?
@@ -59,7 +59,6 @@ module HTMLProofer
         end
       end
       @external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
-      @logger.log :info, "Checking #{@external_urls}"
       validate_urls
     end
 
@@ -70,7 +69,6 @@ module HTMLProofer
       @external_urls = {}
 
       process_files.each do |item|
-        @logger.log :info, "Processing file #{item}"
         @external_urls.merge!(item[:external_urls])
         @failures.concat(item[:failures])
       end
@@ -80,10 +78,8 @@ module HTMLProofer
       # just not run those other checks at all.
       if @options[:external_only]
         @failures = []
-        @logger.log :info, "Second validation of urls"
         validate_urls
       elsif !@options[:disable_external]
-        @logger.log :info, "Third place for validation of urls"
         validate_urls
       end
     end
@@ -104,7 +100,7 @@ module HTMLProofer
 
       @src.each do |src|
         checks.each do |klass|
-          @logger.log :info, "Checking #{klass.to_s.downcase} on #{path} ..."
+          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
           check = Object.const_get(klass).new(src, path, html, @logger, @options)
           check.run
           external_urls = check.external_urls
@@ -121,7 +117,6 @@ module HTMLProofer
     end
 
     def validate_urls
-      @logger.log :info, "Cache being made with #{@options[:cache]}"
       url_validator = HTMLProofer::UrlValidator.new(@logger, @external_urls, @options)
       url_validator.before_request = @before_request
       @failures.concat(url_validator.run)

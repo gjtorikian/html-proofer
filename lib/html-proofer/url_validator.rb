@@ -54,7 +54,7 @@ module HTMLProofer
       end
       iterable_external_urls
     end
-    
+
     # remember queries we've seen, ignore future ones
     def new_url_query_values?(uri, paths_with_queries)
       queries = uri.query_values.keys.join('-')
@@ -137,7 +137,6 @@ module HTMLProofer
     end
 
     def queue_request(method, href, filenames)
-      @logger.log :info, "Queue up #{href}"
       opts = @options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
       @before_request.each do |callback|
