@@ -42,7 +42,7 @@ class LinkCheck < ::HTMLProofer::Check
 
     @logger.log :info, "Found #{cache_text} in the cache..."
     @logger.log :info, "We will be checking for #{@external_urls}"
-    @cache.retrieve_urls(@external_urls)
+    @cache.retrieve_urls(@external_urls, true)
   end
 
   def check_links

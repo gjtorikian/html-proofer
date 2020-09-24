@@ -54,7 +54,7 @@ module HTMLProofer
       end
       iterable_external_urls
     end
-
+    
     # remember queries we've seen, ignore future ones
     def new_url_query_values?(uri, paths_with_queries)
       queries = uri.query_values.keys.join('-')
