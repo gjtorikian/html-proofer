@@ -49,6 +49,7 @@ class LinkCheck < ::HTMLProofer::Check
     cached_urls = []
     if @cache.use_cache?
       cached_urls = load_cache
+      @logger.log :info, "Our cached urls are: #{cached_urls.inspect}"
     end
 
     @html.css('a, link').each do |node|
