@@ -71,6 +71,9 @@ module HTMLProofer
 
     def detect_url_changes(found, skip_delete = false)
       existing_urls = @cache_log.keys.map { |url| clean_url(url) }
+
+      return  existing_urls if skip_delete
+
       found_urls = found.keys.map { |url| clean_url(url) }
 
       # prepare to add new URLs detected
@@ -87,8 +90,6 @@ module HTMLProofer
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, 'link', 'links')
       @logger.log :info, "Adding #{new_link_text} to the cache..."
-
-      return additions if skip_delete
 
       # remove from cache URLs that no longer exist
       del = 0
