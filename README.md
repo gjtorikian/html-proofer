@@ -222,7 +222,7 @@ htmlproofer --assume-extension ./_site
 
 ### Using through Docker
 
-If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [html-proofer-docker](https://github.com/18F/html-proofer-docker) for more information.
+If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [klakegg/html-proofer](https://hub.docker.com/r/klakegg/html-proofer) for more information.
 
 ### Using as Rack middleware
 
