@@ -12,13 +12,13 @@ module HTMLProofer
     attr_reader :external_urls
     attr_writer :before_request
 
-    def initialize(logger, external_urls, options)
+    def initialize(logger, cache, external_urls, options)
       @logger = logger
       @external_urls = external_urls
       @failed_tests = []
       @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
-      @cache = Cache.new(@logger, @options[:cache])
+      @cache = cache
       @before_request = []
     end
 
@@ -26,7 +26,7 @@ module HTMLProofer
       @external_urls = remove_query_values
 
       if @cache.use_cache?
-        urls_to_check = load_cache
+        urls_to_check = @cache.retrieve_urls(@external_urls)
         external_link_checker(urls_to_check)
         @cache.write
       else
@@ -72,15 +72,6 @@ module HTMLProofer
 
     def extract_domain_path(uri)
       uri.host + uri.path
-    end
-
-    def load_cache
-      cache_count = @cache.size
-      cache_text = pluralize(cache_count, 'link', 'links')
-
-      @logger.log :info, "Found #{cache_text} in the cache..."
-
-      @cache.retrieve_urls(@external_urls)
     end
 
     # Proofer runs faster if we pull out all the external URLs and run the checks
