@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.asdo3IRJ395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.16.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com
+  recorded_at: Sat, 14 Nov 2020 16:54:52 GMT
+recorded_with: VCR 2.9.3

@@ -656,4 +656,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :file)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'checks source tags' do
+    file = "#{FIXTURES_DIR}/links/source.html"
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_tests.first).to match(/failed/)
+  end
 end

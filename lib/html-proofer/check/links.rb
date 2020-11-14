@@ -4,7 +4,7 @@ class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 
   def missing_href?
-    blank?(@link.href) && blank?(@link.name) && blank?(@link.id)
+    blank?(@link.href) && blank?(@link.name) && blank?(@link.id) && (@node.name == 'source' && blank?(@link.src))
   end
 
   def placeholder?
@@ -12,7 +12,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def run
-    @html.css('a, link').each do |node|
+    @html.css('a, link, source').each do |node|
       @link = create_element(node)
       line = node.line
       content = node.to_s
@@ -49,7 +49,7 @@ class LinkCheck < ::HTMLProofer::Check
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
         next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
 
-        add_to_external_urls(@link.href)
+        add_to_external_urls(@link.href || @link.src)
         next
       elsif @link.internal? && !@link.exists?
         add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
