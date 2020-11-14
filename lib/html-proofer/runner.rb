@@ -158,7 +158,7 @@ module HTMLProofer
         end
       end
 
-      @failures.concat(@internal_link_checks.issues)
+      @failures.concat(@internal_link_checks.issues) unless @internal_urls.length.zero?
     end
 
     def files
