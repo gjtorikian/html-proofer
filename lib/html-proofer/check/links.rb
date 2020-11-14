@@ -52,10 +52,10 @@ class LinkCheck < ::HTMLProofer::Check
         add_to_external_urls(@link.href || @link.src)
         next
       elsif @link.internal?
-        if !@link.exists?
-          add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
-        else
+        if @link.exists?
           add_to_internal_urls(@link.href, InternalLink.new(@link, @path, line, content))
+        else
+          add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
         end
       end
     end
@@ -102,7 +102,7 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_hash(link, line, content)
-    if link.internal? && !hash_exists?(link.html, link.hash)
+    if link.internal? && !hash_exists?(link.html, link.hash) # rubocop:disable Style/GuardClause
       return add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
     elsif link.external?
       return external_link_check(link, line, content)
@@ -112,11 +112,11 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def external_link_check(link, line, content)
-    if !link.exists?
-      return add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
-    else
+    if link.exists? # rubocop:disable Style/GuardClause
       target_html = create_nokogiri(link.absolute_path)
       return add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content) unless hash_exists?(target_html, link.hash)
+    else
+      return add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
     end
 
     true

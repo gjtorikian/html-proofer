@@ -80,7 +80,7 @@ module HTMLProofer
       begin
         JSON.parse(config)
       rescue StandardError
-        raise ArgumentError, "Option '" + option_name + "' did not contain valid JSON."
+        raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
       end
     end
   end
