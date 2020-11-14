@@ -31,29 +31,21 @@ module HTMLProofer
       false
     end
 
-    def add_to_internal_urls(url)
-      add_path_for_url(url, type: :internal)
+    def add_to_internal_urls(url, internal_url)
+      if @internal_urls[url]
+        @internal_urls[url] << internal_url
+      else
+        @internal_urls[url] = [internal_url]
+      end
     end
 
     def add_to_external_urls(url)
       return if @external_urls[url]
 
-      add_path_for_url(url, type: :external)
-    end
-
-    def add_path_for_url(url, type: :external)
-      if type == :external
-        if @external_urls[url]
-          @external_urls[url] << @path
-        else
-          @external_urls[url] = [@path]
-        end
+      if @external_urls[url]
+        @external_urls[url] << @path
       else
-        if @internal_urls[url]
-          @internal_urls[url] << @path
-        else
-          @internal_urls[url] = [@path]
-        end
+        @external_urls[url] = [@path]
       end
     end
 

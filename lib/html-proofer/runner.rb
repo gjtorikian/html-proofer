@@ -21,7 +21,7 @@ module HTMLProofer
       @type = @options.delete(:type)
       @logger = HTMLProofer::Log.new(@options[:log_level])
       @cache = Cache.new(@logger, @options[:cache])
-      @internal_link_checks = []
+      @internal_link_checks = nil
 
       # Add swap patterns for internal domains
       unless @options[:internal_domains].empty?
@@ -33,6 +33,7 @@ module HTMLProofer
       end
 
       @internal_urls = {}
+      @internal_urls_to_paths = {}
       @external_urls = {}
       @failures = []
       @before_request = []
@@ -71,8 +72,7 @@ module HTMLProofer
     # Sends the external URLs to Typhoeus for batch processing.
     def check_files
       process_files.each do |item|
-        @external_urls.merge!(item[:external_urls]) #{ |k, o,  (n, _)| o << n }
-        @internal_urls.merge!(item[:internal_urls]) { |k, o, (n, _)| o << n }
+        @external_urls.merge!(item[:external_urls])
         @failures.concat(item[:failures])
       end
 
@@ -100,7 +100,7 @@ module HTMLProofer
     end
 
     def check_parsed(html, path)
-      result = { internal_urls: {}, external_urls: {}, failures: [] }
+      result = { external_urls: {}, failures: [] }
 
       @src = [@src] if @type == :file
 
@@ -110,9 +110,18 @@ module HTMLProofer
           check = Object.const_get(klass).new(src, path, html, @logger, @cache, @options)
           check.run
 
-          @internal_link_checks << check if klass == 'LinkCheck' && !check.link.nil?
+          if klass == 'LinkCheck'
+            @internal_link_checks = check
+            check.internal_urls.each_pair do |url, internal_urls|
+              if @internal_urls_to_paths[url]
+                @internal_urls_to_paths[url].concat(internal_urls.map(&:path))
+              else
+                @internal_urls_to_paths[url] = internal_urls.map(&:path)
+              end
+            end
+            @internal_urls.merge!(check.internal_urls)
+          end
 
-          result[:internal_urls].merge!(check.internal_urls)
           external_urls = check.external_urls
           external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }] if @options[:url_swap]
           result[:external_urls].merge!(external_urls)
@@ -120,22 +129,6 @@ module HTMLProofer
         end
       end
       result
-    end
-
-    def add_path_for_url(url, type: :external)
-      if type == :external
-        if @external_urls[url]
-          @external_urls[url] << @path
-        else
-          @external_urls[url] = [@path]
-        end
-      else
-        if @internal_urls[url]
-          @internal_urls[url] << @path
-        else
-          @internal_urls[url] = [@path]
-        end
-      end
     end
 
     def check_path(path)
@@ -152,20 +145,20 @@ module HTMLProofer
     def validate_internal_urls
       if @cache.use_cache?
         urls_to_check = load_internal_cache
-        urls_to_check.each_pair do |url, filenames|
-          @internal_link_checks.each do |check|
-            if url == check.link.href
-              (result = check.check_internal_link)
-              code = result ? 200 : 404
-              @cache.add(url, filenames, code, '') # TODO: blank msg for now
-              break
-            end
-          end
+
+        urls_to_check.each_pair do |url, internal_urls|
+          result = @internal_link_checks.check_internal_link(internal_urls.first.link, internal_urls.first.line, internal_urls.first.content)
+          code = result ? 200 : 404
+          @cache.add(url, @internal_urls_to_paths[url], code, '') # TODO: blank msg for now
         end
         @cache.write
       else
-        @internal_link_checks.each(&:check_internal_link)
+        @internal_urls.values.flatten.each do |internal_url|
+          @internal_link_checks.check_internal_link(internal_url.link, internal_url.line, internal_url.content)
+        end
       end
+
+      @failures.concat(@internal_link_checks.issues)
     end
 
     def files
