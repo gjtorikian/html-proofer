@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe HTMLProofer::Element do
   before(:each) do
-    @check = HTMLProofer::Check.new('', '', Nokogiri::HTML5(''), nil, HTMLProofer::Configuration::PROOFER_DEFAULTS)
+    @check = HTMLProofer::Check.new('', '', Nokogiri::HTML5(''), nil, nil, HTMLProofer::Configuration::PROOFER_DEFAULTS)
   end
 
   describe '#initialize' do

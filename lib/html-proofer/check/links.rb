@@ -51,21 +51,29 @@ class LinkCheck < ::HTMLProofer::Check
 
         add_to_external_urls(@link.href || @link.src)
         next
-      elsif @link.internal? && !@link.exists?
-        add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
+      elsif @link.internal?
+        if !@link.exists?
+          add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
+        else
+          add_to_internal_urls(@link.href, InternalLink.new(@link, @path, line, content))
+        end
       end
-
-      # does the local directory have a trailing slash?
-      if @link.unslashed_directory? @link.absolute_path
-        add_issue("internally linking to a directory #{@link.absolute_path} without trailing slash", line: line, content: content)
-        next
-      end
-
-      # verify the target hash
-      handle_hash(@link, line, content) if @link.hash
     end
 
     external_urls
+  end
+
+  def check_internal_link(link, line, content)
+    # does the local directory have a trailing slash?
+    if link.unslashed_directory?(link.absolute_path)
+      add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", line: line, content: content)
+      return false
+    end
+
+    # verify the target hash
+    return handle_hash(link, line, content) if link.hash
+
+    true
   end
 
   def check_schemes(link, line, content)
@@ -94,23 +102,27 @@ class LinkCheck < ::HTMLProofer::Check
   end
 
   def handle_hash(link, line, content)
-    if link.internal? && !hash_check(link.html, link.hash)
-      add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
+    if link.internal? && !hash_exists?(link.html, link.hash)
+      return add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
     elsif link.external?
-      external_link_check(link, line, content)
+      return external_link_check(link, line, content)
     end
+
+    true
   end
 
   def external_link_check(link, line, content)
     if !link.exists?
-      add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
+      return add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
     else
-      target_html = create_nokogiri link.absolute_path
-      add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content) unless hash_check target_html, link.hash
+      target_html = create_nokogiri(link.absolute_path)
+      return add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content) unless hash_exists?(target_html, link.hash)
     end
+
+    true
   end
 
-  def hash_check(html, href_hash)
+  def hash_exists?(html, href_hash)
     decoded_href_hash = Addressable::URI.unescape(href_hash)
     fragment_ids = [href_hash, decoded_href_hash]
     # https://www.w3.org/TR/html5/single-page.html#scroll-to-fragid
@@ -148,7 +160,19 @@ class LinkCheck < ::HTMLProofer::Check
 
   class XpathFunctions
     def case_sensitive_equals(node_set, str_to_match)
-      node_set.find_all { |node| node.to_s. == str_to_match.to_s }
+      node_set.find_all { |node| node.to_s.== str_to_match.to_s }
+    end
+  end
+
+  class InternalLink
+    attr_reader :link, :href, :path, :line, :content
+
+    def initialize(link, path, line, content)
+      @link = link
+      @href = @link.href
+      @path = path
+      @line = line
+      @content = content
     end
   end
 end

@@ -59,6 +59,8 @@ module HTMLProofer
     end
 
     def add(url, filenames, status, msg = '')
+      return unless use_cache?
+
       data = {
         time: @cache_time,
         filenames: filenames,
@@ -115,8 +117,8 @@ module HTMLProofer
       @load.nil?
     end
 
-    def retrieve_urls(external_urls)
-      urls_to_check = detect_url_changes(external_urls)
+    def retrieve_urls(urls)
+      urls_to_check = detect_url_changes(urls)
       @cache_log.each_pair do |url, cache|
         if within_timeframe?(cache['time'])
           next if cache['message'].empty? # these were successes to skip

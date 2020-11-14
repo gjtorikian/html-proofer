@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: "/test"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.16.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: "/test"
+  recorded_at: Tue, 20 Oct 2015 11:00:00 GMT
+recorded_with: VCR 2.9.3

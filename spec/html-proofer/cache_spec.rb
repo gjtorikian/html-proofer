@@ -90,7 +90,7 @@ describe 'Cache test' do
 
     it 'knows how to write to cache' do
       broken_link_external_filepath = "#{FIXTURES_DIR}/links/broken_link_external.html"
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write).twice # once for internal, once for external
       run_proofer(broken_link_external_filepath, :file, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
 
       log = read_cache(cache_file)
@@ -144,8 +144,8 @@ describe 'Cache test' do
     end
   end
 
-  context 'new url added' do
-    let(:cache_file_name) { '.new_url.log' }
+  context 'new external url added' do
+    let(:cache_file_name) { '.new_external_url.log' }
     it 'does write file if a new URL is added' do
       # this is frozen to within 7 days of the log
       new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -157,6 +157,54 @@ describe 'Cache test' do
 
       # ...because it's within the 30d time frame
       run_proofer(['www.github.com', 'www.google.com'], :links, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
+    end
+  end
+
+  context 'new internal url added' do
+    let(:cache_file_name) { '.new_internal_url.log' }
+    it 'does write file if a new relative URL 200 is added' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 20, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      root_link = "#{FIXTURES_DIR}/links/root_link/root_link.html"
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("/", ["spec/html-proofer/fixtures/links/root_link/root_link.html"], 200, "")
+
+      # we expect one new link to be added because it's within the 30d time frame
+      run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
+    end
+
+    it 'does write file if a new relative URL 404 is added' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 20, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      root_link = "#{FIXTURES_DIR}/links/broken_internal_link.html"
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("#noHash", ["spec/html-proofer/fixtures/links/broken_internal_link.html"], 404, "")
+
+      # we expect one new link to be added because it's within the 30d time frame
+      run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
+    end
+
+    it 'does writes file once if a new relative URL 404 hash is detected multiple times' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 20, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      root_link = "#{FIXTURES_DIR}/links/broken_internal_hashes"
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("file.html#noHash", ["spec/html-proofer/fixtures/links/broken_internal_hashes/file1.html", "spec/html-proofer/fixtures/links/broken_internal_hashes/file2.html", "spec/html-proofer/fixtures/links/broken_internal_hashes/file3.html"], 404, "").once
+
+      # we expect one new link to be added because it's within the 30d time frame
+      run_proofer(root_link, :directory, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
 
       Timecop.return
     end
