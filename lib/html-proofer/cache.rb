@@ -94,12 +94,12 @@ module HTMLProofer
       del = 0
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
-        if !found_urls.include?(url)
+        if found_urls.include?(url)
+          false
+        else
           @logger.log :debug, "Removing #{url} from cache check"
           del += 1
           true
-        else
-          false
         end
       end
 
@@ -120,9 +120,8 @@ module HTMLProofer
     def retrieve_urls(urls)
       urls_to_check = detect_url_changes(urls)
       @cache_log.each_pair do |url, cache|
-        if within_timeframe?(cache['time'])
-          next if cache['message'].empty? # these were successes to skip
-        end
+        next if within_timeframe?(cache['time']) && cache['message'].empty? # these were successes to skip
+
         urls_to_check[url] = cache['filenames'] # recheck expired links
       end
       urls_to_check

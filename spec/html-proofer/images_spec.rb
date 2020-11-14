@@ -157,7 +157,7 @@ describe 'Images test' do
     src_set_check = "#{FIXTURES_DIR}/images/aria_hidden.html"
     proofer = run_proofer(src_set_check, :file)
     expect(proofer.failed_tests.size).to eq 1
-    expect(proofer.failed_tests.first).to match(%r{image .\/gpl.png does not have an alt attribute})
+    expect(proofer.failed_tests.first).to match(%r{image ./gpl.png does not have an alt attribute})
   end
 
   it 'fails for images with a srcset but missing alt' do

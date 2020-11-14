@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - "vendor/**/*"
+
 inherit_gem:
   rubocop-standard:
     - config/default.yml

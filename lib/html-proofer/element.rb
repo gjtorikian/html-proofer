@@ -108,9 +108,7 @@ module HTMLProofer
       return true if /^javascript:/.match?(url)
 
       # ignore base64 encoded images
-      if %w[ImageCheck FaviconCheck].include? @type
-        return true if /^data:image/.match?(url)
-      end
+      return true if %w[ImageCheck FaviconCheck].include?(@type) && /^data:image/.match?(url)
 
       # ignore user defined URLs
       return true if ignores_pattern_check(@check.options[:url_ignore])
@@ -187,7 +185,7 @@ module HTMLProofer
         end
       elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
         base = File.dirname @check.path
-      elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # relative links in nested dir, path is a file
+      elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch; relative links in nested dir, path is a file
         base = File.dirname @check.path
       else # relative link, path is a directory
         base = @check.path

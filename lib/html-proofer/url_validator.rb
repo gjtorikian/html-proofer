@@ -43,11 +43,11 @@ module HTMLProofer
       iterable_external_urls = @external_urls.dup
       @external_urls.each_key do |url|
         uri = begin
-                Addressable::URI.parse(url)
-              rescue URI::Error, Addressable::URI::InvalidURIError
-                @logger.log :error, "#{url} is an invalid URL"
-                nil
-              end
+          Addressable::URI.parse(url)
+        rescue URI::Error, Addressable::URI::InvalidURIError
+          @logger.log :error, "#{url} is an invalid URL"
+          nil
+        end
         next if uri.nil? || uri.query.nil?
 
         iterable_external_urls.delete(url) unless new_url_query_values?(uri, paths_with_queries)
@@ -102,11 +102,11 @@ module HTMLProofer
     def establish_queue(external_urls)
       external_urls.each_pair do |url, filenames|
         url = begin
-                 clean_url(url)
-              rescue URI::Error, Addressable::URI::InvalidURIError
-                add_external_issue(filenames, "#{url} is an invalid URL")
-                next
-               end
+          clean_url(url)
+        rescue URI::Error, Addressable::URI::InvalidURIError
+          add_external_issue(filenames, "#{url} is an invalid URL")
+          next
+        end
 
         method = if hash?(url) && @options[:check_external_hash]
                    :get
@@ -120,10 +120,10 @@ module HTMLProofer
     def clean_url(href)
       # catch any obvious issues, like strings in port numbers
       parsed = Addressable::URI.parse(href)
-      if href !~ /^([!#{$&}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
-        parsed.normalize
-      else
+      if href =~ /^([!#{$&}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
         href
+      else
+        parsed.normalize
       end
     end
 

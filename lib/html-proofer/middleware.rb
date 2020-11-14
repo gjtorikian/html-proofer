@@ -6,6 +6,7 @@ module HTMLProofer
 
     class InvalidHtmlError < StandardError
       def initialize(failures)
+        super
         @failures = failures
       end
 

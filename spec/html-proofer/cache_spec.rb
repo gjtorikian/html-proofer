@@ -171,7 +171,7 @@ describe 'Cache test' do
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
       root_link = "#{FIXTURES_DIR}/links/root_link/root_link.html"
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("/", ["spec/html-proofer/fixtures/links/root_link/root_link.html"], 200, "")
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('/', ['spec/html-proofer/fixtures/links/root_link/root_link.html'], 200, '')
 
       # we expect one new link to be added because it's within the 30d time frame
       run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
@@ -186,7 +186,7 @@ describe 'Cache test' do
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
       root_link = "#{FIXTURES_DIR}/links/broken_internal_link.html"
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("#noHash", ["spec/html-proofer/fixtures/links/broken_internal_link.html"], 404, "")
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('#noHash', ['spec/html-proofer/fixtures/links/broken_internal_link.html'], 404, '')
 
       # we expect one new link to be added because it's within the 30d time frame
       run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
@@ -201,7 +201,7 @@ describe 'Cache test' do
 
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
       root_link = "#{FIXTURES_DIR}/links/broken_internal_hashes"
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with("file.html#noHash", ["spec/html-proofer/fixtures/links/broken_internal_hashes/file1.html", "spec/html-proofer/fixtures/links/broken_internal_hashes/file2.html", "spec/html-proofer/fixtures/links/broken_internal_hashes/file3.html"], 404, "").once
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('file.html#noHash', ['spec/html-proofer/fixtures/links/broken_internal_hashes/file1.html', 'spec/html-proofer/fixtures/links/broken_internal_hashes/file2.html', 'spec/html-proofer/fixtures/links/broken_internal_hashes/file3.html'], 404, '').once
 
       # we expect one new link to be added because it's within the 30d time frame
       run_proofer(root_link, :directory, disable_external: true, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
