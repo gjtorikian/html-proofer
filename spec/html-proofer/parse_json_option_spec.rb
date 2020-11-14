@@ -42,6 +42,6 @@ describe 'JSON config parser' do
   end
 
   it 'Throws an error when the json config is not valid json' do
-    expect { HTMLProofer::Configuration.parse_json_option('testName', 'abc') }.to raise_error(ArgumentError, "Option 'testName' did not contain valid JSON.")
+    expect { HTMLProofer::Configuration.parse_json_option('testName', 'abc') }.to raise_error(ArgumentError)
   end
 end

@@ -4,7 +4,9 @@ class LinkCheck < ::HTMLProofer::Check
   include HTMLProofer::Utils
 
   def missing_href?
-    blank?(@link.href) && blank?(@link.name) && blank?(@link.id) && (@node.name == 'source' && blank?(@link.src))
+    return blank?(@link.src) if @node.name == 'source'
+
+    blank?(@link.href) && blank?(@link.name) && blank?(@link.id)
   end
 
   def placeholder?
