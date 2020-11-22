@@ -169,6 +169,10 @@ module HTMLProofer
       url.start_with?('?')
     end
 
+    def absolute_path?(path)
+      path.start_with?('/')
+    end
+
     def file_path
       return if path.nil? || path.empty?
 
@@ -176,15 +180,15 @@ module HTMLProofer
 
       path_dot_ext = path + @check.options[:extension] if @check.options[:assume_extension]
 
-      if %r{^/}.match?(path) # rubocop:disable Style/ConditionalAssignment path relative to root
-        base = @check.options[:root_dir] || File.dirname(@check.src)
-      elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
-        base = File.dirname(@check.path)
-      elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch; relative links in nested dir, path is a file
-        base = File.dirname(@check.path)
-      else # relative link, path is a directory
-        base = @check.path
-      end
+      base = if absolute_path?(path) # path relative to root
+               @check.options[:root_dir] || File.dirname(@check.src)
+             elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
+               File.dirname(@check.path)
+             elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch; relative links in nested dir, path is a file
+               File.dirname(@check.path)
+             else # relative link, path is a directory
+               @check.path
+             end
       file = File.join(base, path)
       if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
