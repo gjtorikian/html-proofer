@@ -176,22 +176,17 @@ module HTMLProofer
 
       path_dot_ext = path + @check.options[:extension] if @check.options[:assume_extension]
 
-      if %r{^/}.match?(path) # path relative to root
-        if File.directory?(@check.src)
-          base = @check.src
-        else
-          root_dir = @check.options[:root_dir]
-          base = root_dir || File.dirname(@check.src)
-        end
+      if %r{^/}.match?(path) # rubocop:disable Style/ConditionalAssignment path relative to root
+        base = @check.options[:root_dir] || File.dirname(@check.src)
+        ap base
       elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
-        base = File.dirname @check.path
+        base = File.dirname(@check.path)
       elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch; relative links in nested dir, path is a file
-        base = File.dirname @check.path
+        base = File.dirname(@check.path)
       else # relative link, path is a directory
         base = @check.path
       end
-
-      file = File.join base, path
+      file = File.join(base, path)
       if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
       elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
@@ -203,14 +198,15 @@ module HTMLProofer
 
     # checks if a file exists relative to the current pwd
     def exists?
-      return @checked_paths[absolute_path] if @checked_paths.key? absolute_path
+      return @checked_paths[absolute_path] if @checked_paths.key?(absolute_path)
 
-      @checked_paths[absolute_path] = File.exist? absolute_path
+      @checked_paths[absolute_path] = File.exist?(absolute_path)
     end
 
     def absolute_path
       path = file_path || @check.path
-      File.expand_path path, Dir.pwd
+
+      File.expand_path(path, Dir.pwd)
     end
 
     def ignores_pattern_check(links)
