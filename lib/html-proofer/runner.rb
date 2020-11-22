@@ -226,7 +226,7 @@ module HTMLProofer
     # @return [ Array<Block> ] All before_request blocks.
     def before_request(&block)
       @before_request ||= []
-      @before_request << block if block_given?
+      @before_request << block if block
       @before_request
     end
 

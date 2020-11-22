@@ -106,6 +106,12 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
+  it 'navigates above itself in a subdirectory' do
+    real_link = "#{FIXTURES_DIR}/links/root_folder/documentation-from-my-project/"
+    output = make_bin("--root-dir #{FIXTURES_DIR}/links/root_folder/", real_link)
+    expect(output).to match('successfully')
+  end
+
   it 'has every option for proofer defaults' do
     match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
   end
