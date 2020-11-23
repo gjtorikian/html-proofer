@@ -2,13 +2,15 @@ name: Ruby CI
 
 on:
   pull_request:
-
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
 
 jobs:
   test:
+    env:
+      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,13 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby ${{ matrix.ruby-version }}
-        # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-        # change this to (see https://github.com/ruby/setup-ruby#versioning):
-        # uses: ruby/setup-ruby@v1
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           bundler-cache: true
+      - name: Install libxslt and libxml2
+        run: sudo apt-get install libxslt-dev libxml2-dev
       - name: Install dependencies
         run: bundle install
       - name: Run tests

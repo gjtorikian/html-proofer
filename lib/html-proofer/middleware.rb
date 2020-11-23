@@ -60,7 +60,7 @@ module HTMLProofer
       body = []
       result.last.each { |e| body << e }
 
-      body = body.join('')
+      body = body.join
       begin
         html = body.lstrip
       rescue StandardError
