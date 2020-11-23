@@ -1,9 +1,9 @@
 language: ruby
 rvm:
-  - 2.4.3
-  - 2.5.0
-  - 2.6.0
-  - 2.7.0
+  - 2.4.10
+  - 2.5.8
+  - 2.6.6
+  - 2.7.2
   - ruby-head
 
 git:
@@ -20,4 +20,4 @@ matrix:
     - rvm: ruby-head
   include:
     - script: bundle exec rake rubocop
-      rvm: 2.7.0
+      rvm: 2.7.2
