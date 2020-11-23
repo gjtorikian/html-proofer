@@ -181,7 +181,8 @@ module HTMLProofer
       path_dot_ext = path + @check.options[:extension] if @check.options[:assume_extension]
 
       base = if absolute_path?(path) # path relative to root
-               @check.options[:root_dir] || File.dirname(@check.src)
+               # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
+               @check.options[:root_dir] || (File.directory?(@check.src) ? @check.src : File.dirname(@check.src))
              elsif File.exist?(File.expand_path(path, @check.src)) || File.exist?(File.expand_path(path_dot_ext, @check.src)) # relative links, path is a file
                File.dirname(@check.path)
              elsif File.exist?(File.join(File.dirname(@check.path), path)) || File.exist?(File.join(File.dirname(@check.path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch; relative links in nested dir, path is a file
@@ -189,7 +190,9 @@ module HTMLProofer
              else # relative link, path is a directory
                @check.path
              end
+
       file = File.join(base, path)
+
       if @check.options[:assume_extension] && File.file?("#{file}#{@check.options[:extension]}")
         file = "#{file}#{@check.options[:extension]}"
       elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support

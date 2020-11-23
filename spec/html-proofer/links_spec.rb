@@ -662,4 +662,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :file)
     expect(proofer.failed_tests.first).to match(/failed/)
   end
+
+  it 'works for a direct link through directory' do
+    file = "#{FIXTURES_DIR}/links/internals"
+    proofer = run_proofer(file, :directory)
+    expect(proofer.failed_tests).to eq []
+  end
 end
