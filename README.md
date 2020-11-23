@@ -2,9 +2,6 @@
 
 If you generate HTML files, _then this tool might be for you_.
 
-[![Build Status](https://travis-ci.org/gjtorikian/html-proofer.svg?branch=master)](https://travis-ci.org/gjtorikian/html-proofer) [![Gem Version](https://badge.fury.io/rb/html-proofer.svg)](http://badge.fury.io/rb/html-proofer) [![codecov](https://codecov.io/gh/gjtorikian/html-proofer/branch/master/graph/badge.svg)](https://codecov.io/gh/gjtorikian/html-proofer)
-
-
 ## Project scope
 
 HTMLProofer is a set of tests to validate your HTML output. These tests check if your image references are legitimate, if they have alt tags, if your internal links are working, and so on. It's intended to be an all-in-one checker for your output.

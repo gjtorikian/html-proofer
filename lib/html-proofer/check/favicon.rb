@@ -7,7 +7,7 @@ class FaviconCheck < ::HTMLProofer::Check
       favicon = create_element(node)
       next if favicon.ignore?
 
-      found = true if favicon.rel.split(' ').last.eql? 'icon'
+      found = true if favicon.rel.split.last.eql? 'icon'
       break if found
     end
 
