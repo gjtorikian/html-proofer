@@ -23,7 +23,7 @@ docs/
 # YARD artifacts
 .yardoc
 _yardoc
-doc/
+
 .DS_Store
 .idea
 .byebug_history
