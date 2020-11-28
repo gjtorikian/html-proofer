@@ -65,15 +65,15 @@ class LinkCheck < ::HTMLProofer::Check
     external_urls
   end
 
-  def check_internal_link(link, line, content)
+  def check_internal_link(link, path, line, content)
     # does the local directory have a trailing slash?
     if link.unslashed_directory?(link.absolute_path)
-      add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", line: line, content: content)
+      add_issue("internally linking to a directory #{link.absolute_path} without trailing slash", path: path, line: line, content: content)
       return false
     end
 
     # verify the target hash
-    return handle_hash(link, line, content) if link.hash
+    return handle_hash(link, path, line, content) if link.hash
 
     true
   end
@@ -103,9 +103,9 @@ class LinkCheck < ::HTMLProofer::Check
     add_issue("#{link.href} contains no phone number", line: line, content: content) if link.path.empty?
   end
 
-  def handle_hash(link, line, content)
+  def handle_hash(link, path, line, content)
     if link.internal? && !hash_exists?(link.html, link.hash) # rubocop:disable Style/GuardClause
-      return add_issue("linking to internal hash ##{link.hash} that does not exist", line: line, content: content)
+      return add_issue("linking to internal hash ##{link.hash} that does not exist", path:path, line: line, content: content)
     elsif link.external?
       return external_link_check(link, line, content)
     end
