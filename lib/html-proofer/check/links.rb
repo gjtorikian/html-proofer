@@ -105,7 +105,7 @@ class LinkCheck < ::HTMLProofer::Check
 
   def handle_hash(link, path, line, content)
     if link.internal? && !hash_exists?(link.html, link.hash) # rubocop:disable Style/GuardClause
-      return add_issue("linking to internal hash ##{link.hash} that does not exist", path:path, line: line, content: content)
+      return add_issue("linking to internal hash ##{link.hash} that does not exist", path: path, line: line, content: content)
     elsif link.external?
       return external_link_check(link, line, content)
     end
