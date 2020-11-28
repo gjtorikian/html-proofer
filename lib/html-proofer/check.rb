@@ -26,8 +26,8 @@ module HTMLProofer
       raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_issue(desc, line: nil, status: -1, content: nil)
-      @issues << Issue.new(@path, desc, line: line, status: status, content: content)
+    def add_issue(desc, line: nil, path: nil, status: -1, content: nil)
+      @issues << Issue.new(path || @path, desc, line: line, status: status, content: content)
       false
     end
 

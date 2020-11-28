@@ -668,4 +668,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :directory)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'reports linked internal through directory' do
+    file = "#{FIXTURES_DIR}/links/hashes"
+    proofer = run_proofer(file, :directory)
+    expect(proofer.failed_tests.first).to match(%r{support/index.html})
+  end
 end
