@@ -147,6 +147,9 @@ module HTMLProofer
         urls_to_check = load_internal_cache
 
         urls_to_check.each_pair do |url, internal_urls|
+          # pulled from cache
+          internal_urls = @internal_urls[url] unless internal_urls.first.is_a?(LinkCheck::InternalLink)
+
           result = @internal_link_checks.check_internal_link(internal_urls.first.link, internal_urls.first.path, internal_urls.first.line, internal_urls.first.content)
           code = result ? 200 : 404
           @cache.add(url, @internal_urls_to_paths[url].sort, code, '') # TODO: blank msg for now
