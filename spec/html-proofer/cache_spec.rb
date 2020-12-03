@@ -144,6 +144,25 @@ describe 'Cache test' do
     end
   end
 
+  context 'not within date for internal url' do
+    let(:cache_file_name) { '.not_within_date_internal.log' }
+    it 'does write file if timestamp is not within date' do
+      # this is frozen to within 7 days of the log
+      new_time = Time.local(2015, 10, 27, 12, 0, 0)
+      Timecop.freeze(new_time)
+
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+      root_link = "#{FIXTURES_DIR}/links/root_link/root_link.html"
+
+      # we expect an add since we are mocking outside the timeframe
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('/', ['spec/html-proofer/fixtures/links/root_link/root_link.html'], 200, '')
+
+      run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
+
+      Timecop.return
+    end
+  end
+
   context 'new external url added' do
     let(:cache_file_name) { '.new_external_url.log' }
     it 'does write file if a new URL is added' do
