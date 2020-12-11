@@ -214,7 +214,8 @@ module HTMLProofer
       sorted_failures.sort_and_report
       count = @failures.length
       failure_text = pluralize(count, 'failure', 'failures')
-      raise @logger.colorize :fatal, "HTML-Proofer found #{failure_text}!"
+      @logger.log :fatal, "\nHTML-Proofer found #{failure_text}!"
+      exit 1
     end
 
     # Set before_request callback.

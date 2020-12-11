@@ -1,3 +1,4 @@
+# rubocop:disable Naming/FileName
 # frozen_string_literal: true
 
 def require_all(path)
@@ -52,3 +53,4 @@ module HTMLProofer
     HTMLProofer::Runner.new(links, options)
   end
 end
+# rubocop:enable Naming/FileName

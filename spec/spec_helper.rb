@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'vcr'
 require 'timecop'
 require_relative '../lib/html-proofer'
+require 'open3'
 
 FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
@@ -28,7 +29,7 @@ def capture_stderr(*)
   $stdout = StringIO.new unless ENV['VERBOSE']
   begin
     yield
-  rescue RuntimeError # rubocop:disable Lint/SuppressedException
+  rescue SystemExit # rubocop:disable Lint/SuppressedException
   ensure
     $stderr = original_stderr
     $stdout = original_stdout unless ENV['VERBOSE']
@@ -68,7 +69,8 @@ def send_proofer_output(file, type, opts = {})
 end
 
 def make_bin(cmd, path = nil)
-  `bin/htmlproofer #{cmd} #{path}`
+  stdout, stderr = Open3.capture3("bin/htmlproofer #{cmd} #{path}")
+  "#{stdout}\n#{stderr}"
 end
 
 def make_cassette_name(file, opts)

@@ -20,13 +20,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install libxslt and libxml2
+        run: sudo apt-get install libxslt-dev libxml2-dev
       - name: Set up Ruby ${{ matrix.ruby-version }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           # bundler-cache: true
-      - name: Install libxslt and libxml2
-        run: sudo apt-get install libxslt-dev libxml2-dev
       - name: Install dependencies
         run: bundle install
       - name: Run tests

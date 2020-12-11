@@ -1,17 +1,3 @@
-AllCops:
-  Exclude:
-    - "vendor/**/*"
-
 inherit_gem:
   rubocop-standard:
     - config/default.yml
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: single_quotes
-
-Naming/FileName:
-  Enabled: false
-
-Style/Documentation:
-  Enabled: false
