@@ -57,6 +57,8 @@ describe HTMLProofer do
      <a href="tel:">Tel me</a>
 - spec/html-proofer/fixtures/sorting/path/single_issue.html
   *  image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png) (line 1)
+
+HTML-Proofer found 4 failures!
         '.strip)
       end
 
@@ -71,6 +73,8 @@ describe HTMLProofer do
   *  spec/html-proofer/fixtures/sorting/issue/broken_image_two.html (line 1)
 - internal image NOT_AN_IMAGE does not exist
   *  spec/html-proofer/fixtures/sorting/issue/broken_image_two.html (line 4)
+
+HTML-Proofer found 5 failures!
         '.strip)
       end
 
@@ -82,7 +86,8 @@ describe HTMLProofer do
 - 301
   *  spec/html-proofer/fixtures/sorting/status/a_404.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 301
   *  spec/html-proofer/fixtures/sorting/status/broken_link.html: External link http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 301
-        '.strip)
+HTML-Proofer found 3 failures!
+  '.strip)
       end
     end
 

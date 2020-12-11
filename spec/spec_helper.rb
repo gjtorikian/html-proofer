@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'vcr'
 require 'timecop'
 require_relative '../lib/html-proofer'
+require 'open3'
 
 FIXTURES_DIR = 'spec/html-proofer/fixtures'
 
@@ -68,7 +69,8 @@ def send_proofer_output(file, type, opts = {})
 end
 
 def make_bin(cmd, path = nil)
-  `bin/htmlproofer #{cmd} #{path}`
+  stdout, stderr = Open3.capture3("bin/htmlproofer #{cmd} #{path}")
+  "#{stdout}\n#{stderr}"
 end
 
 def make_cassette_name(file, opts)
