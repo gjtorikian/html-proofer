@@ -120,7 +120,7 @@ module HTMLProofer
     def clean_url(href)
       # catch any obvious issues, like strings in port numbers
       parsed = Addressable::URI.parse(href)
-      if href =~ /^([!#{$&}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
+      if href =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
         href
       else
         parsed.normalize
