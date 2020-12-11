@@ -28,7 +28,7 @@ def capture_stderr(*)
   $stdout = StringIO.new unless ENV['VERBOSE']
   begin
     yield
-  rescue RuntimeError # rubocop:disable Lint/SuppressedException
+  rescue SystemExit # rubocop:disable Lint/SuppressedException
   ensure
     $stderr = original_stderr
     $stdout = original_stdout unless ENV['VERBOSE']
