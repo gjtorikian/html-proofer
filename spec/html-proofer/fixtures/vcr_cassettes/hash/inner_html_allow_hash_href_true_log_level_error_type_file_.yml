@@ -1,0 +1,2093 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: "#blog"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: "#blog"
+  recorded_at: Wed, 16 Dec 2020 19:18:50 GMT
+- request:
+    method: head
+    uri: "#podcast"
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: "#podcast"
+  recorded_at: Wed, 16 Dec 2020 19:18:50 GMT
+- request:
+    method: head
+    uri: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-type:
+      - text/css; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=30672000
+      etag:
+      - W/"5f7b5b5f-e7d0"
+      last-modified:
+      - Mon, 05 Oct 2020 17:43:59 GMT
+      cf-cdnjs-via:
+      - cfworker/kv
+      cross-origin-resource-policy:
+      - cross-origin
+      timing-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-request-id:
+      - 070e96bdb70000f41fdc8ec000000001
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      cf-cache-status:
+      - HIT
+      age:
+      - '585892'
+      expires:
+      - Mon, 06 Dec 2021 19:18:51 GMT
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=F55cdj7F4DGjAr5klatpNCcOGj%2Fog7xAOX3D7XsX4Dg2DZdQhHjdis4aAkm64Om9Bq4yp2esvtfsFZBpsJgXu6%2F8Vbjf%2FN2HwXUc8KF%2FRoui%2BqUk7A%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=15780000
+      server:
+      - cloudflare
+      cf-ray:
+      - 602ac0a928b0f41f-LHR
+      alt-svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-type:
+      - application/javascript; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=30672000
+      etag:
+      - W/"5eb03fa9-4f71"
+      last-modified:
+      - Mon, 04 May 2020 16:15:37 GMT
+      cf-cdnjs-via:
+      - cfworker/kv
+      cross-origin-resource-policy:
+      - cross-origin
+      timing-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-request-id:
+      - 070e96bdbc00006b8385bf3000000001
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      cf-cache-status:
+      - HIT
+      age:
+      - '1094617'
+      expires:
+      - Mon, 06 Dec 2021 19:18:51 GMT
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=np9Pjan8f5W1RCqqnqCWoWxWFZ8HXtR%2BaCYWdYPm%2BbPsaRriEZ9f5rXhrwNOdONn7xA8oaD7SgU6kwjY6XuNO2iCWirOsJgyleDmS%2FRLdmFQWm%2BbWQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=15780000
+      server:
+      - cloudflare
+      cf-ray:
+      - 602ac0a92b336b83-LHR
+      alt-svc:
+      - h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://code.jquery.com/jquery-3.3.1.slim.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-length:
+      - '69917'
+      content-type:
+      - application/javascript; charset=utf-8
+      last-modified:
+      - Sat, 20 Jan 2018 17:26:44 GMT
+      accept-ranges:
+      - bytes
+      server:
+      - nginx
+      etag:
+      - W/"5a637bd4-1111d"
+      cache-control:
+      - max-age=315360000
+      - public
+      access-control-allow-origin:
+      - "*"
+      vary:
+      - Accept-Encoding
+      x-hw:
+      - 1608146331.dop218.lo4.t,1608146331.cds225.lo4.hn,1608146331.cds248.lo4.c
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://code.jquery.com/jquery-3.3.1.slim.min.js
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"1544639651"'
+      content-length:
+      - '140936'
+      content-type:
+      - text/css; charset=utf-8
+      last-modified:
+      - Wed, 12 Dec 2018 18:34:11 GMT
+      accept-ranges:
+      - bytes
+      x-cache:
+      - HIT
+      vary:
+      - Accept-Encoding
+      access-control-allow-origin:
+      - "*"
+      cross-origin-resource-policy:
+      - cross-origin
+      x-content-type-options:
+      - nosniff
+      timing-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=31536000
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"1544639634"'
+      content-length:
+      - '51039'
+      content-type:
+      - text/javascript; charset=utf-8
+      last-modified:
+      - Wed, 12 Dec 2018 18:33:54 GMT
+      accept-ranges:
+      - bytes
+      x-cache:
+      - HIT
+      vary:
+      - Accept-Encoding
+      access-control-allow-origin:
+      - "*"
+      cross-origin-resource-policy:
+      - cross-origin
+      x-content-type-options:
+      - nosniff
+      timing-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=31536000
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://www.cloudwithchris.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-length:
+      - '27470'
+      content-type:
+      - text/html
+      content-md5:
+      - xJIrXts8bNJSI53iF44gjw==
+      last-modified:
+      - Wed, 16 Dec 2020 10:01:52 GMT
+      accept-ranges:
+      - bytes
+      etag:
+      - '"0x8D8A1A99CA035D8"'
+      x-cache:
+      - TCP_HIT
+      server:
+      - Windows-Azure-Web/1.0 Microsoft-HTTPAPI/2.0
+      x-ms-request-id:
+      - 9a3585d7-901e-0025-6fdc-d3b575000000
+      x-ms-version:
+      - '2018-03-28'
+      x-azure-ref:
+      - 0m13aXwAAAADs/nJVjh9+SKnRiZQ6ermpTE9OMjFFREdFMDIxMwAxODNmZDdiMS0yYzAzLTRmMjctYmU4OS01MjNiYTJjYTY0NDM=
+      date:
+      - Wed, 16 Dec 2020 19:18:50 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.cloudwithchris.com
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://fonts.googleapis.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      pragma:
+      - no-cache
+      expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-length:
+      - '1588'
+      server:
+      - ESF
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      alt-svc:
+      - h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://gohugo.io/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Mon, 14 Dec 2020 15:50:10 GMT
+      etag:
+      - '"9008765768e6524464fcc87f66cf7787-ssl"'
+      link:
+      - "</dist/app.bundle.js>; rel=preload; as=script, </dist/main.css>; rel=preload;
+        as=style"
+      referrer-policy:
+      - origin-when-cross-origin
+      strict-transport-security:
+      - max-age=31536000
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      age:
+      - '185321'
+      content-length:
+      - '52628'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 4cab4bcc-63d8-4e01-a7b1-8ffea2f074be-11023136
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://gohugo.io/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: get
+    uri: https://fonts.googleapis.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      pragma:
+      - no-cache
+      expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      server:
+      - ESF
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      alt-svc:
+      - h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      accept-ranges:
+      - none
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        PGh0bWwgbGFuZz1lbj48bWV0YSBjaGFyc2V0PXV0Zi04PjxtZXRhIG5hbWU9dmlld3BvcnQgY29udGVudD0iaW5pdGlhbC1zY2FsZT0xLCBtaW5pbXVtLXNjYWxlPTEsIHdpZHRoPWRldmljZS13aWR0aCI+PHRpdGxlPkVycm9yIDQwNCAoTm90IEZvdW5kKSEhMTwvdGl0bGU+PHN0eWxlPip7bWFyZ2luOjA7cGFkZGluZzowfWh0bWwsY29kZXtmb250OjE1cHgvMjJweCBhcmlhbCxzYW5zLXNlcmlmfWh0bWx7YmFja2dyb3VuZDojZmZmO2NvbG9yOiMyMjI7cGFkZGluZzoxNXB4fWJvZHl7Y29sb3I6IzIyMjt0ZXh0LWFsaWduOnVuc2V0O21hcmdpbjo3JSBhdXRvIDA7bWF4LXdpZHRoOjM5MHB4O21pbi1oZWlnaHQ6MTgwcHg7cGFkZGluZzozMHB4IDAgMTVweDt9KiA+IGJvZHl7YmFja2dyb3VuZDp1cmwoLy93d3cuZ29vZ2xlLmNvbS9pbWFnZXMvZXJyb3JzL3JvYm90LnBuZykgMTAwJSA1cHggbm8tcmVwZWF0O3BhZGRpbmctcmlnaHQ6MjA1cHh9cHttYXJnaW46MTFweCAwIDIycHg7b3ZlcmZsb3c6aGlkZGVufXByZXt3aGl0ZS1zcGFjZTpwcmUtd3JhcDt9aW5ze2NvbG9yOiM3Nzc7dGV4dC1kZWNvcmF0aW9uOm5vbmV9YSBpbWd7Ym9yZGVyOjB9QG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDo3NzJweCl7Ym9keXtiYWNrZ3JvdW5kOm5vbmU7bWFyZ2luLXRvcDowO21heC13aWR0aDpub25lO3BhZGRpbmctcmlnaHQ6MH19I2xvZ297YmFja2dyb3VuZDp1cmwoLy93d3cuZ29vZ2xlLmNvbS9pbWFnZXMvYnJhbmRpbmcvZ29vZ2xlbG9nby8xeC9nb29nbGVsb2dvX2NvbG9yXzE1MHg1NGRwLnBuZykgbm8tcmVwZWF0O21hcmdpbi1sZWZ0Oi01cHh9QG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWluLXJlc29sdXRpb246MTkyZHBpKXsjbG9nb3tiYWNrZ3JvdW5kOnVybCgvL3d3dy5nb29nbGUuY29tL2ltYWdlcy9icmFuZGluZy9nb29nbGVsb2dvLzJ4L2dvb2dsZWxvZ29fY29sb3JfMTUweDU0ZHAucG5nKSBuby1yZXBlYXQgMCUgMCUvMTAwJSAxMDAlOy1tb3otYm9yZGVyLWltYWdlOnVybCgvL3d3dy5nb29nbGUuY29tL2ltYWdlcy9icmFuZGluZy9nb29nbGVsb2dvLzJ4L2dvb2dsZWxvZ29fY29sb3JfMTUweDU0ZHAucG5nKSAwfX1AbWVkaWEgb25seSBzY3JlZW4gYW5kICgtd2Via2l0LW1pbi1kZXZpY2UtcGl4ZWwtcmF0aW86Mil7I2xvZ297YmFja2dyb3VuZDp1cmwoLy93d3cuZ29vZ2xlLmNvbS9pbWFnZXMvYnJhbmRpbmcvZ29vZ2xlbG9nby8yeC9nb29nbGVsb2dvX2NvbG9yXzE1MHg1NGRwLnBuZykgbm8tcmVwZWF0Oy13ZWJraXQtYmFja2dyb3VuZC1zaXplOjEwMCUgMTAwJX19I2xvZ297ZGlzcGxheTppbmxpbmUtYmxvY2s7aGVpZ2h0OjU0cHg7d2lkdGg6MTUwcHh9PC9zdHlsZT48ZGl2IGlkPSJhZi1lcnJvci1jb250YWluZXIiPjxhIGhyZWY9Ly93d3cuZ29vZ2xlLmNvbT48c3BhbiBpZD1sb2dvIGFyaWEtbGFiZWw9R29vZ2xlPjwvc3Bhbj48L2E+PHA+PGI+NDA0LjwvYj4gPGlucz5UaGF04oCZcyBhbiBlcnJvci48L2lucz48cD5UaGUgcmVxdWVzdGVkIFVSTCB3YXMgbm90IGZvdW5kIG9uIHRoaXMgc2VydmVyLiA8aW5zPlRoYXTigJlzIGFsbCB3ZSBrbm93LjwvaW5zPjwvZGl2Pg==
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://fonts.googleapis.com
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://twitch.tv/CloudWithChris
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Set-Cookie:
+      - server_session_id=58243a5a1db346ac8c089ec369555ade; domain=.twitch.tv; path=/;
+        secure; samesite=none
+      - unique_id=5lSCVa2T5Duip7LtNOE0rugTeK2vyVxV; expires=Mon, 16 Dec 2030 19:18:51
+        GMT; domain=.twitch.tv; path=/; secure; samesite=none
+      - unique_id_durable=5lSCVa2T5Duip7LtNOE0rugTeK2vyVxV; expires=Mon, 16 Dec 2030
+        19:18:51 GMT; domain=.twitch.tv; path=/; secure; samesite=none; httponly
+      - twitch.lohp.countryCode=GB; domain=.twitch.tv; expires=Sat, 14 Dec 2030 19:18:51
+        GMT;
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-XSS-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Strict-Transport-Security:
+      - max-age=31536000
+      Cache-Control:
+      - private, max-age=0
+      Date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://www.twitch.tv/CloudWithChris
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://twitter.com/erjosito
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-security-policy:
+      - 'connect-src ''self'' blob: https://*.giphy.com https://*.pscp.tv https://*.video.pscp.tv
+        https://*.twimg.com https://api.twitter.com https://api-stream.twitter.com
+        https://ads-api.twitter.com https://caps.twitter.com https://media.riffsy.com
+        https://pay.twitter.com https://sentry.io https://ton.twitter.com https://twitter.com
+        https://upload.twitter.com https://www.google-analytics.com https://app.link
+        https://api2.branch.io https://bnc.lt https://vmap.snappytv.com https://vmapstage.snappytv.com
+        https://vmaprel.snappytv.com https://vmap.grabyo.com https://dhdsnappytv-vh.akamaihd.net
+        https://pdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://dwo3ckksxlb0v.cloudfront.net ; default-src ''self''; form-action ''self''
+        https://twitter.com https://*.twitter.com; font-src ''self'' https://*.twimg.com;
+        frame-src ''self'' https://twitter.com https://mobile.twitter.com https://pay.twitter.com
+        https://cards-frame.twitter.com ; img-src ''self'' blob: data: https://*.cdn.twitter.com
+        https://ton.twitter.com https://*.twimg.com https://analytics.twitter.com
+        https://cm.g.doubleclick.net https://www.google-analytics.com https://www.periscope.tv
+        https://www.pscp.tv https://media.riffsy.com https://*.giphy.com https://*.pscp.tv
+        https://prod-periscope-profile.*.amazonaws.com https://platform-lookaside.fbsbx.com
+        https://scontent.xx.fbcdn.net https://*.googleusercontent.com; manifest-src
+        ''self''; media-src ''self'' blob: https://twitter.com https://*.twimg.com
+        https://*.vine.co https://*.pscp.tv https://*.video.pscp.tv https://*.giphy.com
+        https://media.riffsy.com https://dhdsnappytv-vh.akamaihd.net https://pdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://dwo3ckksxlb0v.cloudfront.net;
+        object-src ''none''; script-src ''self'' ''unsafe-inline'' https://*.twimg.com   https://www.google-analytics.com
+        https://twitter.com https://app.link  ''nonce-YjA2Y2Y2YzQtZjU0ZS00ZmI0LWFmNDctNDE2MTA4NTFjZGVl'';
+        style-src ''self'' ''unsafe-inline'' https://*.twimg.com; worker-src ''self''
+        blob:; report-uri https://twitter.com/i/csp_report?a=O5RXE%3D%3D%3D&ro=false'
+      content-type:
+      - text/html; charset=utf-8
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      expiry:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_f
+      set-cookie:
+      - personalization_id="v1_J0l2hpaJnXZlk806JmFx4g=="; Max-Age=63072000; Expires=Fri,
+        16 Dec 2022 19:18:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A160814633114180087; Max-Age=63072000; Expires=Fri, 16 Dec 2022
+        19:18:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-connection-hash:
+      - 5093cdfc1f6fe15183a93bd5e5c7a84b
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - Express
+      x-response-time:
+      - '154'
+      x-xss-protection:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://twitter.com/erjosito
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://twitter.com/reddobowen
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      content-security-policy:
+      - 'connect-src ''self'' blob: https://*.giphy.com https://*.pscp.tv https://*.video.pscp.tv
+        https://*.twimg.com https://api.twitter.com https://api-stream.twitter.com
+        https://ads-api.twitter.com https://caps.twitter.com https://media.riffsy.com
+        https://pay.twitter.com https://sentry.io https://ton.twitter.com https://twitter.com
+        https://upload.twitter.com https://www.google-analytics.com https://app.link
+        https://api2.branch.io https://bnc.lt https://vmap.snappytv.com https://vmapstage.snappytv.com
+        https://vmaprel.snappytv.com https://vmap.grabyo.com https://dhdsnappytv-vh.akamaihd.net
+        https://pdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://dwo3ckksxlb0v.cloudfront.net ; default-src ''self''; form-action ''self''
+        https://twitter.com https://*.twitter.com; font-src ''self'' https://*.twimg.com;
+        frame-src ''self'' https://twitter.com https://mobile.twitter.com https://pay.twitter.com
+        https://cards-frame.twitter.com ; img-src ''self'' blob: data: https://*.cdn.twitter.com
+        https://ton.twitter.com https://*.twimg.com https://analytics.twitter.com
+        https://cm.g.doubleclick.net https://www.google-analytics.com https://www.periscope.tv
+        https://www.pscp.tv https://media.riffsy.com https://*.giphy.com https://*.pscp.tv
+        https://prod-periscope-profile.*.amazonaws.com https://platform-lookaside.fbsbx.com
+        https://scontent.xx.fbcdn.net https://*.googleusercontent.com; manifest-src
+        ''self''; media-src ''self'' blob: https://twitter.com https://*.twimg.com
+        https://*.vine.co https://*.pscp.tv https://*.video.pscp.tv https://*.giphy.com
+        https://media.riffsy.com https://dhdsnappytv-vh.akamaihd.net https://pdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://dwo3ckksxlb0v.cloudfront.net;
+        object-src ''none''; script-src ''self'' ''unsafe-inline'' https://*.twimg.com   https://www.google-analytics.com
+        https://twitter.com https://app.link  ''nonce-ZWQyOTNlZmYtYWQ2My00ZTUwLWIxODYtMzkwNzg4ZGUyZTI2'';
+        style-src ''self'' ''unsafe-inline'' https://*.twimg.com; worker-src ''self''
+        blob:; report-uri https://twitter.com/i/csp_report?a=O5RXE%3D%3D%3D&ro=false'
+      content-type:
+      - text/html; charset=utf-8
+      cross-origin-opener-policy:
+      - same-origin
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      expiry:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      last-modified:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_f
+      set-cookie:
+      - personalization_id="v1_U+1rXWlZlNLXb4+TMJb77A=="; Max-Age=63072000; Expires=Fri,
+        16 Dec 2022 19:18:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - guest_id=v1%3A160814633115045618; Max-Age=63072000; Expires=Fri, 16 Dec 2022
+        19:18:51 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=631138519
+      x-connection-hash:
+      - 648346be014cbf0eb338926a14ceb141
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-powered-by:
+      - Express
+      x-response-time:
+      - '164'
+      x-xss-protection:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://twitter.com/reddobowen
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"7120dbc1b2a55039bb5c76cb8b1b587f-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583051
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"7120dbc1b2a55039bb5c76cb8b1b587f-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583052
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://blog.cloudtrooper.net/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      - Cookie
+      x-hacker:
+      - If you're reading this, you should visit automattic.com/jobs and apply to
+        join the fun, mention this header.
+      link:
+      - "<https://wp.me/7GtUg>; rel=shortlink"
+      x-ac:
+      - 3.lhr _dfw
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://blog.cloudtrooper.net/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"607ac188e11bc67afc2cb7a6395682a5-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583053
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://www.linkedin.com/in/chrisreddington
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 999
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '1529'
+      content-type:
+      - text/html
+      expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      set-cookie:
+      - trkCode=ripf; Max-Age=5
+      - trkInfo=AQGVhCq32EYx1gAAAXZs_aV4q39M2zH-Dv1Y1CFCSxTiXetGrY7uS8IRTRBvsHz3iHjay7lbvWZjL3_-tCRreYvWgRyPFwJi4Y4P87Hn2Cmg6URI52dM3B07xZVllLR0e1Btn2g=;
+        Max-Age=5
+      - rtc=AQHD8VjbuxCCEAAAAXZs_aV4LTv8LbpDDT4dS6unriWR9cxkzzf0pUZliPXa4AsdFVvaeR5o8cSsaRtEskSdB2GEM-DOZJHdq03bswlzYxXIbBchCIKTu3uYYYdtewygizGR8gBITxiHegHFuTP05yBvKU46oEoAJqSApSS26K7yHlFnbOJvI71ec8ocoJ8umickH-4vF3inWygRSHstX7CpQ-wjzgRf1pNnUI8ptua-mu2IHBgWkcKWS7gMQsJidgVi2-Y=;
+        Max-Age=120; path=/; domain=.linkedin.com
+      x-li-fabric:
+      - prod-lor1
+      x-li-pop:
+      - afd-prod-esv5
+      x-li-proto:
+      - http/2
+      x-li-uuid:
+      - qQYPYpFIURZAYG0MfysAAA==
+      x-msedge-ref:
+      - 'Ref A: 7C210ACA8A6B4E2DB8304DDF28181C83 Ref B: LON21EDGE1017 Ref C: 2020-12-16T19:18:51Z'
+      date:
+      - Wed, 16 Dec 2020 19:18:50 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.linkedin.com/in/chrisreddington
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/images/cloud-with-chris.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '55575'
+      content-type:
+      - image/png
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"05429358ae64e8d2a8d8bd7a71fb629b-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583054
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/images/cloud-with-chris.png
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: get
+    uri: https://www.linkedin.com/in/chrisreddington
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 999
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '1529'
+      content-type:
+      - text/html
+      expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      set-cookie:
+      - trkCode=ripf; Max-Age=5
+      - trkInfo=AQGZrN1OmNfGhQAAAXZs_aV4Hwv5Yx5DzOMID4tY2PXaHdg510p3rbXg0ZWeG-wpsUUBQGHcjgtV9vE731ZFqwbeBT4vK0ILfLe0OQJ7u0L58dsahCYhmFabH1J6juMTP0dRqRo=;
+        Max-Age=5
+      - rtc=AQF1Lp4yPIyEpgAAAXZs_aV4IFATVtMi6bn6mohyNtynDFeQeWwPMcDNdfJw0hCY9wxlp4jdOCjh5Zm7LjcisoPqK3N_r3kuzoSb40wZrVpDJK14LTy7os7SpupPx4tL6tvsJFiYZ6ASeAipLjboMKZiR7BqFLH40YzVlYqy45Re0QHzmPUrpk376KtYJjj7pO0yD4HDT8ND-MIgejzmoJbxXATTIwezel-qA_BHCBp9HIbdqjyPqDExfKo4805ijSCKexU=;
+        Max-Age=120; path=/; domain=.linkedin.com
+      x-li-fabric:
+      - prod-lva1
+      x-li-pop:
+      - afd-prod-edc2
+      x-li-proto:
+      - http/2
+      x-li-uuid:
+      - YaRKapFIURaAETVf/SoAAA==
+      x-msedge-ref:
+      - 'Ref A: BDBCD302BDE04F78B21890A2FAA5F097 Ref B: LON21EDGE1017 Ref C: 2020-12-16T19:18:51Z'
+      date:
+      - Wed, 16 Dec 2020 19:18:50 GMT
+    body:
+      encoding: UTF-8
+      string: |
+        <html><head>
+        <script type="text/javascript">
+        window.onload = function() {
+          // Parse the tracking code from cookies.
+          var trk = "bf";
+          var trkInfo = "bf";
+          var cookies = document.cookie.split("; ");
+          for (var i = 0; i < cookies.length; ++i) {
+            if ((cookies[i].indexOf("trkCode=") == 0) && (cookies[i].length > 8)) {
+              trk = cookies[i].substring(8);
+            }
+            else if ((cookies[i].indexOf("trkInfo=") == 0) && (cookies[i].length > 8)) {
+              trkInfo = cookies[i].substring(8);
+            }
+          }
+
+          if (window.location.protocol == "http:") {
+            // If "sl" cookie is set, redirect to https.
+            for (var i = 0; i < cookies.length; ++i) {
+              if ((cookies[i].indexOf("sl=") == 0) && (cookies[i].length > 3)) {
+                window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+                return;
+              }
+            }
+          }
+
+          // Get the new domain. For international domains such as
+          // fr.linkedin.com, we convert it to www.linkedin.com
+          // treat .cn similar to .com here
+          var domain = location.host;
+          if (domain != "www.linkedin.com" && domain != "www.linkedin.cn") {
+            var subdomainIndex = location.host.indexOf(".linkedin");
+            if (subdomainIndex != -1) {
+              domain = "www" + location.host.substring(subdomainIndex);
+            }
+          }
+
+          window.location.href = "https://" + domain + "/authwall?trk=" + trk + "&trkInfo=" + trkInfo +
+              "&originalReferer=" + document.referrer.substr(0, 200) +
+              "&sessionRedirect=" + encodeURIComponent(window.location.href);
+        }
+        </script>
+        </head></html>
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.linkedin.com/in/chrisreddington
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://www.youtube.com/c/CloudWithChris
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      x-content-type-options:
+      - nosniff
+      expires:
+      - Tue, 27 Apr 1971 19:44:06 GMT
+      x-frame-options:
+      - SAMEORIGIN
+      cache-control:
+      - no-cache
+      p3p:
+      - CP="This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=en
+        for more info."
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      server:
+      - YouTube Frontend Proxy
+      x-xss-protection:
+      - '0'
+      alt-svc:
+      - h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+      accept-ranges:
+      - none
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.youtube.com/c/CloudWithChris
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/images/cloudtrooper.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '46691'
+      content-type:
+      - image/jpeg
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"7c0fd14040dba96edda6af0cabe00b63-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583055
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/images/cloudtrooper.jpg
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/index.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '1128'
+      content-type:
+      - application/xml
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"972546437456375244014ac5f4479595-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583056
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/index.xml
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/events/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"48a7a456caf945d3a6794afbb9fd9394-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583058
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/events/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://github.com/chrisreddington/hugo-community/edit/main/exampleSite/content/community/_index.en.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      Content-Type:
+      - text/html; charset=utf-8
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Vary:
+      - X-PJAX
+      - Accept-Encoding, Accept, X-Requested-With
+      - Accept-Encoding
+      Cache-Control:
+      - no-store
+      ETag:
+      - W/"1752ff971b9c47025e49d90cd3453786"
+      Set-Cookie:
+      - _device_id=8a4f0ddb04bc76c5624f0e43f4637f56; path=/; expires=Thu, 16 Dec 2021
+        19:18:51 GMT; secure; HttpOnly; SameSite=Lax
+      - _octo=GH1.1.103225655.1608146331; domain=.github.com; path=/; expires=Thu,
+        16 Dec 2021 19:18:51 GMT; secure; SameSite=Lax
+      - logged_in=no; domain=.github.com; path=/; expires=Thu, 16 Dec 2021 19:18:51
+        GMT; secure; HttpOnly; SameSite=Lax
+      - _gh_sess=XIGBlyqWUw7xCI1Jm%2BHYaAOSqqGLOArwCqgy%2BMByhLcFoCtTCXpdsQ5woe8LXV1aIqAWSr4QrkjDAstUwp7vaxRMEjdX0jvaEDEZXSF6gPaNmoFb1oAygdH3ZFtC2EL2WF5NYo%2FSyNZB%2BAc3ovF77CBSwSM5AOp8ay0rIz2y6gQ0vsDV1uDwoVeWHLC9NQPmCLeB56U6qp8HjJUnStjNTvuSGtRfFLEsOnJgOTHMAiKRNsRgayeTMepT9HPffRuq1wxYJjLoOgswe8Kl5p3fYw%3D%3D--USd%2BAWnfLtqpsgB%2F--X3v%2BluXYULG4lelDbnxVOQ%3D%3D;
+        path=/; secure; HttpOnly; SameSite=Lax
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-XSS-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Expect-CT:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      Content-Security-Policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src
+        github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com *.githubusercontent.com; manifest-src ''self'';
+        media-src ''none''; script-src github.githubassets.com; style-src ''unsafe-inline''
+        github.githubassets.com; worker-src github.com/socket-worker-5029ae85.js gist.github.com/socket-worker-5029ae85.js'
+      X-GitHub-Request-Id:
+      - DD2D:E023:741B956:A6A1DAB:5FDA5D9B
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fchrisreddington%2Fhugo-community%2Fedit%2Fmain%2FexampleSite%2Fcontent%2Fcommunity%2F_index.en.md
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/img/apple-touch-icon.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '6258'
+      content-type:
+      - image/png
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"2aa591a7c1c9ebfb4c3e4c5f7c05d3ff-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583061
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/img/apple-touch-icon.png
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/sitemap.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '4116'
+      content-type:
+      - application/xml
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"225365820c4ef1b85ab5b206fb9766c8-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583066
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/sitemap.xml
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/img/speakers/chris-reddington.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '515950'
+      content-type:
+      - image/jpeg
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"010704911747e539d8554ed110a979f2-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583062
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/img/speakers/chris-reddington.jpg
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/topics/cloud-architecture/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"e8d0bc8b97e11833fca8605ec55cd2d2-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583069
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/topics/cloud-architecture/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/main.min.a6f7931621d274ee4714b4f47c4e375cb3d046e21a9ebdeb529c04b3f37c6319.css
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '4171'
+      content-type:
+      - text/css; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"06976f79bb6771f7937afe3b1c785509-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583063
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/main.min.a6f7931621d274ee4714b4f47c4e375cb3d046e21a9ebdeb529c04b3f37c6319.css
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/manifest.json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      accept-ranges:
+      - bytes
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '579'
+      content-type:
+      - application/json
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"c818e8b240abf5d5d23fa976e818c165-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583064
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/manifest.json
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/topics/devops/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"a7f8fdba2a950346e3d1c07414d034d4-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583070
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/topics/devops/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/groups/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"daf49f986671f6d19edcc43908b42b51-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583060
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/groups/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/speakers/chris-reddington/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"7d7256aa522c1e20fedbf478b289d13d-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583068
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/speakers/chris-reddington/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://github.com/chrisreddington/hugo-community
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - GitHub.com
+      status:
+      - 200 OK
+      vary:
+      - X-PJAX, Accept-Encoding, Accept, X-Requested-With, Accept-Encoding
+      etag:
+      - W/"6d2ade90837dcdbc84f0e52b3ea5b5e7"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src
+        github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com *.githubusercontent.com; manifest-src ''self'';
+        media-src ''none''; script-src github.githubassets.com; style-src ''unsafe-inline''
+        github.githubassets.com; worker-src github.com/socket-worker-5029ae85.js gist.github.com/socket-worker-5029ae85.js'
+      Set-Cookie:
+      - _gh_sess=aFbVXUnpReuCSy3fveWpQQ6qYQUUjHbYJjkNGO2JBt2h%2BU5q%2BTrEosJHNBVOsEasTf7KvGYyqQarFtORv3LwKnSRMoU%2FGTA6%2FJF4vid%2FTdrIvIv2R23%2B8pyDFaFyakA4CvOwz0kvO9TafPd7YUErR%2BIs5xa4NvZyRe2760wpXHwCdTxiEO6sNBG7qHF6iEobMXXYT9IhVRA052YOn3CANhj%2ByvnROIB%2FEehkq4BE4yNEjgU32MF18lUccZpQPmTVVr8mhyrVeTgyd8c51irLyQ%3D%3D--PYsrn5xtSzb4SNju--0n7eN3l1lbMVddIm7mZfSw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1813049470.1608146331; Path=/; Domain=github.com; Expires=Thu,
+        16 Dec 2021 19:18:51 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 16 Dec 2021 19:18:51
+        GMT; HttpOnly; Secure; SameSite=Lax
+      Accept-Ranges:
+      - bytes
+      X-GitHub-Request-Id:
+      - DD2B:44C7:56AF893:7C31F74:5FDA5D9A
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/chrisreddington/hugo-community
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/speakers/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-length:
+      - '0'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      etag:
+      - '"1f66883ba4dbbd562775a92658139c8b-ssl"'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-robots-tag:
+      - noindex
+      age:
+      - '0'
+      server:
+      - Netlify
+      x-nf-request-id:
+      - 868595f1-3060-429b-9069-d81664e2530d-66583067
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/speakers/
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://github.com/chrisreddington/hugo-community/commit/d142b3b713255f9b9a31fd08db5031fd6e8389f9
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:51 GMT
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - GitHub.com
+      status:
+      - 200 OK
+      vary:
+      - X-PJAX, Accept-Encoding, Accept, X-Requested-With, Accept-Encoding
+      etag:
+      - W/"2e4e3520fe270568380a06f4cd774e28"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src
+        github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com *.githubusercontent.com; manifest-src ''self'';
+        media-src ''none''; script-src github.githubassets.com; style-src ''unsafe-inline''
+        github.githubassets.com; worker-src github.com/socket-worker-5029ae85.js gist.github.com/socket-worker-5029ae85.js'
+      Set-Cookie:
+      - _gh_sess=qYfdKxylirhFsrDXj8%2FZOzjZk0FVffKUVgIUPMCnr2nPQ5YatkEYe2XAjvKYnKOSGs9ZB8TVNNuvUtZbe%2FdhRpQwXx%2FfTlnFamQdqSHP1sXqIXADY9ufo1fbKbiBCjnNFmEgA4EGAnU1g0o2HwGqBj2J1ea%2BS1Zx%2FA5EFQiLE6dUPbMUdFqMl%2BInDxH9Nc4yhqGwzmQwUpd%2BQ7%2FuAbzDxf5i1C3EZPcPlrpJ2E%2FlzuuvBsaFSj7w33Uv6L5dbrkx8jaJjuI6vUj%2BAao4KIAY9Q%3D%3D--GDryR%2B8bcH%2BbA6cU--1xn9nBEFcdzgPnoXNviUyw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.483072665.1608146331; Path=/; Domain=github.com; Expires=Thu,
+        16 Dec 2021 19:18:51 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 16 Dec 2021 19:18:51
+        GMT; HttpOnly; Secure; SameSite=Lax
+      Accept-Ranges:
+      - bytes
+      X-GitHub-Request-Id:
+      - DD2C:6667:56AFB1A:7C50F8A:5FDA5D9B
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/chrisreddington/hugo-community/commit/d142b3b713255f9b9a31fd08db5031fd6e8389f9
+  recorded_at: Wed, 16 Dec 2020 19:18:51 GMT
+- request:
+    method: head
+    uri: https://github.com/chrisreddington
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 16 Dec 2020 19:18:52 GMT
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - GitHub.com
+      status:
+      - 200 OK
+      vary:
+      - X-Requested-With, Accept-Encoding, Accept, X-Requested-With, Accept-Encoding
+      etag:
+      - W/"8a362acea5ed90e98773df107e63acec"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com; font-src
+        github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com *.githubusercontent.com; manifest-src ''self'';
+        media-src ''none''; script-src github.githubassets.com; style-src ''unsafe-inline''
+        github.githubassets.com; worker-src github.com/socket-worker-5029ae85.js gist.github.com/socket-worker-5029ae85.js'
+      Set-Cookie:
+      - _gh_sess=k2lVkmrOE6PvUI4cvuo979LD1uHivKWDmLb99doE1NiLKdYSY7kxvr3BbpwGrB1V6VugEXc8JXeh18pS2V7i2pID0CLPR2kaYwV%2B5tb7ASDepotE5XtpV%2FFIM%2FkkEb%2FY63lyBVYcceD4OqtPBqeMQN27NBDDzAskgGBPGpgpLLutA62NLPQQhgToLi4pRI1dCR12DKOEaEy5%2Fmu4UBXHESdfMSjIk90nvkSB06Yf4RioEoDaYBcun5Njjde5k5mgqxvvPcOv15enih1tEi%2FQ2A%3D%3D--JeuJ3tlgAQo69meU--8Vrj8ppCX9hpQ6IPUOLhEg%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.212825667.1608146331; Path=/; Domain=github.com; Expires=Thu,
+        16 Dec 2021 19:18:51 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 16 Dec 2021 19:18:51
+        GMT; HttpOnly; Secure; SameSite=Lax
+      Accept-Ranges:
+      - bytes
+      X-GitHub-Request-Id:
+      - DD2A:A7AB:5E4BBB:7FBD4C:5FDA5D9A
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://github.com/chrisreddington
+  recorded_at: Wed, 16 Dec 2020 19:18:52 GMT
+recorded_with: VCR 2.9.3
