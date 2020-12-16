@@ -674,4 +674,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :directory)
     expect(proofer.failed_tests.first).to match(%r{support/index.html})
   end
+
+  it 'works for hash hrefs' do
+    file = "#{FIXTURES_DIR}/links/hash/inner.html"
+    proofer = run_proofer(file, :file, allow_hash_href: true)
+    expect(proofer.failed_tests).to eq []
+  end
 end
