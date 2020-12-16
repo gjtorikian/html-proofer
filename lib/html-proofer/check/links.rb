@@ -45,7 +45,7 @@ class LinkCheck < ::HTMLProofer::Check
       # intentionally here because we still want valid? & missing_href? to execute
       next if @link.non_http_remote?
 
-      if !@link.internal? && @link.remote?
+      if !@link.href.start_with?('#') && !@link.internal? && @link.remote?
         check_sri(line, content) if @link.check_sri? && node.name == 'link'
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
