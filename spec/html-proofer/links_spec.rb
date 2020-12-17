@@ -680,4 +680,11 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, allow_hash_href: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'works for relative hash references' do
+    dir = "#{FIXTURES_DIR}/links/relative_nested_internal_hash"
+    proofer = run_proofer(dir, :directory, allow_hash_href: true)
+
+    expect(proofer.failed_tests).to eq []
+  end
 end
