@@ -43,7 +43,8 @@ describe 'Links test' do
   it 'fails for broken internal hash' do
     broken_hash_internal_filepath = "#{FIXTURES_DIR}/links/broken_hash_internal.html"
     proofer = run_proofer(broken_hash_internal_filepath, :file)
-    expect(proofer.failed_tests.last).to match(/linking to internal hash #noHash that does not exist/)
+
+    expect(proofer.failed_tests.first).to match(/linking to internal hash #noHash that does not exist/)
   end
 
   it 'passes when linking to the top' do

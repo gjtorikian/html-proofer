@@ -157,11 +157,12 @@ module HTMLProofer
         @cache.write
       else
         @internal_urls.values.flatten.each do |internal_url|
-          @internal_link_checks.check_internal_link(internal_url.link, internal_url.path, internal_url.line, internal_url.content)
+          result = @internal_link_checks.check_internal_link(internal_url.link, internal_url.path, internal_url.line, internal_url.content)
+          next if result
+
+          @failures.concat(@internal_link_checks.issues) unless @internal_link_checks.issues.length.zero?
         end
       end
-
-      @failures.concat(@internal_link_checks.issues) unless @internal_urls.length.zero?
     end
 
     def files
