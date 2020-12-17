@@ -45,7 +45,7 @@ class LinkCheck < ::HTMLProofer::Check
       # intentionally here because we still want valid? & missing_href? to execute
       next if @link.non_http_remote?
 
-      if !@link.href&.start_with?('#') && !@link.internal? && @link.remote?
+      if !@link.hash.nil? && !@link.internal? && @link.remote?
         check_sri(line, content) if @link.check_sri? && node.name == 'link'
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
@@ -54,7 +54,7 @@ class LinkCheck < ::HTMLProofer::Check
         add_to_external_urls(@link.href || @link.src)
         next
       elsif @link.internal?
-        if @link.exists?
+        if @link.exists? || @link.hash
           add_to_internal_urls(@link.href, InternalLink.new(@link, @path, line, content))
         else
           add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
@@ -72,10 +72,10 @@ class LinkCheck < ::HTMLProofer::Check
       return false
     end
 
-    # verify the target hash
-    return handle_hash(link, path, line, content) if link.hash
+    return true unless link.hash
 
-    true
+    # verify the target hash
+    handle_hash(link, path, line, content)
   end
 
   def check_schemes(link, line, content)
