@@ -158,7 +158,7 @@ module HTMLProofer
     end
 
     def link_points_to_same_page?
-      hash_link || param_link || internal_absolute_link?
+      hash_link || param_link
     end
 
     def hash_link
