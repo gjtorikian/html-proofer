@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ['lib']
-  gem.required_ruby_version = '~> 2.4'
+  gem.required_ruby_version = ['>= 2.4.10', '< 4.0']
 
   gem.add_dependency 'addressable',     '~> 2.3'
   gem.add_dependency 'mercenary',       '~> 0.3'
