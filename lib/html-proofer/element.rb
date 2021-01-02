@@ -74,6 +74,10 @@ module HTMLProofer
       !parts.nil?
     end
 
+    def path?
+      !parts.host.nil? && !parts.path.nil?
+    end
+
     def parts
       @parts ||= Addressable::URI.parse url
     rescue URI::Error, Addressable::URI::InvalidURIError

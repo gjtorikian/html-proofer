@@ -51,6 +51,11 @@ class LinkCheck < ::HTMLProofer::Check
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
         next if @link.respond_to?(:rel) && @link.rel == 'dns-prefetch'
 
+        unless @link.path?
+          add_issue("#{@link.href} is an invalid URL", line: line, content: content)
+          next
+        end
+
         add_to_external_urls(@link.href || @link.src)
         next
       elsif @link.internal?
