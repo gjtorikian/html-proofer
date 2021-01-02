@@ -71,7 +71,11 @@ module HTMLProofer
     end
 
     def valid?
-      !parts.nil? && !parts.host.nil? && !parts.path.nil?
+      !parts.nil?
+    end
+
+    def path?
+      !parts.host.nil? && !parts.path.nil?
     end
 
     def parts
