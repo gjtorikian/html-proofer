@@ -681,4 +681,10 @@ describe 'Links test' do
     proofer = run_proofer(file, :file, allow_hash_href: true)
     expect(proofer.failed_tests).to eq []
   end
+
+  it 'does not crash on badly formatted urls' do
+    file = "#{FIXTURES_DIR}/links/bad_formatting.html"
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_tests.first).to match(/is an invalid URL/)
+  end
 end
