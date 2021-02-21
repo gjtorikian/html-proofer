@@ -22,7 +22,7 @@ module HTMLProofer
         allow_hash_href: true,
         check_external_hash: true,
         check_html: true,
-        url_ignore: [/.*/], # Don't try to check if local files exist
+        url_ignore: [%r{^/}], # Don't try to check if local files exist
         validation: { report_eof_tags: true }
       }
     end
