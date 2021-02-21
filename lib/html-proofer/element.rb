@@ -220,6 +220,8 @@ module HTMLProofer
     end
 
     def ignores_pattern_check(links)
+      return false unless links.is_a?(Array)
+
       links.each do |ignore|
         case ignore
         when String
