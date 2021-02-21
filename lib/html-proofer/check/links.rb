@@ -59,11 +59,8 @@ class LinkCheck < ::HTMLProofer::Check
         add_to_external_urls(@link.href || @link.src)
         next
       elsif @link.internal?
-        if @link.exists? || @link.hash
-          add_to_internal_urls(@link.href, InternalLink.new(@link, @path, line, content))
-        else
-          add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content)
-        end
+        add_to_internal_urls(@link.href, InternalLink.new(@link, @path, line, content))
+        add_issue("internally linking to #{@link.href}, which does not exist", line: line, content: content) if !@link.exists? && !@link.hash
       end
     end
 

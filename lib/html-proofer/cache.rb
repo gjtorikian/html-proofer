@@ -109,8 +109,13 @@ module HTMLProofer
       additions
     end
 
+    # TODO: Garbage performance--both the external and internal
+    # caches need access to this file. Write a proper versioned
+    # schema in the future
     def write
-      File.write(cache_file, @cache_log.to_json)
+      file = {}
+      file = JSON.parse(File.read(cache_file)) if File.exist?(cache_file)
+      File.write(cache_file, file.merge(@cache_log).to_json)
     end
 
     def load?
