@@ -63,7 +63,9 @@ module HTMLProofer
           swap(url, @options[:url_swap])
         end
       end
-      @external_urls = [@src.map { |s| [s, nil] }.flatten].to_h
+      @external_urls = @src.each_with_object({}) do |url, hash|
+        hash[url]= nil
+      end
       validate_external_urls
     end
 
