@@ -24,7 +24,7 @@ module HTMLProofer
         raise e
       end
 
-      @aria_hidden = defined?(@aria_hidden) && @aria_hidden == 'true' ? true : false
+      @aria_hidden = defined?(@aria_hidden) && @aria_hidden == 'true'
 
       @data_proofer_ignore = defined?(@data_proofer_ignore)
 

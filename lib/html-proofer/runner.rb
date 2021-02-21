@@ -63,7 +63,7 @@ module HTMLProofer
           swap(url, @options[:url_swap])
         end
       end
-      @external_urls = Hash[*@src.map { |s| [s, nil] }.flatten]
+      @external_urls = @src.map { |s| [s, nil] }.flatten.to_h
       validate_external_urls
     end
 
@@ -123,7 +123,7 @@ module HTMLProofer
           end
 
           external_urls = check.external_urls
-          external_urls = Hash[check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }] if @options[:url_swap]
+          external_urls = check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }.to_h if @options[:url_swap]
           result[:external_urls].merge!(external_urls)
           result[:failures].concat(check.issues)
         end

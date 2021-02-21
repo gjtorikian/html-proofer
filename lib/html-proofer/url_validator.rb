@@ -85,7 +85,7 @@ module HTMLProofer
     # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
     # not available as an option.
     def external_link_checker(external_urls)
-      external_urls = Hash[external_urls.sort]
+      external_urls = external_urls.sort.to_h
 
       count = external_urls.length
       check_text = pluralize(count, 'external link', 'external links')
