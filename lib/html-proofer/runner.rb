@@ -238,7 +238,7 @@ module HTMLProofer
     end
 
     def load_internal_cache
-      urls_to_check = @cache.retrieve_urls(@internal_urls)
+      urls_to_check = @cache.retrieve_urls(@internal_urls, :internal)
       cache_text = pluralize(urls_to_check.count, 'internal link', 'internal links')
       @logger.log :info, "Found #{cache_text} in the cache..."
 
