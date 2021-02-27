@@ -89,9 +89,9 @@ describe 'Cache test' do
     let(:cache_file_name) { '.htmlproofer.log' }
 
     it 'knows how to write to cache' do
-      broken_link_external_filepath = "#{FIXTURES_DIR}/links/broken_link_external.html"
+      missing_link_href = "#{FIXTURES_DIR}/links/missing_link_href.html"
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write).twice # once for internal, once for external
-      run_proofer(broken_link_external_filepath, :file, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
+      run_proofer(missing_link_href, :file, cache: { timeframe: '30d', cache_file: cache_file_name }.merge(default_cache_options))
 
       log = read_cache(cache_file)
       expect(log.keys.length).to eq(2)
@@ -298,6 +298,31 @@ describe 'Cache test' do
     cache = JSON.parse(File.read(cache_location))
     expect(cache.keys.count).to eq(2)
     expect(cache.keys[0]).to eq('https://github.com/gjtorikian/html-proofer')
+
+    Timecop.return
+  end
+
+  it 'removes links that do not exist' do
+    cache_file_name = '.removed_link.log'
+    cache_location = File.join(storage_dir, cache_file_name)
+
+    new_time = Time.local(2021, 0o1, 27, 12, 0, 0)
+    Timecop.freeze(new_time)
+
+    File.delete(cache_location) if File.exist?(cache_location)
+
+    run_proofer("#{FIXTURES_DIR}/cache/external_example.html", :file, external_only: true, links_only: true, cache: { timeframe: '1d', cache_file: cache_file_name }.merge(default_cache_options))
+
+    cache = JSON.parse(File.read(cache_location))
+
+    expect(cache.keys.count).to eq(1)
+    expect(cache.keys[0]).to eq('https://github.com/gjtorikian/html-proofer')
+
+    run_proofer("#{FIXTURES_DIR}/cache/some_link.html", :file, external_only: true, links_only: true, cache: { timeframe: '1d', cache_file: cache_file_name }.merge(default_cache_options))
+
+    cache = JSON.parse(File.read(cache_location))
+    expect(cache.keys.count).to eq(1)
+    expect(cache.keys[0]).to eq('https://github.com/gjtorikian')
 
     Timecop.return
   end

@@ -26,7 +26,7 @@ module HTMLProofer
       @external_urls = remove_query_values
 
       if @cache.use_cache?
-        urls_to_check = @cache.retrieve_urls(@external_urls)
+        urls_to_check = @cache.retrieve_urls(@external_urls, :external)
         external_link_checker(urls_to_check)
         @cache.write
       else

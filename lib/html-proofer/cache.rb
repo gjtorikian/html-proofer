@@ -71,7 +71,7 @@ module HTMLProofer
       @cache_log[clean_url(url)] = data
     end
 
-    def detect_url_changes(found)
+    def detect_url_changes(found, type)
       existing_urls = @cache_log.keys.map { |url| clean_url(url) }
       found_urls = found.keys.map { |url| clean_url(url) }
 
@@ -92,11 +92,13 @@ module HTMLProofer
 
       # remove from cache URLs that no longer exist
       del = 0
+      uri_regexp = URI::DEFAULT_PARSER.make_regexp
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
+
         if found_urls.include?(url)
           false
-        else
+        elsif (type == :internal && url !~ uri_regexp) || (type == :external && url =~ uri_regexp)
           @logger.log :debug, "Removing #{url} from cache check"
           del += 1
           true
@@ -113,17 +115,15 @@ module HTMLProofer
     # caches need access to this file. Write a proper versioned
     # schema in the future
     def write
-      file = {}
-      file = JSON.parse(File.read(cache_file)) if File.exist?(cache_file)
-      File.write(cache_file, file.merge(@cache_log).to_json)
+      File.write(cache_file, @cache_log.to_json)
     end
 
     def load?
       @load.nil?
     end
 
-    def retrieve_urls(urls)
-      urls_to_check = detect_url_changes(urls)
+    def retrieve_urls(urls, type)
+      urls_to_check = detect_url_changes(urls, type)
       @cache_log.each_pair do |url, cache|
         next if within_timeframe?(cache['time']) && cache['message'].empty? # these were successes to skip
 
