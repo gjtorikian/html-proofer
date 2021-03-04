@@ -3,6 +3,7 @@
 require_relative 'utils'
 require 'date'
 require 'json'
+require 'uri'
 
 module HTMLProofer
   class Cache
