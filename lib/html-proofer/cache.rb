@@ -11,6 +11,8 @@ module HTMLProofer
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
     DEFAULT_CACHE_FILE_NAME = 'cache.log'
 
+    URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
+
     attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
     def initialize(logger, options)
@@ -30,6 +32,8 @@ module HTMLProofer
     end
 
     def within_timeframe?(time)
+      return false if time.nil?
+
       (@parsed_timeframe..@cache_time).cover?(Time.parse(time))
     end
 
@@ -72,8 +76,12 @@ module HTMLProofer
     end
 
     def detect_url_changes(found, type)
-      existing_urls = @cache_log.keys.map { |url| clean_url(url) }
       found_urls = found.keys.map { |url| clean_url(url) }
+
+      # if there were no urls, bail
+      return {} if found_urls.empty?
+
+      existing_urls = @cache_log.keys.map { |url| clean_url(url) }
 
       # prepare to add new URLs detected
       additions = found.reject do |url, _|
@@ -91,21 +99,20 @@ module HTMLProofer
       @logger.log :info, "Adding #{new_link_text} to the cache..."
 
       # remove from cache URLs that no longer exist
-      del = 0
-      uri_regexp = URI::DEFAULT_PARSER.make_regexp
+      deletions = 0
       @cache_log.delete_if do |url, _|
         url = clean_url(url)
 
         if found_urls.include?(url)
           false
-        elsif (type == :internal && url !~ uri_regexp) || (type == :external && url =~ uri_regexp)
+        elsif url_matches_type?(url, type)
           @logger.log :debug, "Removing #{url} from cache check"
-          del += 1
+          deletions += 1
           true
         end
       end
 
-      del_link_text = pluralize(del, 'link', 'links')
+      del_link_text = pluralize(deletions, 'link', 'links')
       @logger.log :info, "Removing #{del_link_text} from the cache..."
 
       additions
@@ -124,10 +131,13 @@ module HTMLProofer
 
     def retrieve_urls(urls, type)
       urls_to_check = detect_url_changes(urls, type)
+
       @cache_log.each_pair do |url, cache|
         next if within_timeframe?(cache['time']) && cache['message'].empty? # these were successes to skip
 
-        urls_to_check[url] = cache['filenames'] # recheck expired links
+        if url_matches_type?(url, type)
+          urls_to_check[url] = cache['filenames'] # recheck expired links
+        end
       end
       urls_to_check
     end
@@ -154,9 +164,9 @@ module HTMLProofer
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      return unless File.exist?(cache_file)
+      return unless File.exist?(@cache_file)
 
-      contents = File.read(cache_file)
+      contents = File.read(@cache_file)
       @cache_log = contents.empty? ? {} : JSON.parse(contents)
     end
 
@@ -173,6 +183,11 @@ module HTMLProofer
       when :hours
         @cache_datetime - Rational(measurement / 24.0)
       end.to_time
+    end
+
+    def url_matches_type?(url, type)
+      return true if type == :internal && url !~ URI_REGEXP
+      return true if type == :external && url =~ URI_REGEXP
     end
   end
 end

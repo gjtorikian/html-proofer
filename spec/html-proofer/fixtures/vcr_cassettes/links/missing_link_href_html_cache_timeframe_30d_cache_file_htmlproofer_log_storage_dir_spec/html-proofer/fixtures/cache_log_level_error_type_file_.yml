@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://www.asdo3irj395295jsingrkrg4.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.6; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: http://www.asdo3irj395295jsingrkrg4.com/
+  recorded_at: Thu, 04 Mar 2021 12:36:32 GMT
+- request:
+    method: head
+    uri: http://www.google.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.18.6; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Date:
+      - Thu, 04 Mar 2021 12:36:32 GMT
+      Server:
+      - gws
+      X-XSS-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Expires:
+      - Thu, 04 Mar 2021 12:36:32 GMT
+      Cache-Control:
+      - private
+      Set-Cookie:
+      - 1P_JAR=2021-03-04-12; expires=Sat, 03-Apr-2021 12:36:32 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=210=JqMOj0JuTOvaL7xHIVQYDGZZbMv9cr0nO1s-s7gfnjYKnhgAeo2Pa6XXKnOjbDiij3IAknU86hBSSYTb--N7rMldYjTjzm6y23RLM3zqT6CKTzVAw_MYc_tsAoEa5j_7tOIMCUcknCZOjB6StJ5GYd4AKTF_j_vNR5pfbrnnC68;
+        expires=Fri, 03-Sep-2021 12:36:32 GMT; path=/; domain=.google.com; HttpOnly
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Thu, 04 Mar 2021 12:36:32 GMT
+recorded_with: VCR 2.9.3
