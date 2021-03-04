@@ -136,9 +136,9 @@ describe 'Cache test' do
       expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
       # we expect an add since we are mocking outside the timeframe
-      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('www.github.com', nil, 200)
+      expect_any_instance_of(HTMLProofer::Cache).to receive(:add).with('https://www.github.com', nil, 200)
 
-      run_proofer(['www.github.com'], :links, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
+      run_proofer(['https://www.github.com'], :links, cache: { timeframe: '4d', cache_file: cache_file_name }.merge(default_cache_options))
 
       Timecop.return
     end
