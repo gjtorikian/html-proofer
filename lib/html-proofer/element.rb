@@ -16,10 +16,11 @@ module HTMLProofer
       # Construct readable ivars for every element
       begin
         obj.attributes.each_pair do |attribute, value|
-          name = attribute.tr('-:.;@', '_').to_s.to_sym
-          if data_src_attribute? && data_src_attribute == attribute
-            name = :datasrc
-          end
+          name = if data_src_attribute? && data_src_attribute == attribute
+                   :datasrc
+                 else
+                   attribute.tr('-:.;@', '_').to_s.to_sym
+                 end
           (class << self; self; end).send(:attr_reader, name)
           instance_variable_set("@#{name}", value.value)
         end
@@ -152,7 +153,7 @@ module HTMLProofer
     end
 
     def data_src_attribute?
-      ! @check.options[:data_src_attribute].empty?
+      !@check.options[:data_src_attribute].empty?
     end
 
     def data_src_attribute
