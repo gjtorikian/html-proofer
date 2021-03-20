@@ -61,7 +61,7 @@ describe 'Images test' do
   it 'fails for image with no src' do
     image_src_filepath = "#{FIXTURES_DIR}/images/missing_image_src.html"
     proofer = run_proofer(image_src_filepath, :file)
-    expect(proofer.failed_tests.first).to match(/image has no src or srcset attribute/)
+    expect(proofer.failed_tests.first).to match(/image has no src, srcset, or data src attribute/)
   end
 
   it 'fails for image with default mac filename' do
@@ -150,6 +150,12 @@ describe 'Images test' do
   it 'works for images with a srcset' do
     src_set_check = "#{FIXTURES_DIR}/images/src_set_check.html"
     proofer = run_proofer(src_set_check, :file)
+    expect(proofer.failed_tests).to eq []
+  end
+
+  it 'works for images with a data attribute src' do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
+    proofer = run_proofer(custom_data_src_check, :file, data_src_attribute: 'data-src')
     expect(proofer.failed_tests).to eq []
   end
 

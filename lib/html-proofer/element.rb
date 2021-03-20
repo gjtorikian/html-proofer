@@ -12,10 +12,14 @@ module HTMLProofer
 
     def initialize(obj, check, logger)
       @logger = logger
+      @check = check
       # Construct readable ivars for every element
       begin
         obj.attributes.each_pair do |attribute, value|
           name = attribute.tr('-:.;@', '_').to_s.to_sym
+          if data_src_attribute? && data_src_attribute == attribute
+            name = :datasrc
+          end
           (class << self; self; end).send(:attr_reader, name)
           instance_variable_set("@#{name}", value.value)
         end
@@ -29,7 +33,6 @@ module HTMLProofer
       @data_proofer_ignore = defined?(@data_proofer_ignore)
 
       @text = obj.content
-      @check = check
       @checked_paths = {}
       @type = check.class.name
       @line = obj.line
@@ -58,12 +61,16 @@ module HTMLProofer
       else
         @srcset = nil
       end
+
+      if defined?(@datasrc)
+        @datasrc.insert(0, 'http:') if %r{^//}.match?(@datasrc)
+      end
     end
 
     def url
       return @url if defined?(@url)
 
-      @url = (@src || @srcset || @href || '').delete("\u200b").strip
+      @url = (@src || @srcset || @href || @datasrc || '').delete("\u200b").strip
       @url = Addressable::URI.join(base.attr('href') || '', url).to_s if base
       return @url if @check.options[:url_swap].empty?
 
@@ -140,6 +147,14 @@ module HTMLProofer
 
     def check_sri?
       @check.options[:check_sri]
+    end
+
+    def data_src_attribute?
+      ! @check.options[:data_src_attribute].empty?
+    end
+
+    def data_src_attribute
+      @check.options[:data_src_attribute].to_s
     end
 
     # path is external to the file

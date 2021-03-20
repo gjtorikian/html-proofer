@@ -27,6 +27,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
   p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
+  p.option 'data_src_attribute', '--data-src-attribute <attribute>', String, 'Sets a data attribute to use as a valid image src, for example `data-src` (default: ``)'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
   p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'
