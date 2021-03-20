@@ -64,6 +64,8 @@ module HTMLProofer
 
       if defined?(@datasrc)
         @datasrc.insert(0, 'http:') if %r{^//}.match?(@datasrc)
+      else
+        @datasrc = nil
       end
     end
 
