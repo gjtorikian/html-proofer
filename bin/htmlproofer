@@ -48,6 +48,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
   p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
+  p.option 'hydra_config', '--hydra-config CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
   p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
   p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
@@ -88,6 +89,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_mismatched_tags] = opts['report_mismatched_tags'] unless opts['report_mismatched_tags'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config']) unless opts['typhoeus_config'].nil?
+    options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra_config', opts['hydra_config']) unless opts['hydra_config'].nil?
 
     unless opts['timeframe'].nil?
       options[:cache] ||= {}

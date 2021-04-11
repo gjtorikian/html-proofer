@@ -37,8 +37,8 @@ describe 'JSON config parser' do
 
   it 'Returns an object representing the json when valid json' do
     result = HTMLProofer::Configuration.parse_json_option('testName', '{ "myValue": "hello world!", "numberValue": 123}')
-    expect(result['myValue']).to eq('hello world!')
-    expect(result['numberValue']).to eq(123)
+    expect(result[:myValue]).to eq('hello world!')
+    expect(result[:numberValue]).to eq(123)
   end
 
   it 'Throws an error when the json config is not valid json' do

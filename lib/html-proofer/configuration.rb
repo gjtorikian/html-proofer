@@ -78,7 +78,7 @@ module HTMLProofer
       return {} if config.strip.empty?
 
       begin
-        JSON.parse(config)
+        JSON.parse(config, { symbolize_names: true })
       rescue StandardError
         raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
       end
