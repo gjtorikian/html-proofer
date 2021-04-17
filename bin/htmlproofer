@@ -6,7 +6,7 @@ $stdout.sync = true
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'html-proofer'
-require 'mercenary'
+require 'mercenary' 
 
 Mercenary.program(:htmlproofer) do |p|
   p.version HTMLProofer::VERSION
