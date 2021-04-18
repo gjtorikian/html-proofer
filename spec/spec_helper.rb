@@ -68,9 +68,18 @@ def send_proofer_output(file, type, opts = {})
   end
 end
 
-def make_bin(cmd, path = nil)
-  stdout, stderr = Open3.capture3("bin/htmlproofer #{cmd} #{path}")
-  "#{stdout}\n#{stderr}"
+def capture_proofer_http(item, type, opts = {})
+  proofer = make_proofer(item, type, opts)
+  cassette_name = make_cassette_name(item, opts)
+  VCR.use_cassette(cassette_name, record: :new_episodes) do
+    capture_stderr { proofer.run }
+    VCR.current_cassette.serializable_hash['http_interactions'].last
+  end
+end
+
+def make_bin(args)
+  stdout, stderr = Open3.capture3("bin/htmlproofer #{args}")
+  "#{stdout}\n#{stderr}".encode('UTF-8', invalid: :replace, undef: :replace)
 end
 
 def make_cassette_name(file, opts)
