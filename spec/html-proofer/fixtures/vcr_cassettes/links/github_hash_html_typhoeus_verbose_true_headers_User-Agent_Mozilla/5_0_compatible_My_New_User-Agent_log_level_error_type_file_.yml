@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/typhoeus/typhoeus#other-curl-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; My New User-Agent)
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Sun, 18 Apr 2021 19:16:59 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, Accept-Encoding, Accept, X-Requested-With
+      etag:
+      - W/"22d9aa86647b1efb1f71bf1d68986bdc"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com *.actions.githubusercontent.com
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js'
+      set-cookie:
+      - _gh_sess=LIxpi0D2LxHVyLUsRbKpZwLQLxLXJwSK6g3%2B9lCtOOLtz6ptyf%2FBUpco5r8knQrMXJlXOynr4DdDbKXb%2B0P3xax4%2F1AOzSy3D4BfxtHHxZm8R88R8a7pFtJL8W1vv%2BLqGEgni8v32pg2sFwMcA%2BE3Gu0pMKgk0mGFJ48hDVMUhZwOK1a8BCsCp4CTM3S4076TNJDtM0tkAxZQiiClFsiXDzosw2znQ%2BejN34HMZ82VxsoV20rbbkUoY2ZgSIm8xU0BE05s109EX%2FT16%2F2JXh2A%3D%3D--wm3BHuEfm%2FQcLLG7--Sa1YYptnQuRcx5ercKtW5Q%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.2079054216.1618773419; Path=/; Domain=github.com; Expires=Mon,
+        18 Apr 2022 19:16:59 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Mon, 18 Apr 2022 19:16:59
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - CACD:1529:21BAAC8:311BF59:607C85AB
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/typhoeus/typhoeus#other-curl-options
+  recorded_at: Sun, 18 Apr 2021 19:16:59 GMT
+- request:
+    method: head
+    uri: https://github.com/typhoeus/typhoeus#top
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; My New User-Agent)
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Sun, 18 Apr 2021 19:16:59 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, Accept-Encoding, Accept, X-Requested-With
+      etag:
+      - W/"22d9aa86647b1efb1f71bf1d68986bdc"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
+        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
+        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com *.actions.githubusercontent.com
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
+        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js'
+      set-cookie:
+      - _gh_sess=KXPduGyig%2Bf5zFiICcwv1yWV4B3aQfFbfZb8fwWG%2F2AOoMOCmm2aF0gOF3Pie5%2BSDxM72jodnaaY3deEa1LgjFGsq00rO1%2B9fO17KHNJDVt5pfACAmOdnGIPb0I637EzbSXR08ejGh38StJ5WB6YrPcbZjLTv4oI3KHAj8AK2C%2BcVwOihgcqAsRUZzf7jYbgmfdaPPsSedRop9O5ILo8ST%2Fu2MXf25Far4rZB5mQe8x4DorfEeKNe26qb0W1Fhc1GzEFjD4n3ANFbxEBkHE6pw%3D%3D--BYudFmTrLS7GjOQj--pqhQ%2Bis49B7RU73R4DYtEA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1912038987.1618773419; Path=/; Domain=github.com; Expires=Mon,
+        18 Apr 2022 19:16:59 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Mon, 18 Apr 2022 19:16:59
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - CACE:5083:2161D4A:30AC1F5:607C85AB
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/typhoeus/typhoeus#top
+  recorded_at: Sun, 18 Apr 2021 19:16:59 GMT
+recorded_with: VCR 2.9.3

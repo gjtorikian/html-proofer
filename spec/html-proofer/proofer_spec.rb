@@ -45,6 +45,12 @@ describe HTMLProofer do
       expect(proofer.options[:typhoeus][:in_processes]).to eq(nil)
     end
 
+    it 'only has one UA with file' do
+      github_hash = "#{FIXTURES_DIR}/links/github_hash.html"
+      http = capture_proofer_http(github_hash, :file, typhoeus: { verbose: true, headers: { 'User-Agent' => 'Mozilla/5.0 (compatible; My New User-Agent)' } })
+      expect(http['request']['headers']['User-Agent']).to eq(['Mozilla/5.0 (compatible; My New User-Agent)'])
+    end
+
     describe 'sorting' do
       it 'understands sorting by path' do
         output = send_proofer_output("#{FIXTURES_DIR}/sorting/path", :directory, log_level: :info)
