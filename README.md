@@ -416,11 +416,30 @@ The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
 
-### Caching with Travis
+### Caching with continuous integration
+
+Enable caching in your continuous integration process. It will make your builds faster.
+
+**In GitHub Actions:**
+
+Add this step to your build workflow before HTMLProofer is run:
+
+```yaml
+      - name: Cache HTMLProofer
+        id: cache-htmlproofer
+        uses: actions/cache@v2
+        with:
+          path: tmp/.htmlproofer
+          key: ${{ runner.os }}-htmlproofer
+```
+
+Also make sure that your later step which runs HTMLProofer will not return a failed shell status. You can try something like `html-proof ... || true`. Because a failed step in GitHub Actions will skip all later steps.
+
+**In Travis:**
 
 If you want to enable caching with Travis CI, be sure to add these lines into your _.travis.yml_ file:
 
-```
+```yaml
 cache:
   directories:
   - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
