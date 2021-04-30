@@ -16,6 +16,7 @@ module HTMLProofer
       check_opengraph: false,
       checks_to_ignore: [],
       check_sri: false,
+      data_src_attribute: '',
       directory_index_file: 'index.html',
       disable_external: false,
       empty_alt_ignore: false,

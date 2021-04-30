@@ -281,6 +281,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_html` | Enables HTML validation errors from Nokogumbo | `false` |
 | `check_img_http` | Fails an image if it's marked as `http` | `false` |
+| `data_src_attribute` | Sets a data attribute to use as a valid image src, for example `data-src` | "" |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
