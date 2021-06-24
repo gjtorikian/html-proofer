@@ -125,7 +125,7 @@ module HTMLProofer
           end
 
           external_urls = check.external_urls
-          external_urls = check.external_urls.map { |url, file| [swap(url, @options[:url_swap]), file] }.to_h if @options[:url_swap]
+          external_urls = check.external_urls.transform_keys { |url| swap(url, @options[:url_swap]) } if @options[:url_swap]
           result[:external_urls].merge!(external_urls)
           result[:failures].concat(check.issues)
         end

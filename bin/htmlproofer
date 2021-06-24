@@ -89,7 +89,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:validation][:report_mismatched_tags] = opts['report_mismatched_tags'] unless opts['report_mismatched_tags'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'], symbolize_names: false) unless opts['typhoeus_config'].nil?
-    options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra_config', opts['hydra_config'], symbolize_names: false) unless opts['hydra_config'].nil?
+    options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra_config', opts['hydra_config']) unless opts['hydra_config'].nil?
 
     unless opts['timeframe'].nil?
       options[:cache] ||= {}
