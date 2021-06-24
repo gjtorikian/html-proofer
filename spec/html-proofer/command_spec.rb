@@ -107,10 +107,15 @@ describe 'Command test' do
   end
 
   # VCR doesn't work with bins, for some reason; parse STDOUT, ugh
-  skip 'has only one UA [does not work in CI]' do
+  it 'has only one UA' do
     http = make_bin(%|--typhoeus-config='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
     expect(http.scan(/User-Agent: Typhoeus/).count).to eq 0
     expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}).count).to eq 2
+  end
+
+  it 'accepts hydra max_concurrency' do
+    http = make_bin(%(--hydra-config '{"max_concurrency": 5}' http://www.github.com --as-links))
+    expect(http.scan(/max_concurrency is invalid/).count).to eq 0
   end
 
   it 'navigates above itself in a subdirectory' do
