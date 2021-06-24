@@ -86,7 +86,7 @@ def make_cassette_name(file, opts)
   filename = if file.is_a? Array
                file.join('_')
              else
-               file.split('/')[-2..-1].join('/')
+               file.split('/')[-2..].join('/')
              end
   (filename += opts.inspect) unless opts.empty?
   filename
