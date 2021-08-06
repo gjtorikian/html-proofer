@@ -53,6 +53,7 @@ module HTMLProofer
       if @failures.empty?
         @logger.log :info, 'HTML-Proofer finished successfully.'
       else
+        @failures.uniq!
         print_failed_tests
       end
     end
