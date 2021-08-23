@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'nokogumbo'
+require 'nokogiri'
 
 module HTMLProofer
   module Utils

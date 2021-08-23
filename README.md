@@ -69,7 +69,7 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 ### HTML
 
-* Whether your HTML markup is valid. This is done via [Nokogumbo](https://github.com/rubys/nokogumbo) to validate well-formed HTML5 markup.
+* Whether your HTML markup is valid. This is done via [Nokogiri](https://nokogiri.org/) to validate well-formed HTML5 markup.
 
 ## Usage
 
