@@ -294,6 +294,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
 | `internal_domains`| An array of Strings containing domains that will be treated as internal urls. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
+| `mailto_without_email_ignore` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
