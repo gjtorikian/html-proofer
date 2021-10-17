@@ -95,7 +95,7 @@ class LinkCheck < ::HTMLProofer::Check
 
   def handle_mailto(link, line, content)
     if link.path.empty?
-      add_issue("#{link.href} contains no email address", line: line, content: content) unless link.mailto_without_email_ignore?
+      add_issue("#{link.href} contains no email address", line: line, content: content) unless link.ignore_empty_mailto?
     elsif !link.path.include?('@')
       add_issue("#{link.href} contains an invalid email address", line: line, content: content)
     end

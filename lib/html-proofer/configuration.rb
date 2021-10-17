@@ -27,7 +27,7 @@ module HTMLProofer
       http_status_ignore: [],
       internal_domains: [],
       log_level: :info,
-      mailto_without_email_ignore: false,
+      ignore_empty_mailto: false,
       only_4xx: false,
       url_ignore: [],
       url_swap: {}

@@ -202,7 +202,7 @@ describe 'Links test' do
 
   it 'ignores blank mailto links when configured to allow them' do
     blank_mail_to_link = "#{FIXTURES_DIR}/links/blank_mailto_link.html"
-    proofer = run_proofer(blank_mail_to_link, :file, mailto_without_email_ignore: true)
+    proofer = run_proofer(blank_mail_to_link, :file, ignore_empty_mailto: true)
     expect(proofer.failed_tests).to eq []
   end
 

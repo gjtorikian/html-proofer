@@ -142,8 +142,8 @@ module HTMLProofer
       @check.options[:check_sri]
     end
 
-    def mailto_without_email_ignore?
-      @check.options[:mailto_without_email_ignore]
+    def ignore_empty_mailto?
+      @check.options[:ignore_empty_mailto]
     end
 
     # path is external to the file
