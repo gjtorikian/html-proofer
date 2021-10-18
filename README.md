@@ -217,6 +217,31 @@ Don't have or want a `Rakefile`? You can also do something like the following:
 htmlproofer --assume-extension ./_site
 ```
 
+#### Adjusting for a `baseurl`
+
+If your Jekyll site has a `baseurl` configured, you'll need to adjust the
+generated url validation to cope with that. The easiest way is using the
+`url_swap` option.
+
+For a `site.baseurl` value of `/BASEURL`, here's what that looks like on the
+command line:
+
+```bash
+htmlproofer --assume-extension ./_site --url-swap '^/BASEURL/:/'
+```
+
+or in your `Rakefile`
+
+```ruby
+require 'html-proofer'
+
+task :test do
+  sh "bundle exec jekyll build"
+  options = { :assume_extension => true, :url_swap => "^/BASEURL/:/" }
+  HTMLProofer.check_directory("./_site", options).run
+end
+```
+
 ### Using through Docker
 
 If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [klakegg/html-proofer](https://hub.docker.com/r/klakegg/html-proofer) for more information.
