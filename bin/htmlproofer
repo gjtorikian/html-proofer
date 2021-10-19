@@ -37,6 +37,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
   p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
+  p.option 'ignore_empty_mailto', '--ignore-empty-mailto', 'If `true`, allows `mailto:` `href`s which do not contain an email address'
   p.option 'report_invalid_tags', '--report-invalid-tags', 'When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors (default: `false`)'
   p.option 'report_missing_names', '--report-missing-names', 'When `check_html` is enabled, HTML markup that are missing entity names are reported as errors (default: `false`)'
   p.option 'report_script_embeds', '--report-script-embeds', 'When `check_html` is enabled, `script` tags containing markup are reported as errors (default: `false`)'

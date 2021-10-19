@@ -178,7 +178,7 @@ module HTMLProofer
       when :months
         @cache_datetime >> -measurement
       when :weeks
-        @cache_datetime - measurement * 7
+        @cache_datetime - (measurement * 7)
       when :days
         @cache_datetime - measurement
       when :hours

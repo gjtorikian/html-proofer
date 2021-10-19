@@ -142,6 +142,10 @@ module HTMLProofer
       @check.options[:check_sri]
     end
 
+    def ignore_empty_mailto?
+      @check.options[:ignore_empty_mailto]
+    end
+
     # path is external to the file
     def external?
       !internal?
