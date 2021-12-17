@@ -543,6 +543,28 @@ HTMLProofer.check_directory("out/", {
 }}).run
 ```
 
+Alternatively, you can specifify these options on the commandline with:
+
+```bash
+htmlproofer --typhoeus-config='{"headers":{"User-Agent":"Mozilla/5.0 (compatible; My New User-Agent)"}}'
+```
+
+### Cookies
+
+Sometimes links fail because they don't have access to cookies. To fix this you can create a .cookies file using the following snippets:
+
+``` ruby
+HTMLProofer.check_directory("out/", {
+  :typhoeus => {
+    :cookiefile => ".cookies",
+    :cookiejar => ".cookies"
+}}).run
+```
+
+```bash
+htmlproofer --typhoeus-config='{"cookiefile":".cookies","cookiejar":".cookies"}'
+```
+
 ### Regular expressions
 
 To exclude urls using regular expressions, include them between forward slashes and don't quote them:
