@@ -15,7 +15,6 @@ module HTMLProofer
       @options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
 
       @options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
-      @options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.merge(opts[:validation] || {})
       @options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
       @type = @options.delete(:type)
@@ -198,7 +197,6 @@ module HTMLProofer
 
       @checks = HTMLProofer::Check.subchecks.map(&:name)
       @checks.delete('FaviconCheck') unless @options[:check_favicon]
-      @checks.delete('HtmlCheck') unless @options[:check_html]
       @checks.delete('OpenGraphCheck') unless @options[:check_opengraph]
       @options[:checks_to_ignore].each { |ignored| @checks.delete(ignored) }
       @checks

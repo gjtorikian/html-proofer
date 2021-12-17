@@ -88,12 +88,6 @@ describe 'Command test' do
     expect(output).to match('1 failure')
   end
 
-  it 'works with check-html' do
-    broken = "#{FIXTURES_DIR}/html/missing_closing_quotes.html"
-    output = make_bin("--check-html --report-eof-tags #{broken}")
-    expect(output).to match('1 failure')
-  end
-
   it 'works with empty-alt-ignore' do
     broken = "#{FIXTURES_DIR}/images/empty_image_alt_text.html"
     output = make_bin("--empty-alt-ignore #{broken}")
@@ -126,10 +120,6 @@ describe 'Command test' do
 
   it 'has every option for proofer defaults' do
     match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
-  end
-
-  it 'has every option for validation defaults' do
-    match_command_help(HTMLProofer::Configuration::VALIDATION_DEFAULTS)
   end
 end
 
