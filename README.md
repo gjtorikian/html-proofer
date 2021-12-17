@@ -80,7 +80,7 @@ You can configure HTMLProofer to run on:
 * an array of directories
 * an array of links
 
-It can also run through the command-line, Docker, or as Rack middleware.
+It can also run through the command-line.
 
 ### Using in a script
 
@@ -246,18 +246,6 @@ end
 
 If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [klakegg/html-proofer](https://hub.docker.com/r/klakegg/html-proofer) for more information.
 
-### Using as Rack middleware
-
-You can run html-proofer as part of your Rack middleware to validate your HTML at runtime. For example, in Rails, add these lines to `config/application.rb`:
-
-```ruby
-  config.middleware.use HTMLProofer::Middleware if Rails.env.test?
-  config.middleware.use HTMLProofer::Middleware if Rails.env.development?
-```
-
-This will raise an error at runtime if your HTML is invalid. You can choose to skip validation of a page by adding `?proofer-ignore` to the URL.
-
-This is particularly helpful for projects which have extensive CI, since any invalid HTML will fail your build.
 
 ## Ignoring content
 
@@ -304,7 +292,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
-| `check_html` | Enables HTML validation errors from Nokogumbo | `false` |
 | `check_img_http` | Fails an image if it's marked as `http` | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
@@ -329,33 +316,11 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 
 In addition, there are a few "namespaced" options. These are:
 
-* `:validation`
 * `:typhoeus` / `:hydra`
 * `:parallel`
 * `:cache`
 
 See below for more information.
-
-### Configuring HTML validation rules
-
-If `check_html` is `true`, Nokogumbo performs additional validation on your HTML.
-
-You can pass in additional options to configure this validation.
-
-| Option | Description | Default |
-| :----- | :---------- | :------ |
-| `report_eof_tags` | When `check_html` is enabled, HTML markup with mismatched tags are reported as errors | `false`
-| `report_invalid_tags` | When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors. | `false`
-| `report_mismatched_tags` | When `check_html` is enabled, HTML markup with tags that are malformed are reported as errors | `false`
-| `report_missing_doctype` | When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors. | `false`
-| `report_missing_names` | When `check_html` is enabled, HTML markup that are missing entity names are reported as errors. | `false`
-| `report_script_embeds` | When `check_html` is enabled, `script` tags containing markup are reported as errors. | `false`
-
-For example:
-
-``` ruby
-opts = { :check_html => true, :validation => { :report_script_embeds => true } }
-```
 
 ### Configuring Typhoeus and Hydra
 

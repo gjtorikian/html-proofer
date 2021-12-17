@@ -23,7 +23,6 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you do not want to run (default: `[]`)'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
   p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'check_html', '--check-html', 'Enables HTML validation errors from Nokogumbo (default: `false`).'
   p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
   p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
@@ -38,12 +37,6 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
   p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
   p.option 'ignore_empty_mailto', '--ignore-empty-mailto', 'If `true`, allows `mailto:` `href`s which do not contain an email address'
-  p.option 'report_invalid_tags', '--report-invalid-tags', 'When `check_html` is enabled, HTML markup that is unknown to Nokogumbo are reported as errors (default: `false`)'
-  p.option 'report_missing_names', '--report-missing-names', 'When `check_html` is enabled, HTML markup that are missing entity names are reported as errors (default: `false`)'
-  p.option 'report_script_embeds', '--report-script-embeds', 'When `check_html` is enabled, `script` tags containing markup are reported as errors (default: `false`)'
-  p.option 'report_missing_doctype', '--report-missing-doctype', 'When `check_html` is enabled, HTML markup with missing or out-of-order `DOCTYPE` are reported as errors (default: `false`)'
-  p.option 'report_eof_tags', '--report-eof-tags', 'When `check_html` is enabled, HTML markup with tags that are malformed are reported as errors (default: `false`)'
-  p.option 'report_mismatched_tags', '--report-mismatched-tags', 'When `check_html` is enabled, HTML markup with mismatched tags are reported as errors (default: `false`)'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
@@ -80,14 +73,6 @@ Mercenary.program(:htmlproofer) do |p|
 
     options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
-
-    options[:validation] = HTMLProofer::Configuration::VALIDATION_DEFAULTS.dup
-    options[:validation][:report_script_embeds] = opts['report_script_embeds'] unless opts['report_script_embeds'].nil?
-    options[:validation][:report_missing_names] = opts['report_missing_names'] unless opts['report_missing_names'].nil?
-    options[:validation][:report_invalid_tags] = opts['report_invalid_tags'] unless opts['report_invalid_tags'].nil?
-    options[:validation][:report_missing_doctype] = opts['report_missing_doctype'] unless opts['report_missing_doctype'].nil?
-    options[:validation][:report_eof_tags] = opts['report_eof_tags'] unless opts['report_eof_tags'].nil?
-    options[:validation][:report_mismatched_tags] = opts['report_mismatched_tags'] unless opts['report_mismatched_tags'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'], symbolize_names: false) unless opts['typhoeus_config'].nil?
     options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra_config', opts['hydra_config']) unless opts['hydra_config'].nil?

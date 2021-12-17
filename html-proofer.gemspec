@@ -33,8 +33,11 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rspec', '~> 3.1'
   gem.add_development_dependency 'rubocop'
-  gem.add_development_dependency 'rubocop-performance'
+  gem.add_development_dependency 'rubocop-rspec'
   gem.add_development_dependency 'rubocop-standard'
   gem.add_development_dependency 'timecop', '~> 0.8'
   gem.add_development_dependency 'vcr', '~> 2.9'
+  gem.metadata = {
+    'rubygems_mfa_required' => 'true'
+  }
 end
