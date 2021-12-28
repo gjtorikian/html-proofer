@@ -3,7 +3,7 @@
 require 'bundler/setup'
 require 'vcr'
 require 'timecop'
-require_relative '../lib/html-proofer'
+require 'html_proofer'
 require 'open3'
 
 FIXTURES_DIR = 'spec/html-proofer/fixtures'

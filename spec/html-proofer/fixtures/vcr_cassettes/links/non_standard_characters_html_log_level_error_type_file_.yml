@@ -136,4 +136,88 @@ http_interactions:
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
   recorded_at: Sun, 21 May 2017 22:25:38 GMT
+- request:
+    method: head
+    uri: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Tue, 28 Dec 2021 19:15:28 GMT
+      content-type:
+      - text/html; charset=utf-8
+      last-modified:
+      - Fri, 17 Dec 2021 12:55:38 GMT
+      expires:
+      - Tue, 28 Dec 2021 19:25:23 GMT
+      cache-control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      x-github-request-id:
+      - CA3A:4FB5:C86B4:8EA739:61CB624B
+      via:
+      - 1.1 varnish
+      age:
+      - '6'
+      x-served-by:
+      - cache-ewr18162-EWR
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - '1'
+      x-timer:
+      - S1640718929.618840,VS0,VE1
+      vary:
+      - Accept-Encoding
+      x-fastly-request-id:
+      - 516b854756a3e9bbf86b23a1d094e141e6cde13c
+      cf-cache-status:
+      - DYNAMIC
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=sD19Wbij1ib8tmjJ6tgEuI3ljUCioLFqUheenTcyLZ36Rj13DhQLYW86yfY%2BJnX5sBqmjrsxg1UDGwYhPqrvlqGH7VKtW5%2BXZO6lDlQtdVDaclZ3OgKgVcrNJ6f%2FqD5KZg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      permissions-policy:
+      - interest cohort=()
+      referrer-policy:
+      - no-referrer-when-downgrade
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      access-control-allow-origin:
+      - https://ben.balter.com
+      server:
+      - cloudflare
+      cf-ray:
+      - 6c4d1e17bf378cd6-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
+  recorded_at: Tue, 28 Dec 2021 19:15:28 GMT
 recorded_with: VCR 2.9.3

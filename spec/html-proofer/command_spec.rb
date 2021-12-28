@@ -52,12 +52,6 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with internal-domains' do
-    translated_link = "#{FIXTURES_DIR}/links/link_translated_internal_domains.html"
-    output = make_bin("--internal-domains www.example.com,example.com #{translated_link}")
-    expect(output).to match('successfully')
-  end
-
   it 'works with url-ignore' do
     ignorable_links = "#{FIXTURES_DIR}/links/ignorable_links_via_options.html"
     output = make_bin("--url-ignore /^http:\/\//,/sdadsad/,../whaadadt.html #{ignorable_links}")

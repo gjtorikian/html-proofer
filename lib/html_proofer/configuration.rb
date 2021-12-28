@@ -2,11 +2,9 @@
 
 module HTMLProofer
   module Configuration
-    require_relative 'version'
-
     PROOFER_DEFAULTS = {
+      allow_hash_href: true,
       allow_missing_href: false,
-      allow_hash_href: false,
       alt_ignore: [],
       assume_extension: false,
       check_external_hash: false,
@@ -17,16 +15,15 @@ module HTMLProofer
       check_sri: false,
       directory_index_file: 'index.html',
       disable_external: false,
-      empty_alt_ignore: false,
-      enforce_https: false,
+      ignore_empty_mailto: false,
+      ignore_missing_alt: false,
+      enforce_https: true,
       error_sort: :path,
       extension: '.html',
       external_only: false,
       file_ignore: [],
       http_status_ignore: [],
-      internal_domains: [],
       log_level: :info,
-      ignore_empty_mailto: false,
       only_4xx: false,
       url_ignore: [],
       url_swap: {}
@@ -46,9 +43,26 @@ module HTMLProofer
       max_concurrency: 50
     }.freeze
 
-    PARALLEL_DEFAULTS = {}.freeze
+    PARALLEL_DEFAULTS = {
+      enable: true
+    }.freeze
 
     CACHE_DEFAULTS = {}.freeze
+
+    def self.generate_defaults(opts)
+      options = PROOFER_DEFAULTS.merge(opts)
+
+      options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
+      options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
+
+      options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
+      options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
+
+      # TODO: make sure user can't add own src
+      options.delete(:src)
+
+      options
+    end
 
     def self.to_regex?(item)
       if item.start_with?('/') && item.end_with?('/')

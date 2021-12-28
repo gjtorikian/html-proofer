@@ -59,4 +59,92 @@ http_interactions:
     adapter_metadata:
       effective_url: https://help.github.com/articles/searching-issues/
   recorded_at: Sun, 21 May 2017 22:25:35 GMT
+- request:
+    method: head
+    uri: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - Cowboy
+      x-ratelimit-limit:
+      - '250'
+      x-ratelimit-remaining:
+      - '249'
+      x-ratelimit-reset:
+      - '1640715049'
+      access-control-allow-origin:
+      - "*"
+      content-security-policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
+        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
+        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
+        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
+        ''self'' ''unsafe-inline'';child-src ''self'''
+      x-dns-prefetch-control:
+      - 'off'
+      expect-ct:
+      - max-age=0
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - _csrf=AorliV85zSGSgpoMGeH8gJt7; Path=/; HttpOnly; Secure; SameSite=Lax
+      cache-control:
+      - private, no-store
+      x-powered-by:
+      - Next.js
+      etag:
+      - '"5240c-2Z9mu4sj7NsxycjWGXTrqJ6qX+M"'
+      content-type:
+      - text/html; charset=utf-8
+      via:
+      - 1.1 vegur, 1.1 varnish
+      accept-ranges:
+      - bytes
+      date:
+      - Tue, 28 Dec 2021 18:09:48 GMT
+      x-served-by:
+      - cache-ewr18170-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1640714989.621405,VS0,VE76
+      vary:
+      - Accept-Encoding
+      content-length:
+      - '336908'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
+  recorded_at: Tue, 28 Dec 2021 18:09:48 GMT
 recorded_with: VCR 2.9.3

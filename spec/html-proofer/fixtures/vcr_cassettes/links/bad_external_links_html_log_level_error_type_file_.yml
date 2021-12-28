@@ -12,12 +12,12 @@ http_interactions:
   response:
     status:
       code: 0
-      message: 
+      message:
     headers: {}
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
     adapter_metadata:
       effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
   recorded_at: Sun, 21 May 2017 22:25:36 GMT
@@ -68,4 +68,78 @@ http_interactions:
     adapter_metadata:
       effective_url: http://www.google.com/
   recorded_at: Sun, 21 May 2017 22:25:36 GMT
+- request:
+    method: head
+    uri: https://www.asdo3IRJ395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Tue, 28 Dec 2021 19:16:14 GMT
+- request:
+    method: head
+    uri: https://www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=UTF-8
+      p3p:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      date:
+      - Tue, 28 Dec 2021 19:16:14 GMT
+      server:
+      - gws
+      x-xss-protection:
+      - '0'
+      x-frame-options:
+      - SAMEORIGIN
+      expires:
+      - Tue, 28 Dec 2021 19:16:14 GMT
+      cache-control:
+      - private
+      set-cookie:
+      - 1P_JAR=2021-12-28-19; expires=Thu, 27-Jan-2022 19:16:14 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=511=lizW8z9i0_Mum1QhFbLzDxM8y-C0P8RcqL1BXaeegUkhGOA7LqFyjwDnY6W3xU79hk7sdv0QSsHIfc-b0rmPK2NkMfVDmOT2H-KJVXLrfyeRADO0OTxf7Y9nI-Jg1Uz3wzA3jne73kF8jXue-688zCgvfiYWFfVCw7xTlgy3bIw;
+        expires=Wed, 29-Jun-2022 19:16:14 GMT; path=/; domain=.google.com; HttpOnly
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.google.com/
+  recorded_at: Tue, 28 Dec 2021 19:16:14 GMT
 recorded_with: VCR 2.9.3

@@ -180,4 +180,212 @@ http_interactions:
     adapter_metadata:
       effective_url: http://jekyllrb.com/docs/configuration/
   recorded_at: Sun, 21 May 2017 22:25:37 GMT
+- request:
+    method: head
+    uri: https://rtyley.github.io/bfg-repo-cleaner/#usage
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      content-type:
+      - text/html; charset=utf-8
+      permissions-policy:
+      - interest-cohort=()
+      last-modified:
+      - Sun, 21 Mar 2021 22:37:56 GMT
+      access-control-allow-origin:
+      - "*"
+      etag:
+      - '"6057cac4-4071"'
+      expires:
+      - Tue, 28 Dec 2021 19:25:50 GMT
+      cache-control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      x-github-request-id:
+      - AA26:2803:17A957B:21CA7B1:61CB6266
+      accept-ranges:
+      - bytes
+      date:
+      - Tue, 28 Dec 2021 19:15:50 GMT
+      via:
+      - 1.1 varnish
+      age:
+      - '0'
+      x-served-by:
+      - cache-ewr18179-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1640718950.390778,VS0,VE13
+      vary:
+      - Accept-Encoding
+      x-fastly-request-id:
+      - 0a90bd6f12cc05e38d58e1802bf9fac44253a7f9
+      content-length:
+      - '16497'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://rtyley.github.io/bfg-repo-cleaner/#usage
+  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
+- request:
+    method: head
+    uri: https://jekyllrb.com/docs/configuration/#markdown-options
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      content-type:
+      - text/html; charset=utf-8
+      x-origin-cache:
+      - HIT
+      last-modified:
+      - Mon, 27 Dec 2021 18:07:30 GMT
+      access-control-allow-origin:
+      - "*"
+      etag:
+      - '"61ca00e2-336b"'
+      expires:
+      - Tue, 28 Dec 2021 19:25:50 GMT
+      cache-control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      x-github-request-id:
+      - 2DE2:3175:C417F6:15C59B2:61CB6266
+      accept-ranges:
+      - bytes
+      date:
+      - Tue, 28 Dec 2021 19:15:50 GMT
+      via:
+      - 1.1 varnish
+      age:
+      - '0'
+      x-served-by:
+      - cache-ewr18130-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1640718950.415071,VS0,VE11
+      vary:
+      - Accept-Encoding
+      x-fastly-request-id:
+      - 26f3c930320e638cf5ea7e3be16413e0d0246616
+      content-length:
+      - '13163'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://jekyllrb.com/docs/configuration/#markdown-options
+  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Mon, 27 Dec 2021 23:37:35 GMT
+      vary:
+      - Accept-Encoding,Cookie,Authorization
+      server:
+      - ATS/8.0.8
+      x-content-type-options:
+      - nosniff
+      p3p:
+      - CP="See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P for more
+        info."
+      content-language:
+      - en
+      last-modified:
+      - Sun, 26 Dec 2021 20:05:52 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      age:
+      - '70694'
+      x-cache:
+      - cp1083 hit, cp1081 hit/6
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1081"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      set-cookie:
+      - WMF-Last-Access=28-Dec-2021;Path=/;HttpOnly;secure;Expires=Sat, 29 Jan 2022
+        12:00:00 GMT
+      - WMF-Last-Access-Global=28-Dec-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Sat,
+        29 Jan 2022 12:00:00 GMT
+      - GeoIP=US:NY:New_York:40.75:-73.99:v4; Path=/; secure; Domain=.wikipedia.org
+      x-client-ip:
+      - 108.62.52.151
+      cache-control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      accept-ranges:
+      - bytes
+      content-length:
+      - '275810'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
+  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
 recorded_with: VCR 2.9.3

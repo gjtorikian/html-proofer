@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'utils'
 require 'date'
 require 'json'
 require 'uri'
@@ -12,21 +11,27 @@ module HTMLProofer
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
     DEFAULT_CACHE_FILE_NAME = 'cache.log'
 
+    CACHE_VERSION = 2
+
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
     attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
     def initialize(logger, options)
       @logger = logger
-      @cache_log = {}
+      @cache_log = {
+        version: CACHE_VERSION,
+        internal: [],
+        external: []
+      }
 
       @cache_datetime = DateTime.now
       @cache_time = @cache_datetime.to_time
 
       if options.nil? || options.empty?
-        define_singleton_method('use_cache?') { false }
+        define_singleton_method(:enabled?) { false }
       else
-        define_singleton_method('use_cache?') { true }
+        define_singleton_method(:enabled?) { true }
         setup_cache!(options)
         @parsed_timeframe = parsed_timeframe(options[:timeframe])
       end
@@ -63,8 +68,8 @@ module HTMLProofer
       end
     end
 
-    def add(url, filenames, status, msg = '')
-      return unless use_cache?
+    def add(url, filenames, status, msg, type:)
+      return unless enabled?
 
       data = {
         time: @cache_time,
@@ -73,7 +78,7 @@ module HTMLProofer
         message: msg
       }
 
-      @cache_log[clean_url(url)] = data
+      @cache_log[type][clean_url(url)] = data
     end
 
     def detect_url_changes(found, type)

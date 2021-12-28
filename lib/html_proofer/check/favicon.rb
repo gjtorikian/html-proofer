@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FaviconCheck < ::HTMLProofer::Check
+class HTMLProofer::Check::Favicon < HTMLProofer::Check
   def run
     found = false
     @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |node|

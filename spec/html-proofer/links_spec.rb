@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe 'Links test' do
   it 'fails for broken internal hash (even if the file exists)' do
-    broken_hash_external_filepath = "#{FIXTURES_DIR}/links/broken_hash_external.html"
+    broken_hash_external_filepath = "#{FIXTURES_DIR}/links/broken_hash_external_file.html"
     proofer = run_proofer(broken_hash_external_filepath, :file)
-    expect(proofer.failed_tests.last).to match(/linking to internal hash #asdfasfdkafl that does not exist/)
+    expect(proofer.failed_tests.last).to match(%r{internally linking to ../images/missing_image_alt.html#asdfasfdkafl; the file exists, but the hash does not})
   end
 
   it 'fails for broken hashes on the web when asked (even if the file exists)' do
@@ -44,7 +44,7 @@ describe 'Links test' do
     broken_hash_internal_filepath = "#{FIXTURES_DIR}/links/broken_hash_internal.html"
     proofer = run_proofer(broken_hash_internal_filepath, :file)
 
-    expect(proofer.failed_tests.first).to match(/linking to internal hash #noHash that does not exist/)
+    expect(proofer.failed_tests.first).to match(/internally linking to #noHash; the file exists, but the hash does not/)
   end
 
   it 'passes when linking to the top' do
@@ -58,7 +58,7 @@ describe 'Links test' do
     proofer = run_proofer(broken_link_external_filepath, :file)
     failure = proofer.failed_tests.first
     expect(failure).to match(/failed: response code 0/)
-    expect(failure).to match(%r{External link http://www.asdo3IRJ395295jsingrkrg4.com/ failed:})
+    expect(failure).to match(%r{External link https://www.asdo3IRJ395295jsingrkrg4.com/ failed:})
   end
 
   it 'passes for different filename without option' do
@@ -106,20 +106,20 @@ describe 'Links test' do
 
   it 'should follow redirects' do
     link_with_redirect_filepath = "#{FIXTURES_DIR}/links/link_with_redirect.html"
-    proofer = run_proofer(link_with_redirect_filepath, :file)
+    proofer = run_proofer(link_with_redirect_filepath, :file, { enforce_https: false })
     expect(proofer.failed_tests).to eq []
   end
 
   it 'fails on redirects if not following' do
     link_with_redirect_filepath = "#{FIXTURES_DIR}/links/link_with_redirect.html"
-    proofer = run_proofer(link_with_redirect_filepath, :file, typhoeus: { followlocation: false })
+    proofer = run_proofer(link_with_redirect_filepath, :file, { enforce_https: false, typhoeus: { followlocation: false } })
     expect(proofer.failed_tests.first).to match(/failed: 301/)
   end
 
   it "does not fail on redirects we're not following" do
     # this test should emit a 301--see above--but we're intentionally suppressing it
     link_with_redirect_filepath = "#{FIXTURES_DIR}/links/link_with_redirect.html"
-    proofer = run_proofer(link_with_redirect_filepath, :file, only_4xx: true, typhoeus: { followlocation: false })
+    proofer = run_proofer(link_with_redirect_filepath, :file, { only_4xx: true, enforce_https: false, typhoeus: { followlocation: false } })
     expect(proofer.failed_tests).to eq []
   end
 
@@ -132,7 +132,7 @@ describe 'Links test' do
   it 'fails for broken hash links with status code numbers' do
     broken_link_with_number_filepath = "#{FIXTURES_DIR}/links/broken_link_with_number.html"
     proofer = run_proofer(broken_link_with_number_filepath, :file)
-    expect(proofer.failed_tests.first).to match(/linking to internal hash #25-method-not-allowed that does not exist/)
+    expect(proofer.failed_tests.first).to match(/internally linking to #25-method-not-allowed; the file exists, but the hash does not/)
   end
 
   it 'should understand relative hash' do
@@ -191,7 +191,7 @@ describe 'Links test' do
   it 'finds a mix of broken and unbroken links' do
     multiple_problems = "#{FIXTURES_DIR}/links/multiple_problems.html"
     proofer = run_proofer(multiple_problems, :file)
-    expect(proofer.failed_tests.first).to match(/linking to internal hash #anadaasdadsadschor that does not exist/)
+    expect(proofer.failed_tests.first).to match(/internally linking to #anadaasdadsadschor; the file exists, but the hash does not/)
   end
 
   it 'ignores valid mailto links' do
@@ -313,7 +313,7 @@ describe 'Links test' do
   it 'fails for broken hash with query' do
     broken_hash = "#{FIXTURES_DIR}/links/broken_hash_with_query.html"
     proofer = run_proofer(broken_hash, :file)
-    expect(proofer.failed_tests.first).to match(/linking to internal hash #example that does not exist/)
+    expect(proofer.failed_tests.first).to match(/#example; the file exists, but the hash does not/)
   end
 
   it 'passes when linking to hash on another page' do
@@ -325,7 +325,7 @@ describe 'Links test' do
   it 'fails for mismatched hash casing' do
     hash_on_another_page = "#{FIXTURES_DIR}/links/hash_mismatched_case.html"
     proofer = run_proofer(hash_on_another_page, :file)
-    expect(proofer.failed_tests.first).to match('internal hash #MainMenu that does not exist')
+    expect(proofer.failed_tests.first).to match('#MainMenu; the file exists, but the hash does not')
   end
 
   it 'works for directory index file' do
@@ -428,10 +428,9 @@ describe 'Links test' do
   end
 
   it 'reports failures for the original link, not the redirection' do
-    skip 'URL seems broken now. Need to find a new one'
     fixture = "#{FIXTURES_DIR}/links/redirected_error.html"
-    proofer = run_proofer(fixture, :file)
-    expect(proofer.failed_tests.first).to match(/failed: 404/)
+    proofer = run_proofer(fixture, :file, enforce_https: false)
+    expect(proofer.failed_tests.first).to match(%r{http://stackoverflow.com/asdadsads failed: 404})
   end
 
   it 'does not complain for files with attributes containing dashes' do
@@ -483,28 +482,28 @@ describe 'Links test' do
     expect(proofer.failed_tests.first).to match(/is an invalid URL/)
   end
 
-  it 'passes for non-HTTPS links when not asked' do
+  it 'passes for non-HTTPS links when asked' do
     non_https = "#{FIXTURES_DIR}/links/non_https.html"
-    proofer = run_proofer(non_https, :file)
+    proofer = run_proofer(non_https, :file, enforce_https: false)
     expect(proofer.failed_tests.length).to eq 0
   end
 
-  it 'fails for non-HTTPS links when asked' do
+  it 'fails for non-HTTPS links by default' do
     non_https = "#{FIXTURES_DIR}/links/non_https.html"
-    proofer = run_proofer(non_https, :file, enforce_https: true)
+    proofer = run_proofer(non_https, :file)
     expect(proofer.failed_tests.first).to match(/ben.balter.com is not an HTTPS link/)
   end
 
-  it 'passes for hash href when asked' do
+  it 'passes for hash href' do
     hash_href = "#{FIXTURES_DIR}/links/hash_href.html"
-    proofer = run_proofer(hash_href, :file, allow_hash_href: true)
+    proofer = run_proofer(hash_href, :file)
     expect(proofer.failed_tests.length).to eq 0
   end
 
-  it 'fails for hash href when not asked' do
+  it 'fails for hash href when asked' do
     hash_href = "#{FIXTURES_DIR}/links/hash_href.html"
-    proofer = run_proofer(hash_href, :file)
-    expect(proofer.failed_tests.first).to match(/linking to internal hash # that does not exist/)
+    proofer = run_proofer(hash_href, :file, allow_hash_href: false)
+    expect(proofer.failed_tests.first).to match(/linking to internal hash #, which points to nowhere/)
   end
 
   it 'fails for broken IP address links' do
@@ -543,12 +542,6 @@ describe 'Links test' do
     missing_href = "#{FIXTURES_DIR}/links/blank_href_htmlunknown.html"
     proofer = run_proofer(missing_href, :file, allow_missing_href: true)
     expect(proofer.failed_tests.length).to eq 0
-  end
-
-  it 'works with internal_domains' do
-    translated_link = "#{FIXTURES_DIR}/links/link_translated_internal_domains.html"
-    proofer = run_proofer(translated_link, :file, internal_domains: ['www.example.com', 'example.com'])
-    expect(proofer.failed_tests).to eq []
   end
 
   it 'passes for relative links with a base' do
@@ -654,7 +647,7 @@ describe 'Links test' do
 
   it 'allows for at-sign attribute' do
     file = "#{FIXTURES_DIR}/links/at_sign.html"
-    proofer = run_proofer(file, :file)
+    proofer = run_proofer(file, :file, allow_hash_href: false)
     expect(proofer.failed_tests.first).to match(/linking to internal hash/)
   end
 
@@ -679,7 +672,7 @@ describe 'Links test' do
   it 'reports linked internal through directory' do
     file = "#{FIXTURES_DIR}/links/hashes"
     proofer = run_proofer(file, :directory)
-    expect(proofer.failed_tests.first).to match(%r{support/index.html})
+    expect(proofer.failed_tests.first).to match(/the file exists, but the hash does not/)
   end
 
   it 'works for hash hrefs' do

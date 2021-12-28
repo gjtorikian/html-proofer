@@ -92,4 +92,49 @@ http_interactions:
     adapter_metadata:
       effective_url: http://www.xn--mxaaaiil1bdgepgr1bpt0d.gr/mars/
   recorded_at: Thu, 02 Aug 2018 12:38:52 GMT
+- request:
+    method: head
+    uri: https://www.xn--mxaaaiil1bdgepgr1bpt0d.gr/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 28 Dec 2021 19:14:40 GMT
+      Content-Type:
+      - text/html; charset=UTF-8
+      Connection:
+      - keep-alive
+      x-powered-by:
+      - PHP/8.0.13
+      x-turbo-charged-by:
+      - LiteSpeed
+      CF-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=tm9eD6e3VtqSj0WYa7cBqgZ%2FFz%2BOY%2BbYVMSSW2D%2FtBSiHRk0ytQnguEIAjZQbPIC9GZnRDHsQangD79wTMXXQ5Bmh86LwXjWC5Z%2F5%2Fe%2Bcg5iUiJ%2FKU1YEq9pfu8CTeRQRytzOAewUWQGIeDEypCEBCvbk0c%3D"}],"group":"cf-nel","max_age":604800}'
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      CF-RAY:
+      - 6c4d1ceade758c4e-EWR
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.xn--mxaaaiil1bdgepgr1bpt0d.gr/
+  recorded_at: Tue, 28 Dec 2021 19:14:40 GMT
 recorded_with: VCR 2.9.3

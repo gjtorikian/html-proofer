@@ -285,28 +285,26 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
+| `allow_hash_href` | If `true`, ignores the `href="#"`. | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
-| `allow_hash_href` | If `true`, ignores the `href="#"`. | `false` |
-| `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
+| `alt_ignore` | An array of Strings or RegExps containing `img` `src`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
 | `check_favicon` | Enables the favicon checker. | `false` |
 | `check_opengraph` | Enables the Open Graph checker. | `false` |
-| `check_img_http` | Fails an image if it's marked as `http` | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
-| `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
+| `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `extension` | The extension of your HTML files including the dot. | `.html`
 | `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
-| `internal_domains`| An array of Strings containing domains that will be treated as internal urls. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
+| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags. | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
@@ -364,13 +362,15 @@ The `Authorization` header is being set if and only if the `base_url` is `https:
 
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { :in_processes => 3} })
+HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { in_processes: 3} })
 ```
 
-In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
+In this example, `in_processes: 3` is passed into Parallel as a configuration option.
+
+Pass in `:parallel => { enable: false }` to disable parallel runs.
 
 ## Configuring caching
 

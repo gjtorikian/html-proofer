@@ -135,17 +135,11 @@ describe 'Images test' do
     expect(proofer.failed_tests.first).to_not match(/does not have an alt attribute/)
   end
 
-  it 'properly ignores empty alt attribute when empty_alt_ignore set' do
+  it 'properly ignores empty alt attribute when ignore_missing_alt set' do
     missing_alt_filepath = "#{FIXTURES_DIR}/images/empty_image_alt_text.html"
-    proofer = run_proofer(missing_alt_filepath, :file, empty_alt_ignore: true)
+    proofer = run_proofer(missing_alt_filepath, :file, ignore_missing_alt: true)
     expect(proofer.failed_tests).to eq []
   end
-
-  # it 'properly ignores empty alt attributes, but not missing alt attributes, when empty_alt_ignore set' do
-  #   missing_alt_filepath = "#{FIXTURES_DIR}/images/missing_image_alt.html"
-  #   proofer = run_proofer(missing_alt_filepath, :file, empty_alt_ignore: true)
-  #   expect(proofer.failed_tests.first).to match(/gpl.png does not have an alt attribute/)
-  # end
 
   it 'works for images with a srcset' do
     src_set_check = "#{FIXTURES_DIR}/images/src_set_check.html"

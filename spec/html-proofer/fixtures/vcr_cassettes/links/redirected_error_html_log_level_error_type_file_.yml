@@ -49,4 +49,49 @@ http_interactions:
     adapter_metadata:
       effective_url: https://www.cnet.com/html/404.html
   recorded_at: Sat, 07 Sep 2019 11:17:38 GMT
+- request:
+    method: head
+    uri: https://asia.cnet.com/blogs/geekonomics/post.htm?id=63009224
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      expires:
+      - Mon, 27 Dec 2021 05:57:16 GMT
+      cache-control:
+      - public, max-age=3600
+      last-modified:
+      - Mon, 14 Jun 2021 18:15:59 GMT
+      etag:
+      - '"b80c25696cd5b0e1ed5516117793acf3"'
+      content-type:
+      - text/html
+      date:
+      - Tue, 28 Dec 2021 19:42:06 GMT
+      vary:
+      - Accept-Encoding, User-Agent
+      strict-transport-security:
+      - max-age=63072000; includeSubDomains; preload
+      accept-ranges:
+      - bytes
+      content-length:
+      - '185965'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.cnet.com/html/404.html
+  recorded_at: Tue, 28 Dec 2021 19:42:06 GMT
 recorded_with: VCR 2.9.3

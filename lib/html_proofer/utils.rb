@@ -8,21 +8,18 @@ module HTMLProofer
       "#{count} #{count == 1 ? single : plural}"
     end
 
+    def blank?(str)
+      str.nil? || str == ''
+    end
+
     def create_nokogiri(path)
       content = if File.exist?(path) && !File.directory?(path)
-                  File.open(path).read
+                  File.read(path)
                 else
                   path
                 end
 
       Nokogiri::HTML5(content, max_errors: -1)
-    end
-
-    def swap(href, replacement)
-      replacement.each do |link, replace|
-        href = href.gsub(link, replace)
-      end
-      href
     end
   end
 end

@@ -2,30 +2,31 @@
 
 require 'typhoeus'
 require 'uri'
-require_relative './utils'
-require_relative './cache'
 
 module HTMLProofer
-  class UrlValidator
+  class UrlValidator::External < UrlValidator
     include HTMLProofer::Utils
 
     attr_reader :external_urls
     attr_writer :before_request
 
-    def initialize(logger, cache, external_urls, options)
-      @logger = logger
+    def initialize(runner, external_urls)
+      super(runner)
+      @cache = @runner.cache
+      @logger = @runner.logger
+      @options = @runner.options
+
       @external_urls = external_urls
+
       @failed_tests = []
-      @options = options
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
-      @cache = cache
       @before_request = []
     end
 
     def run
       @external_urls = remove_query_values
 
-      if @cache.use_cache?
+      if @cache.enabled?
         urls_to_check = @cache.retrieve_urls(@external_urls, :external)
         external_link_checker(urls_to_check)
         @cache.write
@@ -100,11 +101,11 @@ module HTMLProofer
     end
 
     def establish_queue(external_urls)
-      external_urls.each_pair do |url, filenames|
+      external_urls.each_pair do |url, metadata|
         url = begin
           clean_url(url)
         rescue URI::Error, Addressable::URI::InvalidURIError
-          add_external_issue(filenames, "#{url} is an invalid URL")
+          add_external_issue(metadata, "#{url} is an invalid URL")
           next
         end
 
@@ -113,7 +114,8 @@ module HTMLProofer
                  else
                    :head
                  end
-        queue_request(method, url, filenames)
+
+        queue_request(method, url, metadata)
       end
     end
 
@@ -147,7 +149,7 @@ module HTMLProofer
       debug_msg = if filenames.nil?
                     "Received a #{response_code} for #{href}"
                   else
-                    "Received a #{response_code} for #{href}  in #{filenames.join(' ')}"
+                    "Received a #{response_code} for #{href} in #{filenames.join(' ')}"
                   end
 
       @logger.log :debug, debug_msg
@@ -155,7 +157,7 @@ module HTMLProofer
       return if @options[:http_status_ignore].include?(response_code)
 
       if response_code.between?(200, 299)
-        @cache.add(href, filenames, response_code) unless check_hash_in_2xx_response(href, effective_url, response, filenames)
+        @cache.add(href, filenames, response_code, 'OK', type: :external) unless check_hash_in_2xx_response(href, effective_url, response, filenames)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
@@ -168,7 +170,7 @@ module HTMLProofer
         # Received a non-successful http response.
         msg = "External link #{href} failed: #{response_code} #{response.return_message}"
         add_external_issue(filenames, msg, response_code)
-        @cache.add(href, filenames, response_code, msg)
+        @cache.add(href, filenames, response_code, msg, type: :external)
       end
     end
 
@@ -195,35 +197,35 @@ module HTMLProofer
 
       msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
       add_external_issue(filenames, msg, response.code)
-      @cache.add(href, filenames, response.code, msg)
+      @cache.add(href, filenames, response.code, msg, type: :external)
       true
     end
 
     def handle_timeout(href, filenames, response_code)
       msg = "External link #{href} failed: got a time out (response code #{response_code})"
-      @cache.add(href, filenames, 0, msg)
+      @cache.add(href, filenames, 0, msg, type: :external)
       return if @options[:only_4xx]
 
       add_external_issue(filenames, msg, response_code)
     end
 
-    def handle_failure(href, filenames, response_code, return_message)
+    def handle_failure(href, metadata, response_code, return_message)
       msg = "External link #{href} failed: response code #{response_code} means something's wrong.
              It's possible libcurl couldn't connect to the server or perhaps the request timed out.
              Sometimes, making too many requests at once also breaks things.
              Either way, the return message (if any) from the server is: #{return_message}"
-      @cache.add(href, filenames, 0, msg)
+      @cache.add(href, metadata, 0, msg, type: :external)
       return if @options[:only_4xx]
 
-      add_external_issue(filenames, msg, response_code)
+      add_external_issue(metadata, msg, response_code)
     end
 
-    def add_external_issue(filenames, desc, status = nil)
+    def add_external_issue(metadata, desc, status = nil)
       # possible if we're checking an array of links
-      if filenames.nil?
+      if metadata.nil?
         @failed_tests << Issue.new('', desc, status: status)
       else
-        filenames.each { |f| @failed_tests << Issue.new(f, desc, status: status) }
+        metadata.each { |m| @failed_tests << Issue.new(m[:source], desc, status: status) }
       end
     end
 

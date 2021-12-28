@@ -12,13 +12,38 @@ http_interactions:
   response:
     status:
       code: 0
-      message: 
+      message:
     headers: {}
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
     adapter_metadata:
       effective_url: http://www.kakakakakaakkakakakakakakaakakak.biz.foo.net/
   recorded_at: Sun, 21 May 2017 22:25:23 GMT
+- request:
+    method: head
+    uri: https://www.kakakakakaakkakakakakakakaakakak.biz.foo.net
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://www.kakakakakaakkakakakakakakaakakak.biz.foo.net/
+  recorded_at: Mon, 27 Dec 2021 13:57:22 GMT
 recorded_with: VCR 2.9.3

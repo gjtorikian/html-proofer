@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.push File.expand_path('lib', __dir__)
-require 'html-proofer/version'
+require 'html_proofer/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'html-proofer'
@@ -22,13 +22,14 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'addressable',     '~> 2.3'
   gem.add_dependency 'mercenary',       '~> 0.3'
   gem.add_dependency 'nokogiri',        '~> 1.12'
-  gem.add_dependency 'parallel',        '~> 1.3'
+  gem.add_dependency 'parallel',        '~> 1.10'
   gem.add_dependency 'rainbow',         '~> 3.0'
   gem.add_dependency 'typhoeus',        '~> 1.3'
   gem.add_dependency 'yell',            '~> 2.0'
+  gem.add_dependency 'zeitwerk',        '~> 2.5'
 
   gem.add_development_dependency 'awesome_print'
-  gem.add_development_dependency 'pry-byebug'
+  gem.add_development_dependency 'debug'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'redcarpet'
   gem.add_development_dependency 'rspec', '~> 3.1'
@@ -37,6 +38,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubocop-standard'
   gem.add_development_dependency 'timecop', '~> 0.8'
   gem.add_development_dependency 'vcr', '~> 2.9'
+
   gem.metadata = {
     'rubygems_mfa_required' => 'true'
   }

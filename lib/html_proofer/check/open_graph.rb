@@ -1,18 +1,6 @@
 # frozen_string_literal: true
 
-class OpenGraphElement < ::HTMLProofer::Element
-  attr_reader :src
-
-  def initialize(obj, check, logger)
-    super(obj, check, logger)
-    # Fake up src from the content attribute
-    instance_variable_set('@src', @content)
-
-    @src.insert 0, 'http:' if %r{^//}.match?(@src)
-  end
-end
-
-class OpenGraphCheck < ::HTMLProofer::Check
+class HTMLProofer::Check::OpenGraph < HTMLProofer::Check
   def missing_src?
     !@opengraph.src
   end

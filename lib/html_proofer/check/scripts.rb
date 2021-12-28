@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ScriptCheck < ::HTMLProofer::Check
+class HTMLProofer::Check::Scripts < HTMLProofer::Check
   attr_reader :src
 
   def missing_src?
@@ -19,9 +19,9 @@ class ScriptCheck < ::HTMLProofer::Check
       # does the script exist?
       if missing_src?
         add_issue('script is empty and has no src attribute', line: line, content: content)
-      elsif @script.remote?
-        add_to_external_urls(@script.src)
-        check_sri(line, content) if @script.check_sri?
+      elsif @script.url.remote?
+        add_to_external_urls(@script.src, line)
+        check_sri(line, content) if @runner.check_sri?
       elsif !@script.exists?
         add_issue("internal script #{@script.src} does not exist", line: line, content: content)
       end
