@@ -3,7 +3,7 @@
 class HTMLProofer::Check::Images < HTMLProofer::Check
   include HTMLProofer::Utils
 
-  SCREEN_SHOT_REGEX = /^Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
+  SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
 
   def run
     @html.css('img').each do |node|
@@ -27,7 +27,7 @@ class HTMLProofer::Check::Images < HTMLProofer::Check
 
       add_issue("image #{@img.url.raw_attribute} does not have an alt attribute", line: line, content: content) if empty_alt_tag? && !ignore_missing_alt? && !ignore_alt?
 
-      add_issue("image #{@img.url.raw_attribute} uses the http scheme", line: line, content: content) if check_img_http? && @img.url.http?
+      add_issue("image #{@img.url.raw_attribute} uses the http scheme", line: line, content: content) if @runner.enforce_https? && @img.url.http?
     end
 
     external_urls
@@ -51,9 +51,5 @@ class HTMLProofer::Check::Images < HTMLProofer::Check
 
   def missing_src?
     blank?(@img.url.to_s)
-  end
-
-  def check_img_http?
-    @runner.options[:check_img_http]
   end
 end

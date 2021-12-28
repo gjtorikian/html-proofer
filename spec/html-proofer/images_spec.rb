@@ -64,7 +64,7 @@ describe 'Images test' do
     expect(proofer.failed_tests.first).to match(/image has no src or srcset attribute/)
   end
 
-  it 'fails for image with default mac filename' do
+  it 'fails for image with default macOS filename' do
     terrible_image_name = "#{FIXTURES_DIR}/images/terrible_image_name.html"
     proofer = run_proofer(terrible_image_name, :file)
     expect(proofer.failed_tests.first).to match(/image has a terrible filename/)
@@ -178,15 +178,15 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'passes for HTTP images when not asked' do
+  it 'passes for HTTP images when asked' do
     http    = "#{FIXTURES_DIR}/images/src_http.html"
-    proofer = run_proofer(http, :file)
+    proofer = run_proofer(http, :file, enforce_https: false)
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'fails for HTTP images when asked' do
+  it 'fails for HTTP images when not asked' do
     http    = "#{FIXTURES_DIR}/images/src_http.html"
-    proofer = run_proofer(http, :file, check_img_http: true)
+    proofer = run_proofer(http, :file)
     expect(proofer.failed_tests.first).to match(/uses the http scheme/)
   end
 

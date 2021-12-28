@@ -176,6 +176,10 @@ module HTMLProofer
       @options[:check_sri]
     end
 
+    def enforce_https?
+      @options[:enforce_https]
+    end
+
     def checks
       return @checks if defined?(@checks) && !@checks.nil?
 
