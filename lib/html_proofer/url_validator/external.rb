@@ -93,7 +93,7 @@ module HTMLProofer
         url = begin
           clean_url(url)
         rescue URI::Error, Addressable::URI::InvalidURIError
-          add_external_issue(metadata, "#{url} is an invalid URL")
+          add_failure(metadata, "#{url} is an invalid URL")
           next
         end
 
@@ -143,7 +143,7 @@ module HTMLProofer
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
-        handle_failure(effective_url, filenames, response_code, response.return_message)
+        handle_connection_failure(effective_url, filenames, response_code, response.return_message)
       elsif method == :head
         queue_request(:get, href, filenames)
       else
@@ -151,7 +151,7 @@ module HTMLProofer
 
         # Received a non-successful http response.
         msg = "External link #{href} failed: #{response_code} #{response.return_message}"
-        add_external_issue(filenames, msg, response_code)
+        add_failure(filenames, msg, response_code)
         @cache.add_external(href, filenames, response_code, msg)
       end
     end
@@ -178,7 +178,7 @@ module HTMLProofer
       return unless body_doc.xpath(xpath.join('|')).empty?
 
       msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
-      add_external_issue(filenames, msg, response.code)
+      add_failure(filenames, msg, response.code)
       @cache.add_external(href, filenames, response.code, msg)
       true
     end
@@ -188,23 +188,26 @@ module HTMLProofer
       @cache.add_external(href, filenames, 0, msg)
       return if @options[:only_4xx]
 
-      add_external_issue(filenames, msg, response_code)
+      add_failure(filenames, msg, response_code)
     end
 
-    def handle_failure(href, metadata, response_code, return_message)
-      msg = "External link #{href} failed: response code #{response_code} means something's wrong.
-             It's possible libcurl couldn't connect to the server or perhaps the request timed out.
-             Sometimes, making too many requests at once also breaks things.
-             Either way, the return message (if any) from the server is: #{return_message}"
+    def handle_connection_failure(href, metadata, response_code, return_message)
+      msg = <<~MSG
+        External link #{href} failed: response code #{response_code} means something's wrong.
+        It's possible libcurl couldn't connect to the server or perhaps the request timed out.
+        Sometimes, making too many requests at once also breaks things.
+      MSG
+
+      msg.concat("\nEither way, the return message from the server is: #{return_message}") unless blank?(return_message)
+
       @cache.add_external(href, metadata, 0, msg)
       return if @options[:only_4xx]
 
-      add_external_issue(metadata, msg, response_code)
+      add_failure(metadata, msg, response_code)
     end
 
-    def add_external_issue(metadata, desc, status = nil)
-      # possible if we're checking an array of links
-      if metadata.nil?
+    def add_failure(metadata, desc, status = nil)
+      if blank?(metadata) # possible if we're checking an array of links
         @failed_tests << Failure.new('', desc, status: status)
       else
         metadata.each { |m| @failed_tests << Failure.new(m[:source], desc, status: status) }

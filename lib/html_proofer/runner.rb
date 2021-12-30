@@ -55,6 +55,7 @@ module HTMLProofer
 
         hash[url] = []
       end
+
       validate_external_urls
     end
 

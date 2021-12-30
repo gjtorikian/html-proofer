@@ -18,13 +18,10 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, ignores the `href="#"`'
   p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href` (this is the default for HTML5).'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
-  p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'assume_extension', '--assume-extension', 'Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) (default: `false`).'
-  p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you do not want to run (default: `[]`)'
+  p.option 'checks', '--checks check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you want to run (default: `["Links", "Images", "Scripts"]`)'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
-  p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
   p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
-  p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
@@ -89,7 +86,7 @@ Mercenary.program(:htmlproofer) do |p|
 
     paths = path.split(',')
     if opts['as_links']
-      links = path.delete(' ').split(',')
+      links = path.split(',').map(&:strip)
       HTMLProofer.check_links(links, options).run
     elsif File.directory?(paths.first)
       HTMLProofer.check_directories(paths, options).run

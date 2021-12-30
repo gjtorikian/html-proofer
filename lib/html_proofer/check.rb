@@ -3,6 +3,8 @@
 module HTMLProofer
   # Mostly handles issue management and collecting of external URLs.
   class Check
+    include HTMLProofer::Utils
+
     attr_reader :failures, :options, :internal_urls, :external_urls
 
     def initialize(runner, html)
@@ -27,15 +29,15 @@ module HTMLProofer
     end
 
     def self.subchecks(runner_options)
+      # grab all known checks
       checks = ObjectSpace.each_object(Class).select do |klass|
         klass < self
       end
 
+      # remove any checks not explicitly included
       checks.each_with_object([]) do |check, arr|
-        check_name = check.to_s
-        next if runner_options[:checks_to_ignore].include?(check_name)
-        next if check_name == 'HTMLProofer::Check::Favicon' && !runner_options[:check_favicon]
-        next if check_name == 'HTMLProofer::Check::OpenGraph' && !runner_options[:check_opengraph]
+        check_name = check.to_s.split('::').last
+        next unless runner_options[:checks].include?(check_name)
 
         arr << check
       end
@@ -61,6 +63,10 @@ module HTMLProofer
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
       @external_urls[url_string] << { filename: @runner.current_source, line: line }
+    end
+
+    private def html5?
+      @html.to_s.scan(/^<!DOCTYPE html>/).any?
     end
 
     private def base_url

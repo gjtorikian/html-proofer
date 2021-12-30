@@ -19,7 +19,7 @@ describe 'Scripts test' do
     file = "#{FIXTURES_DIR}/scripts/script_missing_internal.html"
     proofer = run_proofer(file, :file)
     expect(proofer.failed_tests.length).to eq 1
-    expect(proofer.failed_tests.first).to include('spec/html-proofer/fixtures/scripts/script_missing_internal.html: internal script doesnotexist.js does not exist (line 5)')
+    expect(proofer.failed_tests.first).to include('internal script doesnotexist.js does not exist (line 5)')
   end
 
   it 'works for present content' do

@@ -4,18 +4,24 @@ class HTMLProofer::Check::Favicon < HTMLProofer::Check
   def run
     found = false
     @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |node|
-      favicon = create_element(node)
-      next if favicon.ignore?
+      @favicon = create_element(node)
 
-      found = true if favicon.rel.split.last.eql? 'icon'
-      break if found
+      next if @favicon.ignore?
+
+      break if (found = @favicon.node['rel'].split.last.eql? 'icon')
     end
-
-    return if found
 
     return if immediate_redirect?
 
-    add_failure('no favicon specified')
+    if found
+      if @favicon.url.remote?
+        add_to_external_urls(@favicon.url, @favicon.line)
+      elsif !@favicon.url.exists?
+        add_failure("internal favicon #{@favicon.url.raw_attribute} does not exist", line: @favicon.line, content: @favicon.content)
+      end
+    else
+      add_failure('no favicon specified')
+    end
   end
 
   private

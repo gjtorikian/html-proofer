@@ -287,13 +287,10 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, ignores the `href="#"`. | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
-| `alt_ignore` | An array of Strings or RegExps containing `img` `src`s whose missing `alt` tags are safe to ignore. | `[]` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
+| `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
-| `check_favicon` | Enables the favicon checker. | `false` |
-| `check_opengraph` | Enables the Open Graph checker. | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
-| `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
@@ -307,7 +304,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
+| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 
 In addition, there are a few "namespaced" options. These are:

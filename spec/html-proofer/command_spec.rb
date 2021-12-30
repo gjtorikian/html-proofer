@@ -8,17 +8,11 @@ describe 'Command test' do
     expect(output).to match('1 failure')
   end
 
-  it 'works with alt-ignore' do
-    ignorable_links = "#{FIXTURES_DIR}/images/ignorable_alt_via_options.html"
-    output = make_bin("--alt-ignore /wikimedia/,gpl.png #{ignorable_links}")
+  it 'works with checks' do
+    external = "#{FIXTURES_DIR}/links/file.foo" # this has a broken link
+    output = make_bin("--extension .foo --checks 'Images,Scripts' #{external}")
     expect(output).to match('successfully')
-  end
-
-  it 'works with checks-to-ignore' do
-    external = "#{FIXTURES_DIR}/links/file.foo"
-    output = make_bin("--extension .foo --checks-to-ignore 'LinkCheck' #{external}")
-    expect(output).to match('successfully')
-    expect(output).to_not match(/Running.+?LinkCheck/)
+    expect(output).to_not match(/Running.+?Links/)
   end
 
   it 'works with check-external-hash' do
@@ -43,7 +37,7 @@ describe 'Command test' do
     external = "#{FIXTURES_DIR}/links/file.foo"
     output = make_bin("--extension .foo #{external}")
     expect(output).to match('1 failure')
-    expect(output).to match('LinkCheck')
+    expect(output).to match('Links')
   end
 
   it 'works with file-ignore' do
@@ -77,8 +71,8 @@ describe 'Command test' do
   end
 
   it 'works with check-favicon' do
-    broken = "#{FIXTURES_DIR}/favicon/favicon_broken.html"
-    output = make_bin("--check-favicon #{broken}")
+    broken = "#{FIXTURES_DIR}/favicon/internal_favicon_broken.html"
+    output = make_bin("--checks 'Favicon' #{broken}")
     expect(output).to match('1 failure')
   end
 
@@ -94,11 +88,10 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  # VCR doesn't work with bins, for some reason; parse STDOUT, ugh
-  skip 'has only one UA [does not work in CI]' do
+  it 'has only one UA' do
     http = make_bin(%|--typhoeus-config='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
     expect(http.scan(/User-Agent: Typhoeus/).count).to eq 0
-    expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}).count).to eq 2
+    expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i).count).to eq 2
   end
 
   it 'accepts hydra max_concurrency' do

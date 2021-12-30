@@ -1,33 +1,29 @@
 # frozen_string_literal: true
 
 class HTMLProofer::Check::Images < HTMLProofer::Check
-  include HTMLProofer::Utils
-
   SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
 
   def run
     @html.css('img').each do |node|
       @img = create_element(node)
-      line = node.line
-      content = node.content
 
       next if @img.ignore?
 
       # screenshot filenames should return because of terrible names
-      add_failure("image has a terrible filename (#{@img.url.raw_attribute})", line: line, content: content) if terrible_filename?
+      add_failure("image has a terrible filename (#{@img.url.raw_attribute})", line: @img.line, content: @img.content) if terrible_filename?
 
       # does the image exist?
       if missing_src?
-        add_failure('image has no src or srcset attribute', line: line, content: content)
+        add_failure('image has no src or srcset attribute', line: @img.line, content: @img.content)
       elsif @img.url.remote?
-        add_to_external_urls(@img.url, line)
+        add_to_external_urls(@img.url, @img.line)
       elsif !@img.url.exists?
-        add_failure("internal image #{@img.url.raw_attribute} does not exist", line: line, content: content)
+        add_failure("internal image #{@img.url.raw_attribute} does not exist", line: @img.line, content: @img.content)
       end
 
-      add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: line, content: content) if empty_alt_tag? && !ignore_missing_alt? && !ignore_alt?
+      add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: @img.line, content: @img.content) if empty_alt_tag? && !ignore_missing_alt? && !ignore_alt?
 
-      add_failure("image #{@img.url.raw_attribute} uses the http scheme", line: line, content: content) if @runner.enforce_https? && @img.url.http?
+      add_failure("image #{@img.url.raw_attribute} uses the http scheme", line: @img.line, content: @img.content) if @runner.enforce_https? && @img.url.http?
     end
 
     external_urls
@@ -38,7 +34,7 @@ class HTMLProofer::Check::Images < HTMLProofer::Check
   end
 
   def ignore_alt?
-    @img.matches_ignore_pattern?(@runner.options[:alt_ignore]) || @img.aria_hidden?
+    @img.url.ignore? || @img.aria_hidden?
   end
 
   def empty_alt_tag?

@@ -3,16 +3,20 @@
 class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   attr_reader :url
 
-  def initialize(runner, link_attribute, base_url:)
+  def initialize(runner, link_attribute, base_url: nil)
     super
 
-    @url = @raw_attribute.delete("\u200b").strip
-    @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
+    if @raw_attribute.nil?
+      @url = nil
+    else
+      @url = @raw_attribute.delete("\u200b").strip
+      @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
 
-    @url = url_swap
+      @url = url_swap
 
-    # convert "//" links to "https://"
-    @url.start_with?('//') ? @url = "https:#{@url}" : @url
+      # convert "//" links to "https://"
+      @url.start_with?('//') ? @url = "https:#{@url}" : @url
+    end
   end
 
   def to_s
@@ -20,7 +24,8 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   end
 
   def ignore?
-    (/^javascript:/).match?(@url)
+    return true if (/^javascript:/).match?(@url)
+    return true if ignores_pattern?(@runner.options[:url_ignore])
   end
 
   def valid?
@@ -68,9 +73,15 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
 
   # checks if a file exists relative to the current pwd
   def exists?
+    return true if base64_link?
+
     return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
 
     @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
+  end
+
+  def base64_link?
+    /^data:image/.match?(@raw_attribute)
   end
 
   def absolute_path
@@ -160,6 +171,20 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     @url
   end
 
+  def ignores_pattern?(links_to_ignore)
+    return false unless links_to_ignore.is_a?(Array)
+
+    links_to_ignore.each do |link_to_ignore|
+      case link_to_ignore
+      when String
+        return true if link_to_ignore == @raw_attribute
+      when Regexp
+        return true if link_to_ignore&.match?(@raw_attribute)
+      end
+    end
+
+    false
+  end
   #    private def follow_location?
   #   @check.options[:typhoeus] && @check.options[:typhoeus][:followlocation]
   # end
