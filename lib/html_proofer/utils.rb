@@ -8,8 +8,8 @@ module HTMLProofer
       "#{count} #{count == 1 ? single : plural}"
     end
 
-    def blank?(str)
-      str.nil? || str == ''
+    def blank?(obj)
+      obj.nil? || obj.empty?
     end
 
     def create_nokogiri(path)

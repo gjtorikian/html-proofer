@@ -17,15 +17,15 @@ class HTMLProofer::Check::OpenGraph < HTMLProofer::Check
 
       # does the opengraph exist?
       if missing_src?
-        add_issue('open graph has no content attribute', line: m.line, content: m.content)
+        add_failure('open graph has no content attribute', line: m.line, content: m.content)
       elsif empty_src?
-        add_issue('open graph content attribute is empty', line: m.line, content: m.content)
+        add_failure('open graph content attribute is empty', line: m.line, content: m.content)
       elsif !@opengraph.valid?
-        add_issue("#{@opengraph.src} is an invalid URL", line: m.line)
+        add_failure("#{@opengraph.src} is an invalid URL", line: m.line)
       elsif @opengraph.remote?
         add_to_external_urls(@opengraph.url)
       else
-        add_issue("internal open graph #{@opengraph.url} does not exist", line: m.line, content: m.content) unless @opengraph.exists?
+        add_failure("internal open graph #{@opengraph.url} does not exist", line: m.line, content: m.content) unless @opengraph.exists?
       end
     end
 

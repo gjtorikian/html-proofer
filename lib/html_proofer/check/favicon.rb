@@ -15,7 +15,7 @@ class HTMLProofer::Check::Favicon < HTMLProofer::Check
 
     return if immediate_redirect?
 
-    add_issue('no favicon specified')
+    add_failure('no favicon specified')
   end
 
   private

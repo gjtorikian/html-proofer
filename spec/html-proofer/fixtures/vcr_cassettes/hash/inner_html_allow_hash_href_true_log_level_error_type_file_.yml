@@ -2090,4 +2090,148 @@ http_interactions:
     adapter_metadata:
       effective_url: https://github.com/chrisreddington
   recorded_at: Wed, 16 Dec 2020 19:18:52 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/#podcast
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      cache-control:
+      - private, max-age=0
+      content-length:
+      - '50'
+      content-type:
+      - text/plain; charset=utf-8
+      date:
+      - Wed, 29 Dec 2021 00:48:07 GMT
+      server:
+      - Netlify
+      age:
+      - '0'
+      x-nf-request-id:
+      - 01FR1TH5M8N6WKFK6GZG3H5YTK
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/#podcast
+  recorded_at: Wed, 29 Dec 2021 00:48:07 GMT
+- request:
+    method: head
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/#blog
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - Netlify
+      date:
+      - Wed, 29 Dec 2021 00:48:07 GMT
+      content-length:
+      - '0'
+      age:
+      - '0'
+      x-nf-request-id:
+      - 01FR1TH5M8608V7QE535ZAYMZZ
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/#blog
+  recorded_at: Wed, 29 Dec 2021 00:48:07 GMT
+- request:
+    method: get
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/#podcast
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - Netlify
+      date:
+      - Wed, 29 Dec 2021 00:48:07 GMT
+      content-length:
+      - '0'
+      age:
+      - '0'
+      x-nf-request-id:
+      - 01FR1TH5P5V4GEPV2SB9X6VQEF
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/#podcast
+  recorded_at: Wed, 29 Dec 2021 00:48:07 GMT
+- request:
+    method: get
+    uri: https://deploy-preview-44--hugo-community.netlify.app/community/#blog
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - Netlify
+      date:
+      - Wed, 29 Dec 2021 00:48:07 GMT
+      content-length:
+      - '0'
+      age:
+      - '0'
+      x-nf-request-id:
+      - 01FR1TH5PQ0TF00T99SX5CS5BW
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://deploy-preview-44--hugo-community.netlify.app/community/#blog
+  recorded_at: Wed, 29 Dec 2021 00:48:07 GMT
 recorded_with: VCR 2.9.3

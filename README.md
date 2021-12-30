@@ -299,7 +299,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
 | `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `extension` | The extension of your HTML files including the dot. | `.html`
-| `external_only` | Only checks problems with external references. | `false`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
@@ -310,7 +309,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
 | `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
-| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -446,7 +444,7 @@ HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_lev
 
 Want to write your own test? Sure, that's possible!
 
-Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
+Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_failure(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
 
 If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
 
@@ -470,7 +468,7 @@ class MailToOctocat < ::HTMLProofer::Check
       line = node.line
 
       if mailto? && octocat?
-        return add_issue("Don't email the Octocat directly!", line: line)
+        return add_failure("Don't email the Octocat directly!", line: line)
       end
     end
   end

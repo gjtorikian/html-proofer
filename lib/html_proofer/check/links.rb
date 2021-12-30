@@ -26,13 +26,13 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
       # next if placeholder?
 
       if !allow_hash_href? && @link.node['href'] == '#'
-        add_issue('linking to internal hash #, which points to nowhere', line: line, content: content)
+        add_failure('linking to internal hash #, which points to nowhere', line: line, content: content)
         next
       end
 
       # is it even a valid URL?
       unless @link.url.valid?
-        add_issue("#{@link.href} is an invalid URL", line: line, content: content)
+        add_failure("#{@link.href} is an invalid URL", line: line, content: content)
         next
       end
 
@@ -45,39 +45,30 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
         # HTML5 allows dropping the href: http://git.io/vBX0z
         next if @html.internal_subset.nil? || (@html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?)
 
-        add_issue('anchor has no href attribute', line: line, content: content)
+        add_failure('anchor has no href attribute', line: line, content: content)
         next
       end
 
-      # intentionally here because we still want valid? & missing_href? to execute
+      # intentionally down here because we still want valid? & missing_href? to execute
       next if @link.url.non_http_remote?
 
-      if !@link.node['href']&.start_with?('#') && !@link.url.internal? && @link.url.remote?
+      if !@link.url.internal? && @link.url.remote?
         check_sri(line, content) if @runner.check_sri? && node.name == 'link'
         # we need to skip these for now; although the domain main be valid,
         # curl/Typheous inaccurately return 404s for some links. cc https://git.io/vyCFx
         next if @link.node['rel'] == 'dns-prefetch'
 
         unless @link.url.path?
-          add_issue("#{@link.url.raw_attribute} is an invalid URL", line: line, content: content)
+          add_failure("#{@link.url.raw_attribute} is an invalid URL", line: line, content: content)
           next
         end
 
         add_to_external_urls(@link.url, line)
       elsif @link.url.internal?
-        # TODO: cache stuff should go here
-        validator = HTMLProofer::UrlValidator::Internal.new(@runner, @link.url)
-
-        unless validator.file_exists?
-          add_issue("internally linking to #{@link.url.raw_attribute}, which does not exist", line: line, content: content)
-          next
-        end
-
         # does the local directory have a trailing slash?
-        add_issue("internally linking to a directory #{@link.url.raw_attribute} without trailing slash", line: line, content: content) if validator.unslashed_directory?
+        add_failure("internally linking to a directory #{@link.url.raw_attribute} without trailing slash", line: line) if @link.url.unslashed_directory?(@link.url.absolute_path)
 
-        # add_to_internal_urls(@link.url, line)
-        add_issue("internally linking to #{@link.url.raw_attribute}; the file exists, but the hash does not", line: line, content: content) unless validator.hash_exists?
+        add_to_internal_urls(@link.url, line)
       end
     end
 
@@ -101,31 +92,20 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
     when 'http'
       return unless @runner.options[:enforce_https]
 
-      add_issue("#{@link.url.raw_attribute} is not an HTTPS link", line: line, content: content)
+      add_failure("#{@link.url.raw_attribute} is not an HTTPS link", line: line, content: content)
     end
   end
 
   def handle_mailto(line, content)
     if @link.url.path.empty?
-      add_issue("#{@link.url.raw_attribute} contains no email address", line: line, content: content) unless ignore_empty_mailto?
+      add_failure("#{@link.url.raw_attribute} contains no email address", line: line, content: content) unless ignore_empty_mailto?
     elsif !/#{URI::MailTo::EMAIL_REGEXP}/o.match?(@link.url.path)
-      add_issue("#{@link.url.raw_attribute} contains an invalid email address", line: line, content: content)
+      add_failure("#{@link.url.raw_attribute} contains an invalid email address", line: line, content: content)
     end
   end
 
   def handle_tel(line, content)
-    add_issue("#{@link.url.raw_attribute} contains no phone number", line: line, content: content) if @link.url.path.empty?
-  end
-
-  def external_link_check(line, content)
-    if link.url.exists? # rubocop:disable Style/GuardClause
-      target_html = create_nokogiri(link.absolute_path)
-      return add_issue("linking to #{link.href}, but #{link.hash} does not exist", line: line, content: content) unless hash_exists?(target_html, link.hash)
-    else
-      return add_issue("trying to find hash of #{link.href}, but #{link.absolute_path} does not exist", line: line, content: content)
-    end
-
-    true
+    add_failure("#{@link.url.raw_attribute} contains no phone number", line: line, content: content) if @link.url.path.empty?
   end
 
   def ignore_empty_mailto?
@@ -140,11 +120,11 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
     return unless SRI_REL_TYPES.include?(@link.node['rel'])
 
     if blank?(@link.node['integrity']) && blank?(@link.node['crossorigin'])
-      add_issue("SRI and CORS not provided in: #{@link.url.raw_attribute}", line: line, content: content)
+      add_failure("SRI and CORS not provided in: #{@link.url.raw_attribute}", line: line, content: content)
     elsif blank?(@link.node['integrity'])
-      add_issue("Integrity is missing in: #{@link.url.raw_attribute}", line: line, content: content)
+      add_failure("Integrity is missing in: #{@link.url.raw_attribute}", line: line, content: content)
     elsif blank?(@link.node['crossorigin'])
-      add_issue("CORS not provided for external resource in: #{@link.link.url.raw_attribute}", line: line, content: content)
+      add_failure("CORS not provided for external resource in: #{@link.link.url.raw_attribute}", line: line, content: content)
     end
   end
 

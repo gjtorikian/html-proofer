@@ -8,27 +8,28 @@ module HTMLProofer
   class Cache
     include HTMLProofer::Utils
 
+    CACHE_VERSION = 2
+
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
     DEFAULT_CACHE_FILE_NAME = 'cache.log'
-
-    CACHE_VERSION = 2
+    DEFAULT_STRUCTURE = {
+      version: CACHE_VERSION,
+      internal: {},
+      external: {}
+    }.freeze
 
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
     attr_reader :exists, :cache_log, :storage_dir, :cache_file
 
-    def initialize(logger, options)
-      @logger = logger
-      @cache_log = {
-        version: CACHE_VERSION,
-        internal: [],
-        external: []
-      }
+    def initialize(runner, options)
+      @runner = runner
+      @logger = @runner.logger
 
       @cache_datetime = DateTime.now
       @cache_time = @cache_datetime.to_time
 
-      if options.nil? || options.empty?
+      if blank?(options)
         define_singleton_method(:enabled?) { false }
       else
         define_singleton_method(:enabled?) { true }
@@ -40,15 +41,8 @@ module HTMLProofer
     def within_timeframe?(time)
       return false if time.nil?
 
-      (@parsed_timeframe..@cache_time).cover?(Time.parse(time))
-    end
-
-    def urls
-      @cache_log['urls'] || []
-    end
-
-    def size
-      @cache_log.length
+      time = Time.parse(time) if time.is_a?(String)
+      (@parsed_timeframe..@cache_time).cover?(time)
     end
 
     def parsed_timeframe(timeframe)
@@ -68,31 +62,51 @@ module HTMLProofer
       end
     end
 
-    def add(url, filenames, status, msg, type:)
+    def add_internal(url, metadata, found)
       return unless enabled?
 
-      data = {
-        time: @cache_time,
-        filenames: filenames,
-        status: status,
-        message: msg
-      }
+      @cache_log[:internal][url] = { time: @cache_time, metadata: [] } if @cache_log[:internal][url].nil?
 
-      @cache_log[type][clean_url(url)] = data
+      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found: found)
     end
 
-    def detect_url_changes(found, type)
-      found_urls = found.keys.map { |url| clean_url(url) }
+    def add_external(url, filenames, status, msg)
+      return unless enabled?
 
+      @cache_log[:external][url] = { time: @cache_time, status: status, message: msg, metadata: [] } if @cache_log[:external][url].nil?
+
+      @cache_log[:external][url][:metadata] = filenames
+    end
+
+    def construct_internal_link_metadata(metadata, found: nil)
+      m = {
+        source: metadata[:source],
+        current_path: metadata[:current_path],
+        line: metadata[:line],
+        base_url: metadata[:base_url]
+      }
+
+      m[:found] = found unless found.nil?
+
+      m
+    end
+
+    def detect_url_changes(found_urls, type)
       # if there were no urls, bail
       return {} if found_urls.empty?
 
-      existing_urls = @cache_log.keys.map { |url| clean_url(url) }
+      additions = determine_additions(found_urls, type)
 
-      # prepare to add new URLs detected
-      additions = found.reject do |url, _|
-        url = clean_url(url)
-        if existing_urls.include?(url)
+      determine_deletions(found_urls, type)
+
+      additions
+    end
+
+    # prepare to add new URLs detected
+    private def determine_additions(found_urls, type)
+      additions = found_urls.reject do |url, _|
+        # url = unescape_url(url)
+        if @cache_log[type].include?(url)
           true
         else
           @logger.log :debug, "Adding #{url} to cache check"
@@ -101,13 +115,18 @@ module HTMLProofer
       end
 
       new_link_count = additions.length
-      new_link_text = pluralize(new_link_count, 'link', 'links')
+      new_link_text = pluralize(new_link_count, "#{type} link", "#{type} links")
       @logger.log :info, "Adding #{new_link_text} to the cache..."
 
-      # remove from cache URLs that no longer exist
+      additions
+    end
+
+    # remove from cache URLs that no longer exist
+    private def determine_deletions(found_urls, type)
       deletions = 0
-      @cache_log.delete_if do |url, _|
-        url = clean_url(url)
+
+      @cache_log[type].delete_if do |url, _|
+        url = unescape_url(url)
 
         if found_urls.include?(url)
           false
@@ -118,33 +137,27 @@ module HTMLProofer
         end
       end
 
-      del_link_text = pluralize(deletions, 'link', 'links')
+      del_link_text = pluralize(deletions, "#{type} link", "#{type} links")
       @logger.log :info, "Removing #{del_link_text} from the cache..."
-
-      additions
     end
 
-    # TODO: Garbage performance--both the external and internal
-    # caches need access to this file. Write a proper versioned
-    # schema in the future
     def write
-      File.write(cache_file, @cache_log.to_json)
-    end
+      return unless enabled?
 
-    def load?
-      @load.nil?
+      File.write(@cache_file, @cache_log.to_json)
     end
 
     def retrieve_urls(urls, type)
+      return urls if empty?
+
       urls_to_check = detect_url_changes(urls, type)
 
-      @cache_log.each_pair do |url, cache|
-        next if within_timeframe?(cache['time']) && cache['message'].empty? # these were successes to skip
+      @cache_log[type].each_pair do |url, cache|
+        next if within_timeframe?(cache[:time])
 
-        if url_matches_type?(url, type)
-          urls_to_check[url] = cache['filenames'] # recheck expired links
-        end
+        urls_to_check[url] = cache[:metadata] # recheck expired links
       end
+
       urls_to_check
     end
 
@@ -157,11 +170,11 @@ module HTMLProofer
       Addressable::URI.unescape(url)
     end
 
-    def clean_url(url)
-      unescape_url(url)
+    def empty?
+      blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
     end
 
-    def setup_cache!(options)
+    private def setup_cache!(options)
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
@@ -170,15 +183,27 @@ module HTMLProofer
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      return unless File.exist?(@cache_file)
+      return (@cache_log = DEFAULT_STRUCTURE) unless File.exist?(@cache_file)
 
       contents = File.read(@cache_file)
-      @cache_log = contents.empty? ? {} : JSON.parse(contents)
+
+      return (@cache_log = DEFAULT_STRUCTURE) if blank?(contents)
+
+      log = JSON.parse(contents, symbolize_names: true)
+
+      old_cache = (cache_version = log[:version]).nil?
+      @cache_log = if old_cache # previous cache version, create a new one
+                     DEFAULT_STRUCTURE
+                   elsif cache_version != CACHE_VERSION
+                   # if cache version is newer...do something
+                   else
+                     log[:internal] = log[:internal].transform_keys(&:to_s)
+                     log[:external] = log[:external].transform_keys(&:to_s)
+                     log
+                   end
     end
 
-    private
-
-    def time_ago(measurement, unit)
+    private def time_ago(measurement, unit)
       case unit
       when :months
         @cache_datetime >> -measurement
@@ -191,7 +216,7 @@ module HTMLProofer
       end.to_time
     end
 
-    def url_matches_type?(url, type)
+    private def url_matches_type?(url, type)
       return true if type == :internal && url !~ URI_REGEXP
       return true if type == :external && url =~ URI_REGEXP
     end

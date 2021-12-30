@@ -6,16 +6,12 @@ module HTMLProofer
 
     def initialize(runner)
       @runner = runner
+
+      @cache = @runner.cache
+      @logger = @runner.logger
+      @options = @runner.options
+
+      @failed_tests = []
     end
-
-    # def handle_hash
-    #   if @url.internal? && !hash_exists?(link.html, link.hash)
-
-    #   elsif link.external?
-    #     return external_link_check(link, line, content)
-    #   end
-
-    #   true
-    # end
   end
 end

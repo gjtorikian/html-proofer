@@ -235,4 +235,240 @@ http_interactions:
     adapter_metadata:
       effective_url: http://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
   recorded_at: Sun, 21 May 2017 22:25:39 GMT
+- request:
+    method: head
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Thu, 30 Dec 2021 20:12:00 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '62'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1082 miss, cp1076 miss
+      x-cache-status:
+      - miss
+      server-timing:
+      - cache;desc="miss", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.216
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Thu, 30 Dec 2021 20:12:00 GMT
+- request:
+    method: head
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Thu, 30 Dec 2021 20:12:00 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1080 miss, cp1076 miss
+      x-cache-status:
+      - miss
+      server-timing:
+      - cache;desc="miss", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.216
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Thu, 30 Dec 2021 20:12:00 GMT
+- request:
+    method: get
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Thu, 30 Dec 2021 20:12:00 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '62'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1082 miss, cp1076 hit/1
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.216
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: 'Regexp failed to match URI: "/wikipedia/en/thumb/not_here.png"'
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Thu, 30 Dec 2021 20:12:00 GMT
+- request:
+    method: get
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Thu, 30 Dec 2021 20:12:00 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1080 miss, cp1076 hit/1
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.216
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: 'Regexp failed to match URI: "/wikipedia/en/thumb/fooooof.png"'
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Thu, 30 Dec 2021 20:12:00 GMT
 recorded_with: VCR 2.9.3

@@ -4,7 +4,8 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failures, :current_source, :current_path, :checked_paths, :current_check
+    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failures, :checked_paths, :current_check
+    attr_accessor :current_path, :current_source
 
     def initialize(src, opts = {})
       @options = HTMLProofer::Configuration.generate_defaults(opts)
@@ -13,7 +14,7 @@ module HTMLProofer
       @source = src
 
       @logger = HTMLProofer::Log.new(@options[:log_level])
-      @cache = Cache.new(@logger, @options[:cache])
+      @cache = Cache.new(self, @options[:cache])
 
       @internal_urls = {}
       @external_urls = {}
@@ -34,14 +35,11 @@ module HTMLProofer
       else
         @logger.log :info, "Running #{checks} on #{@source} on *#{@options[:extension]}... \n\n"
 
-        if @options[:external_only]
-          validate_external_url
-          @logger.log :info, "Ran on #{pluralize(files.length, 'link', 'links')}!\n\n"
-        else
-          check_files
-          @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
-        end
+        check_files
+        @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
       end
+
+      @cache.write
 
       if @failures.empty?
         @logger.log :info, 'HTML-Proofer finished successfully.'
@@ -55,11 +53,7 @@ module HTMLProofer
       @external_urls = @source.uniq.each_with_object({}) do |link, hash|
         url = Attribute::Url.new(self, link, base_url: nil).to_s
 
-        hash[url] = [{
-          current_source: url,
-          line: nil,
-          base_url: nil
-        }]
+        hash[url] = []
       end
       validate_external_urls
     end
@@ -76,7 +70,7 @@ module HTMLProofer
 
       validate_external_urls unless @options[:disable_external]
 
-      # validate_internal_urls
+      validate_internal_urls
     end
 
     # Walks over each implemented check and runs them on the files, in parallel.
@@ -103,51 +97,30 @@ module HTMLProofer
           @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
           @current_source = current_source
           @current_path = path
+
           check = Object.const_get(klass).new(self, @html)
-          @current_check = check.class.to_s
+          @current_check = check
 
           check.run
 
           result[:external_urls].merge!(check.external_urls)
           result[:internal_urls].merge!(check.internal_urls)
-          result[:failures].concat(check.issues)
+          result[:failures].concat(check.failures)
         end
       end
       result
     end
 
     def validate_external_urls
-      url_validator = HTMLProofer::UrlValidator::External.new(self, @external_urls)
-      url_validator.before_request = @before_request
-      @failures.concat(url_validator.run)
-      @external_urls = url_validator.external_urls
+      external_url_validator = HTMLProofer::UrlValidator::External.new(self, @external_urls)
+      external_url_validator.before_request = @before_request
+      @failures.concat(external_url_validator.validate)
     end
 
-    # def validate_internal_urls
-    #   if @cache.enabled?
-    #     urls_to_check = load_internal_cache
-
-    #     urls_to_check.each_pair do |url, internal_urls|
-    #       # pulled from cache
-    #       internal_urls = @internal_urls[url] unless internal_urls.first.is_a?(LinkCheck::InternalLink)
-
-    #       result = @internal_link_checks.check_internal_link(internal_urls.first.link, internal_urls.first.path, internal_urls.first.line, internal_urls.first.content)
-    #       code = result ? 200 : 404
-    #       @cache.add(url, @internal_urls_to_paths[url].sort, code, '') # TODO: blank msg for now
-    #     end
-    #     @cache.write
-    #   else
-    #     @internal_urls.each_pair do |internal_url, metadatas|
-    #       metadatas.each do |metadata|
-    #         url = Attribute::Url.new(self, internal_url, base_url: metadata[:base_url])
-    #         result = UrlValidator::Internal.new(url, hash_exists: metadata[:hash_exists]).exists?
-    #         next if result
-
-    #         @failures.concat(@internal_link_checks.issues) unless @internal_link_checks.issues.length.zero?
-    #       end
-    #     end
-    #   end
-    # end
+    def validate_internal_urls
+      internal_link_validator = HTMLProofer::UrlValidator::Internal.new(self, @internal_urls)
+      @failures.concat(internal_link_validator.validate)
+    end
 
     def files
       @files ||= if @type == :directory
@@ -223,6 +196,14 @@ module HTMLProofer
     def load_internal_cache
       urls_to_check = @cache.retrieve_urls(@internal_urls, :internal)
       cache_text = pluralize(urls_to_check.count, 'internal link', 'internal links')
+      @logger.log :info, "Found #{cache_text} in the cache..."
+
+      urls_to_check
+    end
+
+    def load_external_cache
+      urls_to_check = @cache.retrieve_urls(@external_urls, :external)
+      cache_text = pluralize(urls_to_check.count, 'external link', 'external links')
       @logger.log :info, "Found #{cache_text} in the cache..."
 
       urls_to_check

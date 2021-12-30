@@ -92,7 +92,10 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
            # relative links, path is a file
            elsif File.exist?(File.expand_path(path, @runner.current_source)) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
              File.dirname(@runner.current_path)
-             # relative link, path is a directory
+           # relative links in nested dir, path is a file
+           elsif File.exist?(File.join(File.dirname(@runner.current_path), path)) || File.exist?(File.join(File.dirname(@runner.current_path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch
+             File.dirname(@runner.current_path)
+           # relative link, path is a directory
            else
              @runner.current_path
            end
@@ -122,7 +125,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   end
 
   def internal?
-    relative_link? || internal_absolute_link?
+    relative_link? || internal_absolute_link? || hash_link?
   end
 
   def internal_absolute_link?
@@ -132,18 +135,18 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   def relative_link?
     return false if remote?
 
-    hash_link || param_link || url.start_with?('.') || url =~ /^\S/
+    hash_link? || param_link? || url.start_with?('.') || url =~ /^\S/
   end
 
   def link_points_to_same_page?
     hash_link || param_link
   end
 
-  def hash_link
+  def hash_link?
     url.start_with?('#')
   end
 
-  def param_link
+  def param_link?
     url.start_with?('?')
   end
 

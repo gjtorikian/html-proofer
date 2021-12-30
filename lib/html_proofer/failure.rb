@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  class Issue
+  class Failure
     attr_reader :path, :desc, :status, :line, :content
 
     def initialize(path, desc, line: nil, status: -1, content: nil)

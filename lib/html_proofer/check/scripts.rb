@@ -18,12 +18,12 @@ class HTMLProofer::Check::Scripts < HTMLProofer::Check
 
       # does the script exist?
       if missing_src?
-        add_issue('script is empty and has no src attribute', line: line, content: content)
+        add_failure('script is empty and has no src attribute', line: line, content: content)
       elsif @script.url.remote?
         add_to_external_urls(@script.src, line)
         check_sri(line, content) if @runner.check_sri?
       elsif !@script.exists?
-        add_issue("internal script #{@script.src} does not exist", line: line, content: content)
+        add_failure("internal script #{@script.src} does not exist", line: line, content: content)
       end
     end
 
@@ -32,11 +32,11 @@ class HTMLProofer::Check::Scripts < HTMLProofer::Check
 
   def check_sri(line, content)
     if !defined?(@script.integrity) && !defined?(@script.crossorigin)
-      add_issue("SRI and CORS not provided in: #{@script.src}", line: line, content: content)
+      add_failure("SRI and CORS not provided in: #{@script.src}", line: line, content: content)
     elsif !defined?(@script.integrity)
-      add_issue("Integrity is missing in: #{@script.src}", line: line, content: content)
+      add_failure("Integrity is missing in: #{@script.src}", line: line, content: content)
     elsif !defined?(@script.crossorigin)
-      add_issue("CORS not provided for external resource in: #{@script.src}", line: line, content: content)
+      add_failure("CORS not provided for external resource in: #{@script.src}", line: line, content: content)
     end
   end
 end

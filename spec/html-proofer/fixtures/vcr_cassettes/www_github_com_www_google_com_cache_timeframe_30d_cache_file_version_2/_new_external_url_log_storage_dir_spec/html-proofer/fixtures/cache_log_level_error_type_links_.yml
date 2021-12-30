@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Date:
+      - Wed, 29 Dec 2021 18:19:08 GMT
+      Server:
+      - gws
+      X-XSS-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Expires:
+      - Wed, 29 Dec 2021 18:19:08 GMT
+      Cache-Control:
+      - private
+      Set-Cookie:
+      - 1P_JAR=2021-12-29-18; expires=Fri, 28-Jan-2022 18:19:08 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=511=mwsUbrkbTBK9Nhh46qBtzZASJl7YMR6vloRgyopm8ndB8yA1Je4LEs3p_X0ol-x_D2YnG3Z6pFmy03OCXOKAYZyMhkuYS1XRkiBXO97CLJZF_bgWPwOif-DxWq0bvuSmDQlG0WIGu3ct58sLxH7T0mM-9ZqVtejAviY0S5_mECA;
+        expires=Thu, 30-Jun-2022 18:19:08 GMT; path=/; domain=.google.com; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Tue, 20 Oct 2015 16:00:00 GMT
+recorded_with: VCR 2.9.3

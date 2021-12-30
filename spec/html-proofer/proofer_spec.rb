@@ -12,11 +12,11 @@ describe HTMLProofer do
   end
 
   describe '#failures' do
-    it 'is an array of Issue' do
+    it 'is an array of Failures' do
       broken_link_internal_filepath = "#{FIXTURES_DIR}/links/broken_link_internal.html"
       proofer = run_proofer(broken_link_internal_filepath, :file)
       expect(proofer.failures.length).to eq(2)
-      expect(proofer.failures[0].class).to eq(HTMLProofer::Issue)
+      expect(proofer.failures[0].class).to eq(HTMLProofer::IssFailureue)
       expect(proofer.failures[0].path).to eq('spec/html-proofer/fixtures/links/broken_link_internal.html')
       expect(proofer.failures[0].desc).to eq('internally linking to ./notreal.html, which does not exist')
     end
@@ -142,21 +142,7 @@ HTML-Proofer found 3 failures!
     end
   end
 
-  describe 'external only' do
-    it 'knows how to ignore non-external link failures' do
-      options = { external_only: true }
-      missing_alt_filepath = "#{FIXTURES_DIR}/images/missing_image_alt.html"
-      proofer = run_proofer(missing_alt_filepath, :file, options)
-      expect(proofer.failed_tests).to eq([])
-    end
-
-    it 'still reports external link failures' do
-      options = { external_only: true }
-      external = "#{FIXTURES_DIR}/links/broken_link_external.html"
-      proofer = run_proofer(external, :file, options)
-      expect(proofer.failed_tests.length).to eq(1)
-    end
-
+  describe 'external links' do
     it 'ignores status codes when asked' do
       proofer = run_proofer(['www.github.com/github/notreallyhere'], :links, http_status_ignore: [404])
       expect(proofer.failed_tests.length).to eq(0)

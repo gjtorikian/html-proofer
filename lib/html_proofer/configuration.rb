@@ -20,7 +20,6 @@ module HTMLProofer
       enforce_https: true,
       error_sort: :path,
       extension: '.html',
-      external_only: false,
       file_ignore: [],
       http_status_ignore: [],
       log_level: :info,

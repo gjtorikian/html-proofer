@@ -12,36 +12,28 @@ module HTMLProofer
 
     def initialize(runner, external_urls)
       super(runner)
-      @cache = @runner.cache
-      @logger = @runner.logger
-      @options = @runner.options
 
       @external_urls = external_urls
-
-      @failed_tests = []
       @hydra = Typhoeus::Hydra.new(@options[:hydra])
       @before_request = []
     end
 
-    def run
-      @external_urls = remove_query_values
-
+    def validate
       if @cache.enabled?
-        urls_to_check = @cache.retrieve_urls(@external_urls, :external)
-        external_link_checker(urls_to_check)
-        @cache.write
+        urls_to_check = @runner.load_external_cache
+        run_external_link_checker(urls_to_check)
       else
-        external_link_checker(@external_urls)
+        run_external_link_checker(@external_urls)
       end
 
       @failed_tests
     end
 
-    def remove_query_values
-      return nil if @external_urls.nil?
+    def remove_query_values(external_urls)
+      return nil if external_urls.nil?
 
       paths_with_queries = {}
-      iterable_external_urls = @external_urls.dup
+      iterable_external_urls = external_urls.dup
       @external_urls.each_key do |url|
         uri = begin
           Addressable::URI.parse(url)
@@ -85,12 +77,8 @@ module HTMLProofer
     # If the HEAD fails, we'll fall back to GET, as some servers are not configured
     # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
     # not available as an option.
-    def external_link_checker(external_urls)
-      external_urls = external_urls.sort.to_h
-
-      count = external_urls.length
-      check_text = pluralize(count, 'external link', 'external links')
-      @logger.log :info, "Checking #{check_text}..."
+    def run_external_link_checker(external_urls)
+      external_urls = remove_query_values(external_urls)
 
       # Route log from Typhoeus/Ethon to our own logger
       Ethon.logger = @logger
@@ -146,18 +134,12 @@ module HTMLProofer
       response_code = response.code
       response.body.delete!("\x00")
 
-      debug_msg = if filenames.nil?
-                    "Received a #{response_code} for #{href}"
-                  else
-                    "Received a #{response_code} for #{href} in #{filenames.join(' ')}"
-                  end
-
-      @logger.log :debug, debug_msg
+      @logger.log :debug, "Received a #{response_code} for #{href}"
 
       return if @options[:http_status_ignore].include?(response_code)
 
       if response_code.between?(200, 299)
-        @cache.add(href, filenames, response_code, 'OK', type: :external) unless check_hash_in_2xx_response(href, effective_url, response, filenames)
+        @cache.add_external(href, filenames, response_code, 'OK') unless check_hash_in_2xx_response(href, effective_url, response, filenames)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
@@ -170,7 +152,7 @@ module HTMLProofer
         # Received a non-successful http response.
         msg = "External link #{href} failed: #{response_code} #{response.return_message}"
         add_external_issue(filenames, msg, response_code)
-        @cache.add(href, filenames, response_code, msg, type: :external)
+        @cache.add_external(href, filenames, response_code, msg)
       end
     end
 
@@ -197,13 +179,13 @@ module HTMLProofer
 
       msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
       add_external_issue(filenames, msg, response.code)
-      @cache.add(href, filenames, response.code, msg, type: :external)
+      @cache.add_external(href, filenames, response.code, msg)
       true
     end
 
     def handle_timeout(href, filenames, response_code)
       msg = "External link #{href} failed: got a time out (response code #{response_code})"
-      @cache.add(href, filenames, 0, msg, type: :external)
+      @cache.add_external(href, filenames, 0, msg)
       return if @options[:only_4xx]
 
       add_external_issue(filenames, msg, response_code)
@@ -214,7 +196,7 @@ module HTMLProofer
              It's possible libcurl couldn't connect to the server or perhaps the request timed out.
              Sometimes, making too many requests at once also breaks things.
              Either way, the return message (if any) from the server is: #{return_message}"
-      @cache.add(href, metadata, 0, msg, type: :external)
+      @cache.add_external(href, metadata, 0, msg)
       return if @options[:only_4xx]
 
       add_external_issue(metadata, msg, response_code)
@@ -223,9 +205,9 @@ module HTMLProofer
     def add_external_issue(metadata, desc, status = nil)
       # possible if we're checking an array of links
       if metadata.nil?
-        @failed_tests << Issue.new('', desc, status: status)
+        @failed_tests << Failure.new('', desc, status: status)
       else
-        metadata.each { |m| @failed_tests << Issue.new(m[:source], desc, status: status) }
+        metadata.each { |m| @failed_tests << Failure.new(m[:source], desc, status: status) }
       end
     end
 
