@@ -210,6 +210,6 @@ describe 'Images test' do
   it 'supports multiple srcsets when fails' do
     relative_images = File.join(FIXTURES_DIR, 'images', 'multiple_srcset_failure.html')
     proofer = run_proofer(relative_images, :file)
-    expect(proofer.failed_tests.first.desc).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x, gpl.png does not exist'
+    expect(proofer.failed_tests.first.desc).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist'
   end
 end

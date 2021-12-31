@@ -68,6 +68,11 @@ module HTMLProofer
       @node.attributes['aria-hidden']&.value == 'true'
     end
 
+
+  def multiple_srcsets?
+    !blank?(srcset) && srcset.split(',').size > 1
+  end
+
     def ignore?
       return true if @node.attributes['data-proofer-ignore']
       return true if ancestors_ignorable?

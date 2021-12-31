@@ -17,9 +17,9 @@ class HTMLProofer::Check::Images < HTMLProofer::Check
         add_failure('image has no src or srcset attribute', line: @img.line, content: @img.content)
       elsif @img.url.remote?
         add_to_external_urls(@img.url, @img.line)
-      elsif !@img.url.exists?
+      elsif !@img.url.exists? && !@img.multiple_srcsets?
         add_failure("internal image #{@img.url.raw_attribute} does not exist", line: @img.line, content: @img.content)
-      elsif !blank?(@img.srcset)
+      elsif @img.multiple_srcsets?
         srcsets = @img.srcset.split(',').map(&:strip)
         srcsets.each do |srcset|
           srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url)
