@@ -7,12 +7,13 @@ module HTMLProofer
   class Element
     include HTMLProofer::Utils
 
-    attr_reader :node, :url, :line, :content
+    attr_reader :node, :url, :base_url, :line, :content
 
     def initialize(runner, node, base_url: nil)
       @runner = runner
       @node = node
 
+      @base_url = base_url
       @url = Attribute::Url.new(runner, link_attribute, base_url: base_url)
 
       @line = node.line
@@ -65,6 +66,10 @@ module HTMLProofer
 
     def aria_hidden?
       @node.attributes['aria-hidden']&.value == 'true'
+    end
+
+    def multiple_srcsets?
+      !blank?(srcset) && srcset.split(',').size > 1
     end
 
     def ignore?
