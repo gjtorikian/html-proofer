@@ -19,6 +19,17 @@ class HTMLProofer::Check::Images < HTMLProofer::Check
         add_to_external_urls(@img.url, @img.line)
       elsif !@img.url.exists?
         add_failure("internal image #{@img.url.raw_attribute} does not exist", line: @img.line, content: @img.content)
+      elsif !blank?(@img.srcset)
+        srcsets = @img.srcset.split(',').map(&:strip)
+        srcsets.each do |srcset|
+          srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url)
+
+          if srcset_url.remote?
+            add_to_external_urls(srcset_url.url, @img.line)
+          elsif !srcset_url.exists?
+            add_failure("internal image #{srcset} does not exist", line: @img.line, content: @img.content)
+          end
+        end
       end
 
       add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: @img.line, content: @img.content) if empty_alt_tag? && !ignore_missing_alt? && !ignore_alt?
