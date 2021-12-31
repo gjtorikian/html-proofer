@@ -162,7 +162,7 @@ You'll also get a new program called `htmlproofer` with this gem. Terrific!
 Pass in options through the command-line as flags, like this:
 
 ``` bash
-htmlproofer --extension .html.erb ./out
+htmlproofer --extensions .html.erb ./out
 ```
 
 Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer).
@@ -188,29 +188,7 @@ values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
 ``` bash
-htmlproofer --swap-urls "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
-```
-
-### Using with Jekyll
-
-Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'`
-to your `Gemfile` as described above, and add the following to your `Rakefile`,
-using `rake test` to execute:
-
-```ruby
-require 'html-proofer'
-
-task :test do
-  sh "bundle exec jekyll build"
-  options = { :assume_extension => true }
-  HTMLProofer.check_directory("./_site", options).run
-end
-```
-
-Don't have or want a `Rakefile`? You can also do something like the following:
-
-```bash
-htmlproofer --assume-extension ./_site
+htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --url-ignore www.github.com ./out
 ```
 
 #### Adjusting for a `baseurl`
@@ -233,7 +211,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  options = { :assume_extension => true, :swap_urls => "^/BASEURL/:/" }
+  options = { :swap_urls => "^/BASEURL/:/" }
   HTMLProofer.check_directory("./_site", options).run
 end
 ```
@@ -283,14 +261,14 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
-| `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
+| `assume_extension` | Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) | `.html` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `extension` | The extension of your HTML files including the dot. | `.html`
+| `extensions` | An array of Strings indicating the extensions you would like to check (including the dot) | `['.html']`
 | `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
@@ -314,7 +292,7 @@ See below for more information.
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {:extension => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
+HTMLProofer.new("out/", {:extensions => [".htm"], :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
 ```
 
 This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check the [Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.

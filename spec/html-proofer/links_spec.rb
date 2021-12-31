@@ -67,7 +67,7 @@ describe 'Links test' do
   end
 
   it 'fails for different filenames' do
-    options = { extension: '.foo' }
+    options = { extensions: ['.foo'] }
     broken_link_external_filepath = File.join(FIXTURES_DIR, 'links', 'file.foo')
     proofer = run_proofer(broken_link_external_filepath, :file, options)
     expect(proofer.failed_tests.first.desc).to match(/failed: response code 0/)
@@ -447,18 +447,17 @@ describe 'Links test' do
   context 'automatically adding default extensions to files' do
     before :each do
       @fixture = File.join(FIXTURES_DIR, 'links', 'no_html_extension.html')
-      @options = { assume_extension: true }
     end
 
-    it 'is not enabled by default' do
+    it 'can be turned off' do
       # Default behaviour does not change
-      proofer = run_proofer(@fixture, :file)
+      proofer = run_proofer(@fixture, :file, { assume_extension: '' })
       expect(proofer.failed_tests.count).to be >= 3
     end
 
-    it 'accepts extensionless file links when enabled' do
+    it 'accepts extensionless file links by default' do
       # With command-line option
-      proofer = run_proofer(@fixture, :file, @options)
+      proofer = run_proofer(@fixture, :file)
       expect(proofer.failed_tests).to eq []
     end
   end
@@ -692,5 +691,13 @@ describe 'Links test' do
     file = File.join(FIXTURES_DIR, 'links', 'bad_formatting.html')
     proofer = run_proofer(file, :file)
     expect(proofer.failed_tests.first.desc).to match(/is an invalid URL/)
+  end
+
+  it 'should not try reading PDFs' do
+    file = File.join(FIXTURES_DIR, 'links', 'pdfs.html')
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_tests.count).to eq 3
+    expect(proofer.failed_tests.first.desc).to match(/internally linking to exists.pdf#page=2; the file exists, but the hash does not/)
+    expect(proofer.failed_tests.last.desc).to match(/internally linking to missing.pdf#page=2, which does not exist/)
   end
 end

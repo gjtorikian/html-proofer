@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/gjtorikian/html-proofer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 20:29:49 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"5363b715e58e37d24027425610a49a24"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        raw.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com
+        github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=3Qu%2BGFeDCevWxG%2F8sQY9mdTnmtz3q5E51GMU4uKSIiDytEf%2B3jWMRclwnQErFiFM3sk%2Fj9gBhHFBGaTWk0ndvwTNdePvexDFUdQsjkBVKbJyCFCtG4llOxCErStQ10rrbuPp1KIXVKF7yhxM%2FavFl0nYJ3Olw9h1yHJDTQWNJpqdIB%2FHuNbl89e%2F15niuCV8HegT1vb4nO%2BT8sR9vQSYAA%2BS3dMUW4PV%2BWb926fVyUEQ%2FxL%2B9tj7XaoiV%2Bv2zp03aYqryE8iKKwy7LGPIX8luw%3D%3D--3s%2B%2BpeIlTkelW8Fl--p73s9qdc0JwrTwVPXqbD4w%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1232660596.1640982589; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 20:29:49 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 20:29:49
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - 7750:4C30:1D25EF1:3129421:61CF683C
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/html-proofer
+  recorded_at: Fri, 31 Dec 2021 20:29:49 GMT
+recorded_with: VCR 2.9.3

@@ -7,7 +7,7 @@ module HTMLProofer
     PROOFER_DEFAULTS = {
       allow_hash_href: true,
       allow_missing_href: false,
-      assume_extension: false,
+      assume_extension: '.html',
       check_external_hash: false,
       checks: DEFAULT_TESTS,
       directory_index_file: 'index.html',
@@ -18,7 +18,7 @@ module HTMLProofer
       ignore_status_codes: [],
       ignore_urls: [],
       enforce_https: true,
-      extension: '.html',
+      extensions: ['.html'],
       log_level: :info,
       only_4xx: false,
       swap_urls: {}
