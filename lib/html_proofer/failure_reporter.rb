@@ -10,8 +10,8 @@ module HTMLProofer
       @failures = failures
       @logger = logger
       @sorted_failures = failures.group_by(&:check_name) \
-                                  .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } } \
-                                  .sort
+                                 .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } } \
+                                 .sort
     end
 
     def report(type)

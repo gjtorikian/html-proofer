@@ -2,7 +2,7 @@
 
 module HTMLProofer
   module Configuration
-    DEFAULT_TESTS = %w[Links Images Scripts]
+    DEFAULT_TESTS = %w[Links Images Scripts].freeze
 
     PROOFER_DEFAULTS = {
       allow_hash_href: true,
