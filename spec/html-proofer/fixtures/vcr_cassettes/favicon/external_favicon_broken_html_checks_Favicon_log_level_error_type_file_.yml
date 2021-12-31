@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://www.github.com/asdadaskdalsdk.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:38:19 GMT
+      content-type:
+      - text/plain; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src 'self' data:; script-src 'self'; style-src 'unsafe-inline'
+      set-cookie:
+      - _gh_sess=NhND0FtQZSgB%2B5HNs%2FHXRloOsLhE1X2m%2BCp1yvH71hvaQajMAFNh%2BfRMrY1Bweq%2BYHh4hMRMsECVyJ2NemBqF4ZEqkyGbHzTpy64IUgmmfJWrJF6GTvkjhrtG7dcOnc2uSrgTSun3WriKM%2BIdTAnCH%2FKYk2uuBFKQnAnDh9Vh6SuujIAVdvhNIZ5A7eVlUpwIcdHM%2F4YoGuN2TSG8tlxMROdmVKecPxFS4QdZ8yIuudWHmdSmak47Zzhb5%2BL1BnOFOuQmSAXpqjrXv13cjV%2FDQ%3D%3D--XMy7VT%2F9cvvnEUEh--TYok4b%2FJ%2BhdIZvXwVzYT6A%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1076251464.1640968699; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:19 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:19
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '9'
+      x-github-request-id:
+      - '09C8:5601:1BD3705:2F4084E:61CF31FB'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/asdadaskdalsdk.png
+  recorded_at: Fri, 31 Dec 2021 16:38:19 GMT
+- request:
+    method: get
+    uri: https://www.github.com/asdadaskdalsdk.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:38:19 GMT
+      content-type:
+      - text/plain; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src 'self' data:; script-src 'self'; style-src 'unsafe-inline'
+      set-cookie:
+      - _gh_sess=t10na9xYpu7SIczMm0M6lNoLIe0FZMUTUxqQQSecU7W%2Fkig2DbSHXQzEiVcQjD9bRlWoHAlP9GOv%2BahJmbNSC4wl8FQT9GU2mSpBavVK0clfUEYtLF9Kxkg9yBM87sCDFZjx4d0VCs2chcB8FR8A9Phg6HFkUCd%2FbGUAMiluiS%2BldUWnN8r8eq%2FgOgl%2FNt%2BNlEFgs8EiQYw7NnyCAJqbBeC0QFZvRKACK3oOFHAUlp44nc%2Bx99tX3hygAcCHCsCAnaMUGZaYVAnXJdpkgQbVTQ%3D%3D--548qMB3eYzdKvogm--6qILt%2Bc4pQylf6RO4N5mow%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.210667337.1640968699; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:19 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:19
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '9'
+      x-github-request-id:
+      - '09C8:5601:1BD370D:2F40856:61CF31FB'
+    body:
+      encoding: ASCII-8BIT
+      string: Not Found
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/asdadaskdalsdk.png
+  recorded_at: Fri, 31 Dec 2021 16:38:19 GMT
+recorded_with: VCR 2.9.3

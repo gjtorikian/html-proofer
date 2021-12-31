@@ -1,0 +1,440 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://docs.github.com/en/get-started/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - Cowboy
+      X-Ratelimit-Limit:
+      - '250'
+      X-Ratelimit-Remaining:
+      - '249'
+      X-Ratelimit-Reset:
+      - '1640968722'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
+        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
+        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
+        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
+        ''self'' ''unsafe-inline'';child-src ''self'''
+      X-Dns-Prefetch-Control:
+      - 'off'
+      Expect-Ct:
+      - max-age=0
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Download-Options:
+      - noopen
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - '0'
+      Set-Cookie:
+      - _csrf=F6ir8FdC4hNfg-yc0o20gi3T; Path=/; HttpOnly; Secure; SameSite=Lax
+      Location:
+      - "/en/get-started"
+      Via:
+      - 1.1 vegur, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18128-EWR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1640968661.343193,VS0,VE35
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://docs.github.com/en/get-started/
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+- request:
+    method: head
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html
+      permissions-policy:
+      - interest-cohort=()
+      Location:
+      - http://www.gjtorikian.com/mathematical/
+      X-GitHub-Request-Id:
+      - 2B2E:0B09:1B0E8C2:29E0892:61CF31D5
+      Content-Length:
+      - '162'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18132-EWR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1640968661.382164,VS0,VE12
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 426bfc25aac9369618ac1ca60aa9f9f3c578b029
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://gjtorikian.github.io/mathematical/
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+- request:
+    method: get
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - GitHub.com
+      Content-Type:
+      - text/html
+      permissions-policy:
+      - interest-cohort=()
+      Location:
+      - http://www.gjtorikian.com/mathematical/
+      X-GitHub-Request-Id:
+      - 2B2E:0B09:1B0E8C2:29E0892:61CF31D5
+      Content-Length:
+      - '162'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18132-EWR
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1640968661.419376,VS0,VE0
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 78c84346dfc830b515e5cdb237533b73a666eeb4
+    body:
+      encoding: ASCII-8BIT
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
+        Moved Permanently</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://gjtorikian.github.io/mathematical/
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+- request:
+    method: get
+    uri: http://docs.github.com/en/get-started/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - Cowboy
+      X-Ratelimit-Limit:
+      - '250'
+      X-Ratelimit-Remaining:
+      - '249'
+      X-Ratelimit-Reset:
+      - '1640968722'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
+        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
+        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
+        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
+        ''self'' ''unsafe-inline'';child-src ''self'''
+      X-Dns-Prefetch-Control:
+      - 'off'
+      Expect-Ct:
+      - max-age=0
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Download-Options:
+      - noopen
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - '0'
+      Set-Cookie:
+      - _csrf=GfoeHrhpT6Q7_zrLfRpvyZ6p; Path=/; HttpOnly; Secure; SameSite=Lax
+      Location:
+      - "/en/get-started"
+      Via:
+      - 1.1 vegur, 1.1 varnish
+      Transfer-Encoding:
+      - chunked
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18128-EWR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1640968661.399701,VS0,VE36
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://docs.github.com/en/get-started/
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+- request:
+    method: head
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      location:
+      - https://github.com/gjtorikian/repository-sync
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=bgWQhyA%2BINI92EAt8Y2YbJOF97trU6A8Eq689kz4KcRRuILzgf4ptwyzS%2F7QR7vjuwu9ml0AYA%2FHHf6ogYVCaUCX6gBP%2BisF4XxtwQwzJOzZgEXbTxr7oCuKK4txR6dbHYGIqrUclM4Dk%2FVp81v%2BfxiwfRITeToXcOTBhCZF9wsgX0GV%2F7goOFJ0sdqNG2JlUBfjqmC3zb1ZJxsr%2BfoEpCt68%2FIUTm%2BqX2BQRtWSF3PEq69hFohwDK2dp0HBolSeReRhxDpsikNByCB7cS9H7A%3D%3D--1oqCVMCX5RH3QrZM--b7x4459YYYxZLdZLq2qatg%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.240830845.1640968661; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:41 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:41
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '111'
+      x-github-request-id:
+      - EAF0:633E:27071B7:3D0DF21:61CF31D5
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/github/repository-sync
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+- request:
+    method: get
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 301
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      location:
+      - https://github.com/gjtorikian/repository-sync
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=yd8l4xVTsf5lkedw1ZjF%2F%2FCw%2BIpZDAqMmgJtK0ibuJmX%2FTwLTl4Ino37DQnZAqlqK2O9%2BVQhrGZ%2BroUSOvnhatW8UYk8D2g%2F%2FDyaWgdi3nM54fEflw38%2B%2BGtjXLDq6B1tqBMzZQY2uqX7XGvfLpd4HcVizmZEcbFHW3t8lj5v4tqwEBn1%2F7DPaRN10aH6Zv8kt0ZfExVVYHP%2Fhe1Gz8Z0ZINmgop1nG57C0yS5sks4fqkJ7KRQiDBZJ9mQyLz7QBul3TF4DieUcyziLSHDiJmQ%3D%3D--DepWNMtBa2RX32RS--lvxQV2%2FNjgwi7TWNrOiTRA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1617402063.1640968661; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:41 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:41
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '111'
+      x-github-request-id:
+      - EAF0:633E:27071BB:3D0DF2A:61CF31D5
+    body:
+      encoding: ASCII-8BIT
+      string: <html><body>You are being <a href="https://github.com/gjtorikian/repository-sync">redirected</a>.</body></html>
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/github/repository-sync
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/favicon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:21 GMT
+      content-type:
+      - image/x-icon
+      last-modified:
+      - Fri, 31 Dec 2021 11:08:36 GMT
+      etag:
+      - W/"61cee4b4-1976"
+      expires:
+      - Mon, 29 Dec 2031 16:37:21 GMT
+      cache-control:
+      - max-age=315360000
+      vary:
+      - Accept-Encoding, Accept, X-Requested-With
+      x-frame-options:
+      - DENY
+      set-cookie:
+      - _gh_sess=EWKvD2Z8mAYLnPhyid7SD%2FrdE7ZX5lwd8Tr2LWpe7pK5JbtO%2Bk4sUNzbz%2BVQRdRMFeQ1aPZm1leqbD%2F%2FXSxn1zqIJzDv2jQUMEkNCGCA9oHZtWAGXeBfIvdE7mGJwnWrviiskkB6tqyvpiXGiNNau2ow88xAmS2qTXZUdSjGaRp9NwL6tbepfn%2BNtzGj2ev5l4OwVzHEyxrhdAXPWI4w27nAMbKnLX%2BvtiH2gYRnxjo%2FY3yq6KIMdyJVqLCRPoGTz%2By1CZm3SFnDwx%2BzmLOl%2Fw%3D%3D--cwmfPEYEbrU4uoRj--8%2FyeX1DrXAk4rxn2LDaf3A%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1444508860.1640968641; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:21 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:21
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      content-length:
+      - '6518'
+      x-github-request-id:
+      - DF72:0D90:1A94F52:36ACE6A:61CF31C1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/favicon.ico
+  recorded_at: Fri, 31 Dec 2021 16:37:21 GMT
+recorded_with: VCR 2.9.3

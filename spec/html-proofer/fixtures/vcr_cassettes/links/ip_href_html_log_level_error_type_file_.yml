@@ -2,44 +2,52 @@
 http_interactions:
 - request:
     method: head
-    uri: http://1.2.3.4/
+    uri: https://1.2.3.4/
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 0
-      message: 
+      message:
     headers: {}
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: 
+    http_version:
     adapter_metadata:
-      effective_url: http://1.2.3.4/
-  recorded_at: Sun, 21 May 2017 22:25:35 GMT
+      effective_url: https://1.2.3.4/
+  recorded_at: Fri, 31 Dec 2021 16:37:33 GMT
 - request:
     method: head
-    uri: http://5.6.7.8/
+    uri: https://5.6.7.8/
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 0
-      message: 
+      message:
     headers: {}
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: 
+    http_version:
     adapter_metadata:
-      effective_url: http://5.6.7.8/
-  recorded_at: Sun, 21 May 2017 22:25:35 GMT
+      effective_url: https://5.6.7.8/
+  recorded_at: Fri, 31 Dec 2021 16:37:33 GMT
 recorded_with: VCR 2.9.3

@@ -15,36 +15,29 @@ Mercenary.program(:htmlproofer) do |p|
 
   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
-  p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href` (this is the default for HTML5).'
-  p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, ignores the `href="#"`'
+  p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, assumes `href="#"` anchors are valid'
+  p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
-  p.option 'alt_ignore', '--alt-ignore image1,[image2,...]', Array, 'A comma-separated list of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore'
   p.option 'assume_extension', '--assume-extension', 'Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) (default: `false`).'
-  p.option 'checks_to_ignore', '--checks-to-ignore check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you do not want to run (default: `[]`)'
-  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists). This slows the checker down (default: `false`).'
-  p.option 'check_favicon', '--check-favicon', 'Enables the favicon checker (default: `false`).'
-  p.option 'check_img_http', '--check-img-http', 'Fails an image if it\'s marked as `http` (default: `false`).'
-  p.option 'check_opengraph', '--check-opengraph', 'Enables the Open Graph checker (default: `false`).'
+  p.option 'checks', '--checks check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you want to run (default: `["Links", "Images", "Scripts"]`)'
+  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists) (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
-  p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker, which can take a lot of time (default: `false`)'
-  p.option 'empty_alt_ignore', '--empty-alt-ignore', 'If `true`, ignores images with empty alt tags'
-  p.option 'error_sort', '--error-sort <sort>', String, 'Defines the sort order for error output. Can be `:path`, `:desc`, or `:status` (default: `:path`).'
-  p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `false`).'
+  p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker (default: `false`)'
+  p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `true`).'
   p.option 'extension', '--extension <ext>', String, 'The extension of your HTML files including the dot. (default: `.html`)'
-  p.option 'external_only', '--external_only', 'Only checks problems with external references'
-  p.option 'file_ignore', '--file-ignore file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
-  p.option 'http_status_ignore', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
-  p.option 'internal_domains', '--internal-domains domain1,[domain2,...]', Array, 'A comma-separated list of Strings containing domains that will be treated as internal urls.'
+  p.option 'ignore_files', '--ignore-files file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
   p.option 'ignore_empty_mailto', '--ignore-empty-mailto', 'If `true`, allows `mailto:` `href`s which do not contain an email address'
+  p.option 'ignore_missing_alt', '--empty-alt-ignore', 'If `true`, ignores images with empty/missing alt tags'
+  p.option 'ignore_status_codes', '--http-status-ignore 123,[xxx, ...]', Array, 'A comma-separated list of numbers representing status codes to ignore.'
+  p.option 'ignore_urls', '--ignore-urls link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images.'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
   p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
   p.option 'hydra_config', '--hydra-config CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
-  p.option 'url_ignore', '--url-ignore link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored'
-  p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
+  p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
 
   p.action do |args, opts|
@@ -60,18 +53,17 @@ Mercenary.program(:htmlproofer) do |p|
     end
 
     # some minor manipulation of a special option
-    unless opts['url_swap'].nil?
-      options[:url_swap] = {}
-      opts['url_swap'].each do |s|
+    unless opts['swap_urls'].nil?
+      options[:swap_urls] = {}
+      opts['swap_urls'].each do |s|
         splt = s.split(/(?<!\\):/, 2)
 
         re = splt[0].gsub(/\\:/, ':')
         string = splt[1].gsub(/\\:/, ':')
-        options[:url_swap][Regexp.new(re)] = string
+        options[:swap_urls][Regexp.new(re)] = string
       end
     end
 
-    options[:error_sort] = opts['error-sort'].to_sym unless opts['error-sort'].nil?
     options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
 
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'], symbolize_names: false) unless opts['typhoeus_config'].nil?
@@ -87,11 +79,11 @@ Mercenary.program(:htmlproofer) do |p|
       options[:cache][:storage_dir] = opts['storage_dir'] unless opts['storage_dir'].nil?
     end
 
-    options[:http_status_ignore] = Array(options[:http_status_ignore]).map(&:to_i)
+    options[:ignore_status_codes] = Array(options[:ignore_status_codes]).map(&:to_i)
 
     paths = path.split(',')
     if opts['as_links']
-      links = path.delete(' ').split(',')
+      links = path.split(',').map(&:strip)
       HTMLProofer.check_links(links, options).run
     elsif File.directory?(paths.first)
       HTMLProofer.check_directories(paths, options).run

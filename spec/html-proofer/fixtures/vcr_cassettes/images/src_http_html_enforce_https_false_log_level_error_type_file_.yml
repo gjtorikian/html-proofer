@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 30 Dec 2021 20:11:58 GMT
+      content-type:
+      - image/png
+      content-length:
+      - '16183'
+      last-modified:
+      - Thu, 10 Aug 2017 22:10:36 GMT
+      etag:
+      - e30ab56b28c8e93fee2f6eb8fc508f85
+      x-timestamp:
+      - '1502403035.73148'
+      server:
+      - ATS/8.0.8
+      age:
+      - '73551'
+      x-cache:
+      - cp1090 hit, cp1078 hit/3
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1078"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.215
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+      accept-ranges:
+      - bytes
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
+  recorded_at: Fri, 31 Dec 2021 16:37:50 GMT
+recorded_with: VCR 2.9.3

@@ -1,0 +1,129 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:21 GMT
+      content-type:
+      - text/plain; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src 'self' data:; script-src 'self'; style-src 'unsafe-inline'
+      set-cookie:
+      - _gh_sess=Ji7gg3t3kJoR%2FELFZaQjjHZCiN1wM%2Bueurabk3KNNm9n1fmbtuR70vCVwrWd96M0yZ1kGSHHIpDOpSBj%2F3f7fM5VeffcQ4g7O34WZxBn62wpu24AKVct75HJQccm2UHWAeLdG%2Bnse1YYEQWdtIV2O0gMom6CL0FtnJskkogP7%2BpC6nFVxCP2G5xGzSfu09Er8%2Bct7PQkfGknHqIFIT4FQHCfQRzfiGiBfTjj3cjc8rBOC3l5h8qFP9pMnsOC44jCF9dPB5jMSSBZtZCCMS90VQ%3D%3D--wZfBoQuiBqwWq06x--pY6i1Q%2BL9nwhwg3%2B%2Bz0N7A%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.117713087.1640968641; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:21 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:21
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '9'
+      x-github-request-id:
+      - DF58:0D54:1640018:2D2475E:61CF31C0
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Fri, 31 Dec 2021 16:37:21 GMT
+- request:
+    method: get
+    uri: https://github.com/hearticon.ico
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:21 GMT
+      content-type:
+      - text/plain; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      cache-control:
+      - no-cache
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - default-src 'none'; base-uri 'self'; connect-src 'self'; form-action 'self';
+        img-src 'self' data:; script-src 'self'; style-src 'unsafe-inline'
+      set-cookie:
+      - _gh_sess=1YkWH8xr%2BMoglukpeRvvpMaRKBHHllWLt4ctfaWq6FVgMjr778JWNu7esSY75k2PDXZ3wXjSvLxrXdNVrV17HhRRj20GlqfQrKLR54e0YbJ3IUepC1yFomZE5bDh3Z3Abmi3YhsBlhM635hny6pMChnmXsEdwnqdpttvJJHfTIPNuh4sXUNSx%2BBveOuxdQ1dN1ZOfmf5B2vUZ4%2B6rZEd2XhFsCCHwbIL9hEhXq60gcHdHbfhCl%2BXH0i7IeCjZFKs9n40sF6sKReUE7dAMb5kRQ%3D%3D--CILzbAC1oG4cetUg--QqVdjkZSTueYJg81h2ZWjA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1178544060.1640968641; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:21 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:21
+        GMT; HttpOnly; Secure; SameSite=Lax
+      content-length:
+      - '9'
+      x-github-request-id:
+      - DF58:0D54:164001A:2D24764:61CF31C1
+    body:
+      encoding: ASCII-8BIT
+      string: Not Found
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/hearticon.ico
+  recorded_at: Fri, 31 Dec 2021 16:37:21 GMT
+recorded_with: VCR 2.9.3

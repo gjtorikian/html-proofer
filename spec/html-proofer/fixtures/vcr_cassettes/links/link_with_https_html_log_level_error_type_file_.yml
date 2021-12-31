@@ -8,69 +8,76 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Server:
+      server:
       - GitHub.com
-      Date:
-      - Sun, 21 May 2017 22:25:24 GMT
-      Content-Type:
+      date:
+      - Fri, 31 Dec 2021 16:37:36 GMT
+      content-type:
       - text/html; charset=utf-8
-      Status:
-      - 200 OK
-      Cache-Control:
-      - no-cache
-      Vary:
-      - X-PJAX
-      - Accept-Encoding
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:24
-        -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiM2RiMTYyMTRkZGUyMWVmYzBjYzM1OWNhNjU2NWY2NzUiLCJzcHlfcmVwbyI6Im9jdG9jYXQvU3Bvb24tS25pZmUiLCJzcHlfcmVwb19hdCI6MTQ5NTQwNTUyNCwiX2NzcmZfdG9rZW4iOiJPWWlhbFN2cllkRG5aRzVNeWJKdmJvYUdEL0ZTUTErNlkrS2RqZTQyVXdRPSJ9--fc3f5981df55e212b694d06d3b884aa613a12bb3;
-        path=/; secure; HttpOnly
-      X-Request-Id:
-      - 07f946b4adbbd409f76128c425858cc6
-      X-Runtime:
-      - '0.157835'
-      Content-Security-Policy:
-      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
-        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
-        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
-        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
-        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
-        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
-        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
-        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
-        style-src ''unsafe-inline'' assets-cdn.github.com'
-      Strict-Transport-Security:
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"5b7e7caf2c9efb553e44abbe36d54f93"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
       - max-age=31536000; includeSubdomains; preload
-      Public-Key-Pins:
-      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
-        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
-        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
-        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
-        includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
+      x-frame-options:
       - deny
-      X-XSS-Protection:
-      - 1; mode=block
-      X-Served-By:
-      - 6aca4ad039b350239ed28dd19335fa67
-      X-GitHub-Request-Id:
-      - C3BA:45BB:28FF32D:3D74D11:592213D4
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        raw.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com
+        github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=bYl8%2Bd%2BvI2yHCl1sFiNI%2Bdl60U7O8YLOioWgqGOx5sms1xXEyHUI781O4jXJg7ofQK2LId%2B5iZPMw4nAwrXMw7o4qwzUU6tul2aU1wVKlyRqtKdHhfu4m8jBFEeLyyJj6Z7iO%2BCQ6JZCtiqPgtCOfP4z%2FXDALm3gpXZqgdweBSjB7wQgVaeclogKwvymbr92Xrd%2BF3MQzYZkurG1diRQ%2FB7sD%2F1e5qD3S4cqWALE7rpXuakrkm%2F4PpgcEnvezCAzB0cy9WLkE2qo3cImMtI%2FlA%3D%3D--GFm5LvsAJBfnEnMR--L8XFaSkxRoBWZW7XsyTiSw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.673374125.1640968656; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:36 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:36
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - E880:3C6A:2401D95:39C688D:61CF31D0
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/octocat/Spoon-Knife/issues
-  recorded_at: Sun, 21 May 2017 22:25:24 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:36 GMT
 recorded_with: VCR 2.9.3

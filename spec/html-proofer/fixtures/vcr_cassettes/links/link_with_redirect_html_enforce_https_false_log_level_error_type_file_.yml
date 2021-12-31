@@ -1,0 +1,245 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://docs.github.com/en/get-started/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Cowboy
+      X-Ratelimit-Limit:
+      - '250'
+      X-Ratelimit-Remaining:
+      - '249'
+      X-Ratelimit-Reset:
+      - '1640968728'
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
+        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
+        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
+        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
+        ''self'' ''unsafe-inline'';child-src ''self'''
+      X-Dns-Prefetch-Control:
+      - 'off'
+      Expect-Ct:
+      - max-age=0
+      X-Frame-Options:
+      - SAMEORIGIN
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      X-Download-Options:
+      - noopen
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      X-Xss-Protection:
+      - '0'
+      Set-Cookie:
+      - _csrf=AqlBTu_8Atfo-GPPXMcIAhlf; Path=/; HttpOnly; Secure; SameSite=Lax
+      Cache-Control:
+      - private, no-store
+      X-Powered-By:
+      - Next.js
+      Etag:
+      - '"2b5bc-fBg44fWA6L2M/+Dhl2UcJ9xFoBM"'
+      Content-Type:
+      - text/html; charset=utf-8
+      Via:
+      - 1.1 vegur, 1.1 varnish
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - '177596'
+      Date:
+      - Fri, 31 Dec 2021 16:37:47 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18153-EWR
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1640968667.422364,VS0,VE129
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://docs.github.com/en/get-started
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
+- request:
+    method: head
+    uri: http://gjtorikian.github.io/mathematical/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Fri, 31 Dec 2021 16:37:47 GMT
+      content-type:
+      - text/html; charset=utf-8
+      last-modified:
+      - Wed, 19 Aug 2015 15:46:31 GMT
+      access-control-allow-origin:
+      - "*"
+      expires:
+      - Fri, 31 Dec 2021 16:47:47 GMT
+      cache-control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      x-github-request-id:
+      - 55B6:736F:1F0EAE2:305DDD2:61CF31DB
+      via:
+      - 1.1 varnish
+      age:
+      - '0'
+      x-served-by:
+      - cache-ewr18144-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1640968668.580707,VS0,VE15
+      vary:
+      - Accept-Encoding
+      x-fastly-request-id:
+      - 3cd37be9e83e17f55d50e26608f2e8376a022332
+      cf-cache-status:
+      - DYNAMIC
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=DOejrHq1BxTJmspxXfEFuGfFCUCNH5frvy2apoJ6zDRNi4pX7%2B78TGHebB0TqOLNUalvP3FOExlmbJezVpISz3NC8ZoTBfniGpUpu%2FQgs3iRPW5opG9qBrWnPEUigLBbUEsv9K4%3D"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      server:
+      - cloudflare
+      cf-ray:
+      - 6c64ef3c3c8d8c1b-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.gjtorikian.com/mathematical/
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
+- request:
+    method: head
+    uri: https://github.com/github/repository-sync
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Fri, 31 Dec 2021 16:37:47 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"0b8de43b56d4df05c3bdb2a0e87937c0"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+        github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        raw.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com
+        github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=iNkR8hgjKhpTXBtS7jvlEVoZn33d4KUwznhNfQqCfkMheOxlHp9BLWQf9jWhuWnlHHzc15M148fglTv%2FLOojfafn8fdO3lDDrDtulcmSOFz9XjPbKR%2B%2BIDvpPR9XU2e%2BhFbGLoLvE5PcaYJgIFXD7e6r2gZNJDU0IbkC3GU1o132N1xT5SsxZh9Bph8OMqoVgR2C9hI0SffHpfMW3HZDldLkn6lQ1bCncbbLUFWwBI8nx6z0ssaAg5fLmSTVqpCBJencDdSI%2BfqH16jorTI%2Fng%3D%3D--2hodcYGfTWscXgQj--PJXvbnF3Kw2tHOALi1aMBQ%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1327641410.1640968667; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:47 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:47
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE74:4FA4:1156C74:21E3659:61CF31DB
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/repository-sync
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
+recorded_with: VCR 2.9.3

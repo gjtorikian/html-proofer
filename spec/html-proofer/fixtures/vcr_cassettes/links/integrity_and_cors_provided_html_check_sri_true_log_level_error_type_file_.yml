@@ -2,63 +2,79 @@
 http_interactions:
 - request:
     method: head
-    uri: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
+    uri: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/css
-      Last-Modified:
-      - Tue, 21 Mar 2017 14:41:26 GMT
-      Expires:
-      - Mon, 21 May 2018 15:42:01 GMT
-      Cache-Control:
-      - max-age=31536000, public
-      Access-Control-Allow-Origin:
-      - "*"
-      Timing-Allow-Origin:
-      - "*"
-      X-GitHub-Request-Id:
-      - B7FA:4570:123E1E:132F8C:5921B549
-      Content-Length:
-      - '121557'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:36 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '24215'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-jfk8142-JFK
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '1'
-      X-Timer:
-      - S1495405537.811264,VS0,VE1
-      Vary:
+      date:
+      - Fri, 31 Dec 2021 16:37:41 GMT
+      content-type:
+      - text/css; charset=utf-8
+      vary:
       - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 2f90031460bb9fd73b66908668999c50f52a6955
+      cdn-pullzone:
+      - '252412'
+      cdn-uid:
+      - b1941f61-b576-4f40-80de-5677acb38f74
+      cdn-requestcountrycode:
+      - US
+      cdn-edgestorageid:
+      - '617'
+      - '617'
+      last-modified:
+      - Mon, 25 Jan 2021 22:03:59 GMT
+      cdn-cachedat:
+      - '2021-05-25 10:55:10'
+      cdn-requestpullsuccess:
+      - 'True'
+      cdn-requestpullcode:
+      - '200'
+      cache-control:
+      - public, max-age=31919000
+      timing-allow-origin:
+      - "*"
+      cross-origin-resource-policy:
+      - cross-origin
+      access-control-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cdn-requestid:
+      - b22175ed827d62f0dd875e3b8325e933
+      cdn-cache:
+      - HIT
+      cf-cache-status:
+      - HIT
+      age:
+      - '19009988'
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      server:
+      - cloudflare
+      cf-ray:
+      - 6c64ef14b89417bd-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
-      effective_url: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-  recorded_at: Sun, 21 May 2017 22:25:36 GMT
+      effective_url: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
 recorded_with: VCR 2.9.3

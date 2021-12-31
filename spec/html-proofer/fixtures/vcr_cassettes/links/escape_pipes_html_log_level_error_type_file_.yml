@@ -8,39 +8,50 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Content-Type:
+      content-type:
       - text/css; charset=utf-8
-      Access-Control-Allow-Origin:
+      access-control-allow-origin:
       - "*"
-      Timing-Allow-Origin:
+      timing-allow-origin:
       - "*"
-      Content-Length:
-      - '2875'
-      Expires:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Cache-Control:
+      content-length:
+      - '2467'
+      expires:
+      - Fri, 31 Dec 2021 16:37:39 GMT
+      date:
+      - Fri, 31 Dec 2021 16:37:39 GMT
+      cache-control:
       - private, max-age=86400
-      Server:
+      cross-origin-opener-policy:
+      - same-origin-allow-popups
+      cross-origin-resource-policy:
+      - cross-origin
+      server:
       - ESF
-      X-XSS-Protection:
-      - 1; mode=block
-      X-Frame-Options:
+      x-xss-protection:
+      - '0'
+      x-frame-options:
       - SAMEORIGIN
-      Alt-Svc:
-      - quic=":443"; ma=2592000; v="37,36,35"
+      x-content-type-options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
       effective_url: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:39 GMT
 recorded_with: VCR 2.9.3

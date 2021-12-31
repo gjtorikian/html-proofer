@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "external": {},
+  "internal": {
+    "root_link.html": {
+      "time": "2015-10-15 12:00:00 -0700",
+      "metadata": [
+        {
+          "source": "spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html",
+          "current_path": "spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html",
+          "line": 10,
+          "base_url": "",
+          "found": true
+        }
+      ]
+    }
+  }
+}

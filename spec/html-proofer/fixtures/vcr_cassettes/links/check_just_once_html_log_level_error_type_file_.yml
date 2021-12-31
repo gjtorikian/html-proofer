@@ -8,71 +8,61 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sun, 21 May 2017 22:25:38 GMT
-      Content-Type:
+      server:
+      - nginx/1.18.0
+      date:
+      - Fri, 31 Dec 2021 16:37:22 GMT
+      content-type:
       - text/html; charset=utf-8
-      Status:
-      - 200 OK
-      Cache-Control:
-      - no-cache
-      Vary:
-      - X-PJAX
-      - Accept-Encoding
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:38
-        -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiOWYwOTYyOTJhMzU1YzNiOTVjODI5MmUyYzE3MmI5MmMiLCJfY3NyZl90b2tlbiI6IjYyOUVIQURHTFp1TEpmL3o3MkNkZHcxb1VZN3o2OGxrV1Y2bkE4dVkyRDA9In0%3D--b2bd57fb039e61e880a93b270596c2be5ec8cd92;
-        path=/; secure; HttpOnly
-      X-Request-Id:
-      - 87cc7008062a7cac1230e271ecc98edb
-      X-Runtime:
-      - '0.068968'
-      Content-Security-Policy:
-      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
-        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
-        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
-        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
-        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
-        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
-        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
-        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
-        style-src ''unsafe-inline'' assets-cdn.github.com'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      Public-Key-Pins:
-      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
-        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
-        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
-        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
-        includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-XSS-Protection:
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
       - 1; mode=block
-      X-Served-By:
-      - 26049f47774ecce22e876a1fa55b2a77
-      X-GitHub-Request-Id:
-      - C3FB:45BC:39C4FB7:564BC8D:592213E2
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      etag:
+      - W/"92911ba05eac2e85aed98314360d26d3"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-security-policy:
+      - 'default-src ''none''; font-src https://support-assets.github.com; img-src
+        https: data:; script-src https://support-assets.github.com; style-src https://support-assets.github.com;
+        connect-src ''self'' wss://support.github.com https://enterprise-bundles.github.com
+        https://github.zendesk.com https://esbtoolsproduction.blob.core.windows.net'
+      set-cookie:
+      - _help_hub_session=6cQk5dhjihUAgeloENP5%2Fvr0uep%2BnV3kiCAOZOMLAOQeOELi8EcNTrVyJ0Rhtn39ApKqpPs3NmTj8oGq%2FhF27f9eNw7WYftpVL1yL%2BYbNxZ%2Fl1tLpTlHXR%2Bp5KzC4%2BNLpW4appPlhiYKOy%2FpavLqFdFW4ts4NlPpJ1XQTQDFwbmc5SZSkVmr7%2FyBy2DaljO0v8EEYmnAeGiYhQnwVqt1T7Fy8A9hgh1s%2B8cyGU%2BJlzVyFFLuHSxM1mjnk7jqMfNxqjylDvwlXbRlHmG5ynNngi0ZEDZdR0VExQ%3D%3D--Adl34jOTaQCnpRlq--hUJN%2FHu7xwYvb1wZ1oSJ7Q%3D%3D;
+        path=/; secure; HttpOnly
+      x-runtime:
+      - '0.013971'
+      strict-transport-security:
+      - max-age=63072000; includeSubDomains
+      x-github-backend:
+      - Kubernetes
+      x-github-request-id:
+      - 3412:4FE4:7D72CF:40EAB8A:61CF31C2
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
-      effective_url: https://github.com/contact?form%5Bsubject%5D=New+Assigned+Events
-  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+      effective_url: https://support.github.com/request?tags=dotcom-contact-params
+  recorded_at: Fri, 31 Dec 2021 16:37:22 GMT
 - request:
     method: head
     uri: https://github.com/contact#false?form%5Bsubject%5D=Organization+and+Team+Membership+APIs
@@ -81,69 +71,59 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Server:
-      - GitHub.com
-      Date:
-      - Sun, 21 May 2017 22:25:38 GMT
-      Content-Type:
+      server:
+      - nginx/1.18.0
+      date:
+      - Fri, 31 Dec 2021 16:37:23 GMT
+      content-type:
       - text/html; charset=utf-8
-      Status:
-      - 200 OK
-      Cache-Control:
-      - no-cache
-      Vary:
-      - X-PJAX
-      - Accept-Encoding
-      X-UA-Compatible:
-      - IE=Edge,chrome=1
-      Set-Cookie:
-      - logged_in=no; domain=.github.com; path=/; expires=Thu, 21 May 2037 22:25:38
-        -0000; secure; HttpOnly
-      - _gh_sess=eyJzZXNzaW9uX2lkIjoiNzNhZmY4NDQ0ZjkzNzEwZWFjYmEyNGYzYTUzODJjYzgiLCJfY3NyZl90b2tlbiI6InAyVjVQRFJjRE5IVTJ6T1FQb3Q2dWxLR2VzeTV5Z0xSeS9keFEvS3crUGs9In0%3D--dae9ee7d1ce5ca5329e471f3fea649ec74446251;
-        path=/; secure; HttpOnly
-      X-Request-Id:
-      - d6e811b3654be0eb06a450403b88bdd1
-      X-Runtime:
-      - '0.066527'
-      Content-Security-Policy:
-      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
-        render.githubusercontent.com; connect-src ''self'' uploads.github.com status.github.com
-        collector.githubapp.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com
-        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-user-asset-79cafe.s3.amazonaws.com
-        wss://live.github.com; font-src assets-cdn.github.com; form-action ''self''
-        github.com gist.github.com; frame-ancestors ''none''; img-src ''self'' data:
-        assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com
-        *.githubusercontent.com; media-src ''none''; script-src assets-cdn.github.com;
-        style-src ''unsafe-inline'' assets-cdn.github.com'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      Public-Key-Pins:
-      - max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=";
-        pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=";
-        pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4=";
-        pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A=";
-        includeSubDomains
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-XSS-Protection:
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
       - 1; mode=block
-      X-Served-By:
-      - bc4c952d089501afbfc8f7ff525da31c
-      X-GitHub-Request-Id:
-      - C3FA:45BD:47DF29A:6B378F3:592213E2
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      etag:
+      - W/"e7f3ad70d8c06161ee539628796f03c5"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-security-policy:
+      - 'default-src ''none''; font-src https://support-assets.github.com; img-src
+        https: data:; script-src https://support-assets.github.com; style-src ''self''
+        https: ''unsafe-inline''; connect-src ''self'' wss://support.github.com https://enterprise-bundles.github.com
+        https://github.zendesk.com https://esbtoolsproduction.blob.core.windows.net'
+      set-cookie:
+      - _help_hub_session=424Fl2R0PwtNjC3D7ppNTP%2F6qpqhC1eNKAHAN%2Bon%2BPmIfPwhsgkwjNFjAFh%2FnJqzrctKGvKebGwqqflN2b3zh%2BoEDrI%2FpTJRzG4pCfVJ%2FANN41UJJ4RikILdjkBJdUUZSV5h5QLmzLC3rI7j%2FypPF4Vko%2F%2B6FTUz5A7Kxu6t%2BQ%2FO3U4Lr3jNDIden%2FO28dlFQ72B2Ck5IFWmx%2FpoK1Fdlg2Z46fuopfdApyn%2B3rr5LIVS%2F%2FOY%2BNtdES3gPqBLENJPhr6jBkIUPog70cSlSTyycDbHoWCUCDyCA%3D%3D--HCGUVir4XlsgH8SU--59RqFatXwvmG%2FgGv6gdy%2BA%3D%3D;
+        path=/; secure; HttpOnly
+      x-runtime:
+      - '1.101427'
+      strict-transport-security:
+      - max-age=63072000; includeSubDomains
+      x-github-backend:
+      - Kubernetes
+      x-github-request-id:
+      - 3410:0D67:469B23:3CEE114:61CF31C1
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
-      effective_url: https://github.com/contact
-  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+      effective_url: https://support.github.com/?tags=dotcom-direct
+  recorded_at: Fri, 31 Dec 2021 16:37:23 GMT
 recorded_with: VCR 2.9.3

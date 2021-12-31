@@ -2,122 +2,120 @@
 http_interactions:
 - request:
     method: head
-    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 404
-      message: Not Found
+      message: ''
     headers:
-      Date:
-      - Sun, 21 May 2017 22:25:23 GMT
-      Content-Type:
+      date:
+      - Fri, 31 Dec 2021 16:37:49 GMT
+      content-type:
       - text/html; charset=UTF-8
-      Connection:
-      - keep-alive
-      X-Trans-Id:
-      - txd469d64dcead4249a3d9f-00592213d3
-      Vary:
-      - Accept-Encoding
-      X-Varnish:
-      - 180062360, 209907495
-      Via:
-      - 1.1 varnish-v4, 1.1 varnish-v4
-      Age:
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
       - '0'
-      X-Cache:
-      - cp1063 miss, cp1072 pass
-      X-Cache-Status:
+      x-cache:
+      - cp1080 miss, cp1078 miss
+      x-cache-status:
       - miss
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Analytics:
-      - https=1;nocookies=1
-      X-Client-IP:
-      - 100.37.221.161
-      Access-Control-Allow-Origin:
+      server-timing:
+      - cache;desc="miss", host;desc="cp1078"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.215
+      access-control-allow-origin:
       - "*"
-      Access-Control-Expose-Headers:
-      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
-      Timing-Allow-Origin:
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
       - "*"
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
       effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
-  recorded_at: Sun, 21 May 2017 22:25:23 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:49 GMT
 - request:
     method: get
-    uri: http://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 404
-      message: Not Found
+      message: ''
     headers:
-      Date:
-      - Sun, 21 May 2017 22:25:23 GMT
-      Content-Type:
+      date:
+      - Fri, 31 Dec 2021 16:37:49 GMT
+      content-type:
       - text/html; charset=UTF-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Trans-Id:
-      - txd469d64dcead4249a3d9f-00592213d3
-      Vary:
-      - Accept-Encoding
-      X-Varnish:
-      - 178431626 180062361, 209542015
-      Via:
-      - 1.1 varnish-v4, 1.1 varnish-v4
-      Age:
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
       - '0'
-      X-Cache:
-      - cp1063 hit/1, cp1072 pass
-      X-Cache-Status:
-      - hit
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Analytics:
-      - https=1;nocookies=1
-      X-Client-IP:
-      - 100.37.221.161
-      Access-Control-Allow-Origin:
+      x-cache:
+      - cp1080 miss, cp1078 hit/1
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1078"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      x-client-ip:
+      - 45.144.113.215
+      access-control-allow-origin:
       - "*"
-      Access-Control-Expose-Headers:
-      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache, X-Varnish
-      Timing-Allow-Origin:
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
       - "*"
     body:
-      encoding: UTF-8
-      string: |-
-        <html>
-         <head>
-          <title>404 Not Found</title>
-         </head>
-         <body>
-          <h1>404 Not Found</h1>
-          The resource could not be found.<br /><br />
-        Regexp failed to match URI: &quot;/wikipedia/en/thumb/fooooof.png&quot;
-
-
-         </body>
-        </html>
-    http_version: '1.1'
+      encoding: ASCII-8BIT
+      string: 'Regexp failed to match URI: "/wikipedia/en/thumb/fooooof.png"'
+    http_version: '2'
     adapter_metadata:
       effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
-  recorded_at: Sun, 21 May 2017 22:25:24 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:49 GMT
 recorded_with: VCR 2.9.3

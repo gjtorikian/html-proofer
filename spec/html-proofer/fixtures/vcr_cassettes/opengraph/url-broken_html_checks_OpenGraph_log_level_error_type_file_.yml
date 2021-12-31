@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://d61db214731f59884ce90032779915e9.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: http://d61db214731f59884ce90032779915e9.com/
+  recorded_at: Fri, 31 Dec 2021 16:37:20 GMT
+recorded_with: VCR 2.9.3

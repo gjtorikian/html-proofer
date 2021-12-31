@@ -778,7 +778,7 @@
 - Checking for unused images [\#337](https://github.com/gjtorikian/html-proofer/issues/337)
 - External Link test failing on Valid URL - ONLY on Travis server [\#331](https://github.com/gjtorikian/html-proofer/issues/331)
 - Spell Check [\#330](https://github.com/gjtorikian/html-proofer/issues/330)
-- --url-swap keys can't contain colon [\#293](https://github.com/gjtorikian/html-proofer/issues/293)
+- --swap-urls keys can't contain colon [\#293](https://github.com/gjtorikian/html-proofer/issues/293)
 
 **Merged pull requests:**
 
@@ -789,7 +789,7 @@
 - spelling fixes [\#342](https://github.com/gjtorikian/html-proofer/pull/342) ([ka7](https://github.com/ka7))
 - Links point to webpages [\#339](https://github.com/gjtorikian/html-proofer/pull/339) ([fulldecent](https://github.com/fulldecent))
 - link to html-proofer-docker [\#335](https://github.com/gjtorikian/html-proofer/pull/335) ([afeld](https://github.com/afeld))
-- Added escape sequences for --url-swap [\#320](https://github.com/gjtorikian/html-proofer/pull/320) ([johnzeringue](https://github.com/johnzeringue))
+- Added escape sequences for --swap-urls [\#320](https://github.com/gjtorikian/html-proofer/pull/320) ([johnzeringue](https://github.com/johnzeringue))
 
 ## [v3.0.6](https://github.com/gjtorikian/html-proofer/tree/v3.0.6) (2016-05-17)
 

@@ -145,7 +145,7 @@ HTMLProofer.check_directories(['./one', './two']).run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com']).run
+HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
@@ -187,12 +187,12 @@ you can pass in a syntax like this:
 htmlproofer --url-ignore "/www.github.com/,/foo.com/" ./out
 ```
 
-Since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
+Since `swap_urls` is a bit special, you'll pass in a pair of `RegEx:String`
 values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
 ``` bash
-htmlproofer --url-swap "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
+htmlproofer --swap-urls "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
 ```
 
 ### Using with Jekyll
@@ -221,13 +221,13 @@ htmlproofer --assume-extension ./_site
 
 If your Jekyll site has a `baseurl` configured, you'll need to adjust the
 generated url validation to cope with that. The easiest way is using the
-`url_swap` option.
+`swap_urls` option.
 
 For a `site.baseurl` value of `/BASEURL`, here's what that looks like on the
 command line:
 
 ```bash
-htmlproofer --assume-extension ./_site --url-swap '^/BASEURL/:/'
+htmlproofer --assume-extension ./_site --swap-urls '^/BASEURL/:/'
 ```
 
 or in your `Rakefile`
@@ -237,7 +237,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  options = { :assume_extension => true, :url_swap => "^/BASEURL/:/" }
+  options = { :assume_extension => true, :swap_urls => "^/BASEURL/:/" }
   HTMLProofer.check_directory("./_site", options).run
 end
 ```
@@ -252,14 +252,14 @@ If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-
 Add the `data-proofer-ignore` attribute to any tag to ignore it from every check.
 
 ``` html
-<a href="http://notareallink" data-proofer-ignore>Not checked.</a>
+<a href="https://notareallink" data-proofer-ignore>Not checked.</a>
 ```
 
 This can also apply to parent elements, all the way up to the `<html>` tag:
 
 ``` html
 <div data-proofer-ignore>
-  <a href="http://notareallink">Not checked because of parent.</a>
+  <a href="https://notareallink">Not checked because of parent.</a>
 </div>
 ```
 
@@ -276,7 +276,7 @@ Say you've got some new files in a pull request, and your tests are failing beca
     filename.end_with?('.md')
   end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
 
-  HTMLProofer.check_directory('./output', { url_ignore: diffable_files }).run
+  HTMLProofer.check_directory('./output', { ignore_urls: diffable_files }).run
 ```
 
 ## Configuration
@@ -285,34 +285,27 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
-| `allow_hash_href` | If `true`, ignores the `href="#"`. | `false` |
-| `alt_ignore` | An array of Strings or RegExps containing `img`s whose missing `alt` tags are safe to ignore. | `[]` |
+| `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
+| `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
-| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
-| `check_favicon` | Enables the favicon checker. | `false` |
-| `check_opengraph` | Enables the Open Graph checker. | `false` |
-| `check_img_http` | Fails an image if it's marked as `http` | `false` |
+| `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
+| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
-| `checks_to_ignore`| An array of Strings indicating which checks you do not want to run | `[]`
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
-| `empty_alt_ignore` | If `true`, ignores images with empty alt tags. | `false` |
-| `enforce_https` | Fails a link if it's not marked as `https`. | `false` |
-| `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
+| `disable_external` | If `true`, does not run the external link checker | `false` |
+| `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
 | `extension` | The extension of your HTML files including the dot. | `.html`
-| `external_only` | Only checks problems with external references. | `false`
-| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
-| `internal_domains`| An array of Strings containing domains that will be treated as internal urls. | `[]` |
-| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
+| `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
+| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
+| `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
+| `ignore_urls` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
+| `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes. Note that non-HTTP(S) URIs are always ignored. | `[]` |
-| `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
-| `verbose` | If `true`, outputs extra information as the checking happens. Useful for debugging. **Will be deprecated in a future release.**| `false` |
+
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -364,13 +357,15 @@ The `Authorization` header is being set if and only if the `base_url` is `https:
 
 ### Configuring Parallel
 
-[Parallel](https://github.com/grosser/parallel) can be used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
+[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { :in_processes => 3} })
+HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { in_processes: 3} })
 ```
 
-In this example, `:in_processes => 3` is passed into Parallel as a configuration option.
+In this example, `in_processes: 3` is passed into Parallel as a configuration option.
+
+Pass in `:parallel => { enable: false }` to disable parallel runs.
 
 ## Configuring caching
 
@@ -446,7 +441,7 @@ HTML-Proofer can be as noisy or as quiet as you'd like. If you set the `:log_lev
 
 Want to write your own test? Sure, that's possible!
 
-Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_issue(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
+Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_failure(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
 
 If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
 
@@ -470,7 +465,7 @@ class MailToOctocat < ::HTMLProofer::Check
       line = node.line
 
       if mailto? && octocat?
-        return add_issue("Don't email the Octocat directly!", line: line)
+        return add_failure("Don't email the Octocat directly!", line: line)
       end
     end
   end
@@ -536,7 +531,7 @@ To exclude urls using regular expressions, include them between forward slashes 
 
 ``` ruby
 HTMLProofer.check_directories(["out/"], {
-  :url_ignore => [/example.com/],
+  :ignore_urls => [/example.com/],
 }).run
 ```
 
@@ -544,10 +539,10 @@ HTMLProofer.check_directories(["out/"], {
 
 Project | Repository | Notes
 :------ | :--------- | :----
-[Jekyll's website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
-[Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
-[Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
-[Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
+[Jekyll's website](https://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
+[Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
+[Squeak's website](https://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
+[Atom Flight Manual](https://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
 [HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites)
-[Project Calico Documentation](http://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)
-[GitHub does dotfiles](http://dotfiles.github.io/) | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action
+[Project Calico Documentation](https://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)
+[GitHub does dotfiles](https://dotfiles.github.io/) | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action

@@ -1,0 +1,87 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: http://ben.balter.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Fri, 31 Dec 2021 16:37:43 GMT
+      content-type:
+      - text/html; charset=utf-8
+      last-modified:
+      - Fri, 17 Dec 2021 12:55:38 GMT
+      expires:
+      - Fri, 31 Dec 2021 16:38:01 GMT
+      cache-control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      x-github-request-id:
+      - 7BDA:2725:1CBEB86:294BC12:61CF2F91
+      via:
+      - 1.1 varnish
+      age:
+      - '401'
+      x-served-by:
+      - cache-ewr18144-EWR
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - '2'
+      x-timer:
+      - S1640968663.017587,VS0,VE0
+      vary:
+      - Accept-Encoding
+      x-fastly-request-id:
+      - a05388a3460ab662c5cdb7e078aa798cce11b346
+      cf-cache-status:
+      - DYNAMIC
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=mdM6hZ%2BWPmGamd6nyv%2BD5GnFft9pu7%2BIKS805rVXp02HJh0PQjA%2FVdj81iWu45Uc5fcNcn2tUFsioMiDNm%2Btz5UNOZPXMyHK2Z0IuxdsbhJg3Qb5dAZLjtu9OSiJ4%2B%2FjGA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      permissions-policy:
+      - interest cohort=()
+      referrer-policy:
+      - no-referrer-when-downgrade
+      x-frame-options:
+      - sameorigin
+      x-xss-protection:
+      - 1; mode=block
+      access-control-allow-origin:
+      - https://ben.balter.com
+      server:
+      - cloudflare
+      cf-ray:
+      - 6c64ef1fba8b196c-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+        ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://ben.balter.com/
+  recorded_at: Fri, 31 Dec 2021 16:37:43 GMT
+recorded_with: VCR 2.9.3
