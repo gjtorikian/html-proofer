@@ -192,13 +192,16 @@ module HTMLProofer
     end
 
     def handle_connection_failure(href, metadata, response_code, status_message)
-      msg = <<~MSG
+      msgs = [<<~MSG
         External link #{href} failed: response code #{response_code} means something's wrong.
         It's possible libcurl couldn't connect to the server or perhaps the request timed out.
         Sometimes, making too many requests at once also breaks things.
       MSG
+      ]
 
-      msg.concat("\nEither way, the return message from the server is: #{status_message}") unless blank?(status_message)
+      msgs << "Either way, the return message from the server is: #{status_message}" unless blank?(status_message)
+
+      msg = msgs.join("\n")
 
       @cache.add_external(href, metadata, 0, msg)
       return if @runner.options[:only_4xx]
