@@ -88,6 +88,12 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
+  it 'works with attribute-override' do
+    custom_data_src_check = File.join(FIXTURES_DIR, 'images', 'data_src_attribute.html')
+    output = make_bin("#{custom_data_src_check}  --attribute-override '{\"img\": \"data-src\" }'")
+    expect(output).to match('successfully')
+  end
+
   it 'navigates above itself in a subdirectory' do
     real_link = File.join(FIXTURES_DIR, 'links', 'root_folder/documentation-from-my-project/')
     output = make_bin("--root-dir #{File.join(FIXTURES_DIR, 'links', 'root_folder/')} #{real_link}")
@@ -137,6 +143,7 @@ def match_command_help(config)
       description.gsub!('An array', 'A comma-separated list')
       description.gsub!(/\[(.+?)\]\(.+?\)/, '\1')
       description.sub!(/\.$/, '')
+
       # match README description for option
       expect(help_output).to include(description)
     end

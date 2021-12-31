@@ -200,7 +200,4 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
 
     false
   end
-  #    private def follow_location?
-  #   @check.options[:typhoeus] && @check.options[:typhoeus][:followlocation]
-  # end
 end

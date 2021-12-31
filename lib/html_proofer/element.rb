@@ -21,7 +21,7 @@ module HTMLProofer
     end
 
     def link_attribute
-      meta_content || src || srcset || href
+      meta_content || src || srcset || href || attribute_override
     end
 
     def meta_content
@@ -79,6 +79,12 @@ module HTMLProofer
       return true if url&.ignore?
 
       false
+    end
+
+    private def attribute_override
+      return nil if blank?(@runner.options[:attribute_override])
+
+      @node[@runner.options[:attribute_override][@node.name]]
     end
 
     private def ancestors_ignorable?

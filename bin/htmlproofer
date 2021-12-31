@@ -18,7 +18,8 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'allow_hash_href', '--allow-hash-href', 'If `true`, assumes `href="#"` anchors are valid'
   p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
-  p.option 'assume_extension', '--assume-extension', 'Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) (default: `.html`).'
+  p.option 'assume_extension', '--assume-extension <ext>', 'Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) (default: `.html`).'
+  p.option 'attribute_override', '--attribute-override CONFIG', String, 'JSON-formatted string that maps elements names to the attribute to check (default: `{}`).'
   p.option 'checks', '--checks check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you want to run (default: `["Links", "Images", "Scripts"]`)'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists) (default: `false`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
@@ -71,6 +72,8 @@ Mercenary.program(:htmlproofer) do |p|
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus', opts['typhoeus'], symbolize_names: false) unless opts['typhoeus'].nil?
     options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra', opts['hydra']) unless opts['hydra'].nil?
     options[:parallel] = HTMLProofer::Configuration.parse_json_option('parallel', opts['parallel']) unless opts['parallel'].nil?
+
+    options[:attribute_override] = HTMLProofer::Configuration.parse_json_option('attribute_override', opts['attribute_override'], symbolize_names: false) unless opts['attribute_override'].nil?
 
     unless opts['timeframe'].nil?
       options[:cache] ||= {}

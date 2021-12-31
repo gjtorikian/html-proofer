@@ -3,7 +3,7 @@
 class HTMLProofer::Check::Favicon < HTMLProofer::Check
   def run
     found = false
-    @html.xpath('//link[not(ancestor::pre or ancestor::code)]').each do |node|
+    @html.css('link').each do |node|
       @favicon = create_element(node)
 
       next if @favicon.ignore?

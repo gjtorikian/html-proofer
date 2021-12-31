@@ -212,4 +212,10 @@ describe 'Images test' do
     proofer = run_proofer(relative_images, :file)
     expect(proofer.failed_tests.first.desc).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist'
   end
+
+  it 'works for images with a data attribute src' do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
+    proofer = run_proofer(custom_data_src_check, :file, attribute_override: { 'img' => 'data-src' })
+    expect(proofer.failed_tests).to eq []
+  end
 end

@@ -262,6 +262,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
 | `assume_extension` | Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) | `.html` |
+| `attribute_override` | JSON-formatted string that maps elements names to the attribute to check | `{}` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
