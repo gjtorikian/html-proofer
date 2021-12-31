@@ -11,13 +11,13 @@ describe 'Favicons test' do
   it 'fails for absent favicon' do
     absent = File.join(FIXTURES_DIR, 'favicon', 'favicon_absent.html')
     proofer = run_proofer(absent, :file, checks: ['Favicon'])
-    expect(proofer.failed_tests.first.desc).to match(/no favicon specified/)
+    expect(proofer.failed_tests.first.desc).to match(/no favicon provided/)
   end
 
   it 'fails for absent favicon but present apple touch icon' do
     absent = File.join(FIXTURES_DIR, 'favicon', 'favicon_absent_apple.html')
     proofer = run_proofer(absent, :file, checks: ['Favicon'])
-    expect(proofer.failed_tests.last.desc).to match(/(internally linking to gpl.png, which does not exist|no favicon specified)/)
+    expect(proofer.failed_tests.last.desc).to match(/(no favicon provided)/)
   end
 
   it 'fails for broken internal favicon' do
@@ -35,12 +35,12 @@ describe 'Favicons test' do
   it 'fails for ignored with ignore_urls' do
     ignored = File.join(FIXTURES_DIR, 'favicon', 'internal_favicon_broken.html')
     proofer = run_proofer(ignored, :file, checks: ['Favicon'], ignore_urls: [/asdadaskdalsdk/])
-    expect(proofer.failed_tests.first.desc).to match(/no favicon specified/)
+    expect(proofer.failed_tests.first.desc).to match(/no favicon provided/)
   end
 
-  it 'translates links via url_swap' do
+  it 'translates links via swap_urls' do
     translated_link = File.join(FIXTURES_DIR, 'favicon', 'internal_favicon_broken.html')
-    proofer = run_proofer(translated_link, :file, checks: ['Favicon'], url_swap: { /^asdadaskdalsdk.+/ => '../resources/gpl.png' })
+    proofer = run_proofer(translated_link, :file, checks: ['Favicon'], swap_urls: { /^asdadaskdalsdk.+/ => '../resources/gpl.png' })
     expect(proofer.failed_tests).to eq []
   end
 
@@ -59,7 +59,7 @@ describe 'Favicons test' do
   it 'fails for broken favicon with data-proofer-ignore' do
     broken_but_ignored = File.join(FIXTURES_DIR, 'favicon', 'favicon_broken_but_ignored.html')
     proofer = run_proofer(broken_but_ignored, :file, checks: ['Favicon'])
-    expect(proofer.failed_tests.first.desc).to match(/no favicon specified/)
+    expect(proofer.failed_tests.first.desc).to match(/no favicon provided/)
   end
 
   it 'specifically ignores jekyll redirect_from template' do

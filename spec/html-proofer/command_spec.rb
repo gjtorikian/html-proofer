@@ -52,15 +52,15 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with url-swap' do
+  it 'works with swap-urls' do
     translated_link = File.join(FIXTURES_DIR, 'links', 'link_translated_via_href_swap.html')
-    output = make_bin(%|--url-swap "\\A/articles/([\\w-]+):\\1.html" #{translated_link}|)
+    output = make_bin(%|--swap-urls "\\A/articles/([\\w-]+):\\1.html" #{translated_link}|)
     expect(output).to match('successfully')
   end
 
-  it 'works with url-swap and colon' do
+  it 'works with swap-urls and colon' do
     translated_link = File.join(FIXTURES_DIR, 'links', 'link_translated_via_href_swap2.html')
-    output = make_bin(%(--url-swap "http\\://www.example.com:" #{translated_link}))
+    output = make_bin(%(--swap-urls "http\\://www.example.com:" #{translated_link}))
     expect(output).to match('successfully')
   end
 

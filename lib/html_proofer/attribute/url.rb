@@ -12,7 +12,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
       @url = @raw_attribute.delete("\u200b").strip
       @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
 
-      @url = url_swap
+      @url = swap_urls
 
       # convert "//" links to "https://"
       @url.start_with?('//') ? @url = "https:#{@url}" : @url
@@ -161,8 +161,8 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     url.start_with?('?')
   end
 
-  private def url_swap
-    return @url if blank?(replacements = @runner.options[:url_swap])
+  private def swap_urls
+    return @url if blank?(replacements = @runner.options[:swap_urls])
 
     replacements.each do |link, replace|
       @url = @url.gsub(link, replace)

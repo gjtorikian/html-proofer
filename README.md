@@ -187,12 +187,12 @@ you can pass in a syntax like this:
 htmlproofer --url-ignore "/www.github.com/,/foo.com/" ./out
 ```
 
-Since `url_swap` is a bit special, you'll pass in a pair of `RegEx:String`
+Since `swap_urls` is a bit special, you'll pass in a pair of `RegEx:String`
 values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
 ``` bash
-htmlproofer --url-swap "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
+htmlproofer --swap-urls "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
 ```
 
 ### Using with Jekyll
@@ -221,13 +221,13 @@ htmlproofer --assume-extension ./_site
 
 If your Jekyll site has a `baseurl` configured, you'll need to adjust the
 generated url validation to cope with that. The easiest way is using the
-`url_swap` option.
+`swap_urls` option.
 
 For a `site.baseurl` value of `/BASEURL`, here's what that looks like on the
 command line:
 
 ```bash
-htmlproofer --assume-extension ./_site --url-swap '^/BASEURL/:/'
+htmlproofer --assume-extension ./_site --swap-urls '^/BASEURL/:/'
 ```
 
 or in your `Rakefile`
@@ -237,7 +237,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  options = { :assume_extension => true, :url_swap => "^/BASEURL/:/" }
+  options = { :assume_extension => true, :swap_urls => "^/BASEURL/:/" }
   HTMLProofer.check_directory("./_site", options).run
 end
 ```
@@ -303,8 +303,9 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
+| `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-| `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
+
 
 In addition, there are a few "namespaced" options. These are:
 

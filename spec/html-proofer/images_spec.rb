@@ -82,9 +82,9 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates images via url_swap' do
+  it 'translates images via swap_urls' do
     translated_link = File.join(FIXTURES_DIR, 'images', 'terrible_image_name.html')
-    proofer = run_proofer(translated_link, :file, url_swap: { %r{./Screen.+} => 'gpl.png' })
+    proofer = run_proofer(translated_link, :file, swap_urls: { %r{./Screen.+} => 'gpl.png' })
     expect(proofer.failed_tests).to eq []
   end
 
@@ -171,9 +171,9 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates src via url_swap' do
+  it 'translates src via swap_urls' do
     translate_src = File.join(FIXTURES_DIR, 'images', 'replace_abs_url_src.html')
-    proofer = run_proofer(translate_src, :file, url_swap: { %r{^http://baseurl.com} => '' })
+    proofer = run_proofer(translate_src, :file, swap_urls: { %r{^http://baseurl.com} => '' })
     expect(proofer.failed_tests).to eq []
   end
 

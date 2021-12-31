@@ -13,7 +13,7 @@ describe HTMLProofer::FailureReporter do
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:
 
-           no favicon specified
+           no favicon provided
 
         For the Images check, the following failures were found:
 

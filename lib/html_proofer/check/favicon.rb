@@ -20,7 +20,7 @@ class HTMLProofer::Check::Favicon < HTMLProofer::Check
         add_failure("internal favicon #{@favicon.url.raw_attribute} does not exist", line: @favicon.line, content: @favicon.content)
       end
     else
-      add_failure('no favicon specified')
+      add_failure('no favicon provided')
     end
   end
 

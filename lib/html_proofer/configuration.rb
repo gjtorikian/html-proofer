@@ -21,7 +21,7 @@ module HTMLProofer
       extension: '.html',
       log_level: :info,
       only_4xx: false,
-      url_swap: {}
+      swap_urls: {}
     }.freeze
 
     TYPHOEUS_DEFAULTS = {

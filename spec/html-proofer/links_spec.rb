@@ -176,14 +176,14 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates links via url_swap' do
+  it 'translates links via swap_urls' do
     translated_link = File.join(FIXTURES_DIR, 'links', 'link_translated_via_href_swap.html')
-    proofer = run_proofer(translated_link, :file, url_swap: { %r{\A/articles/([\w-]+)} => '\\1.html' })
+    proofer = run_proofer(translated_link, :file, swap_urls: { %r{\A/articles/([\w-]+)} => '\\1.html' })
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'translates links via url_swap for list of links' do
-    proofer = run_proofer(['www.garbalarba.com'], :links, url_swap: { /garbalarba/ => 'github' })
+  it 'translates links via swap_urls for list of links' do
+    proofer = run_proofer(['www.garbalarba.com'], :links, swap_urls: { /garbalarba/ => 'github' })
     expect(proofer.failed_tests).to eq []
   end
 

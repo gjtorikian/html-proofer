@@ -37,7 +37,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
   p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
   p.option 'hydra_config', '--hydra-config CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
-  p.option 'url_swap', '--url-swap re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
+  p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
 
   p.action do |args, opts|
@@ -53,14 +53,14 @@ Mercenary.program(:htmlproofer) do |p|
     end
 
     # some minor manipulation of a special option
-    unless opts['url_swap'].nil?
-      options[:url_swap] = {}
-      opts['url_swap'].each do |s|
+    unless opts['swap_urls'].nil?
+      options[:swap_urls] = {}
+      opts['swap_urls'].each do |s|
         splt = s.split(/(?<!\\):/, 2)
 
         re = splt[0].gsub(/\\:/, ':')
         string = splt[1].gsub(/\\:/, ':')
-        options[:url_swap][Regexp.new(re)] = string
+        options[:swap_urls][Regexp.new(re)] = string
       end
     end
 
