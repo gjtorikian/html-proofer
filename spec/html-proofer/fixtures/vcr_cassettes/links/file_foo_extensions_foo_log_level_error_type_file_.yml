@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://www.asdo3IRJ395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://www.asdo3IRJ395295jsingrkrg4.com/
+  recorded_at: Fri, 31 Dec 2021 20:29:50 GMT
+- request:
+    method: head
+    uri: https://www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=UTF-8
+      p3p:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      date:
+      - Fri, 31 Dec 2021 20:29:50 GMT
+      server:
+      - gws
+      x-xss-protection:
+      - '0'
+      x-frame-options:
+      - SAMEORIGIN
+      expires:
+      - Fri, 31 Dec 2021 20:29:50 GMT
+      cache-control:
+      - private
+      set-cookie:
+      - 1P_JAR=2021-12-31-20; expires=Sun, 30-Jan-2022 20:29:50 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=511=KeDfyG_8CcGP5ytfKFGjXppQGZ-qdxpIyXIf3qtcH93jUVBf5LASciWX5g8H4l-45dgQOwSFgBMjBkX9R9e6w_IL6638eB79YVBhHlB8y3T8ZMREcONPXCaBm48qjPb9VKVSsVhyFZD4VunCAjMWIMWfBTsHw9x2zNCncO6WayY;
+        expires=Sat, 02-Jul-2022 20:29:50 GMT; path=/; domain=.google.com; HttpOnly
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.google.com/
+  recorded_at: Fri, 31 Dec 2021 20:29:50 GMT
+recorded_with: VCR 2.9.3

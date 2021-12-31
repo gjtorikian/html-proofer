@@ -60,6 +60,9 @@ module HTMLProofer
       href_hash = url.hash
       return true if blank?(href_hash)
 
+      # prevents searching files we didn't ask about
+      return false unless url.known_extension?
+
       decoded_href_hash = Addressable::URI.unescape(href_hash)
       fragment_ids = [href_hash, decoded_href_hash]
       # https://www.w3.org/TR/html5/single-page.html#scroll-to-fragid

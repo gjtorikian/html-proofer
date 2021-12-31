@@ -10,7 +10,7 @@ describe 'Command test' do
 
   it 'works with checks' do
     external = File.join(FIXTURES_DIR, 'links', 'file.foo') # this has a broken link
-    output = make_bin("--extension .foo --checks 'Images,Scripts' #{external}")
+    output = make_bin("--extensions .foo --checks 'Images,Scripts' #{external}")
     expect(output).to match('successfully')
     expect(output).to_not match(/Running.+?Links/)
   end
@@ -33,9 +33,9 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with extension' do
+  it 'works with extensions' do
     external = File.join(FIXTURES_DIR, 'links', 'file.foo')
-    output = make_bin("--extension .foo #{external}")
+    output = make_bin("--extensions .foo #{external}")
     expect(output).to match('1 failure')
     expect(output).to match('Links')
   end

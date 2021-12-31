@@ -23,6 +23,21 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     @url
   end
 
+  def known_extension?
+    return true if hash_link?
+
+    ext = File.extname(path)
+
+    # no extension means we use the assumed one
+    return @runner.options[:extensions].include?(@runner.options[:assume_extension]) if blank?(ext)
+
+    @runner.options[:extensions].include?(ext)
+  end
+
+  def unknown_extension?
+    !known_extension?
+  end
+
   def ignore?
     return true if (/^javascript:/).match?(@url)
     return true if ignores_pattern?(@runner.options[:ignore_urls])
@@ -95,7 +110,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
 
     path_dot_ext = ''
 
-    path_dot_ext = path + @runner.options[:extension] if @runner.options[:assume_extension]
+    path_dot_ext = path + @runner.options[:assume_extension] unless blank?(@runner.options[:assume_extension])
 
     base = if absolute_path?(path) # path relative to root
              # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
@@ -113,8 +128,8 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
 
     file = File.join(base, path)
 
-    if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:extension]}")
-      file = "#{file}#{@runner.options[:extension]}"
+    if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:assume_extension]}")
+      file = "#{file}#{@runner.options[:assume_extension]}"
     elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
       file = File.join file, @runner.options[:directory_index_file]
     end
