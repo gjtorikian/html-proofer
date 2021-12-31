@@ -29,6 +29,6 @@ task :proof_readme do
   mkdir_p 'out'
   File.write('out/README.html', html)
 
-  opts = { }
+  opts = {}
   HTMLProofer.check_directory('./out', opts).run
 end
