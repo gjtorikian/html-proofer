@@ -33,12 +33,14 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'ignore_urls', '--ignore-urls link1,[link2,...]', Array, 'A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images.'
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
-  p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
-  p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
-  p.option 'typhoeus_config', '--typhoeus-config CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
-  p.option 'hydra_config', '--hydra-config CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
-  p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
+  p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
+  p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
+  p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
+
+  p.option 'typhoeus', '--typhoeus CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
+  p.option 'hydra', '--hydra CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
+  p.option 'parallel', '--parallel CONFIG', String, 'JSON-formatted string of Parallel config. Will override the html-proofer defaults.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -66,8 +68,9 @@ Mercenary.program(:htmlproofer) do |p|
 
     options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
 
-    options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus_config', opts['typhoeus_config'], symbolize_names: false) unless opts['typhoeus_config'].nil?
-    options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra_config', opts['hydra_config']) unless opts['hydra_config'].nil?
+    options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus', opts['typhoeus'], symbolize_names: false) unless opts['typhoeus'].nil?
+    options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra', opts['hydra']) unless opts['hydra'].nil?
+    options[:parallel] = HTMLProofer::Configuration.parse_json_option('parallel', opts['parallel']) unless opts['parallel'].nil?
 
     unless opts['timeframe'].nil?
       options[:cache] ||= {}
