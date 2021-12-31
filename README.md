@@ -289,17 +289,17 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
-| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
+| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
+| `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
 | `extension` | The extension of your HTML files including the dot. | `.html`
-| `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
-| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
+| `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
+| `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
+| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |

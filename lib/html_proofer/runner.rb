@@ -142,7 +142,7 @@ module HTMLProofer
     end
 
     def ignore_file?(file)
-      @options[:file_ignore].each do |pattern|
+      @options[:ignore_files].each do |pattern|
         return true if pattern.is_a?(String) && pattern == file
         return true if pattern.is_a?(Regexp) && pattern =~ file
       end

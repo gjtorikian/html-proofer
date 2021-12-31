@@ -47,28 +47,28 @@ describe HTMLProofer do
 
   describe 'file ignores' do
     it 'knows how to ignore a file by string' do
-      options = { file_ignore: [File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')] }
+      options = { ignore_files: [File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')] }
       broken_hash_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')
       proofer = run_proofer(broken_hash_internal_filepath, :file, options)
       expect(proofer.failed_tests).to eq([])
     end
 
     it 'knows how to ignore a file by regexp' do
-      options = { file_ignore: [/broken_hash/] }
+      options = { ignore_files: [/broken_hash/] }
       broken_hash_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')
       proofer = run_proofer(broken_hash_internal_filepath, :file, options)
       expect(proofer.failed_tests).to eq([])
     end
 
     it 'knows how to ignore multiple files by regexp' do
-      options = { file_ignore: [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
+      options = { ignore_files: [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
       broken_folders = File.join(FIXTURES_DIR, 'links', 'folder/multiples')
       proofer = run_proofer([broken_folders], :directories, options)
       expect(proofer.failed_tests).to eq([])
     end
 
     it 'knows how to ignore a directory by regexp' do
-      options = { file_ignore: [/\S\.html/] }
+      options = { ignore_files: [/\S\.html/] }
       links_dir = File.join(FIXTURES_DIR, 'links')
       proofer = run_proofer([links_dir], :directories, options)
       expect(proofer.failed_tests).to eq([])
@@ -91,7 +91,7 @@ describe HTMLProofer do
 
   describe 'external links' do
     it 'ignores status codes when asked' do
-      proofer = run_proofer(['www.github.com/github/notreallyhere'], :links, http_status_ignore: [404])
+      proofer = run_proofer(['www.github.com/github/notreallyhere'], :links, ignore_status_codes: [404])
       expect(proofer.failed_tests.length).to eq(0)
     end
   end

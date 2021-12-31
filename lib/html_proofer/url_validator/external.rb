@@ -136,7 +136,7 @@ module HTMLProofer
 
       @logger.log :debug, "Received a #{response_code} for #{href}"
 
-      return if @runner.options[:http_status_ignore].include?(response_code)
+      return if @runner.options[:ignore_status_codes].include?(response_code)
 
       if response_code.between?(200, 299)
         @cache.add_external(href, filenames, response_code, 'OK') unless check_hash_in_2xx_response(href, effective_url, response, filenames)
