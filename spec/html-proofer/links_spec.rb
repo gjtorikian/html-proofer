@@ -170,9 +170,9 @@ describe 'Links test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'ignores links via url_ignore' do
+  it 'ignores links via ignore_urls' do
     ignorable_links = File.join(FIXTURES_DIR, 'links', 'ignorable_links_via_options.html')
-    proofer = run_proofer(ignorable_links, :file, url_ignore: [%r{^http://}, /sdadsad/, '../whaadadt.html'])
+    proofer = run_proofer(ignorable_links, :file, ignore_urls: [%r{^http://}, /sdadsad/, '../whaadadt.html'])
     expect(proofer.failed_tests).to eq []
   end
 

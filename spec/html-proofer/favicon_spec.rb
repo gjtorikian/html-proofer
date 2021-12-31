@@ -32,9 +32,9 @@ describe 'Favicons test' do
     expect(proofer.failed_tests.first.desc).to match(%r{External link https://www.github.com/asdadaskdalsdk.png})
   end
 
-  it 'fails for ignored with url_ignore' do
+  it 'fails for ignored with ignore_urls' do
     ignored = File.join(FIXTURES_DIR, 'favicon', 'internal_favicon_broken.html')
-    proofer = run_proofer(ignored, :file, checks: ['Favicon'], url_ignore: [/asdadaskdalsdk/])
+    proofer = run_proofer(ignored, :file, checks: ['Favicon'], ignore_urls: [/asdadaskdalsdk/])
     expect(proofer.failed_tests.first.desc).to match(/no favicon specified/)
   end
 

@@ -276,7 +276,7 @@ Say you've got some new files in a pull request, and your tests are failing beca
     filename.end_with?('.md')
   end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
 
-  HTMLProofer.check_directory('./output', { url_ignore: diffable_files }).run
+  HTMLProofer.check_directory('./output', { ignore_urls: diffable_files }).run
 ```
 
 ## Configuration
@@ -299,11 +299,11 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
 | `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
+| `ignore_urls` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 
 In addition, there are a few "namespaced" options. These are:
@@ -530,7 +530,7 @@ To exclude urls using regular expressions, include them between forward slashes 
 
 ``` ruby
 HTMLProofer.check_directories(["out/"], {
-  :url_ignore => [/example.com/],
+  :ignore_urls => [/example.com/],
 }).run
 ```
 

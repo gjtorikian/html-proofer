@@ -25,7 +25,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
 
   def ignore?
     return true if (/^javascript:/).match?(@url)
-    return true if ignores_pattern?(@runner.options[:url_ignore])
+    return true if ignores_pattern?(@runner.options[:ignore_urls])
   end
 
   def valid?

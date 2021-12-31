@@ -30,13 +30,13 @@ describe 'Images test' do
 
   it 'passes when ignoring image with nothing but spaces in alt attribute' do
     empty_alt_filepath = File.join(FIXTURES_DIR, 'images', 'empty_image_alt_text.html')
-    proofer = run_proofer(empty_alt_filepath, :file, url_ignore: [/.+/])
+    proofer = run_proofer(empty_alt_filepath, :file, ignore_urls: [/.+/])
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'passes for missing internal images even when url_ignore is set' do
+  it 'passes for missing internal images even when ignore_urls is set' do
     internal_image_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_internal.html')
-    proofer = run_proofer(internal_image_filepath, :file, url_ignore: [/.*/])
+    proofer = run_proofer(internal_image_filepath, :file, ignore_urls: [/.*/])
     expect(proofer.failed_tests).to eq []
   end
 
@@ -76,9 +76,9 @@ describe 'Images test' do
     expect(proofer.failed_tests).to eq []
   end
 
-  it 'ignores images via url_ignore' do
+  it 'ignores images via ignore_urls' do
     ignorable_image = File.join(FIXTURES_DIR, 'images', 'terrible_image_name.html')
-    proofer = run_proofer(ignorable_image, :file, url_ignore: [%r{./Screen.+}])
+    proofer = run_proofer(ignorable_image, :file, ignore_urls: [%r{./Screen.+}])
     expect(proofer.failed_tests).to eq []
   end
 
@@ -124,13 +124,13 @@ describe 'Images test' do
 
   it 'properly ignores missing alt tags when asked' do
     ignoreable_links = File.join(FIXTURES_DIR, 'images', 'ignorable_alt_via_options.html')
-    proofer = run_proofer(ignoreable_links, :file, url_ignore: [/wikimedia/, 'gpl.png'])
+    proofer = run_proofer(ignoreable_links, :file, ignore_urls: [/wikimedia/, 'gpl.png'])
     expect(proofer.failed_tests).to eq []
   end
 
   it 'properly ignores missing alt tags when asked' do
     ignoreable_links = File.join(FIXTURES_DIR, 'images', 'ignore_alt_but_not_link.html')
-    proofer = run_proofer(ignoreable_links, :file, url_ignore: [/.*/])
+    proofer = run_proofer(ignoreable_links, :file, ignore_urls: [/.*/])
     expect(proofer.failed_tests).to eq []
   end
 
@@ -167,7 +167,7 @@ describe 'Images test' do
 
   it 'properly ignores missing alt tags when asked for srcset' do
     ignoreable_links = File.join(FIXTURES_DIR, 'images', 'src_set_ignorable.html')
-    proofer = run_proofer(ignoreable_links, :file, url_ignore: [/wikimedia/, 'gpl.png'])
+    proofer = run_proofer(ignoreable_links, :file, ignore_urls: [/wikimedia/, 'gpl.png'])
     expect(proofer.failed_tests).to eq []
   end
 

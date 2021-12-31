@@ -13,14 +13,14 @@ module HTMLProofer
       directory_index_file: 'index.html',
       disable_external: false,
       ignore_empty_mailto: false,
+      ignore_files: [],
       ignore_missing_alt: false,
+      ignore_status_codes: [],
+      ignore_urls: [],
       enforce_https: true,
       extension: '.html',
-      ignore_files: [],
-      ignore_status_codes: [],
       log_level: :info,
       only_4xx: false,
-      url_ignore: [],
       url_swap: {}
     }.freeze
 
