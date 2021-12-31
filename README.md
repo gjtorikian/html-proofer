@@ -300,8 +300,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
-| `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -337,6 +335,8 @@ The default value is:
 }
 ```
 
+On the CLI, you can provide the `--typhoeus` or `hydra` arguments. These are parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+
 #### Setting `before-request` callback
 
 You can provide a block to set some logic before an external link is checked. For example, say you want to provide an authentication token every time a GitHub URL is checked. You can do that like this:
@@ -362,6 +362,8 @@ HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { in
 In this example, `in_processes: 3` is passed into Parallel as a configuration option.
 
 Pass in `:parallel => { enable: false }` to disable parallel runs.
+
+On the CLI, you can provide the `--parallel` argument. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ## Configuring caching
 
@@ -397,6 +399,8 @@ Links that were failures are kept in the cache and *always* rechecked. If they p
 The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
+
+On the CLI, you can provide the `--timeframe` or `--storage-dir` arguments to control the cache behavior.
 
 ### Caching with continuous integration
 

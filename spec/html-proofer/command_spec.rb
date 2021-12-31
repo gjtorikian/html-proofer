@@ -88,17 +88,6 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'has only one UA' do
-    http = make_bin(%|--typhoeus-config='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
-    expect(http.scan(/User-Agent: Typhoeus/).count).to eq 0
-    expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i).count).to eq 2
-  end
-
-  it 'accepts hydra max_concurrency' do
-    http = make_bin(%(--hydra-config '{"max_concurrency": 5}' http://www.github.com --as-links))
-    expect(http.scan(/max_concurrency is invalid/).count).to eq 0
-  end
-
   it 'navigates above itself in a subdirectory' do
     real_link = File.join(FIXTURES_DIR, 'links', 'root_folder/documentation-from-my-project/')
     output = make_bin("--root-dir #{File.join(FIXTURES_DIR, 'links', 'root_folder/')} #{real_link}")
@@ -107,6 +96,25 @@ describe 'Command test' do
 
   it 'has every option for proofer defaults' do
     match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
+  end
+
+  context 'nested options' do
+    it 'supports typhoeus' do
+      link_with_redirect_filepath = File.join(FIXTURES_DIR, 'links', 'link_with_redirect.html')
+      output = make_bin("#{link_with_redirect_filepath} --typhoeus '{ \"followlocation\": false }'")
+      expect(output).to match(/failed: 301/)
+    end
+
+    it 'has only one UA' do
+      http = make_bin(%|--typhoeus='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
+      expect(http.scan(/User-Agent: Typhoeus/).count).to eq 0
+      expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i).count).to eq 2
+    end
+
+    it 'supports hydra' do
+      http = make_bin(%(--hydra '{"max_concurrency": 5}' http://www.github.com --as-links))
+      expect(http.scan(/max_concurrency is invalid/).count).to eq 0
+    end
   end
 end
 
