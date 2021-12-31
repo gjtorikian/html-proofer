@@ -27,38 +27,38 @@ http_interactions:
       Location:
       - http://www.gjtorikian.com/mathematical/
       X-GitHub-Request-Id:
-      - 9346:6F9E:1649E6D:2050300:61CB5604
+      - 2B2E:0B09:1B0E8C2:29E0892:61CF31D5
       Content-Length:
       - '162'
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '82'
+      - '1'
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-ewr18148-EWR
+      - cache-ewr18156-EWR
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '1'
       X-Timer:
-      - S1640715863.590280,VS0,VE1
+      - S1640968663.629862,VS0,VE1
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - a7c42bc3c807fbfe20369da76c090ce51c1a08d7
+      - f362e4490188ae1f944ef53be4532cf5a84ac07c
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://gjtorikian.github.io/mathematical/
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: get
     uri: http://gjtorikian.github.io/mathematical/
@@ -86,31 +86,31 @@ http_interactions:
       Location:
       - http://www.gjtorikian.com/mathematical/
       X-GitHub-Request-Id:
-      - 9346:6F9E:1649E6D:2050300:61CB5604
+      - 2B2E:0B09:1B0E8C2:29E0892:61CF31D5
       Content-Length:
       - '162'
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       Via:
       - 1.1 varnish
       Age:
-      - '82'
+      - '1'
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-ewr18148-EWR
+      - cache-ewr18156-EWR
       X-Cache:
       - HIT
       X-Cache-Hits:
       - '2'
       X-Timer:
-      - S1640715863.609250,VS0,VE0
+      - S1640968663.656853,VS0,VE0
       Vary:
       - Accept-Encoding
       X-Fastly-Request-ID:
-      - 512869a5c84b2775c2a00cf567fa977cff800e49
+      - 5ad6338294d54bd17dec3be2aba6e31a6227986a
     body:
       encoding: ASCII-8BIT
       string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
@@ -118,7 +118,7 @@ http_interactions:
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://gjtorikian.github.io/mathematical/
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: head
     uri: http://docs.github.com/en/get-started/
@@ -144,7 +144,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '249'
       X-Ratelimit-Reset:
-      - '1640715923'
+      - '1640968723'
       Access-Control-Allow-Origin:
       - "*"
       Content-Security-Policy:
@@ -173,32 +173,34 @@ http_interactions:
       X-Xss-Protection:
       - '0'
       Set-Cookie:
-      - _csrf=sT7nmHc_AMZdTPNgkoZoRkw_; Path=/; HttpOnly; Secure; SameSite=Lax
+      - _csrf=YD3ClhvVGhsNVMW9fPARrSgc; Path=/; HttpOnly; Secure; SameSite=Lax
       Location:
       - "/en/get-started"
       Via:
       - 1.1 vegur, 1.1 varnish
       Accept-Ranges:
       - bytes
+      Transfer-Encoding:
+      - chunked
       Date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-ewr18180-EWR
+      - cache-ewr18151-EWR
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1640715863.630092,VS0,VE35
+      - S1640968663.626192,VS0,VE34
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://docs.github.com/en/get-started/
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: get
     uri: http://docs.github.com/en/get-started/
@@ -224,7 +226,7 @@ http_interactions:
       X-Ratelimit-Remaining:
       - '249'
       X-Ratelimit-Reset:
-      - '1640715923'
+      - '1640968723'
       Access-Control-Allow-Origin:
       - "*"
       Content-Security-Policy:
@@ -253,7 +255,7 @@ http_interactions:
       X-Xss-Protection:
       - '0'
       Set-Cookie:
-      - _csrf=74AjZF_SKeym-UrRNUdXU0Vi; Path=/; HttpOnly; Secure; SameSite=Lax
+      - _csrf=fudDBZ9Ro90Nddu60G1fCDCJ; Path=/; HttpOnly; Secure; SameSite=Lax
       Location:
       - "/en/get-started"
       Via:
@@ -263,24 +265,24 @@ http_interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-ewr18180-EWR
+      - cache-ewr18151-EWR
       X-Cache:
       - MISS
       X-Cache-Hits:
       - '0'
       X-Timer:
-      - S1640715863.694547,VS0,VE36
+      - S1640968663.689985,VS0,VE10
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: http://docs.github.com/en/get-started/
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: head
     uri: https://github.com/github/repository-sync
@@ -302,7 +304,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:41 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -341,23 +343,23 @@ http_interactions:
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
         worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=8NPRjAz1HUXvNKOp0S4sld%2BuSmscsHX5otH3mR87fZkJf3VJOhdGFC60s0PuVkLR8WkKm2N%2B9JKfVyAhYwkdF%2BBM%2BxP4oRtzcEZ27XTBvJOnVrn3T64cWwU0YAvB8JR%2BOcvxWnoduTbZFHTiBvrvo1oxY54grxcHz0lrqm18RABYmxWYt%2F8%2FZeX3cTk3RPUBKzqbjT2BqX2NxHDN%2BhoLp9HrK0%2FhW9qMesQATZwLRni01ELCbJ4DpxwySB%2FfPM9Hh40w9xXkArmcr1XTe0WXGA%3D%3D--AjelTXF6MnZXWglJ--tdrDReRY3CVT0tq6DbESsA%3D%3D;
+      - _gh_sess=eoBl2hYScLAScbp41S1CUNaVuLuItCmSi74prWURh6JKTnkVu1SAm20xDndP38wlhcz3wCunz91uLInUy1sOot4wrU9UhWrDWLlSLflikX2VElUxLcZtPjn5JzHgA6%2F94i30D%2Ff9fpWKVQzmef5wlw7luajj%2FLgDfzVyx7UdojGlg1jf3yI39Toapuxpp3aphgKSIWb5eBR79LHdzKaNpFIP0Fe3ca6%2FbqXWH32evOuUEURqLZFt0e9eK51yspBEMbYODFTAQeBgVpomtGz8qw%3D%3D--Ghjw2UJN60B8JLmA--edvvy3MfPfOtWh399f8l7A%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1139660258.1640715862; Path=/; Domain=github.com; Expires=Wed,
-        28 Dec 2022 18:24:22 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Wed, 28 Dec 2022 18:24:22
+      - _octo=GH1.1.1447546267.1640968662; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:42 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:42
         GMT; HttpOnly; Secure; SameSite=Lax
       content-length:
       - '111'
       x-github-request-id:
-      - F86E:315C:68DAE3:D08AE7:61CB5656
+      - EB74:024E:1F40290:328380A:61CF31D6
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/github/repository-sync
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: get
     uri: https://github.com/github/repository-sync
@@ -379,7 +381,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Tue, 28 Dec 2021 18:24:22 GMT
+      - Fri, 31 Dec 2021 16:37:41 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -418,21 +420,21 @@ http_interactions:
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
         worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=xOA7CpEyReWIOwXhukZGgUSBObg99rITJznXNWxs%2BxFZ60ZtEmUohEC0MnlMj5HRGdeAUdP3UmlJNv0gEr4XOvuoiWDs1UHyzPpSDhW3AixjF1ZJstdrNThlLRSOTKCfn1rZK4cQJRG18Qv7rhQ62mFQzZOgbCuQIvMNnFlg%2FR1wYeSTi9tD65LoUrjmSQurfGmBBrVeEMDcb%2BZPeKC%2B0XuxTtIgHHPLFWS4P9oe9VCdDHemouF93e5AIwX6e1O9%2BoHwaaHoePtk7raq2MnREw%3D%3D--c2YsTE3Bz5JWvV9V--eVqVndnWKzf0cocVck%2FM1Q%3D%3D;
+      - _gh_sess=B4htz1bUilDm0IozB7FhhXu6CuWVpVmDW5F%2F4rJZQCbPtYTlaguBqRC%2F7KAJw4Vi8FVS6YQ8aB2SLlj7KQh8mZc1yT61VaRUDHaDRWyG5dZZvp2ZqvpDpmuSKzeEr5bybbXcul841CAq7eQXZ3vt2sKskn3CvD6KZy1CrAcNrV1xqteD3X1U0%2F%2BiuVOh%2BonvkEs9rsOKhXgurmzghhq3MTIgcGkuNI6mB5ybkZu5UoPVBPuxKafeh%2FRz4ENVumWSgt%2FRqPG0MaWTa2HTvPYDtQ%3D%3D--RXu4fJh8JXf%2B1n94--R2HyJ%2FXje8cYPRGOSW%2BGVA%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.46902267.1640715862; Path=/; Domain=github.com; Expires=Wed, 28
-        Dec 2022 18:24:22 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Wed, 28 Dec 2022 18:24:22
+      - _octo=GH1.1.155418607.1640968662; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:42 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:42
         GMT; HttpOnly; Secure; SameSite=Lax
       content-length:
       - '111'
       x-github-request-id:
-      - F86E:315C:68DAE8:D08AE9:61CB5656
+      - EB74:024E:1F40292:328380F:61CF31D6
     body:
       encoding: ASCII-8BIT
       string: <html><body>You are being <a href="https://github.com/gjtorikian/repository-sync">redirected</a>.</body></html>
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/github/repository-sync
-  recorded_at: Tue, 28 Dec 2021 18:24:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 recorded_with: VCR 2.9.3

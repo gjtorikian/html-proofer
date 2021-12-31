@@ -19,13 +19,15 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Sun, 18 Apr 2021 19:16:59 GMT
+      - Fri, 31 Dec 2021 16:38:02 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
-      - X-PJAX, Accept-Encoding, Accept, X-Requested-With
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
       etag:
-      - W/"22d9aa86647b1efb1f71bf1d68986bdc"
+      - W/"938e39a794fa567d225da28f3e8eec81"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -41,37 +43,41 @@ http_interactions:
       expect-ct:
       - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
       content-security-policy:
-      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
-        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
-        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
         github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
-        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com *.actions.githubusercontent.com
-        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations;
-        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com;
-        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
-        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        raw.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com
+        github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
         github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
         manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
-        worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js'
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=LIxpi0D2LxHVyLUsRbKpZwLQLxLXJwSK6g3%2B9lCtOOLtz6ptyf%2FBUpco5r8knQrMXJlXOynr4DdDbKXb%2B0P3xax4%2F1AOzSy3D4BfxtHHxZm8R88R8a7pFtJL8W1vv%2BLqGEgni8v32pg2sFwMcA%2BE3Gu0pMKgk0mGFJ48hDVMUhZwOK1a8BCsCp4CTM3S4076TNJDtM0tkAxZQiiClFsiXDzosw2znQ%2BejN34HMZ82VxsoV20rbbkUoY2ZgSIm8xU0BE05s109EX%2FT16%2F2JXh2A%3D%3D--wm3BHuEfm%2FQcLLG7--Sa1YYptnQuRcx5ercKtW5Q%3D%3D;
+      - _gh_sess=I2qVqPVzcOb0MWZFhHNM4Q3IchFdbW39zrUhOUr7ZwAw5qgdPOM4IpWuWFsgF9NgOD8hkpkaMp8jKWF7bRKE%2B9o3qAakOA%2F0FbWKo%2BHT0QvPafQg1KlygNclWVIMSAgVn%2BFLr0wIXOFys3hojFhsr%2BA2%2BAL42WgOhJMIcJwZJVx5zOSqmwIUSrKTVD7TALoH9uTEkhh7YfqHqvVEdyWrJAQ%2Bq0G2me56XPtiricaQ1EA3%2Fq83UXeCbbAp7uGYhDpypId%2B%2FuxZFgadYvPdz86IQ%3D%3D--RpTQekH3Sdqv34oo--X6lCFVlZzPDPWJJSP%2BIXZg%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.2079054216.1618773419; Path=/; Domain=github.com; Expires=Mon,
-        18 Apr 2022 19:16:59 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Mon, 18 Apr 2022 19:16:59
+      - _octo=GH1.1.1928072584.1640968681; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:01 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:01
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - CACD:1529:21BAAC8:311BF59:607C85AB
+      - F694:4C2E:9CABA8:17FA16B:61CF31E9
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/typhoeus/typhoeus#other-curl-options
-  recorded_at: Sun, 18 Apr 2021 19:16:59 GMT
+  recorded_at: Fri, 31 Dec 2021 16:38:02 GMT
 - request:
     method: head
     uri: https://github.com/typhoeus/typhoeus#top
@@ -91,13 +97,15 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Sun, 18 Apr 2021 19:16:59 GMT
+      - Fri, 31 Dec 2021 16:38:02 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
-      - X-PJAX, Accept-Encoding, Accept, X-Requested-With
+      - X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
       etag:
-      - W/"22d9aa86647b1efb1f71bf1d68986bdc"
+      - W/"938e39a794fa567d225da28f3e8eec81"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -113,35 +121,39 @@ http_interactions:
       expect-ct:
       - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
       content-security-policy:
-      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; connect-src
-        ''self'' uploads.github.com www.githubstatus.com collector.githubapp.com api.github.com
-        github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.githubapp.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com
         github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com
-        cdn.optimizely.com logx.optimizely.com/v1/events wss://alive.github.com *.actions.githubusercontent.com
-        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations;
-        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com;
-        frame-ancestors ''none''; frame-src render.githubusercontent.com; img-src
-        ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
+        cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com wss://alive.github.com
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        raw.githubusercontent.com github-production-repository-image-32fea6.s3.amazonaws.com
+        github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com;
+        font-src github.githubassets.com; form-action ''self'' github.com gist.github.com
+        objects-origin.githubusercontent.com; frame-ancestors ''none''; frame-src
+        render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com identicons.github.com collector.githubapp.com
         github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com;
         manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
-        worker-src github.com/socket-worker-3f088aa2.js gist.github.com/socket-worker-3f088aa2.js'
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=KXPduGyig%2Bf5zFiICcwv1yWV4B3aQfFbfZb8fwWG%2F2AOoMOCmm2aF0gOF3Pie5%2BSDxM72jodnaaY3deEa1LgjFGsq00rO1%2B9fO17KHNJDVt5pfACAmOdnGIPb0I637EzbSXR08ejGh38StJ5WB6YrPcbZjLTv4oI3KHAj8AK2C%2BcVwOihgcqAsRUZzf7jYbgmfdaPPsSedRop9O5ILo8ST%2Fu2MXf25Far4rZB5mQe8x4DorfEeKNe26qb0W1Fhc1GzEFjD4n3ANFbxEBkHE6pw%3D%3D--BYudFmTrLS7GjOQj--pqhQ%2Bis49B7RU73R4DYtEA%3D%3D;
+      - _gh_sess=HZ5jMpP6WFhv28J66Osv3aVEFZV8BfUh6qHpc44bIyKun6trN%2BaDnpCScyeGK2LTMfE8jsMSjqApIW8Bk%2F49G4tcCBMojJOPbZTZ7QyHTq%2BUTvKdDqtDyq%2BN6vwMckaSX2NVTXkPi7b%2FPKhXJqbjACr96arGDOFUzgFsTxuVG0iW0OTT9KcXN0649zWCPp0%2BM0E3yt%2Fw5GxqQPRRZyF%2BUALmlvcOJpc9nv7AwrIqwaRaXmYrmIRje18RzLKIUqTvu0Rd7rR4UBWfF0ex%2BZvAxg%3D%3D--dVeBu7sNz%2FH0GPJ%2F--q5lLFOpLeBCyOeT7uPseyw%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1912038987.1618773419; Path=/; Domain=github.com; Expires=Mon,
-        18 Apr 2022 19:16:59 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Mon, 18 Apr 2022 19:16:59
+      - _octo=GH1.1.1528942359.1640968681; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:01 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:01
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - CACE:5083:2161D4A:30AC1F5:607C85AB
+      - F696:0D54:16409B8:2D25A98:61CF31E9
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/typhoeus/typhoeus#top
-  recorded_at: Sun, 18 Apr 2021 19:16:59 GMT
+  recorded_at: Fri, 31 Dec 2021 16:38:02 GMT
 recorded_with: VCR 2.9.3

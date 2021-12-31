@@ -55,15 +55,15 @@ describe HTMLProofer::FailureReporter do
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html on line 14:
 
-           External link https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 404 No error
+           External link https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed: 404 Not found
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html on line 19:
 
-           External link https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 404 No error
+           External link https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed: 404 Not found
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html on line 26:
 
-           External link https://help.github.com/changing-author-info/ failed: 404 No error
+           External link https://help.github.com/changing-author-info/ failed: 404 Not found
 
         For the Links > Internal check, the following failures were found:
 

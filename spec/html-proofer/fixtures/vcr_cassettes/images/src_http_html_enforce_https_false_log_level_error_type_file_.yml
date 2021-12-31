@@ -19,7 +19,7 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Tue, 28 Dec 2021 19:48:23 GMT
+      - Thu, 30 Dec 2021 20:11:58 GMT
       content-type:
       - image/png
       content-length:
@@ -33,13 +33,13 @@ http_interactions:
       server:
       - ATS/8.0.8
       age:
-      - '482'
+      - '73551'
       x-cache:
-      - cp1090 hit, cp1086 hit/3
+      - cp1090 hit, cp1078 hit/3
       x-cache-status:
       - hit-front
       server-timing:
-      - cache;desc="hit-front", host;desc="cp1086"
+      - cache;desc="hit-front", host;desc="cp1078"
       strict-transport-security:
       - max-age=106384710; includeSubDomains; preload
       report-to:
@@ -51,7 +51,7 @@ http_interactions:
       permissions-policy:
       - interest-cohort=()
       x-client-ip:
-      - 108.62.52.151
+      - 45.144.113.215
       access-control-allow-origin:
       - "*"
       access-control-expose-headers:
@@ -66,5 +66,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/2/22/Heckert_GNU_white.svg/256px-Heckert_GNU_white.svg.png
-  recorded_at: Tue, 28 Dec 2021 19:56:25 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:50 GMT
 recorded_with: VCR 2.9.3

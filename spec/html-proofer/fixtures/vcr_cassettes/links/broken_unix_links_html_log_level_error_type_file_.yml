@@ -2,186 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: http://rtyley.github.io/bfg-repo-cleaner/#usage
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Wed, 23 Mar 2016 22:13:09 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:35:37 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 77E0:6A18:3BBC04E:4F4C5F6:592213DF
-      Content-Length:
-      - '17166'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '0'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-jfk8149-JFK
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      X-Timer:
-      - S1495405537.157094,VS0,VE11
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 556582c9d65bcdd6d7d7bde35103024c975e5cb4
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://rtyley.github.io/bfg-repo-cleaner/
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
-- request:
-    method: head
-    uri: http://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Connection:
-      - keep-alive
-      Server:
-      - mw1211.eqiad.wmnet
-      X-Powered-By:
-      - HHVM/3.18.2
-      P3P:
-      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
-        for more info."
-      X-Content-Type-Options:
-      - nosniff
-      Content-language:
-      - en
-      X-UA-Compatible:
-      - IE=Edge
-      Vary:
-      - Accept-Encoding,Cookie,Authorization
-      Link:
-      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
-        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
-        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
-        2dppx)"
-      Last-Modified:
-      - Sun, 21 May 2017 04:35:38 GMT
-      Backend-Timing:
-      - D=110843 t=1495341584505493
-      X-Varnish:
-      - 394090013 362916510, 488639115 98570269
-      Via:
-      - 1.1 varnish-v4, 1.1 varnish-v4
-      Age:
-      - '63952'
-      X-Cache:
-      - cp1068 hit/5, cp1066 hit/11
-      X-Cache-Status:
-      - hit
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Set-Cookie:
-      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
-        12:00:00 GMT
-      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
-        22 Jun 2017 12:00:00 GMT
-      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
-      X-Analytics:
-      - ns=0;page_id=41548;https=1;nocookies=1
-      X-Client-IP:
-      - 100.37.221.161
-      Cache-Control:
-      - private, s-maxage=0, max-age=0, must-revalidate
-      Accept-Ranges:
-      - bytes
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
-- request:
-    method: head
-    uri: http://jekyllrb.com/docs/configuration/#markdown-options
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Content-Type:
-      - text/html; charset=utf-8
-      Connection:
-      - keep-alive
-      Set-Cookie:
-      - __cfduid=d73c992e52a9b073ea0aa002fa04cf76c1495405537; expires=Mon, 21-May-18
-        22:25:37 GMT; path=/; domain=.jekyllrb.com; HttpOnly
-      Last-Modified:
-      - Mon, 15 May 2017 20:07:04 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:35:37 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 27B3:1D8CA:63FDAE6:82F84C5:592213E1
-      Server:
-      - cloudflare-nginx
-      CF-RAY:
-      - 362af3dfa6a52186-EWR
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://jekyllrb.com/docs/configuration/
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
-- request:
-    method: head
     uri: https://rtyley.github.io/bfg-repo-cleaner/#usage
     body:
       encoding: US-ASCII
@@ -211,33 +31,33 @@ http_interactions:
       etag:
       - '"6057cac4-4071"'
       expires:
-      - Tue, 28 Dec 2021 19:25:50 GMT
+      - Fri, 31 Dec 2021 16:47:42 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - AA26:2803:17A957B:21CA7B1:61CB6266
+      - 5BBE:5C68:20A5CEB:31FCB51:61CF31D6
       accept-ranges:
       - bytes
       date:
-      - Tue, 28 Dec 2021 19:15:50 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       via:
       - 1.1 varnish
       age:
       - '0'
       x-served-by:
-      - cache-ewr18179-EWR
+      - cache-ewr18144-EWR
       x-cache:
       - MISS
       x-cache-hits:
       - '0'
       x-timer:
-      - S1640718950.390778,VS0,VE13
+      - S1640968662.435292,VS0,VE15
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 0a90bd6f12cc05e38d58e1802bf9fac44253a7f9
+      - c562ec0ecf005937ce303a6c6ddfe20642999a16
       content-length:
       - '16497'
     body:
@@ -246,7 +66,7 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://rtyley.github.io/bfg-repo-cleaner/#usage
-  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: head
     uri: https://jekyllrb.com/docs/configuration/#markdown-options
@@ -269,42 +89,40 @@ http_interactions:
       - GitHub.com
       content-type:
       - text/html; charset=utf-8
-      x-origin-cache:
-      - HIT
       last-modified:
-      - Mon, 27 Dec 2021 18:07:30 GMT
+      - Thu, 30 Dec 2021 22:31:10 GMT
       access-control-allow-origin:
       - "*"
       etag:
-      - '"61ca00e2-336b"'
+      - '"61ce332e-336b"'
       expires:
-      - Tue, 28 Dec 2021 19:25:50 GMT
+      - Fri, 31 Dec 2021 16:47:42 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - 2DE2:3175:C417F6:15C59B2:61CB6266
+      - 1CFC:1032:FD378A:204B025:61CF31D6
       accept-ranges:
       - bytes
       date:
-      - Tue, 28 Dec 2021 19:15:50 GMT
+      - Fri, 31 Dec 2021 16:37:42 GMT
       via:
       - 1.1 varnish
       age:
       - '0'
       x-served-by:
-      - cache-ewr18130-EWR
+      - cache-ewr18132-EWR
       x-cache:
       - MISS
       x-cache-hits:
       - '0'
       x-timer:
-      - S1640718950.415071,VS0,VE11
+      - S1640968662.484815,VS0,VE15
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 26f3c930320e638cf5ea7e3be16413e0d0246616
+      - e86ee1907af0803492b2cfc57ac251f05843820a
       content-length:
       - '13163'
     body:
@@ -313,7 +131,7 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://jekyllrb.com/docs/configuration/#markdown-options
-  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 - request:
     method: head
     uri: https://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
@@ -333,11 +151,9 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Mon, 27 Dec 2021 23:37:35 GMT
-      vary:
-      - Accept-Encoding,Cookie,Authorization
+      - Thu, 30 Dec 2021 23:48:05 GMT
       server:
-      - ATS/8.0.8
+      - mw1389.eqiad.wmnet
       x-content-type-options:
       - nosniff
       p3p:
@@ -345,18 +161,20 @@ http_interactions:
         info."
       content-language:
       - en
+      vary:
+      - Accept-Encoding,Cookie,Authorization
       last-modified:
-      - Sun, 26 Dec 2021 20:05:52 GMT
+      - Thu, 30 Dec 2021 22:36:16 GMT
       content-type:
       - text/html; charset=UTF-8
       age:
-      - '70694'
+      - '60576'
       x-cache:
-      - cp1083 hit, cp1081 hit/6
+      - cp1083 hit, cp1089 hit/3
       x-cache-status:
       - hit-front
       server-timing:
-      - cache;desc="hit-front", host;desc="cp1081"
+      - cache;desc="hit-front", host;desc="cp1089"
       strict-transport-security:
       - max-age=106384710; includeSubDomains; preload
       report-to:
@@ -368,13 +186,13 @@ http_interactions:
       permissions-policy:
       - interest-cohort=()
       set-cookie:
-      - WMF-Last-Access=28-Dec-2021;Path=/;HttpOnly;secure;Expires=Sat, 29 Jan 2022
+      - WMF-Last-Access=31-Dec-2021;Path=/;HttpOnly;secure;Expires=Tue, 01 Feb 2022
         12:00:00 GMT
-      - WMF-Last-Access-Global=28-Dec-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Sat,
-        29 Jan 2022 12:00:00 GMT
-      - GeoIP=US:NY:New_York:40.75:-73.99:v4; Path=/; secure; Domain=.wikipedia.org
+      - WMF-Last-Access-Global=31-Dec-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Tue,
+        01 Feb 2022 12:00:00 GMT
+      - GeoIP=US:NY:New_York:40.72:-74.00:v4; Path=/; secure; Domain=.wikipedia.org
       x-client-ip:
-      - 108.62.52.151
+      - 45.144.113.215
       cache-control:
       - private, s-maxage=0, max-age=0, must-revalidate
       accept-ranges:
@@ -387,5 +205,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Phase-locked_loop#Clock_generation
-  recorded_at: Tue, 28 Dec 2021 19:15:50 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:42 GMT
 recorded_with: VCR 2.9.3

@@ -21,7 +21,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Wed, 29 Dec 2021 17:28:23 GMT
+      - Fri, 31 Dec 2021 16:37:47 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -31,7 +31,7 @@ http_interactions:
       content-language:
       - en-US
       etag:
-      - W/"3578466c84e6744aa794b877bbf85c94"
+      - W/"f41cc130bcce8732fd02e70d67f91e1f"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -63,16 +63,16 @@ http_interactions:
         github.githubassets.com; script-src github.githubassets.com; style-src ''unsafe-inline''
         github.githubassets.com; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=62tZXuLbDWjDUSekF8Q0Gs2zUoI8PrmetuKuKMh2mFOgMtT5u3qJTS55sg9Ejq69AwG%2BAIcXuvRPxy6eA3XrWx%2BvJbZeALZ0Dkr9JC3pf0LbkO%2B1eijyCs4rAQc70F4ILhSV5xHONzzs7rB9RAvLIkxTBTscQOouX%2BPuYlD0qEC5CQlelWoVX4HpsaKd303%2BoupYWUqV6vGbVA%2FoTJgPVqrd%2FWkkzMlenOUcfSWg9wiLEpz2PtPBQOWxT6PqFjqlwnmLFHtZQob3PwzYdlFgmg%3D%3D--Ba8cSz8Us3oNS3C2--b%2FwpwMiwk6fDO3nM8OdHjA%3D%3D;
+      - _gh_sess=rsK14v%2BAfh4dQ2kyYrmlgobV2NSNMD%2BZKP2Vw36ajicUz71RS0%2BRIcrpTlb68ypKLwdLLqzvP1AtjbeTxp478tOjbItYnUjgWMDNdVvRDbscVrQu39aTZgjccJCypmdvFkNgB7o78wez2QxeV8TWPb7Op1pJ%2B0msDeGLKop%2BgXQVUVsOCvHSx3RlTRm%2BsPzQtfd3qkOGQ9LmEeecTMeqLJqkf0Na%2BDS%2BsVQwmwAVn32uHlH0LVtfTYvSCR0f2SAyb9tKU23G6sFZOo7nuO4XOw%3D%3D--feQg6v44XwIgWdMJ--bdf1rMr5l5Drn0iKaOFYiQ%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1255246438.1640798903; Path=/; Domain=github.com; Expires=Thu,
-        29 Dec 2022 17:28:23 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 29 Dec 2022 17:28:23
+      - _octo=GH1.1.1237826051.1640968684; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:04 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:04
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - EAE5:2A95:179D6F3:24C4946:61CC9AB7
+      - F932:2D33:2EF96B0:44B6FFB:61CF31EC
     body:
       encoding: ASCII-8BIT
       string: ''

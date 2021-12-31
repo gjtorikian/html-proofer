@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: head
-    uri: http://github.github.com/github-flavored-markdown/
+    uri: http://docs.github.com/en/get-started/
     body:
       encoding: US-ASCII
       string: ''
@@ -16,143 +16,80 @@ http_interactions:
   response:
     status:
       code: 200
-      message: ''
+      message: OK
     headers:
-      server:
-      - GitHub.com
-      content-type:
-      - text/html; charset=utf-8
-      last-modified:
-      - Thu, 31 Jul 2014 23:48:53 GMT
-      access-control-allow-origin:
-      - "*"
-      etag:
-      - '"53dad5e5-1e0"'
-      expires:
-      - Tue, 28 Dec 2021 18:33:00 GMT
-      cache-control:
-      - max-age=600
-      x-proxy-cache:
-      - MISS
-      x-github-request-id:
-      - D7A8:2803:178F279:21A4916:61CB5604
-      accept-ranges:
-      - bytes
-      date:
-      - Tue, 28 Dec 2021 18:23:00 GMT
-      via:
-      - 1.1 varnish
-      age:
-      - '0'
-      x-served-by:
-      - cache-ewr18179-EWR
-      x-cache:
-      - MISS
-      x-cache-hits:
-      - '0'
-      x-timer:
-      - S1640715781.969278,VS0,VE27
-      vary:
-      - Accept-Encoding
-      x-fastly-request-id:
-      - 8788e3b43ae0addfef3987d2a19d1f866b4f8ae1
-      content-length:
-      - '480'
-    body:
-      encoding: ASCII-8BIT
-      string: ''
-    http_version: '2'
-    adapter_metadata:
-      effective_url: https://github.github.com/github-flavored-markdown/
-  recorded_at: Tue, 28 Dec 2021 18:23:00 GMT
-- request:
-    method: head
-    uri: https://help.github.com/changing-author-info/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
-      Accept:
-      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
-      Expect:
-      - ''
-  response:
-    status:
-      code: 404
-      message: ''
-    headers:
-      server:
+      Server:
       - Cowboy
-      x-ratelimit-limit:
+      X-Ratelimit-Limit:
       - '250'
-      x-ratelimit-remaining:
+      X-Ratelimit-Remaining:
       - '249'
-      x-ratelimit-reset:
-      - '1640715842'
-      access-control-allow-origin:
+      X-Ratelimit-Reset:
+      - '1640968728'
+      Access-Control-Allow-Origin:
       - "*"
-      content-security-policy:
+      Content-Security-Policy:
       - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
         ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
         githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
         ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
         https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
         ''self'' ''unsafe-inline'';child-src ''self'''
-      x-dns-prefetch-control:
+      X-Dns-Prefetch-Control:
       - 'off'
-      expect-ct:
+      Expect-Ct:
       - max-age=0
-      x-frame-options:
+      X-Frame-Options:
       - SAMEORIGIN
-      strict-transport-security:
+      Strict-Transport-Security:
       - max-age=15552000; includeSubDomains
-      x-download-options:
+      X-Download-Options:
       - noopen
-      x-content-type-options:
+      X-Content-Type-Options:
       - nosniff
-      x-permitted-cross-domain-policies:
+      X-Permitted-Cross-Domain-Policies:
       - none
-      referrer-policy:
+      Referrer-Policy:
       - strict-origin-when-cross-origin
-      x-xss-protection:
+      X-Xss-Protection:
       - '0'
-      set-cookie:
-      - _csrf=NHLe8NDJTzH4m2jh7crleNJL; Path=/; HttpOnly; Secure; SameSite=Lax
-      cache-control:
-      - private, no-cache, no-store, max-age=0, must-revalidate
-      x-powered-by:
+      Set-Cookie:
+      - _csrf=AqlBTu_8Atfo-GPPXMcIAhlf; Path=/; HttpOnly; Secure; SameSite=Lax
+      Cache-Control:
+      - private, no-store
+      X-Powered-By:
       - Next.js
-      etag:
-      - '"1ca3-yVxqaQPuP9U99xukxM9Nwdu7vqQ"'
-      content-type:
+      Etag:
+      - '"2b5bc-fBg44fWA6L2M/+Dhl2UcJ9xFoBM"'
+      Content-Type:
       - text/html; charset=utf-8
-      via:
+      Via:
       - 1.1 vegur, 1.1 varnish
-      accept-ranges:
+      Accept-Ranges:
       - bytes
-      date:
-      - Tue, 28 Dec 2021 18:23:01 GMT
-      x-served-by:
-      - cache-ewr18146-EWR
-      x-cache:
+      Content-Length:
+      - '177596'
+      Date:
+      - Fri, 31 Dec 2021 16:37:47 GMT
+      Connection:
+      - keep-alive
+      X-Served-By:
+      - cache-ewr18153-EWR
+      X-Cache:
       - MISS
-      x-cache-hits:
+      X-Cache-Hits:
       - '0'
-      x-timer:
-      - S1640715781.079995,VS0,VE39
-      vary:
+      X-Timer:
+      - S1640968667.422364,VS0,VE129
+      Vary:
       - Accept-Encoding
-      content-length:
-      - '7331'
     body:
       encoding: ASCII-8BIT
       string: ''
-    http_version: '2'
+    http_version: '1.1'
     adapter_metadata:
-      effective_url: https://docs.github.com/changing-author-info
-  recorded_at: Tue, 28 Dec 2021 18:23:01 GMT
+      effective_url: http://docs.github.com/en/get-started
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
 - request:
     method: head
     uri: http://gjtorikian.github.io/mathematical/
@@ -172,7 +109,7 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Tue, 28 Dec 2021 18:23:01 GMT
+      - Fri, 31 Dec 2021 16:37:47 GMT
       content-type:
       - text/html; charset=utf-8
       last-modified:
@@ -180,41 +117,41 @@ http_interactions:
       access-control-allow-origin:
       - "*"
       expires:
-      - Tue, 28 Dec 2021 18:33:01 GMT
+      - Fri, 31 Dec 2021 16:47:47 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - FA2A:3D85:1733AA0:21497FB:61CB5605
+      - 55B6:736F:1F0EAE2:305DDD2:61CF31DB
       via:
       - 1.1 varnish
       age:
       - '0'
       x-served-by:
-      - cache-ewr18129-EWR
+      - cache-ewr18144-EWR
       x-cache:
       - MISS
       x-cache-hits:
       - '0'
       x-timer:
-      - S1640715781.165460,VS0,VE32
+      - S1640968668.580707,VS0,VE15
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 2f65cbd5bc436920a0867512ba178469b11fd871
+      - 3cd37be9e83e17f55d50e26608f2e8376a022332
       cf-cache-status:
       - DYNAMIC
       expect-ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       report-to:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=QaFvmOmvr%2BvChEtOCFdRKARMrQDWg7t%2F%2Fya5LCZwsbzF7xFGxyqbEfRknDmkFwwpJLoX67iw9%2BOQRtoejiom7eY20htWrYVDzU2kwVV2NfO5EWgCFHIrOmlMICoYjgzj3ltHYcY%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=DOejrHq1BxTJmspxXfEFuGfFCUCNH5frvy2apoJ6zDRNi4pX7%2B78TGHebB0TqOLNUalvP3FOExlmbJezVpISz3NC8ZoTBfniGpUpu%2FQgs3iRPW5opG9qBrWnPEUigLBbUEsv9K4%3D"}],"group":"cf-nel","max_age":604800}'
       nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       server:
       - cloudflare
       cf-ray:
-      - 6c4cd14029bd8c05-EWR
+      - 6c64ef3c3c8d8c1b-EWR
       alt-svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
         ma=86400
@@ -224,96 +161,7 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://www.gjtorikian.com/mathematical/
-  recorded_at: Tue, 28 Dec 2021 18:23:01 GMT
-- request:
-    method: get
-    uri: https://help.github.com/changing-author-info/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
-      Accept:
-      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
-      Expect:
-      - ''
-  response:
-    status:
-      code: 404
-      message: ''
-    headers:
-      server:
-      - Cowboy
-      x-ratelimit-limit:
-      - '250'
-      x-ratelimit-remaining:
-      - '249'
-      x-ratelimit-reset:
-      - '1640715842'
-      access-control-allow-origin:
-      - "*"
-      content-security-policy:
-      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
-        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
-        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
-        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
-        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
-        ''self'' ''unsafe-inline'';child-src ''self'''
-      x-dns-prefetch-control:
-      - 'off'
-      expect-ct:
-      - max-age=0
-      x-frame-options:
-      - SAMEORIGIN
-      strict-transport-security:
-      - max-age=15552000; includeSubDomains
-      x-download-options:
-      - noopen
-      x-content-type-options:
-      - nosniff
-      x-permitted-cross-domain-policies:
-      - none
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-xss-protection:
-      - '0'
-      set-cookie:
-      - _csrf=meeycsKqQvFAe7UYHvzJIUxg; Path=/; HttpOnly; Secure; SameSite=Lax
-      cache-control:
-      - private, no-cache, no-store, max-age=0, must-revalidate
-      x-powered-by:
-      - Next.js
-      etag:
-      - '"1ca3-V57g7A5zAMlaEYAAgwzk2JhY+1s"'
-      content-type:
-      - text/html; charset=utf-8
-      via:
-      - 1.1 vegur, 1.1 varnish
-      accept-ranges:
-      - bytes
-      date:
-      - Tue, 28 Dec 2021 18:23:01 GMT
-      x-served-by:
-      - cache-ewr18146-EWR
-      x-cache:
-      - MISS
-      x-cache-hits:
-      - '0'
-      x-timer:
-      - S1640715781.242138,VS0,VE47
-      vary:
-      - Accept-Encoding
-      content-length:
-      - '7331'
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        PCFET0NUWVBFIGh0bWw+PGh0bWwgbGFuZz0iZW4iPjxoZWFkPjxtZXRhIGNoYXJTZXQ9InV0Zi04Ii8+PG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xIi8+PGxpbmsgcmVsPSJhbHRlcm5hdGUgaWNvbiIgdHlwZT0iaW1hZ2UvcG5nIiBocmVmPSIvYXNzZXRzL2ltYWdlcy9zaXRlL2Zhdmljb24ucG5nIi8+PGxpbmsgcmVsPSJpY29uIiB0eXBlPSJpbWFnZS9zdmcreG1sIiBocmVmPSIvYXNzZXRzL2ltYWdlcy9zaXRlL2Zhdmljb24uc3ZnIi8+PG1ldGEgbmFtZT0iZ29vZ2xlLXNpdGUtdmVyaWZpY2F0aW9uIiBjb250ZW50PSJjMWt1RC1LMkhJVkY2MzVseXBjc1dQb0Q0a2lsbzUtakFfd0JGeVQ0dU1ZIi8+PG1ldGEgbmFtZT0iY3NyZi10b2tlbiIgY29udGVudD0iTWVUT28wS2gtWE9hdXhRa2tDRGtTakxFMXAtRVRPaWs2MXhFIi8+PHRpdGxlPjQwNCAtIFBhZ2Ugbm90IGZvdW5kPC90aXRsZT48bWV0YSBuYW1lPSJzdGF0dXMiIGNvbnRlbnQ9IjQwNCIvPjxtZXRhIG5hbWU9Im5leHQtaGVhZC1jb3VudCIgY29udGVudD0iOCIvPjxsaW5rIHJlbD0icHJlbG9hZCIgaHJlZj0iL19uZXh0L3N0YXRpYy9jc3MvMTMxMDhlNmQ2ZWE2MTIyYzNiY2IuY3NzIiBhcz0ic3R5bGUiLz48bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii9fbmV4dC9zdGF0aWMvY3NzLzEzMTA4ZTZkNmVhNjEyMmMzYmNiLmNzcyIgZGF0YS1uLWc9IiIvPjxsaW5rIHJlbD0icHJlbG9hZCIgaHJlZj0iL19uZXh0L3N0YXRpYy9jc3MvZGQzMDY2NzljOWY2OGNmNTJiNjIuY3NzIiBhcz0ic3R5bGUiLz48bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii9fbmV4dC9zdGF0aWMvY3NzL2RkMzA2Njc5YzlmNjhjZjUyYjYyLmNzcyIgZGF0YS1uLXA9IiIvPjxub3NjcmlwdCBkYXRhLW4tY3NzPSIiPjwvbm9zY3JpcHQ+PHNjcmlwdCBkZWZlcj0iIiBub21vZHVsZT0iIiBzcmM9Ii9fbmV4dC9zdGF0aWMvY2h1bmtzL3BvbHlmaWxscy1hNDBlZjE2NzhiYWUxMWU2OTZkYmE0NTEyNGVhZGQ3MC5qcyI+PC9zY3JpcHQ+PHNjcmlwdCBzcmM9Ii9fbmV4dC9zdGF0aWMvY2h1bmtzL3dlYnBhY2stYWYyODQ3NmEyZTc3OTBmZDQ4ZGIuanMiIGRlZmVyPSIiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvX25leHQvc3RhdGljL2NodW5rcy9mcmFtZXdvcmstMmI4YmU2MzE1ODZjYmJjNjg4NmUuanMiIGRlZmVyPSIiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvX25leHQvc3RhdGljL2NodW5rcy9tYWluLTM5YWZmNWJlY2UxOTQxN2ViZTczLmpzIiBkZWZlcj0iIj48L3NjcmlwdD48c2NyaXB0IHNyYz0iL19uZXh0L3N0YXRpYy9jaHVua3MvcGFnZXMvX2FwcC1lOWJmNzMwYTcyZDg3M2EzNDYzYy5qcyIgZGVmZXI9IiI+PC9zY3JpcHQ+PHNjcmlwdCBzcmM9Ii9fbmV4dC9zdGF0aWMvY2h1bmtzLzBlMjI2ZmIwLTcxNGY1NzVhZjk2Y2FiYjg1YWViLmpzIiBkZWZlcj0iIj48L3NjcmlwdD48c2NyaXB0IHNyYz0iL19uZXh0L3N0YXRpYy9jaHVua3MvcGFnZXMvNDA0LTg1ZGJjODVhY2Q0N2FlMDdlZDcwLmpzIiBkZWZlcj0iIj48L3NjcmlwdD48c2NyaXB0IHNyYz0iL19uZXh0L3N0YXRpYy9zUHA3d0IyZjNHVDhKVVJnZzJWRVYvX2J1aWxkTWFuaWZlc3QuanMiIGRlZmVyPSIiPjwvc2NyaXB0PjxzY3JpcHQgc3JjPSIvX25leHQvc3RhdGljL3NQcDd3QjJmM0dUOEpVUmdnMlZFVi9fc3NnTWFuaWZlc3QuanMiIGRlZmVyPSIiPjwvc2NyaXB0PjxzdHlsZSBkYXRhLXN0eWxlZD0iIiBkYXRhLXN0eWxlZC12ZXJzaW9uPSI1LjMuMyI+PC9zdHlsZT48L2hlYWQ+PGJvZHkgZGF0YS1jb2xvci1tb2RlPSJhdXRvIiBkYXRhLWRhcmstdGhlbWU9ImRhcmsiIGRhdGEtbGlnaHQtdGhlbWU9ImxpZ2h0Ij48ZGl2IGlkPSJfX25leHQiPjxkaXYgY2xhc3M9Im1pbi1oLXNjcmVlbiBkLWZsZXggZmxleC1jb2x1bW4iPjxkaXYgY2xhc3M9ImJvcmRlci1ib3R0b20gY29sb3ItYm9yZGVyLW11dGVkIG5vLXByaW50Ij48aGVhZGVyIGNsYXNzPSJjb250YWluZXIteGwgcC1yZXNwb25zaXZlIHB5LTMgcG9zaXRpb24tcmVsYXRpdmUgZC1mbGV4IHdpZHRoLWZ1bGwiPjxkaXYgY2xhc3M9ImQtZmxleCBmbGV4LWl0ZW1zLWNlbnRlciIgc3R5bGU9InotaW5kZXg6MyIgaWQ9ImdpdGh1Yi1sb2dvLW1vYmlsZSIgcm9sZT0iYmFubmVyIj48YSBhcmlhLWhpZGRlbj0idHJ1ZSIgdGFiaW5kZXg9Ii0xIiBocmVmPSIvZW4iPjxzdmcgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyIgY2xhc3M9ImNvbG9yLWZnLWRlZmF1bHQiIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt1c2VyLXNlbGVjdDpub25lO3ZlcnRpY2FsLWFsaWduOnRleHQtYm90dG9tO292ZXJmbG93OnZpc2libGUiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTggMEMzLjU4IDAgMCAzLjU4IDAgOGMwIDMuNTQgMi4yOSA2LjUzIDUuNDcgNy41OS40LjA3LjU1LS4xNy41NS0uMzggMC0uMTktLjAxLS44Mi0uMDEtMS40OS0yLjAxLjM3LTIuNTMtLjQ5LTIuNjktLjk0LS4wOS0uMjMtLjQ4LS45NC0uODItMS4xMy0uMjgtLjE1LS42OC0uNTItLjAxLS41My42My0uMDEgMS4wOC41OCAxLjIzLjgyLjcyIDEuMjEgMS44Ny44NyAyLjMzLjY2LjA3LS41Mi4yOC0uODcuNTEtMS4wNy0xLjc4LS4yLTMuNjQtLjg5LTMuNjQtMy45NSAwLS44Ny4zMS0xLjU5LjgyLTIuMTUtLjA4LS4yLS4zNi0xLjAyLjA4LTIuMTIgMCAwIC42Ny0uMjEgMi4yLjgyLjY0LS4xOCAxLjMyLS4yNyAyLS4yNy42OCAwIDEuMzYuMDkgMiAuMjcgMS41My0xLjA0IDIuMi0uODIgMi4yLS44Mi40NCAxLjEuMTYgMS45Mi4wOCAyLjEyLjUxLjU2LjgyIDEuMjcuODIgMi4xNSAwIDMuMDctMS44NyAzLjc1LTMuNjUgMy45NS4yOS4yNS41NC43My41NCAxLjQ4IDAgMS4wNy0uMDEgMS45My0uMDEgMi4yIDAgLjIxLjE1LjQ2LjU1LjM4QTguMDEzIDguMDEzIDAgMDAxNiA4YzAtNC40Mi0zLjU4LTgtOC04eiI+PC9wYXRoPjwvc3ZnPjwvYT48YSBjbGFzcz0iaDQgY29sb3ItZmctZGVmYXVsdCBuby11bmRlcmxpbmUgbm8td3JhcCBwbC0yIiBocmVmPSIvZW4iPkdpdEh1YiBEb2NzPC9hPjwvZGl2PjwvaGVhZGVyPjwvZGl2PjxkaXYgY2xhc3M9ImNvbnRhaW5lci14bCBwLXJlc3BvbnNpdmUgcHktNiB3aWR0aC1mdWxsIGZsZXgtMSI+PGFydGljbGUgY2xhc3M9ImNvbC1tZC0xMCBjb2wtbGctNyBteC1hdXRvIj48aDE+T29vcHMhPC9oMT48ZGl2IGNsYXNzPSJmMiBjb2xvci1mZy1tdXRlZCBtYi0zIExlYWRfY29udGFpbmVyX183WVc2WSI+SXQgbG9va3MgbGlrZSB0aGlzIHBhZ2UgZG9lc24ndCBleGlzdC48L2Rpdj48cCBjbGFzcz0iZjMiPldlIHRyYWNrIHRoZXNlIGVycm9ycyBhdXRvbWF0aWNhbGx5LCBidXQgaWYgdGhlIHByb2JsZW0gcGVyc2lzdHMgcGxlYXNlIGZlZWwgZnJlZSB0byBjb250YWN0IHVzLjwvcD48YSBpZD0iY29udGFjdC11cyIgaHJlZj0iaHR0cHM6Ly9zdXBwb3J0LmdpdGh1Yi5jb20vY29udGFjdCIgY2xhc3M9ImJ0biBidG4tb3V0bGluZSBtdC0yIj48c3ZnIGFyaWEtaGlkZGVuPSJ0cnVlIiByb2xlPSJpbWciIGNsYXNzPSJvY3RpY29uIG1yLTEiIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJjdXJyZW50Q29sb3IiIHN0eWxlPSJkaXNwbGF5OmlubGluZS1ibG9jazt1c2VyLXNlbGVjdDpub25lO3ZlcnRpY2FsLWFsaWduOnRleHQtYm90dG9tO292ZXJmbG93OnZpc2libGUiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTEuNSAyLjc1YS4yNS4yNSAwIDAxLjI1LS4yNWg4LjVhLjI1LjI1IDAgMDEuMjUuMjV2NS41YS4yNS4yNSAwIDAxLS4yNS4yNWgtMy41YS43NS43NSAwIDAwLS41My4yMkwzLjUgMTEuNDRWOS4yNWEuNzUuNzUgMCAwMC0uNzUtLjc1aC0xYS4yNS4yNSAwIDAxLS4yNS0uMjV2LTUuNXpNMS43NSAxQTEuNzUgMS43NSAwIDAwMCAyLjc1djUuNUMwIDkuMjE2Ljc4NCAxMCAxLjc1IDEwSDJ2MS41NDNhMS40NTcgMS40NTcgMCAwMDIuNDg3IDEuMDNMNy4wNjEgMTBoMy4xODlBMS43NSAxLjc1IDAgMDAxMiA4LjI1di01LjVBMS43NSAxLjc1IDAgMDAxMC4yNSAxaC04LjV6TTE0LjUgNC43NWEuMjUuMjUgMCAwMC0uMjUtLjI1aC0uNWEuNzUuNzUgMCAxMTAtMS41aC41Yy45NjYgMCAxLjc1Ljc4NCAxLjc1IDEuNzV2NS41QTEuNzUgMS43NSAwIDAxMTQuMjUgMTJIMTR2MS41NDNhMS40NTcgMS40NTcgMCAwMS0yLjQ4NyAxLjAzTDkuMjIgMTIuMjhhLjc1Ljc1IDAgMTExLjA2LTEuMDZsMi4yMiAyLjIydi0yLjE5YS43NS43NSAwIDAxLjc1LS43NWgxYS4yNS4yNSAwIDAwLjI1LS4yNXYtNS41eiI+PC9wYXRoPjwvc3ZnPkNvbnRhY3Qgc3VwcG9ydDwvYT48L2FydGljbGU+PC9kaXY+PGZvb3RlciBjbGFzcz0icHktNiB0ZXh0LXNtYWxsIj48ZGl2IGNsYXNzPSJjb250YWluZXIteGwgZC1mbGV4IHB4LTMgcHgtbWQtNiBmbGV4LWp1c3RpZnktY2VudGVyIj48dWwgY2xhc3M9ImQtZmxleCBsaXN0LXN0eWxlLW5vbmUgZmxleC13cmFwIGZsZXgtanVzdGlmeS1jZW50ZXIiPjxsaSBjbGFzcz0iZC1mbGV4IG1yLXhsLTMgY29sb3ItZmctbXV0ZWQiPjxzdmcgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyIgY2xhc3M9Im1yLTIgbXIteGwtMyIgdmlld0JveD0iMCAwIDE2IDE2IiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIGZpbGw9ImN1cnJlbnRDb2xvciIgc3R5bGU9ImRpc3BsYXk6aW5saW5lLWJsb2NrO3VzZXItc2VsZWN0Om5vbmU7dmVydGljYWwtYWxpZ246dGV4dC1ib3R0b207b3ZlcmZsb3c6dmlzaWJsZSI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNOCAwQzMuNTggMCAwIDMuNTggMCA4YzAgMy41NCAyLjI5IDYuNTMgNS40NyA3LjU5LjQuMDcuNTUtLjE3LjU1LS4zOCAwLS4xOS0uMDEtLjgyLS4wMS0xLjQ5LTIuMDEuMzctMi41My0uNDktMi42OS0uOTQtLjA5LS4yMy0uNDgtLjk0LS44Mi0xLjEzLS4yOC0uMTUtLjY4LS41Mi0uMDEtLjUzLjYzLS4wMSAxLjA4LjU4IDEuMjMuODIuNzIgMS4yMSAxLjg3Ljg3IDIuMzMuNjYuMDctLjUyLjI4LS44Ny41MS0xLjA3LTEuNzgtLjItMy42NC0uODktMy42NC0zLjk1IDAtLjg3LjMxLTEuNTkuODItMi4xNS0uMDgtLjItLjM2LTEuMDIuMDgtMi4xMiAwIDAgLjY3LS4yMSAyLjIuODIuNjQtLjE4IDEuMzItLjI3IDItLjI3LjY4IDAgMS4zNi4wOSAyIC4yNyAxLjUzLTEuMDQgMi4yLS44MiAyLjItLjgyLjQ0IDEuMS4xNiAxLjkyLjA4IDIuMTIuNTEuNTYuODIgMS4yNy44MiAyLjE1IDAgMy4wNy0xLjg3IDMuNzUtMy42NSAzLjk1LjI5LjI1LjU0LjczLjU0IDEuNDggMCAxLjA3LS4wMSAxLjkzLS4wMSAyLjIgMCAuMjEuMTUuNDYuNTUuMzhBOC4wMTMgOC4wMTMgMCAwMDE2IDhjMC00LjQyLTMuNTgtOC04LTh6Ij48L3BhdGg+PC9zdmc+PHNwYW4+wqkgPCEtLSAtLT4yMDIxPCEtLSAtLT4gR2l0SHViLCBJbmMuPC9zcGFuPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSIvZ2l0aHViL3NpdGUtcG9saWN5L2dpdGh1Yi10ZXJtcy1vZi1zZXJ2aWNlIj5UZXJtczwvYT48L2xpPjxsaSBjbGFzcz0ibWwtMyI+PGEgaHJlZj0iL2dpdGh1Yi9zaXRlLXBvbGljeS9naXRodWItcHJpdmFjeS1zdGF0ZW1lbnQiPlByaXZhY3kgPC9hPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSJodHRwczovL2dpdGh1Yi5jb20vc2VjdXJpdHkiPlNlY3VyaXR5PC9hPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSJodHRwczovL3d3dy5naXRodWJzdGF0dXMuY29tLyI+U3RhdHVzPC9hPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSIvIj5IZWxwPC9hPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSJodHRwczovL3N1cHBvcnQuZ2l0aHViLmNvbSI+Q29udGFjdCBHaXRIdWI8L2E+PC9saT48bGkgY2xhc3M9Im1sLTMiPjxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9wcmljaW5nIj5QcmljaW5nPC9hPjwvbGk+PGxpIGNsYXNzPSJtbC0zIj48YSBocmVmPSIvZGV2ZWxvcGVycyI+RGV2ZWxvcGVyIEFQSTwvYT48L2xpPjxsaSBjbGFzcz0ibWwtMyI+PGEgaHJlZj0iaHR0cHM6Ly9zZXJ2aWNlcy5naXRodWIuY29tLyI+VHJhaW5pbmc8L2E+PC9saT48bGkgY2xhc3M9Im1sLTMiPjxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9hYm91dCI+QWJvdXQ8L2E+PC9saT48L3VsPjwvZGl2PjwvZm9vdGVyPjwvZGl2PjwvZGl2PjxzY3JpcHQgaWQ9Il9fTkVYVF9EQVRBX18iIHR5cGU9ImFwcGxpY2F0aW9uL2pzb24iPnsicHJvcHMiOnsicGFnZVByb3BzIjp7fSwidGhlbWVQcm9wcyI6eyJjb2xvck1vZGUiOiJhdXRvIiwibmlnaHRUaGVtZSI6ImRhcmsiLCJkYXlUaGVtZSI6ImxpZ2h0In0sImNzcmZUb2tlbiI6Ik1lVE9vMEtoLVhPYXV4UWtrQ0RrU2pMRTFwLUVUT2lrNjF4RSIsImxhbmd1YWdlc0NvbnRleHQiOnsibGFuZ3VhZ2VzIjp7ImVuIjp7Im5hbWUiOiJFbmdsaXNoIiwiY29kZSI6ImVuIiwiaHJlZmxhbmciOiJlbiIsImRpciI6IiIsIndpcCI6ZmFsc2V9LCJjbiI6eyJuYW1lIjoiU2ltcGxpZmllZCBDaGluZXNlIiwibmF0aXZlTmFtZSI6IueugOS9k+S4reaWhyIsImNvZGUiOiJjbiIsImhyZWZsYW5nIjoiemgtSGFucyIsInJlZGlyZWN0UGF0dGVybnMiOlt7fSx7fV0sImRpciI6InRyYW5zbGF0aW9ucy96aC1DTiIsIndpcCI6ZmFsc2V9LCJqYSI6eyJuYW1lIjoiSmFwYW5lc2UiLCJuYXRpdmVOYW1lIjoi5pel5pys6KqeIiwiY29kZSI6ImphIiwiaHJlZmxhbmciOiJqYSIsInJlZGlyZWN0UGF0dGVybnMiOlt7fV0sImRpciI6InRyYW5zbGF0aW9ucy9qYS1KUCIsIndpcCI6ZmFsc2V9LCJlcyI6eyJuYW1lIjoiU3BhbmlzaCIsIm5hdGl2ZU5hbWUiOiJFc3Bhw7FvbCIsImNvZGUiOiJlcyIsImhyZWZsYW5nIjoiZXMiLCJkaXIiOiJ0cmFuc2xhdGlvbnMvZXMtRVMiLCJ3aXAiOmZhbHNlfSwicHQiOnsibmFtZSI6IlBvcnR1Z3Vlc2UiLCJuYXRpdmVOYW1lIjoiUG9ydHVndcOqcyBkbyBCcmFzaWwiLCJjb2RlIjoicHQiLCJocmVmbGFuZyI6InB0IiwiZGlyIjoidHJhbnNsYXRpb25zL3B0LUJSIiwid2lwIjpmYWxzZX19fX0sInBhZ2UiOiIvNDA0IiwicXVlcnkiOnt9LCJidWlsZElkIjoic1BwN3dCMmYzR1Q4SlVSZ2cyVkVWIiwiaXNGYWxsYmFjayI6ZmFsc2UsImN1c3RvbVNlcnZlciI6dHJ1ZSwiYXBwR2lwIjp0cnVlLCJsb2NhbGUiOiJlbiIsImxvY2FsZXMiOlsiZW4iLCJjbiIsImphIiwiZXMiLCJwdCIsImRlIl0sImRlZmF1bHRMb2NhbGUiOiJlbiIsInNjcmlwdExvYWRlciI6W119PC9zY3JpcHQ+PC9ib2R5PjwvaHRtbD4=
-    http_version: '2'
-    adapter_metadata:
-      effective_url: https://docs.github.com/changing-author-info
-  recorded_at: Tue, 28 Dec 2021 18:23:01 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
 - request:
     method: head
     uri: https://github.com/github/repository-sync
@@ -335,7 +183,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Tue, 28 Dec 2021 18:23:01 GMT
+      - Fri, 31 Dec 2021 16:37:47 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -343,7 +191,7 @@ http_interactions:
       permissions-policy:
       - interest-cohort=()
       etag:
-      - W/"292c44935fbae49fa99b32cfc199e890"
+      - W/"0b8de43b56d4df05c3bdb2a0e87937c0"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -377,111 +225,21 @@ http_interactions:
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
         worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=psigtXrXpW9%2BVk6fx45azpnBmakepK0cXlzNyBCFoBhgfUNYN%2BmxRc0crbo%2Bo01JHTZOBe3gN6JW8bi4okY45FTb6tmOoA3SHu7OeqEsl5UzJKpLM3OQI8MIJLnEOhm%2BxqiSo1fBK19q0H3wxsHeyPAoqdgsCR1znwc0edNW6WJdGmHbkFJFZQrzBLLlgY0fBHx5OuiUboN6PK346vBIAXgxR16JIA%2Fcz6rjOnBGGoSiTPGyu7%2B9l2qeBYjgTANSLVghmrlUqRAovJVntZ2ccg%3D%3D--Aa6an4cFhk9pcBmP--vBfh22L6QmTUgqmFRSbX4A%3D%3D;
+      - _gh_sess=iNkR8hgjKhpTXBtS7jvlEVoZn33d4KUwznhNfQqCfkMheOxlHp9BLWQf9jWhuWnlHHzc15M148fglTv%2FLOojfafn8fdO3lDDrDtulcmSOFz9XjPbKR%2B%2BIDvpPR9XU2e%2BhFbGLoLvE5PcaYJgIFXD7e6r2gZNJDU0IbkC3GU1o132N1xT5SsxZh9Bph8OMqoVgR2C9hI0SffHpfMW3HZDldLkn6lQ1bCncbbLUFWwBI8nx6z0ssaAg5fLmSTVqpCBJencDdSI%2BfqH16jorTI%2Fng%3D%3D--2hodcYGfTWscXgQj--PJXvbnF3Kw2tHOALi1aMBQ%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1155145587.1640715780; Path=/; Domain=github.com; Expires=Wed,
-        28 Dec 2022 18:23:00 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Wed, 28 Dec 2022 18:23:00
+      - _octo=GH1.1.1327641410.1640968667; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:47 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:47
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - 4032:0D10:2DFDF16:4DF1BB9:61CB5604
+      - EE74:4FA4:1156C74:21E3659:61CF31DB
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/gjtorikian/repository-sync
-  recorded_at: Tue, 28 Dec 2021 18:23:01 GMT
-- request:
-    method: head
-    uri: http://docs.github.com/en/get-started/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
-      Accept:
-      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
-      Expect:
-      - ''
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - Cowboy
-      X-Ratelimit-Limit:
-      - '250'
-      X-Ratelimit-Remaining:
-      - '249'
-      X-Ratelimit-Reset:
-      - '1640715877'
-      Access-Control-Allow-Origin:
-      - "*"
-      Content-Security-Policy:
-      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
-        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
-        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
-        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
-        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
-        ''self'' ''unsafe-inline'';child-src ''self'''
-      X-Dns-Prefetch-Control:
-      - 'off'
-      Expect-Ct:
-      - max-age=0
-      X-Frame-Options:
-      - SAMEORIGIN
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains
-      X-Download-Options:
-      - noopen
-      X-Content-Type-Options:
-      - nosniff
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      X-Xss-Protection:
-      - '0'
-      Set-Cookie:
-      - _csrf=dM4K0qZisMwlAzCokGWQjNVP; Path=/; HttpOnly; Secure; SameSite=Lax
-      Cache-Control:
-      - private, no-store
-      X-Powered-By:
-      - Next.js
-      Etag:
-      - '"2b5bc-koUFZjkPD4yFUcrsGBerRpARTX0"'
-      Content-Type:
-      - text/html; charset=utf-8
-      Via:
-      - 1.1 vegur, 1.1 varnish
-      Accept-Ranges:
-      - bytes
-      Content-Length:
-      - '177596'
-      Date:
-      - Tue, 28 Dec 2021 18:23:36 GMT
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-ewr18180-EWR
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      X-Timer:
-      - S1640715817.526467,VS0,VE209
-      Vary:
-      - Accept-Encoding
-    body:
-      encoding: ASCII-8BIT
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://docs.github.com/en/get-started
-  recorded_at: Tue, 28 Dec 2021 18:23:36 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:47 GMT
 recorded_with: VCR 2.9.3

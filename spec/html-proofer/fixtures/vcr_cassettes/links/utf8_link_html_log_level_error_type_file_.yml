@@ -2,124 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Mon, 15 May 2017 14:06:04 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:35:37 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
-      Content-Length:
-      - '534'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '0'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-iad2140-IAD
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '1'
-      X-Timer:
-      - S1495405538.808838,VS0,VE7
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 86eba9cb638f2c5c8c1f374baf484a3c520481a9
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
-- request:
-    method: head
-    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Mon, 15 May 2017 14:06:04 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:35:37 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
-      Content-Length:
-      - '534'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:37 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '0'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-iad2151-IAD
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      X-Timer:
-      - S1495405538.807666,VS0,VE7
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - cd7229fa5121fa1319d3782422ca8e6dfcb27062
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sun, 21 May 2017 22:25:37 GMT
-- request:
-    method: head
     uri: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
     body:
       encoding: US-ASCII
@@ -137,41 +19,41 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Tue, 28 Dec 2021 19:15:23 GMT
+      - Fri, 31 Dec 2021 16:37:34 GMT
       content-type:
       - text/html; charset=utf-8
       last-modified:
       - Fri, 17 Dec 2021 12:55:38 GMT
       expires:
-      - Tue, 28 Dec 2021 19:25:23 GMT
+      - Fri, 31 Dec 2021 16:47:34 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - CA3A:4FB5:C86B4:8EA739:61CB624B
+      - 17C0:0DCB:204092C:31A4AA7:61CF31CE
       via:
       - 1.1 varnish
       age:
       - '0'
       x-served-by:
-      - cache-ewr18131-EWR
+      - cache-ewr18167-EWR
       x-cache:
       - MISS
       x-cache-hits:
       - '0'
       x-timer:
-      - S1640718923.029422,VS0,VE14
+      - S1640968654.052802,VS0,VE13
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - b1a9e5987a491f6d38f7679eada1dbc68ff28955
+      - efddf320ddf3e75de88fc3f5625e1eb76f15688e
       cf-cache-status:
       - DYNAMIC
       expect-ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       report-to:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=sYPKoeZBVGwvvfE8r3fVzgizXnBD1yb6223Q89cbwHqi0yqZZLFL4XWvs0lyyE1P%2BNt1cpfmLhm%2BJnJB5O5Cg49gXVP%2Bo7y5510pSuD6C9aKSVmAYBEXAUy3opJw5arJ9w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=%2Bs9MV4P5pyv3tw%2B0E88fHttAUShsPCWQeUd4ayTJHCqR5s%2BEHvAllpqoWbZPIPciaEDVj3CMrInC5QWj6HaZrP8YeZ3fdoZcKpv80znyPCdNwrALQsd4VicyvpP8sBWNRw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       strict-transport-security:
@@ -191,7 +73,7 @@ http_interactions:
       server:
       - cloudflare
       cf-ray:
-      - 6c4d1df4de08e6ec-EWR
+      - 6c64eee7bcce3354-EWR
       alt-svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
         ma=86400
@@ -201,7 +83,7 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Tue, 28 Dec 2021 19:15:23 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:34 GMT
 - request:
     method: head
     uri: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
@@ -221,41 +103,41 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Tue, 28 Dec 2021 19:15:23 GMT
+      - Fri, 31 Dec 2021 16:37:34 GMT
       content-type:
       - text/html; charset=utf-8
       last-modified:
       - Fri, 17 Dec 2021 12:55:38 GMT
       expires:
-      - Tue, 28 Dec 2021 19:25:23 GMT
+      - Fri, 31 Dec 2021 16:47:34 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - CA3A:4FB5:C86B4:8EA739:61CB624B
+      - 17C0:0DCB:204092C:31A4AA7:61CF31CE
       via:
       - 1.1 varnish
       age:
       - '0'
       x-served-by:
-      - cache-ewr18177-EWR
+      - cache-ewr18162-EWR
       x-cache:
       - HIT
       x-cache-hits:
       - '1'
       x-timer:
-      - S1640718923.031105,VS0,VE12
+      - S1640968654.077517,VS0,VE0
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 32c0b3a701e6e2532ce75bfd44c9fb3a1097ce75
+      - c6209efa6e7ae1242f008c28f2ce9b5ac0343240
       cf-cache-status:
       - DYNAMIC
       expect-ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       report-to:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=3jwyHAzJjvq8k%2BgvTQgEPOllhe8yNUCWZGwisWq3butY0ijDeRi%2F4iImib26s8xStBeQYm7LRhI0fg0OgTdUclmaaghiW1Nzs0hPnyk2R%2B%2BXFNBu2x%2BNp6JjBChIxNkj7Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ePG3fOTmlMWfeOzUt9d9KImaYgeVW%2Fjsy7jKle9XpyKSND0U8A8XSKHkH3on2lg%2B1n6eHVx2Rw0KLX5Jhvpcl02%2Fo%2FVn8dl%2FzFl0gQ1uDUoX%2BTLSJ1goPgG%2BZ1nMmLDWOA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       strict-transport-security:
@@ -275,7 +157,7 @@ http_interactions:
       server:
       - cloudflare
       cf-ray:
-      - 6c4d1df4dd1b8c18-EWR
+      - 6c64eee7efcf8c8d-EWR
       alt-svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
         ma=86400
@@ -285,5 +167,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Tue, 28 Dec 2021 19:15:23 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:34 GMT
 recorded_with: VCR 2.9.3

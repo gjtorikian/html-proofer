@@ -2,67 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/css
-      Last-Modified:
-      - Tue, 21 Mar 2017 14:41:26 GMT
-      Expires:
-      - Mon, 21 May 2018 15:42:01 GMT
-      Cache-Control:
-      - max-age=31536000, public
-      Access-Control-Allow-Origin:
-      - "*"
-      Timing-Allow-Origin:
-      - "*"
-      X-GitHub-Request-Id:
-      - B7FA:4570:123E1E:132F8C:5921B549
-      Content-Length:
-      - '121557'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:25 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '24204'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-jfk8143-JFK
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '5'
-      X-Timer:
-      - S1495405525.095022,VS0,VE0
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 50b5cd6719c92c760cfc71153124a1090c44a219
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-  recorded_at: Sun, 21 May 2017 22:25:25 GMT
-- request:
-    method: head
     uri: https://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
     body:
       encoding: US-ASCII
@@ -84,32 +23,32 @@ http_interactions:
       content-type:
       - text/html; charset=utf-8
       etag:
-      - '"5e6d4198-239b"'
+      - '"5e6d6874-239b"'
       content-security-policy:
       - default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src
         'self'
       x-github-request-id:
-      - CF18:5C66:2EA747:E86084:61CB6311
+      - DCD8:461B:1FF99E6:3144A94:61CF31D2
       accept-ranges:
       - bytes
       date:
-      - Tue, 28 Dec 2021 19:22:27 GMT
+      - Fri, 31 Dec 2021 16:37:39 GMT
       via:
       - 1.1 varnish
       age:
-      - '226'
+      - '1'
       x-served-by:
-      - cache-ewr18159-EWR
+      - cache-ewr18146-EWR
       x-cache:
       - HIT
       x-cache-hits:
       - '1'
       x-timer:
-      - S1640719347.323620,VS0,VE4
+      - S1640968659.058315,VS0,VE0
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 02a2d0a14a3fa65a90f7f08e407e05edd8deeac8
+      - b4559b6ef19e712eabb0158dab2007437a356104
       content-length:
       - '9115'
     body:
@@ -118,7 +57,7 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-  recorded_at: Tue, 28 Dec 2021 19:22:27 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:39 GMT
 - request:
     method: get
     uri: https://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
@@ -142,32 +81,32 @@ http_interactions:
       content-type:
       - text/html; charset=utf-8
       etag:
-      - '"5e6d4198-239b"'
+      - '"5e6d6874-239b"'
       content-security-policy:
       - default-src 'none'; style-src 'unsafe-inline'; img-src data:; connect-src
         'self'
       x-github-request-id:
-      - CF18:5C66:2EA747:E86084:61CB6311
+      - DCD8:461B:1FF99E6:3144A94:61CF31D2
       accept-ranges:
       - bytes
       date:
-      - Tue, 28 Dec 2021 19:22:27 GMT
+      - Fri, 31 Dec 2021 16:37:39 GMT
       via:
       - 1.1 varnish
       age:
-      - '226'
+      - '1'
       x-served-by:
-      - cache-ewr18159-EWR
+      - cache-ewr18146-EWR
       x-cache:
       - HIT
       x-cache-hits:
       - '2'
       x-timer:
-      - S1640719347.349539,VS0,VE0
+      - S1640968659.097007,VS0,VE0
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 68eff2aa1c57f014e289884be6c17e6f655f6b5b
+      - a34a7d26df8e508bd1fb41cb8dfc777876a22c0d
       content-length:
       - '9115'
     body:
@@ -255,5 +194,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://assets-cdn.github.com/assets/frameworks-5b61aadc846f0818981ceec31b49c475fb084c163fdec5efbc2c21ef539092a9.css
-  recorded_at: Tue, 28 Dec 2021 19:22:27 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:39 GMT
 recorded_with: VCR 2.9.3

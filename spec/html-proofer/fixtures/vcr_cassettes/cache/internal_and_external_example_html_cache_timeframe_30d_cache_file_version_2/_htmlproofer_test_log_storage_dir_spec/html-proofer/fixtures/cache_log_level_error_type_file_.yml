@@ -21,7 +21,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Thu, 30 Dec 2021 20:07:28 GMT
+      - Fri, 31 Dec 2021 16:37:45 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -29,7 +29,7 @@ http_interactions:
       permissions-policy:
       - interest-cohort=()
       etag:
-      - W/"1894faded7259a085e5ecbd07d204a11"
+      - W/"32b10f47fa319fba55b0677baa22fccf"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -63,21 +63,21 @@ http_interactions:
         script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
         worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=htev%2FJ30qErcyQ7ckt8Jtlh%2BgWxym0b1my3%2BmaCcjzGhwih73u%2FuvUE266xL8MLX7AozYZY%2BcI%2BxtT2Y8lEAGoNkmq0IhMT4PGLP8L3hhRqoI86L6b6a169rd0nGCAQduagVBNojI2f%2B4qfFnKO2BFf%2FBMnokPBFocP5LZWzpaFVlgqXc%2FUG%2BEiaL4cVeFRnyejC%2BwYtVXU4YQqQ4MkJnMIgfBDoSABy%2FjdFlWGlr44t2tKSAnGD%2FAT1sD6%2BIYr5wsqgbjbwHP2CDbSwH9vCrg%3D%3D--7IoaiD4jPgz8lGDh--ZoNKuJ7L%2Fiv0YTqAOVw5nQ%3D%3D;
+      - _gh_sess=eWUr8s%2F0mRXT0dmLjB6psLV4%2FRCq2GaI4e3XimZ4q5Tcog8yN5MyUtUqpZruwxJl4IxmL9%2F%2F5dF%2F82vO4f1QUA3Vmq3kOpAxOhTNNapoY7sPATE2vLJPFiYr4MBB%2F4Thmczwpco7CVwCM%2BWgEcKoqjFAKITKjvOuWQzD3EB5YxAk6pZEgf%2F6xbvjtVDJu1lTQWM1%2B7Qnbv2KpxazVn1zklVuk9lyNJTts1dMTyk48YmqIRdIDW70X5mP4cSOfdpq8OaV1rS4SpBHFdhEo%2BRBwA%3D%3D--%2BFhvbW72FDJHxBim--s6a%2BUzqHf7dBD1y5ofKyhw%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1614503157.1640894848; Path=/; Domain=github.com; Expires=Fri,
-        30 Dec 2022 20:07:28 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Fri, 30 Dec 2022 20:07:28
+      - _octo=GH1.1.841451618.1640968682; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:38:02 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:38:02
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - AC40:624E:16320AE:2D63A33:61CE1180
+      - F736:024C:92B1BC:1725EED:61CF31EA
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/gjtorikian/html-proofer
-  recorded_at: Thu, 30 Dec 2021 20:07:28 GMT
+  recorded_at: Fri, 31 Dec 2021 16:38:02 GMT
 recorded_with: VCR 2.9.3

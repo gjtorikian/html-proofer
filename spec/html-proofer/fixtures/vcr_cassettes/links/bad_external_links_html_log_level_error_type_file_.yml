@@ -2,74 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: http://www.asdo3IRJ395295jsingrkrg4.com
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 0
-      message:
-    headers: {}
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version:
-    adapter_metadata:
-      effective_url: http://www.asdo3IRJ395295jsingrkrg4.com/
-  recorded_at: Sun, 21 May 2017 22:25:36 GMT
-- request:
-    method: head
-    uri: http://www.google.com
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Sun, 21 May 2017 22:25:36 GMT
-      Expires:
-      - "-1"
-      Cache-Control:
-      - private, max-age=0
-      Content-Type:
-      - text/html; charset=UTF-8
-      P3P:
-      - CP="This is not a P3P policy! See https://www.google.com/support/accounts/answer/151657?hl=en
-        for more info."
-      Server:
-      - gws
-      X-XSS-Protection:
-      - 1; mode=block
-      X-Frame-Options:
-      - SAMEORIGIN
-      Set-Cookie:
-      - NID=103=lJQszECWAt4qnMqAYxP_6-qNg_QFFOHOB6BMBUW6THwTOSXMocP7Mj8xE4s75M4kxJAaxt7Dnt-Bh5FdLmryZDnoHCNzeg-vPRpI8PGlzHiYRXmmO_Nge4JVtxM7OMXPE0HPreLQzZaMCF2g;
-        expires=Mon, 20-Nov-2017 22:25:36 GMT; path=/; domain=.google.com; HttpOnly
-      Transfer-Encoding:
-      - chunked
-      Accept-Ranges:
-      - none
-      Vary:
-      - Accept-Encoding
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://www.google.com/
-  recorded_at: Sun, 21 May 2017 22:25:36 GMT
-- request:
-    method: head
     uri: https://www.asdo3IRJ395295jsingrkrg4.com
     body:
       encoding: US-ASCII
@@ -92,7 +24,7 @@ http_interactions:
     http_version:
     adapter_metadata:
       effective_url: https://www.asdo3IRJ395295jsingrkrg4.com/
-  recorded_at: Tue, 28 Dec 2021 19:16:14 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:35 GMT
 - request:
     method: head
     uri: https://www.google.com
@@ -116,7 +48,7 @@ http_interactions:
       p3p:
       - CP="This is not a P3P policy! See g.co/p3phelp for more info."
       date:
-      - Tue, 28 Dec 2021 19:16:14 GMT
+      - Fri, 31 Dec 2021 16:37:35 GMT
       server:
       - gws
       x-xss-protection:
@@ -124,14 +56,14 @@ http_interactions:
       x-frame-options:
       - SAMEORIGIN
       expires:
-      - Tue, 28 Dec 2021 19:16:14 GMT
+      - Fri, 31 Dec 2021 16:37:35 GMT
       cache-control:
       - private
       set-cookie:
-      - 1P_JAR=2021-12-28-19; expires=Thu, 27-Jan-2022 19:16:14 GMT; path=/; domain=.google.com;
+      - 1P_JAR=2021-12-31-16; expires=Sun, 30-Jan-2022 16:37:35 GMT; path=/; domain=.google.com;
         Secure
-      - NID=511=lizW8z9i0_Mum1QhFbLzDxM8y-C0P8RcqL1BXaeegUkhGOA7LqFyjwDnY6W3xU79hk7sdv0QSsHIfc-b0rmPK2NkMfVDmOT2H-KJVXLrfyeRADO0OTxf7Y9nI-Jg1Uz3wzA3jne73kF8jXue-688zCgvfiYWFfVCw7xTlgy3bIw;
-        expires=Wed, 29-Jun-2022 19:16:14 GMT; path=/; domain=.google.com; HttpOnly
+      - NID=511=P1ukoqYi80f4oBplpt30ekObG5nnVC8tpFLIzOBrWCWrRkqUlIzP-XN-K9BXCcsN9NsaVCQ07FwYjc-kbAAprYUXekNBMKfayhC6OJp_FwGkAebU7b2k8hxsNWaegy0pQuZDifscByot3JHU76o7KxT3ylojNEmFZZOWziK2kP8;
+        expires=Sat, 02-Jul-2022 16:37:35 GMT; path=/; domain=.google.com; HttpOnly
       alt-svc:
       - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
         ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
@@ -141,5 +73,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://www.google.com/
-  recorded_at: Tue, 28 Dec 2021 19:16:14 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:35 GMT
 recorded_with: VCR 2.9.3

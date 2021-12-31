@@ -2,48 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: http://1.2.3.4/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 0
-      message:
-    headers: {}
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version:
-    adapter_metadata:
-      effective_url: http://1.2.3.4/
-  recorded_at: Sun, 21 May 2017 22:25:35 GMT
-- request:
-    method: head
-    uri: http://5.6.7.8/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 0
-      message:
-    headers: {}
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version:
-    adapter_metadata:
-      effective_url: http://5.6.7.8/
-  recorded_at: Sun, 21 May 2017 22:25:35 GMT
-- request:
-    method: head
     uri: https://1.2.3.4/
     body:
       encoding: US-ASCII
@@ -66,7 +24,7 @@ http_interactions:
     http_version:
     adapter_metadata:
       effective_url: https://1.2.3.4/
-  recorded_at: Tue, 28 Dec 2021 19:26:54 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:33 GMT
 - request:
     method: head
     uri: https://5.6.7.8/
@@ -91,5 +49,5 @@ http_interactions:
     http_version:
     adapter_metadata:
       effective_url: https://5.6.7.8/
-  recorded_at: Tue, 28 Dec 2021 19:27:22 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:33 GMT
 recorded_with: VCR 2.9.3

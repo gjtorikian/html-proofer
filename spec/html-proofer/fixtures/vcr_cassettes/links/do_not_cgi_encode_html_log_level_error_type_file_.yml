@@ -8,35 +8,119 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
-      code: 200
-      message: OK
+      code: 403
+      message: Forbidden
     headers:
-      x-amz-id-2:
-      - VXCQvTBDb5ViQvRQ6dNri4ECD4hOr/LBRtPnPk29K5JQ7kIAxIPSXhVt3GpZFX0LstF7osq30g4=
       x-amz-request-id:
-      - 93D07932059835D5
-      Date:
-      - Sun, 21 May 2017 22:25:26 GMT
-      Last-Modified:
-      - Thu, 16 Feb 2017 22:58:48 GMT
-      ETag:
-      - '"29818ab714021692a380ac83ea0af7d4"'
-      Accept-Ranges:
-      - bytes
+      - CAHNSTZ9QBRZ8BYM
+      x-amz-id-2:
+      - xW7uqR/0vqVLLBwV4LBxyvUlLTVSAFxognSlTbhsE6vhC4rD3rJnnQ+/ixCXiCMEGvomHZsXSBw=
       Content-Type:
-      - application/x-debian-package
-      Content-Length:
-      - '3323820'
+      - application/xml
+      Date:
+      - Fri, 31 Dec 2021 16:37:46 GMT
       Server:
       - AmazonS3
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
     http_version: '1.1'
     adapter_metadata:
       effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
-  recorded_at: Sun, 21 May 2017 22:25:25 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:46 GMT
+- request:
+    method: get
+    uri: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 403
+      message: Forbidden
+    headers:
+      x-amz-request-id:
+      - CAHY7BDW6YWRWA7Q
+      x-amz-id-2:
+      - u0ddBMPKFgk0SdIi8F71bsosv+xm5gjhCSUY2LrkQ4xI03/4W/2edkA20F4LOjg4Xe1vGtR9MBg=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Fri, 31 Dec 2021 16:37:46 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Error><Code>AllAccessDisabled</Code><Message>All access to this object has been disabled</Message><RequestId>CAHY7BDW6YWRWA7Q</RequestId><HostId>u0ddBMPKFgk0SdIi8F71bsosv+xm5gjhCSUY2LrkQ4xI03/4W/2edkA20F4LOjg4Xe1vGtR9MBg=</HostId></Error>
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://reflect-io-packages.s3.amazonaws.com/reflect-agent/reflect-agent_0.4.6-1~bpo7%2B1.290_amd64.deb
+  recorded_at: Fri, 31 Dec 2021 16:37:46 GMT
+- request:
+    method: head
+    uri: https://www.google.com/search?q=foo%2Bbar
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=UTF-8
+      p3p:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      date:
+      - Fri, 31 Dec 2021 16:44:56 GMT
+      server:
+      - gws
+      x-xss-protection:
+      - '0'
+      x-frame-options:
+      - SAMEORIGIN
+      expires:
+      - Fri, 31 Dec 2021 16:44:56 GMT
+      cache-control:
+      - private
+      set-cookie:
+      - 1P_JAR=2021-12-31-16; expires=Sun, 30-Jan-2022 16:44:56 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=511=XaK38nq7sHe7ic_sV6m9Vyt77mnPsZrlrFm9CiepQ8siiMrJ_91RqfMOqOjboeWHiDH3idhG_WvCddyfTwI6FwtxG9z6CNO6oUgp5godDwOhdpuMnmXoEw7NW4TxETRN21G_1A-BIjpomUmkL29Kre86RZjJDAHMk5sdFTWLFUs;
+        expires=Sat, 02-Jul-2022 16:44:56 GMT; path=/; domain=.google.com; HttpOnly
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.google.com/search?q=foo%2Bbar
+  recorded_at: Fri, 31 Dec 2021 16:44:56 GMT
 recorded_with: VCR 2.9.3

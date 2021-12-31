@@ -2,140 +2,78 @@
 http_interactions:
 - request:
     method: head
-    uri: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Mon, 15 May 2017 14:06:04 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:35:37 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 3F5E:62C0:654F3FF:84BB2ED:592213E1
-      Content-Length:
-      - '534'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:38 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '0'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-iad2150-IAD
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '1'
-      X-Timer:
-      - S1495405538.243021,VS0,VE0
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 74a9938c10ca1eafcb59f0a79399c38f81587be4
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: http://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Sun, 21 May 2017 22:25:38 GMT
-- request:
-    method: head
     uri: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Date:
-      - Sun, 21 May 2017 22:25:38 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Connection:
-      - keep-alive
-      Server:
-      - mw1254.eqiad.wmnet
-      Vary:
-      - Accept-Encoding,Cookie,Authorization
-      X-Powered-By:
-      - HHVM/3.12.14
-      P3P:
-      - CP="This is not a P3P policy! See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P
-        for more info."
-      X-Content-Type-Options:
+      date:
+      - Fri, 31 Dec 2021 00:27:19 GMT
+      server:
+      - mw1403.eqiad.wmnet
+      x-content-type-options:
       - nosniff
-      Content-language:
+      p3p:
+      - CP="See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P for more
+        info."
+      content-language:
       - en
-      X-UA-Compatible:
-      - IE=Edge
-      Link:
-      - "</static/images/project-logos/enwiki.png>;rel=preload;as=image;media=not
-        all and (min-resolution: 1.5dppx),</static/images/project-logos/enwiki-1.5x.png>;rel=preload;as=image;media=(min-resolution:
-        1.5dppx) and (max-resolution: 1.999999dppx),</static/images/project-logos/enwiki-2x.png>;rel=preload;as=image;media=(min-resolution:
-        2dppx)"
-      Last-Modified:
-      - Sat, 20 May 2017 11:45:00 GMT
-      Backend-Timing:
-      - D=94706 t=1495280787762719
-      X-Varnish:
-      - 463856154 428976936, 485861072 239396873
-      Via:
-      - 1.1 varnish-v4, 1.1 varnish-v4
-      Age:
-      - '36268'
-      X-Cache:
-      - cp1067 hit/7, cp1066 hit/20
-      X-Cache-Status:
-      - hit
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Set-Cookie:
-      - WMF-Last-Access=21-May-2017;Path=/;HttpOnly;secure;Expires=Thu, 22 Jun 2017
+      vary:
+      - Accept-Encoding,Cookie,Authorization
+      last-modified:
+      - Thu, 30 Dec 2021 23:27:02 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      age:
+      - '58224'
+      x-cache:
+      - cp1079 miss, cp1089 hit/21
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1089"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      permissions-policy:
+      - interest-cohort=()
+      set-cookie:
+      - WMF-Last-Access=31-Dec-2021;Path=/;HttpOnly;secure;Expires=Tue, 01 Feb 2022
         12:00:00 GMT
-      - WMF-Last-Access-Global=21-May-2017;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Thu,
-        22 Jun 2017 12:00:00 GMT
-      - GeoIP=US:NY:Brooklyn:40.68:-73.96:v4; Path=/; secure; Domain=.wikipedia.org
-      X-Analytics:
-      - ns=0;page_id=25914154;https=1;nocookies=1
-      X-Client-IP:
-      - 100.37.221.161
-      Cache-Control:
+      - WMF-Last-Access-Global=31-Dec-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Tue,
+        01 Feb 2022 12:00:00 GMT
+      - GeoIP=US:NY:New_York:40.72:-74.00:v4; Path=/; secure; Domain=.wikipedia.org
+      x-client-ip:
+      - 45.144.113.215
+      cache-control:
       - private, s-maxage=0, max-age=0, must-revalidate
-      Accept-Ranges:
+      accept-ranges:
       - bytes
+      content-length:
+      - '330864'
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
       effective_url: https://en.wikipedia.org/wiki/Coup_d%27%C3%A9tat
-  recorded_at: Sun, 21 May 2017 22:25:38 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:44 GMT
 - request:
     method: head
     uri: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
@@ -155,41 +93,41 @@ http_interactions:
       message: ''
     headers:
       date:
-      - Tue, 28 Dec 2021 19:15:28 GMT
+      - Fri, 31 Dec 2021 16:37:44 GMT
       content-type:
       - text/html; charset=utf-8
       last-modified:
       - Fri, 17 Dec 2021 12:55:38 GMT
       expires:
-      - Tue, 28 Dec 2021 19:25:23 GMT
+      - Fri, 31 Dec 2021 16:47:34 GMT
       cache-control:
       - max-age=600
       x-proxy-cache:
       - MISS
       x-github-request-id:
-      - CA3A:4FB5:C86B4:8EA739:61CB624B
+      - 17C0:0DCB:204092C:31A4AA7:61CF31CE
       via:
       - 1.1 varnish
       age:
-      - '6'
+      - '10'
       x-served-by:
-      - cache-ewr18162-EWR
+      - cache-ewr18148-EWR
       x-cache:
       - HIT
       x-cache-hits:
       - '1'
       x-timer:
-      - S1640718929.618840,VS0,VE1
+      - S1640968664.179537,VS0,VE1
       vary:
       - Accept-Encoding
       x-fastly-request-id:
-      - 516b854756a3e9bbf86b23a1d094e141e6cde13c
+      - d13ba5b7fbf471e0812d92d01fb89e7c05c43b27
       cf-cache-status:
       - DYNAMIC
       expect-ct:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       report-to:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=sD19Wbij1ib8tmjJ6tgEuI3ljUCioLFqUheenTcyLZ36Rj13DhQLYW86yfY%2BJnX5sBqmjrsxg1UDGwYhPqrvlqGH7VKtW5%2BXZO6lDlQtdVDaclZ3OgKgVcrNJ6f%2FqD5KZg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=Mtx0SJkVseVxwSACbQQ0WteSjEvCyCFJQYv12yznmID21%2BX2pH9D2EqxIveEf6P8qh%2BKSojaD8rXgkSK8jaYoLuY3nAx3vkUppZr2dQK56VfwoR1KymRIxB%2F5AcSsqBjeA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       nel:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       strict-transport-security:
@@ -209,7 +147,7 @@ http_interactions:
       server:
       - cloudflare
       cf-ray:
-      - 6c4d1e17bf378cd6-EWR
+      - 6c64ef26fcee8ce3-EWR
       alt-svc:
       - h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
         ma=86400
@@ -219,5 +157,5 @@ http_interactions:
     http_version: '2'
     adapter_metadata:
       effective_url: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
-  recorded_at: Tue, 28 Dec 2021 19:15:28 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:44 GMT
 recorded_with: VCR 2.9.3

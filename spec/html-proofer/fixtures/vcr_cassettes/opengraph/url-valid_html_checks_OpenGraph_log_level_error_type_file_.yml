@@ -21,7 +21,7 @@ http_interactions:
       server:
       - GitHub.com
       date:
-      - Thu, 30 Dec 2021 22:21:20 GMT
+      - Fri, 31 Dec 2021 16:37:21 GMT
       content-type:
       - text/html; charset=utf-8
       vary:
@@ -31,7 +31,7 @@ http_interactions:
       content-language:
       - en-US
       etag:
-      - W/"2084399e2dc49a235a6fb227e364ac0e"
+      - W/"a370e541747524c9d9fa7a994fd7b632"
       cache-control:
       - max-age=0, private, must-revalidate
       strict-transport-security:
@@ -63,21 +63,21 @@ http_interactions:
         github.githubassets.com; script-src github.githubassets.com; style-src ''unsafe-inline''
         github.githubassets.com; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
       set-cookie:
-      - _gh_sess=1hn4qihWfbXMuP8l1wa65Z6vsfHu%2BZPViOghTxrNSGGfVSYJTTa4DAxzjOQlvOIoVKNjDFxZNhRu7Gyy6ji8oI36qJtha2JJfTz%2F2CZwEyFOpWffTxAwzdWf%2B9ZP%2FdxRBrTspJZiuFgobvhXuJC%2BIZCYhUa%2BMxiWli3C3qK9QPDiEABsOp6gU2SSb7M34kbBVCvEq3nv4wA416OYOIQRywHsGSTXYKnRbb5zru3whyRHaSJ%2F6cEph%2FritqqYdRpV8VaJH02E%2BB5i6lHHZy%2Bopg%3D%3D--7n6QLMx%2F8LbhL4hh--e8de4ydsUIuAISLNvhroaQ%3D%3D;
+      - _gh_sess=i0v6bMpUJ%2BFZVewuNkPot%2FqWj39mfrAVwknJh5LrovyjP61TZ0c2GtpnOiwIwAs7S93Z2usBUlhn6nn1ziPITYYxLKVqRK%2BDGmCZdHuay8KsrCTRaLl295CumUsZ%2FLdCGF8D%2FlXKiMp1JOoOMfU937F76UosJOokRQ7Wk%2F5EkLCIn2fGQBDZ5hxkJtKhnd3%2FWm%2B0WSar6lM9s6uhlTX4pVUItGA21jC%2BLlJV4qWLaIMVmy6PcWlleKo7AD6D2wqXl5JKNa0LYVI5G%2FByQKK0FA%3D%3D--m4n1fwHPjxY3WDOQ--96lCH94rinvTak4eNZgYXw%3D%3D;
         Path=/; HttpOnly; Secure; SameSite=Lax
-      - _octo=GH1.1.1767638137.1640902880; Path=/; Domain=github.com; Expires=Fri,
-        30 Dec 2022 22:21:20 GMT; Secure; SameSite=Lax
-      - logged_in=no; Path=/; Domain=github.com; Expires=Fri, 30 Dec 2022 22:21:20
+      - _octo=GH1.1.1336700951.1640968641; Path=/; Domain=github.com; Expires=Sat,
+        31 Dec 2022 16:37:21 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 31 Dec 2022 16:37:21
         GMT; HttpOnly; Secure; SameSite=Lax
       accept-ranges:
       - bytes
       x-github-request-id:
-      - 5E06:26B6:23F03A7:374AC0D:61CE30E0
+      - DFB0:4C2E:9CA74D:17F97E0:61CF31C1
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://github.com/
-  recorded_at: Thu, 30 Dec 2021 22:21:20 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:21 GMT
 recorded_with: VCR 2.9.3

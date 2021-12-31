@@ -2,65 +2,6 @@
 http_interactions:
 - request:
     method: head
-    uri: https://help.github.com/articles/searching-issues#no
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.7.0; +https://github.com/gjtorikian/html-proofer)
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - GitHub.com
-      Content-Type:
-      - text/html; charset=utf-8
-      Last-Modified:
-      - Sun, 21 May 2017 03:21:01 GMT
-      Access-Control-Allow-Origin:
-      - "*"
-      Expires:
-      - Sun, 21 May 2017 22:17:47 GMT
-      Cache-Control:
-      - max-age=600
-      X-GitHub-Request-Id:
-      - 5B8A:3E22:51CE230:710406A:59220FB2
-      Content-Length:
-      - '34163'
-      Accept-Ranges:
-      - bytes
-      Date:
-      - Sun, 21 May 2017 22:25:25 GMT
-      Via:
-      - 1.1 varnish
-      Age:
-      - '12'
-      Connection:
-      - keep-alive
-      X-Served-By:
-      - cache-jfk8141-JFK
-      X-Cache:
-      - HIT
-      X-Cache-Hits:
-      - '1'
-      X-Timer:
-      - S1495405525.046581,VS0,VE0
-      Vary:
-      - Accept-Encoding
-      X-Fastly-Request-ID:
-      - 38ae44abc72a1544eb6f8e1ef393b4b60095f4a4
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: '1.1'
-    adapter_metadata:
-      effective_url: https://help.github.com/articles/searching-issues/
-  recorded_at: Sun, 21 May 2017 22:25:25 GMT
-- request:
-    method: head
     uri: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
     body:
       encoding: US-ASCII
@@ -82,9 +23,9 @@ http_interactions:
       x-ratelimit-limit:
       - '250'
       x-ratelimit-remaining:
-      - '248'
+      - '249'
       x-ratelimit-reset:
-      - '1640715063'
+      - '1640968716'
       access-control-allow-origin:
       - "*"
       content-security-policy:
@@ -113,13 +54,13 @@ http_interactions:
       x-xss-protection:
       - '0'
       set-cookie:
-      - _csrf=Lk84PaYXqn6k5wftnPkzCvb1; Path=/; HttpOnly; Secure; SameSite=Lax
+      - _csrf=3TRxpR1JxmUxepaJ570Henn5; Path=/; HttpOnly; Secure; SameSite=Lax
       cache-control:
       - private, no-store
       x-powered-by:
       - Next.js
       etag:
-      - '"5240c-WzXpevI3JLMR09WQQA+PSN8m6OQ"'
+      - '"5237c-rAOy/DTMWYXzge5EDE8YQvcfCQQ"'
       content-type:
       - text/html; charset=utf-8
       via:
@@ -127,24 +68,24 @@ http_interactions:
       accept-ranges:
       - bytes
       date:
-      - Tue, 28 Dec 2021 18:10:05 GMT
+      - Fri, 31 Dec 2021 16:37:36 GMT
       x-served-by:
-      - cache-ewr18138-EWR
+      - cache-ewr18163-EWR
       x-cache:
       - MISS
       x-cache-hits:
       - '0'
       x-timer:
-      - S1640715006.536183,VS0,VE67
+      - S1640968656.912953,VS0,VE130
       vary:
       - Accept-Encoding
       content-length:
-      - '336908'
+      - '336764'
     body:
       encoding: ASCII-8BIT
       string: ''
     http_version: '2'
     adapter_metadata:
       effective_url: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
-  recorded_at: Tue, 28 Dec 2021 18:10:05 GMT
+  recorded_at: Fri, 31 Dec 2021 16:37:36 GMT
 recorded_with: VCR 2.9.3
