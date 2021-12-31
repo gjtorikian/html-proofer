@@ -1,8 +1,6 @@
 name: Ruby CI
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
   push:
 
 jobs:

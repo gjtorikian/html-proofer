@@ -145,7 +145,7 @@ HTMLProofer.check_directories(['./one', './two']).run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(['http://github.com', 'http://jekyllrb.com']).run
+HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 ```
 
 This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
@@ -252,14 +252,14 @@ If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-
 Add the `data-proofer-ignore` attribute to any tag to ignore it from every check.
 
 ``` html
-<a href="http://notareallink" data-proofer-ignore>Not checked.</a>
+<a href="https://notareallink" data-proofer-ignore>Not checked.</a>
 ```
 
 This can also apply to parent elements, all the way up to the `<html>` tag:
 
 ``` html
 <div data-proofer-ignore>
-  <a href="http://notareallink">Not checked because of parent.</a>
+  <a href="https://notareallink">Not checked because of parent.</a>
 </div>
 ```
 
@@ -538,10 +538,10 @@ HTMLProofer.check_directories(["out/"], {
 
 Project | Repository | Notes
 :------ | :--------- | :----
-[Jekyll's website](http://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
-[Raspberry Pi's documentation](http://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
-[Squeak's website](http://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
-[Atom Flight Manual](http://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
+[Jekyll's website](https://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
+[Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
+[Squeak's website](https://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
+[Atom Flight Manual](https://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
 [HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites)
-[Project Calico Documentation](http://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)
-[GitHub does dotfiles](http://dotfiles.github.io/) | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action
+[Project Calico Documentation](https://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)
+[GitHub does dotfiles](https://dotfiles.github.io/) | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action
