@@ -67,10 +67,6 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 * Whether the images and URLs in the OpenGraph metadata are valid.
 
-### HTML
-
-* Whether your HTML markup is valid. This is done via [Nokogiri](https://nokogiri.org/) to validate well-formed HTML5 markup.
-
 ## Usage
 
 You can configure HTMLProofer to run on:
