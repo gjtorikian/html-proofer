@@ -3798,4 +3798,92 @@ http_interactions:
     adapter_metadata:
       effective_url: https://5.6.7.8/
   recorded_at: Fri, 31 Dec 2021 16:38:01 GMT
+- request:
+    method: head
+    uri: https://www.google.com/search?q=foo%2Bbar
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=UTF-8
+      p3p:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      date:
+      - Fri, 31 Dec 2021 17:16:10 GMT
+      server:
+      - gws
+      x-xss-protection:
+      - '0'
+      x-frame-options:
+      - SAMEORIGIN
+      expires:
+      - Fri, 31 Dec 2021 17:16:10 GMT
+      cache-control:
+      - private
+      set-cookie:
+      - 1P_JAR=2021-12-31-17; expires=Sun, 30-Jan-2022 17:16:10 GMT; path=/; domain=.google.com;
+        Secure
+      - NID=511=fCzqe9OWWDyD-zDgvivOvYD4vhVyrSxn7o8xRc2a7ypE2qk-5PY1jStMncMksTYZO1oMh81pJcTp7lB1XTAQlnh92kNg5qkvw3cxqylD9jmx55-eSdJGqZDxQRGYy-h0467__rEHi0VmpGRhgCLszif2yyzWhkmi_FwtvfocA9Y;
+        expires=Sat, 02-Jul-2022 17:16:10 GMT; path=/; domain=.google.com; HttpOnly
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-Q050=":443"; ma=2592000,h3-Q046=":443";
+        ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.google.com/search?q=foo%2Bbar
+  recorded_at: Fri, 31 Dec 2021 17:16:10 GMT
+- request:
+    method: head
+    uri: https://docs.q-ctrl.com/boulder-opal/application-notes/designing-robust-molmer-sorensen-gates-with-parametric-trap-drive-amplification#Designing-robust-M%C3%B8lmer%E2%80%93S%C3%B8rensen-gates-with-parametric-trap-drive-amplification
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Fri, 31 Dec 2021 17:16:10 GMT
+      content-type:
+      - text/html; charset=utf-8
+      content-length:
+      - '493378'
+      etag:
+      - 22070ae-78742-61b2dc05
+      last-modified:
+      - Fri, 10 Dec 2021 04:48:05 GMT
+      cache-control:
+      - private, max-age=0, proxy-revalidate, no-store, no-cache, must-revalidate
+      strict-transport-security:
+      - max-age=15724800; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://docs.q-ctrl.com/boulder-opal/application-notes/designing-robust-molmer-sorensen-gates-with-parametric-trap-drive-amplification#Designing-robust-M%C3%B8lmer%E2%80%93S%C3%B8rensen-gates-with-parametric-trap-drive-amplification
+  recorded_at: Fri, 31 Dec 2021 17:16:10 GMT
 recorded_with: VCR 2.9.3

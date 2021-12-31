@@ -246,7 +246,7 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
             root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_hashes')
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('file.html#noHash', { :base_url => '', :current_path => 'spec/html-proofer/fixtures/links/broken_internal_hashes/file3.html', :line => 5, :source => 'spec/html-proofer/fixtures/links/broken_internal_hashes' }, false).once
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once
 
             # we expect one new link to be added because it's within the 30d time frame
             run_proofer(root_link, :directory, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
