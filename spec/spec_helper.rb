@@ -60,7 +60,7 @@ def run_proofer(item, type, opts = {})
   end
 end
 
-def send_proofer_output(file, type, opts = {})
+def capture_proofer_output(file, type, opts = {})
   proofer = make_proofer(file, type, opts)
   cassette_name = make_cassette_name(file, opts)
   VCR.use_cassette(cassette_name, record: :new_episodes) do
@@ -93,6 +93,6 @@ def make_cassette_name(file, opts)
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = "#{FIXTURES_DIR}/vcr_cassettes"
+  config.cassette_library_dir = File.join(FIXTURES_DIR, 'vcr_cassettes')
   config.hook_into :typhoeus
 end

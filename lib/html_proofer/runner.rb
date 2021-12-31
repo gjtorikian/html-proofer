@@ -4,7 +4,7 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failures, :checked_paths, :current_check
+    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failure_reporter, :checked_paths, :current_check
     attr_accessor :current_path, :current_source
 
     def initialize(src, opts = {})
@@ -29,17 +29,21 @@ module HTMLProofer
     end
 
     def run
+      check_text = pluralize(checks.length, 'check', 'checks')
+
       if @type == :links
-        @logger.log :info, "Running #{checks} on #{@source}... \n\n"
+        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source}... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :info, "Running #{checks} on #{@source} on *#{@options[:extension]}... \n\n"
+        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} on *#{@options[:extension]}... \n\n"
 
         check_files
         @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
       end
 
       @cache.write
+
+      @failure_reporter = FailureReporter.new(@failures, @logger)
 
       if @failures.empty?
         @logger.log :info, 'HTML-Proofer finished successfully.'
@@ -165,15 +169,13 @@ module HTMLProofer
     end
 
     def failed_tests
-      @failures.each_with_object([]) { |f, arr| arr << f.to_s }
+      @failure_reporter.failures
     end
 
     def print_failed_tests
-      sorted_failures = SortedIssues.new(@failures, @options[:error_sort], @logger)
+      @failure_reporter.report(:cli)
 
-      sorted_failures.sort_and_report
-      count = @failures.length
-      failure_text = pluralize(count, 'failure', 'failures')
+      failure_text = pluralize(@failures.length, 'failure', 'failures')
       @logger.log :fatal, "\nHTML-Proofer found #{failure_text}!"
       exit 1
     end
@@ -208,6 +210,12 @@ module HTMLProofer
       @logger.log :info, "Found #{cache_text} in the cache..."
 
       urls_to_check
+    end
+
+    private def format_checks_list(checks)
+      checks.map do |check|
+        check.sub(/HTMLProofer::Check::/, '')
+      end.join(', ')
     end
   end
 end

@@ -2,20 +2,19 @@
 
 module HTMLProofer
   module Configuration
+    DEFAULT_TESTS = %w[Links Images Scripts]
+
     PROOFER_DEFAULTS = {
       allow_hash_href: true,
       allow_missing_href: false,
-      alt_ignore: [],
       assume_extension: false,
       check_external_hash: false,
-      check_img_http: false,
-      checks: %w[Links Images Scripts],
+      checks: DEFAULT_TESTS,
       directory_index_file: 'index.html',
       disable_external: false,
       ignore_empty_mailto: false,
       ignore_missing_alt: false,
       enforce_https: true,
-      error_sort: :path,
       extension: '.html',
       file_ignore: [],
       http_status_ignore: [],

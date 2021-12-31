@@ -9,7 +9,6 @@ module HTMLProofer
 
       @cache = @runner.cache
       @logger = @runner.logger
-      @options = @runner.options
 
       @failed_tests = []
     end

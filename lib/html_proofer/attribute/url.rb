@@ -29,7 +29,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   end
 
   def valid?
-    !parts.nil?
+    !parts.nil? || raw_attribute.nil? # it's valid because it doesn't exist, which is okay in HTML5
   end
 
   def path?

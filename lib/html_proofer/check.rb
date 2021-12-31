@@ -24,8 +24,8 @@ module HTMLProofer
       raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_failure(desc, line: nil, path: nil, status: -1, content: nil)
-      @failures << Failure.new(path || @path, desc, line: line, status: status, content: content)
+    def add_failure(desc, line: nil, status: nil, content: nil)
+      @failures << Failure.new(@runner.current_path, short_name, desc, line: line, status: status, content: content)
     end
 
     def self.subchecks(runner_options)
@@ -36,15 +36,22 @@ module HTMLProofer
 
       # remove any checks not explicitly included
       checks.each_with_object([]) do |check, arr|
-        check_name = check.to_s.split('::').last
-        next unless runner_options[:checks].include?(check_name)
+        next unless runner_options[:checks].include?(check.short_name)
 
         arr << check
       end
     end
 
+    def short_name
+      self.class.name.split('::').last
+    end
+
+    def self.short_name
+      name.split('::').last
+    end
+
     def add_to_internal_urls(url, line)
-      url_string = url.to_s
+      url_string = url.raw_attribute
 
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
@@ -63,10 +70,6 @@ module HTMLProofer
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
       @external_urls[url_string] << { filename: @runner.current_source, line: line }
-    end
-
-    private def html5?
-      @html.to_s.scan(/^<!DOCTYPE html>/).any?
     end
 
     private def base_url

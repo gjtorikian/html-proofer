@@ -285,8 +285,8 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 
 | Option | Description | Default |
 | :----- | :---------- | :------ |
-| `allow_hash_href` | If `true`, ignores the `href="#"`. | `true` |
-| `allow_missing_href` | If `true`, does not flag `a` tags missing `href` (this is the default for HTML5). | `false` |
+| `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
+| `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
 | `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists). This slows the checker down. | `false` |
@@ -294,17 +294,16 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker, which can take a lot of time. | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `error_sort` | Defines the sort order for error output. Can be `:path`, `:desc`, or `:status`. | `:path`
 | `extension` | The extension of your HTML files including the dot. | `.html`
 | `file_ignore` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `http_status_ignore` | An array of numbers representing status codes to ignore. | `[]`
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
-| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags. | `false` |
+| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
 | `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. It affects all HTML attributes, such as `alt` tags on images. | `[]` |
+| `url_ignore` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `url_swap` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 
 In addition, there are a few "namespaced" options. These are:

@@ -15,7 +15,7 @@ class HTMLProofer::Check::Scripts < HTMLProofer::Check
         add_to_external_urls(@script.src, @script.line)
         check_sri if @runner.check_sri?
       elsif !@script.url.exists?
-        add_failure("internal script #{@script.src} does not exist", line: @script.line, content: @script.content)
+        add_failure("internal script reference #{@script.src} does not exist", line: @script.line, content: @script.content)
       end
     end
 

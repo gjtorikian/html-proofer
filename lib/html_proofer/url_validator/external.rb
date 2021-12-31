@@ -14,7 +14,7 @@ module HTMLProofer
       super(runner)
 
       @external_urls = external_urls
-      @hydra = Typhoeus::Hydra.new(@options[:hydra])
+      @hydra = Typhoeus::Hydra.new(@runner.options[:hydra])
       @before_request = []
     end
 
@@ -97,7 +97,7 @@ module HTMLProofer
           next
         end
 
-        method = if hash?(url) && @options[:check_external_hash]
+        method = if hash?(url) && @runner.options[:check_external_hash]
                    :get
                  else
                    :head
@@ -118,7 +118,7 @@ module HTMLProofer
     end
 
     def queue_request(method, href, filenames)
-      opts = @options[:typhoeus].merge(method: method)
+      opts = @runner.options[:typhoeus].merge(method: method)
       request = Typhoeus::Request.new(href, opts)
       @before_request.each do |callback|
         callback.call(request)
@@ -136,21 +136,21 @@ module HTMLProofer
 
       @logger.log :debug, "Received a #{response_code} for #{href}"
 
-      return if @options[:http_status_ignore].include?(response_code)
+      return if @runner.options[:http_status_ignore].include?(response_code)
 
       if response_code.between?(200, 299)
         @cache.add_external(href, filenames, response_code, 'OK') unless check_hash_in_2xx_response(href, effective_url, response, filenames)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
-        handle_connection_failure(effective_url, filenames, response_code, response.return_message)
+        handle_connection_failure(effective_url, filenames, response_code, response.status_message)
       elsif method == :head
         queue_request(:get, href, filenames)
       else
-        return if @options[:only_4xx] && !response_code.between?(400, 499)
+        return if @runner.options[:only_4xx] && !response_code.between?(400, 499)
 
         # Received a non-successful http response.
-        msg = "External link #{href} failed: #{response_code} #{response.return_message}"
+        msg = "External link #{href} failed: #{response_code} #{response.status_message}"
         add_failure(filenames, msg, response_code)
         @cache.add_external(href, filenames, response_code, msg)
       end
@@ -159,8 +159,8 @@ module HTMLProofer
     # Even though the response was a success, we may have been asked to check
     # if the hash on the URL exists on the page
     def check_hash_in_2xx_response(href, effective_url, response, filenames)
-      return false if @options[:only_4xx]
-      return false unless @options[:check_external_hash]
+      return false if @runner.options[:only_4xx]
+      return false unless @runner.options[:check_external_hash]
       return false unless (hash = hash?(href))
 
       body_doc = create_nokogiri(response.body)
@@ -186,31 +186,31 @@ module HTMLProofer
     def handle_timeout(href, filenames, response_code)
       msg = "External link #{href} failed: got a time out (response code #{response_code})"
       @cache.add_external(href, filenames, 0, msg)
-      return if @options[:only_4xx]
+      return if @runner.options[:only_4xx]
 
       add_failure(filenames, msg, response_code)
     end
 
-    def handle_connection_failure(href, metadata, response_code, return_message)
+    def handle_connection_failure(href, metadata, response_code, status_message)
       msg = <<~MSG
         External link #{href} failed: response code #{response_code} means something's wrong.
         It's possible libcurl couldn't connect to the server or perhaps the request timed out.
         Sometimes, making too many requests at once also breaks things.
       MSG
 
-      msg.concat("\nEither way, the return message from the server is: #{return_message}") unless blank?(return_message)
+      msg.concat("\nEither way, the return message from the server is: #{status_message}") unless blank?(status_message)
 
       @cache.add_external(href, metadata, 0, msg)
-      return if @options[:only_4xx]
+      return if @runner.options[:only_4xx]
 
       add_failure(metadata, msg, response_code)
     end
 
     def add_failure(metadata, desc, status = nil)
       if blank?(metadata) # possible if we're checking an array of links
-        @failed_tests << Failure.new('', desc, status: status)
+        @failed_tests << Failure.new('', 'Links > External', desc, status: status)
       else
-        metadata.each { |m| @failed_tests << Failure.new(m[:source], desc, status: status) }
+        metadata.each { |m| @failed_tests << Failure.new(m[:filename], 'Links > External', desc, line: m[:line], status: status) }
       end
     end
 

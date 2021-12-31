@@ -1,25 +1,11 @@
 # frozen_string_literal: true
 
 class HTMLProofer::Check::Links < HTMLProofer::Check
-  def missing_link?
-    missing_href? || missing_src?
-  end
-
-  def missing_href?
-    anchor_tag? && blank?(@link.node['href'])
-  end
-
-  def missing_src?
-    source_tag? && blank?(@link.node['src'])
-  end
-
   def run
     @html.css('a, link, source').each do |node|
       @link = create_element(node)
 
       next if @link.ignore?
-
-      # next if placeholder?
 
       if !allow_hash_href? && @link.node['href'] == '#'
         add_failure('linking to internal hash #, which points to nowhere', line: @link.line, content: @link.content)
@@ -28,8 +14,6 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
 
       # is it even a valid URL?
       unless @link.url.valid?
-        next if @link.url.raw_attribute.nil? && html5?
-
         add_failure("#{@link.href} is an invalid URL", line: @link.line, content: @link.content)
         next
       end
@@ -37,13 +21,10 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
       check_schemes
 
       # is there even an href?
-      if missing_link?
-        next if missing_href? && allow_missing_href?
+      if @link.link_attribute.nil?
+        next if allow_missing_href?
 
-        # HTML5 allows dropping the href: http://git.io/vBX0z
-        next if @html.internal_subset.nil? || (@html.internal_subset.name == 'html' && @html.internal_subset.external_id.nil?)
-
-        add_failure('anchor has no href attribute', line: @link.line, content: @link.content)
+        add_failure("#{@link.node.name} is missing a reference", line: @link.line, content: @link.content)
         next
       end
 

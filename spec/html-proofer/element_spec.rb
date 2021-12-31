@@ -47,7 +47,7 @@ describe HTMLProofer::Element do
 
   describe 'ivar setting' do
     it 'does not explode if given a bad attribute' do
-      broken_attribute = "#{FIXTURES_DIR}/html/invalid_attribute.html"
+      broken_attribute = File.join(FIXTURES_DIR, 'html', 'invalid_attribute.html')
       proofer = run_proofer(broken_attribute, :file)
       expect(proofer.failed_tests.length).to eq 0
     end

@@ -79,7 +79,7 @@ describe 'Cache test' do
     end
 
     it 'fails on an invalid date' do
-      file = "#{FIXTURES_DIR}/links/broken_link_external.html"
+      file = File.join(FIXTURES_DIR, 'links', 'broken_link_external.html')
       expect do
         run_proofer(file, :file, cache: { timeframe: '30x' }.merge(default_cache_options))
       end.to raise_error ArgumentError
@@ -234,7 +234,7 @@ describe 'Cache test' do
         it 'does write file if a new relative URL 404 is added' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-            root_link = "#{FIXTURES_DIR}/links/broken_internal_link.html"
+            root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_link.html')
             expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('#noHash', { :base_url => '', :current_path => 'spec/html-proofer/fixtures/links/broken_internal_link.html', :line => 5, :source => 'spec/html-proofer/fixtures/links/broken_internal_link.html' }, false)
 
             # we expect one new link to be added because it's within the 30d time frame
@@ -245,7 +245,7 @@ describe 'Cache test' do
         it 'does writes file once if a new relative URL 404 hash is detected multiple times' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-            root_link = "#{FIXTURES_DIR}/links/broken_internal_hashes"
+            root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_hashes')
             expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('file.html#noHash', { :base_url => '', :current_path => 'spec/html-proofer/fixtures/links/broken_internal_hashes/file3.html', :line => 5, :source => 'spec/html-proofer/fixtures/links/broken_internal_hashes' }, false).once
 
             # we expect one new link to be added because it's within the 30d time frame
@@ -272,7 +272,7 @@ describe 'Cache test' do
         cache_filename = File.join('version_2', '.recheck_external_failure.log')
         cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
-        file = "#{FIXTURES_DIR}/cache/external_example.html"
+        file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
 
         File.delete(cache_filepath) if File.exist?(cache_filepath)
 
@@ -293,7 +293,7 @@ describe 'Cache test' do
         cache_filename = File.join('version_2', '.internal_and_external.log')
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
-        file = "#{FIXTURES_DIR}/cache/internal_and_external_example.html"
+        file = File.join(FIXTURES_DIR, 'cache', 'internal_and_external_example.html')
 
         File.delete(cache_location) if File.exist?(cache_location)
 
@@ -329,7 +329,7 @@ describe 'Cache test' do
         external_links = cache['external']
         expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
 
-        run_proofer("#{FIXTURES_DIR}/cache/some_link.html", :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+        run_proofer(File.join(FIXTURES_DIR, 'cache', 'some_link.html'), :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
         cache = read_cache(cache_filename)
         external_links = cache['external']

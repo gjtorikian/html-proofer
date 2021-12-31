@@ -15,7 +15,7 @@ describe HTMLProofer::Runner do
         request = r
       end
 
-      cassette_name = make_cassette_name("#{FIXTURES_DIR}/links/check_just_once.html", opts)
+      cassette_name = make_cassette_name(File.join(FIXTURES_DIR, 'links', 'check_just_once.html'), opts)
       VCR.use_cassette(cassette_name, record: :new_episodes) do
         capture_stderr { proofer.run }
         proofer
@@ -36,7 +36,7 @@ describe HTMLProofer::Runner do
       opts = {
         cache: { timeframe: '1d', cache_file: cache_file_name, storage_dir: storage_dir }
       }
-      dir = "#{FIXTURES_DIR}/links/_site"
+      dir = File.join(FIXTURES_DIR, 'links', '_site')
       proofer = make_proofer(dir, :directory, opts)
       request = nil
       auth = 'Bearer <TOKEN>'
