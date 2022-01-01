@@ -27,7 +27,7 @@ describe HTMLProofer::Runner do
     end
 
     it 'plays nice with cache' do
-      cache_file_name = '.runner.log'
+      cache_file_name = '.runner.json'
       storage_dir = File.join(FIXTURES_DIR, '/cache')
       cache_location = File.join(storage_dir, cache_file_name)
 

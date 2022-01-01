@@ -89,7 +89,7 @@ describe 'Cache test' do
   context 'version 2' do
     it 'knows how to write to cache' do
       test_file = File.join(cache_fixture_dir, 'internal_and_external_example.html')
-      cache_filename = File.join('version_2', '.htmlproofer_test.log')
+      cache_filename = File.join('version_2', '.htmlproofer_test.json')
       cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
       File.delete(cache_filepath) if File.exist?(cache_filepath)
@@ -136,7 +136,7 @@ describe 'Cache test' do
 
     context 'external links' do
       context 'dates' do
-        let(:cache_filename) { File.join('version_2', '.within_date_external.log') }
+        let(:cache_filename) { File.join('version_2', '.within_date_external.json') }
         it 'does not write file if timestamp is within date' do
           # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 27, 12, 0, 0)
@@ -164,7 +164,7 @@ describe 'Cache test' do
       end
 
       context 'new external url added' do
-        let(:cache_filename) { File.join('version_2', '.new_external_url.log') }
+        let(:cache_filename) { File.join('version_2', '.new_external_url.json') }
         it 'does write file if a new URL is added' do
           # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -182,7 +182,7 @@ describe 'Cache test' do
 
     context 'internal links' do
       context 'dates' do
-        let(:cache_filename) { File.join('version_2', '.within_date_internal.log') }
+        let(:cache_filename) { File.join('version_2', '.within_date_internal.json') }
         let(:test_file) { File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link.html') }
 
         it 'does not write file if timestamp is within date' do
@@ -213,8 +213,8 @@ describe 'Cache test' do
       end
 
       context 'new internal url added' do
-        let(:cache_filename) { File.join('version_2', '.new_internal_url.log') }
-        let(:cache_filepath) { File.join(cache_fixture_dir, 'version_2', '.new_internal_url.log') }
+        let(:cache_filename) { File.join('version_2', '.new_internal_url.json') }
+        let(:cache_filepath) { File.join(cache_fixture_dir, 'version_2', '.new_internal_url.json') }
         # this is frozen to within 30 days of the log
         let(:new_time) { Time.local(2015, 10, 20, 12, 0, 0) }
 
@@ -257,7 +257,7 @@ describe 'Cache test' do
 
     context 'rechecking failures' do
       it 'does recheck failures, regardless of cache' do
-        cache_filename = File.join('version_2', '.recheck_failure.log')
+        cache_filename = File.join('version_2', '.recheck_failure.json')
 
         expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
@@ -269,7 +269,7 @@ describe 'Cache test' do
       end
 
       it 'does recheck failures, regardless of external-only cache' do
-        cache_filename = File.join('version_2', '.recheck_external_failure.log')
+        cache_filename = File.join('version_2', '.recheck_external_failure.json')
         cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
         file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
@@ -290,7 +290,7 @@ describe 'Cache test' do
       end
 
       it 'does recheck failures, regardless of external and internal cache' do
-        cache_filename = File.join('version_2', '.internal_and_external.log')
+        cache_filename = File.join('version_2', '.internal_and_external.json')
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
         file = File.join(FIXTURES_DIR, 'cache', 'internal_and_external_example.html')
@@ -318,7 +318,7 @@ describe 'Cache test' do
     context 'removing links' do
       it 'removes external links that no longer exist' do
         test_file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
-        cache_filename = File.join('version_2', '.removed_link.log')
+        cache_filename = File.join('version_2', '.removed_link.json')
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
         File.delete(cache_location) if File.exist?(cache_location)

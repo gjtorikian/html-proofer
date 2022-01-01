@@ -11,7 +11,7 @@ module HTMLProofer
     CACHE_VERSION = 2
 
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
-    DEFAULT_CACHE_FILE_NAME = 'cache.log'
+    DEFAULT_CACHE_FILE_NAME = 'cache.json'
     DEFAULT_STRUCTURE = {
       version: CACHE_VERSION,
       internal: {},

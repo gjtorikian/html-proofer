@@ -69,7 +69,7 @@ module HTMLProofer
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: @runner.current_source, line: line }
+      @external_urls[url_string] << { filename: @runner.current_path, line: line }
     end
 
     private def base_url
