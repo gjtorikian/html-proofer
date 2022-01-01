@@ -11,9 +11,9 @@ module HTMLProofer
       @runner = runner
       @html   = remove_ignored(html)
 
-      @failures = []
-      @internal_urls = {}
       @external_urls = {}
+      @internal_urls = {}
+      @failures = []
     end
 
     def create_element(node)

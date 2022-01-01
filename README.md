@@ -314,7 +314,7 @@ The default value is:
 }
 ```
 
-On the CLI, you can provide the `--typhoeus` or `hydra` arguments. These are parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+On the CLI, you can provide the `--typhoeus` or `hydra` arguments to set the configurations. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 #### Setting `before-request` callback
 
@@ -342,7 +342,7 @@ In this example, `in_processes: 3` is passed into Parallel as a configuration op
 
 Pass in `:parallel => { enable: false }` to disable parallel runs.
 
-On the CLI, you can provide the `--parallel` argument. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+On the CLI, you can provide the `--parallel` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ## Configuring caching
 
@@ -379,7 +379,7 @@ The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
 
-On the CLI, you can provide the `--timeframe` or `--storage-dir` arguments to control the cache behavior.
+On the CLI, you can provide the `--cache` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ### Caching with continuous integration
 

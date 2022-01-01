@@ -91,54 +91,51 @@ module HTMLProofer
       m
     end
 
-    def detect_url_changes(found_urls, type)
-      # if there were no urls, bail
-      return {} if found_urls.empty?
+    def detect_url_changes(urls_detected, type)
+      additions = determine_additions(urls_detected, type)
 
-      additions = determine_additions(found_urls, type)
-
-      determine_deletions(found_urls, type)
+      determine_deletions(urls_detected, type)
 
       additions
     end
 
     # prepare to add new URLs detected
-    private def determine_additions(found_urls, type)
-      additions = found_urls.reject do |url, _|
+    private def determine_additions(urls_detected, type)
+      additions = urls_detected.reject do |url, _|
         # url = unescape_url(url)
         if @cache_log[type].include?(url)
           true
         else
-          @logger.log :debug, "Adding #{url} to cache check"
+          @logger.log :debug, "Adding #{url} to #{type} cache"
           false
         end
       end
 
       new_link_count = additions.length
-      new_link_text = pluralize(new_link_count, "#{type} link", "#{type} links")
-      @logger.log :info, "Adding #{new_link_text} to the cache..."
+      new_link_text = pluralize(new_link_count, "new #{type} link", "new #{type} links")
+      @logger.log :debug, "Adding #{new_link_text} to the cache"
 
       additions
     end
 
     # remove from cache URLs that no longer exist
-    private def determine_deletions(found_urls, type)
+    private def determine_deletions(urls_detected, type)
       deletions = 0
 
       @cache_log[type].delete_if do |url, _|
         url = unescape_url(url)
 
-        if found_urls.include?(url)
+        if urls_detected.include?(url)
           false
         elsif url_matches_type?(url, type)
-          @logger.log :debug, "Removing #{url} from cache check"
+          @logger.log :debug, "Removing #{url} from #{type} cache"
           deletions += 1
           true
         end
       end
 
-      del_link_text = pluralize(deletions, "#{type} link", "#{type} links")
-      @logger.log :info, "Removing #{del_link_text} from the cache..."
+      del_link_text = pluralize(deletions, "outdated #{type} link", "outdated #{type} links")
+      @logger.log :debug, "Removing #{del_link_text} from the cache"
     end
 
     def write
@@ -147,10 +144,11 @@ module HTMLProofer
       File.write(@cache_file, @cache_log.to_json)
     end
 
-    def retrieve_urls(urls, type)
-      return urls if empty?
+    def retrieve_urls(urls_detected, type)
+      # if there are no urls, bail
+      return {} if urls_detected.empty?
 
-      urls_to_check = detect_url_changes(urls, type)
+      urls_to_check = detect_url_changes(urls_detected, type)
 
       @cache_log[type].each_pair do |url, cache|
         next if within_timeframe?(cache[:time])
@@ -172,6 +170,10 @@ module HTMLProofer
 
     def empty?
       blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
+    end
+
+    def size(type)
+      @cache_log[type].size
     end
 
     private def setup_cache!(options)

@@ -16,9 +16,10 @@ module HTMLProofer
       @logger = HTMLProofer::Log.new(@options[:log_level])
       @cache = Cache.new(self, @options[:cache])
 
-      @internal_urls = {}
       @external_urls = {}
+      @internal_urls = {}
       @failures = []
+
       @before_request = []
 
       @checked_paths = {}
@@ -32,10 +33,10 @@ module HTMLProofer
       check_text = pluralize(checks.length, 'check', 'checks')
 
       if @type == :links
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source}... \n\n"
+        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n"
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} on *#{@options[:extensions].join(', ')}... \n\n"
+        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(', ')} files...\n\n"
 
         check_files
         @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
@@ -99,11 +100,12 @@ module HTMLProofer
 
       @source.each do |current_source|
         checks.each do |klass|
-          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
           @current_source = current_source
           @current_path = path
 
           check = Object.const_get(klass).new(self, @html)
+          @logger.log :debug, "Checking #{check.short_name} in #{path}"
+
           @current_check = check
 
           check.run
@@ -197,17 +199,23 @@ module HTMLProofer
     end
 
     def load_internal_cache
-      urls_to_check = @cache.retrieve_urls(@internal_urls, :internal)
-      cache_text = pluralize(urls_to_check.count, 'internal link', 'internal links')
-      @logger.log :info, "Found #{cache_text} in the cache..."
-
-      urls_to_check
+      load_cache(:internal)
     end
 
     def load_external_cache
-      urls_to_check = @cache.retrieve_urls(@external_urls, :external)
-      cache_text = pluralize(urls_to_check.count, 'external link', 'external links')
-      @logger.log :info, "Found #{cache_text} in the cache..."
+      load_cache(:external)
+    end
+
+    private def load_cache(type)
+      ivar = instance_variable_get("@#{type}_urls")
+
+      existing_urls_count = @cache.size(type)
+      cache_text = pluralize(existing_urls_count, "#{type} link", "#{type} links")
+      @logger.log :debug, "Found #{cache_text} in the cache"
+
+      urls_to_check = @cache.retrieve_urls(ivar, type)
+      urls_detected = pluralize(urls_to_check.count, "#{type} link", "#{type} links")
+      @logger.log :info, "Checking #{urls_detected}"
 
       urls_to_check
     end
