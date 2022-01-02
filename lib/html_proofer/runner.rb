@@ -188,7 +188,7 @@ module HTMLProofer
     end
 
     def failed_tests
-      @reporter.failures
+      @reporter.failures.flatten.select { |f| f.is_a?(Failure) }
     end
 
     def print_failed_tests
