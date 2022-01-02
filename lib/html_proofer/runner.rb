@@ -83,8 +83,8 @@ module HTMLProofer
               ivar[url].concat(metadata)
             end
           end
-          @failures.concat(result[:failures])
         end
+        @failures.concat(result[:failures])
       end
 
       validate_external_urls unless @options[:disable_external]

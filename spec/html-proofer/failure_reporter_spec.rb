@@ -25,18 +25,6 @@ describe HTMLProofer::FailureReporter do
 
            image ./gpl.png does not have an alt attribute
 
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 5):
-
-           internal image ./gpl.png does not exist
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 5):
-
-           image ./gpl.png does not have an alt attribute
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 6):
-
-           internal image NOT_AN_IMAGE does not exist
-
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 6):
 
            internal image NOT_AN_IMAGE does not exist
@@ -47,37 +35,17 @@ describe HTMLProofer::FailureReporter do
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 10):
 
-           internal image gpl.png does not exist
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 10):
-
-           image gpl.png does not have an alt attribute
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 10):
-
            image gpl.png does not have an alt attribute
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 12):
 
            image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 12):
-
-           image has a terrible filename (./Screen Shot 2012-08-09 at 7.51.18 AM.png)
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 12):
-
-           internal image ./Screen Shot 2012-08-09 at 7.51.18 AM.png does not exist
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 12):
 
            internal image ./Screen Shot 2012-08-09 at 7.51.18 AM.png does not exist
 
         For the Links check, the following failures were found:
-
-        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 8):
-
-           tel: contains no phone number
 
         * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 8):
 
@@ -106,6 +74,7 @@ describe HTMLProofer::FailureReporter do
 
         HTML-Proofer found 13 failures!
       MSG
+
       expect(output).to match(msg)
     end
   end
