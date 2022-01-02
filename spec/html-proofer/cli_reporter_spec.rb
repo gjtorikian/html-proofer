@@ -67,7 +67,7 @@ describe HTMLProofer::Reporter::Cli do
 
         For the Links > Internal check, the following failures were found:
 
-        * In nowhere.fooof (line 24):
+        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 24):
 
            internally linking to nowhere.fooof, which does not exist
 

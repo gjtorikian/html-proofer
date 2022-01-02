@@ -261,7 +261,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
-| `assume_extension` | Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) | `.html` |
+| `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
 | `attribute_override` | JSON-formatted string that maps elements names to the attribute to check | `{}` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
@@ -269,7 +269,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `extensions` | An array of Strings indicating the extensions you would like to check (including the dot) | `['.html']`
+| `extensions` | An array of Strings indicating the file extensions you would like to check (including the dot) | `['.html']`
 | `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |

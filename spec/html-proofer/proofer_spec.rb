@@ -9,9 +9,9 @@ describe HTMLProofer do
       proofer = run_proofer(broken_link_internal_filepath, :file)
       expect(proofer.failed_checks.length).to eq(2)
       expect(proofer.failed_checks[0].class).to eq(HTMLProofer::Failure)
-      expect(proofer.failed_checks.first.path).to eq('./notreal.html')
+      expect(proofer.failed_checks.first.path).to eq(broken_link_internal_filepath)
       expect(proofer.failed_checks.first.description).to eq('internally linking to ./notreal.html, which does not exist')
-      expect(proofer.failed_checks.first.line).to eq(5)
+      expect(proofer.failed_checks.first.line).to eq(3)
     end
   end
 
