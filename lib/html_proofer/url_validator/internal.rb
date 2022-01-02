@@ -18,7 +18,7 @@ module HTMLProofer
         run_internal_link_checker(@internal_urls)
       end
 
-      @failed_tests
+      @failed_checks
     end
 
     def run_internal_link_checker(links)
@@ -30,13 +30,13 @@ module HTMLProofer
           @runner.current_path = metadata[:current_path]
 
           unless file_exists?(url)
-            @failed_tests << Failure.new(url.to_s, 'Links > Internal', "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
+            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
             @cache.add_internal(url.to_s, metadata, false)
             next
           end
 
           unless hash_exists?(url)
-            @failed_tests << Failure.new(url.to_s, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash does not", line: metadata[:line], status: nil, content: nil)
+            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash does not", line: metadata[:line], status: nil, content: nil)
             @cache.add_internal(url.to_s, metadata, false)
             next
           end
@@ -45,7 +45,7 @@ module HTMLProofer
         end
       end
 
-      @failed_tests
+      @failed_checks
     end
 
     private def file_exists?(url)

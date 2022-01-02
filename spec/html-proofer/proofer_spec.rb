@@ -3,15 +3,15 @@
 require 'spec_helper'
 
 describe HTMLProofer do
-  describe '#failed_tests' do
+  describe '#failed_checks' do
     it 'is an array of Failures' do
       broken_link_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_link_internal.html')
       proofer = run_proofer(broken_link_internal_filepath, :file)
-      expect(proofer.failed_tests.length).to eq(2)
-      expect(proofer.failed_tests[0].class).to eq(HTMLProofer::Failure)
-      expect(proofer.failed_tests.first.path).to eq('./notreal.html')
-      expect(proofer.failed_tests.first.description).to eq('internally linking to ./notreal.html, which does not exist')
-      expect(proofer.failed_tests.first.line).to eq(5)
+      expect(proofer.failed_checks.length).to eq(2)
+      expect(proofer.failed_checks[0].class).to eq(HTMLProofer::Failure)
+      expect(proofer.failed_checks.first.path).to eq(broken_link_internal_filepath)
+      expect(proofer.failed_checks.first.description).to eq('internally linking to ./notreal.html, which does not exist')
+      expect(proofer.failed_checks.first.line).to eq(3)
     end
   end
 
@@ -50,28 +50,28 @@ describe HTMLProofer do
       options = { ignore_files: [File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')] }
       broken_hash_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')
       proofer = run_proofer(broken_hash_internal_filepath, :file, options)
-      expect(proofer.failed_tests).to eq([])
+      expect(proofer.failed_checks).to eq([])
     end
 
     it 'knows how to ignore a file by regexp' do
       options = { ignore_files: [/broken_hash/] }
       broken_hash_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')
       proofer = run_proofer(broken_hash_internal_filepath, :file, options)
-      expect(proofer.failed_tests).to eq([])
+      expect(proofer.failed_checks).to eq([])
     end
 
     it 'knows how to ignore multiple files by regexp' do
       options = { ignore_files: [%r{.*/javadoc/.*}, %r{.*/catalog/.*}] }
       broken_folders = File.join(FIXTURES_DIR, 'links', 'folder/multiples')
       proofer = run_proofer([broken_folders], :directories, options)
-      expect(proofer.failed_tests).to eq([])
+      expect(proofer.failed_checks).to eq([])
     end
 
     it 'knows how to ignore a directory by regexp' do
       options = { ignore_files: [/\S\.html/] }
       links_dir = File.join(FIXTURES_DIR, 'links')
       proofer = run_proofer([links_dir], :directories, options)
-      expect(proofer.failed_tests).to eq([])
+      expect(proofer.failed_checks).to eq([])
     end
   end
 
@@ -92,7 +92,7 @@ describe HTMLProofer do
   describe 'external links' do
     it 'ignores status codes when asked' do
       proofer = run_proofer(['www.github.com/github/notreallyhere'], :links, ignore_status_codes: [404])
-      expect(proofer.failed_tests.length).to eq(0)
+      expect(proofer.failed_checks.length).to eq(0)
     end
   end
 

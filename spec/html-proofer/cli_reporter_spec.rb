@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe HTMLProofer::FailureReporter do
+describe HTMLProofer::Reporter::Cli do
   describe 'cli_report' do
     it 'reports all issues accurately' do
       errors = File.join(FIXTURES_DIR, 'sorting', 'kitchen_sinkish.html')
@@ -67,7 +67,7 @@ describe HTMLProofer::FailureReporter do
 
         For the Links > Internal check, the following failures were found:
 
-        * In nowhere.fooof (line 24):
+        * In spec/html-proofer/fixtures/sorting/kitchen_sinkish.html (line 24):
 
            internally linking to nowhere.fooof, which does not exist
 

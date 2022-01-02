@@ -261,7 +261,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
-| `assume_extension` | Automatically add specified extension to file paths, to allow extensionless URLs (as supported by static sites) | `.html` |
+| `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
 | `attribute_override` | JSON-formatted string that maps elements names to the attribute to check | `{}` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
@@ -269,7 +269,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `extensions` | An array of Strings indicating the extensions you would like to check (including the dot) | `['.html']`
+| `extensions` | An array of Strings indicating the file extensions you would like to check (including the dot) | `['.html']`
 | `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
 | `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
@@ -428,30 +428,42 @@ Here's an example custom test demonstrating these concepts. It reports `mailto` 
 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
-  def mailto?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /mailto/
-  end
-
-  def octocat?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /octocat@github.com/
+  def mailto_octocat?
+    @link.url.raw_attribute == 'mailto:octocat@github.com'
   end
 
   def run
     @html.css('a').each do |node|
       @link = create_element(node)
-      line = node.line
 
-      if mailto? && octocat?
-        return add_failure("Don't email the Octocat directly!", line: line)
-      end
+      next if @link.ignore?
+
+      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
     end
   end
 end
 ```
 
+Don't forget to include this new check in HTMLProofer's options, for example:
+
+```ruby
+# removes default checks and just runs this one
+HTMLProofer.check_directories(["out/"], {checks: ['MailToOctocat']})
+```
+
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
+
+## Reporting
+
+By default, HTML-Proofer has its own reporting mechanism to print errors at the end of the run. You can choose to use your own reporter by passing in your own subclass of `HTMLProofer::Reporter`:
+
+``` ruby
+proofer = HTMLProofer.check_directory(item, opts)
+proofer.reporter = MyCustomReporter.new(logger: proofer.logger)
+proofer.run
+```
+
+Your custom reporter must implement the `report` function which implements the behavior you wish to see. The `logger` kwarg is optional.
 
 ## Troubleshooting
 

@@ -49,7 +49,7 @@ describe HTMLProofer::Element do
     it 'does not explode if given a bad attribute' do
       broken_attribute = File.join(FIXTURES_DIR, 'html', 'invalid_attribute.html')
       proofer = run_proofer(broken_attribute, :file)
-      expect(proofer.failed_tests.length).to eq 0
+      expect(proofer.failed_checks.length).to eq 0
     end
   end
 end
