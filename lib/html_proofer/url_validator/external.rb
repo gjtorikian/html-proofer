@@ -26,7 +26,7 @@ module HTMLProofer
         run_external_link_checker(@external_urls)
       end
 
-      @failed_tests
+      @failed_checks
     end
 
     def remove_query_values(external_urls)
@@ -212,9 +212,9 @@ module HTMLProofer
 
     def add_failure(metadata, description, status = nil)
       if blank?(metadata) # possible if we're checking an array of links
-        @failed_tests << Failure.new('', 'Links > External', description, status: status)
+        @failed_checks << Failure.new('', 'Links > External', description, status: status)
       else
-        metadata.each { |m| @failed_tests << Failure.new(m[:filename], 'Links > External', description, line: m[:line], status: status) }
+        metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > External', description, line: m[:line], status: status) }
       end
     end
 

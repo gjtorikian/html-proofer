@@ -54,7 +54,7 @@ module HTMLProofer
         @logger.log :info, 'HTML-Proofer finished successfully.'
       else
         @failures.uniq!
-        print_failed_tests
+        report_failed_checks
       end
     end
 
@@ -187,11 +187,11 @@ module HTMLProofer
       @checks
     end
 
-    def failed_tests
+    def failed_checks
       @reporter.failures.flatten.select { |f| f.is_a?(Failure) }
     end
 
-    def print_failed_tests
+    def report_failed_checks
       @reporter.report
 
       failure_text = pluralize(@failures.length, 'failure', 'failures')
