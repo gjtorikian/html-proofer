@@ -1,6 +1,6 @@
 # HTMLProofer
 
-If you generate HTML files, _then this tool might be for you_.
+If you generate HTML files, _then this tool might be for you_!
 
 ## Project scope
 
@@ -10,7 +10,7 @@ In scope for this project is any well-known and widely-used test for HTML docume
 
 **Third-party modules.** We want this product to be useful for continuous integration so we prefer to avoid subjective tests which are prone to false positive results, such as spell checkers, indentation checkers, etc. If you want to work on these items, please see [the section on custom tests](#custom-tests) and consider adding an implementation as a third-party module.
 
-**Advanced configuration.** Most front-end developers can test their HTML using [our command line program](#using-on-the-command-line). Advanced configuration will [require using Ruby](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
+**Advanced configuration.** Most front-end developers can test their HTML using [our command line program](#using-on-the-command-line). Advanced configuration will require using Ruby.
 
 ## Installation
 
@@ -30,7 +30,7 @@ Or install it yourself as:
 
 ## What's tested?
 
-Below is mostly comprehensive list of checks that HTMLProofer can perform.
+Below is a mostly comprehensive list of checks that HTMLProofer can perform.
 
 ### Images
 
@@ -262,9 +262,8 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
 | `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
-| `attribute_override` | JSON-formatted string that maps elements names to the attribute to check | `{}` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
-| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
+| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `true` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |
@@ -278,6 +277,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
+| `swap_attributes` | JSON-formatted string that maps element names to the preferred attribute to check | `{}` |
 | `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 
 In addition, there are a few "namespaced" options. These are:
@@ -285,8 +285,6 @@ In addition, there are a few "namespaced" options. These are:
 * `:typhoeus` / `:hydra`
 * `:parallel`
 * `:cache`
-
-See below for more information.
 
 ### Configuring Typhoeus and Hydra
 

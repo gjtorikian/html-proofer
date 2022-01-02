@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - Cowboy
+      x-ratelimit-limit:
+      - '250'
+      x-ratelimit-remaining:
+      - '249'
+      x-ratelimit-reset:
+      - '1641154795'
+      access-control-allow-origin:
+      - "*"
+      content-security-policy:
+      - 'default-src ''none'';prefetch-src ''self'';connect-src ''self'';font-src
+        ''self'' data: githubdocs.azureedge.net;img-src ''self'' data: github.githubassets.com
+        githubdocs.azureedge.net placehold.it *.githubusercontent.com github.com;object-src
+        ''self'';script-src ''self'' data:;frame-src https://graphql-explorer.githubapp.com
+        https://graphql.github.com/ http://localhost:3000 https://www.youtube-nocookie.com;style-src
+        ''self'' ''unsafe-inline'';child-src ''self'''
+      x-dns-prefetch-control:
+      - 'off'
+      expect-ct:
+      - max-age=0
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - _csrf=7eX_G2Mw-dnjTA3BJvYgQUVw; Path=/; HttpOnly; Secure; SameSite=Lax
+      cache-control:
+      - private, no-store
+      x-powered-by:
+      - Next.js
+      etag:
+      - '"5237c-yWu9af18QHYLVCnNZtagf40vm2w"'
+      content-type:
+      - text/html; charset=utf-8
+      via:
+      - 1.1 vegur, 1.1 varnish
+      accept-ranges:
+      - bytes
+      date:
+      - Sun, 02 Jan 2022 20:18:54 GMT
+      x-served-by:
+      - cache-ewr18148-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1641154735.893454,VS0,VE96
+      vary:
+      - Accept-Encoding
+      content-length:
+      - '336764'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
+  recorded_at: Sun, 02 Jan 2022 20:18:55 GMT
+recorded_with: VCR 2.9.3

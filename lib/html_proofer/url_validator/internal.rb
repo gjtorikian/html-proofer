@@ -36,7 +36,7 @@ module HTMLProofer
           end
 
           unless hash_exists?(url)
-            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash does not", line: metadata[:line], status: nil, content: nil)
+            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: metadata[:line], status: nil, content: nil)
             @cache.add_internal(url.to_s, metadata, false)
             next
           end

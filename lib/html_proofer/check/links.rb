@@ -12,6 +12,14 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
         next
       end
 
+      # is there even an href?
+      if blank?(@link.url.raw_attribute)
+        next if allow_missing_href?
+
+        add_failure("'#{@link.node.name}' tag is missing a reference", line: @link.line, content: @link.content)
+        next
+      end
+
       # is it even a valid URL?
       unless @link.url.valid?
         add_failure("#{@link.href} is an invalid URL", line: @link.line, content: @link.content)
@@ -19,14 +27,6 @@ class HTMLProofer::Check::Links < HTMLProofer::Check
       end
 
       check_schemes
-
-      # is there even an href?
-      if @link.link_attribute.nil?
-        next if allow_missing_href?
-
-        add_failure("#{@link.node.name} is missing a reference", line: @link.line, content: @link.content)
-        next
-      end
 
       # intentionally down here because we still want valid? & missing_href? to execute
       next if @link.url.non_http_remote?
