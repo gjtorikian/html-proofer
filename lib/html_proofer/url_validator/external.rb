@@ -16,6 +16,8 @@ module HTMLProofer
       @external_urls = external_urls
       @hydra = Typhoeus::Hydra.new(@runner.options[:hydra])
       @before_request = []
+
+      @paths_with_queries = {}
     end
 
     def validate
@@ -29,44 +31,6 @@ module HTMLProofer
       @failed_checks
     end
 
-    def remove_query_values(external_urls)
-      return nil if external_urls.nil?
-
-      paths_with_queries = {}
-      iterable_external_urls = external_urls.dup
-      @external_urls.each_key do |url|
-        uri = begin
-          Addressable::URI.parse(url)
-        rescue URI::Error, Addressable::URI::InvalidURIError
-          @logger.log :error, "#{url} is an invalid URL"
-          nil
-        end
-        next if uri.nil? || uri.query.nil?
-
-        iterable_external_urls.delete(url) unless new_url_query_values?(uri, paths_with_queries)
-      end
-      iterable_external_urls
-    end
-
-    # remember queries we've seen, ignore future ones
-    def new_url_query_values?(uri, paths_with_queries)
-      queries = uri.query_values.keys.join('-')
-      domain_path = extract_domain_path(uri)
-      if paths_with_queries[domain_path].nil?
-        paths_with_queries[domain_path] = [queries]
-        true
-      elsif !paths_with_queries[domain_path].include?(queries)
-        paths_with_queries[domain_path] << queries
-        true
-      else
-        false
-      end
-    end
-
-    def extract_domain_path(uri)
-      uri.host + uri.path
-    end
-
     # Proofer runs faster if we pull out all the external URLs and run the checks
     # at the end. Otherwise, we're halting the consuming process for every file during
     # `process_files`.
@@ -78,26 +42,20 @@ module HTMLProofer
     # for HEAD. If we've decided to check for hashes, we must do a GET--HEAD is
     # not available as an option.
     def run_external_link_checker(external_urls)
-      external_urls = remove_query_values(external_urls)
-
       # Route log from Typhoeus/Ethon to our own logger
       Ethon.logger = @logger
 
-      establish_queue(external_urls)
+      external_urls.each_pair do |external_url, metadata|
+        url = Attribute::Url.new(@runner, external_url, base_url: nil)
 
-      @hydra.run
-    end
-
-    def establish_queue(external_urls)
-      external_urls.each_pair do |url, metadata|
-        url = begin
-          clean_url(url)
-        rescue URI::Error, Addressable::URI::InvalidURIError
-          add_failure(metadata, "#{url} is an invalid URL")
+        unless url.valid?
+          add_failure(metadata, "#{url} is an invalid URL", 0)
           next
         end
 
-        method = if hash?(url) && @runner.options[:check_external_hash]
+        next unless new_url_query_values?(url)
+
+        method = if @runner.options[:check_external_hash] && url.hash?
                    :get
                  else
                    :head
@@ -105,32 +63,23 @@ module HTMLProofer
 
         queue_request(method, url, metadata)
       end
+
+      @hydra.run
     end
 
-    def clean_url(href)
-      # catch any obvious issues, like strings in port numbers
-      parsed = Addressable::URI.parse(href)
-      if href =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
-        href
-      else
-        parsed.normalize
-      end
-    end
-
-    def queue_request(method, href, filenames)
+    def queue_request(method, url, filenames)
       opts = @runner.options[:typhoeus].merge(method: method)
-      request = Typhoeus::Request.new(href, opts)
+      request = Typhoeus::Request.new(url.url, opts)
       @before_request.each do |callback|
         callback.call(request)
       end
-      request.on_complete { |response| response_handler(response, filenames) }
+      request.on_complete { |response| response_handler(response, url, filenames) }
       @hydra.queue request
     end
 
-    def response_handler(response, filenames)
-      effective_url = response.options[:effective_url]
-      href = response.request.base_url.to_s
+    def response_handler(response, url, filenames)
       method = response.request.options[:method]
+      href = response.request.base_url.to_s
       response_code = response.code
       response.body.delete!("\x00")
 
@@ -139,13 +88,13 @@ module HTMLProofer
       return if @runner.options[:ignore_status_codes].include?(response_code)
 
       if response_code.between?(200, 299)
-        @cache.add_external(href, filenames, response_code, 'OK') unless check_hash_in_2xx_response(href, effective_url, response, filenames)
+        @cache.add_external(href, filenames, response_code, 'OK') unless check_hash_in_2xx_response(href, url, response, filenames)
       elsif response.timed_out?
         handle_timeout(href, filenames, response_code)
       elsif response_code.zero?
-        handle_connection_failure(effective_url, filenames, response_code, response.status_message)
-      elsif method == :head
-        queue_request(:get, href, filenames)
+        handle_connection_failure(href, filenames, response_code, response.status_message)
+      elsif method == :head # some servers don't support HEAD
+        queue_request(:get, url, filenames)
       else
         return if @runner.options[:only_4xx] && !response_code.between?(400, 499)
 
@@ -159,17 +108,19 @@ module HTMLProofer
 
     # Even though the response was a success, we may have been asked to check
     # if the hash on the URL exists on the page
-    def check_hash_in_2xx_response(href, effective_url, response, filenames)
+    def check_hash_in_2xx_response(href, url, response, filenames)
       return false if @runner.options[:only_4xx]
       return false unless @runner.options[:check_external_hash]
-      return false unless (hash = hash?(href))
+      return false unless url.hash?
+
+      hash = url.hash
 
       body_doc = create_nokogiri(response.body)
 
       unencoded_hash = Addressable::URI.unescape(hash)
       xpath = [%(//*[@name="#{hash}"]|/*[@name="#{unencoded_hash}"]|//*[@id="#{hash}"]|//*[@id="#{unencoded_hash}"])]
       # user-content is a special addition by GitHub.
-      if URI.parse(href).host =~ /github\.com/i
+      if url.host =~ /github\.com/i
         xpath << [%(//*[@name="user-content-#{hash}"]|//*[@id="user-content-#{hash}"])]
         # when linking to a file on GitHub, like #L12-L34, only the first "L" portion
         # will be identified as a linkable portion
@@ -178,7 +129,7 @@ module HTMLProofer
 
       return unless body_doc.xpath(xpath.join('|')).empty?
 
-      msg = "External link #{href} failed: #{effective_url} exists, but the hash '#{hash}' does not"
+      msg = "External link #{href} failed: #{url.sans_hash} exists, but the hash '#{hash}' does not"
       add_failure(filenames, msg, response.code)
       @cache.add_external(href, filenames, response.code, msg)
       true
@@ -218,11 +169,21 @@ module HTMLProofer
       end
     end
 
-    # Does the URL have a hash?
-    def hash?(url)
-      URI.parse(url).fragment
-    rescue URI::InvalidURIError
-      false
+    # remember queries we've seen, ignore future ones
+    private def new_url_query_values?(url)
+      return true if (query_values = url.query_values).nil?
+
+      queries = query_values.keys.join('-')
+      domain_path = url.domain_path
+      if @paths_with_queries[domain_path].nil?
+        @paths_with_queries[domain_path] = [queries]
+        true
+      elsif !@paths_with_queries[domain_path].include?(queries)
+        @paths_with_queries[domain_path] << queries
+        true
+      else
+        false
+      end
     end
   end
 end

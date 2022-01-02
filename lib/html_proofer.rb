@@ -1,12 +1,5 @@
 # frozen_string_literal: true
 
-# def require_all(path)
-#   dir = File.join(File.dirname(__FILE__), path)
-#   Dir[File.join(dir, '*.rb')].sort.each do |f|
-#     require f
-#   end
-# end
-
 require 'zeitwerk'
 lib_dir = File.join(File.dirname(__dir__), 'lib')
 gem_loader = Zeitwerk::Loader.for_gem

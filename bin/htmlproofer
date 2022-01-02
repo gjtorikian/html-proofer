@@ -19,9 +19,8 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'allow_missing_href', '--allow-missing-href', 'If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.'
   p.option 'as_links', '--as-links', 'Assumes that `PATH` is a comma-separated array of links to check.'
   p.option 'assume_extension', '--assume-extension <ext>', 'Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) (default: `.html`).'
-  p.option 'attribute_override', '--attribute-override CONFIG', String, 'JSON-formatted string that maps elements names to the attribute to check (default: `{}`).'
   p.option 'checks', '--checks check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you want to run (default: `["Links", "Images", "Scripts"]`)'
-  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists) (default: `false`).'
+  p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists) (default: `true`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker (default: `false`)'
@@ -35,6 +34,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
+  p.option 'swap_attributes', '--swap-attributes CONFIG', String, 'JSON-formatted config that maps element names to the preferred attribute to check (default: `{}`).'
   p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
 
   p.option 'typhoeus', '--typhoeus CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
@@ -73,7 +73,7 @@ Mercenary.program(:htmlproofer) do |p|
     options[:parallel] = HTMLProofer::Configuration.parse_json_option('parallel', opts['parallel']) unless opts['parallel'].nil?
     options[:cache] = HTMLProofer::Configuration.parse_json_option('cache', opts['cache']) unless opts['cache'].nil?
 
-    options[:attribute_override] = HTMLProofer::Configuration.parse_json_option('attribute_override', opts['attribute_override'], symbolize_names: false) unless opts['attribute_override'].nil?
+    options[:swap_attributes] = HTMLProofer::Configuration.parse_json_option('swap_attributes', opts['swap_attributes'], symbolize_names: false) unless opts['swap_attributes'].nil?
 
     options[:ignore_status_codes] = Array(options[:ignore_status_codes]).map(&:to_i)
 

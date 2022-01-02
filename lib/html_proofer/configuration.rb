@@ -8,8 +8,7 @@ module HTMLProofer
       allow_hash_href: true,
       allow_missing_href: false,
       assume_extension: '.html',
-      attribute_override: {},
-      check_external_hash: false,
+      check_external_hash: true,
       checks: DEFAULT_TESTS,
       directory_index_file: 'index.html',
       disable_external: false,
@@ -22,6 +21,7 @@ module HTMLProofer
       extensions: ['.html'],
       log_level: :info,
       only_4xx: false,
+      swap_attributes: {},
       swap_urls: {}
     }.freeze
 
@@ -54,7 +54,6 @@ module HTMLProofer
       options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
       options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
-      # TODO: make sure user can't add own src
       options.delete(:src)
 
       options

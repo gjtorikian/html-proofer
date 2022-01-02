@@ -21,11 +21,14 @@ module HTMLProofer
     end
 
     def link_attribute
-      meta_content || src || srcset || href || attribute_override
+      meta_content || src || srcset || href
     end
 
     def meta_content
-      @node['content'] if meta_tag?
+      return nil unless meta_tag?
+      return swap_attributes('content') if attribute_swapped?
+
+      @node['content']
     end
 
     def meta_tag?
@@ -33,7 +36,10 @@ module HTMLProofer
     end
 
     def src
-      @node['src'] if img_tag? || script_tag? || source_tag?
+      return nil if !img_tag? && !script_tag? && !source_tag?
+      return swap_attributes('src') if attribute_swapped?
+
+      @node['src']
     end
 
     def img_tag?
@@ -45,7 +51,10 @@ module HTMLProofer
     end
 
     def srcset
-      @node['srcset'] if img_tag? || source_tag?
+      return nil if !img_tag? && !source_tag?
+      return swap_attributes('srcset') if attribute_swapped?
+
+      @node['srcset']
     end
 
     def source_tag?
@@ -53,7 +62,10 @@ module HTMLProofer
     end
 
     def href
-      @node['href'] if a_tag? || link_tag?
+      return nil if !a_tag? && !link_tag?
+      return swap_attributes('href') if attribute_swapped?
+
+      @node['href']
     end
 
     def a_tag?
@@ -81,10 +93,24 @@ module HTMLProofer
       false
     end
 
-    private def attribute_override
-      return nil if blank?(@runner.options[:attribute_override])
+    private def attribute_swapped?
+      return false if blank?(@runner.options[:swap_attributes])
 
-      @node[@runner.options[:attribute_override][@node.name]]
+      attrs = @runner.options[:swap_attributes][@node.name]
+
+      return true unless blank?(attrs)
+    end
+
+    private def swap_attributes(old_attr)
+      attrs = @runner.options[:swap_attributes][@node.name]
+
+      new_attr = attrs.find do |(o, _)|
+        o == old_attr
+      end&.last
+
+      return nil if blank?(new_attr)
+
+      @node[new_attr]
     end
 
     private def ancestors_ignorable?

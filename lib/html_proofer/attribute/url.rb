@@ -3,6 +3,8 @@
 class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   attr_reader :url
 
+  REMOTE_SCHEMES = %w[http https].freeze
+
   def initialize(runner, link_attribute, base_url: nil)
     super
 
@@ -12,7 +14,8 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
       @url = @raw_attribute.delete("\u200b").strip
       @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
 
-      @url = swap_urls
+      swap_urls!
+      clean_url!
 
       # convert "//" links to "https://"
       @url.start_with?('//') ? @url = "https:#{@url}" : @url
@@ -44,7 +47,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   end
 
   def valid?
-    !parts.nil? || raw_attribute.nil? # it's valid because it doesn't exist, which is okay in HTML5
+    !parts.nil?
   end
 
   def path?
@@ -65,13 +68,17 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     parts&.fragment
   end
 
+  # Does the URL have a hash?
+  def hash?
+    !blank?(hash)
+  end
+
   def scheme
     parts&.scheme
   end
 
-  # path is to an external server
   def remote?
-    %w[http https].include?(scheme)
+    REMOTE_SCHEMES.include?(scheme)
   end
 
   def http?
@@ -86,16 +93,28 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     !scheme.nil? && !remote?
   end
 
+  def host
+    parts&.host
+  end
+
+  def domain_path
+    host + path
+  end
+
+  def query_values
+    parts&.query_values
+  end
+
   # checks if a file exists relative to the current pwd
   def exists?
-    return true if base64_link?
+    return true if base64?
 
     return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
 
     @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
   end
 
-  def base64_link?
+  def base64?
     /^data:image/.match?(@raw_attribute)
   end
 
@@ -176,17 +195,26 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
     url.start_with?('?')
   end
 
-  private def swap_urls
+  def sans_hash
+    @url.to_s.sub(/##{hash}/, '')
+  end
+
+  # catch any obvious issues, like strings in port numbers
+  private def clean_url!
+    return if @url =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
+
+    @url = Addressable::URI.parse(@url).normalize.to_s
+  end
+
+  private def swap_urls!
     return @url if blank?(replacements = @runner.options[:swap_urls])
 
     replacements.each do |link, replace|
       @url = @url.gsub(link, replace)
     end
-
-    @url
   end
 
-  def ignores_pattern?(links_to_ignore)
+  private def ignores_pattern?(links_to_ignore)
     return false unless links_to_ignore.is_a?(Array)
 
     links_to_ignore.each do |link_to_ignore|

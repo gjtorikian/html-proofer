@@ -42,4 +42,43 @@ http_interactions:
     adapter_metadata:
       effective_url: https://travel.state.gov/content/dam/passports/FIG_cropper.swf
   recorded_at: Fri, 31 Dec 2021 16:37:46 GMT
+- request:
+    method: head
+    uri: https://travel.state.gov/content/dam/passports/FIG_cropper.swf#
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Date:
+      - Sun, 02 Jan 2022 20:08:48 GMT
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      Vary:
+      - Accept-Encoding
+      Connection:
+      - close
+      Content-Type:
+      - text/html;charset=utf-8
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://travel.state.gov/content/dam/passports/FIG_cropper.swf
+  recorded_at: Sun, 02 Jan 2022 20:08:48 GMT
 recorded_with: VCR 2.9.3

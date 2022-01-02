@@ -6,18 +6,18 @@ describe 'Links test' do
   it 'fails for broken internal hash (even if the file exists)' do
     broken_hash_external_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_external_file.html')
     proofer = run_proofer(broken_hash_external_filepath, :file)
-    expect(proofer.failed_checks.last.description).to match(%r{internally linking to ../images/missing_image_alt.html#asdfasfdkafl; the file exists, but the hash does not})
+    expect(proofer.failed_checks.last.description).to match(%r{internally linking to ../images/missing_image_alt.html#asdfasfdkafl; the file exists, but the hash 'asdfasfdkafl' does not})
   end
 
   it 'fails for broken hashes on the web when asked (even if the file exists)' do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, 'links', 'broken_hash_on_the_web.html')
-    proofer = run_proofer(broken_hash_on_the_web, :file, check_external_hash: true)
+    proofer = run_proofer(broken_hash_on_the_web, :file)
     expect(proofer.failed_checks.first.description).to match(/but the hash 'no' does not/)
   end
 
   it 'passes for broken hashes on the web when ignored (even if the file exists)' do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, 'links', 'broken_hash_on_the_web.html')
-    proofer = run_proofer(broken_hash_on_the_web, :file)
+    proofer = run_proofer(broken_hash_on_the_web, :file, check_external_hash: false)
     expect(proofer.failed_checks).to eq []
   end
 
@@ -29,7 +29,7 @@ describe 'Links test' do
 
   it 'passes for GitHub hashes to a file on the web when asked' do
     github_hash = File.join(FIXTURES_DIR, 'links', 'github_file_hash.html')
-    proofer = run_proofer(github_hash, :file, check_external_hash: true)
+    proofer = run_proofer(github_hash, :file)
     expect(proofer.failed_checks).to eq []
   end
 
@@ -43,7 +43,7 @@ describe 'Links test' do
   it 'fails for broken internal hash' do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_hash_internal.html')
     proofer = run_proofer(broken_hash_internal_filepath, :file)
-    expect(proofer.failed_checks.first.description).to match(/internally linking to #noHash; the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/internally linking to #noHash; the file exists, but the hash 'noHash' does not/)
   end
 
   it 'passes when linking to the top' do
@@ -57,7 +57,6 @@ describe 'Links test' do
     proofer = run_proofer(broken_link_external_filepath, :file)
     failure = proofer.failed_checks.first.description
     expect(failure).to match(/failed: response code 0/)
-    expect(failure).to match(%r{External link https://www.asdo3IRJ395295jsingrkrg4.com/ failed:})
   end
 
   it 'passes for different filename without option' do
@@ -99,7 +98,7 @@ describe 'Links test' do
 
   it 'allows link with no href' do
     missing_link_href_filepath = File.join(FIXTURES_DIR, 'links', 'missing_link_href.html')
-    proofer = run_proofer(missing_link_href_filepath, :file)
+    proofer = run_proofer(missing_link_href_filepath, :file, allow_missing_href: true)
     expect(proofer.failed_checks).to eq []
   end
 
@@ -131,7 +130,7 @@ describe 'Links test' do
   it 'fails for broken hash links with status code numbers' do
     broken_link_with_number_filepath = File.join(FIXTURES_DIR, 'links', 'broken_link_with_number.html')
     proofer = run_proofer(broken_link_with_number_filepath, :file)
-    expect(proofer.failed_checks.first.description).to match(/internally linking to #25-method-not-allowed; the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/internally linking to #25-method-not-allowed; the file exists, but the hash '25-method-not-allowed' does not/)
   end
 
   it 'should understand relative hash' do
@@ -190,7 +189,7 @@ describe 'Links test' do
   it 'finds a mix of broken and unbroken links' do
     multiple_problems = File.join(FIXTURES_DIR, 'links', 'multiple_problems.html')
     proofer = run_proofer(multiple_problems, :file)
-    expect(proofer.failed_checks.first.description).to match(/internally linking to #anadaasdadsadschor; the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/internally linking to #anadaasdadsadschor; the file exists, but the hash 'anadaasdadsadschor' does not/)
   end
 
   it 'ignores valid mailto links' do
@@ -255,7 +254,7 @@ describe 'Links test' do
 
   it 'allows empty href on link elements' do
     head_link = File.join(FIXTURES_DIR, 'links', 'head_link_href_empty.html')
-    proofer = run_proofer(head_link, :file)
+    proofer = run_proofer(head_link, :file, allow_missing_href: true)
     expect(proofer.failed_checks).to eq []
   end
 
@@ -312,7 +311,7 @@ describe 'Links test' do
   it 'fails for broken hash with query' do
     broken_hash = File.join(FIXTURES_DIR, 'links', 'broken_hash_with_query.html')
     proofer = run_proofer(broken_hash, :file)
-    expect(proofer.failed_checks.first.description).to match(/#example; the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/#example; the file exists, but the hash 'example' does not/)
   end
 
   it 'passes when linking to hash on another page' do
@@ -324,7 +323,7 @@ describe 'Links test' do
   it 'fails for mismatched hash casing' do
     hash_on_another_page = File.join(FIXTURES_DIR, 'links', 'hash_mismatched_case.html')
     proofer = run_proofer(hash_on_another_page, :file)
-    expect(proofer.failed_checks.first.description).to match('#MainMenu; the file exists, but the hash does not')
+    expect(proofer.failed_checks.first.description).to match('#MainMenu; the file exists, but the hash \'MainMenu\' does not')
   end
 
   it 'works for directory index file' do
@@ -623,7 +622,7 @@ describe 'Links test' do
 
   it 'correctly handles empty href' do
     file = File.join(FIXTURES_DIR, 'links', 'empty_href.html')
-    proofer = run_proofer(file, :file, check_external_hash: true)
+    proofer = run_proofer(file, :file)
     expect(proofer.failed_checks.length).to eq 1
   end
 
@@ -641,7 +640,7 @@ describe 'Links test' do
 
   it 'can link to external non-unicode hash' do
     file = File.join(FIXTURES_DIR, 'links', 'hash_to_unicode_ref.html')
-    proofer = run_proofer(file, :file, check_external_hash: true)
+    proofer = run_proofer(file, :file)
     expect(proofer.failed_checks).to eq []
   end
 
@@ -672,7 +671,7 @@ describe 'Links test' do
   it 'reports linked internal through directory' do
     file = File.join(FIXTURES_DIR, 'links', 'hashes')
     proofer = run_proofer(file, :directory)
-    expect(proofer.failed_checks.first.description).to match(/the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/the file exists, but the hash 'generating-and-submitting' does not/)
   end
 
   it 'works for hash hrefs' do
@@ -697,7 +696,7 @@ describe 'Links test' do
     file = File.join(FIXTURES_DIR, 'links', 'pdfs.html')
     proofer = run_proofer(file, :file)
     expect(proofer.failed_checks.count).to eq 3
-    expect(proofer.failed_checks.first.description).to match(/internally linking to exists.pdf#page=2; the file exists, but the hash does not/)
+    expect(proofer.failed_checks.first.description).to match(/internally linking to exists.pdf#page=2; the file exists, but the hash 'page=2' does not/)
     expect(proofer.failed_checks.last.description).to match(/internally linking to missing.pdf#page=2, which does not exist/)
   end
 end
