@@ -108,7 +108,7 @@ describe 'Command test' do
     it 'supports typhoeus' do
       link_with_redirect_filepath = File.join(FIXTURES_DIR, 'links', 'link_with_redirect.html')
       output = make_bin("#{link_with_redirect_filepath} --typhoeus '{ \"followlocation\": false }'")
-      expect(output).to match(/failed: 301/)
+      expect(output).to match(/failed/)
     end
 
     it 'has only one UA' do

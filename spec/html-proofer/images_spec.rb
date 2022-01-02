@@ -12,19 +12,19 @@ describe 'Images test' do
   it 'fails for image without alt attribute' do
     missing_alt_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_alt.html')
     proofer = run_proofer(missing_alt_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/gpl.png does not have an alt attribute/)
+    expect(proofer.failed_tests.first.description).to match(/gpl.png does not have an alt attribute/)
   end
 
   it 'fails for image with an empty alt attribute' do
     missing_alt_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_alt_text.html')
     proofer = run_proofer(missing_alt_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/gpl.png does not have an alt attribute/)
+    expect(proofer.failed_tests.first.description).to match(/gpl.png does not have an alt attribute/)
   end
 
   it 'fails for image with nothing but spaces in alt attribute' do
     empty_alt_filepath = File.join(FIXTURES_DIR, 'images', 'empty_image_alt_text.html')
     proofer = run_proofer(empty_alt_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/gpl.png does not have an alt attribute/)
+    expect(proofer.failed_tests.first.description).to match(/gpl.png does not have an alt attribute/)
     expect(proofer.failed_tests.length).to eq(4)
   end
 
@@ -49,25 +49,25 @@ describe 'Images test' do
   it 'fails for missing external images' do
     external_image_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_external.html')
     proofer = run_proofer(external_image_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/failed: response code 0/)
+    expect(proofer.failed_tests.first.description).to match(/failed: response code 0/)
   end
 
   it 'fails for missing internal images' do
     internal_image_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_internal.html')
     proofer = run_proofer(internal_image_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/doesnotexist.png does not exist/)
+    expect(proofer.failed_tests.first.description).to match(/doesnotexist.png does not exist/)
   end
 
   it 'fails for image with no src' do
     image_src_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_src.html')
     proofer = run_proofer(image_src_filepath, :file)
-    expect(proofer.failed_tests.first.desc).to match(/image has no src or srcset attribute/)
+    expect(proofer.failed_tests.first.description).to match(/image has no src or srcset attribute/)
   end
 
   it 'fails for image with default macOS filename' do
     terrible_image_name = File.join(FIXTURES_DIR, 'images', 'terrible_image_name.html')
     proofer = run_proofer(terrible_image_name, :file)
-    expect(proofer.failed_tests.first.desc).to match(/image has a terrible filename/)
+    expect(proofer.failed_tests.first.description).to match(/image has a terrible filename/)
   end
 
   it 'ignores images marked as ignore data-proofer-ignore' do
@@ -113,7 +113,7 @@ describe 'Images test' do
   it 'fails for invalid images missing the protocol' do
     missing_protocol_link = File.join(FIXTURES_DIR, 'images', 'image_missing_protocol_invalid.html')
     proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_tests.first.desc).to match(/failed: 404/)
+    expect(proofer.failed_tests.first.description).to match(/failed/)
   end
 
   it 'properly checks relative links' do
@@ -150,19 +150,19 @@ describe 'Images test' do
     src_set_check = File.join(FIXTURES_DIR, 'images', 'aria_hidden.html')
     proofer = run_proofer(src_set_check, :file)
     expect(proofer.failed_tests.size).to eq 1
-    expect(proofer.failed_tests.first.desc).to match(%r{image ./gpl.png does not have an alt attribute})
+    expect(proofer.failed_tests.first.description).to match(%r{image ./gpl.png does not have an alt attribute})
   end
 
   it 'fails for images with a srcset but missing alt' do
     src_set_missing_alt = File.join(FIXTURES_DIR, 'images', 'src_set_missing_alt.html')
     proofer = run_proofer(src_set_missing_alt, :file)
-    expect(proofer.failed_tests.first.desc).to match(/image gpl.png does not have an alt attribute/)
+    expect(proofer.failed_tests.first.description).to match(/image gpl.png does not have an alt attribute/)
   end
 
   it 'fails for images with an alt but missing src or srcset' do
     src_set_missing_alt = File.join(FIXTURES_DIR, 'images', 'src_set_missing_image.html')
     proofer = run_proofer(src_set_missing_alt, :file)
-    expect(proofer.failed_tests.first.desc).to match(/image has no src or srcset attribute/)
+    expect(proofer.failed_tests.first.description).to match(/image has no src or srcset attribute/)
   end
 
   it 'properly ignores missing alt tags when asked for srcset' do
@@ -186,7 +186,7 @@ describe 'Images test' do
   it 'fails for HTTP images when not asked' do
     http    = File.join(FIXTURES_DIR, 'images', 'src_http.html')
     proofer = run_proofer(http, :file)
-    expect(proofer.failed_tests.first.desc).to match(/uses the http scheme/)
+    expect(proofer.failed_tests.first.description).to match(/uses the http scheme/)
   end
 
   it 'properly checks relative images with base' do
@@ -210,7 +210,7 @@ describe 'Images test' do
   it 'supports multiple srcsets when fails' do
     relative_images = File.join(FIXTURES_DIR, 'images', 'multiple_srcset_failure.html')
     proofer = run_proofer(relative_images, :file)
-    expect(proofer.failed_tests.first.desc).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist'
+    expect(proofer.failed_tests.first.description).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist'
   end
 
   it 'works for images with a data attribute src' do

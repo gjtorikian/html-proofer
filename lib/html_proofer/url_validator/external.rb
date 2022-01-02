@@ -150,7 +150,8 @@ module HTMLProofer
         return if @runner.options[:only_4xx] && !response_code.between?(400, 499)
 
         # Received a non-successful http response.
-        msg = "External link #{href} failed: #{response_code} #{response.status_message}"
+        status_message = blank?(response.status_message) ? '' : ": #{response.status_message}"
+        msg = "External link #{href} failed#{status_message}"
         add_failure(filenames, msg, response_code)
         @cache.add_external(href, filenames, response_code, msg)
       end
@@ -209,11 +210,11 @@ module HTMLProofer
       add_failure(metadata, msg, response_code)
     end
 
-    def add_failure(metadata, desc, status = nil)
+    def add_failure(metadata, description, status = nil)
       if blank?(metadata) # possible if we're checking an array of links
-        @failed_tests << Failure.new('', 'Links > External', desc, status: status)
+        @failed_tests << Failure.new('', 'Links > External', description, status: status)
       else
-        metadata.each { |m| @failed_tests << Failure.new(m[:filename], 'Links > External', desc, line: m[:line], status: status) }
+        metadata.each { |m| @failed_tests << Failure.new(m[:filename], 'Links > External', description, line: m[:line], status: status) }
       end
     end
 

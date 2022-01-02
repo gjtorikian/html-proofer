@@ -2,24 +2,16 @@
 
 module HTMLProofer
   class Failure
-    attr_reader :path, :check_name, :desc, :status, :line, :content
+    attr_reader :path, :check_name, :description, :status, :line, :content
 
-    def initialize(path, check_name, desc, line: nil, status: nil, content: nil)
+    def initialize(path, check_name, description, line: nil, status: nil, content: nil)
       @path = path
       @check_name = check_name
-      @desc = desc
+      @description = description
 
       @line = line
       @status = status
       @content = content
-    end
-
-    def to_s
-      if @line
-        "#{@path}: #{@desc} (line #{@line})"
-      else
-        "#{@path}: #{@desc}"
-      end
     end
   end
 end

@@ -24,8 +24,8 @@ module HTMLProofer
       raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
     end
 
-    def add_failure(desc, line: nil, status: nil, content: nil)
-      @failures << Failure.new(@runner.current_path, short_name, desc, line: line, status: status, content: content)
+    def add_failure(description, line: nil, status: nil, content: nil)
+      @failures << Failure.new(@runner.current_path, short_name, description, line: line, status: status, content: content)
     end
 
     def self.subchecks(runner_options)
@@ -55,12 +55,13 @@ module HTMLProofer
 
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
-      metadata = @runner.cache.construct_internal_link_metadata({
-                                                                  source: @runner.current_source,
-                                                                  current_path: @runner.current_path,
-                                                                  line: line,
-                                                                  base_url: base_url
-                                                                })
+      metadata = {
+                  source: @runner.current_source,
+                  current_path: @runner.current_path,
+                  line: line,
+                  base_url: base_url,
+                  found: nil
+                }
       @internal_urls[url_string] << metadata
     end
 
