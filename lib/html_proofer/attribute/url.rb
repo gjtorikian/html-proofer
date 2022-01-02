@@ -14,8 +14,8 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
       @url = @raw_attribute.delete("\u200b").strip
       @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
 
-      clean_url!
       swap_urls!
+      clean_url!
 
       # convert "//" links to "https://"
       @url.start_with?('//') ? @url = "https:#{@url}" : @url

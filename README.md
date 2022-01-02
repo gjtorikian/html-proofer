@@ -277,7 +277,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
-| `swap_attributes` | JSON-formatted string that maps element names to the preferred attribute to check | `{}` |
+| `swap_attributes` | JSON-formatted config that maps element names to the preferred attribute to check | `{}` |
 | `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
 
 In addition, there are a few "namespaced" options. These are:

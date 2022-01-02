@@ -69,7 +69,7 @@ module HTMLProofer
 
     def queue_request(method, url, filenames)
       opts = @runner.options[:typhoeus].merge(method: method)
-      request = Typhoeus::Request.new(url, opts)
+      request = Typhoeus::Request.new(url.url, opts)
       @before_request.each do |callback|
         callback.call(request)
       end

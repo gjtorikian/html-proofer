@@ -88,9 +88,9 @@ describe 'Command test' do
     expect(output).to match('successfully')
   end
 
-  it 'works with attribute-override' do
+  it 'works with swap-attributes' do
     custom_data_src_check = File.join(FIXTURES_DIR, 'images', 'data_src_attribute.html')
-    output = make_bin("#{custom_data_src_check}  --attribute-override '{\"img\": \"data-src\" }'")
+    output = make_bin("#{custom_data_src_check}  --swap-attributes '{\"img\": [[\"src\", \"data-src\"]] }'")
     expect(output).to match('successfully')
   end
 

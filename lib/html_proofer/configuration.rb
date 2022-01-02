@@ -8,7 +8,6 @@ module HTMLProofer
       allow_hash_href: true,
       allow_missing_href: false,
       assume_extension: '.html',
-      attribute_override: {},
       check_external_hash: true,
       checks: DEFAULT_TESTS,
       directory_index_file: 'index.html',
@@ -22,6 +21,7 @@ module HTMLProofer
       extensions: ['.html'],
       log_level: :info,
       only_4xx: false,
+      swap_attributes: {},
       swap_urls: {}
     }.freeze
 

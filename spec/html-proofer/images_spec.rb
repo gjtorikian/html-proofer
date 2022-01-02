@@ -213,9 +213,15 @@ describe 'Images test' do
     expect(proofer.failed_checks.first.description).to eq 'internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist'
   end
 
-  it 'works for images with a data attribute src' do
+  it 'works for images with a swapped data attribute src' do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
-    proofer = run_proofer(custom_data_src_check, :file, attribute_override: { 'img' => 'data-src' })
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { 'img' => [%w[src data-src]] })
     expect(proofer.failed_checks).to eq []
+  end
+
+  it 'breaks for images with a swapped attribute that does not exist' do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { 'img' => [%w[src foobar]] })
+    expect(proofer.failed_checks.length).to eq 1
   end
 end
