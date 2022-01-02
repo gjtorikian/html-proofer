@@ -83,7 +83,7 @@ It can also run through the command-line.
 1. Require the gem.
 2. Generate some HTML.
 3. Create a new instance of the `HTMLProofer` on your output folder.
-4. `run` that instance.
+4. Call `proofer.run` on that path.
 
 Here's an example:
 
@@ -144,16 +144,23 @@ With `check_links`, you can also pass in an array of links:
 HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 ```
 
-This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
+### Swapping information
 
-**Note:** flags are different from the default ones provided above. The underscores are replaced with dashes.
+Sometimes, the information in your HTML is not the same as how your server serves content. In these cases, you can use `swap_urls` to map the URL in a file to the URL you'd like it to become. For example:
 
-`allow_hash_href` will be `--allow-hash-href`
-
-
-``` bash
-htmlproofer www.google.com,www.github.com --as-links
+```ruby
+run_proofer(file, :file, swap_urls: { %r{^https://example.com} => 'https://website.com' })
 ```
+
+In this case, any link that matches the `^https://example.com` will be converted to `https://website.com`.
+
+A similar swapping process can be done for attributes:
+
+```ruby
+run_proofer(file, :file, swap_urls: { 'img': [['src', 'srcset']] })
+```
+
+In this case, we are telling HTMLProofer that, for any `img` tag detected, and for any check using the `src` attribute, to use the `srcset` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need.
 
 ### Using on the command-line
 
@@ -190,6 +197,8 @@ values. The escape sequences `\:` should be used to produce literal
 ``` bash
 htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --url-ignore www.github.com ./out
 ```
+
+Some configuration options--such as `--typheous`, `--cache`, or `--attribute-swap`--require well-formatted JSON.
 
 #### Adjusting for a `baseurl`
 
