@@ -56,12 +56,12 @@ module HTMLProofer
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
       metadata = {
-                  source: @runner.current_source,
-                  current_path: @runner.current_path,
-                  line: line,
-                  base_url: base_url,
-                  found: nil
-                }
+        source: @runner.current_source,
+        current_path: @runner.current_path,
+        line: line,
+        base_url: base_url,
+        found: nil
+      }
       @internal_urls[url_string] << metadata
     end
 
