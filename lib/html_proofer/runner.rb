@@ -7,6 +7,8 @@ module HTMLProofer
     attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failure_reporter, :checked_paths, :current_check
     attr_accessor :current_path, :current_source
 
+    URL_TYPES = %i[external internal].freeze
+
     def initialize(src, opts = {})
       @options = HTMLProofer::Configuration.generate_defaults(opts)
 
@@ -64,14 +66,25 @@ module HTMLProofer
       validate_external_urls
     end
 
-    # Collects any external URLs found in a directory of files. Also collectes
-    # every failed test from process_files.
-    # Sends the external URLs to Typhoeus for batch processing.
+    # Walks over each implemented check and runs them on the files, in parallel.
+    # Sends the collected external URLs to Typhoeus for batch processing.
     def check_files
-      process_files.each do |item|
-        @external_urls.merge!(item[:external_urls])
-        @internal_urls.merge!(item[:internal_urls])
-        @failures.concat(item[:failures])
+      process_files.each do |result|
+        URL_TYPES.each do |url_type|
+          type = :"#{url_type}_urls"
+          ivar_name = "@#{type}"
+          ivar = instance_variable_get(ivar_name)
+
+          if ivar.empty?
+            instance_variable_set(ivar_name, result[type])
+          else
+            result[type].each do |url, metadata|
+              ivar[url] = [] if ivar[url].nil?
+              ivar[url].concat(metadata)
+            end
+          end
+          @failures.concat(result[:failures])
+        end
       end
 
       validate_external_urls unless @options[:disable_external]
@@ -93,6 +106,8 @@ module HTMLProofer
       check_parsed(path)
     end
 
+    # Collects any external URLs found in a directory of files. Also collectes
+    # every failed test from process_files.
     def check_parsed(path)
       result = { internal_urls: {}, external_urls: {}, failures: [] }
 
@@ -104,7 +119,7 @@ module HTMLProofer
           @current_path = path
 
           check = Object.const_get(klass).new(self, @html)
-          @logger.log :debug, "Checking #{check.short_name} in #{path}"
+          @logger.log :debug, "Running #{check.short_name} in #{path}"
 
           @current_check = check
 
