@@ -428,27 +428,27 @@ Here's an example custom test demonstrating these concepts. It reports `mailto` 
 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
-  def mailto?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /mailto/
-  end
-
-  def octocat?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /octocat@github.com/
+  def mailto_octocat?
+    @link.url.raw_attribute == 'mailto:octocat@github.com'
   end
 
   def run
     @html.css('a').each do |node|
       @link = create_element(node)
-      line = node.line
 
-      if mailto? && octocat?
-        return add_failure("Don't email the Octocat directly!", line: line)
-      end
+      next if @link.ignore?
+
+      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
     end
   end
 end
+```
+
+Don't forget to include this new check in HTMLProofer's options, for example:
+
+```ruby
+# removes default checks and just runs this one
+HTMLProofer.check_directories(["out/"], {checks: ['MailToOctocat']})
 ```
 
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
