@@ -35,13 +35,12 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'log_level', '--log-level <level>', String, 'Sets the logging level, as determined by Yell. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)'
   p.option 'only_4xx', '--only-4xx', 'Only reports errors for links that fall within the 4xx status code range'
   p.option 'root_dir', '--root-dir PATH', String, 'The absolute path to the directory serving your html-files.'
-  p.option 'storage_dir', '--storage-dir PATH', String, 'Directory where to store the cache log (default: "tmp/.htmlproofer")'
   p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
-  p.option 'timeframe', '--timeframe <time>', String, 'A string representing the caching timeframe.'
 
   p.option 'typhoeus', '--typhoeus CONFIG', String, 'JSON-formatted string of Typhoeus config. Will override the html-proofer defaults.'
   p.option 'hydra', '--hydra CONFIG', String, 'JSON-formatted string of Hydra config. Will override the html-proofer defaults.'
   p.option 'parallel', '--parallel CONFIG', String, 'JSON-formatted string of Parallel config. Will override the html-proofer defaults.'
+  p.option 'cache', '--cache CONFIG', String, 'JSON-formatted string of cache config. Will override the html-proofer defaults.'
 
   p.action do |args, opts|
     args = ['.'] if args.empty?
@@ -72,18 +71,9 @@ Mercenary.program(:htmlproofer) do |p|
     options[:typhoeus] = HTMLProofer::Configuration.parse_json_option('typhoeus', opts['typhoeus'], symbolize_names: false) unless opts['typhoeus'].nil?
     options[:hydra] = HTMLProofer::Configuration.parse_json_option('hydra', opts['hydra']) unless opts['hydra'].nil?
     options[:parallel] = HTMLProofer::Configuration.parse_json_option('parallel', opts['parallel']) unless opts['parallel'].nil?
+    options[:cache] = HTMLProofer::Configuration.parse_json_option('cache', opts['cache']) unless opts['cache'].nil?
 
     options[:attribute_override] = HTMLProofer::Configuration.parse_json_option('attribute_override', opts['attribute_override'], symbolize_names: false) unless opts['attribute_override'].nil?
-
-    unless opts['timeframe'].nil?
-      options[:cache] ||= {}
-      options[:cache][:timeframe] = opts['timeframe'] unless opts['timeframe'].nil?
-    end
-
-    unless opts['storage_dir'].nil?
-      options[:cache] ||= {}
-      options[:cache][:storage_dir] = opts['storage_dir'] unless opts['storage_dir'].nil?
-    end
 
     options[:ignore_status_codes] = Array(options[:ignore_status_codes]).map(&:to_i)
 

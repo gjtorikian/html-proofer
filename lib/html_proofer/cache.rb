@@ -67,28 +67,16 @@ module HTMLProofer
 
       @cache_log[:internal][url] = { time: @cache_time, metadata: [] } if @cache_log[:internal][url].nil?
 
-      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found: found)
+      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found)
     end
 
-    def add_external(url, filenames, status, msg)
+    def add_external(url, filenames, status_code, msg)
       return unless enabled?
 
-      @cache_log[:external][url] = { time: @cache_time, status: status, message: msg, metadata: [] } if @cache_log[:external][url].nil?
+      found = status_code.between?(200, 299)
+      @cache_log[:external][url] = { time: @cache_time, found: found, status_code: status_code, message: msg, metadata: [] } if @cache_log[:external][url].nil?
 
       @cache_log[:external][url][:metadata] = filenames
-    end
-
-    def construct_internal_link_metadata(metadata, found: nil)
-      m = {
-        source: metadata[:source],
-        current_path: metadata[:current_path],
-        line: metadata[:line],
-        base_url: metadata[:base_url]
-      }
-
-      m[:found] = found unless found.nil?
-
-      m
     end
 
     def detect_url_changes(urls_detected, type)
@@ -99,12 +87,28 @@ module HTMLProofer
       additions
     end
 
+    private def construct_internal_link_metadata(metadata, found)
+      {
+        source: metadata[:source],
+        current_path: metadata[:current_path],
+        line: metadata[:line],
+        base_url: metadata[:base_url],
+        found: found
+      }
+    end
+
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
-      additions = urls_detected.reject do |url, _|
-        # url = unescape_url(url)
+      additions = urls_detected.reject do |url, metadata|
         if @cache_log[type].include?(url)
-          true
+          @cache_log[type][url][:metadata] = metadata
+
+          # if this is false, we're trying again
+          if type == :external
+            @cache_log[type][url][:found]
+          else
+            @cache_log[type][url][:metadata].none? { |m| m[:found] }
+          end
         else
           @logger.log :debug, "Adding #{url} to #{type} cache"
           false
