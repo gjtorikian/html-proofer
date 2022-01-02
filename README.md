@@ -459,11 +459,11 @@ By default, HTML-Proofer has its own reporting mechanism to print errors at the 
 
 ``` ruby
 proofer = HTMLProofer.check_directory(item, opts)
-proofer.reporter = MyCustomReporter
+proofer.reporter = MyCustomReporter.new(logger: proofer.logger)
 proofer.run
 ```
 
-Your custom reporter mut implement the `report` function which implements the behavior you wish to see.
+Your custom reporter must implement the `report` function which implements the behavior you wish to see. The `logger` kwarg is optional.
 
 ## Troubleshooting
 

@@ -6,7 +6,7 @@ module HTMLProofer
 
     attr_reader :failures
 
-    def initialize(logger)
+    def initialize(logger: nil)
       @logger = logger
     end
 

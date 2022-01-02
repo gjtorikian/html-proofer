@@ -15,7 +15,7 @@ describe HTMLProofer::Reporter do
 
     VCR.use_cassette(cassette_name, record: :new_episodes) do
       proofer = make_proofer(file, :file, {})
-      proofer.reporter = CustomReporter.new(proofer.logger)
+      proofer.reporter = CustomReporter.new(logger: proofer.logger)
       output = capture_stderr { proofer.run }
       expect(output).to include('Womp womp, found')
     end
