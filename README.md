@@ -453,6 +453,18 @@ end
 
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
 
+## Reporting
+
+By default, HTML-Proofer has its own reporting mechanism to print errors at the end of the run. You can choose to use your own reporter by passing in your own subclass of `HTMLProofer::Reporter`:
+
+``` ruby
+proofer = HTMLProofer.check_directory(item, opts)
+proofer.reporter = MyCustomReporter
+proofer.run
+```
+
+Your custom reporter mut implement the `report` function which implements the behavior you wish to see.
+
 ## Troubleshooting
 
 Here are some brief snippets identifying some common problems that you can work around. For more information, check out [our wiki](https://github.com/gjtorikian/html-proofer/wiki).

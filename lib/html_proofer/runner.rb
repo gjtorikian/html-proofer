@@ -4,8 +4,8 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failure_reporter, :checked_paths, :current_check
-    attr_accessor :current_path, :current_source
+    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :checked_paths, :current_check
+    attr_accessor :current_path, :current_source, :reporter
 
     URL_TYPES = %i[external internal].freeze
 
@@ -29,6 +29,8 @@ module HTMLProofer
       @current_check = nil
       @current_source = nil
       @current_path = nil
+
+      @reporter = Reporter::Cli.new(@logger)
     end
 
     def run
@@ -46,7 +48,7 @@ module HTMLProofer
 
       @cache.write
 
-      @failure_reporter = FailureReporter.new(@failures, @logger)
+      @reporter.failures = @failures
 
       if @failures.empty?
         @logger.log :info, 'HTML-Proofer finished successfully.'
@@ -186,11 +188,11 @@ module HTMLProofer
     end
 
     def failed_tests
-      @failure_reporter.failures
+      @reporter.failures
     end
 
     def print_failed_tests
-      @failure_reporter.report(:cli)
+      @reporter.report
 
       failure_text = pluralize(@failures.length, 'failure', 'failures')
       @logger.log :fatal, "\nHTML-Proofer found #{failure_text}!"

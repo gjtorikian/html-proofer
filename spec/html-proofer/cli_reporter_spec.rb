@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe HTMLProofer::FailureReporter do
+describe HTMLProofer::Reporter::Cli do
   describe 'cli_report' do
     it 'reports all issues accurately' do
       errors = File.join(FIXTURES_DIR, 'sorting', 'kitchen_sinkish.html')
