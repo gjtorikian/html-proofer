@@ -1,0 +1,9 @@
+{
+  "http://www.foofoofoo.biz": {
+    "time": "2015-10-20 12:00:00 -0700",
+    "filenames": null,
+    "found": false,
+    "status": 0,
+    "message": "External link www.foofoofoo.biz failed: 0 "
+  }
+}

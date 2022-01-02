@@ -28,12 +28,14 @@ module HTMLProofer
         failures.each do |failure|
           path_str = blank?(failure.path) ? '' : "* In #{failure.path}"
 
-          line_str = failure.line.nil? ? '' : " on line #{failure.line}"
+          line_str = failure.line.nil? ? '' : " (line #{failure.line})"
+
+          status_str = failure.status.nil? ? '' : " (#{failure.status})"
 
           str << <<~MSG
             #{path_str}#{line_str}:
 
-               #{failure.desc}
+               #{failure.description}#{status_str}
           MSG
         end
 

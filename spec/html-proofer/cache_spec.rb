@@ -87,9 +87,10 @@ describe 'Cache test' do
   end
 
   context 'version 2' do
+    let(:version) { 'version_2' }
     it 'knows how to write to cache' do
       test_file = File.join(cache_fixture_dir, 'internal_and_external_example.html')
-      cache_filename = File.join('version_2', '.htmlproofer_test.log')
+      cache_filename = File.join(version, '.htmlproofer_test.json')
       cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
       File.delete(cache_filepath) if File.exist?(cache_filepath)
@@ -121,13 +122,16 @@ describe 'Cache test' do
       # }
 
       expect(log['version']).to eq(2)
+
       external_urls = log['external']
       external_url = external_urls['https://github.com/gjtorikian/html-proofer']
-      expect(external_url['status']).to eq(200)
+
+      expect(external_url['status_code']).to eq(200)
       expect(external_url['metadata'].first['line']).to eq(7)
 
       internal_urls = log['internal']
       internal_url = internal_urls['/somewhere.html']
+
       expect(internal_url['metadata'].first['line']).to eq(11)
       expect(internal_url['metadata'].first['found']).to eq(false)
 
@@ -136,7 +140,7 @@ describe 'Cache test' do
 
     context 'external links' do
       context 'dates' do
-        let(:cache_filename) { File.join('version_2', '.within_date_external.log') }
+        let(:cache_filename) { File.join(version, '.within_date_external.json') }
         it 'does not write file if timestamp is within date' do
           # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 27, 12, 0, 0)
@@ -164,7 +168,7 @@ describe 'Cache test' do
       end
 
       context 'new external url added' do
-        let(:cache_filename) { File.join('version_2', '.new_external_url.log') }
+        let(:cache_filename) { File.join(version, '.new_external_url.json') }
         it 'does write file if a new URL is added' do
           # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 20, 12, 0, 0)
@@ -182,7 +186,7 @@ describe 'Cache test' do
 
     context 'internal links' do
       context 'dates' do
-        let(:cache_filename) { File.join('version_2', '.within_date_internal.log') }
+        let(:cache_filename) { File.join(version, '.within_date_internal.json') }
         let(:test_file) { File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link.html') }
 
         it 'does not write file if timestamp is within date' do
@@ -205,7 +209,7 @@ describe 'Cache test' do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
             # we expect an add since we are mocking outside the timeframe
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/', { :base_url => '', :found => false, :line => 11, :source => 'spec/html-proofer/fixtures/cache/internal_and_external_example.html' }, false)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/', { :base_url => '', current_path: test_file, :found => nil, :line => 5, :source => test_file }, true)
 
             run_proofer(test_file, :file, disable_external: true, cache: { timeframe: '4d', cache_file: cache_filename }.merge(default_cache_options))
           end
@@ -213,8 +217,8 @@ describe 'Cache test' do
       end
 
       context 'new internal url added' do
-        let(:cache_filename) { File.join('version_2', '.new_internal_url.log') }
-        let(:cache_filepath) { File.join(cache_fixture_dir, 'version_2', '.new_internal_url.log') }
+        let(:cache_filename) { File.join(version, '.new_internal_url.json') }
+        let(:cache_filepath) { File.join(cache_fixture_dir, cache_filename) }
         # this is frozen to within 30 days of the log
         let(:new_time) { Time.local(2015, 10, 20, 12, 0, 0) }
 
@@ -222,11 +226,10 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             root_link = File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link_with_another_link.html')
 
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('/', { :base_url => '', current_path: root_link, :line => 5, :source => root_link }, true).and_call_original
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('/', { :base_url => '', current_path: root_link, found: nil, :line => 5, :source => root_link }, true).and_call_original
 
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write).once
 
-            # we expect one new link to be added because it's within the 30d time frame
             run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
           end
         end
@@ -235,21 +238,9 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
             root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_link.html')
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('#noHash', { :base_url => '', :current_path => 'spec/html-proofer/fixtures/links/broken_internal_link.html', :line => 5, :source => 'spec/html-proofer/fixtures/links/broken_internal_link.html' }, false)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('#noHash', { :base_url => '', :current_path => root_link, found: nil, :line => 5, :source => root_link }, false)
 
-            # we expect one new link to be added because it's within the 30d time frame
             run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
-          end
-        end
-
-        it 'does writes file once if a new relative URL 404 hash is detected multiple times' do
-          Timecop.freeze(new_time) do
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
-            root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_hashes')
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once
-
-            # we expect one new link to be added because it's within the 30d time frame
-            run_proofer(root_link, :directory, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -257,7 +248,7 @@ describe 'Cache test' do
 
     context 'rechecking failures' do
       it 'does recheck failures, regardless of cache' do
-        cache_filename = File.join('version_2', '.recheck_failure.log')
+        cache_filename = File.join(version, '.recheck_failure.json')
 
         expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
@@ -269,7 +260,7 @@ describe 'Cache test' do
       end
 
       it 'does recheck failures, regardless of external-only cache' do
-        cache_filename = File.join('version_2', '.recheck_external_failure.log')
+        cache_filename = File.join(version, '.recheck_external_failure.json')
         cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
         file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
@@ -290,7 +281,7 @@ describe 'Cache test' do
       end
 
       it 'does recheck failures, regardless of external and internal cache' do
-        cache_filename = File.join('version_2', '.internal_and_external.log')
+        cache_filename = File.join(version, '.internal_and_external.json')
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
         file = File.join(FIXTURES_DIR, 'cache', 'internal_and_external_example.html')
@@ -318,7 +309,7 @@ describe 'Cache test' do
     context 'removing links' do
       it 'removes external links that no longer exist' do
         test_file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
-        cache_filename = File.join('version_2', '.removed_link.log')
+        cache_filename = File.join(version, '.removed_link.json')
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
         File.delete(cache_location) if File.exist?(cache_location)

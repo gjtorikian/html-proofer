@@ -27,8 +27,8 @@ describe HTMLProofer::Runner do
     end
 
     it 'plays nice with cache' do
-      cache_file_name = '.runner.log'
-      storage_dir = File.join(FIXTURES_DIR, '/cache')
+      cache_file_name = '.runner.json'
+      storage_dir = File.join(FIXTURES_DIR, 'cache', 'version_2')
       cache_location = File.join(storage_dir, cache_file_name)
 
       File.delete(cache_location) if File.exist?(cache_location)
