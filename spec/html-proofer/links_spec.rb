@@ -56,7 +56,7 @@ describe 'Links test' do
     broken_link_external_filepath = File.join(FIXTURES_DIR, 'links', 'broken_link_external.html')
     proofer = run_proofer(broken_link_external_filepath, :file)
     failure = proofer.failed_checks.first.description
-    expect(failure).to match(/failed: response code 0/)
+    expect(failure).to match(/failed with something very wrong/)
   end
 
   it 'passes for different filename without option' do
@@ -69,7 +69,7 @@ describe 'Links test' do
     options = { extensions: ['.foo'] }
     broken_link_external_filepath = File.join(FIXTURES_DIR, 'links', 'file.foo')
     proofer = run_proofer(broken_link_external_filepath, :file, options)
-    expect(proofer.failed_checks.first.description).to match(/failed: response code 0/)
+    expect(proofer.failed_checks.first.description).to match(/failed with something very wrong/)
   end
 
   it 'accepts multiple filenames' do
@@ -251,7 +251,7 @@ describe 'Links test' do
   it 'fails for invalid links missing the protocol' do
     missing_protocol_link = File.join(FIXTURES_DIR, 'links', 'link_missing_protocol_invalid.html')
     proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_checks.first.description).to match(/failed: response code 0/)
+    expect(proofer.failed_checks.first.description).to match(/failed with something very wrong/)
   end
 
   it 'works for valid href within link elements' do
@@ -295,7 +295,7 @@ describe 'Links test' do
 
   it 'works for array of links' do
     proofer = run_proofer(['www.github.com', 'foofoofoo.biz'], :links)
-    expect(proofer.failed_checks.first.description).to match(/failed: response code 0/)
+    expect(proofer.failed_checks.first.description).to match(/failed with something very wrong/)
   end
 
   it 'works for broken anchors within pre' do
@@ -514,7 +514,7 @@ describe 'Links test' do
   it 'fails for broken IP address links' do
     hash_href = File.join(FIXTURES_DIR, 'links', 'ip_href.html')
     proofer = run_proofer(hash_href, :file)
-    expect(proofer.failed_checks.first.description).to match(/response code 0/)
+    expect(proofer.failed_checks.first.description).to match(/failed with something very wrong/)
   end
 
   it 'works for internal links to weird encoding IDs' do
