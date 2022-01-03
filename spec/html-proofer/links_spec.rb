@@ -72,6 +72,14 @@ describe 'Links test' do
     expect(proofer.failed_checks.first.description).to match(/failed: response code 0/)
   end
 
+  it 'accepts multiple filenames' do
+    options = { extensions: ['.xhtml', '.foo'] }
+    broken_link_external_filepath = File.join(FIXTURES_DIR, 'links')
+    proofer = run_proofer(broken_link_external_filepath, :directory, options)
+    results = proofer.failed_checks.map(&:path).all? { |p| p.end_with?('.xhtml', '.foo') }
+    expect(results).to be(true)
+  end
+
   it 'fails for broken internal links' do
     broken_link_internal_filepath = File.join(FIXTURES_DIR, 'links', 'broken_link_internal.html')
     proofer = run_proofer(broken_link_internal_filepath, :file)
