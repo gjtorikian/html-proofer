@@ -208,34 +208,13 @@ describe 'Cache test' do
         end
 
         it 'saves unencoded as normalized in cache' do
+          cache_filename = File.join(version, '.some_other_external_url.json')
           new_time = Time.local(2015, 10, 20, 12, 0, 0)
           Timecop.freeze(new_time) do
-            hash = {
-              :version => 2,
-              :internal => {},
-              :external => {
-                'www.github.com' => {
-                  :time => '2015-10-01 16:18:15 -0700',
-                  :found => true,
-                  :status => 200,
-                  :message => 'OK',
-                  :metadata => []
-                },
-                'github.com/search?q=is:closed+is:issue+words' => { # notice this URL is cleaned up
-                  :time => '2015-10-20 12:00:00 -0400',
-                  :found => true,
-                  :status_code => 200,
-                  :message => 'OK',
-                  :metadata => []
-                }
-              }
-            }
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external)
 
-            cache_filepath = File.join(cache_fixture_dir, cache_filename)
-            expect(File).to receive(:write).with(cache_filepath, hash.to_json)
-
-            # we expect no new link to be added, because it's the same as the cache link
-            # expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external).with('github.com/search?q=is:closed+is:issue+words', [], 200, 'OK')
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:cleaned_url).with('github.com/search?q=is%3Aclosed+is%3Aissue+words').and_return('github.com/search?q=is:closed+is:issue+words')
 
             run_proofer(['github.com/search?q=is%3Aclosed+is%3Aissue+words'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
           end
