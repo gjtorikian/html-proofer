@@ -12,11 +12,6 @@ module HTMLProofer
 
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
     DEFAULT_CACHE_FILE_NAME = 'cache.json'
-    DEFAULT_STRUCTURE = {
-      version: CACHE_VERSION,
-      internal: {},
-      external: {}
-    }.freeze
 
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
@@ -174,6 +169,12 @@ module HTMLProofer
     end
 
     private def setup_cache!(options)
+      default_structure = {
+        version: CACHE_VERSION,
+        internal: {},
+        external: {}
+      }
+
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
@@ -182,17 +183,17 @@ module HTMLProofer
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      return (@cache_log = DEFAULT_STRUCTURE) unless File.exist?(@cache_file)
+      return (@cache_log = default_structure) unless File.exist?(@cache_file)
 
       contents = File.read(@cache_file)
 
-      return (@cache_log = DEFAULT_STRUCTURE) if blank?(contents)
+      return (@cache_log = default_structure) if blank?(contents)
 
       log = JSON.parse(contents, symbolize_names: true)
 
       old_cache = (cache_version = log[:version]).nil?
       @cache_log = if old_cache # previous cache version, create a new one
-                     DEFAULT_STRUCTURE
+                     default_structure
                    elsif cache_version != CACHE_VERSION
                    # if cache version is newer...do something
                    else
