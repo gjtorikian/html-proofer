@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "internal": {},
+  "external": {
+    "https://github.com/gjtorikian/html-proofer": {
+      "time": "2022-01-02 20:41:00 +0100",
+      "found": false,
+      "status_code": 0,
+      "message": "error",
+      "metadata": [
+        {
+          "filename": "spec/html-proofer/fixtures/cache/valid_link.html",
+          "line": 7
+        }
+      ]
+    }
+  }
+}

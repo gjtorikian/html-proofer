@@ -247,6 +247,31 @@ describe 'Cache test' do
     end
 
     context 'rechecking failures' do
+      it 'does recheck failures for newly valid links' do
+        file = File.join(FIXTURES_DIR, 'cache', 'valid_link.html')
+
+        # link from file is broken in this cache
+        template = File.join(FIXTURES_DIR, 'cache', version, '.broken_external_link.template')
+        cache_filename = File.join(version, '.broken_external_link.json')
+        cache_filepath = File.join(FIXTURES_DIR, 'cache', cache_filename)
+        FileUtils.cp(template, cache_filepath)
+
+        cache = read_cache(cache_filename)
+        external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
+        expect(external_link['found']).to equal(false)
+        expect(external_link['status_code']).to equal(0)
+
+        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+
+        cache = read_cache(cache_filename)
+        external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
+        expect(external_link['found']).to equal(true)
+        expect(external_link['status_code']).to equal(200)
+        expect(external_link['message']).equal?('OK')
+
+        File.delete(cache_filepath)
+      end
+
       it 'does recheck failures, regardless of cache' do
         cache_filename = File.join(version, '.recheck_failure.json')
 
