@@ -74,9 +74,7 @@ module HTMLProofer
       return unless enabled?
 
       found = status_code.between?(200, 299)
-      @cache_log[:external][url] = { time: @cache_time, found: found, status_code: status_code, message: msg, metadata: [] } if @cache_log[:external][url].nil?
-
-      @cache_log[:external][url][:metadata] = filenames
+      @cache_log[:external][url] = { time: @cache_time, found: found, status_code: status_code, message: msg, metadata: filenames }
     end
 
     def detect_url_changes(urls_detected, type)
