@@ -49,7 +49,7 @@ describe 'Images test' do
   it 'fails for missing external images' do
     external_image_filepath = File.join(FIXTURES_DIR, 'images', 'missing_image_external.html')
     proofer = run_proofer(external_image_filepath, :file)
-    expect(proofer.failed_checks.first.description).to match(/failed: response code 0/)
+    expect(proofer.failed_checks.first.description).to match(/failed with something very wrong/)
   end
 
   it 'fails for missing internal images' do

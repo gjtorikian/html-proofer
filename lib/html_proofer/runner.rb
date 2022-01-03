@@ -149,9 +149,8 @@ module HTMLProofer
     def files
       @files ||= if @type == :directory
                    @source.map do |src|
-                     pattern = File.join(src, '**', "*{#{@options[:extensions].join('|')}}")
-                     files = Dir.glob(pattern).select { |fn| File.file? fn }
-                     files.reject { |f| ignore_file?(f) }
+                     pattern = File.join(src, '**', "*{#{@options[:extensions].join(',')}}")
+                     Dir.glob(pattern).select { |f| File.file?(f) }.reject { |f| ignore_file?(f) }
                    end.flatten
                  elsif @type == :file &&  @options[:extensions].include?(File.extname(@source))
                    [@source].reject { |f| ignore_file?(f) }

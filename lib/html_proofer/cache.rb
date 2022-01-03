@@ -12,11 +12,6 @@ module HTMLProofer
 
     DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
     DEFAULT_CACHE_FILE_NAME = 'cache.json'
-    DEFAULT_STRUCTURE = {
-      version: CACHE_VERSION,
-      internal: {},
-      external: {}
-    }.freeze
 
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
@@ -74,7 +69,9 @@ module HTMLProofer
       return unless enabled?
 
       found = status_code.between?(200, 299)
-      @cache_log[:external][url] = { time: @cache_time, found: found, status_code: status_code, message: msg, metadata: filenames }
+
+      clean_url = cleaned_url(url)
+      @cache_log[:external][clean_url] = { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
     end
 
     def detect_url_changes(urls_detected, type)
@@ -98,6 +95,8 @@ module HTMLProofer
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
       additions = urls_detected.reject do |url, metadata|
+        url = cleaned_url(url)
+
         if @cache_log[type].include?(url)
           @cache_log[type][url][:metadata] = metadata
 
@@ -125,7 +124,7 @@ module HTMLProofer
       deletions = 0
 
       @cache_log[type].delete_if do |url, _|
-        url = unescape_url(url)
+        url = cleaned_url(url)
 
         if urls_detected.include?(url)
           false
@@ -161,15 +160,6 @@ module HTMLProofer
       urls_to_check
     end
 
-    # FIXME: it seems that Typhoeus actually acts on escaped URLs,
-    # but there's no way to get at that information, and the cache
-    # stores unescaped URLs. Because of this, some links, such as
-    # github.com/search/issues?q=is:open+is:issue+fig are not matched
-    # as github.com/search/issues?q=is%3Aopen+is%3Aissue+fig
-    def unescape_url(url)
-      Addressable::URI.unescape(url)
-    end
-
     def empty?
       blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
     end
@@ -179,6 +169,12 @@ module HTMLProofer
     end
 
     private def setup_cache!(options)
+      default_structure = {
+        version: CACHE_VERSION,
+        internal: {},
+        external: {}
+      }
+
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
@@ -187,17 +183,17 @@ module HTMLProofer
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      return (@cache_log = DEFAULT_STRUCTURE) unless File.exist?(@cache_file)
+      return (@cache_log = default_structure) unless File.exist?(@cache_file)
 
       contents = File.read(@cache_file)
 
-      return (@cache_log = DEFAULT_STRUCTURE) if blank?(contents)
+      return (@cache_log = default_structure) if blank?(contents)
 
       log = JSON.parse(contents, symbolize_names: true)
 
       old_cache = (cache_version = log[:version]).nil?
       @cache_log = if old_cache # previous cache version, create a new one
-                     DEFAULT_STRUCTURE
+                     default_structure
                    elsif cache_version != CACHE_VERSION
                    # if cache version is newer...do something
                    else
@@ -223,6 +219,16 @@ module HTMLProofer
     private def url_matches_type?(url, type)
       return true if type == :internal && url !~ URI_REGEXP
       return true if type == :external && url =~ URI_REGEXP
+    end
+
+    private def cleaned_url(url)
+      return escape_unescape(url) unless url.end_with?('/', '#', '?') && url.length > 1
+
+      escape_unescape(url[0..-2])
+    end
+
+    private def escape_unescape(url)
+      Addressable::URI.parse(url).normalize.to_s
     end
   end
 end

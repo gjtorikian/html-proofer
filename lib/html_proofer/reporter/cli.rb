@@ -6,16 +6,18 @@ class HTMLProofer::Reporter::Cli < HTMLProofer::Reporter
       str = ["For the #{check_name} check, the following failures were found:\n"]
 
       failures.each do |failure|
-        path_str = blank?(failure.path) ? '' : "* In #{failure.path}"
+        path_str = blank?(failure.path) ? '' : "In #{failure.path}"
 
         line_str = failure.line.nil? ? '' : " (line #{failure.line})"
 
-        status_str = failure.status.nil? ? '' : " (#{failure.status})"
+        path_and_line = [path_str, line_str].join
+        path_and_line = blank?(path_and_line) ? '' : "* #{path_and_line}:\n\n"
 
+        status_str = failure.status.nil? ? '' : " (status code #{failure.status})"
+
+        indent = blank?(path_and_line) ? '* ' : '  '
         str << <<~MSG
-          #{path_str}#{line_str}:
-
-             #{failure.description}#{status_str}
+          #{path_and_line}#{indent}#{failure.description}#{status_str}
         MSG
       end
 

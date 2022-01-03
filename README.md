@@ -374,10 +374,10 @@ And the following options means "recheck links older than two weeks":
 { :cache => { :timeframe => '2w' } }
 ```
 
-You can change the directory where the cachefile is kept by also providing the `storage_dir` key:
+You can change the filename or the directory where the cachefile is kept by also providing the `storage_dir` key:
 
 ``` ruby
-{ :cache => { :storage_dir => '/tmp/html-proofer-cache-money' } }
+{ :cache => { :cache_file => 'stay_cachey.json', :storage_dir => '/tmp/html-proofer-cache-money' } }
 ```
 
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
