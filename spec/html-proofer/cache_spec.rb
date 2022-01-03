@@ -88,6 +88,7 @@ describe 'Cache test' do
 
   context 'version 2' do
     let(:version) { 'version_2' }
+
     it 'knows how to write to cache' do
       test_file = File.join(cache_fixture_dir, 'internal_and_external_example.html')
       cache_filename = File.join(version, '.htmlproofer_test.json')
@@ -141,8 +142,8 @@ describe 'Cache test' do
     context 'external links' do
       context 'dates' do
         let(:cache_filename) { File.join(version, '.within_date_external.json') }
+
         it 'does not write file if timestamp is within date' do
-          # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 27, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
@@ -169,8 +170,8 @@ describe 'Cache test' do
 
       context 'new external url added' do
         let(:cache_filename) { File.join(version, '.new_external_url.json') }
+
         it 'does write file if a new URL is added' do
-          # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 20, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
@@ -179,6 +180,64 @@ describe 'Cache test' do
 
             # ...because it's within the 30d time frame
             run_proofer(['www.github.com', 'www.google.com'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+          end
+        end
+
+        it 'handles slashed and unslashed URLs as the same' do
+          new_time = Time.local(2015, 10, 20, 12, 0, 0)
+          Timecop.freeze(new_time) do
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+            # we expect no new link to be added, because it's the same as the cache link (but with a `/`)
+            expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add_external)
+
+            run_proofer(['www.github.com/'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+          end
+        end
+
+        it 'understands encodings even if it is unnormalized coming in' do
+          new_time = Time.local(2015, 10, 20, 12, 0, 0)
+          Timecop.freeze(new_time) do
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+            # we expect no new link to be added, because it's the same as the cache link
+            expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add_external)
+
+            run_proofer(['github.com/search/issues?q=is%3Aopen+is%3Aissue+fig'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+          end
+        end
+
+        it 'saves unencoded as normalized in cache' do
+          new_time = Time.local(2015, 10, 20, 12, 0, 0)
+          Timecop.freeze(new_time) do
+            hash = {
+              :version => 2,
+              :internal => {},
+              :external => {
+                'www.github.com' => {
+                  :time => '2015-10-01 16:18:15 -0700',
+                  :found => true,
+                  :status => 200,
+                  :message => 'OK',
+                  :metadata => []
+                },
+                'github.com/search?q=is:closed+is:issue+words' => { # notice this URL is cleaned up
+                  :time => '2015-10-20 12:00:00 -0400',
+                  :found => true,
+                  :status_code => 200,
+                  :message => 'OK',
+                  :metadata => []
+                }
+              }
+            }
+
+            cache_filepath = File.join(cache_fixture_dir, cache_filename)
+            expect(File).to receive(:write).with(cache_filepath, hash.to_json)
+
+            # we expect no new link to be added, because it's the same as the cache link
+            # expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external).with('github.com/search?q=is:closed+is:issue+words', [], 200, 'OK')
+
+            run_proofer(['github.com/search?q=is%3Aclosed+is%3Aissue+words'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -190,7 +249,6 @@ describe 'Cache test' do
         let(:test_file) { File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link.html') }
 
         it 'does not write file if timestamp is within date' do
-          # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 27, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
@@ -203,7 +261,6 @@ describe 'Cache test' do
         end
 
         it 'does write file if timestamp is not within date' do
-          # this is frozen to within 7 days of the log
           new_time = Time.local(2015, 10, 27, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)

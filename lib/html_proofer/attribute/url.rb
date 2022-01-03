@@ -98,7 +98,7 @@ class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
   end
 
   def domain_path
-    host + path
+    (host || '') + path
   end
 
   def query_values
