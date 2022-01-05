@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  VERSION = '3.19.3'
+  VERSION = '4.0.0.rc1'
 end
