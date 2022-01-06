@@ -195,6 +195,34 @@ describe 'Cache test' do
           end
         end
 
+        it 'handles multiple slashed and unslashed URLs during additions/deletions' do
+          cache_filename = File.join(version, '.trailing_slashes.json')
+          cache_filepath = File.join(cache_fixture_dir, cache_filename)
+          test_file = File.join(FIXTURES_DIR, 'cache', 'trailing_slashes.html')
+
+          new_time = Time.local(2022, 1, 6, 12, 0, 0)
+          Timecop.freeze(new_time) do
+            File.delete(cache_filepath) if File.exist?(cache_filepath)
+
+            run_proofer(test_file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+
+            cache = read_cache(cache_filename)
+            external_urls = cache['external']
+            expect(external_urls.keys).to eq(['https://github.com', 'https://rubygems.org', 'https://github.com/gjtorikian', 'https://github.com/riccardoporreca'])
+
+            # we expect no new links to be added, because it's the same as the cache link
+            expect_any_instance_of(HTMLProofer::Cache).to_not receive(:add_external)
+
+            run_proofer(test_file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+
+            cache = read_cache(cache_filename)
+            external_urls = cache['external']
+            expect(external_urls.keys).to eq(['https://github.com', 'https://rubygems.org', 'https://github.com/gjtorikian', 'https://github.com/riccardoporreca'])
+
+            File.delete(cache_filepath)
+          end
+        end
+
         it 'understands encodings even if it is unnormalized coming in' do
           new_time = Time.local(2015, 10, 20, 12, 0, 0)
           Timecop.freeze(new_time) do
