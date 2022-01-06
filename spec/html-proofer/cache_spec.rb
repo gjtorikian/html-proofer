@@ -311,62 +311,70 @@ describe 'Cache test' do
     end
 
     context 'rechecking failures' do
+      let(:new_time) { Time.local(2022, 1, 6, 12, 0, 0) }
+
       it 'does recheck failures for newly valid links' do
-        file = File.join(FIXTURES_DIR, 'cache', 'valid_link.html')
+        Timecop.freeze(new_time) do
+          file = File.join(FIXTURES_DIR, 'cache', 'valid_link.html')
 
-        # link from file is broken in this cache
-        template = File.join(FIXTURES_DIR, 'cache', version, '.broken_external_link.template')
-        cache_filename = File.join(version, '.broken_external_link.json')
-        cache_filepath = File.join(FIXTURES_DIR, 'cache', cache_filename)
-        FileUtils.cp(template, cache_filepath)
+          # link from file is broken in this cache
+          template = File.join(FIXTURES_DIR, 'cache', version, '.broken_external_link.template')
+          cache_filename = File.join(version, '.broken_external_link.json')
+          cache_filepath = File.join(FIXTURES_DIR, 'cache', cache_filename)
+          FileUtils.cp(template, cache_filepath)
 
-        cache = read_cache(cache_filename)
-        external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
-        expect(external_link['found']).to equal(false)
-        expect(external_link['status_code']).to equal(0)
+          cache = read_cache(cache_filename)
+          external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
+          expect(external_link['found']).to equal(false)
+          expect(external_link['status_code']).to equal(0)
 
-        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        cache = read_cache(cache_filename)
-        external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
-        expect(external_link['found']).to equal(true)
-        expect(external_link['status_code']).to equal(200)
-        expect(external_link['message']).equal?('OK')
+          cache = read_cache(cache_filename)
+          external_link = cache['external']['https://github.com/gjtorikian/html-proofer']
+          expect(external_link['found']).to equal(true)
+          expect(external_link['status_code']).to equal(200)
+          expect(external_link['message']).equal?('OK')
 
-        File.delete(cache_filepath)
+          File.delete(cache_filepath)
+        end
       end
 
       it 'does recheck failures, regardless of cache' do
-        cache_filename = File.join(version, '.recheck_failure.json')
+        Timecop.freeze(new_time) do
+          cache_filename = File.join(version, '.recheck_failure.json')
 
-        expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+          expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
-        # we expect the same link to be re-added, even though we are within the time frame,
-        # because `foofoofoo.biz` was a failure
-        expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external)
+          # we expect the same link to be re-added, even though we are within the time frame,
+          # because `foofoofoo.biz` was a failure
+          expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external)
 
-        run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+        end
       end
 
       it 'does recheck failures, regardless of external-only cache' do
-        cache_filename = File.join(version, '.recheck_external_failure.json')
-        cache_filepath = File.join(cache_fixture_dir, cache_filename)
+        Timecop.freeze(new_time) do
+          cache_filename = File.join(version, '.recheck_external_failure.json')
+          cache_filepath = File.join(cache_fixture_dir, cache_filename)
 
-        file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
+          file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
 
-        File.delete(cache_filepath) if File.exist?(cache_filepath)
+          File.delete(cache_filepath) if File.exist?(cache_filepath)
 
-        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
 
-        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+        end
       end
 
       it 'does recheck failures, regardless of external and internal cache' do
@@ -374,46 +382,51 @@ describe 'Cache test' do
         cache_location = File.join(cache_fixture_dir, cache_filename)
 
         file = File.join(FIXTURES_DIR, 'cache', 'internal_and_external_example.html')
+        Timecop.freeze(new_time) do
+          File.delete(cache_location) if File.exist?(cache_location)
 
-        File.delete(cache_location) if File.exist?(cache_location)
+          run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+          internal_links = cache['internal']
+          expect(internal_links.keys.first).to eq('/somewhere.html')
 
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
-        internal_links = cache['internal']
-        expect(internal_links.keys.first).to eq('/somewhere.html')
+          run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        run_proofer(file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
-
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
-        internal_links = cache['internal']
-        expect(internal_links.keys.first).to eq('/somewhere.html')
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+          internal_links = cache['internal']
+          expect(internal_links.keys.first).to eq('/somewhere.html')
+        end
       end
     end
 
     context 'removing links' do
+      let(:new_time) { Time.local(2022, 1, 6, 12, 0, 0) }
+
       it 'removes external links that no longer exist' do
-        test_file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
-        cache_filename = File.join(version, '.removed_link.json')
-        cache_location = File.join(cache_fixture_dir, cache_filename)
+        Timecop.freeze(new_time) do
+          test_file = File.join(FIXTURES_DIR, 'cache', 'external_example.html')
+          cache_filename = File.join(version, '.removed_link.json')
+          cache_location = File.join(cache_fixture_dir, cache_filename)
 
-        File.delete(cache_location) if File.exist?(cache_location)
+          File.delete(cache_location) if File.exist?(cache_location)
 
-        run_proofer(test_file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(test_file, :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian/html-proofer')
 
-        run_proofer(File.join(FIXTURES_DIR, 'cache', 'some_link.html'), :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(File.join(FIXTURES_DIR, 'cache', 'some_link.html'), :file, cache: { timeframe: '1d', cache_file: cache_filename }.merge(default_cache_options))
 
-        cache = read_cache(cache_filename)
-        external_links = cache['external']
-        expect(external_links.keys.first).to eq('https://github.com/gjtorikian')
+          cache = read_cache(cache_filename)
+          external_links = cache['external']
+          expect(external_links.keys.first).to eq('https://github.com/gjtorikian')
+        end
       end
     end
   end
