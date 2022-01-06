@@ -14,10 +14,9 @@ require 'html_proofer/version'
 require 'parallel'
 require 'fileutils'
 
-%w[awesome_print debug].each do |gem|
-  require gem
-rescue LoadError;  # rubocop:disable Lint/SuppressedException
-end
+# require 'awesome_print'
+# require 'debug'
+
 module HTMLProofer
   def self.check_file(file, options = {})
     raise ArgumentError unless file.is_a?(String)
