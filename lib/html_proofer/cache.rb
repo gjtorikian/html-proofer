@@ -95,8 +95,6 @@ module HTMLProofer
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
       additions = urls_detected.reject do |url, metadata|
-        url = cleaned_url(url)
-
         if @cache_log[type].include?(url)
           @cache_log[type][url][:metadata] = metadata
 
@@ -124,8 +122,6 @@ module HTMLProofer
       deletions = 0
 
       @cache_log[type].delete_if do |url, _|
-        url = cleaned_url(url)
-
         if urls_detected.include?(url)
           false
         elsif url_matches_type?(url, type)
@@ -148,6 +144,10 @@ module HTMLProofer
     def retrieve_urls(urls_detected, type)
       # if there are no urls, bail
       return {} if urls_detected.empty?
+
+      urls_detected = urls_detected.transform_keys do |url|
+        cleaned_url(url)
+      end
 
       urls_to_check = detect_url_changes(urls_detected, type)
 
@@ -222,9 +222,11 @@ module HTMLProofer
     end
 
     private def cleaned_url(url)
-      return escape_unescape(url) unless url.end_with?('/', '#', '?') && url.length > 1
+      cleaned_url = escape_unescape(url)
 
-      escape_unescape(url[0..-2])
+      return cleaned_url unless cleaned_url.end_with?('/', '#', '?') && cleaned_url.length > 1
+
+      cleaned_url[0..-2]
     end
 
     private def escape_unescape(url)
