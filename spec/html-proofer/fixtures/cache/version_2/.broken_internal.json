@@ -1,0 +1,18 @@
+{
+    "version": 2,
+    "external": {},
+    "internal": {
+      "/": {
+        "time": "2015-10-20 12:00:00 -0700",
+        "metadata": [
+          {
+            "source": "spec/html-proofer/fixtures/cache/root_link.html",
+            "line": 11,
+            "base_url": "",
+            "found": false
+          }
+        ]
+      }
+    }
+  }
+  

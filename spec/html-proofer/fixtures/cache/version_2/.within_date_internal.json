@@ -9,7 +9,7 @@
           "source": "spec/html-proofer/fixtures/cache/root_link.html",
           "line": 11,
           "base_url": "",
-          "found": false
+          "found": true
         }
       ]
     }
