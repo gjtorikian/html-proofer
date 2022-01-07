@@ -96,14 +96,22 @@ module HTMLProofer
     private def determine_additions(urls_detected, type)
       additions = urls_detected.reject do |url, metadata|
         if @cache_log[type].include?(url)
-          @cache_log[type][url][:metadata] = metadata
 
           # if this is false, we're trying again
           if type == :external
-            @cache_log[type][url][:found]
+            found = @cache_log[type][url][:found]
           else
-            @cache_log[type][url][:metadata].none? { |m| m[:found] }
+            found = @cache_log[type][url][:metadata].all? { |m| m[:found] }
           end
+          if not found
+            @logger.log :debug, "Re-adding not found #{url} to #{type} cache"
+            # metadata will be updated when re-adding the url, and must be re-intialized for internal links
+            @cache_log[type][url][:metadata] = []
+          else
+            # update the cached metadata (there might be more locations found cached for the link)
+            @cache_log[type][url][:metadata] = metadata
+          end
+          found
         else
           @logger.log :debug, "Adding #{url} to #{type} cache"
           false
