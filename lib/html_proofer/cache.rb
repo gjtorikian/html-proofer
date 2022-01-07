@@ -98,18 +98,18 @@ module HTMLProofer
         if @cache_log[type].include?(url)
 
           # if this is false, we're trying again
-          if type == :external
-            found = @cache_log[type][url][:found]
+          found = if type == :external
+                    @cache_log[type][url][:found]
+                  else
+                    @cache_log[type][url][:metadata].all? { |m| m[:found] }
+                  end
+          if found
+            # update the cached metadata (there might be more locations found cached for the link)
+            @cache_log[type][url][:metadata] = metadata
           else
-            found = @cache_log[type][url][:metadata].all? { |m| m[:found] }
-          end
-          if not found
             @logger.log :debug, "Re-adding not found #{url} to #{type} cache"
             # metadata will be updated when re-adding the url, and must be re-intialized for internal links
             @cache_log[type][url][:metadata] = []
-          else
-            # update the cached metadata (there might be more locations found cached for the link)
-            @cache_log[type][url][:metadata] = metadata
           end
           found
         else
