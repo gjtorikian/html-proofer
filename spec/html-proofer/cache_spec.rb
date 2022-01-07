@@ -280,6 +280,22 @@ describe 'Cache test' do
         end
       end
 
+      context 'rechecking failures' do
+        let(:cache_filename) { File.join(version, '.broken_internal.json') }
+        let(:test_file) { File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link.html') }
+
+        it 'does recheck failures, regardless of cache' do
+          new_time = Time.local(2015, 10, 27, 12, 0, 0)
+          Timecop.freeze(new_time) do
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/', { :base_url => '', current_path: test_file, :found => nil, :line => 5, :source => test_file }, true)
+
+            run_proofer(test_file, :file, disable_external: true, cache: { timeframe: '28d', cache_file: cache_filename }.merge(default_cache_options))
+          end
+        end
+      end
+
       context 'new internal url added' do
         let(:cache_filename) { File.join(version, '.new_internal_url.json') }
         let(:cache_filepath) { File.join(cache_fixture_dir, cache_filename) }
