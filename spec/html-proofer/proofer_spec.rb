@@ -19,7 +19,7 @@ describe HTMLProofer do
     it 'works for directory that ends with .html' do
       folder = File.join(FIXTURES_DIR, 'links', '_site/folder.html')
       proofer = HTMLProofer.check_directory(folder)
-      expect(proofer.files).to eq(["#{folder}/index.html"])
+      expect(proofer.files).to eq([{ source: folder, path: "#{folder}/index.html" }])
     end
   end
 
