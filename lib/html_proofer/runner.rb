@@ -127,8 +127,8 @@ module HTMLProofer
 
           check.run
 
-          result[:external_urls].merge!(check.external_urls)
-          result[:internal_urls].merge!(check.internal_urls)
+          result[:external_urls].merge!(check.external_urls) { |_key, old, current| old.concat(current) }
+          result[:internal_urls].merge!(check.internal_urls) { |_key, old, current| old.concat(current) }
           result[:failures].concat(check.failures)
         end
       end
