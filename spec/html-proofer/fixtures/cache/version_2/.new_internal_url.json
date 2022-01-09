@@ -2,15 +2,13 @@
   "version": 2,
   "external": {},
   "internal": {
-    "root_link.html": {
+      "{\"link\":\"root_link.html\",\"context\":{\"source\":\"spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html\",\"path\":\"spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html\",\"base_url\": \"\"}}": {
       "time": "2015-10-15 12:00:00 -0700",
+      "found": true,
       "metadata": [
         {
-          "source": "spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html",
-          "current_path": "spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html",
-          "line": 10,
-          "base_url": "",
-          "found": true
+          "filename": "spec/html-proofer/fixtures/links/root_link/root_link_with_another_link.html",
+          "line": 10
         }
       ]
     }

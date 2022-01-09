@@ -306,7 +306,7 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('root_link.html', { :base_url => '', current_path: test_file, :found => nil, :line => 5, :source => test_file }, false)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('root_link.html', { :base_url => '', path: test_file, :source => test_file }, [{ :line => 5, :filename => test_file }], false)
 
             run_proofer(test_file, :file, disable_external: true, cache: { timeframe: '28d', cache_file: cache_filename }.merge(default_cache_options))
           end
