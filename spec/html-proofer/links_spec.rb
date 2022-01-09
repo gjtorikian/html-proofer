@@ -685,7 +685,7 @@ describe 'Links test' do
   it 'knows how to find internal link with additional sources' do
     empty_dir = File.join(FIXTURES_DIR, 'links', 'same_name_as_dir')
     valid_dir = File.join(FIXTURES_DIR, 'links', 'internals')
-    proofer = run_proofer([valid_dir,empty_dir], :directories)
+    proofer = run_proofer([valid_dir, empty_dir], :directories)
     expect(proofer.failed_checks.length).to eq(0)
   end
 
