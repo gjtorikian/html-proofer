@@ -194,7 +194,7 @@ module HTMLProofer
                    elsif cache_version != CACHE_VERSION
                    # if cache version is newer...do something
                    else
-                     log[:internal] = log[:internal].transform_keys { |key| JSON.parse(key.to_s, symbolize_names: true) }
+                     log[:internal] = log[:internal].transform_keys(&:to_s)
                      log[:external] = log[:external].transform_keys(&:to_s)
                      log
                    end
