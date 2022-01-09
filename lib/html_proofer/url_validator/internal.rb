@@ -30,13 +30,13 @@ module HTMLProofer
         @runner.current_path = context[:path]
 
         unless file_exists?(url)
-          metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > Internal', "internally linking to #{url}, which does not exist", line: m[:line]) }
+          add_failure(metadata, "internally linking to #{url}, which does not exist")
           @cache.add_internal(url.to_s, context, metadata, false)
           next
         end
 
         unless hash_exists?(url)
-          metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > Internal', "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: m[:line]) }
+          add_failure(metadata, "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not")
           @cache.add_internal(url.to_s, context, metadata, false)
           next
         end
@@ -80,6 +80,10 @@ module HTMLProofer
 
       html = create_nokogiri(url.absolute_path)
       html.xpath(*xpaths)
+    end
+
+    def add_failure(metadata, description)
+      metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > Internal', description, line: m[:line]) }
     end
   end
 end
