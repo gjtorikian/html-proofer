@@ -97,40 +97,38 @@ module HTMLProofer
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
       if @options[:parallel][:enable]
-        Parallel.map(files, @options[:parallel]) { |path| load_file(path) }
+        Parallel.map(files, @options[:parallel]) { |file| load_file(file[:path], file[:source]) }
       else
-        files.map { |path| load_file(path) }
+        files.map do |file|
+          load_file(file[:path], file[:source])
+        end
       end
     end
 
-    def load_file(path)
+    def load_file(path, source)
       @html = create_nokogiri(path)
-      check_parsed(path)
+      check_parsed(path, source)
     end
 
     # Collects any external URLs found in a directory of files. Also collectes
     # every failed test from process_files.
-    def check_parsed(path)
+    def check_parsed(path, source)
       result = { internal_urls: {}, external_urls: {}, failures: [] }
 
-      @source = [@source] if @type == :file
+      checks.each do |klass|
+        @current_source = source
+        @current_path = path
 
-      @source.each do |current_source|
-        checks.each do |klass|
-          @current_source = current_source
-          @current_path = path
+        check = Object.const_get(klass).new(self, @html)
+        @logger.log :debug, "Running #{check.short_name} in #{path}"
 
-          check = Object.const_get(klass).new(self, @html)
-          @logger.log :debug, "Running #{check.short_name} in #{path}"
+        @current_check = check
 
-          @current_check = check
+        check.run
 
-          check.run
-
-          result[:external_urls].merge!(check.external_urls)
-          result[:internal_urls].merge!(check.internal_urls)
-          result[:failures].concat(check.failures)
-        end
+        result[:external_urls].merge!(check.external_urls) { |_key, old, current| old.concat(current) }
+        result[:internal_urls].merge!(check.internal_urls) { |_key, old, current| old.concat(current) }
+        result[:failures].concat(check.failures)
       end
       result
     end
@@ -150,10 +148,10 @@ module HTMLProofer
       @files ||= if @type == :directory
                    @source.map do |src|
                      pattern = File.join(src, '**', "*{#{@options[:extensions].join(',')}}")
-                     Dir.glob(pattern).select { |f| File.file?(f) && !ignore_file?(f) }
+                     Dir.glob(pattern).select { |f| File.file?(f) && !ignore_file?(f) }.map { |f| { source: src, path: f } }
                    end.flatten
-                 elsif @type == :file &&  @options[:extensions].include?(File.extname(@source))
-                   [@source].reject { |f| ignore_file?(f) }
+                 elsif @type == :file && @options[:extensions].include?(File.extname(@source))
+                   [@source].reject { |f| ignore_file?(f) }.map { |f| { source: f, path: f } }
                  else
                    []
                  end

@@ -200,6 +200,12 @@ describe 'Links test' do
     expect(proofer.failed_checks.first.description).to match(/internally linking to #anadaasdadsadschor; the file exists, but the hash 'anadaasdadsadschor' does not/)
   end
 
+  it 'finds the same broken link multiple times' do
+    multiple_problems = File.join(FIXTURES_DIR, 'links', 'multiple_links.html')
+    proofer = run_proofer(multiple_problems, :file)
+    expect(proofer.failed_checks.length).to eq(3)
+  end
+
   it 'ignores valid mailto links' do
     ignorable_links = File.join(FIXTURES_DIR, 'links', 'mailto_link.html')
     proofer = run_proofer(ignorable_links, :file)
@@ -671,9 +677,16 @@ describe 'Links test' do
   end
 
   it 'works for a direct link through directory' do
-    file = File.join(FIXTURES_DIR, 'links', 'internals')
-    proofer = run_proofer(file, :directory)
+    dir = File.join(FIXTURES_DIR, 'links', 'internals')
+    proofer = run_proofer(dir, :directory)
     expect(proofer.failed_checks).to eq []
+  end
+
+  it 'knows how to find internal link with additional sources' do
+    empty_dir = File.join(FIXTURES_DIR, 'links', 'same_name_as_dir')
+    valid_dir = File.join(FIXTURES_DIR, 'links', 'internals')
+    proofer = run_proofer([valid_dir, empty_dir], :directories)
+    expect(proofer.failed_checks.length).to eq(0)
   end
 
   it 'reports linked internal through directory' do

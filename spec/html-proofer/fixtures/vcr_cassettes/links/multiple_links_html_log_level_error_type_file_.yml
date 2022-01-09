@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://another.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://another.png/
+  recorded_at: Sun, 09 Jan 2022 17:09:12 GMT
+- request:
+    method: head
+    uri: https://missing.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://missing.png/
+  recorded_at: Sun, 09 Jan 2022 17:09:12 GMT
+recorded_with: VCR 2.9.3
