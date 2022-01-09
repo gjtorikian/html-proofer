@@ -53,16 +53,16 @@ module HTMLProofer
     def add_to_internal_urls(url, line)
       url_string = url.raw_attribute
 
-      @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
-
-      metadata = {
+      context = {
         source: @runner.current_source,
-        current_path: @runner.current_path,
-        line: line,
-        base_url: base_url,
-        found: nil
+        path: @runner.current_path,
+        base_url: base_url
       }
-      @internal_urls[url_string] << metadata
+      url_key = { link: url_string, context: context }
+
+      @internal_urls[url_key] = [] if @internal_urls[url_key].nil?
+
+      @internal_urls[url_key] << { filename: @runner.current_path, line: line }
     end
 
     def add_to_external_urls(url, line)

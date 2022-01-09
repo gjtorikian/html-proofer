@@ -57,21 +57,20 @@ module HTMLProofer
       end
     end
 
-    def add_internal(url, metadata, found)
+    def add_internal(url, context, metadata, found)
       return unless enabled?
 
-      @cache_log[:internal][url] = { time: @cache_time, metadata: [] } if @cache_log[:internal][url].nil?
-
-      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found)
+      cache_key = { link: url, context: context }
+      @cache_log[:internal][cache_key] = { time: @cache_time.to_s, found: found, metadata: metadata }
     end
 
-    def add_external(url, filenames, status_code, msg)
+    def add_external(url, metadata, status_code, msg)
       return unless enabled?
 
       found = status_code.between?(200, 299)
 
       clean_url = cleaned_url(url)
-      @cache_log[:external][clean_url] = { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
+      @cache_log[:external][clean_url] = { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: metadata }
     end
 
     def detect_url_changes(urls_detected, type)
@@ -82,27 +81,13 @@ module HTMLProofer
       additions
     end
 
-    private def construct_internal_link_metadata(metadata, found)
-      {
-        source: metadata[:source],
-        current_path: metadata[:current_path],
-        line: metadata[:line],
-        base_url: metadata[:base_url],
-        found: found
-      }
-    end
-
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
       additions = urls_detected.reject do |url, metadata|
         if @cache_log[type].include?(url)
 
           # if this is false, we're trying again
-          found = if type == :external
-                    @cache_log[type][url][:found]
-                  else
-                    @cache_log[type][url][:metadata].all? { |m| m[:found] }
-                  end
+          found = @cache_log[type][url][:found]
           if found
             # update the cached metadata (there might be more locations found cached for the link)
             @cache_log[type][url][:metadata] = metadata
@@ -146,15 +131,19 @@ module HTMLProofer
     def write
       return unless enabled?
 
-      File.write(@cache_file, @cache_log.to_json)
+      cache_write = @cache_log
+      cache_write[:internal].transform_keys!(&:to_json)
+      File.write(@cache_file, cache_write.to_json)
     end
 
     def retrieve_urls(urls_detected, type)
       # if there are no urls, bail
       return {} if urls_detected.empty?
 
-      urls_detected = urls_detected.transform_keys do |url|
-        cleaned_url(url)
+      if type == :external
+        urls_detected = urls_detected.transform_keys do |url|
+          cleaned_url(url)
+        end
       end
 
       urls_to_check = detect_url_changes(urls_detected, type)
@@ -205,7 +194,7 @@ module HTMLProofer
                    elsif cache_version != CACHE_VERSION
                    # if cache version is newer...do something
                    else
-                     log[:internal] = log[:internal].transform_keys(&:to_s)
+                     log[:internal] = log[:internal].transform_keys { |key| JSON.parse(key.to_s, symbolize_names: true) }
                      log[:external] = log[:external].transform_keys(&:to_s)
                      log
                    end

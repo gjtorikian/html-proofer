@@ -22,27 +22,26 @@ module HTMLProofer
     end
 
     def run_internal_link_checker(links)
-      links.each_pair do |link, matched_files|
-        matched_files.each do |metadata|
-          url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url])
+      links.each_pair do |link, metadata|
+        context = link[:context]
+        url = HTMLProofer::Attribute::Url.new(@runner, link[:link], base_url: context[:base_url])
 
-          @runner.current_source = metadata[:source]
-          @runner.current_path = metadata[:current_path]
+        @runner.current_source = context[:source]
+        @runner.current_path = context[:path]
 
-          unless file_exists?(url)
-            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
-            @cache.add_internal(url.to_s, metadata, false)
-            next
-          end
-
-          unless hash_exists?(url)
-            @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: metadata[:line], status: nil, content: nil)
-            @cache.add_internal(url.to_s, metadata, false)
-            next
-          end
-
-          @cache.add_internal(url.to_s, metadata, true)
+        unless file_exists?(url)
+          metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > Internal', "internally linking to #{url}, which does not exist", line: m[:line]) }
+          @cache.add_internal(url.to_s, context, metadata, false)
+          next
         end
+
+        unless hash_exists?(url)
+          metadata.each { |m| @failed_checks << Failure.new(m[:filename], 'Links > Internal', "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: m[:line]) }
+          @cache.add_internal(url.to_s, context, metadata, false)
+          next
+        end
+
+        @cache.add_internal(url.to_s, context, metadata, true)
       end
 
       @failed_checks
