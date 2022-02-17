@@ -98,7 +98,7 @@ Dir.mkdir("out") unless File.exist?("out")
 pipeline = HTML::Pipeline.new [
   HTML::Pipeline::MarkdownFilter,
   HTML::Pipeline::TableOfContentsFilter
-], :gfm => true
+], gfm:  true
 
 # iterate over files, and generate HTML from Markdown
 Find.find("./docs") do |path|
@@ -149,7 +149,7 @@ HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 Sometimes, the information in your HTML is not the same as how your server serves content. In these cases, you can use `swap_urls` to map the URL in a file to the URL you'd like it to become. For example:
 
 ```ruby
-run_proofer(file, :file, swap_urls: { %r{^https://example.com} => 'https://website.com' })
+run_proofer(file, :file, swap_urls: { %r{^https//example.com}:  'https://website.com' })
 ```
 
 In this case, any link that matches the `^https://example.com` will be converted to `https://website.com`.
@@ -220,7 +220,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  options = { :swap_urls => "^/BASEURL/:/" }
+  options = { swap_urls:  "^/BASEURL/:/" }
   HTMLProofer.check_directory("./_site", options).run
 end
 ```
@@ -300,7 +300,7 @@ In addition, there are a few "namespaced" options. These are:
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {:extensions => [".htm"], :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
+HTMLProofer.new("out/", {extensions:  [".htm"], typhoeus:  { verbose:  true, ssl_verifyhost:  2 } })
 ```
 
 This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check the [Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
@@ -311,13 +311,13 @@ The default value is:
 
 ``` ruby
 {
-  :typhoeus =>
+  typhoeus:
   {
-    :followlocation => true,
-    :connecttimeout => 10,
-    :timeout => 30
+    followlocation:  true,
+    connecttimeout:  10,
+    timeout:  30
   },
-  :hydra => { :max_concurrency => 50 }
+  hydra:  { max_concurrency:  50 }
 }
 ```
 
@@ -342,12 +342,12 @@ The `Authorization` header is being set if and only if the `base_url` is `https:
 [Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { in_processes: 3} })
+HTMLProofer.check_directories(["out/"], {extension:  ".htm", parallel:  { in_processes: 3} })
 ```
 
 In this example, `in_processes: 3` is passed into Parallel as a configuration option.
 
-Pass in `:parallel => { enable: false }` to disable parallel runs.
+Pass in `parallel:  { enable: false }` to disable parallel runs.
 
 On the CLI, you can provide the `--parallel` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
@@ -365,19 +365,19 @@ You can enable caching for this log file by passing in the option `:cache`, with
 For example, passing the following options means "recheck links older than thirty days":
 
 ``` ruby
-{ :cache => { :timeframe => '30d' } }
+{ cache:  { timeframe:  '30d' } }
 ```
 
 And the following options means "recheck links older than two weeks":
 
 ``` ruby
-{ :cache => { :timeframe => '2w' } }
+{ cache:  { timeframe:  '2w' } }
 ```
 
 You can change the filename or the directory where the cachefile is kept by also providing the `storage_dir` key:
 
 ``` ruby
-{ :cache => { :cache_file => 'stay_cachey.json', :storage_dir => '/tmp/html-proofer-cache-money' } }
+{ cache:  { cache_file:  'stay_cachey.json', storage_dir:  '/tmp/html-proofer-cache-money' } }
 ```
 
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
@@ -484,9 +484,9 @@ To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :ssl_verifypeer => false,
-    :ssl_verifyhost => 0}
+  typhoeus:  {
+    ssl_verifypeer:  false,
+    ssl_verifyhost:  0}
 }).run
 ```
 
@@ -496,8 +496,8 @@ To change the User-Agent used by Typhoeus:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
+  typhoeus:  {
+    headers:  { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run
 ```
 
@@ -513,9 +513,9 @@ Sometimes links fail because they don't have access to cookies. To fix this you 
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :cookiefile => ".cookies",
-    :cookiejar => ".cookies"
+  typhoeus:  {
+    cookiefile:  ".cookies",
+    cookiejar:  ".cookies"
 }}).run
 ```
 
@@ -529,7 +529,7 @@ To exclude urls using regular expressions, include them between forward slashes 
 
 ``` ruby
 HTMLProofer.check_directories(["out/"], {
-  :ignore_urls => [/example.com/],
+  ignore_urls:  [/example.com/],
 }).run
 ```
 
