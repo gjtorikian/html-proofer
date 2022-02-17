@@ -22,6 +22,7 @@ module HTMLProofer
     end
 
     def run_internal_link_checker(links)
+      to_add = []
       links.each_pair do |link, matched_files|
         matched_files.each do |metadata|
           url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url])
@@ -31,18 +32,23 @@ module HTMLProofer
 
           unless file_exists?(url)
             @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
-            @cache.add_internal(url.to_s, metadata, false)
+            to_add << [url, metadata, false]
             next
           end
 
           unless hash_exists?(url)
             @failed_checks << Failure.new(@runner.current_path, 'Links > Internal', "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: metadata[:line], status: nil, content: nil)
-            @cache.add_internal(url.to_s, metadata, false)
+            to_add << [url, metadata, false]
             next
           end
 
-          @cache.add_internal(url.to_s, metadata, true)
+          to_add << [url, metadata, true]
         end
+      end
+
+      # adding directly to the cache above results in an endless loop
+      to_add.each do |(url, metadata, exists)|
+        @cache.add_internal(url.to_s, metadata, exists)
       end
 
       @failed_checks

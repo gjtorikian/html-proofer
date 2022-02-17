@@ -14,8 +14,8 @@ require 'html_proofer/version'
 require 'parallel'
 require 'fileutils'
 
-# require 'awesome_print'
-# require 'debug'
+require 'awesome_print'
+require 'debug'
 
 module HTMLProofer
   def self.check_file(file, options = {})

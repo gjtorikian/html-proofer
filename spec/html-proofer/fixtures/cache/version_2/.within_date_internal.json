@@ -2,12 +2,12 @@
   "version": 2,
   "external": {},
   "internal": {
-    "/": {
+    "/broken_root_link_internal.html": {
       "time": "2015-10-20 12:00:00 -0700",
       "metadata": [
         {
-          "source": "spec/html-proofer/fixtures/cache/root_link.html",
-          "line": 11,
+          "source": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
+          "line": 5,
           "base_url": "",
           "found": true
         }
