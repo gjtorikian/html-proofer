@@ -60,7 +60,7 @@ module HTMLProofer
         current_path: @runner.current_path,
         line: line,
         base_url: base_url,
-        found: nil
+        found: false
       }
       @internal_urls[url_string] << metadata
     end

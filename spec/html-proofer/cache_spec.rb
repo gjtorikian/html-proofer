@@ -253,10 +253,10 @@ describe 'Cache test' do
     context 'internal links' do
       context 'dates' do
         let(:cache_filename) { File.join(version, '.within_date_internal.json') }
-        let(:test_file) { File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link.html') }
+        let(:test_file) { File.join(FIXTURES_DIR, 'links', 'working_root_link_internal.html') }
+        let(:new_time) { Time.local(2015, 10, 27, 12, 0, 0) }
 
         it 'does not write file if timestamp is within date' do
-          new_time = Time.local(2015, 10, 27, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
@@ -268,12 +268,11 @@ describe 'Cache test' do
         end
 
         it 'does write file if timestamp is not within date' do
-          new_time = Time.local(2015, 10, 27, 12, 0, 0)
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
 
             # we expect an add since we are mocking outside the timeframe
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/', { :base_url => '', current_path: test_file, :found => nil, :line => 5, :source => test_file }, true)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/broken_root_link_internal.html', { base_url: '', found: true, line: 5, source: test_file }, true)
 
             run_proofer(test_file, :file, disable_external: true, cache: { timeframe: '4d', cache_file: cache_filename }.merge(default_cache_options))
           end
@@ -290,7 +289,7 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             root_link = File.join(FIXTURES_DIR, 'links', 'root_link', 'root_link_with_another_link.html')
 
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('/', { :base_url => '', current_path: root_link, found: nil, :line => 5, :source => root_link }, true).and_call_original
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/', { base_url: '', current_path: root_link, found: false, line: 5, source: root_link }, true).and_call_original
 
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write).once
 
@@ -302,7 +301,7 @@ describe 'Cache test' do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
             root_link = File.join(FIXTURES_DIR, 'links', 'broken_internal_link.html')
-            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('#noHash', { :base_url => '', :current_path => root_link, found: nil, :line => 5, :source => root_link }, false)
+            expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).once.with('#noHash', { base_url: '', current_path: root_link, found: false, line: 5, source: root_link }, false)
 
             run_proofer(root_link, :file, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
           end
@@ -340,7 +339,7 @@ describe 'Cache test' do
         end
       end
 
-      it 'does recheck failures, regardless of cache' do
+      it 'does recheck external failures, regardless of cache' do
         Timecop.freeze(new_time) do
           cache_filename = File.join(version, '.recheck_failure.json')
 
@@ -351,6 +350,22 @@ describe 'Cache test' do
           expect_any_instance_of(HTMLProofer::Cache).to receive(:add_external)
 
           run_proofer(['http://www.foofoofoo.biz'], :links, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
+        end
+      end
+
+      it 'does recheck internal failures, regardless of cache' do
+        cache_filename = File.join(version, '.broken_internal.json')
+        test_path = File.join(FIXTURES_DIR, 'cache', 'example_site')
+        test_file = File.join(test_path, 'index.html')
+
+        Timecop.freeze(new_time) do
+          expect_any_instance_of(HTMLProofer::Cache).to receive(:write)
+
+          # we expect the same link to be re-added, even though we are within the time frame,
+          # because `index.html` contains a failure
+          expect_any_instance_of(HTMLProofer::Cache).to receive(:add_internal).with('/missing.html', { base_url: '', current_path: test_file, found: false, line: 6, source: test_path }, false)
+
+          run_proofer(test_path, :directory, disable_external: true, cache: { timeframe: '30d', cache_file: cache_filename }.merge(default_cache_options))
         end
       end
 
