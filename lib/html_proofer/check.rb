@@ -21,11 +21,12 @@ module HTMLProofer
     end
 
     def run
-      raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
+      raise NotImplementedError, "HTMLProofer::Check subclasses must implement #run"
     end
 
     def add_failure(description, line: nil, status: nil, content: nil)
-      @failures << Failure.new(@runner.current_path, short_name, description, line: line, status: status, content: content)
+      @failures << Failure.new(@runner.current_path, short_name, description, line: line, status: status,
+        content: content)
     end
 
     def self.subchecks(runner_options)
@@ -43,11 +44,11 @@ module HTMLProofer
     end
 
     def short_name
-      self.class.name.split('::').last
+      self.class.name.split("::").last
     end
 
     def self.short_name
-      name.split('::').last
+      name.split("::").last
     end
 
     def add_to_internal_urls(url, line)
@@ -60,7 +61,7 @@ module HTMLProofer
         current_path: @runner.current_path,
         line: line,
         base_url: base_url,
-        found: false
+        found: false,
       }
       @internal_urls[url_string] << metadata
     end
@@ -76,15 +77,15 @@ module HTMLProofer
     private def base_url
       return @base_url if defined?(@base_url)
 
-      return (@base_url = '') if (base = @html.at_css('base')).nil?
+      return (@base_url = "") if (base = @html.at_css("base")).nil?
 
-      @base_url = base['href']
+      @base_url = base["href"]
     end
 
     private def remove_ignored(html)
       return if html.nil?
 
-      html.css('code, pre, tt').each(&:unlink)
+      html.css("code, pre, tt").each(&:unlink)
       html
     end
   end

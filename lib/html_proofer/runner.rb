@@ -7,7 +7,7 @@ module HTMLProofer
     attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :checked_paths, :current_check
     attr_accessor :current_path, :current_source, :reporter
 
-    URL_TYPES = %i[external internal].freeze
+    URL_TYPES = [:external, :internal].freeze
 
     def initialize(src, opts = {})
       @options = HTMLProofer::Configuration.generate_defaults(opts)
@@ -34,16 +34,17 @@ module HTMLProofer
     end
 
     def run
-      check_text = pluralize(checks.length, 'check', 'checks')
+      check_text = pluralize(checks.length, "check", "checks")
 
       if @type == :links
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n"
+        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n")
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(', ')} files...\n\n"
+        @logger.log(:info,
+          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files...\n\n")
 
         check_files
-        @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
+        @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
       end
 
       @cache.write
@@ -51,7 +52,7 @@ module HTMLProofer
       @reporter.failures = @failures
 
       if @failures.empty?
-        @logger.log :info, 'HTML-Proofer finished successfully.'
+        @logger.log(:info, "HTML-Proofer finished successfully.")
       else
         @failures.uniq!
         report_failed_checks
@@ -120,7 +121,7 @@ module HTMLProofer
         @current_path = path
 
         check = Object.const_get(klass).new(self, @html)
-        @logger.log :debug, "Running #{check.short_name} in #{path}"
+        @logger.log(:debug, "Running #{check.short_name} in #{path}")
 
         @current_check = check
 
@@ -146,15 +147,17 @@ module HTMLProofer
 
     def files
       @files ||= if @type == :directory
-                   @source.map do |src|
-                     pattern = File.join(src, '**', "*{#{@options[:extensions].join(',')}}")
-                     Dir.glob(pattern).select { |f| File.file?(f) && !ignore_file?(f) }.map { |f| { source: src, path: f } }
-                   end.flatten
-                 elsif @type == :file && @options[:extensions].include?(File.extname(@source))
-                   [@source].reject { |f| ignore_file?(f) }.map { |f| { source: f, path: f } }
-                 else
-                   []
-                 end
+        @source.map do |src|
+          pattern = File.join(src, "**", "*{#{@options[:extensions].join(",")}}")
+          Dir.glob(pattern).select do |f|
+            File.file?(f) && !ignore_file?(f)
+          end.map { |f| { source: src, path: f } }
+        end.flatten
+      elsif @type == :file && @options[:extensions].include?(File.extname(@source))
+        [@source].reject { |f| ignore_file?(f) }.map { |f| { source: f, path: f } }
+      else
+        []
+      end
     end
 
     def ignore_file?(file)
@@ -177,7 +180,7 @@ module HTMLProofer
     def checks
       return @checks if defined?(@checks) && !@checks.nil?
 
-      return (@checks = ['LinkCheck']) if @type == :links
+      return (@checks = ["LinkCheck"]) if @type == :links
 
       @checks = HTMLProofer::Check.subchecks(@options).map(&:name)
 
@@ -191,9 +194,9 @@ module HTMLProofer
     def report_failed_checks
       @reporter.report
 
-      failure_text = pluralize(@failures.length, 'failure', 'failures')
-      @logger.log :fatal, "\nHTML-Proofer found #{failure_text}!"
-      exit 1
+      failure_text = pluralize(@failures.length, "failure", "failures")
+      @logger.log(:fatal, "\nHTML-Proofer found #{failure_text}!")
+      exit(1)
     end
 
     # Set before_request callback.
@@ -225,19 +228,19 @@ module HTMLProofer
 
       existing_urls_count = @cache.size(type)
       cache_text = pluralize(existing_urls_count, "#{type} link", "#{type} links")
-      @logger.log :debug, "Found #{cache_text} in the cache"
+      @logger.log(:debug, "Found #{cache_text} in the cache")
 
       urls_to_check = @cache.retrieve_urls(ivar, type)
       urls_detected = pluralize(urls_to_check.count, "#{type} link", "#{type} links")
-      @logger.log :info, "Checking #{urls_detected}"
+      @logger.log(:info, "Checking #{urls_detected}")
 
       urls_to_check
     end
 
     private def format_checks_list(checks)
       checks.map do |check|
-        check.sub(/HTMLProofer::Check::/, '')
-      end.join(', ')
+        check.sub(/HTMLProofer::Check::/, "")
+      end.join(", ")
     end
   end
 end

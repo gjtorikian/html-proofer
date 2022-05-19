@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'date'
-require 'json'
-require 'uri'
+require "date"
+require "json"
+require "uri"
 
 module HTMLProofer
   class Cache
@@ -10,8 +10,8 @@ module HTMLProofer
 
     CACHE_VERSION = 2
 
-    DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
-    DEFAULT_CACHE_FILE_NAME = 'cache.json'
+    DEFAULT_STORAGE_DIR = File.join("tmp", ".htmlproofer")
+    DEFAULT_CACHE_FILE_NAME = "cache.json"
 
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
@@ -21,7 +21,7 @@ module HTMLProofer
       @runner = runner
       @logger = @runner.logger
 
-      @cache_datetime = DateTime.now
+      @cache_datetime = Time.now
       @cache_time = @cache_datetime.to_time
 
       if blank?(options)
@@ -44,13 +44,13 @@ module HTMLProofer
       time, date = timeframe.match(/(\d+)(\D)/).captures
       time = time.to_i
       case date
-      when 'M'
+      when "M"
         time_ago(time, :months)
-      when 'w'
+      when "w"
         time_ago(time, :weeks)
-      when 'd'
+      when "d"
         time_ago(time, :days)
-      when 'h'
+      when "h"
         time_ago(time, :hours)
       else
         raise ArgumentError, "#{date} is not a valid timeframe!"
@@ -71,7 +71,8 @@ module HTMLProofer
       found = status_code.between?(200, 299)
 
       clean_url = cleaned_url(url)
-      @cache_log[:external][clean_url] = { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
+      @cache_log[:external][clean_url] =
+        { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
     end
 
     def detect_url_changes(urls_detected, type)
@@ -88,7 +89,7 @@ module HTMLProofer
         current_path: metadata[:current_path],
         line: metadata[:line],
         base_url: metadata[:base_url],
-        found: found
+        found: found,
       }
     end
 
@@ -105,14 +106,14 @@ module HTMLProofer
             @cache_log[type][url][:metadata].all? { |m| m[:found] }
           end
         else
-          @logger.log :debug, "Adding #{url} to #{type} cache"
+          @logger.log(:debug, "Adding #{url} to #{type} cache")
           false
         end
       end
 
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, "new #{type} link", "new #{type} links")
-      @logger.log :debug, "Adding #{new_link_text} to the cache"
+      @logger.log(:debug, "Adding #{new_link_text} to the cache")
 
       additions
     end
@@ -125,14 +126,14 @@ module HTMLProofer
         if urls_detected.include?(url)
           false
         elsif url_matches_type?(url, type)
-          @logger.log :debug, "Removing #{url} from #{type} cache"
+          @logger.log(:debug, "Removing #{url} from #{type} cache")
           deletions += 1
           true
         end
       end
 
       del_link_text = pluralize(deletions, "outdated #{type} link", "outdated #{type} links")
-      @logger.log :debug, "Removing #{del_link_text} from the cache"
+      @logger.log(:debug, "Removing #{del_link_text} from the cache")
     end
 
     def write
@@ -172,7 +173,7 @@ module HTMLProofer
       default_structure = {
         version: CACHE_VERSION,
         internal: {},
-        external: {}
+        external: {},
       }
 
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
@@ -193,14 +194,14 @@ module HTMLProofer
 
       old_cache = (cache_version = log[:version]).nil?
       @cache_log = if old_cache # previous cache version, create a new one
-                     default_structure
-                   elsif cache_version != CACHE_VERSION
-                   # if cache version is newer...do something
-                   else
-                     log[:internal] = log[:internal].transform_keys(&:to_s)
-                     log[:external] = log[:external].transform_keys(&:to_s)
-                     log
-                   end
+        default_structure
+      elsif cache_version != CACHE_VERSION
+      # if cache version is newer...do something
+      else
+        log[:internal] = log[:internal].transform_keys(&:to_s)
+        log[:external] = log[:external].transform_keys(&:to_s)
+        log
+      end
     end
 
     private def time_ago(measurement, unit)
@@ -224,7 +225,7 @@ module HTMLProofer
     private def cleaned_url(url)
       cleaned_url = escape_unescape(url)
 
-      return cleaned_url unless cleaned_url.end_with?('/', '#', '?') && cleaned_url.length > 1
+      return cleaned_url unless cleaned_url.end_with?("/", "#", "?") && cleaned_url.length > 1
 
       cleaned_url[0..-2]
     end

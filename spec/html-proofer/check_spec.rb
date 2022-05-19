@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 class MailToOctocat < ::HTMLProofer::Check
   def mailto_octocat?
-    @link.url.raw_attribute == 'mailto:octocat@github.com'
+    @link.url.raw_attribute == "mailto:octocat@github.com"
   end
 
   def run
-    @html.css('a').each do |node|
+    @html.css("a").each do |node|
       @link = create_element(node)
 
       next if @link.ignore?
@@ -19,14 +19,14 @@ class MailToOctocat < ::HTMLProofer::Check
 end
 
 describe HTMLProofer::Reporter do
-  it 'supports a custom reporter' do
-    file = File.join(FIXTURES_DIR, 'links', 'mailto_octocat.html')
+  it "supports a custom reporter" do
+    file = File.join(FIXTURES_DIR, "links", "mailto_octocat.html")
     cassette_name = make_cassette_name(file, {})
 
     VCR.use_cassette(cassette_name, record: :new_episodes) do
-      proofer = make_proofer(file, :file, { checks: ['MailToOctocat'] })
+      proofer = make_proofer(file, :file, { checks: ["MailToOctocat"] })
       output = capture_stderr { proofer.run }
-      expect(output).to include("In #{file} (line 1)")
+      expect(output).to(include("In #{file} (line 1)"))
     end
   end
 end

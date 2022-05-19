@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require 'zeitwerk'
-lib_dir = File.join(File.dirname(__dir__), 'lib')
+require "zeitwerk"
+lib_dir = File.join(File.dirname(__dir__), "lib")
 gem_loader = Zeitwerk::Loader.for_gem
 gem_loader.inflector.inflect(
-  'html_proofer' => 'HTMLProofer'
+  "html_proofer" => "HTMLProofer"
 )
-gem_loader.ignore(File.join(lib_dir, 'html-proofer.rb'))
+gem_loader.ignore(File.join(lib_dir, "html-proofer.rb"))
 gem_loader.setup
 
-require 'html_proofer/version'
+require "html_proofer/version"
 
-require 'parallel'
-require 'fileutils'
+require "parallel"
+require "fileutils"
 
 # require 'awesome_print'
 # require 'debug'

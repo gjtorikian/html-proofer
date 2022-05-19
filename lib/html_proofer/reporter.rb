@@ -12,12 +12,12 @@ module HTMLProofer
 
     def failures=(failures)
       @failures = failures.group_by(&:check_name) \
-                          .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } } \
-                          .sort
+        .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } } \
+        .sort
     end
 
     def report
-      raise NotImplementedError, 'HTMLProofer::Reporter subclasses must implement #report'
+      raise NotImplementedError, "HTMLProofer::Reporter subclasses must implement #report"
     end
   end
 end

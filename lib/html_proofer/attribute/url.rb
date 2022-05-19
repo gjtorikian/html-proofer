@@ -1,231 +1,237 @@
 # frozen_string_literal: true
 
-class HTMLProofer::Attribute::Url < HTMLProofer::Attribute
-  attr_reader :url
+module HTMLProofer
+  module Attribute
+    class Url < HTMLProofer::Attribute
+      attr_reader :url
 
-  REMOTE_SCHEMES = %w[http https].freeze
+      REMOTE_SCHEMES = ["http", "https"].freeze
 
-  def initialize(runner, link_attribute, base_url: nil)
-    super
+      def initialize(runner, link_attribute, base_url: nil)
+        super
 
-    if @raw_attribute.nil?
-      @url = nil
-    else
-      @url = @raw_attribute.delete("\u200b").strip
-      @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
+        if @raw_attribute.nil?
+          @url = nil
+        else
+          @url = @raw_attribute.delete("\u200b").strip
+          @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
 
-      swap_urls!
-      clean_url!
+          swap_urls!
+          clean_url!
 
-      # convert "//" links to "https://"
-      @url.start_with?('//') ? @url = "https:#{@url}" : @url
-    end
-  end
+          # convert "//" links to "https://"
+          @url.start_with?("//") ? @url = "https:#{@url}" : @url
+        end
+      end
 
-  def to_s
-    @url
-  end
+      def to_s
+        @url
+      end
 
-  def known_extension?
-    return true if hash_link?
+      def known_extension?
+        return true if hash_link?
 
-    ext = File.extname(path)
+        ext = File.extname(path)
 
-    # no extension means we use the assumed one
-    return @runner.options[:extensions].include?(@runner.options[:assume_extension]) if blank?(ext)
+        # no extension means we use the assumed one
+        return @runner.options[:extensions].include?(@runner.options[:assume_extension]) if blank?(ext)
 
-    @runner.options[:extensions].include?(ext)
-  end
+        @runner.options[:extensions].include?(ext)
+      end
 
-  def unknown_extension?
-    !known_extension?
-  end
+      def unknown_extension?
+        !known_extension?
+      end
 
-  def ignore?
-    return true if (/^javascript:/).match?(@url)
-    return true if ignores_pattern?(@runner.options[:ignore_urls])
-  end
+      def ignore?
+        return true if (/^javascript:/).match?(@url)
+        return true if ignores_pattern?(@runner.options[:ignore_urls])
+      end
 
-  def valid?
-    !parts.nil?
-  end
+      def valid?
+        !parts.nil?
+      end
 
-  def path?
-    !parts.host.nil? && !parts.path.nil?
-  end
+      def path?
+        !parts.host.nil? && !parts.path.nil?
+      end
 
-  def parts
-    @parts ||= Addressable::URI.parse @url
-  rescue URI::Error, Addressable::URI::InvalidURIError
-    @parts = nil
-  end
+      def parts
+        @parts ||= Addressable::URI.parse(@url)
+      rescue URI::Error, Addressable::URI::InvalidURIError
+        @parts = nil
+      end
 
-  def path
-    Addressable::URI.unencode parts.path unless parts.nil?
-  end
+      def path
+        Addressable::URI.unencode(parts.path) unless parts.nil?
+      end
 
-  def hash
-    parts&.fragment
-  end
+      def hash
+        parts&.fragment
+      end
 
-  # Does the URL have a hash?
-  def hash?
-    !blank?(hash)
-  end
+      # Does the URL have a hash?
+      def hash?
+        !blank?(hash)
+      end
 
-  def scheme
-    parts&.scheme
-  end
+      def scheme
+        parts&.scheme
+      end
 
-  def remote?
-    REMOTE_SCHEMES.include?(scheme)
-  end
+      def remote?
+        REMOTE_SCHEMES.include?(scheme)
+      end
 
-  def http?
-    scheme == 'http'
-  end
+      def http?
+        scheme == "http"
+      end
 
-  def https?
-    scheme == 'https'
-  end
+      def https?
+        scheme == "https"
+      end
 
-  def non_http_remote?
-    !scheme.nil? && !remote?
-  end
+      def non_http_remote?
+        !scheme.nil? && !remote?
+      end
 
-  def host
-    parts&.host
-  end
+      def host
+        parts&.host
+      end
 
-  def domain_path
-    (host || '') + path
-  end
+      def domain_path
+        (host || "") + path
+      end
 
-  def query_values
-    parts&.query_values
-  end
+      def query_values
+        parts&.query_values
+      end
 
-  # checks if a file exists relative to the current pwd
-  def exists?
-    return true if base64?
+      # checks if a file exists relative to the current pwd
+      def exists?
+        return true if base64?
 
-    return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
+        return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
 
-    @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
-  end
+        @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
+      end
 
-  def base64?
-    /^data:image/.match?(@raw_attribute)
-  end
+      def base64?
+        /^data:image/.match?(@raw_attribute)
+      end
 
-  def absolute_path
-    path = file_path || @runner.current_path
+      def absolute_path
+        path = file_path || @runner.current_path
 
-    File.expand_path(path, Dir.pwd)
-  end
+        File.expand_path(path, Dir.pwd)
+      end
 
-  def file_path
-    return if path.nil? || path.empty?
+      def file_path
+        return if path.nil? || path.empty?
 
-    path_dot_ext = ''
+        path_dot_ext = ""
 
-    path_dot_ext = path + @runner.options[:assume_extension] unless blank?(@runner.options[:assume_extension])
+        path_dot_ext = path + @runner.options[:assume_extension] unless blank?(@runner.options[:assume_extension])
 
-    base = if absolute_path?(path) # path relative to root
-             # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
-             @runner.options[:root_dir] || (File.directory?(@runner.current_source) ? @runner.current_source : File.dirname(@runner.current_source))
-           # relative links, path is a file
-           elsif File.exist?(File.expand_path(path, @runner.current_source)) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
-             File.dirname(@runner.current_path)
-           # relative links in nested dir, path is a file
-           elsif File.exist?(File.join(File.dirname(@runner.current_path), path)) || File.exist?(File.join(File.dirname(@runner.current_path), path_dot_ext)) # rubocop:disable Lint/DuplicateBranch
-             File.dirname(@runner.current_path)
-           # relative link, path is a directory
-           else
-             @runner.current_path
-           end
+        base = if absolute_path?(path) # path relative to root
+          # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
+          @runner.options[:root_dir] || (File.directory?(@runner.current_source) ? @runner.current_source : File.dirname(@runner.current_source))
+        # relative links, path is a file
+        elsif File.exist?(File.expand_path(path,
+          @runner.current_source)) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
+          File.dirname(@runner.current_path)
+        # relative links in nested dir, path is a file
+        elsif File.exist?(File.join(File.dirname(@runner.current_path),
+          path)) || File.exist?(File.join(File.dirname(@runner.current_path), path_dot_ext))
+          File.dirname(@runner.current_path)
+        # relative link, path is a directory
+        else
+          @runner.current_path
+        end
 
-    file = File.join(base, path)
+        file = File.join(base, path)
 
-    if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:assume_extension]}")
-      file = "#{file}#{@runner.options[:assume_extension]}"
-    elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
-      file = File.join file, @runner.options[:directory_index_file]
-    end
+        if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:assume_extension]}")
+          file = "#{file}#{@runner.options[:assume_extension]}"
+        elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
+          file = File.join(file, @runner.options[:directory_index_file])
+        end
 
-    file
-  end
+        file
+      end
 
-  def unslashed_directory?(file)
-    File.directory?(file) && !file.end_with?(File::SEPARATOR)
-  end
+      def unslashed_directory?(file)
+        File.directory?(file) && !file.end_with?(File::SEPARATOR)
+      end
 
-  def absolute_path?(path)
-    path.start_with?('/')
-  end
+      def absolute_path?(path)
+        path.start_with?("/")
+      end
 
-  # path is external to the file
-  def external?
-    !internal?
-  end
+      # path is external to the file
+      def external?
+        !internal?
+      end
 
-  def internal?
-    relative_link? || internal_absolute_link? || hash_link?
-  end
+      def internal?
+        relative_link? || internal_absolute_link? || hash_link?
+      end
 
-  def internal_absolute_link?
-    url.start_with?('/')
-  end
+      def internal_absolute_link?
+        url.start_with?("/")
+      end
 
-  def relative_link?
-    return false if remote?
+      def relative_link?
+        return false if remote?
 
-    hash_link? || param_link? || url.start_with?('.') || url =~ /^\S/
-  end
+        hash_link? || param_link? || url.start_with?(".") || url =~ /^\S/
+      end
 
-  def link_points_to_same_page?
-    hash_link || param_link
-  end
+      def link_points_to_same_page?
+        hash_link || param_link
+      end
 
-  def hash_link?
-    url.start_with?('#')
-  end
+      def hash_link?
+        url.start_with?("#")
+      end
 
-  def param_link?
-    url.start_with?('?')
-  end
+      def param_link?
+        url.start_with?("?")
+      end
 
-  def sans_hash
-    @url.to_s.sub(/##{hash}/, '')
-  end
+      def sans_hash
+        @url.to_s.sub(/##{hash}/, "")
+      end
 
-  # catch any obvious issues, like strings in port numbers
-  private def clean_url!
-    return if @url =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
+      # catch any obvious issues, like strings in port numbers
+      private def clean_url!
+        return if @url =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
 
-    @url = Addressable::URI.parse(@url).normalize.to_s
-  end
+        @url = Addressable::URI.parse(@url).normalize.to_s
+      end
 
-  private def swap_urls!
-    return @url if blank?(replacements = @runner.options[:swap_urls])
+      private def swap_urls!
+        return @url if blank?(replacements = @runner.options[:swap_urls])
 
-    replacements.each do |link, replace|
-      @url = @url.gsub(link, replace)
-    end
-  end
+        replacements.each do |link, replace|
+          @url = @url.gsub(link, replace)
+        end
+      end
 
-  private def ignores_pattern?(links_to_ignore)
-    return false unless links_to_ignore.is_a?(Array)
+      private def ignores_pattern?(links_to_ignore)
+        return false unless links_to_ignore.is_a?(Array)
 
-    links_to_ignore.each do |link_to_ignore|
-      case link_to_ignore
-      when String
-        return true if link_to_ignore == @raw_attribute
-      when Regexp
-        return true if link_to_ignore&.match?(@raw_attribute)
+        links_to_ignore.each do |link_to_ignore|
+          case link_to_ignore
+          when String
+            return true if link_to_ignore == @raw_attribute
+          when Regexp
+            return true if link_to_ignore&.match?(@raw_attribute)
+          end
+        end
+
+        false
       end
     end
-
-    false
   end
 end

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 describe HTMLProofer::Reporter::Cli do
-  describe 'cli_report' do
-    it 'reports all issues accurately' do
-      errors = File.join(FIXTURES_DIR, 'sorting', 'kitchen_sinkish.html')
-      output = capture_proofer_output(errors, :file, checks: %w[Links Images Scripts Favicon])
+  describe "cli_report" do
+    it "reports all issues accurately" do
+      errors = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
+      output = capture_proofer_output(errors, :file, checks: ["Links", "Images", "Scripts", "Favicon"])
 
       msg = <<~MSG
         For the Favicon check, the following failures were found:
@@ -75,11 +75,11 @@ describe HTMLProofer::Reporter::Cli do
         HTML-Proofer found 13 failures!
       MSG
 
-      expect(output).to match(msg)
+      expect(output).to(match(msg))
     end
 
-    it 'reports as-links accurately' do
-      output = capture_proofer_output(['www.github.com', 'http://asdadsadsasdadaf.biz/'], :links)
+    it "reports as-links accurately" do
+      output = capture_proofer_output(["www.github.com", "http://asdadsadsasdadaf.biz/"], :links)
 
       msg = <<~MSG
         For the Links > External check, the following failures were found:
@@ -94,7 +94,7 @@ describe HTMLProofer::Reporter::Cli do
         HTML-Proofer found 1 failure!
       MSG
 
-      expect(output).to match(msg)
+      expect(output).to(match(msg))
     end
   end
 end

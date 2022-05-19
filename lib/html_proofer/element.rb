@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'addressable/uri'
+require "addressable/uri"
 
 module HTMLProofer
   # Represents the element currently being processed
@@ -26,66 +26,66 @@ module HTMLProofer
 
     def meta_content
       return nil unless meta_tag?
-      return swap_attributes('content') if attribute_swapped?
+      return swap_attributes("content") if attribute_swapped?
 
-      @node['content']
+      @node["content"]
     end
 
     def meta_tag?
-      @node.name == 'meta'
+      @node.name == "meta"
     end
 
     def src
       return nil if !img_tag? && !script_tag? && !source_tag?
-      return swap_attributes('src') if attribute_swapped?
+      return swap_attributes("src") if attribute_swapped?
 
-      @node['src']
+      @node["src"]
     end
 
     def img_tag?
-      @node.name == 'img'
+      @node.name == "img"
     end
 
     def script_tag?
-      @node.name == 'script'
+      @node.name == "script"
     end
 
     def srcset
       return nil if !img_tag? && !source_tag?
-      return swap_attributes('srcset') if attribute_swapped?
+      return swap_attributes("srcset") if attribute_swapped?
 
-      @node['srcset']
+      @node["srcset"]
     end
 
     def source_tag?
-      @node.name == 'source'
+      @node.name == "source"
     end
 
     def href
       return nil if !a_tag? && !link_tag?
-      return swap_attributes('href') if attribute_swapped?
+      return swap_attributes("href") if attribute_swapped?
 
-      @node['href']
+      @node["href"]
     end
 
     def a_tag?
-      @node.name == 'a'
+      @node.name == "a"
     end
 
     def link_tag?
-      @node.name == 'link'
+      @node.name == "link"
     end
 
     def aria_hidden?
-      @node.attributes['aria-hidden']&.value == 'true'
+      @node.attributes["aria-hidden"]&.value == "true"
     end
 
     def multiple_srcsets?
-      !blank?(srcset) && srcset.split(',').size > 1
+      !blank?(srcset) && srcset.split(",").size > 1
     end
 
     def ignore?
-      return true if @node.attributes['data-proofer-ignore']
+      return true if @node.attributes["data-proofer-ignore"]
       return true if ancestors_ignorable?
 
       return true if url&.ignore?
@@ -116,7 +116,7 @@ module HTMLProofer
     private def ancestors_ignorable?
       ancestors_attributes = @node.ancestors.map { |a| a.respond_to?(:attributes) && a.attributes }
       ancestors_attributes.pop # remove document at the end
-      ancestors_attributes.any? { |a| !a['data-proofer-ignore'].nil? }
+      ancestors_attributes.any? { |a| !a["data-proofer-ignore"].nil? }
     end
   end
 end
