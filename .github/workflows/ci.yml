@@ -3,6 +3,9 @@ name: Ruby CI
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     env:
