@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Check
+  class Check
     class OpenGraph < HTMLProofer::Check
       def run
         @html.css('meta[property="og:url"], meta[property="og:image"]').each do |node|

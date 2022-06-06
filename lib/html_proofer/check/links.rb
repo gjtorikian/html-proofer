@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Check
+  class Check
     class Links < HTMLProofer::Check
       def run
         @html.css("a, link, source").each do |node|

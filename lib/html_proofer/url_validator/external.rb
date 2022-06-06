@@ -4,7 +4,7 @@ require "typhoeus"
 require "uri"
 
 module HTMLProofer
-  module UrlValidator
+  class UrlValidator
     class External < UrlValidator
       include HTMLProofer::Utils
 

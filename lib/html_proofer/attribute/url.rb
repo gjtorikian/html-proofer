@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Attribute
+  class Attribute
     class Url < HTMLProofer::Attribute
       attr_reader :url
 
