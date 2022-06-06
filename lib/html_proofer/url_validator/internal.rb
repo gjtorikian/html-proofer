@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module UrlValidator
+  class UrlValidator
     class Internal < UrlValidator
       attr_reader :internal_urls
 

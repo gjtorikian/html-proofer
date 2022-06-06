@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: www.google.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=UTF-8
+      P3P:
+      - CP="This is not a P3P policy! See g.co/p3phelp for more info."
+      Date:
+      - Mon, 06 Jun 2022 21:05:50 GMT
+      Server:
+      - gws
+      X-XSS-Protection:
+      - '0'
+      X-Frame-Options:
+      - SAMEORIGIN
+      Transfer-Encoding:
+      - chunked
+      Expires:
+      - Mon, 06 Jun 2022 21:05:50 GMT
+      Cache-Control:
+      - private
+      Set-Cookie:
+      - 1P_JAR=2022-06-06-21; expires=Wed, 06-Jul-2022 21:05:50 GMT; path=/; domain=.google.com;
+        Secure
+      - AEC=AakniGMW-zuxaB3wg4Gl2LXIde1_T8lUH6AoIx-w-lPnE8rmfLYUWRjU1A; expires=Sat,
+        03-Dec-2022 21:05:50 GMT; path=/; domain=.google.com; Secure; HttpOnly; SameSite=lax
+      - NID=511=heiXH_v7L5Y1x-ehuOO6a_8l5IebJUjRPAL-zrjfMa0MfEX5K5IfRvw86W6tqRcJiK764SGtGWMNOhwjaq7qjOHtQ8ZR05aM0iUqM-H3-sc3oX3V2MZLIIlxZ_fin8ruWl2VRV8ilXgEBpJnTDujErcchDS0-z05my41d6POqKo;
+        expires=Tue, 06-Dec-2022 21:05:50 GMT; path=/; domain=.google.com; HttpOnly
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: http://www.google.com/
+  recorded_at: Tue, 20 Oct 2015 16:00:00 GMT
+recorded_with: VCR 2.9.3

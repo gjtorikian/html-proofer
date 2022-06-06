@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Check
+  class Check
     class Favicon < HTMLProofer::Check
       def run
         found = false

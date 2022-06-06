@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Check
+  class Check
     class Scripts < HTMLProofer::Check
       def run
         @html.css("script").each do |node|

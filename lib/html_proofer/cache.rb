@@ -29,18 +29,15 @@ module HTMLProofer
       else
         define_singleton_method(:enabled?) { true }
         setup_cache!(options)
-        @parsed_timeframe = parsed_timeframe(options[:timeframe])
+
+        @external_timeframe = parsed_timeframe(options[:timeframe][:external])
+        @internal_timeframe = parsed_timeframe(options[:timeframe][:internal])
       end
     end
 
-    def within_timeframe?(time)
-      return false if time.nil?
-
-      time = Time.parse(time) if time.is_a?(String)
-      (@parsed_timeframe..@cache_time).cover?(time)
-    end
-
     def parsed_timeframe(timeframe)
+      return nil if timeframe.nil?
+
       time, date = timeframe.match(/(\d+)(\D)/).captures
       time = time.to_i
       case date
@@ -81,6 +78,48 @@ module HTMLProofer
       determine_deletions(urls_detected, type)
 
       additions
+    end
+
+    def write
+      return unless enabled?
+
+      File.write(@cache_file, @cache_log.to_json)
+    end
+
+    def retrieve_urls(urls_detected, type)
+      # if there are no urls, bail
+      return {} if urls_detected.empty?
+
+      urls_detected = urls_detected.transform_keys do |url|
+        cleaned_url(url)
+      end
+
+      urls_to_check = detect_url_changes(urls_detected, type)
+
+      method_name = type == :external ? :within_external_timeframe? : :within_internal_timeframe?
+      @cache_log[type].each_pair do |url, cache|
+        next if send(method_name, cache[:time])
+
+        urls_to_check[url] = cache[:metadata] # recheck expired links
+      end
+
+      urls_to_check
+    end
+
+    def within_external_timeframe?(time)
+      within_timeframe?(time, @external_timeframe)
+    end
+
+    def within_internal_timeframe?(time)
+      within_timeframe?(time, @internal_timeframe)
+    end
+
+    def empty?
+      blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
+    end
+
+    def size(type)
+      @cache_log[type].size
     end
 
     private def construct_internal_link_metadata(metadata, found)
@@ -136,39 +175,6 @@ module HTMLProofer
       @logger.log(:debug, "Removing #{del_link_text} from the cache")
     end
 
-    def write
-      return unless enabled?
-
-      File.write(@cache_file, @cache_log.to_json)
-    end
-
-    def retrieve_urls(urls_detected, type)
-      # if there are no urls, bail
-      return {} if urls_detected.empty?
-
-      urls_detected = urls_detected.transform_keys do |url|
-        cleaned_url(url)
-      end
-
-      urls_to_check = detect_url_changes(urls_detected, type)
-
-      @cache_log[type].each_pair do |url, cache|
-        next if within_timeframe?(cache[:time])
-
-        urls_to_check[url] = cache[:metadata] # recheck expired links
-      end
-
-      urls_to_check
-    end
-
-    def empty?
-      blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
-    end
-
-    def size(type)
-      @cache_log[type].size
-    end
-
     private def setup_cache!(options)
       default_structure = {
         version: CACHE_VERSION,
@@ -204,16 +210,22 @@ module HTMLProofer
       end
     end
 
+    # https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activesupport/lib/active_support/duration.rb#L112-L117
+    SECONDS_PER_HOUR   = 3600
+    SECONDS_PER_DAY    = 86400
+    SECONDS_PER_WEEK   = 604800
+    SECONDS_PER_MONTH  = 2629746  # 1/12 of a gregorian year
+
     private def time_ago(measurement, unit)
       case unit
       when :months
-        @cache_datetime >> -measurement
+        @cache_datetime - (SECONDS_PER_MONTH * measurement)
       when :weeks
-        @cache_datetime - (measurement * 7)
+        @cache_datetime - (SECONDS_PER_WEEK * measurement)
       when :days
-        @cache_datetime - measurement
+        @cache_datetime - (SECONDS_PER_DAY * measurement)
       when :hours
-        @cache_datetime - Rational(measurement / 24.0)
+        @cache_datetime - Rational(SECONDS_PER_HOUR * measurement)
       end.to_time
     end
 
@@ -232,6 +244,13 @@ module HTMLProofer
 
     private def escape_unescape(url)
       Addressable::URI.parse(url).normalize.to_s
+    end
+
+    private def within_timeframe?(current_time, parsed_timeframe)
+      return false if current_time.nil? || parsed_timeframe.nil?
+
+      current_time = Time.parse(current_time) if current_time.is_a?(String)
+      (parsed_timeframe..@cache_time).cover?(current_time)
     end
   end
 end

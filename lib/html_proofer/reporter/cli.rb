@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module HTMLProofer
-  module Reporter
+  class Reporter
     class Cli < HTMLProofer::Reporter
       def report
         msg = failures.each_with_object([]) do |(check_name, failures), arr|

@@ -15,7 +15,6 @@ Gem::Specification.new do |gem|
   all_files         = %x(git ls-files -z).split("\x0")
   gem.files         = all_files.grep(%r{^(bin|lib)/})
   gem.executables   = all_files.grep(%r{^bin/}) { |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ["lib"]
   gem.required_ruby_version = [">= 2.6.0", "< 4.0"]
 
