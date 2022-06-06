@@ -325,6 +325,44 @@ describe "Cache test" do
               cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
+
+        it "works if new broken internal file is added and cache is rechecked" do
+          cache_filename = File.join(version, ".recheck_internal.json")
+          cache_fullpath = File.join(FIXTURES_DIR, "cache", cache_filename)
+          test_path = File.join(FIXTURES_DIR, "cache", "existing")
+          subsite = File.join(FIXTURES_DIR, "cache", "existing", "broken")
+
+          Timecop.freeze(new_time) do
+            proofer = run_proofer(test_path, :directory, disable_external: true,
+              cache: { timeframe:  { internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+            expect(proofer.failed_checks).to(eq([]))
+            cache = read_cache(cache_filename)
+            internal_link = cache["internal"]["existing.html"]
+            internal_link_metadata = internal_link["metadata"]
+            index_metadata = internal_link_metadata.first
+            expect(index_metadata["current_path"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
+            expect(index_metadata["found"]).to(equal(true))
+
+            FileUtils.mkdir_p(subsite)
+            FileUtils.copy(File.join(test_path, "index.html"), File.join(subsite, "index.html"))
+
+            proofer = run_proofer(test_path, :directory, disable_external: true,
+              cache: { timeframe:  { internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+            expect(proofer.failed_checks).to(eq([]))
+            cache = read_cache(cache_filename)
+            internal_link = cache["internal"]["existing.html"]
+            internal_link_metadata = internal_link["metadata"]
+            index_metadata = internal_link_metadata.first
+            expect(index_metadata["current_path"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
+            expect(index_metadata["found"]).to(equal(true))
+
+            # cleanup
+            FileUtils.rm_rf(subsite) if File.directory?(subsite)
+            FileUtils.rm_rf(cache_fullpath) if File.exist?(cache_fullpath)
+          end
+        end
       end
     end
 
