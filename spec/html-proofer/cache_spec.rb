@@ -21,67 +21,67 @@ describe "Cache test" do
     it "understands months" do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time) do
-        cache = HTMLProofer::Cache.new(link_runner, timeframe: "2M")
+        cache = HTMLProofer::Cache.new(link_runner, timeframe: { external: "2M" })
 
         check_time = Time.local(2019, 8, 6, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(true))
+        expect(cache.within_external_timeframe?(check_time)).to(be(true))
 
         check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(false))
+        expect(cache.within_external_timeframe?(check_time)).to(be(false))
       end
     end
 
     it "understands days" do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time) do
-        cache = HTMLProofer::Cache.new(link_runner, timeframe: "2d")
+        cache = HTMLProofer::Cache.new(link_runner, timeframe: { external: "2d" })
 
         check_time = Time.local(2019, 9, 5, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(true))
+        expect(cache.within_external_timeframe?(check_time)).to(be(true))
 
         check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(false))
+        expect(cache.within_external_timeframe?(check_time)).to(be(false))
       end
     end
 
     it "understands weeks" do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time) do
-        cache = HTMLProofer::Cache.new(link_runner, timeframe: "2w")
+        cache = HTMLProofer::Cache.new(link_runner, timeframe: { external: "2w" })
 
         check_time = Time.local(2019, 8, 30, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(true))
+        expect(cache.within_external_timeframe?(check_time)).to(be(true))
 
         check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(false))
+        expect(cache.within_external_timeframe?(check_time)).to(be(false))
       end
     end
 
     it "understands hours" do
       now_time = Time.local(2019, 9, 6, 12, 0, 0)
       Timecop.freeze(now_time) do
-        cache = HTMLProofer::Cache.new(link_runner, timeframe: "3h")
+        cache = HTMLProofer::Cache.new(link_runner, timeframe: { external: "3h" })
 
         check_time = Time.local(2019, 9, 6, 9, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(true))
+        expect(cache.within_external_timeframe?(check_time)).to(be(true))
 
         check_time = Time.local(2019, 5, 6, 12, 0, 0).to_s
 
-        expect(cache.within_timeframe?(check_time)).to(be(false))
+        expect(cache.within_external_timeframe?(check_time)).to(be(false))
       end
     end
 
     it "fails on an invalid date" do
       file = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
       expect do
-        run_proofer(file, :file, cache: { timeframe: "30x" }.merge(default_cache_options))
+        run_proofer(file, :file, cache: { timeframe: { external: "30x" } }.merge(default_cache_options))
       end.to(raise_error(ArgumentError))
     end
   end
@@ -98,7 +98,7 @@ describe "Cache test" do
 
       allow(HTMLProofer::Cache).to(receive(:write).once)
       run_proofer(test_file, :file,
-        cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+        cache: { timeframe: { external: "30d", internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
 
       log = read_cache(cache_filename)
       expect(log.keys.length).to(eq(3))
@@ -153,7 +153,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to_not(receive(:add_external))
 
             run_proofer(["www.github.com"], :links,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -166,7 +166,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external).with("www.github.com", [], 200, "OK"))
 
             run_proofer(["www.github.com"], :links,
-              cache: { timeframe: "4d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "4d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -183,7 +183,7 @@ describe "Cache test" do
 
             # ...because it's within the 30d time frame
             run_proofer(["www.github.com", "www.google.com"], :links,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -196,7 +196,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to_not(receive(:add_external))
 
             run_proofer(["www.github.com/"], :links,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -210,23 +210,23 @@ describe "Cache test" do
             File.delete(cache_filepath) if File.exist?(cache_filepath)
 
             run_proofer(test_file, :file,
-              cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
             cache = read_cache(cache_filename)
             external_urls = cache["external"]
-            expect(external_urls.keys).to(eq(["https://github.com", "https://rubygems.org",
-                                              "https://github.com/gjtorikian", "https://github.com/riccardoporreca",]))
+            expect(external_urls.keys.sort).to(eq(["https://github.com", "https://github.com/gjtorikian",
+                                                   "https://github.com/riccardoporreca", "https://rubygems.org",]))
 
             # we expect no new links to be added, because it's the same as the cache link
             expect_any_instance_of(HTMLProofer::Cache).to_not(receive(:add_external))
 
             run_proofer(test_file, :file,
-              cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
             cache = read_cache(cache_filename)
             external_urls = cache["external"]
-            expect(external_urls.keys).to(eq(["https://github.com", "https://rubygems.org",
-                                              "https://github.com/gjtorikian", "https://github.com/riccardoporreca",]))
+            expect(external_urls.keys.sort).to(eq(["https://github.com", "https://github.com/gjtorikian",
+                                                   "https://github.com/riccardoporreca", "https://rubygems.org",]))
 
             File.delete(cache_filepath)
           end
@@ -241,7 +241,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to_not(receive(:add_external))
 
             run_proofer(["github.com/search/issues?q=is%3Aopen+is%3Aissue+fig"], :links,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -255,7 +255,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:cleaned_url).with("github.com/search?q=is%3Aclosed+is%3Aissue+words").and_return("github.com/search?q=is:closed+is:issue+words"))
 
             run_proofer(["github.com/search?q=is%3Aclosed+is%3Aissue+words"], :links,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -275,7 +275,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to_not(receive(:add_internal))
 
             run_proofer(test_file, :file, disable_external: true,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe: { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -289,7 +289,7 @@ describe "Cache test" do
             ))
 
             run_proofer(test_file, :file, disable_external: true,
-              cache: { timeframe: "4d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe:  { internal: "4d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -310,7 +310,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:write).once)
 
             run_proofer(root_link, :file, disable_external: true,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
 
@@ -322,7 +322,7 @@ describe "Cache test" do
               { base_url: "", current_path: root_link, found: false, line: 5, source: root_link }, false))
 
             run_proofer(root_link, :file, disable_external: true,
-              cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+              cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
           end
         end
       end
@@ -346,7 +346,7 @@ describe "Cache test" do
           expect(external_link["found"]).to(equal(false))
           expect(external_link["status_code"]).to(equal(0))
 
-          run_proofer(file, :file, cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_link = cache["external"]["https://github.com/gjtorikian/html-proofer"]
@@ -369,7 +369,7 @@ describe "Cache test" do
           expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external))
 
           run_proofer(["http://www.foofoofoo.biz"], :links,
-            cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+            cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
         end
       end
 
@@ -387,7 +387,7 @@ describe "Cache test" do
             { base_url: "", current_path: test_file, found: false, line: 6, source: test_path }, false))
 
           run_proofer(test_path, :directory, disable_external: true,
-            cache: { timeframe: "30d", cache_file: cache_filename }.merge(default_cache_options))
+            cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
         end
       end
 
@@ -400,13 +400,13 @@ describe "Cache test" do
 
           File.delete(cache_filepath) if File.exist?(cache_filepath)
 
-          run_proofer(file, :file, cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]
           expect(external_links.keys.first).to(eq("https://github.com/gjtorikian/html-proofer"))
 
-          run_proofer(file, :file, cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]
@@ -422,7 +422,7 @@ describe "Cache test" do
         Timecop.freeze(new_time) do
           File.delete(cache_location) if File.exist?(cache_location)
 
-          run_proofer(file, :file, cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: { external: "1d", internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]
@@ -430,7 +430,7 @@ describe "Cache test" do
           internal_links = cache["internal"]
           expect(internal_links.keys.first).to(eq("/somewhere.html"))
 
-          run_proofer(file, :file, cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+          run_proofer(file, :file, cache: { timeframe: { external: "1d", internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]
@@ -453,14 +453,14 @@ describe "Cache test" do
           File.delete(cache_location) if File.exist?(cache_location)
 
           run_proofer(test_file, :file,
-            cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+            cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]
           expect(external_links.keys.first).to(eq("https://github.com/gjtorikian/html-proofer"))
 
           run_proofer(File.join(FIXTURES_DIR, "cache", "some_link.html"), :file,
-            cache: { timeframe: "1d", cache_file: cache_filename }.merge(default_cache_options))
+            cache: { timeframe: { external: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
           cache = read_cache(cache_filename)
           external_links = cache["external"]

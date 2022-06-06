@@ -353,28 +353,34 @@ On the CLI, you can provide the `--parallel` argument to set the configuration. 
 
 ## Configuring caching
 
-Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external links. Caching simply means to skip links that are valid for a certain period of time.
+Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external and internal links. Caching simply means to skip link checking for links that are valid for a certain period of time.
 
-You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
+You can enable caching for this by passing in the configuration option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a hash containing two keys, `external` and `internal`. Each of these contains a number followed by a letter indicating the length of time:
 
 * `M` means months
 * `w` means weeks
 * `d` means days
 * `h` means hours
 
-For example, passing the following options means "recheck links older than thirty days":
+For example, passing the following options means "recheck external links older than thirty days":
 
 ``` ruby
-{ cache: { timeframe: '30d' } }
+{ cache: { timeframe: { external: '30d' } } }
 ```
 
-And the following options means "recheck links older than two weeks":
+And the following options means "recheck internal links older than two weeks":
 
 ``` ruby
-{ cache: { timeframe: '2w' } }
+{ cache: { timeframe: { internal: '2w' } } }
 ```
 
-You can change the filename or the directory where the cachefile is kept by also providing the `storage_dir` key:
+Naturally, to support both internal and external link caching, both keys would need to be provided. The following checks external links every two weeks, but internal links only once a week:
+
+``` ruby
+{ cache: { timeframe: { external: '2w', internal: '1w' } } }
+```
+
+You can change the filename or the directory where the cache file is kept by also providing the `storage_dir` key:
 
 ``` ruby
 { cache: { cache_file: 'stay_cachey.json', storage_dir: '/tmp/html-proofer-cache-money' } }

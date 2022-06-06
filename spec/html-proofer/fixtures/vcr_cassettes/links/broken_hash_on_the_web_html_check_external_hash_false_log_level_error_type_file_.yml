@@ -88,4 +88,47 @@ http_interactions:
     adapter_metadata:
       effective_url: https://docs.github.com/en/search-github/searching-on-github/searching-issues-and-pull-requests#no
   recorded_at: Sun, 02 Jan 2022 20:18:55 GMT
+- request:
+    method: head
+    uri: https://guides.rubyonrails.org/active_record_basics.html#no
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.14.0 (Ubuntu)
+      Date:
+      - Mon, 06 Jun 2022 21:05:50 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '47901'
+      Last-Modified:
+      - Mon, 09 May 2022 13:44:53 GMT
+      Connection:
+      - keep-alive
+      ETag:
+      - '"62791ad5-bb1d"'
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains;
+      Accept-Ranges:
+      - bytes
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://guides.rubyonrails.org/active_record_basics.html#no
+  recorded_at: Mon, 06 Jun 2022 21:05:50 GMT
 recorded_with: VCR 2.9.3

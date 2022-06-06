@@ -1,0 +1,84 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/gjtorikian/html-proofer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Mon, 06 Jun 2022 21:05:45 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept,
+        X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"1a4e0248d3f63969e5aa2d4084fa7ece"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=MAY7HmQBkFcwSRl%2Bmu2MRlvZRwiCQQ39ls6bcUE%2Fchtauj51a0U5nM5xbCOgK4NW0kRv80VKBTfhj6sxFecUbYwBoKj1vc2GX0h6X1lHb8FRMUu4nAtFlymY8liHgREzRhHvtdUN61Iyr%2Bu%2B6OxAiNIStPAbTRWZTL0U1ZiaP0uBAY%2BO87vjZUXQnT6NFiuSdglyKAjYheGpruP2sQ0wRb2OFkOKqc4zNWjASokxdWWWhSggNA4y2kflbfj5bcX%2B7S2yEhws8UiMH1jRVYtMbw%3D%3D--U7nLzGEVC505N7bE--sEERJlkZDitdN6gFVJNgVQ%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1924709778.1654549545; Path=/; Domain=github.com; Expires=Tue,
+        06 Jun 2023 21:05:45 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Tue, 06 Jun 2023 21:05:45
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - 2788:0E3B:728B70:1B679DB:629E6C29
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/html-proofer
+  recorded_at: Thu, 06 Jan 2022 17:00:00 GMT
+recorded_with: VCR 2.9.3
