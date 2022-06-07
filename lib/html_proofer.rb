@@ -14,7 +14,7 @@ require "html_proofer/version"
 require "parallel"
 require "fileutils"
 
-if ENV.fetch('VERBOSE', false)
+if ENV.fetch("VERBOSE", false)
   require "awesome_print"
   require "debug"
 end

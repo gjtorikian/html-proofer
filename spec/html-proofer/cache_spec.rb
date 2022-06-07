@@ -285,7 +285,7 @@ describe "Cache test" do
 
             # we expect an add since we are mocking outside the timeframe
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_internal).with(
-              "/broken_root_link_internal.html", { base_url: "", found: true, line: 5, source: test_file }, true
+              "/tel_link.html", { base_url: "", current_path: "spec/html-proofer/fixtures/links/working_root_link_internal.html", found: true, line: 5, source: test_file }, true
             ))
 
             run_proofer(test_file, :file, disable_external: true,
