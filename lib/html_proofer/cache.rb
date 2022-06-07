@@ -154,7 +154,7 @@ module HTMLProofer
       end
     end
 
-    private def determine_internal_additions(urls_detected)
+  private def determine_internal_additions(urls_detected)
       urls_detected.each_with_object({}) do |(url, metadata), hsh|
         # url is not even in cache
         if @cache_log[:internal][url].nil?
