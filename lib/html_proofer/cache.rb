@@ -96,33 +96,11 @@ module HTMLProofer
 
       urls_to_check = detect_url_changes(urls_detected, type)
 
-      if type == :external
-        @cache_log[:external].each_pair do |url, cache|
-          next if within_external_timeframe?(cache[:time])
+      @cache_log[type].each_pair do |url, cache|
+        within_timeframe = type == :external ? within_external_timeframe?(cache[:time]) : within_internal_timeframe?(cache[:time])
+        next if within_timeframe
 
-          urls_to_check[url] = cache[:metadata] # recheck expired links
-        end
-      else
-        @cache_log[:internal].each_pair do |url, cache|
-          incoming_metadatas = urls_detected[url]
-
-          # detected url not found in cache, so check it for the first time
-          if incoming_metadatas.nil?
-            urls_to_check[url] = cache[:metadata]
-          else
-            existing_current_paths = cache[:metadata].map { |m| m[:current_path] }
-            incoming_current_paths = incoming_metadatas.map { |m| m[:current_path] }
-
-            # if new incoming paths point to the same url, check that URL *regardless of cache time*
-            if existing_current_paths.sort != incoming_current_paths.sort
-              urls_to_check[url] = incoming_metadatas
-            else # no new internal URLs were added, but is the timestamp valid?
-              next if within_internal_timeframe?(cache[:time])
-
-              urls_to_check[url] = cache[:metadata] # recheck expired links
-            end
-          end
-        end
+        urls_to_check[url] = cache[:metadata] # recheck expired links
       end
 
       urls_to_check
@@ -156,27 +134,50 @@ module HTMLProofer
 
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
-      additions = urls_detected.reject do |url, _metadata|
-        if @cache_log[type].include?(url)
-          # @cache_log[type][url][:metadata] = metadata
-
-          # if this is false, we're trying again
-          if type == :external
-            @cache_log[type][url][:found]
-          else
-            @cache_log[type][url][:metadata].all? { |m| m[:found] }
-          end
-        else
-          @logger.log(:debug, "Adding #{url} to #{type} cache")
-          false
-        end
-      end
+      additions = type == :external ? determine_external_additions(urls_detected) : determine_internal_additions(urls_detected)
 
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, "new #{type} link", "new #{type} links")
       @logger.log(:debug, "Adding #{new_link_text} to the cache")
 
       additions
+    end
+
+    private def determine_external_additions(urls_detected)
+      urls_detected.reject do |url, _metadata|
+        if @cache_log[:external].include?(url)
+          @cache_log[:external][url][:found] # if this is false, we're trying again
+        else
+          @logger.log(:debug, "Adding #{url} to external cache")
+          false
+        end
+      end
+    end
+
+    private def determine_internal_additions(urls_detected)
+      urls_detected.each_with_object({}) do |(url, metadata), hsh|
+        # url is not even in cache
+        if @cache_log[:internal][url].nil?
+          hsh[url] = metadata
+          next
+        end
+
+        cache_metadata = @cache_log[:internal][url][:metadata]
+        incoming_metadata = urls_detected[url].each_with_object([]) do |incoming_url, arr|
+          existing_cache_metadata = cache_metadata.find { |k, _| k[:current_path] == incoming_url[:current_path] }
+
+          # cache for this url, from an existing path, exists as found
+          if !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
+            metadata.find { |m| m[:current_path] == existing_cache_metadata[:current_path] }[:found] = true
+            next
+          end
+
+          @logger.log(:debug, "Adding #{incoming_url} to internal cache")
+          arr << incoming_url
+        end
+
+        hsh[url] = incoming_metadata
+      end
     end
 
     # remove from cache URLs that no longer exist

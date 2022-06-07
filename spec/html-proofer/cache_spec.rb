@@ -350,15 +350,21 @@ describe "Cache test" do
             proofer = run_proofer(test_path, :directory, disable_external: true,
               cache: { timeframe:  { internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
 
-            expect(proofer.failed_checks).to(eq([]))
+            expect(proofer.failed_checks.count).to(eq(1))
             cache = read_cache(cache_filename)
             internal_link = cache["internal"]["existing.html"]
             internal_link_metadata = internal_link["metadata"]
-            index_metadata = internal_link_metadata.first
-            expect(index_metadata["current_path"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
-            expect(index_metadata["found"]).to(equal(true))
 
-            # cleanup
+            expect(internal_link_metadata.count).to(eq(2))
+
+            first_cache_metadata = internal_link_metadata[0]
+            expect(first_cache_metadata["current_path"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
+            expect(first_cache_metadata["found"]).to(equal(true))
+
+            second_cache_metadata = internal_link_metadata[1]
+            expect(second_cache_metadata["current_path"]).to(eq("spec/html-proofer/fixtures/cache/existing/broken/index.html"))
+            expect(second_cache_metadata["found"]).to(equal(false))
+          ensure # cleanup
             FileUtils.rm_rf(subsite) if File.directory?(subsite)
             FileUtils.rm_rf(cache_fullpath) if File.exist?(cache_fullpath)
           end
