@@ -26,13 +26,13 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = StringIO.new unless ENV["VERBOSE"]
+  $stdout = StringIO.new unless ENV["DEBUG"]
   begin
     yield
   rescue SystemExit # rubocop:disable Lint/SuppressedException
   ensure
     $stderr = original_stderr
-    $stdout = original_stdout unless ENV["VERBOSE"]
+    $stdout = original_stdout unless ENV["DEBUG"]
   end
   fake_err.string
 end
