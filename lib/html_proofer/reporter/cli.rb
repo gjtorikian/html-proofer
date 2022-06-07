@@ -8,11 +8,11 @@ module HTMLProofer
           str = ["For the #{check_name} check, the following failures were found:\n"]
 
           failures.each do |failure|
-            path_str = blank?(failure.path) ? "" : "In #{failure.path}"
+            path_str = blank?(failure.path) ? "" : "At #{failure.path}"
 
-            line_str = failure.line.nil? ? "" : " (line #{failure.line})"
+            line_str = failure.line.nil? ? "" : ":#{failure.line}"
 
-            path_and_line = [path_str, line_str].join
+            path_and_line = "#{path_str}#{line_str}"
             path_and_line = blank?(path_and_line) ? "" : "* #{path_and_line}:\n\n"
 
             status_str = failure.status.nil? ? "" : " (status code #{failure.status})"

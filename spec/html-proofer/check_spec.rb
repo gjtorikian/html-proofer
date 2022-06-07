@@ -26,7 +26,7 @@ describe HTMLProofer::Reporter do
     VCR.use_cassette(cassette_name, record: :new_episodes) do
       proofer = make_proofer(file, :file, { checks: ["MailToOctocat"] })
       output = capture_stderr { proofer.run }
-      expect(output).to(include("In #{file} (line 1)"))
+      expect(output).to(include("At #{file}:1"))
     end
   end
 end
