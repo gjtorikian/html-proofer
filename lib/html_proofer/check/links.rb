@@ -48,14 +48,15 @@ module HTMLProofer
             add_to_external_urls(@link.url, @link.line)
           elsif @link.url.internal?
             # does the local directory have a trailing slash?
-            add_failure("internally linking to a directory #{@link.url.raw_attribute} without trailing slash",
-              line: @link.line, content: @link.content) if @link.url.unslashed_directory?(@link.url.absolute_path)
+            if @link.url.unslashed_directory?(@link.url.absolute_path)
+              add_failure("internally linking to a directory #{@link.url.raw_attribute} without trailing slash",
+                line: @link.line, content: @link.content)
+              next
+            end
 
             add_to_internal_urls(@link.url, @link.line)
           end
         end
-
-        external_urls
       end
 
       def allow_missing_href?
