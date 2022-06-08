@@ -46,6 +46,13 @@ describe "Links test" do
     expect(proofer.failed_checks.first.description).to(match(/internally linking to #noHash; the file exists, but the hash 'noHash' does not/))
   end
 
+  it "finds internal hash with implict index" do
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
+    proofer = run_proofer(broken_hash_internal_filepath, :directory)
+    expect(proofer.failed_checks.count).to(eq(1))
+    expect(proofer.failed_checks.first.description).to(match(/without trailing slash/))
+  end
+
   it "passes when linking to the top" do
     path = File.join(FIXTURES_DIR, "links", "topHashInternal.html")
     proofer = run_proofer(path, :file)
