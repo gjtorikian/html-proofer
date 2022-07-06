@@ -125,7 +125,7 @@ module HTMLProofer
     private def construct_internal_link_metadata(metadata, found)
       {
         source: metadata[:source],
-        current_path: metadata[:current_path],
+        filename: metadata[:filename],
         line: metadata[:line],
         base_url: metadata[:base_url],
         found: found,
@@ -164,11 +164,11 @@ module HTMLProofer
 
         cache_metadata = @cache_log[:internal][url][:metadata]
         incoming_metadata = urls_detected[url].each_with_object([]) do |incoming_url, arr|
-          existing_cache_metadata = cache_metadata.find { |k, _| k[:current_path] == incoming_url[:current_path] }
+          existing_cache_metadata = cache_metadata.find { |k, _| k[:filename] == incoming_url[:filename] }
 
           # cache for this url, from an existing path, exists as found
           if !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
-            metadata.find { |m| m[:current_path] == existing_cache_metadata[:current_path] }[:found] = true
+            metadata.find { |m| m[:filename] == existing_cache_metadata[:filename] }[:found] = true
             next
           end
 

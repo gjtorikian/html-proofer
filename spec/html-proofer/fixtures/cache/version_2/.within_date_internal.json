@@ -7,7 +7,7 @@
       "metadata": [
         {
           "source": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
-          "current_path": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
+          "filename": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
           "line": 5,
           "base_url": "",
           "found": true
