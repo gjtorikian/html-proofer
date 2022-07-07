@@ -96,9 +96,9 @@ module HTMLProofer
 
       urls_to_check = detect_url_changes(urls_detected, type)
 
-      method_name = type == :external ? :within_external_timeframe? : :within_internal_timeframe?
       @cache_log[type].each_pair do |url, cache|
-        next if send(method_name, cache[:time])
+        within_timeframe = type == :external ? within_external_timeframe?(cache[:time]) : within_internal_timeframe?(cache[:time])
+        next if within_timeframe
 
         urls_to_check[url] = cache[:metadata] # recheck expired links
       end
@@ -125,7 +125,7 @@ module HTMLProofer
     private def construct_internal_link_metadata(metadata, found)
       {
         source: metadata[:source],
-        current_path: metadata[:current_path],
+        filename: metadata[:filename],
         line: metadata[:line],
         base_url: metadata[:base_url],
         found: found,
@@ -134,27 +134,50 @@ module HTMLProofer
 
     # prepare to add new URLs detected
     private def determine_additions(urls_detected, type)
-      additions = urls_detected.reject do |url, _metadata|
-        if @cache_log[type].include?(url)
-          # @cache_log[type][url][:metadata] = metadata
-
-          # if this is false, we're trying again
-          if type == :external
-            @cache_log[type][url][:found]
-          else
-            @cache_log[type][url][:metadata].all? { |m| m[:found] }
-          end
-        else
-          @logger.log(:debug, "Adding #{url} to #{type} cache")
-          false
-        end
-      end
+      additions = type == :external ? determine_external_additions(urls_detected) : determine_internal_additions(urls_detected)
 
       new_link_count = additions.length
       new_link_text = pluralize(new_link_count, "new #{type} link", "new #{type} links")
       @logger.log(:debug, "Adding #{new_link_text} to the cache")
 
       additions
+    end
+
+    private def determine_external_additions(urls_detected)
+      urls_detected.reject do |url, _metadata|
+        if @cache_log[:external].include?(url)
+          @cache_log[:external][url][:found] # if this is false, we're trying again
+        else
+          @logger.log(:debug, "Adding #{url} to external cache")
+          false
+        end
+      end
+    end
+
+    private def determine_internal_additions(urls_detected)
+      urls_detected.each_with_object({}) do |(url, metadata), hsh|
+        # url is not even in cache
+        if @cache_log[:internal][url].nil?
+          hsh[url] = metadata
+          next
+        end
+
+        cache_metadata = @cache_log[:internal][url][:metadata]
+        incoming_metadata = urls_detected[url].each_with_object([]) do |incoming_url, arr|
+          existing_cache_metadata = cache_metadata.find { |k, _| k[:filename] == incoming_url[:filename] }
+
+          # cache for this url, from an existing path, exists as found
+          if !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
+            metadata.find { |m| m[:filename] == existing_cache_metadata[:filename] }[:found] = true
+            next
+          end
+
+          @logger.log(:debug, "Adding #{incoming_url} to internal cache")
+          arr << incoming_url
+        end
+
+        hsh[url] = incoming_metadata
+      end
     end
 
     # remove from cache URLs that no longer exist

@@ -5,7 +5,7 @@ module HTMLProofer
     include HTMLProofer::Utils
 
     attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :checked_paths, :current_check
-    attr_accessor :current_path, :current_source, :reporter
+    attr_accessor :current_filename, :current_source, :reporter
 
     URL_TYPES = [:external, :internal].freeze
 
@@ -28,7 +28,7 @@ module HTMLProofer
 
       @current_check = nil
       @current_source = nil
-      @current_path = nil
+      @current_filename = nil
 
       @reporter = Reporter::Cli.new(logger: @logger)
     end
@@ -118,7 +118,7 @@ module HTMLProofer
 
       checks.each do |klass|
         @current_source = source
-        @current_path = path
+        @current_filename = path
 
         check = Object.const_get(klass).new(self, @html)
         @logger.log(:debug, "Running #{check.short_name} in #{path}")

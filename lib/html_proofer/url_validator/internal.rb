@@ -29,17 +29,17 @@ module HTMLProofer
             url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url])
 
             @runner.current_source = metadata[:source]
-            @runner.current_path = metadata[:current_path]
+            @runner.current_filename = metadata[:filename]
 
             unless file_exists?(url)
-              @failed_checks << Failure.new(@runner.current_path, "Links > Internal",
+              @failed_checks << Failure.new(@runner.current_filename, "Links > Internal",
                 "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
               to_add << [url, metadata, false]
               next
             end
 
             unless hash_exists?(url)
-              @failed_checks << Failure.new(@runner.current_path, "Links > Internal",
+              @failed_checks << Failure.new(@runner.current_filename, "Links > Internal",
                 "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: metadata[:line], status: nil, content: nil)
               to_add << [url, metadata, false]
               next

@@ -14,8 +14,10 @@ require "html_proofer/version"
 require "parallel"
 require "fileutils"
 
-# require "awesome_print"
-# require "debug"
+if ENV.fetch("DEBUG", false)
+  require "awesome_print"
+  require "debug"
+end
 
 module HTMLProofer
   def self.check_file(file, options = {})

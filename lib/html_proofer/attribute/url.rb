@@ -121,7 +121,7 @@ module HTMLProofer
       end
 
       def absolute_path
-        path = file_path || @runner.current_path
+        path = file_path || @runner.current_filename
 
         File.expand_path(path, Dir.pwd)
       end
@@ -139,14 +139,14 @@ module HTMLProofer
         # relative links, path is a file
         elsif File.exist?(File.expand_path(path,
           @runner.current_source)) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
-          File.dirname(@runner.current_path)
+          File.dirname(@runner.current_filename)
         # relative links in nested dir, path is a file
-        elsif File.exist?(File.join(File.dirname(@runner.current_path),
-          path)) || File.exist?(File.join(File.dirname(@runner.current_path), path_dot_ext))
-          File.dirname(@runner.current_path)
+        elsif File.exist?(File.join(File.dirname(@runner.current_filename),
+          path)) || File.exist?(File.join(File.dirname(@runner.current_filename), path_dot_ext))
+          File.dirname(@runner.current_filename)
         # relative link, path is a directory
         else
-          @runner.current_path
+          @runner.current_filename
         end
 
         file = File.join(base, path)

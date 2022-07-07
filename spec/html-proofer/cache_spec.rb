@@ -285,7 +285,7 @@ describe "Cache test" do
 
             # we expect an add since we are mocking outside the timeframe
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_internal).with(
-              "/broken_root_link_internal.html", { base_url: "", found: true, line: 5, source: test_file }, true
+              "/tel_link.html", { base_url: "", filename: "spec/html-proofer/fixtures/links/working_root_link_internal.html", found: true, line: 5, source: test_file }, true
             ))
 
             run_proofer(test_file, :file, disable_external: true,
@@ -305,7 +305,7 @@ describe "Cache test" do
             root_link = File.join(FIXTURES_DIR, "links", "root_link", "root_link_with_another_link.html")
 
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_internal).with("/",
-              { base_url: "", current_path: root_link, found: false, line: 5, source: root_link }, true).and_call_original)
+              { base_url: "", filename: root_link, found: false, line: 5, source: root_link }, true).and_call_original)
 
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:write).once)
 
@@ -319,10 +319,54 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:write))
             root_link = File.join(FIXTURES_DIR, "links", "broken_internal_link.html")
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_internal).once.with("#noHash",
-              { base_url: "", current_path: root_link, found: false, line: 5, source: root_link }, false))
+              { base_url: "", filename: root_link, found: false, line: 5, source: root_link }, false))
 
             run_proofer(root_link, :file, disable_external: true,
               cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
+          end
+        end
+
+        it "works if new broken internal file is added and cache is rechecked" do
+          cache_filename = File.join(version, ".recheck_internal.json")
+          cache_fullpath = File.join(FIXTURES_DIR, "cache", cache_filename)
+          test_path = File.join(FIXTURES_DIR, "cache", "existing")
+          subsite = File.join(FIXTURES_DIR, "cache", "existing", "broken")
+
+          Timecop.freeze(new_time) do
+            proofer = run_proofer(test_path, :directory, disable_external: true,
+              cache: { timeframe:  { internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+            expect(proofer.failed_checks).to(eq([]))
+            cache = read_cache(cache_filename)
+            internal_link = cache["internal"]["existing.html"]
+            internal_link_metadata = internal_link["metadata"]
+            index_metadata = internal_link_metadata.first
+            expect(index_metadata["filename"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
+            expect(index_metadata["found"]).to(equal(true))
+
+            FileUtils.mkdir_p(subsite)
+            FileUtils.copy(File.join(test_path, "index.html"), File.join(subsite, "index.html"))
+
+            proofer = run_proofer(test_path, :directory, disable_external: true,
+              cache: { timeframe:  { internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+            expect(proofer.failed_checks.count).to(eq(1))
+            cache = read_cache(cache_filename)
+            internal_link = cache["internal"]["existing.html"]
+            internal_link_metadata = internal_link["metadata"]
+
+            expect(internal_link_metadata.count).to(eq(2))
+
+            first_cache_metadata = internal_link_metadata[0]
+            expect(first_cache_metadata["filename"]).to(eq("spec/html-proofer/fixtures/cache/existing/index.html"))
+            expect(first_cache_metadata["found"]).to(equal(true))
+
+            second_cache_metadata = internal_link_metadata[1]
+            expect(second_cache_metadata["filename"]).to(eq("spec/html-proofer/fixtures/cache/existing/broken/index.html"))
+            expect(second_cache_metadata["found"]).to(equal(false))
+          ensure # cleanup
+            FileUtils.rm_rf(subsite) if File.directory?(subsite)
+            FileUtils.rm_rf(cache_fullpath) if File.exist?(cache_fullpath)
           end
         end
       end
@@ -384,7 +428,7 @@ describe "Cache test" do
           # we expect the same link to be re-added, even though we are within the time frame,
           # because `index.html` contains a failure
           expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_internal).with("/missing.html",
-            { base_url: "", current_path: test_file, found: false, line: 6, source: test_path }, false))
+            { base_url: "", filename: test_file, found: false, line: 6, source: test_path }, false))
 
           run_proofer(test_path, :directory, disable_external: true,
             cache: { timeframe:  { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))

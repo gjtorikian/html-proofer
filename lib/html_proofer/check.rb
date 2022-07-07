@@ -25,7 +25,7 @@ module HTMLProofer
     end
 
     def add_failure(description, line: nil, status: nil, content: nil)
-      @failures << Failure.new(@runner.current_path, short_name, description, line: line, status: status,
+      @failures << Failure.new(@runner.current_filename, short_name, description, line: line, status: status,
         content: content)
     end
 
@@ -58,7 +58,7 @@ module HTMLProofer
 
       metadata = {
         source: @runner.current_source,
-        current_path: @runner.current_path,
+        filename: @runner.current_filename,
         line: line,
         base_url: base_url,
         found: false,
@@ -71,7 +71,7 @@ module HTMLProofer
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: @runner.current_path, line: line }
+      @external_urls[url_string] << { filename: @runner.current_filename, line: line }
     end
 
     private def base_url
