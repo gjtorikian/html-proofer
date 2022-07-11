@@ -9,23 +9,41 @@ describe "Images test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "fails for image without alt attribute" do
+  it "fails for image missing alt attribute" do
     missing_alt_filepath = File.join(FIXTURES_DIR, "images", "missing_image_alt.html")
     proofer = run_proofer(missing_alt_filepath, :file)
     expect(proofer.failed_checks.first.description).to(match(/gpl.png does not have an alt attribute/))
   end
 
-  it "fails for image with an empty alt attribute" do
-    missing_alt_filepath = File.join(FIXTURES_DIR, "images", "missing_image_alt_text.html")
-    proofer = run_proofer(missing_alt_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/gpl.png does not have an alt attribute/))
+  it "does not fail for image missing alt attribute when asked to ignore" do
+    missing_alt_filepath = File.join(FIXTURES_DIR, "images", "missing_image_alt.html")
+    proofer = run_proofer(missing_alt_filepath, :file, ignore_missing_alt: true)
+    expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "fails for image with nothing but spaces in alt attribute" do
+  it "does not fail for image with an empty alt attribute" do
+    missing_alt_filepath = File.join(FIXTURES_DIR, "images", "missing_image_alt_text.html")
+    proofer = run_proofer(missing_alt_filepath, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "fails for image with an empty alt attribute when asked" do
+    missing_alt_filepath = File.join(FIXTURES_DIR, "images", "missing_image_alt_text.html")
+    proofer = run_proofer(missing_alt_filepath, :file, ignore_empty_alt: false)
+    expect(proofer.failed_checks.first.description).to(match(/gpl.png has an alt attribute, but no content/))
+  end
+
+  it "does not fail for image with nothing but spaces in alt attribute" do
     empty_alt_filepath = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
     proofer = run_proofer(empty_alt_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/gpl.png does not have an alt attribute/))
-    expect(proofer.failed_checks.length).to(eq(4))
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "fail for image with nothing but spaces in alt attribute when asked" do
+    empty_alt_filepath = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
+    proofer = run_proofer(empty_alt_filepath, :file, ignore_empty_alt: false)
+    expect(proofer.failed_checks.first.description).to(match(/gpl.png has an alt attribute, but no content/))
+    expect(proofer.failed_checks.length).to(eq(1))
   end
 
   it "passes when ignoring image with nothing but spaces in alt attribute" do
@@ -134,9 +152,15 @@ describe "Images test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "properly ignores empty alt attribute when ignore_missing_alt set" do
+  it "properly ignores empty alt attribute when ignore_missing_alt set to true" do
     missing_alt_filepath = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
     proofer = run_proofer(missing_alt_filepath, :file, ignore_missing_alt: true)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "properly reports empty alt attribute when ignore_missing_alt set to false" do
+    missing_alt_filepath = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
+    proofer = run_proofer(missing_alt_filepath, :file, ignore_missing_alt: false)
     expect(proofer.failed_checks).to(eq([]))
   end
 
@@ -149,8 +173,7 @@ describe "Images test" do
   it "skips missing alt tag for images marked as aria-hidden" do
     src_set_check = File.join(FIXTURES_DIR, "images", "aria_hidden.html")
     proofer = run_proofer(src_set_check, :file)
-    expect(proofer.failed_checks.size).to(eq(1))
-    expect(proofer.failed_checks.first.description).to(match(%r{image ./gpl.png does not have an alt attribute}))
+    expect(proofer.failed_checks.size).to(eq(0))
   end
 
   it "fails for images with a srcset but missing alt" do

@@ -6,7 +6,7 @@ describe HTMLProofer::Reporter::Cli do
   describe "cli_report" do
     it "reports all issues accurately" do
       errors = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
-      output = capture_proofer_output(errors, :file, checks: ["Links", "Images", "Scripts", "Favicon"])
+      output = capture_proofer_output(errors, :file, checks: ["Links", "Images", "Scripts", "Favicon"], ignore_missing_alt: false)
 
       msg = <<~MSG
         For the Favicon check, the following failures were found:
@@ -63,7 +63,7 @@ describe HTMLProofer::Reporter::Cli do
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:26:
 
-          External link https://help.github.com/changing-author-info/ failed (status code 404)
+          External link https://help.github.com/changing-author-info/ failed (status code 403)
 
         For the Links > Internal check, the following failures were found:
 

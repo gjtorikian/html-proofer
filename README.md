@@ -278,9 +278,10 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
 | `extensions` | An array of Strings indicating the file extensions you would like to check (including the dot) | `['.html']`
+| `ignore_empty_alt` | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true` |
 | `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
-| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
+| `ignore_missing_alt` | If `true`, ignores images with missing alt tags | `false` |
 | `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
 | `ignore_urls` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`

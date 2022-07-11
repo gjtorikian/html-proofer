@@ -12,6 +12,7 @@ module HTMLProofer
       checks: DEFAULT_TESTS,
       directory_index_file: "index.html",
       disable_external: false,
+      ignore_empty_alt: true,
       ignore_empty_mailto: false,
       ignore_files: [],
       ignore_missing_alt: false,
