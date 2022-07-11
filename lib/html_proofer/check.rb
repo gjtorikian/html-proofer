@@ -11,9 +11,9 @@ module HTMLProofer
       @runner = runner
       @html   = remove_ignored(html)
 
-      @failures = []
-      @internal_urls = {}
       @external_urls = {}
+      @internal_urls = {}
+      @failures = []
     end
 
     def create_element(node)
@@ -21,11 +21,12 @@ module HTMLProofer
     end
 
     def run
-      raise NotImplementedError, 'HTMLProofer::Check subclasses must implement #run'
+      raise NotImplementedError, "HTMLProofer::Check subclasses must implement #run"
     end
 
-    def add_failure(desc, line: nil, status: nil, content: nil)
-      @failures << Failure.new(@runner.current_path, short_name, desc, line: line, status: status, content: content)
+    def add_failure(description, line: nil, status: nil, content: nil)
+      @failures << Failure.new(@runner.current_filename, short_name, description, line: line, status: status,
+        content: content)
     end
 
     def self.subchecks(runner_options)
@@ -43,11 +44,11 @@ module HTMLProofer
     end
 
     def short_name
-      self.class.name.split('::').last
+      self.class.name.split("::").last
     end
 
     def self.short_name
-      name.split('::').last
+      name.split("::").last
     end
 
     def add_to_internal_urls(url, line)
@@ -55,12 +56,13 @@ module HTMLProofer
 
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
-      metadata = @runner.cache.construct_internal_link_metadata({
-                                                                  source: @runner.current_source,
-                                                                  current_path: @runner.current_path,
-                                                                  line: line,
-                                                                  base_url: base_url
-                                                                })
+      metadata = {
+        source: @runner.current_source,
+        filename: @runner.current_filename,
+        line: line,
+        base_url: base_url,
+        found: false,
+      }
       @internal_urls[url_string] << metadata
     end
 
@@ -69,21 +71,21 @@ module HTMLProofer
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: @runner.current_source, line: line }
+      @external_urls[url_string] << { filename: @runner.current_filename, line: line }
     end
 
     private def base_url
       return @base_url if defined?(@base_url)
 
-      return (@base_url = '') if (base = @html.at_css('base')).nil?
+      return (@base_url = "") if (base = @html.at_css("base")).nil?
 
-      @base_url = base['href']
+      @base_url = base["href"]
     end
 
     private def remove_ignored(html)
       return if html.nil?
 
-      html.css('code, pre, tt').each(&:unlink)
+      html.css("code, pre, tt").each(&:unlink)
       html
     end
   end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'date'
-require 'json'
-require 'uri'
+require "date"
+require "json"
+require "uri"
 
 module HTMLProofer
   class Cache
@@ -10,13 +10,8 @@ module HTMLProofer
 
     CACHE_VERSION = 2
 
-    DEFAULT_STORAGE_DIR = File.join('tmp', '.htmlproofer')
-    DEFAULT_CACHE_FILE_NAME = 'cache.log'
-    DEFAULT_STRUCTURE = {
-      version: CACHE_VERSION,
-      internal: {},
-      external: {}
-    }.freeze
+    DEFAULT_STORAGE_DIR = File.join("tmp", ".htmlproofer")
+    DEFAULT_CACHE_FILE_NAME = "cache.json"
 
     URI_REGEXP = URI::DEFAULT_PARSER.make_regexp
 
@@ -26,7 +21,7 @@ module HTMLProofer
       @runner = runner
       @logger = @runner.logger
 
-      @cache_datetime = DateTime.now
+      @cache_datetime = Time.now
       @cache_time = @cache_datetime.to_time
 
       if blank?(options)
@@ -34,28 +29,25 @@ module HTMLProofer
       else
         define_singleton_method(:enabled?) { true }
         setup_cache!(options)
-        @parsed_timeframe = parsed_timeframe(options[:timeframe])
+
+        @external_timeframe = parsed_timeframe(options[:timeframe][:external])
+        @internal_timeframe = parsed_timeframe(options[:timeframe][:internal])
       end
     end
 
-    def within_timeframe?(time)
-      return false if time.nil?
-
-      time = Time.parse(time) if time.is_a?(String)
-      (@parsed_timeframe..@cache_time).cover?(time)
-    end
-
     def parsed_timeframe(timeframe)
+      return nil if timeframe.nil?
+
       time, date = timeframe.match(/(\d+)(\D)/).captures
       time = time.to_i
       case date
-      when 'M'
+      when "M"
         time_ago(time, :months)
-      when 'w'
+      when "w"
         time_ago(time, :weeks)
-      when 'd'
+      when "d"
         time_ago(time, :days)
-      when 'h'
+      when "h"
         time_ago(time, :hours)
       else
         raise ArgumentError, "#{date} is not a valid timeframe!"
@@ -67,78 +59,25 @@ module HTMLProofer
 
       @cache_log[:internal][url] = { time: @cache_time, metadata: [] } if @cache_log[:internal][url].nil?
 
-      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found: found)
+      @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found)
     end
 
-    def add_external(url, filenames, status, msg)
+    def add_external(url, filenames, status_code, msg)
       return unless enabled?
 
-      @cache_log[:external][url] = { time: @cache_time, status: status, message: msg, metadata: [] } if @cache_log[:external][url].nil?
+      found = status_code.between?(200, 299)
 
-      @cache_log[:external][url][:metadata] = filenames
+      clean_url = cleaned_url(url)
+      @cache_log[:external][clean_url] =
+        { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
     end
 
-    def construct_internal_link_metadata(metadata, found: nil)
-      m = {
-        source: metadata[:source],
-        current_path: metadata[:current_path],
-        line: metadata[:line],
-        base_url: metadata[:base_url]
-      }
+    def detect_url_changes(urls_detected, type)
+      additions = determine_additions(urls_detected, type)
 
-      m[:found] = found unless found.nil?
-
-      m
-    end
-
-    def detect_url_changes(found_urls, type)
-      # if there were no urls, bail
-      return {} if found_urls.empty?
-
-      additions = determine_additions(found_urls, type)
-
-      determine_deletions(found_urls, type)
+      determine_deletions(urls_detected, type)
 
       additions
-    end
-
-    # prepare to add new URLs detected
-    private def determine_additions(found_urls, type)
-      additions = found_urls.reject do |url, _|
-        # url = unescape_url(url)
-        if @cache_log[type].include?(url)
-          true
-        else
-          @logger.log :debug, "Adding #{url} to cache check"
-          false
-        end
-      end
-
-      new_link_count = additions.length
-      new_link_text = pluralize(new_link_count, "#{type} link", "#{type} links")
-      @logger.log :info, "Adding #{new_link_text} to the cache..."
-
-      additions
-    end
-
-    # remove from cache URLs that no longer exist
-    private def determine_deletions(found_urls, type)
-      deletions = 0
-
-      @cache_log[type].delete_if do |url, _|
-        url = unescape_url(url)
-
-        if found_urls.include?(url)
-          false
-        elsif url_matches_type?(url, type)
-          @logger.log :debug, "Removing #{url} from cache check"
-          deletions += 1
-          true
-        end
-      end
-
-      del_link_text = pluralize(deletions, "#{type} link", "#{type} links")
-      @logger.log :info, "Removing #{del_link_text} from the cache..."
     end
 
     def write
@@ -147,13 +86,19 @@ module HTMLProofer
       File.write(@cache_file, @cache_log.to_json)
     end
 
-    def retrieve_urls(urls, type)
-      return urls if empty?
+    def retrieve_urls(urls_detected, type)
+      # if there are no urls, bail
+      return {} if urls_detected.empty?
 
-      urls_to_check = detect_url_changes(urls, type)
+      urls_detected = urls_detected.transform_keys do |url|
+        cleaned_url(url)
+      end
+
+      urls_to_check = detect_url_changes(urls_detected, type)
 
       @cache_log[type].each_pair do |url, cache|
-        next if within_timeframe?(cache[:time])
+        within_timeframe = type == :external ? within_external_timeframe?(cache[:time]) : within_internal_timeframe?(cache[:time])
+        next if within_timeframe
 
         urls_to_check[url] = cache[:metadata] # recheck expired links
       end
@@ -161,20 +106,105 @@ module HTMLProofer
       urls_to_check
     end
 
-    # FIXME: it seems that Typhoeus actually acts on escaped URLs,
-    # but there's no way to get at that information, and the cache
-    # stores unescaped URLs. Because of this, some links, such as
-    # github.com/search/issues?q=is:open+is:issue+fig are not matched
-    # as github.com/search/issues?q=is%3Aopen+is%3Aissue+fig
-    def unescape_url(url)
-      Addressable::URI.unescape(url)
+    def within_external_timeframe?(time)
+      within_timeframe?(time, @external_timeframe)
+    end
+
+    def within_internal_timeframe?(time)
+      within_timeframe?(time, @internal_timeframe)
     end
 
     def empty?
       blank?(@cache_log) || (@cache_log[:internal].empty? && @cache_log[:external].empty?)
     end
 
+    def size(type)
+      @cache_log[type].size
+    end
+
+    private def construct_internal_link_metadata(metadata, found)
+      {
+        source: metadata[:source],
+        filename: metadata[:filename],
+        line: metadata[:line],
+        base_url: metadata[:base_url],
+        found: found,
+      }
+    end
+
+    # prepare to add new URLs detected
+    private def determine_additions(urls_detected, type)
+      additions = type == :external ? determine_external_additions(urls_detected) : determine_internal_additions(urls_detected)
+
+      new_link_count = additions.length
+      new_link_text = pluralize(new_link_count, "new #{type} link", "new #{type} links")
+      @logger.log(:debug, "Adding #{new_link_text} to the cache")
+
+      additions
+    end
+
+    private def determine_external_additions(urls_detected)
+      urls_detected.reject do |url, _metadata|
+        if @cache_log[:external].include?(url)
+          @cache_log[:external][url][:found] # if this is false, we're trying again
+        else
+          @logger.log(:debug, "Adding #{url} to external cache")
+          false
+        end
+      end
+    end
+
+    private def determine_internal_additions(urls_detected)
+      urls_detected.each_with_object({}) do |(url, metadata), hsh|
+        # url is not even in cache
+        if @cache_log[:internal][url].nil?
+          hsh[url] = metadata
+          next
+        end
+
+        cache_metadata = @cache_log[:internal][url][:metadata]
+        incoming_metadata = urls_detected[url].each_with_object([]) do |incoming_url, arr|
+          existing_cache_metadata = cache_metadata.find { |k, _| k[:filename] == incoming_url[:filename] }
+
+          # cache for this url, from an existing path, exists as found
+          if !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
+            metadata.find { |m| m[:filename] == existing_cache_metadata[:filename] }[:found] = true
+            next
+          end
+
+          @logger.log(:debug, "Adding #{incoming_url} to internal cache")
+          arr << incoming_url
+        end
+
+        hsh[url] = incoming_metadata
+      end
+    end
+
+    # remove from cache URLs that no longer exist
+    private def determine_deletions(urls_detected, type)
+      deletions = 0
+
+      @cache_log[type].delete_if do |url, _|
+        if urls_detected.include?(url)
+          false
+        elsif url_matches_type?(url, type)
+          @logger.log(:debug, "Removing #{url} from #{type} cache")
+          deletions += 1
+          true
+        end
+      end
+
+      del_link_text = pluralize(deletions, "outdated #{type} link", "outdated #{type} links")
+      @logger.log(:debug, "Removing #{del_link_text} from the cache")
+    end
+
     private def setup_cache!(options)
+      default_structure = {
+        version: CACHE_VERSION,
+        internal: {},
+        external: {},
+      }
+
       @storage_dir = options[:storage_dir] || DEFAULT_STORAGE_DIR
 
       FileUtils.mkdir_p(storage_dir) unless Dir.exist?(storage_dir)
@@ -183,42 +213,67 @@ module HTMLProofer
 
       @cache_file = File.join(storage_dir, cache_file_name)
 
-      return (@cache_log = DEFAULT_STRUCTURE) unless File.exist?(@cache_file)
+      return (@cache_log = default_structure) unless File.exist?(@cache_file)
 
       contents = File.read(@cache_file)
 
-      return (@cache_log = DEFAULT_STRUCTURE) if blank?(contents)
+      return (@cache_log = default_structure) if blank?(contents)
 
       log = JSON.parse(contents, symbolize_names: true)
 
       old_cache = (cache_version = log[:version]).nil?
       @cache_log = if old_cache # previous cache version, create a new one
-                     DEFAULT_STRUCTURE
-                   elsif cache_version != CACHE_VERSION
-                   # if cache version is newer...do something
-                   else
-                     log[:internal] = log[:internal].transform_keys(&:to_s)
-                     log[:external] = log[:external].transform_keys(&:to_s)
-                     log
-                   end
+        default_structure
+      elsif cache_version != CACHE_VERSION
+      # if cache version is newer...do something
+      else
+        log[:internal] = log[:internal].transform_keys(&:to_s)
+        log[:external] = log[:external].transform_keys(&:to_s)
+        log
+      end
     end
+
+    # https://github.com/rails/rails/blob/3872bc0e54d32e8bf3a6299b0bfe173d94b072fc/activesupport/lib/active_support/duration.rb#L112-L117
+    SECONDS_PER_HOUR   = 3600
+    SECONDS_PER_DAY    = 86400
+    SECONDS_PER_WEEK   = 604800
+    SECONDS_PER_MONTH  = 2629746  # 1/12 of a gregorian year
 
     private def time_ago(measurement, unit)
       case unit
       when :months
-        @cache_datetime >> -measurement
+        @cache_datetime - (SECONDS_PER_MONTH * measurement)
       when :weeks
-        @cache_datetime - (measurement * 7)
+        @cache_datetime - (SECONDS_PER_WEEK * measurement)
       when :days
-        @cache_datetime - measurement
+        @cache_datetime - (SECONDS_PER_DAY * measurement)
       when :hours
-        @cache_datetime - Rational(measurement / 24.0)
+        @cache_datetime - Rational(SECONDS_PER_HOUR * measurement)
       end.to_time
     end
 
     private def url_matches_type?(url, type)
       return true if type == :internal && url !~ URI_REGEXP
       return true if type == :external && url =~ URI_REGEXP
+    end
+
+    private def cleaned_url(url)
+      cleaned_url = escape_unescape(url)
+
+      return cleaned_url unless cleaned_url.end_with?("/", "#", "?") && cleaned_url.length > 1
+
+      cleaned_url[0..-2]
+    end
+
+    private def escape_unescape(url)
+      Addressable::URI.parse(url).normalize.to_s
+    end
+
+    private def within_timeframe?(current_time, parsed_timeframe)
+      return false if current_time.nil? || parsed_timeframe.nil?
+
+      current_time = Time.parse(current_time) if current_time.is_a?(String)
+      (parsed_timeframe..@cache_time).cover?(current_time)
     end
   end
 end

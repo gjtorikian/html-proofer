@@ -299,7 +299,7 @@ Other changes include:
 
 - URLs in \<source src=xx\> not being checked. [\#589](https://github.com/gjtorikian/html-proofer/issues/589)
 - Link checking failed with "441 No error" [\#584](https://github.com/gjtorikian/html-proofer/issues/584)
-- htmlproofer 3.16.0 | Error:  undefined method `match?' for /^javascript:/:Regexp [\#582](https://github.com/gjtorikian/html-proofer/issues/582)
+- htmlproofer 3.16.0 | Error: undefined method `match?' for /^javascript:/:Regexp [\#582](https://github.com/gjtorikian/html-proofer/issues/582)
 - HTMLProofer runs out of memory [\#579](https://github.com/gjtorikian/html-proofer/issues/579)
 
 **Merged pull requests:**
@@ -396,7 +396,7 @@ Other changes include:
 
 **Closed issues:**
 
-- Error:  undefined method `xpath' for nil:NilClass [\#544](https://github.com/gjtorikian/html-proofer/issues/544)
+- Error: undefined method `xpath' for nil:NilClass [\#544](https://github.com/gjtorikian/html-proofer/issues/544)
 
 **Merged pull requests:**
 
@@ -630,7 +630,7 @@ Other changes include:
 - Possible regression: htmlParseEntityRef: expecting ';' for protocol relative URLs [\#447](https://github.com/gjtorikian/html-proofer/issues/447)
 - HEAD to GET fallback doesn't work if URL has a hash and HEAD causes a timeout [\#441](https://github.com/gjtorikian/html-proofer/issues/441)
 - Allow using GET instead of HEAD [\#440](https://github.com/gjtorikian/html-proofer/issues/440)
-- Error:  wrong number of arguments [\#430](https://github.com/gjtorikian/html-proofer/issues/430)
+- Error: wrong number of arguments [\#430](https://github.com/gjtorikian/html-proofer/issues/430)
 - limit memory for travis builds [\#429](https://github.com/gjtorikian/html-proofer/issues/429)
 
 **Merged pull requests:**
@@ -643,7 +643,7 @@ Other changes include:
 
 **Fixed bugs:**
 
-- Error:  string contains null byte [\#409](https://github.com/gjtorikian/html-proofer/issues/409)
+- Error: string contains null byte [\#409](https://github.com/gjtorikian/html-proofer/issues/409)
 
 **Closed issues:**
 
@@ -1043,7 +1043,7 @@ Other changes include:
 - Warnings for non-https anchors [\#252](https://github.com/gjtorikian/html-proofer/issues/252)
 - html-proofer should eat Typhoeus exceptions [\#248](https://github.com/gjtorikian/html-proofer/issues/248)
 - Incremental output [\#247](https://github.com/gjtorikian/html-proofer/issues/247)
-- Error:  `@shot.' is not allowed as an instance variable name [\#245](https://github.com/gjtorikian/html-proofer/issues/245)
+- Error: `@shot.' is not allowed as an instance variable name [\#245](https://github.com/gjtorikian/html-proofer/issues/245)
 - Don't count `?` forms with different parameters as different [\#236](https://github.com/gjtorikian/html-proofer/issues/236)
 
 **Merged pull requests:**

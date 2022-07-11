@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://www.github.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+      Authorization:
+      - Bearer <TOKEN>
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Mon, 06 Jun 2022 21:05:49 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Language, Accept-Encoding,
+        Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      content-language:
+      - en-US
+      etag:
+      - W/"b0cb87ea78ec4f5cfdc7256df4b6e937"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com github.githubassets.com; font-src
+        github.githubassets.com; form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com *.githubusercontent.com
+        customer-stories-feed.github.com spotlights-feed.github.com; manifest-src
+        ''self''; media-src github.com user-images.githubusercontent.com/ github.githubassets.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=4oyQwDu7aIo7AAMNz%2FiERplAze9xOoKu7KGrJGm0Cs%2F6PY76VzPI6D7riiD1IgLguQSIcXax7NLOhyPdZWUYT4zh7%2FW6QSC4Taxm9aokEI9buiRA2t%2FySAF02EII0GRrCnUir1tVv92emUgIP9ofywIakniYK5GYK%2FnYF93La%2FN9Sebs5OxBG2j4Agk2DhDMpYoouXnblRPloclUka8d%2BNunBT5uFdznjdzX%2BIJJdE1wqYANkB1yRfsjhCy3xXexhkHxKPsklFGfYoZSAcjFPg%3D%3D--%2BHdo7nkZIP6kTUr4--gP4LsioDsf6kBrPIqQsIdQ%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.270620804.1654549553; Path=/; Domain=github.com; Expires=Tue,
+        06 Jun 2023 21:05:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Tue, 06 Jun 2023 21:05:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - 2C42:42B4:25A91C4:42FAA03:629E6C31
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/
+  recorded_at: Thu, 17 Feb 2022 17:00:00 GMT
+recorded_with: VCR 2.9.3

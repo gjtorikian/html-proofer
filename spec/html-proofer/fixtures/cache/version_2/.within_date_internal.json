@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "external": {},
+  "internal": {
+    "/tel_link.html": {
+      "time": "2015-10-20 12:00:00 -0700",
+      "metadata": [
+        {
+          "source": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
+          "filename": "spec/html-proofer/fixtures/links/working_root_link_internal.html",
+          "line": 5,
+          "base_url": "",
+          "found": true
+        }
+      ]
+    }
+  }
+}

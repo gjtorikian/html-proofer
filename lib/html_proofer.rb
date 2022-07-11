@@ -1,30 +1,24 @@
 # frozen_string_literal: true
 
-# def require_all(path)
-#   dir = File.join(File.dirname(__FILE__), path)
-#   Dir[File.join(dir, '*.rb')].sort.each do |f|
-#     require f
-#   end
-# end
-
-require 'zeitwerk'
-lib_dir = File.join(File.dirname(__dir__), 'lib')
+require "zeitwerk"
+lib_dir = File.join(File.dirname(__dir__), "lib")
 gem_loader = Zeitwerk::Loader.for_gem
 gem_loader.inflector.inflect(
-  'html_proofer' => 'HTMLProofer'
+  "html_proofer" => "HTMLProofer"
 )
-gem_loader.ignore(File.join(lib_dir, 'html-proofer.rb'))
+gem_loader.ignore(File.join(lib_dir, "html-proofer.rb"))
 gem_loader.setup
 
-require 'html_proofer/version'
+require "html_proofer/version"
 
-require 'parallel'
-require 'fileutils'
+require "parallel"
+require "fileutils"
 
-begin
-  require 'awesome_print'
-  require 'debug'
-rescue LoadError; end # rubocop:disable Lint/SuppressedException
+if ENV.fetch("DEBUG", false)
+  require "awesome_print"
+  require "debug"
+end
+
 module HTMLProofer
   def self.check_file(file, options = {})
     raise ArgumentError unless file.is_a?(String)

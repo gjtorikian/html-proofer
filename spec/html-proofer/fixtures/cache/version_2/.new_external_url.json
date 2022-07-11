@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "internal": {},
+  "external": {
+    "www.github.com": {
+      "time": "2015-10-01 16:18:15 -0700",
+      "found": true,
+      "status": 200,
+      "message": "OK",
+      "metadata": []
+    },
+    "github.com/search/issues?q=is:open+is:issue+fig": {
+      "time": "2015-10-01 16:18:15 -0700",
+      "found": true,
+      "status": 200,
+      "message": "OK",
+      "metadata": []
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # HTMLProofer
 
-If you generate HTML files, _then this tool might be for you_.
+If you generate HTML files, _then this tool might be for you_!
 
 ## Project scope
 
@@ -10,7 +10,7 @@ In scope for this project is any well-known and widely-used test for HTML docume
 
 **Third-party modules.** We want this product to be useful for continuous integration so we prefer to avoid subjective tests which are prone to false positive results, such as spell checkers, indentation checkers, etc. If you want to work on these items, please see [the section on custom tests](#custom-tests) and consider adding an implementation as a third-party module.
 
-**Advanced configuration.** Most front-end developers can test their HTML using [our command line program](#using-on-the-command-line). Advanced configuration will [require using Ruby](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
+**Advanced configuration.** Most front-end developers can test their HTML using [our command line program](#using-on-the-command-line). Advanced configuration will require using Ruby.
 
 ## Installation
 
@@ -30,7 +30,7 @@ Or install it yourself as:
 
 ## What's tested?
 
-Below is mostly comprehensive list of checks that HTMLProofer can perform.
+Below is a mostly comprehensive list of checks that HTMLProofer can perform.
 
 ### Images
 
@@ -67,10 +67,6 @@ Below is mostly comprehensive list of checks that HTMLProofer can perform.
 
 * Whether the images and URLs in the OpenGraph metadata are valid.
 
-### HTML
-
-* Whether your HTML markup is valid. This is done via [Nokogiri](https://nokogiri.org/) to validate well-formed HTML5 markup.
-
 ## Usage
 
 You can configure HTMLProofer to run on:
@@ -87,7 +83,7 @@ It can also run through the command-line.
 1. Require the gem.
 2. Generate some HTML.
 3. Create a new instance of the `HTMLProofer` on your output folder.
-4. `run` that instance.
+4. Call `proofer.run` on that path.
 
 Here's an example:
 
@@ -102,7 +98,7 @@ Dir.mkdir("out") unless File.exist?("out")
 pipeline = HTML::Pipeline.new [
   HTML::Pipeline::MarkdownFilter,
   HTML::Pipeline::TableOfContentsFilter
-], :gfm => true
+], gfm: true
 
 # iterate over files, and generate HTML from Markdown
 Find.find("./docs") do |path|
@@ -148,16 +144,23 @@ With `check_links`, you can also pass in an array of links:
 HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 ```
 
-This configures Proofer to just test those links to ensure they are valid. Note that for the command-line, you'll need to pass a special `--as-links` argument:
+### Swapping information
 
-**Note:** flags are different from the default ones provided above. The underscores are replaced with dashes.
+Sometimes, the information in your HTML is not the same as how your server serves content. In these cases, you can use `swap_urls` to map the URL in a file to the URL you'd like it to become. For example:
 
-`allow_hash_href` will be `--allow-hash-href`
-
-
-``` bash
-htmlproofer www.google.com,www.github.com --as-links
+```ruby
+run_proofer(file, :file, swap_urls: { %r{^https//example.com}: 'https://website.com' })
 ```
+
+In this case, any link that matches the `^https://example.com` will be converted to `https://website.com`.
+
+A similar swapping process can be done for attributes:
+
+```ruby
+run_proofer(file, :file, swap_urls: { 'img': [['src', 'srcset']] })
+```
+
+In this case, we are telling HTMLProofer that, for any `img` tag detected, and for any check using the `src` attribute, to use the `srcset` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need.
 
 ### Using on the command-line
 
@@ -166,7 +169,7 @@ You'll also get a new program called `htmlproofer` with this gem. Terrific!
 Pass in options through the command-line as flags, like this:
 
 ``` bash
-htmlproofer --extension .html.erb ./out
+htmlproofer --extensions .html.erb ./out
 ```
 
 Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer).
@@ -192,30 +195,10 @@ values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
 ``` bash
-htmlproofer --swap-urls "wow:cow,mow:doh" --extension .html.erb --url-ignore www.github.com ./out
+htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --url-ignore www.github.com ./out
 ```
 
-### Using with Jekyll
-
-Want to use HTML Proofer with your Jekyll site? Awesome. Simply add `gem 'html-proofer'`
-to your `Gemfile` as described above, and add the following to your `Rakefile`,
-using `rake test` to execute:
-
-```ruby
-require 'html-proofer'
-
-task :test do
-  sh "bundle exec jekyll build"
-  options = { :assume_extension => true }
-  HTMLProofer.check_directory("./_site", options).run
-end
-```
-
-Don't have or want a `Rakefile`? You can also do something like the following:
-
-```bash
-htmlproofer --assume-extension ./_site
-```
+Some configuration options--such as `--typheous`, `--cache`, or `--attribute-swap`--require well-formatted JSON.
 
 #### Adjusting for a `baseurl`
 
@@ -237,7 +220,7 @@ require 'html-proofer'
 
 task :test do
   sh "bundle exec jekyll build"
-  options = { :assume_extension => true, :swap_urls => "^/BASEURL/:/" }
+  options = { swap_urls: "^/BASEURL/:/" }
   HTMLProofer.check_directory("./_site", options).run
 end
 ```
@@ -287,25 +270,25 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | :----- | :---------- | :------ |
 | `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
 | `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
-| `assume_extension` | Automatically add extension (e.g. `.html`) to file paths, to allow extensionless URLs (as supported by Jekyll 3 and GitHub Pages) | `false` |
+| `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
-| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `false` |
+| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `true` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |
 | `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `extension` | The extension of your HTML files including the dot. | `.html`
+| `extensions` | An array of Strings indicating the file extensions you would like to check (including the dot) | `['.html']`
+| `ignore_empty_alt` | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true` |
 | `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
 | `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
-| `ignore_missing_alt` | If `true`, ignores images with empty/missing alt tags | `false` |
+| `ignore_missing_alt` | If `true`, ignores images with missing alt tags | `false` |
 | `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
 | `ignore_urls` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
 | `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
 | `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
 | `root_dir` | The absolute path to the directory serving your html-files. | "" |
+| `swap_attributes` | JSON-formatted config that maps element names to the preferred attribute to check | `{}` |
 | `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
-| `typhoeus_config` | A JSON-formatted string. Parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. | `{}` |
-
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -313,14 +296,12 @@ In addition, there are a few "namespaced" options. These are:
 * `:parallel`
 * `:cache`
 
-See below for more information.
-
 ### Configuring Typhoeus and Hydra
 
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {:extension => ".htm", :typhoeus => { :verbose => true, :ssl_verifyhost => 2 } })
+HTMLProofer.new("out/", {extensions: [".htm"], typhoeus: { verbose: true, ssl_verifyhost: 2 } })
 ```
 
 This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check the [Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
@@ -331,15 +312,17 @@ The default value is:
 
 ``` ruby
 {
-  :typhoeus =>
+  typhoeus:
   {
-    :followlocation => true,
-    :connecttimeout => 10,
-    :timeout => 30
+    followlocation: true,
+    connecttimeout: 10,
+    timeout: 30
   },
-  :hydra => { :max_concurrency => 50 }
+  hydra: { max_concurrency: 50 }
 }
 ```
+
+On the CLI, you can provide the `--typhoeus` or `hydra` arguments to set the configurations. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 #### Setting `before-request` callback
 
@@ -360,40 +343,48 @@ The `Authorization` header is being set if and only if the `base_url` is `https:
 [Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
 
 ``` ruby
-HTMLProofer.check_directories(["out/"], {:extension => ".htm", :parallel => { in_processes: 3} })
+HTMLProofer.check_directories(["out/"], {extension: ".htm", parallel: { in_processes: 3} })
 ```
 
 In this example, `in_processes: 3` is passed into Parallel as a configuration option.
 
-Pass in `:parallel => { enable: false }` to disable parallel runs.
+Pass in `parallel: { enable: false }` to disable parallel runs.
+
+On the CLI, you can provide the `--parallel` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ## Configuring caching
 
-Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external links. Caching simply means to skip links that are valid for a certain period of time.
+Checking external URLs can slow your tests down. If you'd like to speed that up, you can enable caching for your external and internal links. Caching simply means to skip link checking for links that are valid for a certain period of time.
 
-You can enable caching for this log file by passing in the option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a number followed by a letter indicating the length of time. For example:
+You can enable caching for this by passing in the configuration option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a hash containing two keys, `external` and `internal`. Each of these contains a number followed by a letter indicating the length of time:
 
 * `M` means months
 * `w` means weeks
 * `d` means days
 * `h` means hours
 
-For example, passing the following options means "recheck links older than thirty days":
+For example, passing the following options means "recheck external links older than thirty days":
 
 ``` ruby
-{ :cache => { :timeframe => '30d' } }
+{ cache: { timeframe: { external: '30d' } } }
 ```
 
-And the following options means "recheck links older than two weeks":
+And the following options means "recheck internal links older than two weeks":
 
 ``` ruby
-{ :cache => { :timeframe => '2w' } }
+{ cache: { timeframe: { internal: '2w' } } }
 ```
 
-You can change the directory where the cachefile is kept by also providing the `storage_dir` key:
+Naturally, to support both internal and external link caching, both keys would need to be provided. The following checks external links every two weeks, but internal links only once a week:
 
 ``` ruby
-{ :cache => { :storage_dir => '/tmp/html-proofer-cache-money' } }
+{ cache: { timeframe: { external: '2w', internal: '1w' } } }
+```
+
+You can change the filename or the directory where the cache file is kept by also providing the `storage_dir` key:
+
+``` ruby
+{ cache: { cache_file: 'stay_cachey.json', storage_dir: '/tmp/html-proofer-cache-money' } }
 ```
 
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
@@ -401,6 +392,8 @@ Links that were failures are kept in the cache and *always* rechecked. If they p
 The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
+
+On the CLI, you can provide the `--cache` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ### Caching with continuous integration
 
@@ -449,30 +442,42 @@ Here's an example custom test demonstrating these concepts. It reports `mailto` 
 
 ``` ruby
 class MailToOctocat < ::HTMLProofer::Check
-  def mailto?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /mailto/
-  end
-
-  def octocat?
-    return false if @link.data_proofer_ignore || @link.href.nil?
-    @link.href.match /octocat@github.com/
+  def mailto_octocat?
+    @link.url.raw_attribute == 'mailto:octocat@github.com'
   end
 
   def run
     @html.css('a').each do |node|
       @link = create_element(node)
-      line = node.line
 
-      if mailto? && octocat?
-        return add_failure("Don't email the Octocat directly!", line: line)
-      end
+      next if @link.ignore?
+
+      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
     end
   end
 end
 ```
 
+Don't forget to include this new check in HTMLProofer's options, for example:
+
+```ruby
+# removes default checks and just runs this one
+HTMLProofer.check_directories(["out/"], {checks: ['MailToOctocat']})
+```
+
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
+
+## Reporting
+
+By default, HTML-Proofer has its own reporting mechanism to print errors at the end of the run. You can choose to use your own reporter by passing in your own subclass of `HTMLProofer::Reporter`:
+
+``` ruby
+proofer = HTMLProofer.check_directory(item, opts)
+proofer.reporter = MyCustomReporter.new(logger: proofer.logger)
+proofer.run
+```
+
+Your custom reporter must implement the `report` function which implements the behavior you wish to see. The `logger` kwarg is optional.
 
 ## Troubleshooting
 
@@ -486,9 +491,9 @@ To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :ssl_verifypeer => false,
-    :ssl_verifyhost => 0}
+  typhoeus: {
+    ssl_verifypeer: false,
+    ssl_verifyhost: 0}
 }).run
 ```
 
@@ -498,8 +503,8 @@ To change the User-Agent used by Typhoeus:
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :headers => { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
+  typhoeus: {
+    headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
 }}).run
 ```
 
@@ -515,9 +520,9 @@ Sometimes links fail because they don't have access to cookies. To fix this you 
 
 ``` ruby
 HTMLProofer.check_directory("out/", {
-  :typhoeus => {
-    :cookiefile => ".cookies",
-    :cookiejar => ".cookies"
+  typhoeus: {
+    cookiefile: ".cookies",
+    cookiejar: ".cookies"
 }}).run
 ```
 
@@ -531,7 +536,7 @@ To exclude urls using regular expressions, include them between forward slashes 
 
 ``` ruby
 HTMLProofer.check_directories(["out/"], {
-  :ignore_urls => [/example.com/],
+  ignore_urls: [/example.com/],
 }).run
 ```
 

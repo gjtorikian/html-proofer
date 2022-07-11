@@ -3,6 +3,9 @@ name: Ruby CI
 on:
   push:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     env:
@@ -10,12 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        ruby-version: [3.1.0, 3.0.0, 2.7.5]
+        ruby-version:
+          - 3.1.0
+          - 3.0.0
+          - 2.7.6
+        experimental: [false]
+        include:
+          - ruby-version: head
+            experimental: true
+
+    continue-on-error: ${{ matrix.experimental }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install libxslt and libxml2
         run: sudo apt-get install libxslt-dev libxml2-dev
       - name: Set up Ruby ${{ matrix.ruby-version }}

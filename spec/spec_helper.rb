@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'bundler/setup'
-require 'vcr'
-require 'timecop'
-require 'html_proofer'
-require 'open3'
+require "bundler/setup"
+require "vcr"
+require "timecop"
+require "html_proofer"
+require "open3"
 
-FIXTURES_DIR = 'spec/html-proofer/fixtures'
+FIXTURES_DIR = "spec/html-proofer/fixtures"
 
 RSpec.configure do |config|
   # Use color in STDOUT
@@ -26,13 +26,13 @@ def capture_stderr(*)
   original_stderr = $stderr
   original_stdout = $stdout
   $stderr = fake_err = StringIO.new
-  $stdout = StringIO.new unless ENV['VERBOSE']
+  $stdout = StringIO.new unless ENV["DEBUG"]
   begin
     yield
   rescue SystemExit # rubocop:disable Lint/SuppressedException
   ensure
     $stderr = original_stderr
-    $stdout = original_stdout unless ENV['VERBOSE']
+    $stdout = original_stdout unless ENV["DEBUG"]
   end
   fake_err.string
 end
@@ -73,26 +73,26 @@ def capture_proofer_http(item, type, opts = {})
   cassette_name = make_cassette_name(item, opts)
   VCR.use_cassette(cassette_name, record: :new_episodes) do
     capture_stderr { proofer.run }
-    VCR.current_cassette.serializable_hash['http_interactions'].last
+    VCR.current_cassette.serializable_hash["http_interactions"].last
   end
 end
 
 def make_bin(args)
   stdout, stderr = Open3.capture3("#{RbConfig.ruby} bin/htmlproofer #{args}")
-  "#{stdout}\n#{stderr}".encode('UTF-8', invalid: :replace, undef: :replace)
+  "#{stdout}\n#{stderr}".encode("UTF-8", invalid: :replace, undef: :replace)
 end
 
 def make_cassette_name(file, opts)
-  filename = if file.is_a? Array
-               file.join('_')
-             else
-               file.split('/')[-2..].join('/')
-             end
+  filename = if file.is_a?(Array)
+    file.join("_")
+  else
+    file.split("/")[-2..].join("/")
+  end
   (filename += opts.inspect) unless opts.empty?
   filename
 end
 
 VCR.configure do |config|
-  config.cassette_library_dir = File.join(FIXTURES_DIR, 'vcr_cassettes')
-  config.hook_into :typhoeus
+  config.cassette_library_dir = File.join(FIXTURES_DIR, "vcr_cassettes")
+  config.hook_into(:typhoeus)
 end

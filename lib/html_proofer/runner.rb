@@ -4,8 +4,10 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :failure_reporter, :checked_paths, :current_check
-    attr_accessor :current_path, :current_source
+    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :checked_paths, :current_check
+    attr_accessor :current_filename, :current_source, :reporter
+
+    URL_TYPES = [:external, :internal].freeze
 
     def initialize(src, opts = {})
       @options = HTMLProofer::Configuration.generate_defaults(opts)
@@ -16,40 +18,44 @@ module HTMLProofer
       @logger = HTMLProofer::Log.new(@options[:log_level])
       @cache = Cache.new(self, @options[:cache])
 
-      @internal_urls = {}
       @external_urls = {}
+      @internal_urls = {}
       @failures = []
+
       @before_request = []
 
       @checked_paths = {}
 
       @current_check = nil
       @current_source = nil
-      @current_path = nil
+      @current_filename = nil
+
+      @reporter = Reporter::Cli.new(logger: @logger)
     end
 
     def run
-      check_text = pluralize(checks.length, 'check', 'checks')
+      check_text = pluralize(checks.length, "check", "checks")
 
       if @type == :links
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source}... \n\n"
+        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n")
         check_list_of_links unless @options[:disable_external]
       else
-        @logger.log :info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} on *#{@options[:extension]}... \n\n"
+        @logger.log(:info,
+          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files...\n\n")
 
         check_files
-        @logger.log :info, "Ran on #{pluralize(files.length, 'file', 'files')}!\n\n"
+        @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
       end
 
       @cache.write
 
-      @failure_reporter = FailureReporter.new(@failures, @logger)
+      @reporter.failures = @failures
 
       if @failures.empty?
-        @logger.log :info, 'HTML-Proofer finished successfully.'
+        @logger.log(:info, "HTML-Proofer finished successfully.")
       else
         @failures.uniq!
-        print_failed_tests
+        report_failed_checks
       end
     end
 
@@ -63,14 +69,25 @@ module HTMLProofer
       validate_external_urls
     end
 
-    # Collects any external URLs found in a directory of files. Also collectes
-    # every failed test from process_files.
-    # Sends the external URLs to Typhoeus for batch processing.
+    # Walks over each implemented check and runs them on the files, in parallel.
+    # Sends the collected external URLs to Typhoeus for batch processing.
     def check_files
-      process_files.each do |item|
-        @external_urls.merge!(item[:external_urls])
-        @internal_urls.merge!(item[:internal_urls])
-        @failures.concat(item[:failures])
+      process_files.each do |result|
+        URL_TYPES.each do |url_type|
+          type = :"#{url_type}_urls"
+          ivar_name = "@#{type}"
+          ivar = instance_variable_get(ivar_name)
+
+          if ivar.empty?
+            instance_variable_set(ivar_name, result[type])
+          else
+            result[type].each do |url, metadata|
+              ivar[url] = [] if ivar[url].nil?
+              ivar[url].concat(metadata)
+            end
+          end
+        end
+        @failures.concat(result[:failures])
       end
 
       validate_external_urls unless @options[:disable_external]
@@ -81,37 +98,38 @@ module HTMLProofer
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
       if @options[:parallel][:enable]
-        Parallel.map(files, @options[:parallel]) { |path| load_file(path) }
+        Parallel.map(files, @options[:parallel]) { |file| load_file(file[:path], file[:source]) }
       else
-        files.map { |path| load_file(path) }
+        files.map do |file|
+          load_file(file[:path], file[:source])
+        end
       end
     end
 
-    def load_file(path)
+    def load_file(path, source)
       @html = create_nokogiri(path)
-      check_parsed(path)
+      check_parsed(path, source)
     end
 
-    def check_parsed(path)
+    # Collects any external URLs found in a directory of files. Also collectes
+    # every failed test from process_files.
+    def check_parsed(path, source)
       result = { internal_urls: {}, external_urls: {}, failures: [] }
 
-      @source = [@source] if @type == :file
+      checks.each do |klass|
+        @current_source = source
+        @current_filename = path
 
-      @source.each do |current_source|
-        checks.each do |klass|
-          @logger.log :debug, "Checking #{klass.to_s.downcase} on #{path} ..."
-          @current_source = current_source
-          @current_path = path
+        check = Object.const_get(klass).new(self, @html)
+        @logger.log(:debug, "Running #{check.short_name} in #{path}")
 
-          check = Object.const_get(klass).new(self, @html)
-          @current_check = check
+        @current_check = check
 
-          check.run
+        check.run
 
-          result[:external_urls].merge!(check.external_urls)
-          result[:internal_urls].merge!(check.internal_urls)
-          result[:failures].concat(check.failures)
-        end
+        result[:external_urls].merge!(check.external_urls) { |_key, old, current| old.concat(current) }
+        result[:internal_urls].merge!(check.internal_urls) { |_key, old, current| old.concat(current) }
+        result[:failures].concat(check.failures)
       end
       result
     end
@@ -129,16 +147,17 @@ module HTMLProofer
 
     def files
       @files ||= if @type == :directory
-                   @source.map do |src|
-                     pattern = File.join(src, '**', "*#{@options[:extension]}")
-                     files = Dir.glob(pattern).select { |fn| File.file? fn }
-                     files.reject { |f| ignore_file?(f) }
-                   end.flatten
-                 elsif @type == :file && File.extname(@source) == @options[:extension]
-                   [@source].reject { |f| ignore_file?(f) }
-                 else
-                   []
-                 end
+        @source.map do |src|
+          pattern = File.join(src, "**", "*{#{@options[:extensions].join(",")}}")
+          Dir.glob(pattern).select do |f|
+            File.file?(f) && !ignore_file?(f)
+          end.map { |f| { source: src, path: f } }
+        end.flatten
+      elsif @type == :file && @options[:extensions].include?(File.extname(@source))
+        [@source].reject { |f| ignore_file?(f) }.map { |f| { source: f, path: f } }
+      else
+        []
+      end
     end
 
     def ignore_file?(file)
@@ -161,23 +180,23 @@ module HTMLProofer
     def checks
       return @checks if defined?(@checks) && !@checks.nil?
 
-      return (@checks = ['LinkCheck']) if @type == :links
+      return (@checks = ["LinkCheck"]) if @type == :links
 
       @checks = HTMLProofer::Check.subchecks(@options).map(&:name)
 
       @checks
     end
 
-    def failed_tests
-      @failure_reporter.failures
+    def failed_checks
+      @reporter.failures.flatten.select { |f| f.is_a?(Failure) }
     end
 
-    def print_failed_tests
-      @failure_reporter.report(:cli)
+    def report_failed_checks
+      @reporter.report
 
-      failure_text = pluralize(@failures.length, 'failure', 'failures')
-      @logger.log :fatal, "\nHTML-Proofer found #{failure_text}!"
-      exit 1
+      failure_text = pluralize(@failures.length, "failure", "failures")
+      @logger.log(:fatal, "\nHTML-Proofer found #{failure_text}!")
+      exit(1)
     end
 
     # Set before_request callback.
@@ -197,25 +216,31 @@ module HTMLProofer
     end
 
     def load_internal_cache
-      urls_to_check = @cache.retrieve_urls(@internal_urls, :internal)
-      cache_text = pluralize(urls_to_check.count, 'internal link', 'internal links')
-      @logger.log :info, "Found #{cache_text} in the cache..."
-
-      urls_to_check
+      load_cache(:internal)
     end
 
     def load_external_cache
-      urls_to_check = @cache.retrieve_urls(@external_urls, :external)
-      cache_text = pluralize(urls_to_check.count, 'external link', 'external links')
-      @logger.log :info, "Found #{cache_text} in the cache..."
+      load_cache(:external)
+    end
+
+    private def load_cache(type)
+      ivar = instance_variable_get("@#{type}_urls")
+
+      existing_urls_count = @cache.size(type)
+      cache_text = pluralize(existing_urls_count, "#{type} link", "#{type} links")
+      @logger.log(:debug, "Found #{cache_text} in the cache")
+
+      urls_to_check = @cache.retrieve_urls(ivar, type)
+      urls_detected = pluralize(urls_to_check.count, "#{type} link", "#{type} links")
+      @logger.log(:info, "Checking #{urls_detected}")
 
       urls_to_check
     end
 
     private def format_checks_list(checks)
       checks.map do |check|
-        check.sub(/HTMLProofer::Check::/, '')
-      end.join(', ')
+        check.sub(/HTMLProofer::Check::/, "")
+      end.join(", ")
     end
   end
 end

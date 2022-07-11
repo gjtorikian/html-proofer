@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'nokogiri'
+require "nokogiri"
 
 module HTMLProofer
   module Utils
@@ -14,10 +14,10 @@ module HTMLProofer
 
     def create_nokogiri(path)
       content = if File.exist?(path) && !File.directory?(path)
-                  File.read(path)
-                else
-                  path
-                end
+        File.read(path)
+      else
+        path
+      end
 
       Nokogiri::HTML5(content, max_errors: -1)
     end
