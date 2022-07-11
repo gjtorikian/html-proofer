@@ -2,7 +2,87 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.2...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.3...HEAD)
+
+HTML-Proofer has been fundamentally rewritten to address many problems, provide better expected defaults, and make it easier for future updates.
+
+The biggest change is that the HTML parsing check has been removed. HTML parsers like Nokogumbo/Nokogiri, and indeed, many browsers, are fairly generous when it comes to accepting malformed HTML. This feature detected more false issues than actual ones.
+
+You can also set your own custom reporter, to format results as you see fit. See the README for more info on how to do this.
+
+Other changes include:
+
+* Many of the configuration options have been renamed to be consistent. For example, `url_ignore` has become `ignore_urls`, and `url_swap` became `swap_urls`
+* `alt_ignore` was removed; use `ignore_missing_alt` to ignore missing `alt` attributes, and `ignore_empty_alt` to ignore `alt` attributes that are empty (eg., `<img alt>` or `<img alt="">`)
+* `check_favicon` and `check_opengraph` have been removed, as has `checks_to_ignore`. Pass in checks using the `checks` configuration option. See the README for more info.
+* `check_img_http` was removed. All URLs are expected to be HTTPS; set `enforce_https` to `false` if you prefer keeping HTTP images around
+* `external_only` was removed
+* `file_ignore` was renamed to `ignore_files`
+* `http_status_ignore` was renamed to `ignore_status_codes`
+* `internal_domains` was removed; use `swap_urls` to prepend any necessary domain names
+* Attributes can now be swapped with the `swap_attributes` option
+* `typhoeus_config` and `hydra_config` have been renamed to just `typhoeus` and `hydra`
+* Configuring the cache can now be down through the `cache` config option, rather than `timeframe` and `storage_dir`
+* Parallel file processing is on by default
+* Assuming extensions (`.html`) is enabled by default. Jekyll and other static sites use this.
+* The cache is much more performant
+
+**Fixed bugs:**
+
+- check_favicon breaks with Error:  undefined method `rel' for \#\<HTMLProofer::Element:0x00007f7c1b982940\> [\#652](https://github.com/gjtorikian/html-proofer/issues/652)
+- False error on escaped internal hash references [\#482](https://github.com/gjtorikian/html-proofer/issues/482)
+- Cache bug when broken link is on multiple site pages? [\#411](https://github.com/gjtorikian/html-proofer/issues/411)
+- Ignore \<a href="\#"\> when checking internal links [\#118](https://github.com/gjtorikian/html-proofer/issues/118)
+
+**Closed issues:**
+
+- Broken on macOS 12.1 + ARM + ruby 3.0.3p157 [\#673](https://github.com/gjtorikian/html-proofer/issues/673)
+- next gen stuff [\#669](https://github.com/gjtorikian/html-proofer/issues/669)
+- Github actions does not seem to use cached links [\#664](https://github.com/gjtorikian/html-proofer/issues/664)
+- PDF link with a hash causes PDF-parsing by accident [\#663](https://github.com/gjtorikian/html-proofer/issues/663)
+- htmlproofer 3.19.2 | Error:  invalid byte sequence in UTF-8 with --timeframe "1w" [\#662](https://github.com/gjtorikian/html-proofer/issues/662)
+- "internally linking to /, which does not exist" on standard GitHub Pages Jekyll site [\#661](https://github.com/gjtorikian/html-proofer/issues/661)
+- html-proofer depends on nokogumbo [\#660](https://github.com/gjtorikian/html-proofer/issues/660)
+- How can I speed up a GitHub workflow build? [\#659](https://github.com/gjtorikian/html-proofer/issues/659)
+- Running without the cache clobbers the cache [\#647](https://github.com/gjtorikian/html-proofer/issues/647)
+- Replace --external\_only with --external-only in docs and usage [\#641](https://github.com/gjtorikian/html-proofer/issues/641)
+- Caching breaks proofing of internal links [\#640](https://github.com/gjtorikian/html-proofer/issues/640)
+- Add a Changelog [\#617](https://github.com/gjtorikian/html-proofer/issues/617)
+- Bad behavior with file\_ignore [\#588](https://github.com/gjtorikian/html-proofer/issues/588)
+- An image as direct child of ul should error [\#574](https://github.com/gjtorikian/html-proofer/issues/574)
+- A single doublequote in a div element should error [\#573](https://github.com/gjtorikian/html-proofer/issues/573)
+- NameError: invalid attribute name `6' [\#572](https://github.com/gjtorikian/html-proofer/issues/572)
+- Fail if no files are checked [\#570](https://github.com/gjtorikian/html-proofer/issues/570)
+- href attribute on elements other than anchor & link elements should error [\#566](https://github.com/gjtorikian/html-proofer/issues/566)
+- button in anchor should throw an error [\#565](https://github.com/gjtorikian/html-proofer/issues/565)
+- img width="280px" should throw Error [\#564](https://github.com/gjtorikian/html-proofer/issues/564)
+- Cache does not support Norwegian characters [\#563](https://github.com/gjtorikian/html-proofer/issues/563)
+- Possible to add a delay from command line? [\#558](https://github.com/gjtorikian/html-proofer/issues/558)
+- data-proofer-ignore doesn't ignore HTML validity checks [\#543](https://github.com/gjtorikian/html-proofer/issues/543)
+- Add ability to dump output to a file [\#521](https://github.com/gjtorikian/html-proofer/issues/521)
+- Ignore invalid URLs inside template elements [\#492](https://github.com/gjtorikian/html-proofer/issues/492)
+- Add option for empty href [\#468](https://github.com/gjtorikian/html-proofer/issues/468)
+- SRI/CORS header Access-Control-Allow-Origin missing  [\#417](https://github.com/gjtorikian/html-proofer/issues/417)
+- Can I configure parallel from the command line? [\#408](https://github.com/gjtorikian/html-proofer/issues/408)
+- Add entries to cache if script is killed early [\#405](https://github.com/gjtorikian/html-proofer/issues/405)
+- Report if a link is going to redirect [\#353](https://github.com/gjtorikian/html-proofer/issues/353)
+- Support for multiple file types [\#344](https://github.com/gjtorikian/html-proofer/issues/344)
+- No support for multiple URLs in srcset [\#313](https://github.com/gjtorikian/html-proofer/issues/313)
+
+**Merged pull requests:**
+
+- Abstract reporter [\#680](https://github.com/gjtorikian/html-proofer/pull/680) ([gjtorikian](https://github.com/gjtorikian))
+- Caching improvements [\#679](https://github.com/gjtorikian/html-proofer/pull/679) ([gjtorikian](https://github.com/gjtorikian))
+- Allow for custom attributes to be set [\#678](https://github.com/gjtorikian/html-proofer/pull/678) ([gjtorikian](https://github.com/gjtorikian))
+- Change extensions logic [\#677](https://github.com/gjtorikian/html-proofer/pull/677) ([gjtorikian](https://github.com/gjtorikian))
+- new cli opts [\#676](https://github.com/gjtorikian/html-proofer/pull/676) ([gjtorikian](https://github.com/gjtorikian))
+- Support multiple srcsets [\#675](https://github.com/gjtorikian/html-proofer/pull/675) ([gjtorikian](https://github.com/gjtorikian))
+- KABOOM [\#672](https://github.com/gjtorikian/html-proofer/pull/672) ([gjtorikian](https://github.com/gjtorikian))
+- Remove HTML parsing feature [\#670](https://github.com/gjtorikian/html-proofer/pull/670) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v3.19.3](https://github.com/gjtorikian/html-proofer/tree/v3.19.3) (2021-12-17)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.2...v3.19.3)
 
 **Fixed bugs:**
 
