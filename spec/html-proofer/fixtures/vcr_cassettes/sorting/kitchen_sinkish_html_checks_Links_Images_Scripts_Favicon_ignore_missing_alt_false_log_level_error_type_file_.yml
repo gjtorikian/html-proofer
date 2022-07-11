@@ -1,0 +1,349 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '62'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1082 miss, cp1076 miss
+      x-cache-status:
+      - miss
+      server-timing:
+      - cache;desc="miss", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      accept-ch:
+      - Sec-CH-UA-Arch,Sec-CH-UA-Bitness,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-UA-Platform-Version
+      permissions-policy:
+      - interest-cohort=(),ch-ua-arch=(self "intake-analytics.wikimedia.org"),ch-ua-bitness=(self
+        "intake-analytics.wikimedia.org"),ch-ua-full-version-list=(self "intake-analytics.wikimedia.org"),ch-ua-model=(self
+        "intake-analytics.wikimedia.org"),ch-ua-platform-version=(self "intake-analytics.wikimedia.org")
+      x-client-ip:
+      - 143.244.47.100
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+- request:
+    method: head
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1080 miss, cp1076 miss
+      x-cache-status:
+      - miss
+      server-timing:
+      - cache;desc="miss", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      accept-ch:
+      - Sec-CH-UA-Arch,Sec-CH-UA-Bitness,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-UA-Platform-Version
+      permissions-policy:
+      - interest-cohort=(),ch-ua-arch=(self "intake-analytics.wikimedia.org"),ch-ua-bitness=(self
+        "intake-analytics.wikimedia.org"),ch-ua-full-version-list=(self "intake-analytics.wikimedia.org"),ch-ua-model=(self
+        "intake-analytics.wikimedia.org"),ch-ua-platform-version=(self "intake-analytics.wikimedia.org")
+      x-client-ip:
+      - 143.244.47.100
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+- request:
+    method: get
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '62'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1082 miss, cp1076 hit/1
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      accept-ch:
+      - Sec-CH-UA-Arch,Sec-CH-UA-Bitness,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-UA-Platform-Version
+      permissions-policy:
+      - interest-cohort=(),ch-ua-arch=(self "intake-analytics.wikimedia.org"),ch-ua-bitness=(self
+        "intake-analytics.wikimedia.org"),ch-ua-full-version-list=(self "intake-analytics.wikimedia.org"),ch-ua-model=(self
+        "intake-analytics.wikimedia.org"),ch-ua-platform-version=(self "intake-analytics.wikimedia.org")
+      x-client-ip:
+      - 143.244.47.100
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: 'Regexp failed to match URI: "/wikipedia/en/thumb/not_here.png"'
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+- request:
+    method: get
+    uri: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '61'
+      server:
+      - ATS/8.0.8
+      age:
+      - '0'
+      x-cache:
+      - cp1080 miss, cp1076 hit/1
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1076"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      accept-ch:
+      - Sec-CH-UA-Arch,Sec-CH-UA-Bitness,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-UA-Platform-Version
+      permissions-policy:
+      - interest-cohort=(),ch-ua-arch=(self "intake-analytics.wikimedia.org"),ch-ua-bitness=(self
+        "intake-analytics.wikimedia.org"),ch-ua-full-version-list=(self "intake-analytics.wikimedia.org"),ch-ua-model=(self
+        "intake-analytics.wikimedia.org"),ch-ua-platform-version=(self "intake-analytics.wikimedia.org")
+      x-client-ip:
+      - 143.244.47.100
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache
+      timing-allow-origin:
+      - "*"
+    body:
+      encoding: ASCII-8BIT
+      string: 'Regexp failed to match URI: "/wikipedia/en/thumb/fooooof.png"'
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+- request:
+    method: head
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 403
+      message: ''
+    headers:
+      x-azure-ref:
+      - 0NGHMYgAAAABW3TN0g4mCSpAO1b7Aehg0QVRBRURHRTEyMDgANTk2ZDc4YTItY2E1Zi00NzlkLWJjZGMtMDgzNTgzMzE3NGIy
+      accept-ranges:
+      - bytes
+      via:
+      - 1.1 varnish, 1.1 varnish
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      x-served-by:
+      - cache-iad-kiad7000119-IAD, cache-lga21953-LGA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1657561396.471032,VS0,VE31
+      strict-transport-security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://docs.github.com/changing-author-info/
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+- request:
+    method: get
+    uri: https://help.github.com/changing-author-info/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.0.0.rc3; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 403
+      message: ''
+    headers:
+      x-azure-ref:
+      - 0NGHMYgAAAAAPy8k7jUyTTpfdsVSD6LkrQVRBRURHRTEyMDgANTk2ZDc4YTItY2E1Zi00NzlkLWJjZGMtMDgzNTgzMzE3NGIy
+      accept-ranges:
+      - bytes
+      via:
+      - 1.1 varnish, 1.1 varnish
+      date:
+      - Mon, 11 Jul 2022 17:43:16 GMT
+      x-served-by:
+      - cache-iad-kjyo7100138-IAD, cache-lga21953-LGA
+      x-cache:
+      - MISS, MISS
+      x-cache-hits:
+      - 0, 0
+      x-timer:
+      - S1657561397.717485,VS0,VE26
+      strict-transport-security:
+      - max-age=31557600
+    body:
+      encoding: ASCII-8BIT
+      string: "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html
+        xmlns='http://www.w3.org/1999/xhtml'><head><meta content='text/html; charset=utf-8'
+        http-equiv='content-type'/><style type='text/css'>body { font-family:Arial;
+        margin-left:40px; }img  { border:0 none; }#content { margin-left: auto; margin-right:
+        auto }#message h2 { font-size: 20px; font-weight: normal; color: #000000;
+        margin: 34px 0px 0px 0px }#message p  { font-size: 13px; color: #000000; margin:
+        7px 0px 0px 0px }#errorref { font-size: 11px; color: #737373; margin-top:
+        41px }</style><title>Microsoft</title></head><body><div id='content'><div
+        id='message'><h2>The request is blocked.</h2></div><div id='errorref'><span>0NGHMYgAAAAAPy8k7jUyTTpfdsVSD6LkrQVRBRURHRTEyMDgANTk2ZDc4YTItY2E1Zi00NzlkLWJjZGMtMDgzNTgzMzE3NGIy</span></div></div></body></html>"
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://docs.github.com/changing-author-info/
+  recorded_at: Mon, 11 Jul 2022 17:43:16 GMT
+recorded_with: VCR 2.9.3

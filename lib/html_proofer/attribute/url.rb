@@ -44,7 +44,7 @@ module HTMLProofer
       end
 
       def ignore?
-        return true if (/^javascript:/).match?(@url)
+        return true if /^javascript:/.match?(@url)
         return true if ignores_pattern?(@runner.options[:ignore_urls])
       end
 

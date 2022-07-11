@@ -36,8 +36,15 @@ module HTMLProofer
             end
           end
 
-          add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: @img.line,
-            content: @img.content) if empty_alt_tag? && !ignore_missing_alt? && !ignore_alt?
+          unless ignore_element?
+            if missing_alt_tag? && !ignore_missing_alt?
+              add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: @img.line,
+                content: @img.content)
+            elsif (empty_alt_tag? || alt_all_spaces?) && !ignore_empty_alt?
+              add_failure("image #{@img.url.raw_attribute} has an alt attribute, but no content", line: @img.line,
+                content: @img.content)
+            end
+          end
 
           add_failure("image #{@img.url.raw_attribute} uses the http scheme", line: @img.line,
             content: @img.content) if @runner.enforce_https? && @img.url.http?
@@ -50,12 +57,28 @@ module HTMLProofer
         @runner.options[:ignore_missing_alt]
       end
 
-      def ignore_alt?
+      def ignore_empty_alt?
+        @runner.options[:ignore_empty_alt]
+      end
+
+      def ignore_element?
         @img.url.ignore? || @img.aria_hidden?
       end
 
+      def missing_alt_tag?
+        @img.node["alt"].nil?
+      end
+
       def empty_alt_tag?
-        @img.node["alt"].nil? || @img.node["alt"].strip.empty?
+        !missing_alt_tag? && @img.node["alt"].empty?
+      end
+
+      def empty_whitespace_alt_tag?
+        !missing_alt_tag? && @img.node["alt"].strip.empty?
+      end
+
+      def alt_all_spaces?
+        !missing_alt_tag? && @img.node["alt"].split.all?(" ")
       end
 
       def terrible_filename?

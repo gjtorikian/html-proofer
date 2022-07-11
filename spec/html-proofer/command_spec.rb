@@ -78,7 +78,7 @@ describe "Command test" do
 
   it "works with empty-alt-ignore" do
     broken = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
-    output = make_bin("--empty-alt-ignore #{broken}")
+    output = make_bin("--ignore-empty-alt #{broken}")
     expect(output).to(match("successfully"))
   end
 
