@@ -2,30 +2,76 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.3...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.4...HEAD)
 
-HTML-Proofer has been fundamentally rewritten to address many problems, provide better expected defaults, and make it easier for future updates.
+**Closed issues:**
 
-The biggest change is that the HTML parsing check has been removed. HTML parsers like Nokogumbo/Nokogiri, and indeed, many browsers, are fairly generous when it comes to accepting malformed HTML. This feature detected more false issues than actual ones.
+- From time to time I get response code 0 with Stream error in the HTTP/2 framing layer [\#716](https://github.com/gjtorikian/html-proofer/issues/716)
+- `Hash not exist` in path with implicit index [\#714](https://github.com/gjtorikian/html-proofer/issues/714)
+- Config section of README seems to be out of sync with actual CLI options [\#713](https://github.com/gjtorikian/html-proofer/issues/713)
+- Allow separate internal/external cache timeframe [\#708](https://github.com/gjtorikian/html-proofer/issues/708)
+- Update nokogiri dependency [\#705](https://github.com/gjtorikian/html-proofer/issues/705)
+- Issue with internal links re-checking logic / cache keys [\#702](https://github.com/gjtorikian/html-proofer/issues/702)
+- Empty alt tag [\#228](https://github.com/gjtorikian/html-proofer/issues/228)
 
-You can also set your own custom reporter, to format results as you see fit. See the README for more info on how to do this.
+**Merged pull requests:**
 
-Other changes include:
+- Allow for empty alt attributes [\#717](https://github.com/gjtorikian/html-proofer/pull/717) ([gjtorikian](https://github.com/gjtorikian))
+- Address internal hash issue [\#715](https://github.com/gjtorikian/html-proofer/pull/715) ([gjtorikian](https://github.com/gjtorikian))
+- Fix internal link issue [\#712](https://github.com/gjtorikian/html-proofer/pull/712) ([gjtorikian](https://github.com/gjtorikian))
+- Use \<path\>:\<line\> in the CLI reporter [\#711](https://github.com/gjtorikian/html-proofer/pull/711) ([riccardoporreca](https://github.com/riccardoporreca))
+- Split timeframes out [\#710](https://github.com/gjtorikian/html-proofer/pull/710) ([gjtorikian](https://github.com/gjtorikian))
+- Bump actions/checkout from 2 to 3 [\#709](https://github.com/gjtorikian/html-proofer/pull/709) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore: Included githubactions in the dependabot config [\#707](https://github.com/gjtorikian/html-proofer/pull/707) ([naveensrinivasan](https://github.com/naveensrinivasan))
+- chore: Set permissions for GitHub actions [\#706](https://github.com/gjtorikian/html-proofer/pull/706) ([naveensrinivasan](https://github.com/naveensrinivasan))
+- Fix internal link format [\#699](https://github.com/gjtorikian/html-proofer/pull/699) ([gjtorikian](https://github.com/gjtorikian))
+- Fix internal cache metadata check [\#696](https://github.com/gjtorikian/html-proofer/pull/696) ([riccardoporreca](https://github.com/riccardoporreca))
+- Feature/fix files sources processing [\#694](https://github.com/gjtorikian/html-proofer/pull/694) ([riccardoporreca](https://github.com/riccardoporreca))
+- :gem: 4.0.0 [\#674](https://github.com/gjtorikian/html-proofer/pull/674) ([gjtorikian](https://github.com/gjtorikian))
 
-* Many of the configuration options have been renamed to be consistent. For example, `url_ignore` has become `ignore_urls`, and `url_swap` became `swap_urls`
-* `alt_ignore` was removed; use `ignore_missing_alt` to ignore missing `alt` attributes, and `ignore_empty_alt` to ignore `alt` attributes that are empty (eg., `<img alt>` or `<img alt="">`)
-* `check_favicon` and `check_opengraph` have been removed, as has `checks_to_ignore`. Pass in checks using the `checks` configuration option. See the README for more info.
-* `check_img_http` was removed. All URLs are expected to be HTTPS; set `enforce_https` to `false` if you prefer keeping HTTP images around
-* `external_only` was removed
-* `file_ignore` was renamed to `ignore_files`
-* `http_status_ignore` was renamed to `ignore_status_codes`
-* `internal_domains` was removed; use `swap_urls` to prepend any necessary domain names
-* Attributes can now be swapped with the `swap_attributes` option
-* `typhoeus_config` and `hydra_config` have been renamed to just `typhoeus` and `hydra`
-* Configuring the cache can now be down through the `cache` config option, rather than `timeframe` and `storage_dir`
-* Parallel file processing is on by default
-* Assuming extensions (`.html`) is enabled by default. Jekyll and other static sites use this.
-* The cache is much more performant
+## [v3.19.4](https://github.com/gjtorikian/html-proofer/tree/v3.19.4) (2022-05-19)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.0.rc3...v3.19.4)
+
+**Closed issues:**
+
+- Add JUnit-compatible `Reporter` [\#703](https://github.com/gjtorikian/html-proofer/issues/703)
+- Problems with internal link cache re-checking logic \(4.0.0.rc3\) [\#695](https://github.com/gjtorikian/html-proofer/issues/695)
+- File / sources processing issues [\#693](https://github.com/gjtorikian/html-proofer/issues/693)
+
+## [v4.0.0.rc3](https://github.com/gjtorikian/html-proofer/tree/v4.0.0.rc3) (2022-01-06)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.0.rc2...v4.0.0.rc3)
+
+**Closed issues:**
+
+- Always entering debugger in Ruby 2.7 \(4.0.0.rc1\) [\#690](https://github.com/gjtorikian/html-proofer/issues/690)
+
+**Merged pull requests:**
+
+- Hide some more debuggery [\#692](https://github.com/gjtorikian/html-proofer/pull/692) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v4.0.0.rc2](https://github.com/gjtorikian/html-proofer/tree/v4.0.0.rc2) (2022-01-06)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.0.rc1...v4.0.0.rc2)
+
+**Closed issues:**
+
+- External cache key trainling / issues \(4.0.0.rc1\) [\#689](https://github.com/gjtorikian/html-proofer/issues/689)
+
+**Merged pull requests:**
+
+- Clean up a few minor issues [\#691](https://github.com/gjtorikian/html-proofer/pull/691) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v4.0.0.rc1](https://github.com/gjtorikian/html-proofer/tree/v4.0.0.rc1) (2022-01-05)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.3...v4.0.0.rc1)
+
+**Implemented enhancements:**
+
+- Advice on how to adjust links when checking locally [\#471](https://github.com/gjtorikian/html-proofer/issues/471)
+- ... possible to enforce terminal `/` for URLs that point to a directory? [\#467](https://github.com/gjtorikian/html-proofer/issues/467)
+- Read config from `_config.yml` when present [\#175](https://github.com/gjtorikian/html-proofer/issues/175)
 
 **Fixed bugs:**
 
@@ -36,6 +82,7 @@ Other changes include:
 
 **Closed issues:**
 
+- External links cache not updated for failures \(next-gen\) [\#683](https://github.com/gjtorikian/html-proofer/issues/683)
 - Broken on macOS 12.1 + ARM + ruby 3.0.3p157 [\#673](https://github.com/gjtorikian/html-proofer/issues/673)
 - next gen stuff [\#669](https://github.com/gjtorikian/html-proofer/issues/669)
 - Github actions does not seem to use cached links [\#664](https://github.com/gjtorikian/html-proofer/issues/664)
@@ -71,6 +118,11 @@ Other changes include:
 
 **Merged pull requests:**
 
+- Push 4.0.0rc1 [\#688](https://github.com/gjtorikian/html-proofer/pull/688) ([gjtorikian](https://github.com/gjtorikian))
+- opt [\#687](https://github.com/gjtorikian/html-proofer/pull/687) ([gjtorikian](https://github.com/gjtorikian))
+- Test extensions [\#686](https://github.com/gjtorikian/html-proofer/pull/686) ([gjtorikian](https://github.com/gjtorikian))
+- Actually write the external link cache [\#685](https://github.com/gjtorikian/html-proofer/pull/685) ([gjtorikian](https://github.com/gjtorikian))
+- Rename attribute swap [\#684](https://github.com/gjtorikian/html-proofer/pull/684) ([gjtorikian](https://github.com/gjtorikian))
 - Abstract reporter [\#680](https://github.com/gjtorikian/html-proofer/pull/680) ([gjtorikian](https://github.com/gjtorikian))
 - Caching improvements [\#679](https://github.com/gjtorikian/html-proofer/pull/679) ([gjtorikian](https://github.com/gjtorikian))
 - Allow for custom attributes to be set [\#678](https://github.com/gjtorikian/html-proofer/pull/678) ([gjtorikian](https://github.com/gjtorikian))
@@ -299,7 +351,7 @@ Other changes include:
 
 - URLs in \<source src=xx\> not being checked. [\#589](https://github.com/gjtorikian/html-proofer/issues/589)
 - Link checking failed with "441 No error" [\#584](https://github.com/gjtorikian/html-proofer/issues/584)
-- htmlproofer 3.16.0 | Error: undefined method `match?' for /^javascript:/:Regexp [\#582](https://github.com/gjtorikian/html-proofer/issues/582)
+- htmlproofer 3.16.0 | Error:  undefined method `match?' for /^javascript:/:Regexp [\#582](https://github.com/gjtorikian/html-proofer/issues/582)
 - HTMLProofer runs out of memory [\#579](https://github.com/gjtorikian/html-proofer/issues/579)
 
 **Merged pull requests:**
@@ -396,7 +448,7 @@ Other changes include:
 
 **Closed issues:**
 
-- Error: undefined method `xpath' for nil:NilClass [\#544](https://github.com/gjtorikian/html-proofer/issues/544)
+- Error:  undefined method `xpath' for nil:NilClass [\#544](https://github.com/gjtorikian/html-proofer/issues/544)
 
 **Merged pull requests:**
 
@@ -630,7 +682,7 @@ Other changes include:
 - Possible regression: htmlParseEntityRef: expecting ';' for protocol relative URLs [\#447](https://github.com/gjtorikian/html-proofer/issues/447)
 - HEAD to GET fallback doesn't work if URL has a hash and HEAD causes a timeout [\#441](https://github.com/gjtorikian/html-proofer/issues/441)
 - Allow using GET instead of HEAD [\#440](https://github.com/gjtorikian/html-proofer/issues/440)
-- Error: wrong number of arguments [\#430](https://github.com/gjtorikian/html-proofer/issues/430)
+- Error:  wrong number of arguments [\#430](https://github.com/gjtorikian/html-proofer/issues/430)
 - limit memory for travis builds [\#429](https://github.com/gjtorikian/html-proofer/issues/429)
 
 **Merged pull requests:**
@@ -643,7 +695,7 @@ Other changes include:
 
 **Fixed bugs:**
 
-- Error: string contains null byte [\#409](https://github.com/gjtorikian/html-proofer/issues/409)
+- Error:  string contains null byte [\#409](https://github.com/gjtorikian/html-proofer/issues/409)
 
 **Closed issues:**
 
@@ -1043,7 +1095,7 @@ Other changes include:
 - Warnings for non-https anchors [\#252](https://github.com/gjtorikian/html-proofer/issues/252)
 - html-proofer should eat Typhoeus exceptions [\#248](https://github.com/gjtorikian/html-proofer/issues/248)
 - Incremental output [\#247](https://github.com/gjtorikian/html-proofer/issues/247)
-- Error: `@shot.' is not allowed as an instance variable name [\#245](https://github.com/gjtorikian/html-proofer/issues/245)
+- Error:  `@shot.' is not allowed as an instance variable name [\#245](https://github.com/gjtorikian/html-proofer/issues/245)
 - Don't count `?` forms with different parameters as different [\#236](https://github.com/gjtorikian/html-proofer/issues/236)
 
 **Merged pull requests:**
@@ -1102,7 +1154,6 @@ Other changes include:
 - htmlParseEntityRef has no line number [\#232](https://github.com/gjtorikian/html-proofer/issues/232)
 - External Link Checking - Timeouts [\#231](https://github.com/gjtorikian/html-proofer/issues/231)
 - url\_ignore not available through the CLI [\#229](https://github.com/gjtorikian/html-proofer/issues/229)
-- Empty alt tag [\#228](https://github.com/gjtorikian/html-proofer/issues/228)
 - Wrong error shown [\#226](https://github.com/gjtorikian/html-proofer/issues/226)
 
 **Merged pull requests:**
