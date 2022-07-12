@@ -2,7 +2,28 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.4...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.1...HEAD)
+
+**Closed issues:**
+
+- Example cache config not working [\#723](https://github.com/gjtorikian/html-proofer/issues/723)
+- Removal of --check-html [\#722](https://github.com/gjtorikian/html-proofer/issues/722)
+
+## [v4.0.1](https://github.com/gjtorikian/html-proofer/tree/v4.0.1) (2022-07-12)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.0...v4.0.1)
+
+**Closed issues:**
+
+- Linking to directories without a trailing slash in 4.0.0 [\#718](https://github.com/gjtorikian/html-proofer/issues/718)
+
+**Merged pull requests:**
+
+- Restore `follow_location` [\#719](https://github.com/gjtorikian/html-proofer/pull/719) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v4.0.0](https://github.com/gjtorikian/html-proofer/tree/v4.0.0) (2022-07-11)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v3.19.4...v4.0.0)
 
 **Closed issues:**
 
