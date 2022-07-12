@@ -49,6 +49,13 @@ describe "Links test" do
   it "finds internal hash with implict index" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
     proofer = run_proofer(broken_hash_internal_filepath, :directory)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "fails to find internal hash with implict index if not asked to follow" do
+    options = { typhoeus: { followlocation: false } }
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
+    proofer = run_proofer(broken_hash_internal_filepath, :directory, options)
     expect(proofer.failed_checks.count).to(eq(1))
     expect(proofer.failed_checks.first.description).to(match(/without trailing slash/))
   end
@@ -284,6 +291,12 @@ describe "Links test" do
   it "allows missing href on link elements" do
     head_link = File.join(FIXTURES_DIR, "links", "head_link_href_absent.html")
     proofer = run_proofer(head_link, :file, allow_missing_href: true)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "allows for internal linking to a directory without trailing slash by default" do
+    internal = File.join(FIXTURES_DIR, "links", "link_directory_without_slash.html")
+    proofer = run_proofer(internal, :file)
     expect(proofer.failed_checks).to(eq([]))
   end
 

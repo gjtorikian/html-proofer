@@ -161,7 +161,13 @@ module HTMLProofer
       end
 
       def unslashed_directory?(file)
-        File.directory?(file) && !file.end_with?(File::SEPARATOR)
+        return false unless File.directory?(file)
+
+        !file.end_with?(File::SEPARATOR) && !follow_location?
+      end
+
+      def follow_location?
+        @runner.options[:typhoeus] && @runner.options[:typhoeus][:followlocation]
       end
 
       def absolute_path?(path)
