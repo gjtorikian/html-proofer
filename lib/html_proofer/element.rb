@@ -84,6 +84,28 @@ module HTMLProofer
       !blank?(srcset) && srcset.split(",").size > 1
     end
 
+    def srcsets
+      return nil if blank?(srcset)
+
+      srcset.split(",").map(&:strip)
+    end
+
+    def multiple_sizes?
+      return false if blank?(srcsets)
+
+      srcsets.any? do |srcset|
+        !blank?(srcset) && srcset.split(" ").size > 1
+      end
+    end
+
+    def srcsets_wo_sizes
+      return nil if blank?(srcsets)
+
+      srcsets.map do |srcset|
+        srcset.split(" ").first
+      end
+    end
+
     def ignore?
       return true if @node.attributes["data-proofer-ignore"]
       return true if ancestors_ignorable?

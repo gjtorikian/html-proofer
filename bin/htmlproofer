@@ -24,7 +24,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker (default: `false`)'
-  p.option 'enforce_https', '--enforce-https', 'Fails a link if it\'s not marked as `https` (default: `true`).'
+  p.option 'enforce_https', '--enforce-https <false>', String, 'Fails a link if it\'s not marked as `https` (default: `true`).'
   p.option 'extensions', '--extensions ext1,[ext2,...[', Array, 'A comma-separated list of Strings indicating the file extensions you would like to check (including the dot) (default: `.html`)'
   p.option 'ignore_empty_alt', '--ignore-empty-alt', ' If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those)'
   p.option 'ignore_files', '--ignore-files file1,[file2,...]', Array, 'A comma-separated list of Strings or RegExps containing file paths that are safe to ignore'
@@ -66,6 +66,8 @@ Mercenary.program(:htmlproofer) do |p|
         options[:swap_urls][Regexp.new(re)] = string
       end
     end
+
+    options[:enforce_https] = false if opts['enforce_https'] == "false"
 
     options[:log_level] = opts['log_level'].to_sym unless opts['log_level'].nil?
 

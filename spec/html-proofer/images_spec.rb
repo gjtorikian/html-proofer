@@ -247,4 +247,16 @@ describe "Images test" do
     proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["src", "foobar"]] })
     expect(proofer.failed_checks.length).to(eq(1))
   end
+
+  it "works for images with srcset and pixel density" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/srcset-pixel-density.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "breaks for images with invalid srcset and pixel density" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/srcset-pixel-density_broken.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks.first.description).to(match(/foo.webp does not exist/))
+  end
 end
