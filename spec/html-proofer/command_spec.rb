@@ -100,6 +100,16 @@ describe "Command test" do
     expect(output).to(match("successfully"))
   end
 
+  it "works with enforce-https" do
+    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
+    output = make_bin("#{custom_data_src_check}")
+    expect(output).to(match("1 failure"))
+
+    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
+    output = make_bin("#{custom_data_src_check} --enforce-https=false")
+    expect(output).to(match("successfully"))
+  end
+
   it "has every option for proofer defaults" do
     match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
   end
