@@ -180,7 +180,7 @@ For options which require an array of input, surround the value with quotes, and
 any spaces. For example, to exclude an array of HTTP status code, you might do:
 
 ``` bash
-htmlproofer --http-status-ignore "999,401,404" ./out
+htmlproofer --ignore-status-codes "999,401,404" ./out
 ```
 
 For something like `url-ignore`, and other options that require an array of regular expressions,
