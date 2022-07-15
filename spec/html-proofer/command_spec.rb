@@ -102,7 +102,7 @@ describe "Command test" do
 
   it "works with enforce-https" do
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
-    output = make_bin("#{custom_data_src_check}")
+    output = make_bin(custom_data_src_check.to_s)
     expect(output).to(match("1 failure"))
 
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
