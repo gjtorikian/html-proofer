@@ -1,13 +1,23 @@
 # Changelog
 
-## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
+## [v4.1.0](https://github.com/gjtorikian/html-proofer/tree/v4.1.0) (2022-07-15)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.1...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.1...v4.1.0)
 
 **Closed issues:**
 
+- Set enforce\_https to false on the CLI [\#727](https://github.com/gjtorikian/html-proofer/issues/727)
+- hash ref's on the same page aren't found [\#725](https://github.com/gjtorikian/html-proofer/issues/725)
+- srcset width/pixel density descriptors cause missing image error [\#724](https://github.com/gjtorikian/html-proofer/issues/724)
 - Example cache config not working [\#723](https://github.com/gjtorikian/html-proofer/issues/723)
 - Removal of --check-html [\#722](https://github.com/gjtorikian/html-proofer/issues/722)
+- CHANGELOG.md says Unreleased but 4.0 is out [\#721](https://github.com/gjtorikian/html-proofer/issues/721)
+- Make --checks options case insensitive [\#720](https://github.com/gjtorikian/html-proofer/issues/720)
+
+**Merged pull requests:**
+
+- Squash some minor 4.x bugs [\#728](https://github.com/gjtorikian/html-proofer/pull/728) ([gjtorikian](https://github.com/gjtorikian))
+- Change --url-ignore to --ignore-urls in README.md [\#726](https://github.com/gjtorikian/html-proofer/pull/726) ([nwhetsell](https://github.com/nwhetsell))
 
 ## [v4.0.1](https://github.com/gjtorikian/html-proofer/tree/v4.0.1) (2022-07-12)
 
