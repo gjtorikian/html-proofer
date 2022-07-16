@@ -21,6 +21,7 @@ Mercenary.program(:htmlproofer) do |p|
   p.option 'assume_extension', '--assume-extension <ext>', 'Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) (default: `.html`).'
   p.option 'checks', '--checks check1,[check2,...]', Array, 'A comma-separated list of Strings indicating which checks you want to run (default: `["Links", "Images", "Scripts"]`)'
   p.option 'check_external_hash', '--check-external-hash', 'Checks whether external hashes exist (even if the webpage exists) (default: `true`).'
+  p.option 'check_internal_hash', '--check-internal-hash', 'Checks whether internal hashes exist (even if the webpage exists) (default: `true`).'
   p.option 'check_sri', '--check-sri', 'Check that `<link>` and `<script>` external resources use SRI (default: `false`).'
   p.option 'directory_index_file', '--directory-index-file <filename>', String, 'Sets the file to look for when a link refers to a directory. (default: `index.html`)'
   p.option 'disable_external', '--disable-external', 'If `true`, does not run the external link checker (default: `false`)'

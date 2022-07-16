@@ -273,6 +273,7 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 | `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
 | `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
 | `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `true` |
+| `check_internal_hash` | Checks whether internal hashes exist (even if the webpage exists) | `true` |
 | `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
 | `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
 | `disable_external` | If `true`, does not run the external link checker | `false` |

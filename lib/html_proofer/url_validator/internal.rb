@@ -68,6 +68,7 @@ module HTMLProofer
       private def hash_exists?(url)
         href_hash = url.hash
         return true if blank?(href_hash)
+        return true unless @runner.options[:check_internal_hash]
 
         # prevents searching files we didn't ask about
         return false unless url.known_extension?
