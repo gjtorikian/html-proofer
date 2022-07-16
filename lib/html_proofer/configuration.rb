@@ -9,6 +9,7 @@ module HTMLProofer
       allow_missing_href: false,
       assume_extension: ".html",
       check_external_hash: true,
+      check_internal_hash: true,
       checks: DEFAULT_TESTS,
       directory_index_file: "index.html",
       disable_external: false,
