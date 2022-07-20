@@ -163,7 +163,7 @@ describe "Cache test" do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:write))
 
             # we expect an add since we are mocking outside the timeframe
-            expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external).with("www.github.com", [], 200, "OK"))
+            expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external).with("www.github.com", [], 200, "OK", true))
 
             run_proofer(["www.github.com"], :links,
               cache: { timeframe: { external: "4d" }, cache_file: cache_filename }.merge(default_cache_options))
@@ -179,7 +179,7 @@ describe "Cache test" do
           Timecop.freeze(new_time) do
             expect_any_instance_of(HTMLProofer::Cache).to(receive(:write))
             # we expect one new link to be added, but github.com can stay...
-            expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external).with("www.google.com", [], 200, "OK"))
+            expect_any_instance_of(HTMLProofer::Cache).to(receive(:add_external).with("www.google.com", [], 200, "OK", true))
 
             # ...because it's within the 30d time frame
             run_proofer(["www.github.com", "www.google.com"], :links,
