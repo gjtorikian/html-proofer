@@ -148,29 +148,30 @@ module HTMLProofer
     end
 
     private def determine_internal_additions(urls_detected)
-      urls_detected.each_with_object({}) do |(url, metadata), hsh|
+      urls_detected.each_with_object({}) do |(url, detected_metadata), hsh|
         # url is not even in cache
         if @cache_log[:internal][url].nil?
-          hsh[url] = metadata
+          hsh[url] = detected_metadata
           next
         end
 
+        # detect metadata additions
         cache_metadata = @cache_log[:internal][url][:metadata]
-        incoming_metadata = metadata.reject do |incoming_url|
-          existing_cache_metadata = cache_metadata.find { |k, _| k[:filename] == incoming_url[:filename] }
+        metadata_additions = detected_metadata.reject do |detected|
+          existing_cache_metadata = cache_metadata.find { |cached, _| cached[:filename] == detected[:filename] }
           # cache for this url, from an existing path, exists as found
           found = !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
           if !found
-            @logger.log(:debug, "Adding #{incoming_url} to internal cache")
+            @logger.log(:debug, "Adding #{detected} to internal cache")
           end
           found
         end
 
-        if !incoming_metadata.empty?
-          hsh[url] = incoming_metadata
+        if !metadata_additions.empty?
+          hsh[url] = metadata_additions
           # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
           # (this works assuming the detected url metadata have "found" set to false)
-          @cache_log[:internal][url][:metadata] = cache_metadata.difference(incoming_metadata)
+          @cache_log[:internal][url][:metadata] = cache_metadata.difference(metadata_additions)
         end
       end
     end
