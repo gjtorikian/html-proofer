@@ -156,17 +156,14 @@ module HTMLProofer
         end
 
         cache_metadata = @cache_log[:internal][url][:metadata]
-        incoming_metadata = urls_detected[url].each_with_object([]) do |incoming_url, arr|
+        incoming_metadata = metadata.reject do |incoming_url|
           existing_cache_metadata = cache_metadata.find { |k, _| k[:filename] == incoming_url[:filename] }
-
           # cache for this url, from an existing path, exists as found
-          if !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
-            metadata.find { |m| m[:filename] == existing_cache_metadata[:filename] }[:found] = true
-            next
+          found = !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
+          if !found
+            @logger.log(:debug, "Adding #{incoming_url} to internal cache")
           end
-
-          @logger.log(:debug, "Adding #{incoming_url} to internal cache")
-          arr << incoming_url
+          found
         end
 
         if !incoming_metadata.empty?
