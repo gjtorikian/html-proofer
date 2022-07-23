@@ -140,7 +140,7 @@ module HTMLProofer
       urls_detected.reject do |url, _metadata|
         if @cache_log[:external].include?(url)
           found = @cache_log[:external][url][:found] # if this is false, we're trying again
-          if !found
+          unless found
             @logger.log(:debug, "Adding #{url} to external cache (not found)")
           end
           found
@@ -168,13 +168,13 @@ module HTMLProofer
           existing_cache_metadata = cache_metadata.find { |cached, _| cached[:filename] == detected[:filename] }
           # cache for this url, from an existing path, exists as found
           found = !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
-          if !found
+          unless found
             @logger.log(:debug, "Adding #{detected} to internal cache for #{url}")
           end
           found
         end
 
-        if !metadata_additions.empty?
+        unless metadata_additions.empty?
           hsh[url] = metadata_additions
           # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
           # (this works assuming the detected url metadata have "found" set to false)
@@ -188,8 +188,8 @@ module HTMLProofer
       deletions = 0
 
       @cache_log[type].delete_if do |url, cache|
-        within_timeframe = type == :external ? within_external_timeframe?(cache[:time]) : within_internal_timeframe?(cache[:time])
-        if !within_timeframe
+        expired_timeframe = type == :external ? !within_external_timeframe?(cache[:time]) : !within_internal_timeframe?(cache[:time])
+        if expired_timeframe
           @logger.log(:debug, "Removing #{url} from #{type} cache (expired timeframe)")
           deletions += 1
           true
