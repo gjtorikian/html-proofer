@@ -473,7 +473,7 @@ describe "Cache test" do
           expect(external_links.keys.first).to(eq("https://github.com/gjtorikian/html-proofer"))
           expect(external_links["https://github.com/gjtorikian/html-proofer"]["metadata"].count).to(eq(1))
           internal_links = cache["internal"]
-          expect(internal_links.count).to(eq(1))
+          expect(internal_links.keys.first).to(eq("/somewhere.html"))
           expect(internal_links["/somewhere.html"]["metadata"].count).to(eq(1))
 
           run_proofer(file, :file, cache: { timeframe: { external: "1d", internal: "1d" }, cache_file: cache_filename }.merge(default_cache_options))
