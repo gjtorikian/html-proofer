@@ -169,7 +169,12 @@ module HTMLProofer
           arr << incoming_url
         end
 
-        hsh[url] = incoming_metadata
+        if !incoming_metadata.empty?
+          hsh[url] = incoming_metadata
+          # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
+          # (this works assuming the detected url metadata have "found" set to false)
+          @cache_log[:internal][url][:metadata] = cache_metadata.difference(incoming_metadata)
+        end
       end
     end
 
