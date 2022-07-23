@@ -156,6 +156,8 @@ module HTMLProofer
         end
 
         # detect metadata additions
+        # NOTE: the time-stamp for the whole url key will not be updated,
+        # so that it reflects the earliest time any of the metadata was checked
         cache_metadata = @cache_log[:internal][url][:metadata]
         metadata_additions = detected_metadata.reject do |detected|
           existing_cache_metadata = cache_metadata.find { |cached, _| cached[:filename] == detected[:filename] }
