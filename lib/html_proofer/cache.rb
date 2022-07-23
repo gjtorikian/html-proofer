@@ -139,7 +139,11 @@ module HTMLProofer
     private def determine_external_additions(urls_detected)
       urls_detected.reject do |url, _metadata|
         if @cache_log[:external].include?(url)
-          @cache_log[:external][url][:found] # if this is false, we're trying again
+          found = @cache_log[:external][url][:found] # if this is false, we're trying again
+          if !found
+            @logger.log(:debug, "Adding #{url} to external cache (not found)")
+          end
+          found
         else
           @logger.log(:debug, "Adding #{url} to external cache")
           false
@@ -151,6 +155,7 @@ module HTMLProofer
       urls_detected.each_with_object({}) do |(url, detected_metadata), hsh|
         # url is not even in cache
         if @cache_log[:internal][url].nil?
+          @logger.log(:debug, "Adding #{url} to internal cache")
           hsh[url] = detected_metadata
           next
         end
@@ -164,7 +169,7 @@ module HTMLProofer
           # cache for this url, from an existing path, exists as found
           found = !existing_cache_metadata.nil? && !existing_cache_metadata.empty? && existing_cache_metadata[:found]
           if !found
-            @logger.log(:debug, "Adding #{detected} to internal cache")
+            @logger.log(:debug, "Adding #{detected} to internal cache for #{url}")
           end
           found
         end
