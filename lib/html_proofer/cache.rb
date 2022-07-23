@@ -177,6 +177,7 @@ module HTMLProofer
         if metadata_additions.empty?
           next
         end
+
         hsh[url] = metadata_additions
         # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
         # (this works assuming the detected url metadata have "found" set to false)
