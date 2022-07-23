@@ -174,12 +174,13 @@ module HTMLProofer
           found
         end
 
-        unless metadata_additions.empty?
-          hsh[url] = metadata_additions
-          # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
-          # (this works assuming the detected url metadata have "found" set to false)
-          @cache_log[:internal][url][:metadata] = cache_metadata.difference(metadata_additions)
+        if metadata_additions.empty?
+          next
         end
+        hsh[url] = metadata_additions
+        # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
+        # (this works assuming the detected url metadata have "found" set to false)
+        @cache_log[:internal][url][:metadata] = cache_metadata.difference(metadata_additions)
       end
     end
 
