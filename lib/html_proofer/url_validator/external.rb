@@ -22,7 +22,7 @@ module HTMLProofer
       end
 
       def validate
-        urls_to_check = @cache.enabled? ? @runner.load_external_cache : @external_urls
+        urls_to_check = @cache.external_enabled? ? @runner.load_external_cache : @external_urls
         urls_detected = pluralize(urls_to_check.count, "external link", "external links")
         @logger.log(:info, "Checking #{urls_detected}")
 

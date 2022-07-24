@@ -12,7 +12,7 @@ module HTMLProofer
       end
 
       def validate
-        urls_to_check = @cache.enabled? ? @runner.load_internal_cache : @internal_urls
+        urls_to_check = @cache.internal_enabled? ? @runner.load_internal_cache : @internal_urls
         urls_detected = pluralize(urls_to_check.count, "internal link", "internal links")
         @logger.log(:info, "Checking #{urls_detected}")
 

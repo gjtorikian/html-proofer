@@ -26,12 +26,17 @@ module HTMLProofer
 
       if blank?(options)
         define_singleton_method(:enabled?) { false }
+        define_singleton_method(:external_enabled?) { false }
+        define_singleton_method(:internal_enabled?) { false }
       else
+        # we still consider the cache as enabled, regardless of the specic timeframes
         define_singleton_method(:enabled?) { true }
         setup_cache!(options)
 
         @external_timeframe = parsed_timeframe(options[:timeframe][:external])
+        define_singleton_method(:external_enabled?) { !@external_timeframe.nil? }
         @internal_timeframe = parsed_timeframe(options[:timeframe][:internal])
+        define_singleton_method(:internal_enabled?) { !@internal_timeframe.nil? }
       end
     end
 
@@ -55,7 +60,7 @@ module HTMLProofer
     end
 
     def add_internal(url, metadata, found)
-      return unless enabled?
+      return unless internal_enabled?
 
       @cache_log[:internal][url] = { time: @cache_time, metadata: [] } if @cache_log[:internal][url].nil?
 
@@ -63,7 +68,7 @@ module HTMLProofer
     end
 
     def add_external(url, filenames, status_code, msg)
-      return unless enabled?
+      return unless external_enabled?
 
       found = status_code.between?(200, 299)
 

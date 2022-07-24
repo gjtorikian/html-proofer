@@ -140,6 +140,64 @@ describe "Cache test" do
       File.delete(cache_filepath) if File.exist?(cache_filepath)
     end
 
+    it "internal cache is disabled w/o internal timeframe" do
+      test_file = File.join(cache_fixture_dir, "internal_and_external_example.html")
+      cache_filename = File.join(version, ".htmlproofer_test.json")
+      cache_filepath = File.join(cache_fixture_dir, cache_filename)
+
+      allow(HTMLProofer::Cache).to(receive(:write).once)
+
+      expect_any_instance_of(HTMLProofer::Runner).to_not(receive(:load_internal_cache))
+
+      run_proofer(test_file, :file,
+        cache: { timeframe: { external: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+      cache = read_cache(cache_filename)
+      expect(cache["external"].keys.length).to(eq(1))
+      expect(cache["internal"].keys.length).to(eq(0))
+
+      File.delete(cache_filepath) if File.exist?(cache_filepath)
+    end
+
+    it "external cache is disabled w/o external timeframe" do
+      test_file = File.join(cache_fixture_dir, "internal_and_external_example.html")
+      cache_filename = File.join(version, ".htmlproofer_test.json")
+      cache_filepath = File.join(cache_fixture_dir, cache_filename)
+
+      allow(HTMLProofer::Cache).to(receive(:write).once)
+
+      expect_any_instance_of(HTMLProofer::Runner).to_not(receive(:load_external_cache))
+
+      run_proofer(test_file, :file,
+        cache: { timeframe: { internal: "30d" }, cache_file: cache_filename }.merge(default_cache_options))
+
+      cache = read_cache(cache_filename)
+      expect(cache["internal"].keys.length).to(eq(1))
+      expect(cache["external"].keys.length).to(eq(0))
+
+      File.delete(cache_filepath) if File.exist?(cache_filepath)
+    end
+
+    it "internal/external cache is disabled w/o internal/external timeframe" do
+      test_file = File.join(cache_fixture_dir, "internal_and_external_example.html")
+      cache_filename = File.join(version, ".htmlproofer_test.json")
+      cache_filepath = File.join(cache_fixture_dir, cache_filename)
+
+      allow(HTMLProofer::Cache).to(receive(:write).once)
+
+      expect_any_instance_of(HTMLProofer::Runner).to_not(receive(:load_internal_cache))
+      expect_any_instance_of(HTMLProofer::Runner).to_not(receive(:load_external_cache))
+
+      run_proofer(test_file, :file,
+        cache: { timeframe: { }, cache_file: cache_filename }.merge(default_cache_options))
+
+      cache = read_cache(cache_filename)
+      expect(cache["internal"].keys.length).to(eq(0))
+      expect(cache["external"].keys.length).to(eq(0))
+
+      File.delete(cache_filepath) if File.exist?(cache_filepath)
+    end
+
     context "external links" do
       context "dates" do
         let(:cache_filename) { File.join(version, ".within_date_external.json") }
