@@ -189,7 +189,7 @@ describe "Cache test" do
       expect_any_instance_of(HTMLProofer::Runner).to_not(receive(:load_external_cache))
 
       run_proofer(test_file, :file,
-        cache: { timeframe: { }, cache_file: cache_filename }.merge(default_cache_options))
+        cache: { timeframe: {}, cache_file: cache_filename }.merge(default_cache_options))
 
       cache = read_cache(cache_filename)
       expect(cache["internal"].keys.length).to(eq(0))
