@@ -259,4 +259,10 @@ describe "Images test" do
     proofer = run_proofer(custom_data_src_check, :file)
     expect(proofer.failed_checks.first.description).to(match(/foo.webp does not exist/))
   end
+
+  it "works for various webp images" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/webp_valid.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
 end
