@@ -1,5 +1,40 @@
 # Changelog
 
+## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.2.0...HEAD)
+
+**Closed issues:**
+
+- check\_internal\_hash seems to be always true [\#739](https://github.com/gjtorikian/html-proofer/issues/739)
+- Disable internal/external cache altogether if not timeframe is specified [\#737](https://github.com/gjtorikian/html-proofer/issues/737)
+- How to set CLI option ` --check-external-hash` to false? [\#735](https://github.com/gjtorikian/html-proofer/issues/735)
+- Cached external URLs with missing hash are not re-checked [\#733](https://github.com/gjtorikian/html-proofer/issues/733)
+- Warn/Failure if unknown configuration option is provided [\#730](https://github.com/gjtorikian/html-proofer/issues/730)
+- hash ref's on the same page aren't found [\#725](https://github.com/gjtorikian/html-proofer/issues/725)
+- No support for multiple URLs in srcset [\#313](https://github.com/gjtorikian/html-proofer/issues/313)
+
+**Merged pull requests:**
+
+- moderately improved hash detection [\#741](https://github.com/gjtorikian/html-proofer/pull/741) ([gjtorikian](https://github.com/gjtorikian))
+- adjust for additional srcset/webp logic [\#740](https://github.com/gjtorikian/html-proofer/pull/740) ([gjtorikian](https://github.com/gjtorikian))
+- clarify CLI booleans [\#738](https://github.com/gjtorikian/html-proofer/pull/738) ([gjtorikian](https://github.com/gjtorikian))
+- Cache fixes and improvements [\#736](https://github.com/gjtorikian/html-proofer/pull/736) ([riccardoporreca](https://github.com/riccardoporreca))
+- Ensure consistent external cache re-check for all failures [\#734](https://github.com/gjtorikian/html-proofer/pull/734) ([riccardoporreca](https://github.com/riccardoporreca))
+
+## [v4.2.0](https://github.com/gjtorikian/html-proofer/tree/v4.2.0) (2022-07-16)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.1.0...v4.2.0)
+
+**Closed issues:**
+
+- Provide option to ignore hash references for internal links [\#731](https://github.com/gjtorikian/html-proofer/issues/731)
+
+**Merged pull requests:**
+
+- Add option to disable internal hash check [\#732](https://github.com/gjtorikian/html-proofer/pull/732) ([gjtorikian](https://github.com/gjtorikian))
+- Update readme to reflect new command line option --ignore-status-codes [\#729](https://github.com/gjtorikian/html-proofer/pull/729) ([bassmang](https://github.com/bassmang))
+
 ## [v4.1.0](https://github.com/gjtorikian/html-proofer/tree/v4.1.0) (2022-07-15)
 
 [Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.0.1...v4.1.0)
@@ -7,7 +42,6 @@
 **Closed issues:**
 
 - Set enforce\_https to false on the CLI [\#727](https://github.com/gjtorikian/html-proofer/issues/727)
-- hash ref's on the same page aren't found [\#725](https://github.com/gjtorikian/html-proofer/issues/725)
 - srcset width/pixel density descriptors cause missing image error [\#724](https://github.com/gjtorikian/html-proofer/issues/724)
 - Example cache config not working [\#723](https://github.com/gjtorikian/html-proofer/issues/723)
 - Removal of --check-html [\#722](https://github.com/gjtorikian/html-proofer/issues/722)
@@ -145,7 +179,6 @@
 - Add entries to cache if script is killed early [\#405](https://github.com/gjtorikian/html-proofer/issues/405)
 - Report if a link is going to redirect [\#353](https://github.com/gjtorikian/html-proofer/issues/353)
 - Support for multiple file types [\#344](https://github.com/gjtorikian/html-proofer/issues/344)
-- No support for multiple URLs in srcset [\#313](https://github.com/gjtorikian/html-proofer/issues/313)
 
 **Merged pull requests:**
 
