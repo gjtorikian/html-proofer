@@ -16,6 +16,7 @@ module HTMLProofer
           @url = @raw_attribute.delete("\u200b").strip
           @url, @size = @url.split(/\s+/)
           @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
+          @url = "" if @url.nil?
 
           swap_urls!
           clean_url!
