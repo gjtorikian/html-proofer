@@ -52,6 +52,12 @@ describe "Links test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
+  it "finds hash pointing to same page in nested dir" do
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "public")
+    proofer = run_proofer(broken_hash_internal_filepath, :directory, check_internal_hash: true)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "finds internal hash with implict index" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
     proofer = run_proofer(broken_hash_internal_filepath, :directory)
