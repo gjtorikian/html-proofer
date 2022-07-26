@@ -17,8 +17,14 @@ describe "Command test" do
 
   it "works with check-external-hash" do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, "links", "broken_hash_on_the_web.html")
-    output = make_bin("--check-external-hash #{broken_hash_on_the_web}")
+    output = make_bin("--check-external-hash=true #{broken_hash_on_the_web}")
     expect(output).to(match("1 failure"))
+  end
+
+  it "passes for broken hashes on the web when ignored" do
+    broken_hash_on_the_web = File.join(FIXTURES_DIR, "links", "broken_hash_on_the_web.html")
+    output = make_bin("#{broken_hash_on_the_web} --check-external-hash=false")
+    expect(output).to(match("successfully"))
   end
 
   it "works with directory-index-file" do
@@ -29,7 +35,7 @@ describe "Command test" do
 
   it "works with disable-external" do
     external = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
-    output = make_bin("--disable-external #{external}")
+    output = make_bin("--disable-external=true #{external}")
     expect(output).to(match("successfully"))
   end
 
@@ -78,13 +84,13 @@ describe "Command test" do
 
   it "works with empty-alt-ignore" do
     broken = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
-    output = make_bin("--ignore-empty-alt #{broken}")
+    output = make_bin("--ignore-empty-alt=true #{broken}")
     expect(output).to(match("successfully"))
   end
 
   it "works with allow-hash-href" do
     broken = File.join(FIXTURES_DIR, "links", "hash_href.html")
-    output = make_bin("--allow-hash-href #{broken}")
+    output = make_bin("--allow-hash-href=true #{broken}")
     expect(output).to(match("successfully"))
   end
 
