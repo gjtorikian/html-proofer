@@ -70,7 +70,7 @@ module HTMLProofer
         return true unless @runner.options[:check_internal_hash]
 
         # prevents searching files we didn't ask about
-        return false if !url.known_extension?
+        return false unless url.known_extension?
         return false unless url.has_hash?
 
         decoded_href_hash = Addressable::URI.unescape(href_hash)
