@@ -88,7 +88,7 @@ module HTMLProofer
         return if @runner.options[:ignore_status_codes].include?(response_code)
 
         if response_code.between?(200, 299)
-          @cache.add_external(href, filenames, response_code, "OK") unless check_hash_in_2xx_response(href, url,
+          @cache.add_external(href, filenames, response_code, "OK", true) unless check_hash_in_2xx_response(href, url,
             response, filenames)
         elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
@@ -103,7 +103,7 @@ module HTMLProofer
           status_message = blank?(response.status_message) ? "" : ": #{response.status_message}"
           msg = "External link #{href} failed#{status_message}"
           add_failure(filenames, msg, response_code)
-          @cache.add_external(href, filenames, response_code, msg)
+          @cache.add_external(href, filenames, response_code, msg, false)
         end
       end
 
@@ -132,13 +132,13 @@ module HTMLProofer
 
         msg = "External link #{href} failed: #{url.sans_hash} exists, but the hash '#{hash}' does not"
         add_failure(filenames, msg, response.code)
-        @cache.add_external(href, filenames, response.code, msg)
+        @cache.add_external(href, filenames, response.code, msg, false)
         true
       end
 
       def handle_timeout(href, filenames, response_code)
         msg = "External link #{href} failed: got a time out (response code #{response_code})"
-        @cache.add_external(href, filenames, 0, msg)
+        @cache.add_external(href, filenames, 0, msg, false)
         return if @runner.options[:only_4xx]
 
         add_failure(filenames, msg, response_code)
@@ -156,7 +156,7 @@ module HTMLProofer
 
         msg = msgs.join("\n").chomp
 
-        @cache.add_external(href, metadata, 0, msg)
+        @cache.add_external(href, metadata, 0, msg, false)
         return if @runner.options[:only_4xx]
 
         add_failure(metadata, msg, response_code)

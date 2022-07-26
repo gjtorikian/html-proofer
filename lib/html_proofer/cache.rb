@@ -67,10 +67,8 @@ module HTMLProofer
       @cache_log[:internal][url][:metadata] << construct_internal_link_metadata(metadata, found)
     end
 
-    def add_external(url, filenames, status_code, msg)
+    def add_external(url, filenames, status_code, msg, found)
       return unless external_enabled?
-
-      found = status_code.between?(200, 299)
 
       clean_url = cleaned_url(url)
       @cache_log[:external][clean_url] =
