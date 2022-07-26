@@ -231,8 +231,6 @@ module HTMLProofer
       @logger.log(:debug, "Found #{cache_text} in the cache")
 
       urls_to_check = @cache.retrieve_urls(ivar, type)
-      urls_detected = pluralize(urls_to_check.count, "#{type} link", "#{type} links")
-      @logger.log(:info, "Checking #{urls_detected}")
 
       urls_to_check
     end
