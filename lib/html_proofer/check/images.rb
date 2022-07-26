@@ -25,7 +25,7 @@ module HTMLProofer
               content: @img.content)
           elsif @img.multiple_srcsets?
             @img.srcsets.each do |srcset|
-              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url)
+              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
 
               if srcset_url.remote?
                 add_to_external_urls(srcset_url.url, @img.line)
@@ -35,7 +35,7 @@ module HTMLProofer
             end
           elsif @img.multiple_sizes?
             @img.srcsets_wo_sizes.each do |srcset|
-              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url)
+              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
 
               if srcset_url.remote?
                 add_to_external_urls(srcset_url.url, @img.line)

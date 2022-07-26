@@ -3,18 +3,20 @@
 module HTMLProofer
   class Attribute
     class Url < HTMLProofer::Attribute
-      attr_reader :url
+      attr_reader :url, :size
 
       REMOTE_SCHEMES = ["http", "https"].freeze
 
-      def initialize(runner, link_attribute, base_url: nil)
+      def initialize(runner, link_attribute, base_url: nil, extract_size: false)
         super
 
         if @raw_attribute.nil?
           @url = nil
         else
           @url = @raw_attribute.delete("\u200b").strip
+          @url, @size = @url.split(/\s+/) if extract_size
           @url = Addressable::URI.join(base_url, @url).to_s unless blank?(base_url)
+          @url = "" if @url.nil?
 
           swap_urls!
           clean_url!
