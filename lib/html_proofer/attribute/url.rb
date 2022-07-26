@@ -32,6 +32,7 @@ module HTMLProofer
 
       def known_extension?
         return true if hash_link?
+        return true if path.end_with?("/")
 
         ext = File.extname(path)
 
@@ -201,6 +202,10 @@ module HTMLProofer
 
       def hash_link?
         url.start_with?("#")
+      end
+
+      def has_hash?
+        url.include?("#")
       end
 
       def param_link?

@@ -71,6 +71,7 @@ module HTMLProofer
 
         # prevents searching files we didn't ask about
         return false unless url.known_extension?
+        return false unless url.has_hash?
 
         decoded_href_hash = Addressable::URI.unescape(href_hash)
         fragment_ids = [href_hash, decoded_href_hash]
