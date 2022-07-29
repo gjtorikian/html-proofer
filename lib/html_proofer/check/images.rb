@@ -23,17 +23,7 @@ module HTMLProofer
           elsif !@img.url.exists? && !@img.multiple_srcsets? && !@img.multiple_sizes?
             add_failure("internal image #{@img.url.raw_attribute} does not exist", line: @img.line,
               content: @img.content)
-          elsif @img.multiple_srcsets?
-            @img.srcsets.each do |srcset|
-              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
-
-              if srcset_url.remote?
-                add_to_external_urls(srcset_url.url, @img.line)
-              elsif !srcset_url.exists?
-                add_failure("internal image #{srcset} does not exist", line: @img.line, content: @img.content)
-              end
-            end
-          elsif @img.multiple_sizes?
+          elsif @img.multiple_srcsets? || @img.multiple_sizes?
             @img.srcsets_wo_sizes.each do |srcset|
               srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
 

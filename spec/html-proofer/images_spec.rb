@@ -233,7 +233,7 @@ describe "Images test" do
   it "supports multiple srcsets when fails" do
     relative_images = File.join(FIXTURES_DIR, "images", "multiple_srcset_failure.html")
     proofer = run_proofer(relative_images, :file)
-    expect(proofer.failed_checks.first.description).to(eq("internal image /uploads/150-marie-lloyd.jpg 1.5x does not exist"))
+    expect(proofer.failed_checks.first.description).to(eq("internal image /uploads/150-marie-lloyd.jpg does not exist"))
   end
 
   it "works for images with a swapped data attribute src" do
@@ -258,6 +258,12 @@ describe "Images test" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/srcset-pixel-density_broken.html"
     proofer = run_proofer(custom_data_src_check, :file)
     expect(proofer.failed_checks.first.description).to(match(/foo.webp does not exist/))
+  end
+
+  it "works for images with multiple srcsets and pixel densities" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/multiple_srcset-pixel-density.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
   end
 
   it "works for various webp images" do
