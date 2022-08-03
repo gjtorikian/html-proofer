@@ -164,7 +164,13 @@ describe "Images test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "works for images with a srcset" do
+  it "passes for images with a srcset pointing to existing files" do
+    src_set_check = File.join(FIXTURES_DIR, "images", "src_set_check_pass.html")
+    proofer = run_proofer(src_set_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "fails for images with a srcset pointing to missing files" do
     src_set_check = File.join(FIXTURES_DIR, "images", "src_set_check.html")
     proofer = run_proofer(src_set_check, :file)
     expect(proofer.failed_checks.length).to(eq(2))
@@ -264,6 +270,18 @@ describe "Images test" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/multiple_srcset-pixel-density.html"
     proofer = run_proofer(custom_data_src_check, :file)
     expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "works for picture elements with multiple srcsets and pixel densities" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/srcset_picture_pixel-density.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "breaks for picture elements with multiple srcsets and pixel densities" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/srcset_picture_pixel-density_broken.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks.first.description).to(match(/foo.webp does not exist/))
   end
 
   it "works for various webp images" do

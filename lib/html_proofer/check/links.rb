@@ -4,7 +4,7 @@ module HTMLProofer
   class Check
     class Links < HTMLProofer::Check
       def run
-        @html.css("a, link, source").each do |node|
+        @html.css("a, link").each do |node|
           @link = create_element(node)
 
           next if @link.ignore?

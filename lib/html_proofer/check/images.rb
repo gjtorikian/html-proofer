@@ -6,7 +6,7 @@ module HTMLProofer
       SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
 
       def run
-        @html.css("img").each do |node|
+        @html.css("img, source").each do |node|
           @img = create_element(node)
 
           next if @img.ignore?
@@ -35,7 +35,8 @@ module HTMLProofer
             end
           end
 
-          unless ignore_element?
+          # if this is an img element, check that the alt attribute is present
+          if @img.img_tag? && !ignore_element?
             if missing_alt_tag? && !ignore_missing_alt?
               add_failure("image #{@img.url.raw_attribute} does not have an alt attribute", line: @img.line,
                 content: @img.content)
