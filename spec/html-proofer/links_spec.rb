@@ -276,16 +276,10 @@ describe "Links test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "works for valid links missing the protocol" do
+  it "fails for links missing the protocol" do
     missing_protocol_link = File.join(FIXTURES_DIR, "links", "link_missing_protocol_valid.html")
     proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_checks).to(eq([]))
-  end
-
-  it "fails for invalid links missing the protocol" do
-    missing_protocol_link = File.join(FIXTURES_DIR, "links", "link_missing_protocol_invalid.html")
-    proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
   end
 
   it "works for valid href within link elements" do

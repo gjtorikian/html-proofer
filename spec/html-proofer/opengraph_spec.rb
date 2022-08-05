@@ -21,6 +21,12 @@ describe "Open Graph test" do
     expect(proofer.failed_checks.first.description).to(match(/open graph content attribute is empty/))
   end
 
+  it "fails for url missing the protocol" do
+    url_valid = File.join(FIXTURES_DIR, "opengraph", "url-missing-protocol.html")
+    proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
+    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+  end
+
   it "fails for missing external url" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-broken.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
@@ -43,6 +49,12 @@ describe "Open Graph test" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "image-empty.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
     expect(proofer.failed_checks.first.description).to(match(/open graph content attribute is empty/))
+  end
+
+  it "fails for image missing the protocol" do
+    url_valid = File.join(FIXTURES_DIR, "opengraph", "image-missing-protocol.html")
+    proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
+    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
   end
 
   it "fails for missing external image" do

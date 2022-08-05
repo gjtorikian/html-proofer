@@ -20,6 +20,12 @@ describe "Favicons test" do
     expect(proofer.failed_checks.last.description).to(match(/(no favicon provided)/))
   end
 
+  it "fails for favicon missing the protocol" do
+    missing_protocol = File.join(FIXTURES_DIR, "favicon", "protocol_relative_favicon.html")
+    proofer = run_proofer(missing_protocol, :file)
+    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+  end
+
   it "fails for broken internal favicon" do
     broken = File.join(FIXTURES_DIR, "favicon", "internal_favicon_broken.html")
     proofer = run_proofer(broken, :file, checks: ["Favicon"])

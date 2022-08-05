@@ -45,6 +45,14 @@ describe HTMLProofer::Reporter::Cli do
 
           internal image ./Screen Shot 2012-08-09 at 7.51.18 AM.png does not exist
 
+        * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:14:
+
+          image link //upload.wikimedia.org/wikipedia/en/thumb/not_here.png is a protocol-relative URL, use explict https:// instead
+
+        * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:19:
+
+          image link //upload.wikimedia.org/wikipedia/en/thumb/fooooof.png is a protocol-relative URL, use explict https:// instead
+
         For the Links check, the following failures were found:
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:8:
@@ -52,14 +60,6 @@ describe HTMLProofer::Reporter::Cli do
           tel: contains no phone number
 
         For the Links > External check, the following failures were found:
-
-        * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:14:
-
-          External link https://upload.wikimedia.org/wikipedia/en/thumb/not_here.png failed (status code 404)
-
-        * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:19:
-
-          External link https://upload.wikimedia.org/wikipedia/en/thumb/fooooof.png failed (status code 404)
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:26:
 
