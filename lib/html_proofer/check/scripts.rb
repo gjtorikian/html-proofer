@@ -13,6 +13,9 @@ module HTMLProofer
           # does the script exist?
           if missing_src?
             add_failure("script is empty and has no src attribute", line: @script.line, content: @script.content)
+          elsif @script.url.protocol_relative?
+            add_failure("script link #{@script.url} is a protocol-relative URL, use explict https:// instead",
+              line: @script.line, content: @script.content)
           elsif @script.url.remote?
             add_to_external_urls(@script.url, @script.line)
             check_sri if @runner.check_sri?

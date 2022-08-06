@@ -20,10 +20,11 @@ module HTMLProofer
 
           swap_urls!
           clean_url!
-
-          # convert "//" links to "https://"
-          @url.start_with?("//") ? @url = "https:#{@url}" : @url
         end
+      end
+
+      def protocol_relative?
+        url.start_with?("//")
       end
 
       def to_s
