@@ -47,11 +47,11 @@ describe HTMLProofer::Reporter::Cli do
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:14:
 
-          image link //upload.wikimedia.org/wikipedia/en/thumb/not_here.png is a protocol-relative URL, use explict https:// instead
+          image link //upload.wikimedia.org/wikipedia/en/thumb/not_here.png is a protocol-relative URL, use explicit https:// instead
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:19:
 
-          image link //upload.wikimedia.org/wikipedia/en/thumb/fooooof.png is a protocol-relative URL, use explict https:// instead
+          image link //upload.wikimedia.org/wikipedia/en/thumb/fooooof.png is a protocol-relative URL, use explicit https:// instead
 
         For the Links check, the following failures were found:
 

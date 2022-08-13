@@ -17,7 +17,7 @@ module HTMLProofer
 
         if found
           if @favicon.url.protocol_relative?
-            add_failure("favicon link #{@favicon.url} is a protocol-relative URL, use explict https:// instead",
+            add_failure("favicon link #{@favicon.url} is a protocol-relative URL, use explicit https:// instead",
               line: @favicon.line, content: @favicon.content)
           elsif @favicon.url.remote?
             add_to_external_urls(@favicon.url, @favicon.line)

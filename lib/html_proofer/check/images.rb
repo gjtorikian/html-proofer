@@ -19,7 +19,7 @@ module HTMLProofer
           if missing_src?
             add_failure("image has no src or srcset attribute", line: @img.line, content: @img.content)
           elsif @img.url.protocol_relative?
-            add_failure("image link #{@img.url} is a protocol-relative URL, use explict https:// instead",
+            add_failure("image link #{@img.url} is a protocol-relative URL, use explicit https:// instead",
               line: @img.line, content: @img.content)
           elsif @img.url.remote?
             add_to_external_urls(@img.url, @img.line)
@@ -31,7 +31,7 @@ module HTMLProofer
               srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
 
               if srcset_url.protocol_relative?
-                add_failure("image link #{srcset_url.url} is a protocol-relative URL, use explict https:// instead",
+                add_failure("image link #{srcset_url.url} is a protocol-relative URL, use explicit https:// instead",
                   line: @img.line, content: @img.content)
               elsif srcset_url.remote?
                 add_to_external_urls(srcset_url.url, @img.line)
