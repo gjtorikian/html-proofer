@@ -47,42 +47,44 @@ module HTMLProofer
 
     CACHE_DEFAULTS = {}.freeze
 
-    def self.generate_defaults(opts)
-      options = PROOFER_DEFAULTS.merge(opts)
+    class << self
+      def generate_defaults(opts)
+        options = PROOFER_DEFAULTS.merge(opts)
 
-      options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
-      options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
+        options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
+        options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
 
-      options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
-      options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
+        options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
+        options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
-      options.delete(:src)
+        options.delete(:src)
 
-      options
-    end
-
-    def self.to_regex?(item)
-      if item.start_with?("/") && item.end_with?("/")
-        Regexp.new(item[1...-1])
-      else
-        item
+        options
       end
-    end
 
-    def self.parse_json_option(option_name, config, symbolize_names: true)
-      raise ArgumentError, "Must provide an option name in string format." unless option_name.is_a?(String)
-      raise ArgumentError, "Must provide an option name in string format." if option_name.strip.empty?
+      def to_regex?(item)
+        if item.start_with?("/") && item.end_with?("/")
+          Regexp.new(item[1...-1])
+        else
+          item
+        end
+      end
 
-      return {} if config.nil?
+      def parse_json_option(option_name, config, symbolize_names: true)
+        raise ArgumentError, "Must provide an option name in string format." unless option_name.is_a?(String)
+        raise ArgumentError, "Must provide an option name in string format." if option_name.strip.empty?
 
-      raise ArgumentError, "Must provide a JSON configuration in string format." unless config.is_a?(String)
+        return {} if config.nil?
 
-      return {} if config.strip.empty?
+        raise ArgumentError, "Must provide a JSON configuration in string format." unless config.is_a?(String)
 
-      begin
-        JSON.parse(config, { symbolize_names: symbolize_names })
-      rescue StandardError
-        raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
+        return {} if config.strip.empty?
+
+        begin
+          JSON.parse(config, { symbolize_names: symbolize_names })
+        rescue StandardError
+          raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
+        end
       end
     end
   end
