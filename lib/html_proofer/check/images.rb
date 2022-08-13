@@ -18,6 +18,9 @@ module HTMLProofer
           # does the image exist?
           if missing_src?
             add_failure("image has no src or srcset attribute", line: @img.line, content: @img.content)
+          elsif @img.url.protocol_relative?
+            add_failure("image link #{@img.url} is a protocol-relative URL, use explicit https:// instead",
+              line: @img.line, content: @img.content)
           elsif @img.url.remote?
             add_to_external_urls(@img.url, @img.line)
           elsif !@img.url.exists? && !@img.multiple_srcsets? && !@img.multiple_sizes?
@@ -27,7 +30,10 @@ module HTMLProofer
             @img.srcsets_wo_sizes.each do |srcset|
               srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
 
-              if srcset_url.remote?
+              if srcset_url.protocol_relative?
+                add_failure("image link #{srcset_url.url} is a protocol-relative URL, use explicit https:// instead",
+                  line: @img.line, content: @img.content)
+              elsif srcset_url.remote?
                 add_to_external_urls(srcset_url.url, @img.line)
               elsif !srcset_url.exists?
                 add_failure("internal image #{srcset} does not exist", line: @img.line, content: @img.content)

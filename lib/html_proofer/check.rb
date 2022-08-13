@@ -29,26 +29,8 @@ module HTMLProofer
         content: content)
     end
 
-    def self.subchecks(runner_options)
-      # grab all known checks
-      checks = ObjectSpace.each_object(Class).select do |klass|
-        klass < self
-      end
-
-      # remove any checks not explicitly included
-      checks.each_with_object([]) do |check, arr|
-        next unless runner_options[:checks].include?(check.short_name)
-
-        arr << check
-      end
-    end
-
     def short_name
       self.class.name.split("::").last
-    end
-
-    def self.short_name
-      name.split("::").last
     end
 
     def add_to_internal_urls(url, line)
@@ -72,6 +54,26 @@ module HTMLProofer
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
       @external_urls[url_string] << { filename: @runner.current_filename, line: line }
+    end
+
+    class << self
+      def subchecks(runner_options)
+        # grab all known checks
+        checks = ObjectSpace.each_object(Class).select do |klass|
+          klass < self
+        end
+
+        # remove any checks not explicitly included
+        checks.each_with_object([]) do |check, arr|
+          next unless runner_options[:checks].include?(check.short_name)
+
+          arr << check
+        end
+      end
+
+      def short_name
+        name.split("::").last
+      end
     end
 
     private def base_url

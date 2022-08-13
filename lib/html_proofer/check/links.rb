@@ -28,6 +28,12 @@ module HTMLProofer
             next
           end
 
+          if @link.url.protocol_relative?
+            add_failure("#{@link.url} is a protocol-relative URL, use explicit https:// instead",
+              line: @link.line, content: @link.content)
+            next
+          end
+
           check_schemes
 
           # intentionally down here because we still want valid? & missing_href? to execute

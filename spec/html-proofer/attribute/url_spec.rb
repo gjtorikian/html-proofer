@@ -20,4 +20,31 @@ describe HTMLProofer::Attribute::Url do
       expect(url.ignore?).to(eq(true))
     end
   end
+
+  describe "#protocol_relative" do
+    it "works for protocol relative" do
+      url = HTMLProofer::Attribute::Url.new(@runner, "//assets/main.js")
+      expect(url.protocol_relative?).to(eq(true))
+    end
+
+    it "works for https://" do
+      url = HTMLProofer::Attribute::Url.new(@runner, "https://assets/main.js")
+      expect(url.protocol_relative?).to(eq(false))
+    end
+
+    it "works for http://" do
+      url = HTMLProofer::Attribute::Url.new(@runner, "http://assets/main.js")
+      expect(url.protocol_relative?).to(eq(false))
+    end
+
+    it "works for relative internal link" do
+      url = HTMLProofer::Attribute::Url.new(@runner, "assets/main.js")
+      expect(url.protocol_relative?).to(eq(false))
+    end
+
+    it "works for absolute internal link" do
+      url = HTMLProofer::Attribute::Url.new(@runner, "/assets/main.js")
+      expect(url.protocol_relative?).to(eq(false))
+    end
+  end
 end

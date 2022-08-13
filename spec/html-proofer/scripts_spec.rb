@@ -3,6 +3,12 @@
 require "spec_helper"
 
 describe "Scripts test" do
+  it "fails for src missing the protocol" do
+    file = File.join(FIXTURES_DIR, "scripts", "script_missing_protocol.html")
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+  end
+
   it "fails for broken external src" do
     file = File.join(FIXTURES_DIR, "scripts", "script_broken_external.html")
     proofer = run_proofer(file, :file)
