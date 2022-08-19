@@ -157,10 +157,10 @@ In this case, any link that matches the `^https://example.com` will be converted
 A similar swapping process can be done for attributes:
 
 ```ruby
-run_proofer(file, :file, swap_urls: { 'img': [['src', 'srcset']] })
+run_proofer(file, :file, swap_attributes: { 'img': [['src', 'data-src']] })
 ```
 
-In this case, we are telling HTMLProofer that, for any `img` tag detected, and for any check using the `src` attribute, to use the `srcset` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need.
+In this case, we are telling HTMLProofer that, for any `img` tag detected, and for any check using the `src` attribute, to use the `data-src` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need.
 
 ### Using on the command-line
 
