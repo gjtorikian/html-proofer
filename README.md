@@ -294,7 +294,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 In addition, there are a few "namespaced" options. These are:
 
 * `:typhoeus` / `:hydra`
-* `:parallel`
 * `:cache`
 
 ### Configuring Typhoeus and Hydra
@@ -338,20 +337,6 @@ proofer.run
 ```
 
 The `Authorization` header is being set if and only if the `base_url` is `https://github.com`, and it is excluded for all other URLs.
-
-### Configuring Parallel
-
-[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
-
-``` ruby
-HTMLProofer.check_directories(["out/"], {extension: ".htm", parallel: { in_processes: 3} })
-```
-
-In this example, `in_processes: 3` is passed into Parallel as a configuration option.
-
-Pass in `parallel: { enable: false }` to disable parallel runs.
-
-On the CLI, you can provide the `--parallel` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ## Configuring caching
 

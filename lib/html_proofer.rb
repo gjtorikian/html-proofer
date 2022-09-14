@@ -12,7 +12,6 @@ gem_loader.setup
 
 require "html_proofer/version"
 
-require "parallel"
 require "fileutils"
 
 if ENV.fetch("DEBUG", false)

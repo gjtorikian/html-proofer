@@ -31,13 +31,6 @@ describe HTMLProofer do
       expect(proofer.options[:typhoeus][:verbose]).to(be_nil)
     end
 
-    it "takes options for Parallel" do
-      folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
-      proofer = described_class.check_file(folder, parallel: { in_processes: 3 })
-      expect(proofer.options[:parallel][:in_processes]).to(eq(3))
-      expect(proofer.options[:typhoeus][:in_processes]).to(be_nil)
-    end
-
     it "only has one UA with file" do
       github_hash = File.join(FIXTURES_DIR, "links", "github_hash.html")
       http = capture_proofer_http(github_hash, :file,

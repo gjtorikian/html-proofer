@@ -27,7 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency("addressable",     "~> 2.3")
   spec.add_dependency("mercenary",       "~> 0.3")
   spec.add_dependency("nokogiri",        "~> 1.13")
-  spec.add_dependency("parallel",        "~> 1.10")
   spec.add_dependency("rainbow",         "~> 3.0")
   spec.add_dependency("typhoeus",        "~> 1.3")
   spec.add_dependency("yell",            "~> 2.0")
