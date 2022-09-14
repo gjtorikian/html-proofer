@@ -2,7 +2,7 @@
 
 module HTMLProofer
   class Reporter
-    class Cli < HTMLProofer::Reporter
+    class Terminal < HTMLProofer::Reporter
       def report
         msg = failures.each_with_object([]) do |(check_name, failures), arr|
           str = ["For the #{check_name} check, the following failures were found:\n"]

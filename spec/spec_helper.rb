@@ -60,14 +60,6 @@ def run_proofer(item, type, opts = {})
   end
 end
 
-def capture_proofer_output(file, type, opts = {})
-  proofer = make_proofer(file, type, opts)
-  cassette_name = make_cassette_name(file, opts)
-  VCR.use_cassette(cassette_name, record: :new_episodes) do
-    capture_stderr { proofer.run }
-  end
-end
-
 def capture_proofer_http(item, type, opts = {})
   proofer = make_proofer(item, type, opts)
   cassette_name = make_cassette_name(item, opts)
@@ -78,7 +70,7 @@ def capture_proofer_http(item, type, opts = {})
 end
 
 def make_bin(args)
-  stdout, stderr = Open3.capture3("#{RbConfig.ruby} bin/htmlproofer #{args}")
+  stdout, stderr = Open3.capture3("#{RbConfig.ruby} exe/htmlproofer #{args}")
   "#{stdout}\n#{stderr}".encode("UTF-8", invalid: :replace, undef: :replace)
 end
 
@@ -90,6 +82,10 @@ def make_cassette_name(file, opts)
   end
   (filename += opts.inspect) unless opts.empty?
   filename
+end
+
+def ci?
+  ENV.fetch("CI", false)
 end
 
 VCR.configure do |config|

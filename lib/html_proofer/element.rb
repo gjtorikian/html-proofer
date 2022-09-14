@@ -13,6 +13,8 @@ module HTMLProofer
       @runner = runner
       @node = node
 
+      swap_attributes!
+
       @base_url = base_url
       @url = Attribute::Url.new(runner, link_attribute, base_url: base_url)
 
@@ -26,7 +28,6 @@ module HTMLProofer
 
     def meta_content
       return nil unless meta_tag?
-      return swap_attributes("content") if attribute_swapped?
 
       @node["content"]
     end
@@ -37,7 +38,6 @@ module HTMLProofer
 
     def src
       return nil if !img_tag? && !script_tag? && !source_tag?
-      return swap_attributes("src") if attribute_swapped?
 
       @node["src"]
     end
@@ -52,7 +52,6 @@ module HTMLProofer
 
     def srcset
       return nil if !img_tag? && !source_tag?
-      return swap_attributes("srcset") if attribute_swapped?
 
       @node["srcset"]
     end
@@ -63,7 +62,6 @@ module HTMLProofer
 
     def href
       return nil if !a_tag? && !link_tag?
-      return swap_attributes("href") if attribute_swapped?
 
       @node["href"]
     end
@@ -123,16 +121,17 @@ module HTMLProofer
       return true unless blank?(attrs)
     end
 
-    private def swap_attributes(old_attr)
-      attrs = @runner.options[:swap_attributes][@node.name]
+    private def swap_attributes!
+      return unless attribute_swapped?
 
-      new_attr = attrs.find do |(o, _)|
-        o == old_attr
-      end&.last
+      attr_swaps = @runner.options[:swap_attributes][@node.name]
 
-      return nil if blank?(new_attr)
+      attr_swaps.flatten.each_slice(2) do |(old_attr, new_attr)|
+        next if blank?(node[old_attr])
 
-      @node[new_attr]
+        node[new_attr] = node[old_attr]
+        node.delete(old_attr)
+      end
     end
 
     private def ancestors_ignorable?

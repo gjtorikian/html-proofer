@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$stdout.sync = true
+
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "html-proofer"
+require "benchmark"
+
+exit_status = -1
+cli = HTMLProofer::CLI.new
+
+time = Benchmark.realtime { exit_status = cli.run }
+
+puts "Finished in #{time.round(2)} seconds"
+exit exit_status

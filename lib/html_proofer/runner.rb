@@ -30,18 +30,18 @@ module HTMLProofer
       @current_source = nil
       @current_filename = nil
 
-      @reporter = Reporter::Cli.new(logger: @logger)
+      @reporter = Reporter::Terminal.new(logger: @logger)
     end
 
     def run
       check_text = pluralize(checks.length, "check", "checks")
 
       if @type == :links
-        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n")
+        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ...\n\n")
         check_list_of_links unless @options[:disable_external]
       else
         @logger.log(:info,
-          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files...\n\n")
+          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files ...\n\n")
 
         check_files
         @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
@@ -238,7 +238,7 @@ module HTMLProofer
     private def format_checks_list(checks)
       checks.map do |check|
         check.sub(/HTMLProofer::Check::/, "")
-      end.join(", ")
+      end.sort.join(", ")
     end
   end
 end

@@ -27,15 +27,15 @@ describe HTMLProofer do
     it "strips out undesired Typhoeus options" do
       folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
       proofer = HTMLProofer.check_file(folder, verbose: true)
-      expect(proofer.options[:verbose]).to(eq(true))
-      expect(proofer.options[:typhoeus][:verbose]).to(eq(nil))
+      expect(proofer.options[:verbose]).to(be(true))
+      expect(proofer.options[:typhoeus][:verbose]).to(be_nil)
     end
 
     it "takes options for Parallel" do
       folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
       proofer = HTMLProofer.check_file(folder, parallel: { in_processes: 3 })
       expect(proofer.options[:parallel][:in_processes]).to(eq(3))
-      expect(proofer.options[:typhoeus][:in_processes]).to(eq(nil))
+      expect(proofer.options[:typhoeus][:in_processes]).to(be_nil)
     end
 
     it "only has one UA with file" do
@@ -80,7 +80,7 @@ describe HTMLProofer do
     it "knows how to ignore checks" do
       options = { checks_to_ignore: ["ImageRunner"] }
       proofer = make_proofer(File.join(FIXTURES_DIR, "links", "broken_link_external.html"), :file, options)
-      expect(proofer.checks).to_not(include("ImageRunner"))
+      expect(proofer.checks).not_to(include("ImageRunner"))
     end
 
     it "does not care about phoney ignored checks" do
@@ -94,16 +94,6 @@ describe HTMLProofer do
     it "ignores status codes when asked" do
       proofer = run_proofer(["www.github.com/github/notreallyhere"], :links, ignore_status_codes: [404])
       expect(proofer.failed_checks.length).to(eq(0))
-    end
-  end
-
-  describe "multiple directories" do
-    it "works" do
-      dirs = [File.join(FIXTURES_DIR, "links"), File.join(FIXTURES_DIR, "images")]
-      output = capture_proofer_output(dirs, :directories)
-
-      expect(output).to(match(File.join(FIXTURES_DIR, "links")))
-      expect(output).to(match(File.join(FIXTURES_DIR, "images")))
     end
   end
 end
