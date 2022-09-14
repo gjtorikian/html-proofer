@@ -1,0 +1,85 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://github.com/gjtorikian/html-proofer
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:50 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept,
+        X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"e18310ccd97fe8aa379a1b946221542d"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=iMjeGbIZg4xvGs7ItxSevCIrr3RrPFbOKT%2B8MMDPJkqvraQwIMUakgP8ehbOTuBodaGnXVZ9vnq%2BdMG6n6ZxV3pRuIKTLRvopZIIL4SQX1oi7IZxsVyh7KBe8Gfvp2HbWzHQwtejlNt6GRFnYNvJEaSNx%2BDKb%2BQyUlZYGZgxcxCb9mE%2BZFUZyMHWd2TY6e%2BzLTth7bh5ab9glLE%2FV71SYY6zozNpsMEolWbFKPZ%2Bxllb5p9HpJ1f%2BicWZ8WSBAtBxfyAZtCVXAqXOHjsV30TlQ%3D%3D--SxbCCiMp8T0hvzho--v77xjY%2Fjpiaxmrv8hB0N%2Bw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.125950131.1663138009; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:49 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:49
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE91:36B6:2165ADA:321625A:632178D9
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/gjtorikian/html-proofer
+  recorded_at: Wed, 14 Sep 2022 06:46:50 GMT
+recorded_with: VCR 2.9.3

@@ -172,7 +172,7 @@ Pass in options through the command-line as flags, like this:
 htmlproofer --extensions .html.erb ./out
 ```
 
-Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer).
+Use `htmlproofer --help` to see all command line options.
 
 #### Special cases for the command-line
 

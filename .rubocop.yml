@@ -2,5 +2,11 @@ inherit_gem:
   rubocop-standard:
     - config/default.yml
 
+require:
+  - rubocop-rspec
+
 Naming/FileName:
+  Enabled: false
+
+RSpec/FilePath:
   Enabled: false

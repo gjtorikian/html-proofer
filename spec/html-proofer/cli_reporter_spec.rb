@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Reporter::Cli do
-  describe "cli_report" do
+describe HTMLProofer::Reporter::Terminal do
+  describe "report" do
     it "reports all issues accurately" do
       errors = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
       output = capture_proofer_output(errors, :file, checks: ["Links", "Images", "Scripts", "Favicon"], ignore_missing_alt: false)

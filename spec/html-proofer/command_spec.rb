@@ -2,7 +2,31 @@
 
 require "spec_helper"
 
-describe "Command test" do
+describe HTMLProofer::CLI do
+  it "works with allow-hash-href" do
+    broken = File.join(FIXTURES_DIR, "links", "hash_href.html")
+    output = make_bin("--allow-hash-href #{broken}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-allow-hash-href" do
+    broken = File.join(FIXTURES_DIR, "links", "hash_href.html")
+    output = make_bin("--no-allow-hash-href #{broken}")
+    expect(output).to(match("failure"))
+  end
+
+  it "works with allow-missing-href" do
+    missing_link_href_filepath = File.join(FIXTURES_DIR, "links", "missing_link_href.html")
+    output = make_bin("--allow-missing-href #{missing_link_href_filepath}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-allow-missing-href" do
+    missing_link_href_filepath = File.join(FIXTURES_DIR, "links", "missing_link_href.html")
+    output = make_bin("--no-allow-missing-href #{missing_link_href_filepath}")
+    expect(output).to(match("failure"))
+  end
+
   it "works with as-links" do
     output = make_bin("--as-links www.github.com,foofoofoo.biz")
     expect(output).to(match("1 failure"))
@@ -11,20 +35,43 @@ describe "Command test" do
   it "works with checks" do
     external = File.join(FIXTURES_DIR, "links", "file.foo") # this has a broken link
     output = make_bin("--extensions .foo --checks 'Images,Scripts' #{external}")
-    expect(output).to(match("successfully"))
-    expect(output).to_not(match(/Running.+?Links/))
+    expect(output).not_to(match(/Running.+?Links/))
   end
 
   it "works with check-external-hash" do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, "links", "broken_hash_on_the_web.html")
-    output = make_bin("--check-external-hash=true #{broken_hash_on_the_web}")
+    output = make_bin("--check-external-hash #{broken_hash_on_the_web}")
     expect(output).to(match("1 failure"))
   end
 
-  it "passes for broken hashes on the web when ignored" do
+  it "works with no-check-external-hash" do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, "links", "broken_hash_on_the_web.html")
-    output = make_bin("#{broken_hash_on_the_web} --check-external-hash=false")
+    output = make_bin("--no-check-external-hash #{broken_hash_on_the_web}")
     expect(output).to(match("successfully"))
+  end
+
+  it "works with check-internal-hash" do
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
+    output = make_bin("--check-internal-hash #{broken_hash_internal_filepath}")
+    expect(output).to(match("1 failure"))
+  end
+
+  it "works with no-check-internal-hash" do
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
+    output = make_bin("--no-check-internal-hash #{broken_hash_internal_filepath}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with check-sri" do
+    file = File.join(FIXTURES_DIR, "links", "cors_not_provided.html")
+    output = make_bin("--check-sri #{file}")
+    expect(output).to(match("2 failures"))
+  end
+
+  it "works with no-check-sri" do
+    file = File.join(FIXTURES_DIR, "links", "cors_not_provided.html")
+    output = make_bin("--no-check-sri #{file}")
+    expect(output).to(match("1 failure")) # has other issues, but one less than above
   end
 
   it "works with directory-index-file" do
@@ -35,7 +82,25 @@ describe "Command test" do
 
   it "works with disable-external" do
     external = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
-    output = make_bin("--disable-external=true #{external}")
+    output = make_bin("--disable-external #{external}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-disable-external" do
+    external = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
+    output = make_bin("--no-disable-external #{external}")
+    expect(output).to(match("failure"))
+  end
+
+  it "works with enforce-https" do
+    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
+    output = make_bin("#{custom_data_src_check} --enforce-https")
+    expect(output).to(match("1 failure"))
+  end
+
+  it "works with no-enforce-https" do
+    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
+    output = make_bin("#{custom_data_src_check} --no-enforce-https")
     expect(output).to(match("successfully"))
   end
 
@@ -43,12 +108,53 @@ describe "Command test" do
     external = File.join(FIXTURES_DIR, "links", "file.foo")
     output = make_bin("--extensions .foo #{external}")
     expect(output).to(match("1 failure"))
-    expect(output).to(match("Links"))
+  end
+
+  it "works with ignore-empty-alt" do
+    broken = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
+    output = make_bin("--ignore-empty-alt #{broken}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-ignore-empty-alt" do
+    broken = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
+    output = make_bin("--no-ignore-empty-alt #{broken}")
+    expect(output).to(match("failure"))
+  end
+
+  it "works with ignore-empty-mailto" do
+    broken = File.join(FIXTURES_DIR, "links", "blank_mailto_link.html")
+    output = make_bin("--ignore-empty-mailto #{broken}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-ignore-empty-mailto" do
+    broken = File.join(FIXTURES_DIR, "links", "blank_mailto_link.html")
+    output = make_bin("--no-ignore-empty-mailto #{broken}")
+    expect(output).to(match("failure"))
   end
 
   it "works with ignore-files" do
     external = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
     output = make_bin("--ignore-files #{external} #{external}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with ignore-missing-alt" do
+    broken = File.join(FIXTURES_DIR, "images", "missing_image_alt.html")
+    output = make_bin("--ignore-missing-alt #{broken}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with no-ignore-missing-alt" do
+    broken = File.join(FIXTURES_DIR, "images", "missing_image_alt.html")
+    output = make_bin("--no-ignore-missing-alt #{broken}")
+    expect(output).to(match("failure"))
+  end
+
+  it "works with ignore-status-codes" do
+    broken = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
+    output = make_bin("--ignore-status-codes 404 #{broken}")
     expect(output).to(match("successfully"))
   end
 
@@ -82,18 +188,6 @@ describe "Command test" do
     expect(output).to(match("1 failure"))
   end
 
-  it "works with empty-alt-ignore" do
-    broken = File.join(FIXTURES_DIR, "images", "empty_image_alt_text.html")
-    output = make_bin("--ignore-empty-alt=true #{broken}")
-    expect(output).to(match("successfully"))
-  end
-
-  it "works with allow-hash-href" do
-    broken = File.join(FIXTURES_DIR, "links", "hash_href.html")
-    output = make_bin("--allow-hash-href=true #{broken}")
-    expect(output).to(match("successfully"))
-  end
-
   it "works with swap-attributes" do
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "data_src_attribute.html")
     output = make_bin("#{custom_data_src_check}  --swap-attributes '{\"img\": [[\"src\", \"data-src\"]] }'")
@@ -103,16 +197,6 @@ describe "Command test" do
   it "navigates above itself in a subdirectory" do
     real_link = File.join(FIXTURES_DIR, "links", "root_folder/documentation-from-my-project/")
     output = make_bin("--root-dir #{File.join(FIXTURES_DIR, "links", "root_folder/")} #{real_link}")
-    expect(output).to(match("successfully"))
-  end
-
-  it "works with enforce-https" do
-    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
-    output = make_bin(custom_data_src_check.to_s)
-    expect(output).to(match("1 failure"))
-
-    custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
-    output = make_bin("#{custom_data_src_check} --enforce-https=false")
     expect(output).to(match("successfully"))
   end
 
@@ -137,33 +221,5 @@ describe "Command test" do
       http = make_bin(%(--hydra '{"max_concurrency": 5}' http://www.github.com --as-links))
       expect(http.scan(/max_concurrency is invalid/).count).to(eq(0))
     end
-  end
-end
-
-def match_command_help(config)
-  config_keys = config.keys
-  bin_file = File.read("bin/htmlproofer")
-  help_output = make_bin("--help")
-  readme = File.read("README.md")
-
-  config_keys.map(&:to_s).each do |key|
-    # match options
-    expect(bin_file).to(match(key))
-    matched = false
-    readme.each_line do |line|
-      next unless /\| `#{key}`/.match?(line)
-
-      matched = true
-      description = line.split("|")[2].strip
-      description.gsub!("A hash", "A comma-separated list")
-      description.gsub!("An array", "A comma-separated list")
-      description.gsub!(/\[(.+?)\]\(.+?\)/, '\1')
-      description.sub!(/\.$/, "")
-
-      # match README description for option
-      expect(help_output).to(include(description))
-    end
-
-    expect(matched).to(be(true), "Could not find `#{key}` explained in README!") unless matched
   end
 end

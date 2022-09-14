@@ -78,7 +78,7 @@ def capture_proofer_http(item, type, opts = {})
 end
 
 def make_bin(args)
-  stdout, stderr = Open3.capture3("#{RbConfig.ruby} bin/htmlproofer #{args}")
+  stdout, stderr = Open3.capture3("#{RbConfig.ruby} exe/htmlproofer #{args}")
   "#{stdout}\n#{stderr}".encode("UTF-8", invalid: :replace, undef: :replace)
 end
 

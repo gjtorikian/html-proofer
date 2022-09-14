@@ -30,7 +30,7 @@ module HTMLProofer
       @current_source = nil
       @current_filename = nil
 
-      @reporter = Reporter::Cli.new(logger: @logger)
+      @reporter = Reporter::Terminal.new(logger: @logger)
     end
 
     def run
