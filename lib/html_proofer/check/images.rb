@@ -3,7 +3,7 @@
 module HTMLProofer
   class Check
     class Images < HTMLProofer::Check
-      SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/.freeze
+      SCREEN_SHOT_REGEX = /Screen(?: |%20)Shot(?: |%20)\d+-\d+-\d+(?: |%20)at(?: |%20)\d+.\d+.\d+/
 
       def run
         @html.css("img, source").each do |node|

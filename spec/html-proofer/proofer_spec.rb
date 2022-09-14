@@ -18,7 +18,7 @@ describe HTMLProofer do
   describe "#files" do
     it "works for directory that ends with .html" do
       folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
-      proofer = HTMLProofer.check_directory(folder)
+      proofer = described_class.check_directory(folder)
       expect(proofer.files).to(eq([{ source: folder, path: "#{folder}/index.html" }]))
     end
   end
@@ -26,14 +26,14 @@ describe HTMLProofer do
   describe "#options" do
     it "strips out undesired Typhoeus options" do
       folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
-      proofer = HTMLProofer.check_file(folder, verbose: true)
+      proofer = described_class.check_file(folder, verbose: true)
       expect(proofer.options[:verbose]).to(be(true))
       expect(proofer.options[:typhoeus][:verbose]).to(be_nil)
     end
 
     it "takes options for Parallel" do
       folder = File.join(FIXTURES_DIR, "links", "_site/folder.html")
-      proofer = HTMLProofer.check_file(folder, parallel: { in_processes: 3 })
+      proofer = described_class.check_file(folder, parallel: { in_processes: 3 })
       expect(proofer.options[:parallel][:in_processes]).to(eq(3))
       expect(proofer.options[:typhoeus][:in_processes]).to(be_nil)
     end

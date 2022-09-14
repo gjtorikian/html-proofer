@@ -3,28 +3,25 @@
 require "spec_helper"
 
 describe HTMLProofer::Element do
-  before(:each) do
-    @runner = HTMLProofer::Runner.new("")
-    # @check = HTMLProofer::Check.new('', '', Nokogiri::HTML5(''), nil, nil, HTMLProofer::Configuration::PROOFER_DEFAULTS)
-  end
+  let(:runner) { HTMLProofer::Runner.new("") }
 
   describe "#initialize" do
     it "accepts the xmlns attribute" do
       nokogiri = Nokogiri::HTML5('<a xmlns:cc="http://creativecommons.org/ns#">Creative Commons</a>')
-      element = HTMLProofer::Element.new(@runner, nokogiri.css("a").first)
+      element = described_class.new(runner, nokogiri.css("a").first)
       expect(element.node["xmlns:cc"]).to(eq("http://creativecommons.org/ns#"))
     end
 
     it "assignes the text node" do
       nokogiri = Nokogiri::HTML5("<p>One")
-      element = HTMLProofer::Element.new(@runner, nokogiri.css("p").first)
+      element = described_class.new(runner, nokogiri.css("p").first)
       expect(element.node.text).to(eq("One"))
       expect(element.node.content).to(eq("One"))
     end
 
     it "accepts the content attribute" do
       nokogiri = Nokogiri::HTML5('<meta name="twitter:card" content="summary">')
-      element = HTMLProofer::Element.new(@runner, nokogiri.css("meta").first)
+      element = described_class.new(runner, nokogiri.css("meta").first)
       expect(element.node["content"]).to(eq("summary"))
     end
   end
@@ -32,7 +29,7 @@ describe HTMLProofer::Element do
   describe "#link_attribute" do
     it "works for src attributes" do
       nokogiri = Nokogiri::HTML5("<img src=image.png />")
-      element = HTMLProofer::Element.new(@runner, nokogiri.css("img").first)
+      element = described_class.new(runner, nokogiri.css("img").first)
       expect(element.url.to_s).to(eq("image.png"))
     end
   end
@@ -40,8 +37,8 @@ describe HTMLProofer::Element do
   describe "#ignore" do
     it "works for twitter cards" do
       nokogiri = Nokogiri::HTML5('<meta name="twitter:url" data-proofer-ignore content="http://example.com/soon-to-be-published-url">')
-      element = HTMLProofer::Element.new(@runner, nokogiri.css("meta").first)
-      expect(element.ignore?).to(eq(true))
+      element = described_class.new(runner, nokogiri.css("meta").first)
+      expect(element.ignore?).to(be(true))
     end
   end
 
