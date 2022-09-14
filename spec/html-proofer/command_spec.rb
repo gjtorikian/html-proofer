@@ -200,7 +200,7 @@ describe HTMLProofer::CLI do
     expect(output).to(match("successfully"))
   end
 
-  context "nested options" do
+  context "when including nested options" do
     it "supports typhoeus" do
       link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
       output = make_bin(" --typhoeus '{ \"followlocation\": false }' #{link_with_redirect_filepath}")
