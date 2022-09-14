@@ -156,7 +156,7 @@ describe HTMLProofer::CLI do
     broken = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
     output = make_bin("--ignore-status-codes 404 #{broken}")
     expect(output).to(match("successfully"))
-  end
+  end if ci?
 
   it "works with ignore-urls" do
     ignorable_links = File.join(FIXTURES_DIR, "links", "ignorable_links_via_options.html")
@@ -207,7 +207,7 @@ describe HTMLProofer::CLI do
   context "nested options" do
     it "supports typhoeus" do
       link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
-      output = make_bin("#{link_with_redirect_filepath} --typhoeus '{ \"followlocation\": false }'")
+      output = make_bin(" --typhoeus '{ \"followlocation\": false }' #{link_with_redirect_filepath}")
       expect(output).to(match(/failed/))
     end
 

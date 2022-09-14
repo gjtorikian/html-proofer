@@ -92,6 +92,10 @@ def make_cassette_name(file, opts)
   filename
 end
 
+def ci?
+  ENV.fetch("CI", false)
+end
+
 VCR.configure do |config|
   config.cassette_library_dir = File.join(FIXTURES_DIR, "vcr_cassettes")
   config.hook_into(:typhoeus)

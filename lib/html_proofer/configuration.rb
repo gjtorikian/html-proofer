@@ -77,14 +77,6 @@ module HTMLProofer
       [@options, input]
     end
 
-    def to_regex?(item)
-      if item.start_with?("/") && item.end_with?("/")
-        Regexp.new(item[1...-1])
-      else
-        item
-      end
-    end
-
     private def define_options
       OptionParser.new do |opts|
         opts.banner = "Usage: htmlproofer [options] PATH/LINK"
@@ -95,8 +87,8 @@ module HTMLProofer
         #   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
         section(opts, "Input Options") do
-          set_option(opts, "--as-links") do |long_opt_symbol, arg|
-            @options[long_opt_symbol] = arg
+          set_option(opts, "--as-links [LINK1,LINK2,...]") do |long_opt_symbol, list|
+            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
           end
 
           set_option(opts, "--assume-extension EXT") do |long_opt_symbol, arg|
@@ -145,14 +137,6 @@ module HTMLProofer
             @options[long_opt_symbol] = arg
           end
 
-          set_option(opts, "--[no-]ignore-empty-alt") do |long_opt_symbol, arg|
-            @options[long_opt_symbol] = arg
-          end
-
-          set_option(opts, "--[no-]ignore-empty-mailto") do |long_opt_symbol, arg|
-            @options[long_opt_symbol] = arg
-          end
-
           set_option(opts, "--root-dir <DIR>") do |long_opt_symbol, arg|
             @options[long_opt_symbol] = arg
           end
@@ -163,16 +147,30 @@ module HTMLProofer
             @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
           end
 
-          set_option(opts, "--ignore-missing-alt") do |long_opt_symbol, list|
-            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
+          set_option(opts, "--[no-]ignore-empty-alt") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = arg
+          end
+
+          set_option(opts, "--[no-]ignore-empty-mailto") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = arg
+          end
+
+          set_option(opts, "--[no-]ignore-missing-alt") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = arg
           end
 
           set_option(opts, "--ignore-status-codes [500,401,420,...]") do |long_opt_symbol, list|
             @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
           end
 
-          set_option(opts, "---ignore-urls [URL1, URL2,...]") do |long_opt_symbol, list|
-            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
+          set_option(opts, "--ignore-urls [URL1, URL2,...]") do |long_opt_symbol, list|
+            @options[long_opt_symbol] = if list.nil?
+              []
+            else
+              list.split(",").each_with_object([]) do |url, arr|
+                arr << to_regex?(url)
+              end
+            end
           end
 
           set_option(opts, "--only-status-codes [404,451,...]") do |long_opt_symbol, list|
@@ -182,7 +180,7 @@ module HTMLProofer
 
         section(opts, "Transforms Configuration") do
           set_option(opts, "--swap-attributes <CONFIG>") do |long_opt_symbol, arg|
-            @options[long_opt_symbol] = HTMLProofer::Configuration.parse_json_option("swap-attributes", arg)
+            @options[long_opt_symbol] = parse_json_option("swap-attributes", arg)
           end
         end
 
@@ -207,20 +205,24 @@ module HTMLProofer
         end
 
         #   p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
-
-        #     # some minor manipulation of a special option
-        #     unless opts['swap_urls'].nil?
-        #       options[:swap_urls] = {}
-        #       opts['swap_urls'].each do |s|
-        #         splt = s.split(/(?<!\\):/, 2)
-
-        #         re = splt[0].gsub(/\\:/, ':')
-        #         string = splt[1].gsub(/\\:/, ':')
-        #         options[:swap_urls][Regexp.new(re)] = string
-        #       end
-        #     end
       end
     end
+
+    private def to_regex?(item)
+      if item.start_with?("/") && item.end_with?("/")
+        Regexp.new(item[1...-1])
+      else
+        item
+      end
+    end
+
+    # private def str_to_regexp(str)
+    #   split = str.split(/(?<!\\):/, 2)
+
+    #   re = split[0].gsub(/\\:/, ":")
+    #   string = split[1].gsub(/\\:/, ":")
+    #   { key: [Regexp.new(re)], value: string }
+    # end
 
     private def section(opts, heading, &_block)
       opts.separator("\n#{heading}:\n")
@@ -229,8 +231,10 @@ module HTMLProofer
 
     private def set_option(opts, long_arg, &block)
       long_opt_symbol = parse_long_opt(long_arg)
-      description = ConfigurationHelp::TEXT[long_opt_symbol]
-      opts.on(long_arg, description) do |arg|
+      args = []
+      args += Array(ConfigurationHelp::TEXT[long_opt_symbol])
+
+      opts.on(long_arg, *args) do |arg|
         yield long_opt_symbol, arg
       end
     end
@@ -241,7 +245,7 @@ module HTMLProofer
       long_opt[2..].sub("[no-]", "").sub(/ .*/, "").tr("-", "_").gsub(/[\[\]]/, "").to_sym
     end
 
-    private def parse_json_option(option_name, config, symbolize_names: true)
+    def parse_json_option(option_name, config, symbolize_names: true)
       raise ArgumentError, "Must provide an option name in string format." unless option_name.is_a?(String)
       raise ArgumentError, "Must provide an option name in string format." if option_name.strip.empty?
 
@@ -264,12 +268,14 @@ module HTMLProofer
         assume_extension: ["Automatically add specified extension to files for internal links, ",
                            "to allow extensionless URLs (as supported by most servers) (default: `.html`).",],
         directory_index_file: ["Sets the file to look for when a link refers to a directory. (default: `index.html`)."],
-        extensions: ["A comma-separated list of Strings indicating the file extensions you would like to check (default: `.html`)"],
+        extensions: ["A comma-separated list of Strings indicating the file extensions you",
+                     "would like to check (default: `.html`)",],
 
         allow_hash_href: ['"If `true`, assumes `href="#"` anchors are valid (default: `true`)"'],
         allow_missing_href: ["If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically ",
                              "allowed, but could also be human error. (default: `false`)",],
-        checks: ["A comma-separated list of Strings indicating which checks you want to run (default: `[\"Links\", \"Images\", \"Scripts\"]"],
+        checks: ["A comma-separated list of Strings indicating which checks you",
+                 "want to run (default: `[\"Links\", \"Images\", \"Scripts\"]",],
         check_external_hash: ["Checks whether external hashes exist (even if the webpage exists) (default: `true`)."],
         check_internal_hash: ["Checks whether internal hashes exist (even if the webpage exists) (default: `true`)."],
         check_sri: ["Check that `<link>` and `<script>` external resources use SRI (default: `false`)."],
@@ -277,22 +283,27 @@ module HTMLProofer
         enforce_https: ["Fails a link if it\'s not marked as `https` (default: `true`)."],
         root_dir: ["The absolute path to the directory serving your html-files."],
 
-        ignore_empty_alt: ["If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt=\"\">`",
+        ignore_empty_alt: ["If `true`, ignores images with empty/missing ",
+                           "alt tags (in other words, `<img alt>` and `<img alt=\"\">`",
                            "are valid; set this to `false` to flag those) (default: `true`).",],
-        ignore_empty_mailto: ["If `true`, allows `mailto:` `href`s which do not contain an email address (default: `false`)'."],
+        ignore_empty_mailto: ["If `true`, allows `mailto:` `href`s which don't",
+                              "contain an email address (default: `false`)'.",],
         ignore_missing_alt: ["If `true`, ignores images with missing alt tags (default: `false`)."],
         ignore_status_codes: ["A comma-separated list of numbers representing status codes to ignore."],
-        ignore_file: ["A comma-separated list of Strings or RegExps containing file paths that are safe to ignore"],
-        ignore_urls: ["A comma-separated list of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images."],
+        ignore_files: ["A comma-separated list of Strings or RegExps containing file paths that are safe to ignore"],
+        ignore_urls: ["A comma-separated list of Strings or RegExps containing URLs that are",
+                      "safe to ignore. This affects all HTML attributes, such as `alt` tags on images.",],
         only_status_codes: ["A comma-separated list of numbers representing the only status codes to report on."],
 
-        swap_attributes: ["JSON-formatted config that maps element names to the preferred attribute to check (default: `{}`)."],
+        swap_attributes: ["JSON-formatted config that maps element names to the",
+                          "preferred attribute to check (default: `{}`).",],
 
-        typhoeus: ["JSON-formatted string of Typhoeus config. Will override the html-proofer defaults."],
-        hydra: ["JSON-formatted string of Hydra config. Will override the html-proofer defaults."],
-        cache: ["JSON-formatted string of cache config. Will override the html-proofer defaults."],
+        typhoeus: ["JSON-formatted string of Typhoeus config; if set, overrides the html-proofer defaults."],
+        hydra: ["JSON-formatted string of Hydra config; if set, overrides the html-proofer defaults."],
+        cache: ["JSON-formatted string of cache config; if set, overrides the html-proofer defaults."],
 
-        log_level: ["Sets the logging level. One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. (default: `:info`)"],
+        log_level: ["Sets the logging level. One of `:debug`, `:info`, ",
+                    "`:warn`, `:error`, or `:fatal`. (default: `:info`)",],
       }.freeze
     end
   end
