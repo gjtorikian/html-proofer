@@ -238,13 +238,13 @@ describe "Images test" do
 
   it "works for images with a swapped data attribute src" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
-    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["src", "data-src"]] })
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["data-src", "src"]] })
     expect(proofer.failed_checks).to(eq([]))
   end
 
   it "breaks for images with a swapped attribute that does not exist" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
-    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["src", "foobar"]] })
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["foobar", "src"]] })
     expect(proofer.failed_checks.length).to(eq(1))
   end
 

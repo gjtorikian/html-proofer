@@ -13,5 +13,5 @@ cli = HTMLProofer::CLI.new
 
 time = Benchmark.realtime { exit_status = cli.run }
 
-puts "Finished in #{time} seconds"
+puts "Finished in #{time.round(2)} seconds"
 exit exit_status

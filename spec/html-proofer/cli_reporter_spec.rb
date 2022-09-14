@@ -5,10 +5,19 @@ require "spec_helper"
 describe HTMLProofer::Reporter::Terminal do
   describe "report" do
     it "reports all issues accurately" do
-      errors = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
-      output = capture_proofer_output(errors, :file, checks: ["Links", "Images", "Scripts", "Favicon"], ignore_missing_alt: false)
+      error_file = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
+      output = make_bin("--checks Links,Images,Scripts,Favicon --no-ignore-missing-alt #{error_file}")
 
       msg = <<~MSG
+        Running 4 checks (Scripts, Links, Images, Favicon) in spec/html-proofer/fixtures/sorting/kitchen_sinkish.html on *.html files ...
+
+
+        Checking 1 external link
+        Checking 1 internal link
+        Ran on 1 file!
+
+
+
         For the Favicon check, the following failures were found:
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:
@@ -19,11 +28,11 @@ describe HTMLProofer::Reporter::Terminal do
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:5:
 
-          internal image ./gpl.png does not exist
+          image ./gpl.png does not have an alt attribute
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:5:
 
-          image ./gpl.png does not have an alt attribute
+          internal image ./gpl.png does not exist
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:6:
 
@@ -31,11 +40,11 @@ describe HTMLProofer::Reporter::Terminal do
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:10:
 
-          internal image gpl.png does not exist
+          image gpl.png does not have an alt attribute
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:10:
 
-          image gpl.png does not have an alt attribute
+          internal image gpl.png does not exist
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:12:
 
@@ -79,22 +88,33 @@ describe HTMLProofer::Reporter::Terminal do
     end
 
     it "reports as-links accurately" do
-      output = capture_proofer_output(["www.github.com", "http://asdadsadsasdadaf.biz/"], :links)
+      output = make_bin("--as-links www.github.com,http://asdadsadsasdadaf.biz/")
 
       msg = <<~MSG
+        Running 1 check (LinkCheck) on ["www.github.com", "http://asdadsadsasdadaf.biz/"] ...
+
+
+        Checking 2 external links
+
         For the Links > External check, the following failures were found:
 
         * External link http://asdadsadsasdadaf.biz/ failed with something very wrong.
         It's possible libcurl couldn't connect to the server, or perhaps the request timed out.
-        Sometimes, making too many requests at once also breaks things.
-
-        Either way, the return message from the server is: OK (status code 0)
+        Sometimes, making too many requests at once also breaks things. (status code 0)
 
 
         HTML-Proofer found 1 failure!
       MSG
 
       expect(output).to(match(msg))
+    end
+
+    it "works with multiple directories" do
+      dirs = [File.join(FIXTURES_DIR, "links", "_site"), File.join(FIXTURES_DIR, "images", "webp")].join(" ")
+      output = make_bin(dirs)
+
+      expect(output).to(match("spec/html-proofer/fixtures/links/_site"))
+      expect(output).to(match("spec/html-proofer/fixtures/images/webp"))
     end
   end
 end

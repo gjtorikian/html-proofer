@@ -37,11 +37,11 @@ module HTMLProofer
       check_text = pluralize(checks.length, "check", "checks")
 
       if @type == :links
-        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n")
+        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ...\n\n")
         check_list_of_links unless @options[:disable_external]
       else
         @logger.log(:info,
-          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files...\n\n")
+          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files ...\n\n")
 
         check_files
         @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")

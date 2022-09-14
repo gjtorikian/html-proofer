@@ -14,6 +14,7 @@ module HTMLProofer
       @options, path = HTMLProofer::Configuration.new.parse_cli_options(args)
 
       paths = path.split(",")
+
       if @options[:as_links]
         links = path.split(",").map(&:strip)
         HTMLProofer.check_links(links, @options).run

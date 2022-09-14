@@ -10,3 +10,6 @@ Naming/FileName:
 
 RSpec/FilePath:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false

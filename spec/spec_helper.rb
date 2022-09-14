@@ -60,14 +60,6 @@ def run_proofer(item, type, opts = {})
   end
 end
 
-def capture_proofer_output(file, type, opts = {})
-  proofer = make_proofer(file, type, opts)
-  cassette_name = make_cassette_name(file, opts)
-  VCR.use_cassette(cassette_name, record: :new_episodes) do
-    capture_stderr { proofer.run }
-  end
-end
-
 def capture_proofer_http(item, type, opts = {})
   proofer = make_proofer(item, type, opts)
   cassette_name = make_cassette_name(item, opts)

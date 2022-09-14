@@ -190,7 +190,7 @@ describe HTMLProofer::CLI do
 
   it "works with swap-attributes" do
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "data_src_attribute.html")
-    output = make_bin("#{custom_data_src_check}  --swap-attributes '{\"img\": [[\"src\", \"data-src\"]] }'")
+    output = make_bin("--swap-attributes '{ \"img\": [[\"data-src\", \"src\"]] }' #{custom_data_src_check}")
     expect(output).to(match("successfully"))
   end
 
@@ -198,10 +198,6 @@ describe HTMLProofer::CLI do
     real_link = File.join(FIXTURES_DIR, "links", "root_folder/documentation-from-my-project/")
     output = make_bin("--root-dir #{File.join(FIXTURES_DIR, "links", "root_folder/")} #{real_link}")
     expect(output).to(match("successfully"))
-  end
-
-  it "has every option for proofer defaults" do
-    match_command_help(HTMLProofer::Configuration::PROOFER_DEFAULTS)
   end
 
   context "nested options" do

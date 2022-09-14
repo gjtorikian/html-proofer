@@ -72,7 +72,7 @@ module HTMLProofer
     def parse_cli_options(args)
       define_options.parse!(args)
 
-      input = ARGV.empty? ? "." : ARGV.first
+      input = ARGV.empty? ? "." : ARGV.join(",")
 
       [@options, input]
     end
@@ -87,8 +87,8 @@ module HTMLProofer
         #   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
         section(opts, "Input Options") do
-          set_option(opts, "--as-links [LINK1,LINK2,...]") do |long_opt_symbol, list|
-            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
+          set_option(opts, "--as-links") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = arg
           end
 
           set_option(opts, "--assume-extension EXT") do |long_opt_symbol, arg|
@@ -176,11 +176,19 @@ module HTMLProofer
           set_option(opts, "--only-status-codes [404,451,...]") do |long_opt_symbol, list|
             @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
           end
+
+          set_option(opts, "--only-4xx") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = arg
+          end
         end
 
         section(opts, "Transforms Configuration") do
           set_option(opts, "--swap-attributes <CONFIG>") do |long_opt_symbol, arg|
-            @options[long_opt_symbol] = parse_json_option("swap-attributes", arg)
+            @options[long_opt_symbol] = parse_json_option("swap_attributes", arg, symbolize_names: false)
+          end
+
+          set_option(opts, "--swap-urls [re:string,re:string,...]") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = str_to_regexp_map(arg)
           end
         end
 
@@ -203,8 +211,6 @@ module HTMLProofer
             @options[long_opt_symbol] = arg.to_sym
           end
         end
-
-        #   p.option 'swap_urls', '--swap-urls re:string,[re:string,...]', Array, 'A comma-separated list containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. The escape sequences `\\:` should be used to produce literal `:`s.'
       end
     end
 
@@ -216,13 +222,15 @@ module HTMLProofer
       end
     end
 
-    # private def str_to_regexp(str)
-    #   split = str.split(/(?<!\\):/, 2)
+    private def str_to_regexp_map(arg)
+      arg.split(",").each_with_object({}) do |s, hsh|
+        split = s.split(/(?<!\\):/, 2)
 
-    #   re = split[0].gsub(/\\:/, ":")
-    #   string = split[1].gsub(/\\:/, ":")
-    #   { key: [Regexp.new(re)], value: string }
-    # end
+        re = split[0].gsub(/\\:/, ":")
+        string = split[1].gsub(/\\:/, ":")
+        hsh[Regexp.new(re)] = string
+      end
+    end
 
     private def section(opts, heading, &_block)
       opts.separator("\n#{heading}:\n")
@@ -294,9 +302,13 @@ module HTMLProofer
         ignore_urls: ["A comma-separated list of Strings or RegExps containing URLs that are",
                       "safe to ignore. This affects all HTML attributes, such as `alt` tags on images.",],
         only_status_codes: ["A comma-separated list of numbers representing the only status codes to report on."],
+        only_4xx: ["Only reports errors for links that fall within the 4xx status code range."],
 
         swap_attributes: ["JSON-formatted config that maps element names to the",
                           "preferred attribute to check (default: `{}`).",],
+        swap_urls: ["A comma-separated list containing key-value pairs of `RegExp => String`.",
+                    "It transforms URLs that match `RegExp` into `String` via `gsub`.",
+                    "The escape sequences `\\:` should be used to produce literal `:`s.",],
 
         typhoeus: ["JSON-formatted string of Typhoeus config; if set, overrides the html-proofer defaults."],
         hydra: ["JSON-formatted string of Hydra config; if set, overrides the html-proofer defaults."],
