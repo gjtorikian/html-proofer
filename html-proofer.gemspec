@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = ["htmlproofer"]
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = [">= 2.6.0", "< 4.0"]
+  spec.required_ruby_version = [">= 3.1", "< 4.0"]
 
   spec.metadata = {
     "funding_uri" => "https://github.com/sponsors/gjtorikian/",
