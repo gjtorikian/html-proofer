@@ -160,7 +160,7 @@ module HTMLProofer
           end
 
           set_option(opts, "--ignore-status-codes [500,401,420,...]") do |long_opt_symbol, list|
-            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
+            @options[long_opt_symbol] = list.nil? ? [] : list.split(",").map(&:to_i)
           end
 
           set_option(opts, "--ignore-urls [URL1, URL2,...]") do |long_opt_symbol, list|

@@ -238,7 +238,7 @@ module HTMLProofer
     private def format_checks_list(checks)
       checks.map do |check|
         check.sub(/HTMLProofer::Check::/, "")
-      end.join(", ")
+      end.sort.join(", ")
     end
   end
 end

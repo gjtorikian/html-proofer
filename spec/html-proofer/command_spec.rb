@@ -153,10 +153,10 @@ describe HTMLProofer::CLI do
   end
 
   it "works with ignore-status-codes" do
-    broken = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
+    broken = File.join(FIXTURES_DIR, "links", "404_link.html")
     output = make_bin("--ignore-status-codes 404 #{broken}")
     expect(output).to(match("successfully"))
-  end if ci?
+  end
 
   it "works with ignore-urls" do
     ignorable_links = File.join(FIXTURES_DIR, "links", "ignorable_links_via_options.html")
