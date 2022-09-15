@@ -187,7 +187,7 @@ For something like `url-ignore`, and other options that require an array of regu
 you can pass in a syntax like this:
 
 ``` bash
-htmlproofer --ignore-urls "/www.github.com/,/foo.com/" ./out
+htmlproofer --url-ignore "/www.github.com/,/foo.com/" ./out
 ```
 
 Since `swap_urls` is a bit special, you'll pass in a pair of `RegEx:String`
@@ -195,7 +195,7 @@ values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
 ``` bash
-htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --ignore-urls www.github.com ./out
+htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --url-ignore www.github.com ./out
 ```
 
 Some configuration options--such as `--typheous`, `--cache`, or `--attribute-swap`--require well-formatted JSON.
