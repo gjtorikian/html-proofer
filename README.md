@@ -198,7 +198,7 @@ values. The escape sequences `\:` should be used to produce literal
 htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --ignore-urls www.github.com ./out
 ```
 
-Some configuration options--such as `--typheous`, `--cache`, or `--attribute-swap`--require well-formatted JSON.
+Some configuration options, such as `--typheous`, `--cache`, or `--swap-attributes`, require well-formatted JSON.
 
 #### Adjusting for a `baseurl`
 
