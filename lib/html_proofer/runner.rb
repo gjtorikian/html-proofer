@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "async"
+
 module HTMLProofer
   class Runner
     include HTMLProofer::Utils
@@ -43,7 +45,7 @@ module HTMLProofer
         @logger.log(:info,
           "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files ...\n\n")
 
-        check_files
+        process_files
         @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
       end
 
@@ -71,24 +73,23 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     # Sends the collected external URLs to Typhoeus for batch processing.
-    def check_files
-      process_files.each do |result|
-        URL_TYPES.each do |url_type|
-          type = :"#{url_type}_urls"
-          ivar_name = "@#{type}"
-          ivar = instance_variable_get(ivar_name)
+    def check_file(result)
+      URL_TYPES.each do |url_type|
+        type = :"#{url_type}_urls"
+        ivar_name = "@#{type}"
+        ivar = instance_variable_get(ivar_name)
 
-          if ivar.empty?
-            instance_variable_set(ivar_name, result[type])
-          else
-            result[type].each do |url, metadata|
-              ivar[url] = [] if ivar[url].nil?
-              ivar[url].concat(metadata)
-            end
+        if ivar.empty?
+          instance_variable_set(ivar_name, result[type])
+        else
+          result[type].each do |url, metadata|
+            ivar[url] = [] if ivar[url].nil?
+            ivar[url].concat(metadata)
           end
         end
-        @failures.concat(result[:failures])
       end
+
+      @failures.concat(result[:failures])
 
       validate_external_urls unless @options[:disable_external]
 
@@ -97,11 +98,12 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
-      if @options[:parallel][:enable]
-        Parallel.map(files, @options[:parallel]) { |file| load_file(file[:path], file[:source]) }
-      else
-        files.map do |file|
-          load_file(file[:path], file[:source])
+      Async do |task|
+        files.each do |file|
+          task.async do
+            file = load_file(file[:path], file[:source])
+            check_file(file)
+          end
         end
       end
     end
