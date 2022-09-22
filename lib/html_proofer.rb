@@ -25,7 +25,7 @@ module HTMLProofer
       raise ArgumentError unless file.is_a?(String)
       raise ArgumentError, "#{file} does not exist" unless File.exist?(file)
 
-      options[:type] = :file
+      options = prepare_options(options, :file)
       HTMLProofer::Runner.new(file, options)
     end
 
@@ -33,14 +33,14 @@ module HTMLProofer
       raise ArgumentError unless directory.is_a?(String)
       raise ArgumentError, "#{directory} does not exist" unless Dir.exist?(directory)
 
-      options[:type] = :directory
+      options = prepare_options(options, :directory)
       HTMLProofer::Runner.new([directory], options)
     end
 
     def check_directories(directories, options = {})
       raise ArgumentError unless directories.is_a?(Array)
 
-      options[:type] = :directory
+      options = prepare_options(options, :directory)
       directories.each do |directory|
         raise ArgumentError, "#{directory} does not exist" unless Dir.exist?(directory)
       end
@@ -50,8 +50,19 @@ module HTMLProofer
     def check_links(links, options = {})
       raise ArgumentError unless links.is_a?(Array)
 
-      options[:type] = :links
+      options = prepare_options(options, :links)
       HTMLProofer::Runner.new(links, options)
+    end
+
+    private
+
+    def prepare_options(options, type)
+      options = {} if options.nil?
+
+      raise ArgumentError, "Options must be a Hash" unless options.is_a?(Hash)
+
+      options[:type] = type
+      options
     end
   end
 end
