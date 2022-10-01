@@ -3,6 +3,10 @@
 require "spec_helper"
 
 describe "Links test" do
+  unicode_file = File.join(FIXTURES_DIR, "links", "erstiebegrüßung.html")
+  before(:all) { File.open(unicode_file, "w") {} }
+  after(:all) { File.delete(unicode_file) }
+
   it "fails for broken internal hash (even if the file exists)" do
     broken_hash_external_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_external_file.html")
     proofer = run_proofer(broken_hash_external_filepath, :file)
