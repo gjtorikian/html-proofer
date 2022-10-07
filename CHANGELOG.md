@@ -2,7 +2,80 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.2.0...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.1...HEAD)
+
+**Closed issues:**
+
+- `erstiebegrüßung.html` causing problems on macOS [\#771](https://github.com/gjtorikian/html-proofer/issues/771)
+- HTMLProofer times out [\#768](https://github.com/gjtorikian/html-proofer/issues/768)
+
+**Merged pull requests:**
+
+- Create erstiebegrüßung.html from code [\#772](https://github.com/gjtorikian/html-proofer/pull/772) ([asbjornu](https://github.com/asbjornu))
+- Validate options [\#767](https://github.com/gjtorikian/html-proofer/pull/767) ([asbjornu](https://github.com/asbjornu))
+
+## [v4.4.1](https://github.com/gjtorikian/html-proofer/tree/v4.4.1) (2022-09-25)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.0...v4.4.1)
+
+**Closed issues:**
+
+- Custom `Checker` class is not executed [\#764](https://github.com/gjtorikian/html-proofer/issues/764)
+- `--cache` unvailable in CLI [\#763](https://github.com/gjtorikian/html-proofer/issues/763)
+- `--parallel` unavailable in CLI [\#762](https://github.com/gjtorikian/html-proofer/issues/762)
+- HTMLproofer does not properly ignore links [\#756](https://github.com/gjtorikian/html-proofer/issues/756)
+- Mailto check failed in some cases [\#754](https://github.com/gjtorikian/html-proofer/issues/754)
+
+**Merged pull requests:**
+
+- Optimize checking internal link hashes in target files [\#770](https://github.com/gjtorikian/html-proofer/pull/770) ([riccardoporreca](https://github.com/riccardoporreca))
+- Fix `--swap-attributes` CLI argument in README [\#765](https://github.com/gjtorikian/html-proofer/pull/765) ([mark-monteiro](https://github.com/mark-monteiro))
+- Fix and improve swap\_attribute README example [\#755](https://github.com/gjtorikian/html-proofer/pull/755) ([riccardoporreca](https://github.com/riccardoporreca))
+
+## [v4.4.0](https://github.com/gjtorikian/html-proofer/tree/v4.4.0) (2022-08-13)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.3.2...v4.4.0)
+
+**Closed issues:**
+
+- `--assume_extension` unexpected behaviour [\#751](https://github.com/gjtorikian/html-proofer/issues/751)
+- Protocol-relative \(no `http(s):`\) URL issue: Script cache issue and anti-pattern consideration [\#750](https://github.com/gjtorikian/html-proofer/issues/750)
+- Questions on command-line options in 4.x [\#749](https://github.com/gjtorikian/html-proofer/issues/749)
+
+**Merged pull requests:**
+
+- Fail on protocol-relative urls [\#752](https://github.com/gjtorikian/html-proofer/pull/752) ([riccardoporreca](https://github.com/riccardoporreca))
+
+## [v4.3.2](https://github.com/gjtorikian/html-proofer/tree/v4.3.2) (2022-08-03)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.3.1...v4.3.2)
+
+**Closed issues:**
+
+- 4.3.1 Ignoring options [\#748](https://github.com/gjtorikian/html-proofer/issues/748)
+- Link checker triggered for href="" [\#746](https://github.com/gjtorikian/html-proofer/issues/746)
+- Passing RegExp to `--ignore-url` broken after v4.2.0 release [\#745](https://github.com/gjtorikian/html-proofer/issues/745)
+
+**Merged pull requests:**
+
+- Switch 'source' elements to use image check code path [\#747](https://github.com/gjtorikian/html-proofer/pull/747) ([fallax](https://github.com/fallax))
+
+## [v4.3.1](https://github.com/gjtorikian/html-proofer/tree/v4.3.1) (2022-07-29)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.3.0...v4.3.1)
+
+**Closed issues:**
+
+- ignore\_files no longer works with regex [\#743](https://github.com/gjtorikian/html-proofer/issues/743)
+- Empty mailto is generating undesired errors. [\#742](https://github.com/gjtorikian/html-proofer/issues/742)
+
+**Merged pull requests:**
+
+- Srcsets - better handling of multiple srcsets [\#744](https://github.com/gjtorikian/html-proofer/pull/744) ([fallax](https://github.com/fallax))
+
+## [v4.3.0](https://github.com/gjtorikian/html-proofer/tree/v4.3.0) (2022-07-26)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.2.0...v4.3.0)
 
 **Closed issues:**
 
