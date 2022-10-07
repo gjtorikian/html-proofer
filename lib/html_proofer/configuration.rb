@@ -49,6 +49,8 @@ module HTMLProofer
 
     class << self
       def generate_defaults(opts)
+        validate_options(default_options, opts)
+
         options = PROOFER_DEFAULTS.merge(opts)
 
         options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
@@ -84,6 +86,24 @@ module HTMLProofer
           JSON.parse(config, { symbolize_names: symbolize_names })
         rescue StandardError
           raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
+        end
+      end
+
+      private
+
+      def default_options
+        PROOFER_DEFAULTS.merge(typhoeus: TYPHOEUS_DEFAULTS).merge(hydra: HYDRA_DEFAULTS).merge(parallel: PARALLEL_DEFAULTS)
+      end
+
+      def validate_options(defaults, options)
+        defaults.each do |key, default_value|
+          next unless options.key?(key)
+
+          value = options[key]
+          raise TypeError, "Invalid value for '#{key}': '#{value}'. Expected #{default_value.class}." unless value.is_a?(default_value.class)
+
+          # Iterate over nested hashes
+          validate_options(default_value, value) if default_value.is_a?(Hash)
         end
       end
     end
