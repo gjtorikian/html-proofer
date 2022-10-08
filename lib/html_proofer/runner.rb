@@ -45,7 +45,7 @@ module HTMLProofer
         @logger.log(:info,
           "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files ...\n\n")
 
-        process_files
+        check_files
         @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
       end
 
@@ -73,23 +73,24 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     # Sends the collected external URLs to Typhoeus for batch processing.
-    def check_file(result)
-      URL_TYPES.each do |url_type|
-        type = :"#{url_type}_urls"
-        ivar_name = "@#{type}"
-        ivar = instance_variable_get(ivar_name)
+    def check_files
+      process_files.each do |result|
+        URL_TYPES.each do |url_type|
+          type = :"#{url_type}_urls"
+          ivar_name = "@#{type}"
+          ivar = instance_variable_get(ivar_name)
 
-        if ivar.empty?
-          instance_variable_set(ivar_name, result[type])
-        else
-          result[type].each do |url, metadata|
-            ivar[url] = [] if ivar[url].nil?
-            ivar[url].concat(metadata)
+          if ivar.empty?
+            instance_variable_set(ivar_name, result[type])
+          else
+            result[type].each do |url, metadata|
+              ivar[url] = [] if ivar[url].nil?
+              ivar[url].concat(metadata)
+            end
           end
         end
+        @failures.concat(result[:failures])
       end
-
-      @failures.concat(result[:failures])
 
       validate_external_urls unless @options[:disable_external]
 
@@ -98,14 +99,15 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
-      Async do |task|
-        files.each do |file|
+      loaded_files = []
+      files.each do |file|
+        Async do |task|
           task.async do
-            file = load_file(file[:path], file[:source])
-            check_file(file)
+            loaded_files << load_file(file[:path], file[:source])
           end
         end
       end
+      loaded_files
     end
 
     def load_file(path, source)
