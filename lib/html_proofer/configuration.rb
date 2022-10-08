@@ -75,11 +75,6 @@ module HTMLProofer
     private def define_options
       OptionParser.new do |opts|
         opts.banner = "Usage: htmlproofer [options] PATH/LINK"
-        # p.version(HTMLProofer::VERSION)
-        #   p.description %(Test your rendered HTML files to make sure they're accurate.)
-        #   p.syntax 'htmlproofer PATH [options]'
-
-        #   p.description 'Runs the HTML-Proofer suite on the files in PATH. For more details, see the README.'
 
         section(opts, "Input Options") do
           set_option(opts, "--as-links") do |long_opt_symbol, arg|
@@ -206,6 +201,13 @@ module HTMLProofer
             @options[long_opt_symbol] = arg.to_sym
           end
         end
+
+        section(opts, "General Configuration") do
+          set_option(opts, "--version") do
+            puts HTMLProofer::VERSION
+            exit(0)
+          end
+        end
       end
     end
 
@@ -311,6 +313,8 @@ module HTMLProofer
 
         log_level: ["Sets the logging level. One of `:debug`, `:info`, ",
                     "`:warn`, `:error`, or `:fatal`. (default: `:info`)",],
+
+        version: ["Prints the version of html-proofer."],
       }.freeze
     end
   end
