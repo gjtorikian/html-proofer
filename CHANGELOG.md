@@ -2,7 +2,22 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.2...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.3...HEAD)
+
+**Closed issues:**
+
+- Options validation breaking for booleans [\#773](https://github.com/gjtorikian/html-proofer/issues/773)
+
+**Merged pull requests:**
+
+- Native async [\#766](https://github.com/gjtorikian/html-proofer/pull/766) ([gjtorikian](https://github.com/gjtorikian))
+- Lock to \>= Ruby 3.1 [\#760](https://github.com/gjtorikian/html-proofer/pull/760) ([gjtorikian](https://github.com/gjtorikian))
+- V5 [\#759](https://github.com/gjtorikian/html-proofer/pull/759) ([gjtorikian](https://github.com/gjtorikian))
+- CLI Args: A New Hope [\#758](https://github.com/gjtorikian/html-proofer/pull/758) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v4.4.3](https://github.com/gjtorikian/html-proofer/tree/v4.4.3) (2022-10-08)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.2...v4.4.3)
 
 **Merged pull requests:**
 
