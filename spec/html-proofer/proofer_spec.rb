@@ -44,29 +44,6 @@ describe HTMLProofer do
         typhoeus: { verbose: true, headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" } })
       expect(http["request"]["headers"]["User-Agent"]).to(eq(["Mozilla/5.0 (compatible; My New User-Agent)"]))
     end
-
-    it "does not fail on nil options" do
-      github_hash = File.join(FIXTURES_DIR, "links", "github_hash.html")
-      HTMLProofer.check_file(github_hash, nil)
-    end
-
-    it "fails with friendly error on non-Hash options" do
-      links_dir = File.join(FIXTURES_DIR, "links")
-      expect { HTMLProofer.check_directory(links_dir, "abc") }.to(raise_error(ArgumentError, "Options must be a Hash"))
-    end
-
-    it "fails with friendly error on invalid option values" do
-      options = {
-        assume_extension: true,
-        typhoeus: "abc",
-        enforce_https: :yes_please,
-        hydra: { max_concurrency: false },
-      }
-      options.each do |key, value|
-        links_dir = File.join(FIXTURES_DIR, "links")
-        expect { HTMLProofer.check_directory(links_dir, key => value).run }.to(raise_error(TypeError, /^Invalid value for '.*': '.*'\. Expected .*\./))
-      end
-    end
   end
 
   describe "file ignores" do
