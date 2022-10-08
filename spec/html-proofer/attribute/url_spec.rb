@@ -3,48 +3,46 @@
 require "spec_helper"
 
 describe HTMLProofer::Attribute::Url do
-  before(:each) do
-    @runner = HTMLProofer::Runner.new("")
-  end
+  let(:runner) { HTMLProofer::Runner.new("") }
 
   describe "#ignores_pattern_check" do
     it "works for regex patterns" do
-      @runner.options[:ignore_urls] = [%r{/assets/.*(js|css|png|svg)}]
-      url = HTMLProofer::Attribute::Url.new(@runner, "/assets/main.js")
-      expect(url.ignore?).to(eq(true))
+      runner.options[:ignore_urls] = [%r{/assets/.*(js|css|png|svg)}]
+      url = described_class.new(runner, "/assets/main.js")
+      expect(url.ignore?).to(be(true))
     end
 
     it "works for string patterns" do
-      @runner.options[:ignore_urls] = ["/assets/main.js"]
-      url = HTMLProofer::Attribute::Url.new(@runner, "/assets/main.js")
-      expect(url.ignore?).to(eq(true))
+      runner.options[:ignore_urls] = ["/assets/main.js"]
+      url = described_class.new(runner, "/assets/main.js")
+      expect(url.ignore?).to(be(true))
     end
   end
 
   describe "#protocol_relative" do
     it "works for protocol relative" do
-      url = HTMLProofer::Attribute::Url.new(@runner, "//assets/main.js")
-      expect(url.protocol_relative?).to(eq(true))
+      url = described_class.new(runner, "//assets/main.js")
+      expect(url.protocol_relative?).to(be(true))
     end
 
     it "works for https://" do
-      url = HTMLProofer::Attribute::Url.new(@runner, "https://assets/main.js")
-      expect(url.protocol_relative?).to(eq(false))
+      url = described_class.new(runner, "https://assets/main.js")
+      expect(url.protocol_relative?).to(be(false))
     end
 
     it "works for http://" do
-      url = HTMLProofer::Attribute::Url.new(@runner, "http://assets/main.js")
-      expect(url.protocol_relative?).to(eq(false))
+      url = described_class.new(runner, "http://assets/main.js")
+      expect(url.protocol_relative?).to(be(false))
     end
 
     it "works for relative internal link" do
-      url = HTMLProofer::Attribute::Url.new(@runner, "assets/main.js")
-      expect(url.protocol_relative?).to(eq(false))
+      url = described_class.new(runner, "assets/main.js")
+      expect(url.protocol_relative?).to(be(false))
     end
 
     it "works for absolute internal link" do
-      url = HTMLProofer::Attribute::Url.new(@runner, "/assets/main.js")
-      expect(url.protocol_relative?).to(eq(false))
+      url = described_class.new(runner, "/assets/main.js")
+      expect(url.protocol_relative?).to(be(false))
     end
   end
 end

@@ -1,7 +1,10 @@
 name: Ruby CI
 
 on:
+  pull_request:
   push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -16,9 +19,7 @@ jobs:
       fail-fast: true
       matrix:
         ruby-version:
-          - 3.1.0
-          - 3.0.0
-          - 2.7.6
+          - 3.1
         experimental: [false]
         include:
           - ruby-version: head

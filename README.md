@@ -149,18 +149,18 @@ HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 Sometimes, the information in your HTML is not the same as how your server serves content. In these cases, you can use `swap_urls` to map the URL in a file to the URL you'd like it to become. For example:
 
 ```ruby
-run_proofer(file, :file, swap_urls: { %r{^https//example.com}: 'https://website.com' })
+run_proofer(file, :file, swap_urls: { %r{^https//placeholder.com}: 'https://website.com' })
 ```
 
-In this case, any link that matches the `^https://example.com` will be converted to `https://website.com`.
+In this case, any link that matches the `^https://placeholder.com` will be converted to `https://website.com`.
 
 A similar swapping process can be done for attributes:
 
 ```ruby
-run_proofer(file, :file, swap_attributes: { 'img': [['src', 'data-src']] })
+run_proofer(file, :file, swap_attributes: { 'img': [['data-src', 'src']] })
 ```
 
-In this case, we are telling HTMLProofer that, for any `img` tag detected, and for any check using the `src` attribute, to use the `data-src` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need.
+In this case, we are telling HTMLProofer that, for any `img` tag detected, for any `src` attribute, pretend it's actually the `src` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need for each element.
 
 ### Using on the command-line
 
@@ -172,7 +172,7 @@ Pass in options through the command-line as flags, like this:
 htmlproofer --extensions .html.erb ./out
 ```
 
-Use `htmlproofer --help` to see all command line options, or [take a peek here](https://github.com/gjtorikian/html-proofer/blob/main/bin/htmlproofer).
+Use `htmlproofer --help` to see all command line options.
 
 #### Special cases for the command-line
 
@@ -294,7 +294,6 @@ The `HTMLProofer` constructor takes an optional hash of additional options:
 In addition, there are a few "namespaced" options. These are:
 
 * `:typhoeus` / `:hydra`
-* `:parallel`
 * `:cache`
 
 ### Configuring Typhoeus and Hydra
@@ -338,20 +337,6 @@ proofer.run
 ```
 
 The `Authorization` header is being set if and only if the `base_url` is `https://github.com`, and it is excluded for all other URLs.
-
-### Configuring Parallel
-
-[Parallel](https://github.com/grosser/parallel) is used to speed internal file checks. You can pass in any of its options with the options namespace `:parallel`. For example:
-
-``` ruby
-HTMLProofer.check_directories(["out/"], {extension: ".htm", parallel: { in_processes: 3} })
-```
-
-In this example, `in_processes: 3` is passed into Parallel as a configuration option.
-
-Pass in `parallel: { enable: false }` to disable parallel runs.
-
-On the CLI, you can provide the `--parallel` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
 ## Configuring caching
 

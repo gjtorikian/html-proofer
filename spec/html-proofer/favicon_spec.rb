@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Favicons test" do
+describe HTMLProofer::Check::Favicon do
   it "ignores for absent favicon by default" do
     absent = File.join(FIXTURES_DIR, "favicon", "favicon_absent.html")
     expect(run_proofer(absent, :file).failed_checks).to(eq([]))

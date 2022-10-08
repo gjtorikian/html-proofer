@@ -2,11 +2,7 @@
 
 require "spec_helper"
 
-describe "Links test" do
-  unicode_file = File.join(FIXTURES_DIR, "links", "erstiebegrüßung.html")
-  before(:all) { File.open(unicode_file, "w") {} }
-  after(:all) { File.delete(unicode_file) }
-
+describe HTMLProofer::Check::Links do
   it "fails for broken internal hash (even if the file exists)" do
     broken_hash_external_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_external_file.html")
     proofer = run_proofer(broken_hash_external_filepath, :file)
@@ -140,7 +136,7 @@ describe "Links test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "should follow redirects" do
+  it "follows redirects" do
     link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
     proofer = run_proofer(link_with_redirect_filepath, :file, { enforce_https: false })
     expect(proofer.failed_checks).to(eq([]))
@@ -161,7 +157,7 @@ describe "Links test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "should understand https" do
+  it "understands https" do
     link_with_https_filepath = File.join(FIXTURES_DIR, "links", "link_with_https.html")
     proofer = run_proofer(link_with_https_filepath, :file)
     expect(proofer.failed_checks).to(eq([]))
@@ -173,7 +169,7 @@ describe "Links test" do
     expect(proofer.failed_checks.first.description).to(match(/internally linking to #25-method-not-allowed; the file exists, but the hash '25-method-not-allowed' does not/))
   end
 
-  it "should understand relative hash" do
+  it "understands relative hash" do
     link_with_https_filepath = File.join(FIXTURES_DIR, "links", "relative_hash.html")
     proofer = run_proofer(link_with_https_filepath, :file)
     expect(proofer.failed_checks).to(eq([]))
@@ -466,9 +462,13 @@ describe "Links test" do
   end
 
   it "passes for urlencoded href" do
+    unicode_file = File.join(FIXTURES_DIR, "links", "erstiebegrüßung.html")
+    File.open(unicode_file, "w") {}
     fixture = File.join(FIXTURES_DIR, "links", "urlencoded-href.html")
     proofer = run_proofer(fixture, :file)
     expect(proofer.failed_checks).to(eq([]))
+  ensure
+    File.delete(unicode_file)
   end
 
   it "reports failures for the original link, not the redirection" do
@@ -489,20 +489,18 @@ describe "Links test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  context "automatically adding default extensions to files" do
-    before :each do
-      @fixture = File.join(FIXTURES_DIR, "links", "no_html_extension.html")
-    end
+  context "when automatically adding default extensions to files" do
+    let(:fixture) { File.join(FIXTURES_DIR, "links", "no_html_extension.html") }
 
     it "can be turned off" do
       # Default behaviour does not change
-      proofer = run_proofer(@fixture, :file, { assume_extension: "" })
+      proofer = run_proofer(fixture, :file, { assume_extension: "" })
       expect(proofer.failed_checks.count).to(be >= 3)
     end
 
     it "accepts extensionless file links by default" do
       # With command-line option
-      proofer = run_proofer(@fixture, :file)
+      proofer = run_proofer(fixture, :file)
       expect(proofer.failed_checks).to(eq([]))
     end
   end
@@ -745,7 +743,7 @@ describe "Links test" do
     expect(proofer.failed_checks.first.description).to(match(/is an invalid URL/))
   end
 
-  it "should not try reading PDFs" do
+  it "does not try reading PDFs" do
     file = File.join(FIXTURES_DIR, "links", "pdfs.html")
     proofer = run_proofer(file, :file)
     expect(proofer.failed_checks.count).to(eq(3))

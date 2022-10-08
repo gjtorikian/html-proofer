@@ -5,13 +5,13 @@ lib_dir = File.join(File.dirname(__dir__), "lib")
 gem_loader = Zeitwerk::Loader.for_gem
 gem_loader.inflector.inflect(
   "html_proofer" => "HTMLProofer",
+  "cli" => "CLI",
 )
 gem_loader.ignore(File.join(lib_dir, "html-proofer.rb"))
 gem_loader.setup
 
 require "html_proofer/version"
 
-require "parallel"
 require "fileutils"
 
 if ENV.fetch("DEBUG", false)
@@ -22,7 +22,7 @@ end
 module HTMLProofer
   class << self
     def check_file(file, options = {})
-      raise ArgumentError unless file.is_a?(String)
+      raise ArgumentError, "File isn't a string" unless file.is_a?(String)
       raise ArgumentError, "#{file} does not exist" unless File.exist?(file)
 
       options[:type] = :file

@@ -4786,4 +4786,724 @@ http_interactions:
     adapter_metadata:
       effective_url: https://guides.rubyonrails.org/active_record_basics.html#no
   recorded_at: Mon, 06 Jun 2022 21:06:01 GMT
+- request:
+    method: head
+    uri: https://www.gnu.org/software/gettext/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      Server:
+      - Apache/2.4.29
+      Content-Location:
+      - gettext.html
+      Vary:
+      - negotiate,Accept-Encoding
+      TCN:
+      - choice
+      Strict-Transport-Security:
+      - max-age=63072000
+      X-Frame-Options:
+      - sameorigin
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "(null)"
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=0
+      Expires:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      Content-Type:
+      - text/html
+      Content-Language:
+      - en
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://www.gnu.org/software/gettext/
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/JSON
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Tue, 13 Sep 2022 23:20:21 GMT
+      server:
+      - mw1403.eqiad.wmnet
+      x-content-type-options:
+      - nosniff
+      content-language:
+      - en
+      vary:
+      - Accept-Encoding,Cookie,Authorization
+      last-modified:
+      - Tue, 13 Sep 2022 23:19:36 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      age:
+      - '26792'
+      x-cache:
+      - cp1079 hit, cp1087 hit/33
+      x-cache-status:
+      - hit-front
+      server-timing:
+      - cache;desc="hit-front", host;desc="cp1087"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      set-cookie:
+      - WMF-Last-Access=14-Sep-2022;Path=/;HttpOnly;secure;Expires=Sun, 16 Oct 2022
+        00:00:00 GMT
+      - WMF-Last-Access-Global=14-Sep-2022;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Sun,
+        16 Oct 2022 00:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.69:-73.99:v4; Path=/; secure; Domain=.wikipedia.org
+      accept-ch:
+      - Sec-CH-UA-Arch,Sec-CH-UA-Bitness,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-UA-Platform-Version
+      permissions-policy:
+      - interest-cohort=(),ch-ua-arch=(self "intake-analytics.wikimedia.org"),ch-ua-bitness=(self
+        "intake-analytics.wikimedia.org"),ch-ua-full-version-list=(self "intake-analytics.wikimedia.org"),ch-ua-model=(self
+        "intake-analytics.wikimedia.org"),ch-ua-platform-version=(self "intake-analytics.wikimedia.org")
+      x-client-ip:
+      - 98.14.231.8
+      cache-control:
+      - private, s-maxage=0, max-age=0, must-revalidate
+      accept-ranges:
+      - bytes
+      content-length:
+      - '228931'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/JSON
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/blob/master/README.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept,
+        X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"355c5fcdacbf5326f6c86ffac2f78e28"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=KYOSwSy62y1%2Fnid3CVmnitrKV2GdTY085hkdN9ESQ9WyOGUqDKhkJG%2FnfdnnGx6IvV3TxOZhCLzVdh3xPPnQBltWld%2FCikMnJi7SgEUvsWfzy2JT2vmRk%2FItQcyIe15z%2FnEgllLlU%2BEim%2BjcvHAhZlIilnuRZZ%2B5vxqUXk4LBGsw7g8HGZj8cKR8FMYdU3hv%2BOBdXNxZtJT1Yjy8UdU4g47FuCaAM8RI9mBdaMe1fPRlNfqBcfE1KHygctIT21mxOubfKyTQtXTM51GefxTxBQ%3D%3D--576ZU22yDGoTnwYr--R%2B32Mivn55KVYNOeuPgmoA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.850141786.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE96:5884:2365D62:34E0D48:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/blob/master/README.md
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/32
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      permissions-policy:
+      - interest-cohort=()
+      referrer-policy:
+      - no-referrer-when-downgrade
+      server-timing:
+      - issue_layout-fragment;desc="issue_layout fragment";dur=233.717478,issue_conversation_content-fragment;desc="issue_conversation_content
+        fragment";dur=258.814369,issue_conversation_sidebar-fragment;desc="issue_conversation_sidebar
+        fragment";dur=98.276202,nginx;desc="NGINX";dur=1.056743,glb;desc="GLB";dur=8.098653
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-pjax-url:
+      - https://github.com/yktoo/indicator-sound-switcher/issues/32
+      x-voltron-version:
+      - cc85742
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - _gh_sess=dyO7GKEg%2FlC%2FmNA6DX3s0mtHJBP7yqi%2FhwAq8wthD9FXFH1nkTs7qicFFEnFbjxAgbdOKOpQMw32JWWEpdPrJCH1mZPnUTDsVuy0VGm4LYFU5PZ3PVvRTvLkGwUprva3%2B5aZSPvPOkCw0HYruW47JyJd6wMIccOqZ%2BTifZsXYIS4pWlXrXB%2BC%2BJj6M3Q3fw2IdOQaqQIpMKPNOwxtQ6aZRPfvJyOvSOqP6X9xPsE%2FXi1WcKnIxg40M7F4TKEgWvAXKXafWqAwLmqDXM2Mjt%2BiA%3D%3D--OUZ3Inq2uEcWl%2FDp--KSpjFh6vM%2B9kROTh6XYlXw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1319099515.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE98:7751:1CBE2E9:28FEFB4:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/32
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/28
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      permissions-policy:
+      - interest-cohort=()
+      referrer-policy:
+      - no-referrer-when-downgrade
+      server-timing:
+      - issue_layout-fragment;desc="issue_layout fragment";dur=205.858254,issue_conversation_content-fragment;desc="issue_conversation_content
+        fragment";dur=293.906457,issue_conversation_sidebar-fragment;desc="issue_conversation_sidebar
+        fragment";dur=100.089982,nginx;desc="NGINX";dur=1.001529,glb;desc="GLB";dur=7.367458
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-pjax-url:
+      - https://github.com/yktoo/indicator-sound-switcher/issues/28
+      x-voltron-version:
+      - cc85742
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - _gh_sess=IWPfvoD1u4pjGn0T%2FgfkNHClX4wpG51zQfNUjjiG0yb3eo9aZ%2F9T%2BzQX%2Bnh72ugx5BCnFnTi11aob0NmOpH8jCuCOnaNySxMtLCeQjm0NaB0hk%2FlYID50dog4Stno4cktGceNf4Td4ARI9OWaVPbezpmNF3mP76gaW3iN1ZnwsqgNrf%2BKKKLnhZYautiZ7QqhDoi7wCiSZxnkK8aKRf6mK26V0LQlu4RKpcp7CZAUSRL2%2Ffiy33g2LlTtMprY7Cect%2FIIRrZriFJzYX%2Bmutgeg%3D%3D--0XJzANNQxSDiaidd--NSumP7lDI92jkMze1L0wow%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1730294217.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE94:703F:243C27C:35EF9BE:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/28
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/30
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"388a254d4d10ca4b255913074456826b"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=CWbUGkHj9EVQkGzXLK7q09%2F%2FDB0n12QtjY8DUGSqWHh2EBI7XdYGMCnNycCS5lloSiWKP23d3%2BnLYIZoLxT6pJPgiUaov30N9Stq8P2N6Q85%2FLtaOJWw2T%2BKOs0OOXq5u9JBadWwkdpBvVh657237R11IHxDKEpivVfKsk0edrOvi9MEJx6QMaG%2BBqk%2FDRqRU4y6A4P6Sc9NypFbncjCSpLZp%2F%2BvKlU%2Bk5S5hGa5xtP2Ldftf8%2Fb9Sbt85nu4XSE9d0untXCRUOcaPvDcu4pwA%3D%3D--gksflcu%2F6ZRPJ20Y--4fzwz1Z07cKyjDCBsoAYrg%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1075969628.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE97:5884:2365D5A:34E0D40:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/30
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/13
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"b4e6ed1cd4f292c84af3f7cd49a29a1c"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=brtYyfxAXiBTXqjPaQ%2BTcura4sndJlMZTgfb34HuH0Ye%2BmmxDn1dJ%2BvdhqfurAmHN%2FEMyu5cKrWCRDsSiVaskJRTYrsRFqSVLai9RNhpyHZI%2FH5AT%2FXF6MfMVQVQy6d298%2Bcaax7MsfjiY56IQxfse0j8IMwmSWJk5IyS%2BMFD3Qs0kItFkzBXtoCNjc%2FrZikc5FpssKs9%2BdCdRJkO%2B9L4mg4gCBc1%2FE4Tb9PitHdzR0qRpIuvjNKBmnl9z12Qqz8kI4ebzCJNHjTBr1KJDyhQA%3D%3D--%2Fat%2FqH9rRBaFmzjf--eJAGm2EEU2wVwvNJsII%2F5A%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1162575825.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE9A:3ECA:242E79E:35C4083:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/13
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/24
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      permissions-policy:
+      - interest-cohort=()
+      referrer-policy:
+      - no-referrer-when-downgrade
+      server-timing:
+      - issue_layout-fragment;desc="issue_layout fragment";dur=190.279542,issue_conversation_content-fragment;desc="issue_conversation_content
+        fragment";dur=434.566154,issue_conversation_sidebar-fragment;desc="issue_conversation_sidebar
+        fragment";dur=93.885112,nginx;desc="NGINX";dur=0.992488,glb;desc="GLB";dur=6.308489
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-pjax-url:
+      - https://github.com/yktoo/indicator-sound-switcher/issues/24
+      x-voltron-version:
+      - cc85742
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - _gh_sess=r2ECYQZFrc89EWUOE%2FuBm3whqqhOT8reqNR8PxEx7ukG62D5udy3C5zXKdiigMZyuFICqfe5XxYT9f2hwNa9GJFBVQDaj5EvZAUPTR8RdVAyYxYPfgdAPObKAweZCxSfeQsD536oMei%2Feu8xI1%2Fjh0n2J6JR%2BicFad%2FoO3KE8N%2BnVAU8xqEIuqo3GB5cbTVQOo95dVM82HPLgh82E5jjMasP4yvZywV%2FBSsB2ggI%2BhjCzkJ7pHxYuy%2FKH0xTkcMhyaFsAYP%2Bkj1aQxVBo6WcQA%3D%3D--s8hlCS1HYJee%2B21x--L%2BWmZ7%2B1ZqWy3UE%2BABkUPA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.337042046.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE95:526F:230B439:31B29C2:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/24
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
+- request:
+    method: head
+    uri: https://github.com/yktoo/indicator-sound-switcher/issues/31
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/4.4.0; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Wed, 14 Sep 2022 06:46:53 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept, Accept-Encoding,
+        Accept, X-Requested-With
+      permissions-policy:
+      - interest-cohort=()
+      etag:
+      - W/"b28e23d3a0b26563cc4cc3f71cafcf4f"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      expect-ct:
+      - max-age=2592000, report-uri="https://api.github.com/_private/browser/errors"
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src render.githubusercontent.com viewscreen.githubusercontent.com
+        notebooks.githubusercontent.com; img-src ''self'' data: github.githubassets.com
+        identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/
+        github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com
+        spotlights-feed.github.com *.githubusercontent.com; manifest-src ''self'';
+        media-src github.com user-images.githubusercontent.com/ secured-user-images.githubusercontent.com/;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=guJY%2BKtZZvf06%2BYPHA80uDe2N8oJPFZQMVi3JeuCvVFA1gkd3sNHFKWM3i5M%2FKL1odEnFAynR29%2FL0Yx06UrHi%2BuRnZB2YiFBYuEMMLtA65Liko%2F44YisfkP9iRQ5TOoPCe3PCpFyuC0yKdxdVXLlbq9yqvXI4KquiPKPKvuLan%2FWmUxEET1W%2BkFnLj9tmXwLfaE3gCOjHhYIf0qGkncSA3FnHX5fyG2hhgW2%2FB7phDPjrSVis05SHuByXdaOeHju96eBqOjNQOhG%2FEhbAes5w%3D%3D--AoSR8k%2BOvp0pniiV--CRRGbJCc3Ece9edLXoNoYQ%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.957358457.1663138013; Path=/; Domain=github.com; Expires=Thu,
+        14 Sep 2023 06:46:53 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Thu, 14 Sep 2023 06:46:53
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - EE99:5735:2366482:3220076:632178DD
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/yktoo/indicator-sound-switcher/issues/31
+  recorded_at: Wed, 14 Sep 2022 06:46:53 GMT
 recorded_with: VCR 2.9.3

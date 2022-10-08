@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe HTMLProofer::Utils do
   describe "::create_nokogiri" do
-    include HTMLProofer::Utils
+    include described_class
 
     it "passes for a string" do
       noko = create_nokogiri('<html lang="jp">')

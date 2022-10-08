@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Images test" do
+describe HTMLProofer::Check::Images do
   it "passes for existing external images" do
     external_image_filepath = File.join(FIXTURES_DIR, "images", "existing_image_external.html")
     proofer = run_proofer(external_image_filepath, :file)
@@ -134,13 +134,13 @@ describe "Images test" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "properly ignores missing alt tags when asked" do
+  it "properly ignores urls when asked" do
     ignoreable_links = File.join(FIXTURES_DIR, "images", "ignorable_alt_via_options.html")
     proofer = run_proofer(ignoreable_links, :file, ignore_urls: [/wikimedia/, "gpl.png"])
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "properly ignores missing alt tags when asked" do
+  it "properly ignores missing urls when asked" do
     ignoreable_links = File.join(FIXTURES_DIR, "images", "ignore_alt_but_not_link.html")
     proofer = run_proofer(ignoreable_links, :file, ignore_urls: [/.*/])
     expect(proofer.failed_checks).to(eq([]))
@@ -238,13 +238,13 @@ describe "Images test" do
 
   it "works for images with a swapped data attribute src" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
-    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["src", "data-src"]] })
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["data-src", "src"]] })
     expect(proofer.failed_checks).to(eq([]))
   end
 
   it "breaks for images with a swapped attribute that does not exist" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
-    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["src", "foobar"]] })
+    proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["foobar", "src"]] })
     expect(proofer.failed_checks.length).to(eq(1))
   end
 

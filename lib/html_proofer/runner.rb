@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "async"
+
 module HTMLProofer
   class Runner
     include HTMLProofer::Utils
@@ -30,18 +32,18 @@ module HTMLProofer
       @current_source = nil
       @current_filename = nil
 
-      @reporter = Reporter::Cli.new(logger: @logger)
+      @reporter = Reporter::Terminal.new(logger: @logger)
     end
 
     def run
       check_text = pluralize(checks.length, "check", "checks")
 
       if @type == :links
-        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ... \n\n")
+        @logger.log(:info, "Running #{check_text} (#{format_checks_list(checks)}) on #{@source} ...\n\n")
         check_list_of_links unless @options[:disable_external]
       else
         @logger.log(:info,
-          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files...\n\n")
+          "Running #{check_text} (#{format_checks_list(checks)}) in #{@source} on *#{@options[:extensions].join(", ")} files ...\n\n")
 
         check_files
         @logger.log(:info, "Ran on #{pluralize(files.length, "file", "files")}!\n\n")
@@ -97,13 +99,15 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
-      if @options[:parallel][:enable]
-        Parallel.map(files, @options[:parallel]) { |file| load_file(file[:path], file[:source]) }
-      else
-        files.map do |file|
-          load_file(file[:path], file[:source])
+      loaded_files = []
+      files.each do |file|
+        Async do |task|
+          task.async do
+            loaded_files << load_file(file[:path], file[:source])
+          end
         end
       end
+      loaded_files
     end
 
     def load_file(path, source)
@@ -238,7 +242,7 @@ module HTMLProofer
     private def format_checks_list(checks)
       checks.map do |check|
         check.sub(/HTMLProofer::Check::/, "")
-      end.join(", ")
+      end.sort.join(", ")
     end
   end
 end
