@@ -43,10 +43,6 @@ module HTMLProofer
       max_concurrency: 50,
     }.freeze
 
-    PARALLEL_DEFAULTS = {
-      enable: true,
-    }.freeze
-
     CACHE_DEFAULTS = {}.freeze
 
     class << self
@@ -56,7 +52,6 @@ module HTMLProofer
         options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
         options[:hydra] = HTMLProofer::Configuration::HYDRA_DEFAULTS.merge(opts[:hydra] || {})
 
-        options[:parallel] = HTMLProofer::Configuration::PARALLEL_DEFAULTS.merge(opts[:parallel] || {})
         options[:cache] = HTMLProofer::Configuration::CACHE_DEFAULTS.merge(opts[:cache] || {})
 
         options.delete(:src)

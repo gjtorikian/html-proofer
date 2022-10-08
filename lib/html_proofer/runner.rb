@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "async"
+
 module HTMLProofer
   class Runner
     include HTMLProofer::Utils
@@ -97,13 +99,15 @@ module HTMLProofer
 
     # Walks over each implemented check and runs them on the files, in parallel.
     def process_files
-      if @options[:parallel][:enable]
-        Parallel.map(files, @options[:parallel]) { |file| load_file(file[:path], file[:source]) }
-      else
-        files.map do |file|
-          load_file(file[:path], file[:source])
+      loaded_files = []
+      files.each do |file|
+        Async do |task|
+          task.async do
+            loaded_files << load_file(file[:path], file[:source])
+          end
         end
       end
+      loaded_files
     end
 
     def load_file(path, source)
