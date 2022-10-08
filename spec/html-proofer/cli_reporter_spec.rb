@@ -14,6 +14,7 @@ describe HTMLProofer::Reporter::Terminal do
 
         Checking 1 external link
         Checking 1 internal link
+        Checking internal link hashes in 0 files
         Ran on 1 file!
 
 
