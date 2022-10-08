@@ -462,9 +462,13 @@ describe HTMLProofer::Check::Links do
   end
 
   it "passes for urlencoded href" do
+    unicode_file = File.join(FIXTURES_DIR, "links", "erstiebegrüßung.html")
+    File.open(unicode_file, "w") {}
     fixture = File.join(FIXTURES_DIR, "links", "urlencoded-href.html")
     proofer = run_proofer(fixture, :file)
     expect(proofer.failed_checks).to(eq([]))
+  ensure
+    File.delete(unicode_file)
   end
 
   it "reports failures for the original link, not the redirection" do
