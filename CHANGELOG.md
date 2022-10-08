@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.1...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.2...HEAD)
+
+**Merged pull requests:**
+
+- Revert "Validate options" [\#774](https://github.com/gjtorikian/html-proofer/pull/774) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v4.4.2](https://github.com/gjtorikian/html-proofer/tree/v4.4.2) (2022-10-07)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.1...v4.4.2)
 
 **Closed issues:**
 
