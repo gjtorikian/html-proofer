@@ -68,12 +68,6 @@ describe HTMLProofer::Reporter::Terminal do
 
           tel: contains no phone number
 
-        For the Links > External check, the following failures were found:
-
-        * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:26:
-
-          External link https://help.github.com/changing-author-info/ failed (status code 403)
-
         For the Links > Internal check, the following failures were found:
 
         * At spec/html-proofer/fixtures/sorting/kitchen_sinkish.html:24:
@@ -81,7 +75,7 @@ describe HTMLProofer::Reporter::Terminal do
           internally linking to nowhere.fooof, which does not exist
 
 
-        HTML-Proofer found 13 failures!
+        HTML-Proofer found 12 failures!
       MSG
 
       expect(output).to(match(msg))
