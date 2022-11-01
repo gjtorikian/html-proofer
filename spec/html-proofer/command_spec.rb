@@ -166,7 +166,7 @@ describe HTMLProofer::CLI do
 
   it "works with ignore-urls" do
     ignorable_links = File.join(FIXTURES_DIR, "links", "ignorable_links_via_options.html")
-    output = make_bin("--ignore-urls /^http:\/\//,/sdadsad/,../whaadadt.html #{ignorable_links}")
+    output = make_bin("--ignore-urls /^http:///,/sdadsad/,../whaadadt.html #{ignorable_links}")
     expect(output).to(match("successfully"))
   end
 

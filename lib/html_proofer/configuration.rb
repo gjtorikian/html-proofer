@@ -295,7 +295,7 @@ module HTMLProofer
         check_internal_hash: ["Checks whether internal hashes exist (even if the webpage exists) (default: `true`)."],
         check_sri: ["Check that `<link>` and `<script>` external resources use SRI (default: `false`)."],
         disable_external: ["If `true`, does not run the external link checker (default: `false`)."],
-        enforce_https: ["Fails a link if it\'s not marked as `https` (default: `true`)."],
+        enforce_https: ["Fails a link if it's not marked as `https` (default: `true`)."],
         root_dir: ["The absolute path to the directory serving your html-files."],
 
         ignore_empty_alt: ["If `true`, ignores images with empty/missing ",
