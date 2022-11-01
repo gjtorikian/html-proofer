@@ -2,7 +2,19 @@
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.3...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.0...HEAD)
+
+**Closed issues:**
+
+- QUESTION - `ignore-files` syntax not ignore entire directories as I would expect it to. Is my approach syntax incorrect? [\#775](https://github.com/gjtorikian/html-proofer/issues/775)
+
+**Merged pull requests:**
+
+- Accept regexp values for ignore-files via CLI [\#776](https://github.com/gjtorikian/html-proofer/pull/776) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v5.0.0](https://github.com/gjtorikian/html-proofer/tree/v5.0.0) (2022-10-08)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v4.4.3...v5.0.0)
 
 **Closed issues:**
 
