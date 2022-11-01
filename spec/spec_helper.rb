@@ -70,6 +70,7 @@ def capture_proofer_http(item, type, opts = {})
 end
 
 def make_bin(args)
+  ap("#{RbConfig.ruby} exe/htmlproofer #{args}") if debug?
   stdout, stderr = Open3.capture3("#{RbConfig.ruby} exe/htmlproofer #{args}")
   "#{stdout}\n#{stderr}".encode("UTF-8", invalid: :replace, undef: :replace)
 end
@@ -82,6 +83,10 @@ def make_cassette_name(file, opts)
   end
   (filename += opts.inspect) unless opts.empty?
   filename
+end
+
+def debug?
+  ENV.fetch("DEBUG", false)
 end
 
 def ci?

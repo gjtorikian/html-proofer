@@ -134,9 +134,15 @@ describe HTMLProofer::CLI do
     expect(output).to(match("failure"))
   end
 
-  it "works with ignore-files" do
+  it "works with ignore-files (string)" do
     external = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
     output = make_bin("--ignore-files #{external} #{external}")
+    expect(output).to(match("successfully"))
+  end
+
+  it "works with ignore-files (regexp)" do
+    external = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
+    output = make_bin("--ignore-files /_hash_/ #{external}")
     expect(output).to(match("successfully"))
   end
 

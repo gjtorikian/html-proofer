@@ -134,7 +134,17 @@ module HTMLProofer
 
         section(opts, "Ignore Configuration") do
           set_option(opts, "--ignore-files [FILE1,FILE2,...]") do |long_opt_symbol, list|
-            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
+            @options[long_opt_symbol] = if list.nil?
+              []
+            else
+              list.split(",").map.each do |l|
+                if l.start_with?("/") && l.end_with?("/")
+                  Regexp.new(l[1...-1])
+                else
+                  l
+                end
+              end
+            end
           end
 
           set_option(opts, "--[no-]ignore-empty-alt") do |long_opt_symbol, arg|
