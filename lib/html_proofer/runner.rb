@@ -166,8 +166,14 @@ module HTMLProofer
 
     def ignore_file?(file)
       @options[:ignore_files].each do |pattern|
-        return true if pattern.is_a?(String) && pattern == file
-        return true if pattern.is_a?(Regexp) && pattern =~ file
+        if pattern.is_a?(String) && pattern == file
+          @logger.log(:debug, "Ignoring #{file} because it matches #{pattern}")
+          return true
+        end
+        next unless pattern.is_a?(Regexp) && pattern.match(file)
+
+        @logger.log(:debug, "Ignoring #{file} because it matches regexp #{pattern}")
+        return true
       end
 
       false
