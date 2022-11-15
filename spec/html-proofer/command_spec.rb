@@ -222,6 +222,17 @@ describe HTMLProofer::CLI do
     it "supports hydra" do
       http = make_bin(%(--hydra '{"max_concurrency": 5}' http://www.github.com --as-links))
       expect(http.scan(/max_concurrency is invalid/).count).to(eq(0))
+      expect(http.scan(/successfully/).count).to(eq(1))
+    end
+  end
+
+  context "when dealing with cache" do
+    it "basically works" do
+      new_time = Time.local(2022, 1, 6, 12, 0, 0)
+      Timecop.freeze(new_time) do
+        http = make_bin(%(--cache '{"timeframe": { "external": "1d"}}' http://www.github.com --as-links))
+        expect(http.scan(/successfully/).count).to(eq(1))
+      end
     end
   end
 end
