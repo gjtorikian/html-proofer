@@ -197,12 +197,12 @@ module HTMLProofer
             @options[long_opt_symbol] = parse_json_option("typhoeus", arg, symbolize_names: false)
           end
 
-          set_option(opts, "--hydra <CONFIG>") do |long_opt_symbol, _list|
-            @options[long_opt_symbol] = parse_json_option("hydra", arg, symbolize_names: false)
+          set_option(opts, "--hydra <CONFIG>") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = parse_json_option("hydra", arg, symbolize_names: true)
           end
 
-          set_option(opts, "--cache <CONFIG>") do |long_opt_symbol, _list|
-            @options[long_opt_symbol] = parse_json_option("cache", arg, symbolize_names: false)
+          set_option(opts, "--cache <CONFIG>") do |long_opt_symbol, arg|
+            @options[long_opt_symbol] = parse_json_option("cache", arg, symbolize_names: true)
           end
         end
 
