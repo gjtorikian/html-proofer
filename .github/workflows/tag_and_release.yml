@@ -11,7 +11,7 @@ on:
 jobs:
   release:
     env:
-      GEM_NAME: tailwind_merge
+      GEM_NAME: html_proofer
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_API_BOT_KEY }}
     runs-on: ubuntu-latest
@@ -64,7 +64,7 @@ jobs:
           touch $HOME/.gem/credentials
           chmod 0600 $HOME/.gem/credentials
           printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-          bundle exec rake package
+          bundle exec rake build
           for gem in pkg/html-proofer-${{ steps.version-label.outputs.version }}*.gem ; do
             gem push "$gem" --host https://rubygems.org
           done
