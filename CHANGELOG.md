@@ -1,8 +1,34 @@
 # Changelog
 
-## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
+## [v5.0.3](https://github.com/gjtorikian/html-proofer/tree/v5.0.3) (2022-12-05)
 
-[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.0...HEAD)
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.2...v5.0.3)
+
+**Closed issues:**
+
+- Buggy parsing of srcset attribute [\#783](https://github.com/gjtorikian/html-proofer/issues/783)
+- Changelog of a different project [\#782](https://github.com/gjtorikian/html-proofer/issues/782)
+- NoMethodError: undefined method `empty?' for true:TrueClass [\#781](https://github.com/gjtorikian/html-proofer/issues/781)
+- Set enforce\_https to false on the CLI [\#727](https://github.com/gjtorikian/html-proofer/issues/727)
+
+**Merged pull requests:**
+
+- Fix poor srcset parsing [\#784](https://github.com/gjtorikian/html-proofer/pull/784) ([gjtorikian](https://github.com/gjtorikian))
+- Address some typos [\#780](https://github.com/gjtorikian/html-proofer/pull/780) ([gjtorikian](https://github.com/gjtorikian))
+
+## [v5.0.2](https://github.com/gjtorikian/html-proofer/tree/v5.0.2) (2022-11-15)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.1...v5.0.2)
+
+**Closed issues:**
+
+- Runtime error with cache and hydra arguments [\#779](https://github.com/gjtorikian/html-proofer/issues/779)
+- Document tree depth limit exceeded  [\#778](https://github.com/gjtorikian/html-proofer/issues/778)
+- --no-enforce-https has no effect in 5.0.1 [\#777](https://github.com/gjtorikian/html-proofer/issues/777)
+
+## [v5.0.1](https://github.com/gjtorikian/html-proofer/tree/v5.0.1) (2022-11-01)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.0...v5.0.1)
 
 **Closed issues:**
 
@@ -149,7 +175,6 @@
 
 **Closed issues:**
 
-- Set enforce\_https to false on the CLI [\#727](https://github.com/gjtorikian/html-proofer/issues/727)
 - srcset width/pixel density descriptors cause missing image error [\#724](https://github.com/gjtorikian/html-proofer/issues/724)
 - Example cache config not working [\#723](https://github.com/gjtorikian/html-proofer/issues/723)
 - Removal of --check-html [\#722](https://github.com/gjtorikian/html-proofer/issues/722)
