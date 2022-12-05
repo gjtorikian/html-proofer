@@ -236,6 +236,12 @@ describe HTMLProofer::Check::Images do
     expect(proofer.failed_checks.first.description).to(eq("internal image /uploads/150-marie-lloyd.jpg does not exist"))
   end
 
+  it "supports base64 srcsets" do
+    relative_images = File.join(FIXTURES_DIR, "images", "base64_srcset.html")
+    proofer = run_proofer(relative_images, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "works for images with a swapped data attribute src" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/data_src_attribute.html"
     proofer = run_proofer(custom_data_src_check, :file, swap_attributes: { "img" => [["data-src", "src"]] })

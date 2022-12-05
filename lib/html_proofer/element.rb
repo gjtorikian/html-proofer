@@ -82,10 +82,25 @@ module HTMLProofer
       !blank?(srcset) && srcset.split(",").size > 1
     end
 
+    # From https://github.com/sindresorhus/srcset/blob/f7c48acd7facf18e94dec47e6b96e84e0f0e69dc/index.js#LL1-L16C71
+    # This regex represents a loose rule of an “image candidate string”; see https://html.spec.whatwg.org/multipage/images.html#srcset-attribute
+    # An “image candidate string” roughly consists of the following:
+    # 1. Zero or more whitespace characters.
+    # 2. A non-empty URL that does not start or end with `,`.
+    # 3. Zero or more whitespace characters.
+    # 4. An optional “descriptor” that starts with a whitespace character.
+    # 5. Zero or more whitespace characters.
+    # 6. Each image candidate string is separated by a `,`.
+    # We intentionally implement a loose rule here so that we can perform more aggressive error handling and reporting in the below code.
+
+    IMAGE_CANDIDATE_REGEX = /\s*([^,]\S*[^,](?:\s+[^,]+)?)\s*(?:,|$)/
+
     def srcsets
       return nil if blank?(srcset)
 
-      srcset.split(",").map(&:strip)
+      srcset.split(IMAGE_CANDIDATE_REGEX).select.with_index do |_part, idx|
+        idx.odd?
+      end.map(&:strip)
     end
 
     def multiple_sizes?
