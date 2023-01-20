@@ -121,10 +121,12 @@ module HTMLProofer
         return false unless url.hash?
 
         hash = url.hash
+        headers = response.options.fetch(:headers, {})
+        content_type = headers.find { |k, _| k.casecmp("content-type").zero? }
 
         # attempt to verify PDF hash ref; see #787 for more details
         # FIXME: this is re-reading the PDF response
-        if /pdf/.match?(response.options[:headers]["content-type"])
+        if content_type && /pdf/.match?(content_type[1])
           io = URI.parse(url.to_s).open
           reader = PDF::Reader.new(io)
 
