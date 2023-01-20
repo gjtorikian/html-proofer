@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-class MailToOctocat < ::HTMLProofer::Check
+class MailToOctocat < HTMLProofer::Check
   def mailto_octocat?
     @link.url.raw_attribute == "mailto:octocat@github.com"
   end

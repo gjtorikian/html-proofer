@@ -46,8 +46,12 @@ describe HTMLProofer::Check::Favicon do
 
   it "translates links via swap_urls" do
     translated_link = File.join(FIXTURES_DIR, "favicon", "internal_favicon_broken.html")
-    proofer = run_proofer(translated_link, :file, checks: ["Favicon"],
-      swap_urls: { /^asdadaskdalsdk.+/ => "../resources/gpl.png" })
+    proofer = run_proofer(
+      translated_link,
+      :file,
+      checks: ["Favicon"],
+      swap_urls: { /^asdadaskdalsdk.+/ => "../resources/gpl.png" },
+    )
     expect(proofer.failed_checks).to(eq([]))
   end
 

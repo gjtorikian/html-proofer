@@ -280,17 +280,25 @@ module HTMLProofer
     module ConfigurationHelp
       TEXT = {
         as_links: ["Assumes that `PATH` is a comma-separated array of links to check."],
-        assume_extension: ["Automatically add specified extension to files for internal links, ",
-                           "to allow extensionless URLs (as supported by most servers) (default: `.html`).",],
+        assume_extension: [
+          "Automatically add specified extension to files for internal links, ",
+          "to allow extensionless URLs (as supported by most servers) (default: `.html`).",
+        ],
         directory_index_file: ["Sets the file to look for when a link refers to a directory. (default: `index.html`)."],
-        extensions: ["A comma-separated list of Strings indicating the file extensions you",
-                     "would like to check (default: `.html`)",],
+        extensions: [
+          "A comma-separated list of Strings indicating the file extensions you",
+          "would like to check (default: `.html`)",
+        ],
 
         allow_hash_href: ['"If `true`, assumes `href="#"` anchors are valid (default: `true`)"'],
-        allow_missing_href: ["If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically ",
-                             "allowed, but could also be human error. (default: `false`)",],
-        checks: ["A comma-separated list of Strings indicating which checks you",
-                 "want to run (default: `[\"Links\", \"Images\", \"Scripts\"]",],
+        allow_missing_href: [
+          "If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically ",
+          "allowed, but could also be human error. (default: `false`)",
+        ],
+        checks: [
+          "A comma-separated list of Strings indicating which checks you",
+          "want to run (default: `[\"Links\", \"Images\", \"Scripts\"]",
+        ],
         check_external_hash: ["Checks whether external hashes exist (even if the webpage exists) (default: `true`)."],
         check_internal_hash: ["Checks whether internal hashes exist (even if the webpage exists) (default: `true`)."],
         check_sri: ["Check that `<link>` and `<script>` external resources use SRI (default: `false`)."],
@@ -298,31 +306,43 @@ module HTMLProofer
         enforce_https: ["Fails a link if it's not marked as `https` (default: `true`)."],
         root_dir: ["The absolute path to the directory serving your html-files."],
 
-        ignore_empty_alt: ["If `true`, ignores images with empty/missing ",
-                           "alt tags (in other words, `<img alt>` and `<img alt=\"\">`",
-                           "are valid; set this to `false` to flag those) (default: `true`).",],
-        ignore_empty_mailto: ["If `true`, allows `mailto:` `href`s which don't",
-                              "contain an email address (default: `false`)'.",],
+        ignore_empty_alt: [
+          "If `true`, ignores images with empty/missing ",
+          "alt tags (in other words, `<img alt>` and `<img alt=\"\">`",
+          "are valid; set this to `false` to flag those) (default: `true`).",
+        ],
+        ignore_empty_mailto: [
+          "If `true`, allows `mailto:` `href`s which don't",
+          "contain an email address (default: `false`)'.",
+        ],
         ignore_missing_alt: ["If `true`, ignores images with missing alt tags (default: `false`)."],
         ignore_status_codes: ["A comma-separated list of numbers representing status codes to ignore."],
         ignore_files: ["A comma-separated list of Strings or RegExps containing file paths that are safe to ignore"],
-        ignore_urls: ["A comma-separated list of Strings or RegExps containing URLs that are",
-                      "safe to ignore. This affects all HTML attributes, such as `alt` tags on images.",],
+        ignore_urls: [
+          "A comma-separated list of Strings or RegExps containing URLs that are",
+          "safe to ignore. This affects all HTML attributes, such as `alt` tags on images.",
+        ],
         only_status_codes: ["A comma-separated list of numbers representing the only status codes to report on."],
         only_4xx: ["Only reports errors for links that fall within the 4xx status code range."],
 
-        swap_attributes: ["JSON-formatted config that maps element names to the",
-                          "preferred attribute to check (default: `{}`).",],
-        swap_urls: ["A comma-separated list containing key-value pairs of `RegExp => String`.",
-                    "It transforms URLs that match `RegExp` into `String` via `gsub`.",
-                    "The escape sequences `\\:` should be used to produce literal `:`s.",],
+        swap_attributes: [
+          "JSON-formatted config that maps element names to the",
+          "preferred attribute to check (default: `{}`).",
+        ],
+        swap_urls: [
+          "A comma-separated list containing key-value pairs of `RegExp => String`.",
+          "It transforms URLs that match `RegExp` into `String` via `gsub`.",
+          "The escape sequences `\\:` should be used to produce literal `:`s.",
+        ],
 
         typhoeus: ["JSON-formatted string of Typhoeus config; if set, overrides the html-proofer defaults."],
         hydra: ["JSON-formatted string of Hydra config; if set, overrides the html-proofer defaults."],
         cache: ["JSON-formatted string of cache config; if set, overrides the html-proofer defaults."],
 
-        log_level: ["Sets the logging level. One of `:debug`, `:info`, ",
-                    "`:warn`, `:error`, or `:fatal`. (default: `:info`)",],
+        log_level: [
+          "Sets the logging level. One of `:debug`, `:info`, ",
+          "`:warn`, `:error`, or `:fatal`. (default: `:info`)",
+        ],
 
         version: ["Prints the version of html-proofer."],
       }.freeze

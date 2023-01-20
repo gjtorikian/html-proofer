@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-class CustomReporter < ::HTMLProofer::Reporter
+class CustomReporter < HTMLProofer::Reporter
   def report
     @logger.log(:error, "Womp womp, found #{failures.size} issues")
   end

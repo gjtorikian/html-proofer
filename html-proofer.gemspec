@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("addressable",     "~> 2.3")
   spec.add_dependency("async",           "~> 2.1")
   spec.add_dependency("nokogiri",        "~> 1.13")
+  spec.add_dependency("pdf-reader",      "~> 2.11")
   spec.add_dependency("rainbow",         "~> 3.0")
   spec.add_dependency("typhoeus",        "~> 1.3")
   spec.add_dependency("yell",            "~> 2.0")

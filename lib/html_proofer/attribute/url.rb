@@ -141,12 +141,16 @@ module HTMLProofer
           # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
           @runner.options[:root_dir] || (File.directory?(@runner.current_source) ? @runner.current_source : File.dirname(@runner.current_source))
         # relative links, path is a file
-        elsif File.exist?(File.expand_path(path,
-          @runner.current_source)) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
+        elsif File.exist?(File.expand_path(
+          path,
+          @runner.current_source,
+        )) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
           File.dirname(@runner.current_filename)
         # relative links in nested dir, path is a file
-        elsif File.exist?(File.join(File.dirname(@runner.current_filename),
-          path)) || File.exist?(File.join(File.dirname(@runner.current_filename), path_dot_ext))
+        elsif File.exist?(File.join(
+          File.dirname(@runner.current_filename),
+          path,
+        )) || File.exist?(File.join(File.dirname(@runner.current_filename), path_dot_ext))
           File.dirname(@runner.current_filename)
         # relative link, path is a directory
         else
