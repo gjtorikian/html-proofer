@@ -1,5 +1,20 @@
 # Changelog
 
+## [v5.0.4](https://github.com/gjtorikian/html-proofer/tree/v5.0.4) (2023-01-20)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.3...v5.0.4)
+
+**Closed issues:**
+
+- Official HTMLProofer Docker image [\#788](https://github.com/gjtorikian/html-proofer/issues/788)
+- Crashing when checking the external hashes of URLs  [\#787](https://github.com/gjtorikian/html-proofer/issues/787)
+- Test suite depends on vcr, which is not free software [\#786](https://github.com/gjtorikian/html-proofer/issues/786)
+- `data-proofer-ignore` does not silence "Input contains noncharacter" [\#785](https://github.com/gjtorikian/html-proofer/issues/785)
+
+**Merged pull requests:**
+
+- Improved PDF hash handling [\#789](https://github.com/gjtorikian/html-proofer/pull/789) ([gjtorikian](https://github.com/gjtorikian))
+
 ## [v5.0.3](https://github.com/gjtorikian/html-proofer/tree/v5.0.3) (2022-12-05)
 
 [Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.2...v5.0.3)
