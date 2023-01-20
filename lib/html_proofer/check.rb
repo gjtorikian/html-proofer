@@ -25,8 +25,14 @@ module HTMLProofer
     end
 
     def add_failure(description, line: nil, status: nil, content: nil)
-      @failures << Failure.new(@runner.current_filename, short_name, description, line: line, status: status,
-        content: content)
+      @failures << Failure.new(
+        @runner.current_filename,
+        short_name,
+        description,
+        line: line,
+        status: status,
+        content: content,
+      )
     end
 
     def short_name

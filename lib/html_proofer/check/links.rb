@@ -29,8 +29,11 @@ module HTMLProofer
           end
 
           if @link.url.protocol_relative?
-            add_failure("#{@link.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @link.line, content: @link.content)
+            add_failure(
+              "#{@link.url} is a protocol-relative URL, use explicit https:// instead",
+              line: @link.line,
+              content: @link.content,
+            )
             next
           end
 
@@ -55,8 +58,11 @@ module HTMLProofer
           elsif @link.url.internal?
             # does the local directory have a trailing slash?
             if @link.url.unslashed_directory?(@link.url.absolute_path)
-              add_failure("internally linking to a directory #{@link.url.raw_attribute} without trailing slash",
-                line: @link.line, content: @link.content)
+              add_failure(
+                "internally linking to a directory #{@link.url.raw_attribute} without trailing slash",
+                line: @link.line,
+                content: @link.content,
+              )
               next
             end
 
@@ -88,17 +94,26 @@ module HTMLProofer
 
       def handle_mailto
         if @link.url.path.empty?
-          add_failure("#{@link.url.raw_attribute} contains no email address", line: @link.line,
-            content: @link.content) unless ignore_empty_mailto?
+          add_failure(
+            "#{@link.url.raw_attribute} contains no email address",
+            line: @link.line,
+            content: @link.content,
+          ) unless ignore_empty_mailto?
         elsif !/#{URI::MailTo::EMAIL_REGEXP}/o.match?(@link.url.path)
-          add_failure("#{@link.url.raw_attribute} contains an invalid email address", line: @link.line,
-            content: @link.content)
+          add_failure(
+            "#{@link.url.raw_attribute} contains an invalid email address",
+            line: @link.line,
+            content: @link.content,
+          )
         end
       end
 
       def handle_tel
-        add_failure("#{@link.url.raw_attribute} contains no phone number", line: @link.line,
-          content: @link.content) if @link.url.path.empty?
+        add_failure(
+          "#{@link.url.raw_attribute} contains no phone number",
+          line: @link.line,
+          content: @link.content,
+        ) if @link.url.path.empty?
       end
 
       def ignore_empty_mailto?
@@ -113,13 +128,19 @@ module HTMLProofer
         return unless SRI_REL_TYPES.include?(@link.node["rel"])
 
         if blank?(@link.node["integrity"]) && blank?(@link.node["crossorigin"])
-          add_failure("SRI and CORS not provided in: #{@link.url.raw_attribute}", line: @link.line,
-            content: @link.content)
+          add_failure(
+            "SRI and CORS not provided in: #{@link.url.raw_attribute}",
+            line: @link.line,
+            content: @link.content,
+          )
         elsif blank?(@link.node["integrity"])
           add_failure("Integrity is missing in: #{@link.url.raw_attribute}", line: @link.line, content: @link.content)
         elsif blank?(@link.node["crossorigin"])
-          add_failure("CORS not provided for external resource in: #{@link.link.url.raw_attribute}", line: @link.line,
-            content: @link.content)
+          add_failure(
+            "CORS not provided for external resource in: #{@link.link.url.raw_attribute}",
+            line: @link.line,
+            content: @link.content,
+          )
         end
       end
 

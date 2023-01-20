@@ -11,9 +11,11 @@ module HTMLProofer
     STDERR_LEVELS = [:error, :fatal].freeze
 
     def initialize(log_level)
-      @logger = Yell.new(format: false, \
+      @logger = Yell.new(
+        format: false, \
         name: "HTMLProofer", \
-        level: "gte.#{log_level}") do |l|
+        level: "gte.#{log_level}",
+      ) do |l|
         l.adapter(:stdout, level: "lte.warn")
         l.adapter(:stderr, level: "gte.error")
       end

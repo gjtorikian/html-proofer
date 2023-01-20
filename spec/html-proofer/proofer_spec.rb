@@ -33,8 +33,11 @@ describe HTMLProofer do
 
     it "only has one UA with file" do
       github_hash = File.join(FIXTURES_DIR, "links", "github_hash.html")
-      http = capture_proofer_http(github_hash, :file,
-        typhoeus: { verbose: true, headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" } })
+      http = capture_proofer_http(
+        github_hash,
+        :file,
+        typhoeus: { verbose: true, headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" } },
+      )
       expect(http["request"]["headers"]["User-Agent"]).to(eq(["Mozilla/5.0 (compatible; My New User-Agent)"]))
     end
   end

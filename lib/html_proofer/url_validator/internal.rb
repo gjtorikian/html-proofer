@@ -36,8 +36,14 @@ module HTMLProofer
 
             target_file_path = url.absolute_path
             unless file_exists?(target_file_path)
-              @failed_checks << Failure.new(@runner.current_filename, "Links > Internal",
-                "internally linking to #{url}, which does not exist", line: metadata[:line], status: nil, content: nil)
+              @failed_checks << Failure.new(
+                @runner.current_filename,
+                "Links > Internal",
+                "internally linking to #{url}, which does not exist",
+                line: metadata[:line],
+                status: nil,
+                content: nil,
+              )
               to_add << [url, metadata, false]
               next
             end
@@ -55,8 +61,14 @@ module HTMLProofer
               next
             end
             unless hash_exists
-              @failed_checks << Failure.new(@runner.current_filename, "Links > Internal",
-                "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not", line: metadata[:line], status: nil, content: nil)
+              @failed_checks << Failure.new(
+                @runner.current_filename,
+                "Links > Internal",
+                "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not",
+                line: metadata[:line],
+                status: nil,
+                content: nil,
+              )
               to_add << [url, metadata, false]
               next
             end
@@ -75,8 +87,14 @@ module HTMLProofer
             exists = hash_exists_in_html?(href_hash, html)
             url_metadata.each do |(url, metadata)|
               unless exists
-                @failed_checks << Failure.new(metadata[:filename], "Links > Internal",
-                  "internally linking to #{url}; the file exists, but the hash '#{href_hash}' does not", line: metadata[:line], status: nil, content: nil)
+                @failed_checks << Failure.new(
+                  metadata[:filename],
+                  "Links > Internal",
+                  "internally linking to #{url}; the file exists, but the hash '#{href_hash}' does not",
+                  line: metadata[:line],
+                  status: nil,
+                  content: nil,
+                )
               end
               to_add << [url, metadata, exists]
             end

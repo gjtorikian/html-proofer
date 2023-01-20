@@ -17,13 +17,19 @@ module HTMLProofer
           elsif !@open_graph.url.valid?
             add_failure("#{@open_graph.src} is an invalid URL", line: @open_graph.line)
           elsif @open_graph.url.protocol_relative?
-            add_failure("open graph link #{@open_graph.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @open_graph.line, content: @open_graph.content)
+            add_failure(
+              "open graph link #{@open_graph.url} is a protocol-relative URL, use explicit https:// instead",
+              line: @open_graph.line,
+              content: @open_graph.content,
+            )
           elsif @open_graph.url.remote?
             add_to_external_urls(@open_graph.url, @open_graph.line)
           else
-            add_failure("internal open graph #{@open_graph.url.raw_attribute} does not exist", line: @open_graph.line,
-              content: @open_graph.content) unless @open_graph.url.exists?
+            add_failure(
+              "internal open graph #{@open_graph.url.raw_attribute} does not exist",
+              line: @open_graph.line,
+              content: @open_graph.content,
+            ) unless @open_graph.url.exists?
           end
         end
 
