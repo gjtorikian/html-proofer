@@ -144,16 +144,22 @@ describe HTMLProofer::Check::Links do
 
   it "fails on redirects if not following" do
     link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
-    proofer = run_proofer(link_with_redirect_filepath, :file,
-      { enforce_https: false, typhoeus: { followlocation: false } })
+    proofer = run_proofer(
+      link_with_redirect_filepath,
+      :file,
+      { enforce_https: false, typhoeus: { followlocation: false } },
+    )
     expect(proofer.failed_checks.first.description).to(match(/failed/))
   end
 
   it "does not fail on redirects we're not following" do
     # this test should emit a 301--see above--but we're intentionally suppressing it
     link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
-    proofer = run_proofer(link_with_redirect_filepath, :file,
-      { only_4xx: true, enforce_https: false, typhoeus: { followlocation: false } })
+    proofer = run_proofer(
+      link_with_redirect_filepath,
+      :file,
+      { only_4xx: true, enforce_https: false, typhoeus: { followlocation: false } },
+    )
     expect(proofer.failed_checks).to(eq([]))
   end
 
@@ -749,5 +755,16 @@ describe HTMLProofer::Check::Links do
     expect(proofer.failed_checks.count).to(eq(3))
     expect(proofer.failed_checks.first.description).to(match(/internally linking to exists.pdf#page=2; the file exists, but the hash 'page=2' does not/))
     expect(proofer.failed_checks.last.description).to(match(/internally linking to missing.pdf#page=2, which does not exist/))
+  end
+
+  it "tries reading PDFs with hashes" do
+    file = File.join(FIXTURES_DIR, "links", "pdf_w_hash.html")
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_checks.count).to(eq(0))
+
+    file = File.join(FIXTURES_DIR, "links", "pdf_w_hash_broken.html")
+    proofer = run_proofer(file, :file)
+    expect(proofer.failed_checks.count).to(eq(1))
+    expect(proofer.failed_checks.first.description).to(match(/ClocksandTiming.pdf exists, but the hash 'page=2111115' does not/))
   end
 end

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require "typhoeus"
-require "uri"
+require "open-uri"
+# require "uri"
+require "pdf-reader"
 
 module HTMLProofer
   class UrlValidator
@@ -88,8 +90,12 @@ module HTMLProofer
         return if @runner.options[:ignore_status_codes].include?(response_code)
 
         if response_code.between?(200, 299)
-          @cache.add_external(href, filenames, response_code, "OK", true) unless check_hash_in_2xx_response(href, url,
-            response, filenames)
+          @cache.add_external(href, filenames, response_code, "OK", true) unless check_hash_in_2xx_response(
+            href,
+            url,
+            response,
+            filenames,
+          )
         elsif response.timed_out?
           handle_timeout(href, filenames, response_code)
         elsif response_code.zero?
@@ -115,6 +121,26 @@ module HTMLProofer
         return false unless url.hash?
 
         hash = url.hash
+
+        # attempt to verify PDF hash ref; see #787 for more details
+        # FIXME: this is re-reading the PDF response
+        if /pdf/.match?(response.options[:headers]["content-type"])
+          io = URI.parse(url.to_s).open
+          reader = PDF::Reader.new(io)
+
+          pages = reader.pages
+          if hash =~ /\Apage=(\d+)\z/
+            page = Regexp.last_match[1].to_i
+
+            unless pages[page - 1]
+              msg = "External link #{href} failed: #{url.sans_hash} exists, but the hash '#{hash}' does not"
+              add_failure(filenames, msg, response.code)
+              @cache.add_external(href, filenames, response.code, msg, false)
+            end
+
+            return true
+          end
+        end
 
         body_doc = create_nokogiri(response.body)
 
