@@ -217,7 +217,7 @@ module HTMLProofer
         url.start_with?("?")
       end
 
-      def sans_hash
+      def without_hash
         @url.to_s.sub(/##{hash}/, "")
       end
 

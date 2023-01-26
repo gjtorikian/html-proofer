@@ -33,14 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency("yell",            "~> 2.0")
   spec.add_dependency("zeitwerk",        "~> 2.5")
 
-  spec.add_development_dependency("awesome_print")
-  spec.add_development_dependency("debug") if "#{RbConfig::CONFIG["MAJOR"]}.#{RbConfig::CONFIG["MINOR"]}".to_f >= 3.1
-  spec.add_development_dependency("rake")
-  spec.add_development_dependency("redcarpet")
   spec.add_development_dependency("rspec", "~> 3.1")
-  spec.add_development_dependency("rubocop")
-  spec.add_development_dependency("rubocop-rspec")
-  spec.add_development_dependency("rubocop-standard")
   spec.add_development_dependency("timecop", "~> 0.8")
   spec.add_development_dependency("vcr", "~> 2.9")
 end
