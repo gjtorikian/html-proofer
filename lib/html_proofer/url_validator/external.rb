@@ -135,7 +135,7 @@ module HTMLProofer
             page = Regexp.last_match[1].to_i
 
             unless pages[page - 1]
-              msg = "External link #{href} failed: #{url.sans_hash} exists, but the hash '#{hash}' does not"
+              msg = "External link #{href} failed: #{url.without_hash} exists, but the hash '#{hash}' does not"
               add_failure(filenames, msg, response.code)
               @cache.add_external(href, filenames, response.code, msg, false)
             end
@@ -158,7 +158,7 @@ module HTMLProofer
 
         return unless body_doc.xpath(xpath.join("|")).empty?
 
-        msg = "External link #{href} failed: #{url.sans_hash} exists, but the hash '#{hash}' does not"
+        msg = "External link #{href} failed: #{url.without_hash} exists, but the hash '#{hash}' does not"
         add_failure(filenames, msg, response.code)
         @cache.add_external(href, filenames, response.code, msg, false)
         true

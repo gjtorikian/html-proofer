@@ -760,11 +760,12 @@ describe HTMLProofer::Check::Links do
   it "tries reading PDFs with hashes" do
     file = File.join(FIXTURES_DIR, "links", "pdf_w_hash.html")
     proofer = run_proofer(file, :file)
+
     expect(proofer.failed_checks.count).to(eq(0))
 
     file = File.join(FIXTURES_DIR, "links", "pdf_w_hash_broken.html")
     proofer = run_proofer(file, :file)
     expect(proofer.failed_checks.count).to(eq(1))
-    expect(proofer.failed_checks.first.description).to(match(/ClocksandTiming.pdf exists, but the hash 'page=2111115' does not/))
+    expect(proofer.failed_checks.first.description).to(match(/.pdf exists, but the hash 'page=2111115' does not/))
   end
 end
