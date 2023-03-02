@@ -768,4 +768,10 @@ describe HTMLProofer::Check::Links do
     expect(proofer.failed_checks.count).to(eq(1))
     expect(proofer.failed_checks.first.description).to(match(/.pdf exists, but the hash 'page=2111115' does not/))
   end
+
+  it "navigates to sibling through parent" do
+    link_pointing_to_sibling = File.join(FIXTURES_DIR, "links", "root_folder", "admin", "link_to_relative_parent.html")
+    proofer = run_proofer(link_pointing_to_sibling, :file)
+    expect(proofer.failed_checks.count).to(eq(0))
+  end
 end
