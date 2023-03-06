@@ -126,7 +126,7 @@ module HTMLProofer
 
         # attempt to verify PDF hash ref; see #787 for more details
         # FIXME: this is re-reading the PDF response
-        if content_type && /pdf/.match?(content_type[1])
+        if content_type && content_type[1].include?("pdf")
           io = URI.parse(url.to_s).open
           reader = PDF::Reader.new(io)
 

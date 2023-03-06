@@ -783,7 +783,7 @@ describe HTMLProofer::Check::Links do
     proofer = run_proofer(
       link_pointing_to_sibling,
       :file,
-      cache: { timeframe: { internal: "1d" }, storage_dir: cache_storage_dir, cache_file: cache_file},
+      cache: { timeframe: { internal: "1d" }, storage_dir: cache_storage_dir, cache_file: cache_file },
     )
     File.delete(cache_filepath) if File.exist?(cache_filepath)
     expect(proofer.failed_checks.count).to(eq(0))
