@@ -774,4 +774,18 @@ describe HTMLProofer::Check::Links do
     proofer = run_proofer(link_pointing_to_sibling, :file)
     expect(proofer.failed_checks.count).to(eq(0))
   end
+
+  it "navigates to sibling through parent, with cache" do
+    link_pointing_to_sibling = File.join(FIXTURES_DIR, "links", "root_folder", "admin", "link_to_relative_parent.html")
+    cache_storage_dir = File.join(FIXTURES_DIR, "cache", "tmp_sibling_cache")
+    cache_file = "cache.json"
+    cache_filepath = File.join(cache_storage_dir, cache_file)
+    proofer = run_proofer(
+      link_pointing_to_sibling,
+      :file,
+      cache: { timeframe: { internal: "1d" }, storage_dir: cache_storage_dir, cache_file: cache_file},
+    )
+    File.delete(cache_filepath) if File.exist?(cache_filepath)
+    expect(proofer.failed_checks.count).to(eq(0))
+  end
 end
