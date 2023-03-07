@@ -1,5 +1,20 @@
 # Changelog
 
+## [v5.0.5](https://github.com/gjtorikian/html-proofer/tree/v5.0.5) (2023-03-07)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.4...v5.0.5)
+
+**Closed issues:**
+
+- Reporting broken links when using relative internal links reported as broken [\#792](https://github.com/gjtorikian/html-proofer/issues/792)
+- v5 upgrade guide? [\#791](https://github.com/gjtorikian/html-proofer/issues/791)
+- Anchor links are encoded in html-proofer output [\#757](https://github.com/gjtorikian/html-proofer/issues/757)
+
+**Merged pull requests:**
+
+- Fix cleaning relative links cache key [\#793](https://github.com/gjtorikian/html-proofer/pull/793) ([riccardoporreca](https://github.com/riccardoporreca))
+- remove proprietary pdf [\#790](https://github.com/gjtorikian/html-proofer/pull/790) ([gjtorikian](https://github.com/gjtorikian))
+
 ## [v5.0.4](https://github.com/gjtorikian/html-proofer/tree/v5.0.4) (2023-01-20)
 
 [Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.3...v5.0.4)
