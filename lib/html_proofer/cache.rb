@@ -93,8 +93,10 @@ module HTMLProofer
       # if there are no urls, bail
       return {} if urls_detected.empty?
 
-      urls_detected = urls_detected.transform_keys do |url|
-        cleaned_url(url)
+      if type == :external
+        urls_detected = urls_detected.transform_keys do |url|
+          cleaned_url(url)
+        end
       end
 
       urls_to_check = detect_url_changes(urls_detected, type)

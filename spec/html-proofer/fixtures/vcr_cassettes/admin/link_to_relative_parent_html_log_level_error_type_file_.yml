@@ -1,0 +1,3075 @@
+---
+http_interactions:
+- request:
+    method: head
+    uri: https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - application/javascript; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=30672000
+      etag:
+      - W/"5eb03d8b-12e38"
+      last-modified:
+      - Mon, 04 May 2020 16:06:35 GMT
+      cf-cdnjs-via:
+      - cfworker/kv
+      cross-origin-resource-policy:
+      - cross-origin
+      timing-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-cache-status:
+      - HIT
+      age:
+      - '380565'
+      expires:
+      - Tue, 20 Feb 2024 02:12:27 GMT
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=o19acaLmigR8pNGPeXjFNN%2BIXue6ofEmsH8ItNBIKMYCB%2BXDWLw%2B7VB8tkl3Xbf2e0Mpab%2FT1ySD0mXJf%2BLik29muJR90wt5iaDQmm2nR2jhowRmEWS3kgGegzM0MEJETtt61MMX"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=15780000
+      server:
+      - cloudflare
+      cf-ray:
+      - 7a161d66dedb8c17-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - application/javascript; charset=utf-8
+      vary:
+      - Accept-Encoding
+      cdn-pullzone:
+      - '252412'
+      cdn-uid:
+      - b1941f61-b576-4f40-80de-5677acb38f74
+      cdn-requestcountrycode:
+      - US
+      cache-control:
+      - public, max-age=31919000
+      etag:
+      - W/"5869c96cc8f19086aee625d670d741f9"
+      last-modified:
+      - Mon, 25 Jan 2021 22:04:00 GMT
+      cdn-proxyver:
+      - '1.02'
+      cdn-requestpullsuccess:
+      - 'True'
+      cdn-requestpullcode:
+      - '200'
+      cdn-cachedat:
+      - 03/12/2022 18:02:15
+      cdn-edgestorageid:
+      - '871'
+      cdn-status:
+      - '200'
+      cdn-requestid:
+      - d29955e88c31f99d00a69293254d6853
+      cdn-cache:
+      - HIT
+      timing-allow-origin:
+      - "*"
+      cross-origin-resource-policy:
+      - cross-origin
+      access-control-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-cache-status:
+      - HIT
+      age:
+      - '1313658'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      server:
+      - cloudflare
+      cf-ray:
+      - 7a161d66d89c191e-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - application/javascript; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=30672000
+      etag:
+      - W/"5eb03ec4-1499c"
+      last-modified:
+      - Mon, 04 May 2020 16:11:48 GMT
+      cf-cdnjs-via:
+      - cfworker/kv
+      cross-origin-resource-policy:
+      - cross-origin
+      timing-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-cache-status:
+      - HIT
+      age:
+      - '163018'
+      expires:
+      - Tue, 20 Feb 2024 02:12:27 GMT
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=D6RfIF1pVyesJkVel371eo29hlLWWFU2VHJtdtsgKhVu3xKNY5ZvfEbf9%2F%2BgGyhCTcCV%2FtrLbnDdGX44tr43wLhRjKEGo3KB4U2mdg2wli9QUnnWvMRG9Ael%2FJWaR6oy7StMLnqj"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=15780000
+      server:
+      - cloudflare
+      cf-ray:
+      - 7a161d66da7218b1-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://avatars.githubusercontent.com/u/83318378?v=4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - max-age=300
+      content-security-policy:
+      - default-src 'none'
+      content-type:
+      - image/jpeg
+      etag:
+      - '"152794549f0aafb51b680a8b0fed87d480257919ceb9b92b5b5c47b8a9a0cd14"'
+      last-modified:
+      - Tue, 01 Mar 2022 00:31:59 GMT
+      strict-transport-security:
+      - max-age=31557600
+      timing-allow-origin:
+      - https://github.com
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-xss-protection:
+      - 1; mode=block
+      x-github-request-id:
+      - 3AE6:0A55:21E746:2C16E8:63FE1FC7
+      accept-ranges:
+      - bytes
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      via:
+      - 1.1 varnish
+      x-served-by:
+      - cache-ewr18132-EWR
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - '1'
+      x-timer:
+      - S1677723147.344061,VS0,VE1
+      access-control-allow-origin:
+      - "*"
+      x-fastly-request-id:
+      - c12f1fdc85eece7daa75df469f72f161eef599da
+      expires:
+      - Thu, 02 Mar 2023 02:17:27 GMT
+      source-age:
+      - '124483'
+      vary:
+      - Authorization,Accept-Encoding
+      content-length:
+      - '48508'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://avatars.githubusercontent.com/u/83318378?v=4
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://avatars.githubusercontent.com/u/83246930?v=4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - max-age=300
+      content-security-policy:
+      - default-src 'none'
+      content-type:
+      - image/jpeg
+      etag:
+      - '"82a7a447225d4855f9b542c08839bc6d7ea386f3b679223ffe0708f38807b0da"'
+      last-modified:
+      - Tue, 27 Apr 2021 12:46:40 GMT
+      strict-transport-security:
+      - max-age=31557600
+      timing-allow-origin:
+      - https://github.com
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-xss-protection:
+      - 1; mode=block
+      x-github-request-id:
+      - 4434:7FBF:B3B6F:11F6E4:63D27F51
+      accept-ranges:
+      - bytes
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      via:
+      - 1.1 varnish
+      x-served-by:
+      - cache-ewr18182-EWR
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - '1'
+      x-timer:
+      - S1677723147.346729,VS0,VE1
+      access-control-allow-origin:
+      - "*"
+      x-fastly-request-id:
+      - a107990bc201e0b4c298a27732f18bba7bd3c4df
+      expires:
+      - Thu, 02 Mar 2023 02:17:27 GMT
+      source-age:
+      - '2983610'
+      vary:
+      - Authorization,Accept-Encoding
+      content-length:
+      - '8960'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://avatars.githubusercontent.com/u/83246930?v=4
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - application/javascript; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      cache-control:
+      - public, max-age=30672000
+      etag:
+      - W/"5eb03ec1-514"
+      last-modified:
+      - Mon, 04 May 2020 16:11:45 GMT
+      cf-cdnjs-via:
+      - cfworker/kv
+      cross-origin-resource-policy:
+      - cross-origin
+      timing-allow-origin:
+      - "*"
+      x-content-type-options:
+      - nosniff
+      cf-cache-status:
+      - HIT
+      age:
+      - '106672'
+      expires:
+      - Tue, 20 Feb 2024 02:12:27 GMT
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=GsOAkEWCCFR8SUZC2ThTkWx3jl9Px05EEGMLU1gQ66Srqill8LSv3CLHeV3gzoMdJGsjqWcvmYnJiJO7yz%2Fh3u9tLHGBeoladR7IITCuEXCMD24QfK5QWvdauyjAlhnyhAqd8iZ9"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      strict-transport-security:
+      - max-age=15780000
+      server:
+      - cloudflare
+      cf-ray:
+      - 7a161d66dabb181d-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://avatars.githubusercontent.com/u/83297225?v=4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      cache-control:
+      - max-age=300
+      content-security-policy:
+      - default-src 'none'
+      content-type:
+      - image/jpeg
+      etag:
+      - '"a6d8353d88459defd706515518e812accf73c64218817b308f4c250ff5fad839"'
+      last-modified:
+      - Tue, 25 Jan 2022 22:08:46 GMT
+      strict-transport-security:
+      - max-age=31557600
+      timing-allow-origin:
+      - https://github.com
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-xss-protection:
+      - 1; mode=block
+      x-github-request-id:
+      - 8F2E:17DD:B1EF5:118DA1:63D2717E
+      accept-ranges:
+      - bytes
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      via:
+      - 1.1 varnish
+      x-served-by:
+      - cache-ewr18124-EWR
+      x-cache:
+      - HIT
+      x-cache-hits:
+      - '1'
+      x-timer:
+      - S1677723147.354744,VS0,VE8
+      access-control-allow-origin:
+      - "*"
+      x-fastly-request-id:
+      - ed524d0bed252f6e1c4a0995454634107be16316
+      expires:
+      - Thu, 02 Mar 2023 02:17:27 GMT
+      source-age:
+      - '2987149'
+      vary:
+      - Authorization,Accept-Encoding
+      content-length:
+      - '21765'
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://avatars.githubusercontent.com/u/83297225?v=4
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.linkedin.com/company/netapp
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 999
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '1530'
+      content-type:
+      - text/html
+      expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      set-cookie:
+      - trkCode=bf; Max-Age=5
+      - trkInfo=AQEaKaURW95RIgAAAYagF5r4oWejWfnY7q_ySpojeIE1-rbxyPuyoEDDqWGw-XMyKR01cn62I9ekR-n-y6UBpfD41cK1Eo_I1UbevfPZrWDUhVXlwAltkJiybzyrhFhabJNVdIw=;
+        Max-Age=5
+      - rtc=AQFYVC8u23Y-FQAAAYagF5r4MRKiujygP3RsQSYwyW3e3AXp7WxMs9WROU-ulDy8cuN2GvuvbodSMqP0M0jH_nOWXGWUmiS7wSBfPUbVkQ8RBz0lny5UzBOvgTwSz35P5ZoKU9IB8J7qDLLcY1-KJ9ka28vqfb0h6SUdGd6-GPFZM5dftsObnyz0vjVmuu7_1O3wHFuClOJH821UpBKBI2krVvozTAYKNcrCKH-FjBoI;
+        Max-Age=120; path=/; domain=.linkedin.com
+      x-li-fabric:
+      - prod-lva1
+      x-li-pop:
+      - afd-prod-lva1-x
+      x-li-proto:
+      - http/2
+      x-li-uuid:
+      - AAX14Vw8CcPvmGEuCFHpBg==
+      x-cache:
+      - CONFIG_NOCACHE
+      x-msedge-ref:
+      - 'Ref A: 59B503C20EF341AC80C32E6CFF4233C6 Ref B: EWR311000102033 Ref C: 2023-03-02T02:12:27Z'
+      date:
+      - Thu, 02 Mar 2023 02:12:26 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.linkedin.com/company/netapp
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://twitter.com/netapp
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      perf:
+      - '7626143928'
+      expiry:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      pragma:
+      - no-cache
+      server:
+      - tsa_b
+      set-cookie:
+      - guest_id=v1%3A167772314741916887; Max-Age=34214400; Expires=Mon, 01 Apr 2024
+        02:12:27 GMT; Path=/; Domain=.twitter.com; Secure; SameSite=None
+      - ct0=; Max-Age=-1677723146; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Path=/;
+        Domain=.twitter.com; Secure; SameSite=Lax
+      content-type:
+      - text/html; charset=utf-8
+      x-powered-by:
+      - Express
+      cache-control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      last-modified:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      x-frame-options:
+      - DENY
+      x-transaction-id:
+      - 1c7e524f811ea444
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      content-security-policy:
+      - 'connect-src ''self'' blob: https://*.pscp.tv https://*.video.pscp.tv https://*.twimg.com
+        https://api.twitter.com https://api-stream.twitter.com https://ads-api.twitter.com
+        https://aa.twitter.com https://caps.twitter.com https://pay.twitter.com https://sentry.io
+        https://ton.twitter.com https://twitter.com https://upload.twitter.com https://www.google-analytics.com
+        https://accounts.google.com/gsi/status https://accounts.google.com/gsi/log
+        https://app.link https://api2.branch.io https://bnc.lt wss://*.pscp.tv https://vmap.snappytv.com
+        https://vmapstage.snappytv.com https://vmaprel.snappytv.com https://vmap.grabyo.com
+        https://dhdsnappytv-vh.akamaihd.net https://pdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://dwo3ckksxlb0v.cloudfront.net https://media.riffsy.com https://*.giphy.com
+        https://media.tenor.com https://c.tenor.com ; default-src ''self''; form-action
+        ''self'' https://twitter.com https://*.twitter.com; font-src ''self'' https://*.twimg.com;
+        frame-src ''self'' https://twitter.com https://mobile.twitter.com https://pay.twitter.com
+        https://cards-frame.twitter.com https://accounts.google.com/ https://client-api.arkoselabs.com/
+        https://iframe.arkoselabs.com/  https://recaptcha.net/recaptcha/ https://www.google.com/recaptcha/
+        https://www.gstatic.com/recaptcha/; img-src ''self'' blob: data: https://*.cdn.twitter.com
+        https://ton.twitter.com https://*.twimg.com https://analytics.twitter.com
+        https://cm.g.doubleclick.net https://www.google-analytics.com https://maps.googleapis.com
+        https://www.periscope.tv https://www.pscp.tv https://media.riffsy.com https://*.giphy.com
+        https://media.tenor.com https://c.tenor.com https://*.pscp.tv https://*.periscope.tv
+        https://prod-periscope-profile.s3-us-west-2.amazonaws.com https://platform-lookaside.fbsbx.com
+        https://scontent.xx.fbcdn.net https://scontent-sea1-1.xx.fbcdn.net https://*.googleusercontent.com;
+        manifest-src ''self''; media-src ''self'' blob: https://twitter.com https://*.twimg.com
+        https://*.vine.co https://*.pscp.tv https://*.video.pscp.tv https://dhdsnappytv-vh.akamaihd.net
+        https://pdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mdhdsnappytv-vh.akamaihd.net https://mpdhdsnappytv-vh.akamaihd.net
+        https://mmdhdsnappytv-vh.akamaihd.net https://mdhdsnappytv-vh.akamaihd.net
+        https://mpdhdsnappytv-vh.akamaihd.net https://mmdhdsnappytv-vh.akamaihd.net
+        https://dwo3ckksxlb0v.cloudfront.net; object-src ''none''; script-src ''self''
+        ''unsafe-inline'' https://*.twimg.com https://recaptcha.net/recaptcha/ https://www.google.com/recaptcha/
+        https://www.gstatic.com/recaptcha/ https://client-api.arkoselabs.com/ https://www.google-analytics.com
+        https://twitter.com https://app.link https://accounts.google.com/gsi/client
+        https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js  ''nonce-MDIxOTA4NzktY2Q5Yy00YzczLWFlNTgtZjAyMDFkYzYyMzlh'';
+        style-src ''self'' ''unsafe-inline'' https://accounts.google.com/gsi/style
+        https://*.twimg.com; worker-src ''self'' blob:; report-uri https://twitter.com/i/csp_report?a=O5RXE%3D%3D%3D&ro=false'
+      strict-transport-security:
+      - max-age=631138519
+      cross-origin-opener-policy:
+      - same-origin-allow-popups
+      cross-origin-embedder-policy:
+      - unsafe-none
+      x-response-time:
+      - '78'
+      x-connection-hash:
+      - da29b7d4c98f8d2e19ef4662dc165d265ceff2e31aa75e858b62b8ecfab5510b
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://twitter.com/netapp
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/company/legal/privacy-policy/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:323f08db-f4f8-4d28-a241-224e200b593e
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399352_6875_4100_40_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/company/legal/privacy-policy/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:dcd7466e-24d2-4a35-b887-18422e1be81d
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399293_8522_3737_39_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://blog.netapp.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      mpulse_origin_time:
+      - '1509'
+      mpulse_cdn_cache:
+      - MISS
+      x-akam-sw-version:
+      - 0.5.0
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399796_2358_3560_40_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/blog/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: get
+    uri: https://www.linkedin.com/company/netapp
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 999
+      message: ''
+    headers:
+      cache-control:
+      - no-cache, no-store
+      pragma:
+      - no-cache
+      content-length:
+      - '1530'
+      content-type:
+      - text/html
+      expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      set-cookie:
+      - trkCode=bf; Max-Age=5
+      - trkInfo=AQE8n26V0wamFgAAAYagF5r4TC8rmdCISJAkZB1ZgD0EyZF8SEBfM0pn1NSqDV_pASALa7-Dl2IrvY9V3KkPcPGOLF3NU3h7SlBCsaQARClw2orEW_R3LnuW5otrgj0uhf3mHpE=;
+        Max-Age=5
+      - rtc=AQE5HNDuLXSPYAAAAYagF5r4Ik7vDcqmdbaNeok2Q4D_6PBB_T05fXWhc8jaEl2y8qAxWGERjMOKWP_5hOIC-v0rUi2GGNEGsOzIKbiMexvCjk6n4RpSlUeMbGTI4_Om8vuRnabEeuH534wxJK9u01cEFMQrveltIr3CDRc3Pcm80qfNW13eLepTlyO9loh4vIVnB3T2ag1RPHcE_cWtbnRW0FycKZQeu22qAYAiJVVO;
+        Max-Age=120; path=/; domain=.linkedin.com
+      x-li-fabric:
+      - prod-ltx1
+      x-li-pop:
+      - afd-prod-ltx1-x
+      x-li-proto:
+      - http/2
+      x-li-uuid:
+      - AAX14Vw8/zJRIPO3g51i7A==
+      x-cache:
+      - CONFIG_NOCACHE
+      x-msedge-ref:
+      - 'Ref A: C9C269F28355450F8346CB386AE9402C Ref B: EWR311000102033 Ref C: 2023-03-02T02:12:27Z'
+      date:
+      - Thu, 02 Mar 2023 02:12:26 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        <html><head>
+        <script type="text/javascript">
+        window.onload = function() {
+          // Parse the tracking code from cookies.
+          var trk = "bf";
+          var trkInfo = "bf";
+          var cookies = document.cookie.split("; ");
+          for (var i = 0; i < cookies.length; ++i) {
+            if ((cookies[i].indexOf("trkCode=") == 0) && (cookies[i].length > 8)) {
+              trk = cookies[i].substring(8);
+            }
+            else if ((cookies[i].indexOf("trkInfo=") == 0) && (cookies[i].length > 8)) {
+              trkInfo = cookies[i].substring(8);
+            }
+          }
+
+          if (window.location.protocol == "http:") {
+            // If "sl" cookie is set, redirect to https.
+            for (var i = 0; i < cookies.length; ++i) {
+              if ((cookies[i].indexOf("sl=") == 0) && (cookies[i].length > 3)) {
+                window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+                return;
+              }
+            }
+          }
+
+          // Get the new domain. For international domains such as
+          // fr.linkedin.com, we convert it to www.linkedin.com
+          // treat .cn similar to .com here
+          var domain = location.host;
+          if (domain != "www.linkedin.com" && domain != "www.linkedin.cn") {
+            var subdomainIndex = location.host.indexOf(".linkedin");
+            if (subdomainIndex != -1) {
+              domain = "www" + location.host.substring(subdomainIndex);
+            }
+          }
+
+          window.location.href = "https://" + domain + "/authwall?trk=" + trk + "&trkInfo=" + trkInfo +
+              "&original_referer=" + document.referrer.substr(0, 200) +
+              "&sessionRedirect=" + encodeURIComponent(window.location.href);
+        }
+        </script>
+        </head></html>
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.linkedin.com/company/netapp
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/company/contact-us/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      x-akam-sw-version:
+      - 0.5.0
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399312_14050_3307_41_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/company/contact-us/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/company/legal/terms-of-use/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399368_14453_3457_37_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/company/legal/terms-of-use/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://github.com/NetAppDocs/storagegrid-116/issues/new?body=Page:%20%5BConfigure%20load%20balancer%20endpoints%5D(https://docs.netapp.com/us-en/storagegrid-116/admin/configuring-load-balancer-endpoints.html)&template=public-issue-template.md
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame
+      - Accept-Encoding, Accept, X-Requested-With
+      cache-control:
+      - no-store
+      etag:
+      - W/"79c03e0832d359650290b6194a0d9122"
+      set-cookie:
+      - _device_id=7032cce46a63a4060343771e8430734a; path=/; expires=Sat, 02 Mar 2024
+        02:12:27 GMT; secure; HttpOnly; SameSite=Lax
+      - _octo=GH1.1.707407677.1677723147; domain=github.com; path=/; expires=Sat,
+        02 Mar 2024 02:12:27 GMT; secure; SameSite=Lax
+      - logged_in=no; domain=github.com; path=/; expires=Sat, 02 Mar 2024 02:12:27
+        GMT; secure; HttpOnly; SameSite=Lax
+      - _gh_sess=eNEVDP3KAgEq6zepYzo239j0%2Frm3u96hVHINkMjfdbF%2Bka%2B3o9BEbJ4Kq10SBelJzP%2Fie4XDwqtlMCUus2bdXy89pdYbu6IJXUbCbya6M%2BeCHJCaH2iHYZr3pFR4G5677oF3WE9qxJstz40saOr%2F67tvSqS39SmKcNO8ZGNa7CCbRXWSaFjQ8FSxfC3JrY3Wo7x1%2F%2FGS8jiccBbUt%2BzDzL7FHzW1nceijEDKCY9qMP7L7YcZuXWy%2F20R9qPECeFj6tygZnU%3D--IIZJgazx7vdctBwA--1HNn5iTHZhzJOlMy2%2BHldA%3D%3D;
+        path=/; secure; HttpOnly; SameSite=Lax
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/
+        productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/
+        productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com media.githubusercontent.com
+        camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com
+        github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com
+        opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com
+        customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      x-github-request-id:
+      - FD23:5EEF:AF9108E:104E2845:6400060B
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2FNetAppDocs%2Fstoragegrid-116%2Fissues%2Fnew%3Fbody%3DPage%3A%2520%255BConfigure%2520load%2520balancer%2520endpoints%255D%28https%3A%2F%2Fdocs.netapp.com%2Fus-en%2Fstoragegrid-116%2Fadmin%2Fconfiguring-load-balancer-endpoints.html%29%26template%3Dpublic-issue-template.md
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://blog.netapp.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      mpulse_origin_time:
+      - '1509'
+      mpulse_cdn_cache:
+      - MISS
+      x-akam-sw-version:
+      - 0.5.0
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399795_8492_3362_39_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/blog/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/us-en/contribute/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Wed, 01 Mar 2023 20:17:10 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - 89C4:2C1A:EFE4D7:11528A1:63FFB06E
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12328-PDX
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Timer:
+      - S1677723148.579237,VS0,VE76
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 3a9500fea3b8c894f0915b24346080b4e3c68fe4
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/us-en/contribute/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/ja-jp/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - 1D6A:60E7:C38386:E0574F:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12327-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.577021,VS0,VE99
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - c851761c699d74b2f157d746986464cb6e2f95fe
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/ja-jp/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/ko-kr/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - 0B62:5B5D:43A385:4CE5B4:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12320-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.576720,VS0,VE98
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 1c7dab971bde6986ff2a098ab38e7ba20afacf2a
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/ko-kr/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/zh-cn/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - 322A:60E7:C38386:E05751:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12320-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.577784,VS0,VE80
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - a573e8d553ac758fa654b44c28793333a17af022
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/zh-cn/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/zh-tw/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - DBF0:923D:9413F8:A87A53:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12320-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.577160,VS0,VE91
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 84cba67f641b8345ca0329eb04273d19ea4ccf3c
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/zh-tw/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/de-de/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - D1B6:2CDE:E097E7:101AB02:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12327-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.586790,VS0,VE130
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - dc795988830dd4ad4b3f47e700c7ebca8db3da67
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/de-de/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/es-es/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - DD58:9E1C:39058D:40BCD9:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12330-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.578103,VS0,VE100
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 649547bf65e01de1729d68da60a1b0959ac94035
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/es-es/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/fr-fr/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - EEA2:6BC6:251F36:2A4BA4:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12328-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.578423,VS0,VE99
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - 4415c0e4127f64d199390982c501448cac5a5bdd
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/fr-fr/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:dcd7466e-24d2-4a35-b887-18422e1be81d
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496400532_2412_3537_38_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/support-and-training/documentation/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.facebook.com/NetApp
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      vary:
+      - Accept-Encoding
+      accept-ch-lifetime:
+      - '4838400'
+      accept-ch:
+      - sec-ch-prefers-color-scheme
+      report-to:
+      - '{"max_age":86400,"endpoints":[{"url":"https:\/\/www.facebook.com\/browser_reporting\/?minimize=0"}],"group":"coep_report"},
+        {"max_age":259200,"endpoints":[{"url":"https:\/\/www.facebook.com\/ajax\/comet_error_reports\/?device_level=unknown"}]}'
+      x-fb-rlafr:
+      - '0'
+      document-policy:
+      - force-load-at-top
+      cross-origin-embedder-policy-report-only:
+      - require-corp;report-to="coep_report"
+      cross-origin-opener-policy:
+      - same-origin-allow-popups
+      pragma:
+      - no-cache
+      cache-control:
+      - private, no-cache, no-store, must-revalidate
+      expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      x-frame-options:
+      - DENY
+      strict-transport-security:
+      - max-age=15552000; preload
+      content-type:
+      - text/html; charset="utf-8"
+      x-fb-debug:
+      - WRhBBXr1CmQZfH+QRaWQoyQGqbWsOWMqG70uUE22bhRBltF2kq/J1skMfePXgTQcavJkn0NHY4LO6d01ZUkVtQ==
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      priority:
+      - u=3,i
+      alt-svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.facebook.com/NetApp
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.youtube.com/user/NetAppTV
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      x-content-type-options:
+      - nosniff
+      cache-control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      pragma:
+      - no-cache
+      expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-length:
+      - '961224'
+      strict-transport-security:
+      - max-age=31536000
+      x-frame-options:
+      - SAMEORIGIN
+      report-to:
+      - '{"group":"youtube_main","max_age":2592000,"endpoints":[{"url":"https://csp.withgoogle.com/csp/report-to/youtube_main"}]}'
+      permissions-policy:
+      - ch-ua-arch=*, ch-ua-bitness=*, ch-ua-full-version=*, ch-ua-full-version-list=*,
+        ch-ua-model=*, ch-ua-wow64=*, ch-ua-platform=*, ch-ua-platform-version=*
+      cross-origin-opener-policy-report-only:
+      - same-origin-allow-popups; report-to="youtube_main"
+      p3p:
+      - CP="This is not a P3P policy! See http://support.google.com/accounts/answer/151657?hl=en
+        for more info."
+      server:
+      - ESF
+      x-xss-protection:
+      - '0'
+      set-cookie:
+      - GPS=1; Domain=.youtube.com; Expires=Thu, 02-Mar-2023 02:42:27 GMT; Path=/;
+        Secure; HttpOnly
+      - YSC=_UjrMpMt1K0; Domain=.youtube.com; Path=/; Secure; HttpOnly; SameSite=none
+      - VISITOR_INFO1_LIVE=C6VwWccVJRU; Domain=.youtube.com; Expires=Tue, 29-Aug-2023
+        02:12:27 GMT; Path=/; Secure; HttpOnly; SameSite=none
+      alt-svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.youtube.com/user/NetAppTV
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/us-en/storagegrid-115/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - EEA8:2FCA:438171:4CAD89:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12322-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.578159,VS0,VE100
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - f85f757977fc46f5506fbf48e4237d98c240ad0e
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/us-en/storagegrid-115/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/support-and-training/netapp-university/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:323f08db-f4f8-4d28-a241-224e200b593e
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:27 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496400529_2630_4204_38_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/support-and-training/netapp-learning-services/
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://github.com/netapp-madkat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-Requested-With, X-PJAX-Container, Turbo-Frame, Turbo-Visit, Accept-Encoding,
+        Accept, X-Requested-With
+      etag:
+      - W/"60676f6b10b27ff39e7d3627bc88ffe9"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/
+        productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/
+        productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com media.githubusercontent.com
+        camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com
+        github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com
+        opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com
+        customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=DalVv2qIaqUXBCG6YhvQqckAcSyxgCdqwgqblDpOK8ef1IeaipomqM736%2B2J8TcO4yZlRWRx%2FLBp84L6aaarNYXzgh88O3oc4X7OU8m16GzPYG8CeR%2BhMbObZGhP%2FCsZxwXNBiAic0kCsUnIHnO66atJe1oozb7GOQqYkea96vez8yR%2Frm9fBulJnJRVVg8YRw2LQZ9el33l%2B7rQP2LbbChLUUI82nk2PJw%2Bb3IdKGRHCCmbWxAroEWBqg53rXntikcTOtNHuTCuYrPAdHt5oA%3D%3D--FntlCTiF0wYDgBqX--9gyIw5iiYLuPoiiRaEP5AQ%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.215560807.1677723147; Path=/; Domain=github.com; Expires=Sat,
+        02 Mar 2024 02:12:27 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 02 Mar 2024 02:12:27
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - FD25:8F41:AC206AE:1005FA9C:6400060B
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/netapp-madkat
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://github.com/netapp-perveilerk
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-Requested-With, X-PJAX-Container, Turbo-Frame, Turbo-Visit, Accept-Encoding,
+        Accept, X-Requested-With
+      etag:
+      - W/"e0cac19bd8072d2941a3d253fc97b06d"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/
+        productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/
+        productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com media.githubusercontent.com
+        camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com
+        github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com
+        opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com
+        customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=2KChkOSiVFve5uD3S8%2FHqAnYhdcZh2%2FG%2BEXCNIwIXiZDmhke1WICp%2F3%2F8Ca2bXRr51LNz5%2BDS%2BzruAGaaoNuuFbRYuM%2BBdUwHwBVSvcN7hrVEuzQ%2FWmrAoc4kiYUDkTIzgaM3S%2FAUdntfSzoOXcRfEr2mrsSEBEhYewhQR%2BiGApHlM8WhoD2Q2qXJaCyjxKe5hY%2B8rIlZyJH96YzuREOfJSud7HrFLXTe2mDcEfivbq1HItbHf%2BBl%2BiP3EbVBW8w%2FK%2FNXqBA9mMY1fiZoKx7VQ%3D%3D--H1QKlmpL7hq7Mauf--v3cz0KkbeXEgtt16XAxDLw%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.825622907.1677723147; Path=/; Domain=github.com; Expires=Sat,
+        02 Mar 2024 02:12:27 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 02 Mar 2024 02:12:27
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - FD26:5AB9:AFF1337:105127FF:6400060B
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/netapp-perveilerk
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://github.com/NetAppDocs/storagegrid-116/blob/main/admin/configuring-load-balancer-endpoints.adoc
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-PJAX, X-PJAX-Container, Turbo-Visit, Turbo-Frame, Accept-Encoding, Accept,
+        X-Requested-With
+      etag:
+      - W/"ba096f8c3c04826245cc167afeb3b7d6"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - no-referrer-when-downgrade
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/
+        productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/
+        productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com media.githubusercontent.com
+        camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com
+        github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com
+        opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com
+        customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=Nkp3xHI157F4N2GM%2FtpiWJ4xF4Bx4FDXfodM7MDGaoZ8uKfkvFKyjktMCSahfHv0E8wp0swivmtiCHnUAD142Rh3J%2FWMh79UVcN69%2FT8axJh00%2FXB1EbKnR5aRxDUxQR9SRLVLeSGLSvJFiWxYjs7wEUWnVQ6RPNqXJXVBbM7nL5MmNHadQRcPbyRPGcSANhU%2Fh4XCt7Bi2ptd5Bz3EOdlYGmsM2ZDHjCMJhRa5yO%2BuHH0da5VlQnNsMPzhF4UhMuL3xGP8MXCFz4rD9P0fpWQ%3D%3D--zihX8p8i2nw5oUAh--r9Mw4%2FqDGwj9DRlEKJs57g%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1282973806.1677723147; Path=/; Domain=github.com; Expires=Sat,
+        02 Mar 2024 02:12:27 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 02 Mar 2024 02:12:27
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - FD24:32BA:B82EBF9:110A395E:6400060B
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/NetAppDocs/storagegrid-116/blob/main/admin/configuring-load-balancer-endpoints.adoc
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.slideshare.net/NetApp
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - nginx
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-request-uuid:
+      - ebd788a2e3d275b12a18f64b9d412359
+      cache-control:
+      - private, no-store
+      pragma:
+      - no-cache
+      x-ss-make-cacheable:
+      - 'true'
+      x-bench-route:
+      - profile/index
+      etag:
+      - W/"24673b46ca35d946fe9c7d1a29d3f235"
+      set-cookie:
+      - flash=BAh7DEkiC25vdGljZQY6BkVGMEkiDHdhcm5pbmcGOwBGMEkiDG1lc3NhZ2UGOwBGMEkiDHN1Y2Nlc3MGOwBGMEkiCmVycm9yBjsARjBJIg5wZXJtYW5lbnQGOwBGMEkiEW1vZGFsX25vdGljZQY7AEYw--4d44737d8a4b0fb4535d68df321d9eff6a31ba96;
+        path=/
+      - browser_id=7c7e7b7a-7b48-4ccc-b547-7574d445c96f; Domain=.slideshare.net; Path=/;
+        Expires=Tue, 29 Feb 2028 02:12:27 GMT
+      x-request-id:
+      - ebd788a2e3d275b12a18f64b9d412359
+      x-runtime:
+      - '0.371590'
+      p3p:
+      - CP="OTI DSP COR CUR ADM DEV PSD IVD CONo OUR IND"
+      accept-ranges:
+      - bytes
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      via:
+      - 1.1 varnish
+      x-served-by:
+      - cache-ewr18123-EWR
+      x-cache:
+      - MISS
+      x-cache-hits:
+      - '0'
+      x-timer:
+      - S1677723147.450715,VS0,VE407
+      strict-transport-security:
+      - max-age=63072000; includeSubDomains; preload
+      alt-svc:
+      - h3=":443";ma=86400,h3-29=":443";ma=86400,h3-27=":443";ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.slideshare.net/NetApp
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://github.com/netapp-lhalbert
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      server:
+      - GitHub.com
+      date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      content-type:
+      - text/html; charset=utf-8
+      vary:
+      - X-Requested-With, X-PJAX-Container, Turbo-Frame, Turbo-Visit, Accept-Encoding,
+        Accept, X-Requested-With
+      etag:
+      - W/"eab9e534ab92a9c1b8883fa9e8e0d61f"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      strict-transport-security:
+      - max-age=31536000; includeSubdomains; preload
+      x-frame-options:
+      - deny
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - '0'
+      referrer-policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      content-security-policy:
+      - 'default-src ''none''; base-uri ''self''; block-all-mixed-content; child-src
+        github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src
+        ''self'' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com
+        collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com
+        github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com
+        github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events
+        *.actions.githubusercontent.com productionresultssa0.blob.core.windows.net/
+        productionresultssa1.blob.core.windows.net/ productionresultssa2.blob.core.windows.net/
+        productionresultssa3.blob.core.windows.net/ productionresultssa4.blob.core.windows.net/
+        wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations
+        github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com
+        insights.github.com wss://alive.github.com; font-src github.githubassets.com;
+        form-action ''self'' github.com gist.github.com objects-origin.githubusercontent.com;
+        frame-ancestors ''none''; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com;
+        img-src ''self'' data: github.githubassets.com media.githubusercontent.com
+        camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com
+        github-cloud.s3.amazonaws.com objects.githubusercontent.com objects-origin.githubusercontent.com
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com
+        opengraph.githubassets.com github-production-user-asset-6210df.s3.amazonaws.com
+        customer-stories-feed.github.com spotlights-feed.github.com *.githubusercontent.com;
+        manifest-src ''self''; media-src github.com user-images.githubusercontent.com/
+        secured-user-images.githubusercontent.com/ private-user-images.githubusercontent.com;
+        script-src github.githubassets.com; style-src ''unsafe-inline'' github.githubassets.com;
+        worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/'
+      set-cookie:
+      - _gh_sess=EnArlkm3%2B3TpJLiUMMf4GVaDwq7EQ5KBRQanpSivR%2Bm8QbPsG0I3n1GJb9Ngj6WpNN6xjGnt3fGC4CG%2BC4pBwh0eoK1NYCgrDHU6m5IU4wTRpkXclkkXLMRhtt8tQnlOMUP3qJVbqghrZ%2B7o2ctrAddezJJnGDg99zokhSz%2FUi65F%2FuI4KT2qNqAGiHCK7kokI1L21jzLAZcnf%2BmZ8GDFnWhz8LUUYRqu8CvCez%2BI4KCHpojNRn8btVO7SPahYXrNOR4pIX90RafsbFnx5qCQA%3D%3D--r%2B8JVp8rUWdppFiD--pFBnRltX2xUeKzwz2NTGZA%3D%3D;
+        Path=/; HttpOnly; Secure; SameSite=Lax
+      - _octo=GH1.1.1115079731.1677723147; Path=/; Domain=github.com; Expires=Sat,
+        02 Mar 2024 02:12:27 GMT; Secure; SameSite=Lax
+      - logged_in=no; Path=/; Domain=github.com; Expires=Sat, 02 Mar 2024 02:12:27
+        GMT; HttpOnly; Secure; SameSite=Lax
+      accept-ranges:
+      - bytes
+      x-github-request-id:
+      - FD27:1CCB:4322B29:657A147:6400060B
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://github.com/netapp-lhalbert
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://docs.netapp.com/us-en/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 02 Mar 2023 02:12:27 GMT
+      Server:
+      - GitHub.com
+      Access-Control-Allow-Origin:
+      - "*"
+      expires:
+      - Thu, 02 Mar 2023 02:22:27 GMT
+      Cache-Control:
+      - max-age=600
+      x-proxy-cache:
+      - MISS
+      X-GitHub-Request-Id:
+      - F15A:3C3C:550A5D:606569:6400060B
+      Accept-Ranges:
+      - bytes
+      Via:
+      - 1.1 varnish
+      Age:
+      - '0'
+      X-Served-By:
+      - cache-pdx12330-PDX
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - '0'
+      X-Timer:
+      - S1677723148.586333,VS0,VE300
+      Vary:
+      - Accept-Encoding
+      X-Fastly-Request-ID:
+      - b81fa28cb11dc9a1159ff14b1ae387f5897ab9b9
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '1.1'
+    adapter_metadata:
+      effective_url: https://docs.netapp.com/us-en/storagegrid-116/admin/configuring-load-balancer-endpoints.html
+  recorded_at: Thu, 02 Mar 2023 02:12:27 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/company/legal/copyright/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      cache-control:
+      - private
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Thu, 02 Mar 2023 02:12:28 GMT
+      set-cookie:
+      - loggedin-Status=false; path=/
+      - user-info=; path=/
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399350_93573_4561_36_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/company/legal/copyright/
+  recorded_at: Thu, 02 Mar 2023 02:12:28 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/products-a-z/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:e2d3a373-3088-4723-b22f-e41777ab70f4
+      x-powered-by:
+      - ASP.NET
+      cache-control:
+      - private, max-age=900
+      expires:
+      - Thu, 02 Mar 2023 02:27:29 GMT
+      date:
+      - Thu, 02 Mar 2023 02:12:29 GMT
+      set-cookie:
+      - loggedin-Status=false; path=/
+      - user-info=; path=/
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399409_195795_3379_46_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/products-a-z/
+  recorded_at: Thu, 02 Mar 2023 02:12:29 GMT
+- request:
+    method: head
+    uri: https://customers.netapp.com/en/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:e2d3a373-3088-4723-b22f-e41777ab70f4
+      x-powered-by:
+      - ASP.NET
+      expires:
+      - Thu, 02 Mar 2023 02:12:29 GMT
+      cache-control:
+      - max-age=0, no-cache, no-store
+      pragma:
+      - no-cache
+      date:
+      - Thu, 02 Mar 2023 02:12:29 GMT
+      set-cookie:
+      - loggedin-Status=false; path=/
+      - user-info=; path=/
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399781_204378_4175_48_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/customers/
+  recorded_at: Thu, 02 Mar 2023 02:12:29 GMT
+- request:
+    method: head
+    uri: https://mysupport.netapp.com/documentation/docweb/index.html?productID=63374&language=en-US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html;charset=UTF-8
+      server:
+      - envoy
+      cache-control:
+      - no-cache
+      x-oracle-dms-ecid:
+      - 9d0be3c7ffe3e488:-15776f67:186917b10a6:-8000-000000000006454f
+      x-envoy-upstream-service-time:
+      - '1257'
+      date:
+      - Thu, 02 Mar 2023 02:12:29 GMT
+      set-cookie:
+      - slang=EN; domain=.netapp.com; path=/
+      - JSESSIONID_ECM=H0igF6F6Rb_5BgL8zmr5gy8aCeuI8K4FaQy1i_prRPQRGjT5tQr5!2123771580;
+        path=/; HttpOnly
+      - LTMD-COOKIE-LIBRARY-P80=02f0803383-3a83-4dtoV59Fta8KggV6yJ0bFdMH0dhmhWfBwOOstvfPrY4nVmg59Zhwl-yuZo36iJf0yCYP4;
+        path=/; SameSite=None; Secure
+      strict-transport-security:
+      - max-age=15768000 ; includeSubDomains ; preload
+      server-timing:
+      - ak_p; desc="466034_388049883_32821067_154653_35660_52_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://mysupport.netapp.com/documentation/docweb/index.html?productID=63374&language=en-US
+  recorded_at: Thu, 02 Mar 2023 02:12:29 GMT
+- request:
+    method: head
+    uri: https://www.netapp.com/company/legal/cookie-policy/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html; charset=utf-8
+      server:
+      - Microsoft-IIS/10.0
+      access-control-allow-methods:
+      - GET
+      access-control-allow-origin:
+      - "*"
+      access-control-expose-headers:
+      - Request-Context
+      cache-control:
+      - private
+      x-aspnetmvc-version:
+      - '5.2'
+      x-aspnet-version:
+      - 4.0.30319
+      request-context:
+      - appId=cid-v1:149249a1-9c0c-40ae-89b4-ef4e47a1cbd8
+      x-powered-by:
+      - ASP.NET
+      date:
+      - Thu, 02 Mar 2023 02:12:30 GMT
+      set-cookie:
+      - loggedin-Status=false; path=/
+      - user-info=; path=/
+      alt-svc:
+      - h3=":443"; ma=93600
+      x-akam-sw-version:
+      - 0.5.0
+      strict-transport-security:
+      - max-age=63072000
+      content-security-policy:
+      - 'default-src * ''unsafe-inline''; script-src * data: ''unsafe-inline'' ''unsafe-eval'';
+        style-src * ''unsafe-inline''; style-src-elem * ''unsafe-inline''; style-src-attr
+        * ''unsafe-inline''; img-src * data: blob:; font-src * data:; frame-src *
+        data:; frame-ancestors *; media-src * blob:; worker-src * blob:'
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      server-timing:
+      - ak_p; desc="466034_388049348_2496399357_264265_2882_47_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://www.netapp.com/company/legal/cookie-policy/
+  recorded_at: Thu, 02 Mar 2023 02:12:30 GMT
+- request:
+    method: head
+    uri: https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61023&archive=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html;charset=UTF-8
+      server:
+      - envoy
+      cache-control:
+      - no-cache
+      x-oracle-dms-ecid:
+      - 9d0be3c7ffe3e488:-15776f67:186917b10a6:-8000-0000000000064551
+      x-envoy-upstream-service-time:
+      - '1547'
+      date:
+      - Thu, 02 Mar 2023 02:12:30 GMT
+      set-cookie:
+      - slang=EN; domain=.netapp.com; path=/
+      - JSESSIONID_ECM=AqSgF6HvTCLOEquPbp2C03bcjvpadDFGnjpkYMYqB8DlWnxIRaik!2123771580;
+        path=/; HttpOnly
+      - LTMD-COOKIE-LIBRARY-P80=02f0803383-3a83-4dgVJ_rSVrwHOTEafWdnROxmniPxSx5oXJJuXQ1_kDOdTnaXQfaZq0fbLjG9b93xRrYAE;
+        path=/; SameSite=None; Secure
+      strict-transport-security:
+      - max-age=15768000 ; includeSubDomains ; preload
+      server-timing:
+      - ak_p; desc="466034_388049883_32821070_185820_2683_52_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://mysupport.netapp.com/documentation/productlibrary/index.html?productID=61023&archive=true
+  recorded_at: Thu, 02 Mar 2023 02:12:30 GMT
+- request:
+    method: head
+    uri: https://community.netapp.com/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      content-type:
+      - text/html;charset=UTF-8
+      x-frame-options:
+      - SAMEORIGIN
+      x-amz-cf-pop:
+      - ORD52-C2
+      x-amz-cf-id:
+      - 0HC8TtOCg1MrgK5tWcSi0CWikcS3JfAX-jkeGzCFgVJImwHZm_mVug==
+      content-length:
+      - '0'
+      expires:
+      - Thu, 02 Mar 2023 02:12:30 GMT
+      cache-control:
+      - max-age=0, no-cache, no-store
+      pragma:
+      - no-cache
+      date:
+      - Thu, 02 Mar 2023 02:12:30 GMT
+      set-cookie:
+      - AWSALB=I8ElRweuMhtaeujhC0lolWOT+62ahAU3VFv54c7KWXlTd3hWl371g+VHcOqRW22fjAbmYllJZwyAMa91w2sxsQMZsATggwbhL2OFNZHzJ5NbZQYBA25443lYui6X;
+        Expires=Thu, 09 Mar 2023 02:12:30 GMT; Path=/
+      - AWSALBCORS=I8ElRweuMhtaeujhC0lolWOT+62ahAU3VFv54c7KWXlTd3hWl371g+VHcOqRW22fjAbmYllJZwyAMa91w2sxsQMZsATggwbhL2OFNZHzJ5NbZQYBA25443lYui6X;
+        Expires=Thu, 09 Mar 2023 02:12:30 GMT; Path=/; SameSite=None; Secure
+      - LiSESSIONID=BCBEB8F0328D0E10EA90BFBC9A10B2D2; Path=/; Secure; HttpOnly;SameSite=None
+      - LithiumUserInfo=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; Secure
+      - LithiumUserSecure=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/; Secure
+      - LithiumVisitor=~2UXIlWTsw6NcIaekP~Kn0i70B1OsWvGRHG8uqaz8FsHG-LUfFYK5SfAY74hiNeD14OlSf_tIVAXa3oMRM_XoqoqgayCzqAdrA8lTPNYA..;
+        Path=/; HttpOnly; Max-Age=15780000; Secure; SameSite=None
+      - LithiumCookiesAccepted=0; Path=/; Max-Age=15780000; Secure; SameSite=None
+      strict-transport-security:
+      - max-age=15768000
+      server-timing:
+      - ak_p; desc="466034_388049883_32821137_29166_2293_32_0";dur=1
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://community.netapp.com/
+  recorded_at: Thu, 02 Mar 2023 02:12:30 GMT
+- request:
+    method: head
+    uri: https://cloud.netapp.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.4; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 02 Mar 2023 02:12:30 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      content-length:
+      - '91403'
+      etag:
+      - W/"0bec3cbd254bd698a8efefd70d3ccf9e"
+      last-modified:
+      - Mon, 27 Feb 2023 11:54:22 GMT
+      link:
+      - "</hs/hsstatic/HubspotToolsMenu/static-1.154/js/index.js>; rel=preload; as=script,</hs/hsstatic/cos-i18n/static-1.53/bundles/project.js>;
+        rel=preload; as=script"
+      strict-transport-security:
+      - max-age=31536000
+      content-security-policy:
+      - upgrade-insecure-requests
+      edge-cache-tag:
+      - CT-88139867809,CT-91540621693,CT-91540621701,CT-91540621705,CT-91540621708,P-525875,W-1662046234398,W-1662637690034,W-1662646286208,W-1662730080492,W-1670273620623,W-1672676867401,CW-83668318869,CW-84017148248,CW-84020306105,CW-84310752266,CW-84324796546,CW-84437629332,CW-85034688429,CW-88685523460,CW-97139556934,E-47882098007,E-56778788163,E-83652687008,E-83669813433,E-84022661012,E-84173520477,E-84173942881,E-84210106474,E-84310312067,E-84324382526,E-84324707605,E-84437649446,E-85034902804,PGS-ALL,SW-2,GC-86778475860,GC-89393348176,GC-89592173708
+      referrer-policy:
+      - no-referrer-when-downgrade
+      x-hs-cache-config:
+      - BrowserCache-5s-EdgeCache-0s
+      x-hs-cache-control:
+      - s-maxage=10800, max-age=0
+      x-hs-cf-cache-status:
+      - REVALIDATED
+      x-hs-content-id:
+      - '88139867809'
+      x-hs-hub-id:
+      - '525875'
+      x-hs-prerendered:
+      - two-phase;Mon, 27 Feb 2023 11:54:21 GMT
+      set-cookie:
+      - __cf_bm=JcKj5Wwl_EKpHjs8vQy7sc.Vq.AhmerrC969dz03th0-1677723150-0-Ac2r/8ug9Mc+lLFbTrPFCZ7XrePLPtJepCm6HrfWA3o1F1PFE0u4C26OSpdebTUwawoczfrRBuqFlFcIGTIdgQs=;
+        path=/; expires=Thu, 02-Mar-23 02:42:30 GMT; domain=.bluexp.netapp.com; HttpOnly;
+        Secure; SameSite=None
+      - __cfruid=b2b843b331d8452f960f5c76de4a0c5e81f9ef36-1677723150; path=/; domain=.bluexp.netapp.com;
+        HttpOnly; Secure; SameSite=None
+      report-to:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=1voj%2BY68gP2%2Frj53cCcuAhOtP8aphNThxAmsyn4xKwsf4k0kmFFXsnubczS1XlkCQVtBXvsnc3OfYLO8kSZyXnKWq%2F4P0UYMavk3BDeZ4npbuJtUX0lZOVFTQIL9EWzdi%2Bao"}],"group":"cf-nel","max_age":604800}'
+      nel:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      server:
+      - cloudflare
+      cf-ray:
+      - 7a161d795d0ef01d-EWR
+      alt-svc:
+      - h3=":443"; ma=86400, h3-29=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://bluexp.netapp.com/
+  recorded_at: Thu, 02 Mar 2023 02:12:30 GMT
+recorded_with: VCR 2.9.3

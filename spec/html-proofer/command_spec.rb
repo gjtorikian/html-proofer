@@ -201,7 +201,7 @@ describe HTMLProofer::CLI do
   end
 
   it "navigates above itself in a subdirectory" do
-    real_link = File.join(FIXTURES_DIR, "links", "root_folder/documentation-from-my-project/")
+    real_link = File.join(FIXTURES_DIR, "links", "root_folder/admin/")
     output = make_bin("--root-dir #{File.join(FIXTURES_DIR, "links", "root_folder/")} #{real_link}")
     expect(output).to(match("successfully"))
   end
