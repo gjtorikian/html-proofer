@@ -45,8 +45,8 @@ module HTMLProofer
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
       metadata = {
-        source: @runner.current_source,
-        filename: @runner.current_filename,
+        source: url.source,
+        filename: url.filename,
         line: line,
         base_url: base_url,
         found: false,
@@ -59,7 +59,7 @@ module HTMLProofer
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: @runner.current_filename, line: line }
+      @external_urls[url_string] << { filename: url.filename, line: line }
     end
 
     class << self

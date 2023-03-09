@@ -3,12 +3,15 @@
 module HTMLProofer
   class Attribute
     class Url < HTMLProofer::Attribute
-      attr_reader :url, :size
+      attr_reader :url, :size, :source, :filename
 
       REMOTE_SCHEMES = ["http", "https"].freeze
 
-      def initialize(runner, link_attribute, base_url: nil, extract_size: false)
+      def initialize(runner, link_attribute, base_url: nil, source: nil, filename: nil, extract_size: false)
         super
+
+        @source = source
+        @filename = filename
 
         if @raw_attribute.nil?
           @url = nil
@@ -125,7 +128,7 @@ module HTMLProofer
       end
 
       def absolute_path
-        path = file_path || @runner.current_filename
+        path = file_path || @filename
 
         File.expand_path(path, Dir.pwd)
       end
@@ -139,22 +142,22 @@ module HTMLProofer
 
         base = if absolute_path?(path) # path relative to root
           # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
-          @runner.options[:root_dir] || (File.directory?(@runner.current_source) ? @runner.current_source : File.dirname(@runner.current_source))
+          @runner.options[:root_dir] || (File.directory?(@source) ? @source : File.dirname(@source))
         # relative links, path is a file
         elsif File.exist?(File.expand_path(
           path,
-          @runner.current_source,
-        )) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
-          File.dirname(@runner.current_filename)
+          @source,
+        )) || File.exist?(File.expand_path(path_dot_ext, @source))
+          File.dirname(@filename)
         # relative links in nested dir, path is a file
         elsif File.exist?(File.join(
-          File.dirname(@runner.current_filename),
+          File.dirname(@filename),
           path,
-        )) || File.exist?(File.join(File.dirname(@runner.current_filename), path_dot_ext))
-          File.dirname(@runner.current_filename)
+        )) || File.exist?(File.join(File.dirname(@filename), path_dot_ext))
+          File.dirname(@filename)
         # relative link, path is a directory
         else
-          @runner.current_filename
+          @filename
         end
 
         file = File.join(base, path)

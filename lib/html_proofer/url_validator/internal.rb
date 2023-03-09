@@ -29,15 +29,12 @@ module HTMLProofer
           matched_count_to_log = pluralize(matched_files.count, "reference", "references")
           @logger.log(:debug, "(#{i + 1} / #{links.count}) Internal link #{link}: Checking #{matched_count_to_log}")
           matched_files.each do |metadata|
-            url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url])
-
-            @runner.current_source = metadata[:source]
-            @runner.current_filename = metadata[:filename]
+            url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url], source: metadata[:source], filename: metadata[:filename])
 
             target_file_path = url.absolute_path
             unless file_exists?(target_file_path)
               @failed_checks << Failure.new(
-                @runner.current_filename,
+                metadata[:filename],
                 "Links > Internal",
                 "internally linking to #{url}, which does not exist",
                 line: metadata[:line],
@@ -62,7 +59,7 @@ module HTMLProofer
             end
             unless hash_exists
               @failed_checks << Failure.new(
-                @runner.current_filename,
+                metadata[:filename],
                 "Links > Internal",
                 "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not",
                 line: metadata[:line],
