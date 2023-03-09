@@ -11,24 +11,22 @@ module HTMLProofer
 
           # does the open_graph exist?
           if missing_content?
-            add_failure("open graph has no content attribute", line: @open_graph.line, content: @open_graph.content)
+            add_failure("open graph has no content attribute", element: @open_graph)
           elsif empty_content?
-            add_failure("open graph content attribute is empty", line: @open_graph.line, content: @open_graph.content)
+            add_failure("open graph content attribute is empty", element: @open_graph)
           elsif !@open_graph.url.valid?
-            add_failure("#{@open_graph.src} is an invalid URL", line: @open_graph.line)
+            add_failure("#{@open_graph.src} is an invalid URL", element: @open_graph)
           elsif @open_graph.url.protocol_relative?
             add_failure(
               "open graph link #{@open_graph.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @open_graph.line,
-              content: @open_graph.content,
+              element: @open_graph,
             )
           elsif @open_graph.url.remote?
             add_to_external_urls(@open_graph.url, @open_graph.line)
           else
             add_failure(
               "internal open graph #{@open_graph.url.raw_attribute} does not exist",
-              line: @open_graph.line,
-              content: @open_graph.content,
+              element: @open_graph,
             ) unless @open_graph.url.exists?
           end
         end

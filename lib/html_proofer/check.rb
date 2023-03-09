@@ -24,14 +24,14 @@ module HTMLProofer
       raise NotImplementedError, "HTMLProofer::Check subclasses must implement #run"
     end
 
-    def add_failure(description, line: nil, status: nil, content: nil)
+    def add_failure(description, element: nil, line: nil, status: nil, content: nil)
       @failures << Failure.new(
         @runner.current_filename,
         short_name,
         description,
-        line: line,
+        line: element.nil? ? line : element.line,
         status: status,
-        content: content,
+        content: element.nil? ? content : element.content,
       )
     end
 

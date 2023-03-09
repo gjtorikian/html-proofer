@@ -12,12 +12,11 @@ module HTMLProofer
 
           # does the script exist?
           if missing_src?
-            add_failure("script is empty and has no src attribute", line: @script.line, content: @script.content)
+            add_failure("script is empty and has no src attribute", element: @script)
           elsif @script.url.protocol_relative?
             add_failure(
               "script link #{@script.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @script.line,
-              content: @script.content,
+              element: @script,
             )
           elsif @script.url.remote?
             add_to_external_urls(@script.url, @script.line)
@@ -25,8 +24,7 @@ module HTMLProofer
           elsif !@script.url.exists?
             add_failure(
               "internal script reference #{@script.src} does not exist",
-              line: @script.line,
-              content: @script.content,
+              element: @script,
             )
           end
         end
@@ -42,20 +40,17 @@ module HTMLProofer
         if blank?(@script.node["integrity"]) && blank?(@script.node["crossorigin"])
           add_failure(
             "SRI and CORS not provided in: #{@script.url.raw_attribute}",
-            line: @script.line,
-            content: @script.content,
+            element: @script,
           )
         elsif blank?(@script.node["integrity"])
           add_failure(
             "Integrity is missing in: #{@script.url.raw_attribute}",
-            line: @script.line,
-            content: @script.content,
+            element: @script,
           )
         elsif blank?(@script.node["crossorigin"])
           add_failure(
             "CORS not provided for external resource in: #{@script.url.raw_attribute}",
-            line: @script.line,
-            content: @script.content,
+            element: @script,
           )
         end
       end
