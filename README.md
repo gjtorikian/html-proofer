@@ -422,23 +422,23 @@ Want to write your own test? Sure, that's possible!
 
 Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_failure(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
 
-If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on, and can also be used directly to call `add_failure(message, element: element)`.
 
 Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class MailToOctocat < ::HTMLProofer::Check
+class MailToOctocat < HTMLProofer::Check
   def mailto_octocat?
-    @link.url.raw_attribute == 'mailto:octocat@github.com'
+    @link.url.raw_attribute == "mailto:octocat@github.com"
   end
 
   def run
-    @html.css('a').each do |node|
+    @html.css("a").each do |node|
       @link = create_element(node)
 
       next if @link.ignore?
 
-      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
+      return add_failure("Don't email the Octocat directly!", element: @link) if mailto_octocat?
     end
   end
 end
@@ -448,7 +448,7 @@ Don't forget to include this new check in HTMLProofer's options, for example:
 
 ```ruby
 # removes default checks and just runs this one
-HTMLProofer.check_directories(["out/"], {checks: ['MailToOctocat']})
+HTMLProofer.check_directories(["out/"], { checks: ["MailToOctocat"] })
 ```
 
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
