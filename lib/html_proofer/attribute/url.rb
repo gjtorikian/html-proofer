@@ -118,9 +118,29 @@ module HTMLProofer
       def exists?
         return true if base64?
 
-        return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
+        !resolved_path.nil?
+      end
 
-        @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
+      def resolved_path
+        path_to_resolve = absolute_path
+
+        return @runner.resolved_paths[path_to_resolve] if @runner.resolved_paths.key?(path_to_resolve)
+
+        # extensionless URLs
+        path_with_extension = "#{path_to_resolve}#{@runner.options[:assume_extension]}"
+        resolved = if @runner.options[:assume_extension] && File.file?(path_with_extension)
+          path_with_extension # existence checked implicitly by File.file?
+        # implicit index support
+        elsif File.directory?(path_to_resolve) && !unslashed_directory?(path_to_resolve)
+          path_with_index = File.join(path_to_resolve, @runner.options[:directory_index_file])
+          path_with_index if File.file?(path_with_index)
+        # explicit file or directory
+        elsif File.exist?(path_to_resolve)
+          path_to_resolve
+        end
+        @runner.resolved_paths[path_to_resolve] = resolved
+
+        resolved
       end
 
       def base64?
@@ -128,12 +148,12 @@ module HTMLProofer
       end
 
       def absolute_path
-        path = file_path || @filename
+        path = resolve_path || @filename
 
         File.expand_path(path, Dir.pwd)
       end
 
-      def file_path
+      def resolve_path
         return if path.nil? || path.empty?
 
         base = if absolute_path?(path) # path relative to root
@@ -144,15 +164,7 @@ module HTMLProofer
           File.dirname(@filename)
         end
 
-        file = File.join(base, path)
-
-        if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:assume_extension]}")
-          file = "#{file}#{@runner.options[:assume_extension]}"
-        elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
-          file = File.join(file, @runner.options[:directory_index_file])
-        end
-
-        file
+        File.join(base, path)
       end
 
       def unslashed_directory?(file)

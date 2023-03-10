@@ -31,8 +31,7 @@ module HTMLProofer
           matched_files.each do |metadata|
             url = HTMLProofer::Attribute::Url.new(@runner, link, base_url: metadata[:base_url], source: metadata[:source], filename: metadata[:filename])
 
-            target_file_path = url.absolute_path
-            unless file_exists?(target_file_path)
+            unless url.exists?
               @failed_checks << Failure.new(
                 metadata[:filename],
                 "Links > Internal",
@@ -48,6 +47,7 @@ module HTMLProofer
             hash_exists = hash_exists_for_url?(url)
             if hash_exists.nil?
               # the hash needs to be checked in the target file, we collect the url and metadata
+              target_file_path = url.resolved_path
               unless file_paths_hashes_to_check.key?(target_file_path)
                 file_paths_hashes_to_check[target_file_path] = {}
               end
@@ -104,12 +104,6 @@ module HTMLProofer
         end
 
         @failed_checks
-      end
-
-      private def file_exists?(absolute_path)
-        return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
-
-        @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
       end
 
       # verify the hash w/o just based on the URL, w/o looking at the target file
