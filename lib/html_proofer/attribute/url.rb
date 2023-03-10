@@ -136,28 +136,12 @@ module HTMLProofer
       def file_path
         return if path.nil? || path.empty?
 
-        path_dot_ext = ""
-
-        path_dot_ext = path + @runner.options[:assume_extension] unless blank?(@runner.options[:assume_extension])
-
         base = if absolute_path?(path) # path relative to root
           # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
           @runner.options[:root_dir] || (File.directory?(@source) ? @source : File.dirname(@source))
         # relative links, path is a file
-        elsif File.exist?(File.expand_path(
-          path,
-          @source,
-        )) || File.exist?(File.expand_path(path_dot_ext, @source))
-          File.dirname(@filename)
-        # relative links in nested dir, path is a file
-        elsif File.exist?(File.join(
-          File.dirname(@filename),
-          path,
-        )) || File.exist?(File.join(File.dirname(@filename), path_dot_ext))
-          File.dirname(@filename)
-        # relative link, path is a directory
         else
-          @filename
+          File.dirname(@filename)
         end
 
         file = File.join(base, path)
