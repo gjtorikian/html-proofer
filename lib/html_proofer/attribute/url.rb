@@ -148,12 +148,12 @@ module HTMLProofer
       end
 
       def absolute_path
-        path = resolve_path || @filename
+        path = full_path || @filename
 
         File.expand_path(path, Dir.pwd)
       end
 
-      def resolve_path
+      def full_path
         return if path.nil? || path.empty?
 
         base = if absolute_path?(path) # path relative to root
