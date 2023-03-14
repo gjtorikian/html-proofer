@@ -157,10 +157,10 @@ module HTMLProofer
         return if path.nil? || path.empty?
 
         base = if absolute_path?(path) # path relative to root
-          # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
+          # either overwrite with root_dir; or, if source is directory, use that; or, just get the source file's dirname
           @runner.options[:root_dir] || (File.directory?(@source) ? @source : File.dirname(@source))
-        # relative links, path is a file
         else
+          # path relative to the file where the link is defined
           File.dirname(@filename)
         end
 
