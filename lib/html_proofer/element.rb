@@ -16,7 +16,7 @@ module HTMLProofer
       swap_attributes!
 
       @base_url = base_url
-      @url = Attribute::Url.new(runner, link_attribute, base_url: base_url)
+      @url = Attribute::Url.new(runner, link_attribute, base_url: base_url, source: @runner.current_source, filename: @runner.current_filename)
 
       @line = node.line
       @content = node.content

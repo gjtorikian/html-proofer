@@ -24,14 +24,14 @@ module HTMLProofer
       raise NotImplementedError, "HTMLProofer::Check subclasses must implement #run"
     end
 
-    def add_failure(description, line: nil, status: nil, content: nil)
+    def add_failure(description, element: nil, line: nil, status: nil, content: nil)
       @failures << Failure.new(
         @runner.current_filename,
         short_name,
         description,
-        line: line,
+        line: element.nil? ? line : element.line,
         status: status,
-        content: content,
+        content: element.nil? ? content : element.content,
       )
     end
 
@@ -45,8 +45,8 @@ module HTMLProofer
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
 
       metadata = {
-        source: @runner.current_source,
-        filename: @runner.current_filename,
+        source: url.source,
+        filename: url.filename,
         line: line,
         base_url: base_url,
         found: false,
@@ -59,7 +59,7 @@ module HTMLProofer
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: @runner.current_filename, line: line }
+      @external_urls[url_string] << { filename: url.filename, line: line }
     end
 
     class << self

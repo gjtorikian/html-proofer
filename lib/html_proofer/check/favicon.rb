@@ -19,16 +19,14 @@ module HTMLProofer
           if @favicon.url.protocol_relative?
             add_failure(
               "favicon link #{@favicon.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @favicon.line,
-              content: @favicon.content,
+              element: @favicon,
             )
           elsif @favicon.url.remote?
             add_to_external_urls(@favicon.url, @favicon.line)
           elsif !@favicon.url.exists?
             add_failure(
               "internal favicon #{@favicon.url.raw_attribute} does not exist",
-              line: @favicon.line,
-              content: @favicon.content,
+              element: @favicon,
             )
           end
         else

@@ -3,12 +3,15 @@
 module HTMLProofer
   class Attribute
     class Url < HTMLProofer::Attribute
-      attr_reader :url, :size
+      attr_reader :url, :size, :source, :filename
 
       REMOTE_SCHEMES = ["http", "https"].freeze
 
-      def initialize(runner, link_attribute, base_url: nil, extract_size: false)
+      def initialize(runner, link_attribute, base_url: nil, source: nil, filename: nil, extract_size: false)
         super
+
+        @source = source
+        @filename = filename
 
         if @raw_attribute.nil?
           @url = nil
@@ -115,9 +118,29 @@ module HTMLProofer
       def exists?
         return true if base64?
 
-        return @runner.checked_paths[absolute_path] if @runner.checked_paths.key?(absolute_path)
+        !resolved_path.nil?
+      end
 
-        @runner.checked_paths[absolute_path] = File.exist?(absolute_path)
+      def resolved_path
+        path_to_resolve = absolute_path
+
+        return @runner.resolved_paths[path_to_resolve] if @runner.resolved_paths.key?(path_to_resolve)
+
+        # extensionless URLs
+        path_with_extension = "#{path_to_resolve}#{@runner.options[:assume_extension]}"
+        resolved = if @runner.options[:assume_extension] && File.file?(path_with_extension)
+          path_with_extension # existence checked implicitly by File.file?
+        # implicit index support
+        elsif File.directory?(path_to_resolve) && !unslashed_directory?(path_to_resolve)
+          path_with_index = File.join(path_to_resolve, @runner.options[:directory_index_file])
+          path_with_index if File.file?(path_with_index)
+        # explicit file or directory
+        elsif File.exist?(path_to_resolve)
+          path_to_resolve
+        end
+        @runner.resolved_paths[path_to_resolve] = resolved
+
+        resolved
       end
 
       def base64?
@@ -125,47 +148,23 @@ module HTMLProofer
       end
 
       def absolute_path
-        path = file_path || @runner.current_filename
+        path = full_path || @filename
 
         File.expand_path(path, Dir.pwd)
       end
 
-      def file_path
+      def full_path
         return if path.nil? || path.empty?
 
-        path_dot_ext = ""
-
-        path_dot_ext = path + @runner.options[:assume_extension] unless blank?(@runner.options[:assume_extension])
-
         base = if absolute_path?(path) # path relative to root
-          # either overwrite with root_dir; or, if source is directory, use that; or, just get the current file's dirname
-          @runner.options[:root_dir] || (File.directory?(@runner.current_source) ? @runner.current_source : File.dirname(@runner.current_source))
-        # relative links, path is a file
-        elsif File.exist?(File.expand_path(
-          path,
-          @runner.current_source,
-        )) || File.exist?(File.expand_path(path_dot_ext, @runner.current_source))
-          File.dirname(@runner.current_filename)
-        # relative links in nested dir, path is a file
-        elsif File.exist?(File.join(
-          File.dirname(@runner.current_filename),
-          path,
-        )) || File.exist?(File.join(File.dirname(@runner.current_filename), path_dot_ext))
-          File.dirname(@runner.current_filename)
-        # relative link, path is a directory
+          # either overwrite with root_dir; or, if source is directory, use that; or, just get the source file's dirname
+          @runner.options[:root_dir] || (File.directory?(@source) ? @source : File.dirname(@source))
         else
-          @runner.current_filename
+          # path relative to the file where the link is defined
+          File.dirname(@filename)
         end
 
-        file = File.join(base, path)
-
-        if @runner.options[:assume_extension] && File.file?("#{file}#{@runner.options[:assume_extension]}")
-          file = "#{file}#{@runner.options[:assume_extension]}"
-        elsif File.directory?(file) && !unslashed_directory?(file) # implicit index support
-          file = File.join(file, @runner.options[:directory_index_file])
-        end
-
-        file
+        File.join(base, path)
       end
 
       def unslashed_directory?(file)

@@ -13,7 +13,7 @@ class MailToOctocat < HTMLProofer::Check
 
       next if @link.ignore?
 
-      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
+      return add_failure("Don't email the Octocat directly!", element: @link) if mailto_octocat?
     end
   end
 end

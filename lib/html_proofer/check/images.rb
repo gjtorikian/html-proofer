@@ -14,41 +14,37 @@ module HTMLProofer
           # screenshot filenames should return because of terrible names
           add_failure(
             "image has a terrible filename (#{@img.url.raw_attribute})",
-            line: @img.line,
-            content: @img.content,
+            element: @img,
           ) if terrible_filename?
 
           # does the image exist?
           if missing_src?
-            add_failure("image has no src or srcset attribute", line: @img.line, content: @img.content)
+            add_failure("image has no src or srcset attribute", element: @img)
           elsif @img.url.protocol_relative?
             add_failure(
               "image link #{@img.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @img.line,
-              content: @img.content,
+              element: @img,
             )
           elsif @img.url.remote?
             add_to_external_urls(@img.url, @img.line)
           elsif !@img.url.exists? && !@img.multiple_srcsets? && !@img.multiple_sizes?
             add_failure(
               "internal image #{@img.url.raw_attribute} does not exist",
-              line: @img.line,
-              content: @img.content,
+              element: @img,
             )
           elsif @img.multiple_srcsets? || @img.multiple_sizes?
             @img.srcsets_wo_sizes.each do |srcset|
-              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, extract_size: true)
+              srcset_url = HTMLProofer::Attribute::Url.new(@runner, srcset, base_url: @img.base_url, source: @img.url.source, filename: @img.url.filename, extract_size: true)
 
               if srcset_url.protocol_relative?
                 add_failure(
                   "image link #{srcset_url.url} is a protocol-relative URL, use explicit https:// instead",
-                  line: @img.line,
-                  content: @img.content,
+                  element: @img,
                 )
               elsif srcset_url.remote?
                 add_to_external_urls(srcset_url.url, @img.line)
               elsif !srcset_url.exists?
-                add_failure("internal image #{srcset} does not exist", line: @img.line, content: @img.content)
+                add_failure("internal image #{srcset} does not exist", element: @img)
               end
             end
           end
@@ -58,22 +54,19 @@ module HTMLProofer
             if missing_alt_tag? && !ignore_missing_alt?
               add_failure(
                 "image #{@img.url.raw_attribute} does not have an alt attribute",
-                line: @img.line,
-                content: @img.content,
+                element: @img,
               )
             elsif (empty_alt_tag? || alt_all_spaces?) && !ignore_empty_alt?
               add_failure(
                 "image #{@img.url.raw_attribute} has an alt attribute, but no content",
-                line: @img.line,
-                content: @img.content,
+                element: @img,
               )
             end
           end
 
           add_failure(
             "image #{@img.url.raw_attribute} uses the http scheme",
-            line: @img.line,
-            content: @img.content,
+            element: @img,
           ) if @runner.enforce_https? && @img.url.http?
         end
 

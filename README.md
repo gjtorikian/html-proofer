@@ -88,26 +88,26 @@ It can also run through the command-line.
 Here's an example:
 
 ```ruby
-require 'html-proofer'
-require 'html/pipeline'
-require 'find'
+require "html-proofer"
+require "html/pipeline"
+require "find"
 
 # make an out dir
 Dir.mkdir("out") unless File.exist?("out")
 
-pipeline = HTML::Pipeline.new [
+pipeline = HTML::Pipeline.new([
   HTML::Pipeline::MarkdownFilter,
-  HTML::Pipeline::TableOfContentsFilter
-], gfm: true
+  HTML::Pipeline::TableOfContentsFilter,
+],
+gfm: true)
 
 # iterate over files, and generate HTML from Markdown
 Find.find("./docs") do |path|
-  if File.extname(path) == ".md"
-    contents = File.read(path)
-    result = pipeline.call(contents)
+  next unless File.extname(path) == ".md"
+  contents = File.read(path)
+  result = pipeline.call(contents)
 
-    File.open("out/#{path.split("/").pop.sub('.md', '.html')}", 'w') { |file| file.write(result[:output].to_s) }
-  end
+  File.open("out/#{path.split("/").pop.sub(".md", ".html")}", "w") { |file| file.write(result[:output].to_s) }
 end
 
 # test your out dir!
@@ -119,7 +119,7 @@ HTMLProofer.check_directory("./out").run
 If you simply want to check a single file, use the `check_file` method:
 
 ``` ruby
-HTMLProofer.check_file('/path/to/a/file.html').run
+HTMLProofer.check_file("/path/to/a/file.html").run
 ```
 
 ### Checking directories
@@ -127,13 +127,13 @@ HTMLProofer.check_file('/path/to/a/file.html').run
 If you want to check a directory, use `check_directory`:
 
 ``` ruby
-HTMLProofer.check_directory('./out').run
+HTMLProofer.check_directory("./out").run
 ```
 
 If you want to check multiple directories, use `check_directories`:
 
 ``` ruby
-HTMLProofer.check_directories(['./one', './two']).run
+HTMLProofer.check_directories(["./one", "./two"]).run
 ```
 
 ### Checking an array of links
@@ -141,7 +141,7 @@ HTMLProofer.check_directories(['./one', './two']).run
 With `check_links`, you can also pass in an array of links:
 
 ``` ruby
-HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
+HTMLProofer.check_links(["https://github.com", "https://jekyllrb.com"]).run
 ```
 
 ### Swapping information
@@ -149,7 +149,7 @@ HTMLProofer.check_links(['https://github.com', 'https://jekyllrb.com']).run
 Sometimes, the information in your HTML is not the same as how your server serves content. In these cases, you can use `swap_urls` to map the URL in a file to the URL you'd like it to become. For example:
 
 ```ruby
-run_proofer(file, :file, swap_urls: { %r{^https//placeholder.com}: 'https://website.com' })
+run_proofer(file, :file, swap_urls: { %r{^https//placeholder.com} => "https://website.com" })
 ```
 
 In this case, any link that matches the `^https://placeholder.com` will be converted to `https://website.com`.
@@ -157,7 +157,7 @@ In this case, any link that matches the `^https://placeholder.com` will be conve
 A similar swapping process can be done for attributes:
 
 ```ruby
-run_proofer(file, :file, swap_attributes: { 'img': [['data-src', 'src']] })
+run_proofer(file, :file, swap_attributes: { "img": [["data-src", "src"]] })
 ```
 
 In this case, we are telling HTMLProofer that, for any `img` tag detected, for any `src` attribute, pretend it's actually the `src` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need for each element.
@@ -216,7 +216,7 @@ htmlproofer --assume-extension ./_site --swap-urls '^/BASEURL/:/'
 or in your `Rakefile`
 
 ```ruby
-require 'html-proofer'
+require "html-proofer"
 
 task :test do
   sh "bundle exec jekyll build"
@@ -251,15 +251,16 @@ This can also apply to parent elements, all the way up to the `<html>` tag:
 Say you've got some new files in a pull request, and your tests are failing because links to those files are not live yet. One thing you can do is run a diff against your base branch and explicitly ignore the new files, like this:
 
 ```ruby
-  directories = %w(content)
-  merge_base = `git merge-base origin/production HEAD`.chomp
-  diffable_files = `git diff -z --name-only --diff-filter=AC #{merge_base}`.split("\0")
-  diffable_files = diffable_files.select do |filename|
-    next true if directories.include?(File.dirname(filename))
-    filename.end_with?('.md')
-  end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
+directories = ['content']
+merge_base = %x(git merge-base origin/production HEAD).chomp
+diffable_files = %x(git diff -z --name-only --diff-filter=AC #{merge_base}).split("\0")
+diffable_files = diffable_files.select do |filename|
+  next true if directories.include?(File.dirname(filename))
 
-  HTMLProofer.check_directory('./output', { ignore_urls: diffable_files }).run
+  filename.end_with?(".md")
+end.map { |f| Regexp.new(File.basename(f, File.extname(f))) }
+
+HTMLProofer.check_directory("./output", { ignore_urls: diffable_files }).run
 ```
 
 ## Configuration
@@ -301,7 +302,7 @@ In addition, there are a few "namespaced" options. These are:
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
 ``` ruby
-HTMLProofer.new("out/", {extensions: [".htm"], typhoeus: { verbose: true, ssl_verifyhost: 2 } })
+HTMLProofer.new("out/", { extensions: [".htm"], typhoeus: { verbose: true, ssl_verifyhost: 2 } })
 ```
 
 This sets `HTMLProofer`'s extensions to use _.htm_, gives Typhoeus a configuration for it to be verbose, and use specific SSL settings. Check the [Typhoeus documentation](https://github.com/typhoeus/typhoeus#other-curl-options) for more information on what options it can receive.
@@ -316,9 +317,9 @@ The default value is:
   {
     followlocation: true,
     connecttimeout: 10,
-    timeout: 30
+    timeout: 30,
   },
-  hydra: { max_concurrency: 50 }
+  hydra: { max_concurrency: 50 },
 }
 ```
 
@@ -331,7 +332,7 @@ You can provide a block to set some logic before an external link is checked. Fo
 ```ruby
 proofer = HTMLProofer.check_directory(item, opts)
 proofer.before_request do |request|
-  request.options[:headers]['Authorization'] = "Bearer <TOKEN>" if request.base_url == "https://github.com"
+  request.options[:headers]["Authorization"] = "Bearer <TOKEN>" if request.base_url == "https://github.com"
 end
 proofer.run
 ```
@@ -352,25 +353,25 @@ You can enable caching for this by passing in the configuration option `:cache`,
 For example, passing the following options means "recheck external links older than thirty days":
 
 ``` ruby
-{ cache: { timeframe: { external: '30d' } } }
+{ cache: { timeframe: { external: "30d" } } }
 ```
 
 And the following options means "recheck internal links older than two weeks":
 
 ``` ruby
-{ cache: { timeframe: { internal: '2w' } } }
+{ cache: { timeframe: { internal: "2w" } } }
 ```
 
 Naturally, to support both internal and external link caching, both keys would need to be provided. The following checks external links every two weeks, but internal links only once a week:
 
 ``` ruby
-{ cache: { timeframe: { external: '2w', internal: '1w' } } }
+{ cache: { timeframe: { external: "2w", internal: "1w" } } }
 ```
 
 You can change the filename or the directory where the cache file is kept by also providing the `storage_dir` key:
 
 ``` ruby
-{ cache: { cache_file: 'stay_cachey.json', storage_dir: '/tmp/html-proofer-cache-money' } }
+{ cache: { cache_file: "stay_cachey.json", storage_dir: "/tmp/html-proofer-cache-money" } }
 ```
 
 Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
@@ -422,23 +423,23 @@ Want to write your own test? Sure, that's possible!
 
 Just create a class that inherits from `HTMLProofer::Check`. This subclass must define one method called `run`. This is called on your content, and is responsible for performing the validation on whatever elements you like. When you catch a broken issue, call `add_failure(message, line: line, content: content)` to explain the error. `line` refers to the line numbers, and `content` is the node content of the broken element.
 
-If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on.
+If you're working with the element's attributes (as most checks do), you'll also want to call `create_element(node)` as part of your suite. This constructs an object that contains all the attributes of the HTML element you're iterating on, and can also be used directly to call `add_failure(message, element: element)`.
 
 Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
 ``` ruby
-class MailToOctocat < ::HTMLProofer::Check
+class MailToOctocat < HTMLProofer::Check
   def mailto_octocat?
-    @link.url.raw_attribute == 'mailto:octocat@github.com'
+    @link.url.raw_attribute == "mailto:octocat@github.com"
   end
 
   def run
-    @html.css('a').each do |node|
+    @html.css("a").each do |node|
       @link = create_element(node)
 
       next if @link.ignore?
 
-      return add_failure("Don't email the Octocat directly!", line: @link.line) if mailto_octocat?
+      return add_failure("Don't email the Octocat directly!", element: @link) if mailto_octocat?
     end
   end
 end
@@ -448,7 +449,7 @@ Don't forget to include this new check in HTMLProofer's options, for example:
 
 ```ruby
 # removes default checks and just runs this one
-HTMLProofer.check_directories(["out/"], {checks: ['MailToOctocat']})
+HTMLProofer.check_directories(["out/"], { checks: ["MailToOctocat"] })
 ```
 
 See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
@@ -479,7 +480,8 @@ To ignore SSL certificates, turn off Typhoeus' SSL verification:
 HTMLProofer.check_directory("out/", {
   typhoeus: {
     ssl_verifypeer: false,
-    ssl_verifyhost: 0}
+    ssl_verifyhost: 0,
+},
 }).run
 ```
 
@@ -490,8 +492,9 @@ To change the User-Agent used by Typhoeus:
 ``` ruby
 HTMLProofer.check_directory("out/", {
   typhoeus: {
-    headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" }
-}}).run
+    headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" },
+  }
+}).run
 ```
 
 Alternatively, you can specifify these options on the commandline with:
@@ -508,8 +511,9 @@ Sometimes links fail because they don't have access to cookies. To fix this you 
 HTMLProofer.check_directory("out/", {
   typhoeus: {
     cookiefile: ".cookies",
-    cookiejar: ".cookies"
-}}).run
+    cookiejar: ".cookies",
+  }
+}).run
 ```
 
 ```bash

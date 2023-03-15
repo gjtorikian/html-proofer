@@ -10,7 +10,7 @@ module HTMLProofer
           next if @link.ignore?
 
           if !allow_hash_href? && @link.node["href"] == "#"
-            add_failure("linking to internal hash #, which points to nowhere", line: @link.line, content: @link.content)
+            add_failure("linking to internal hash #, which points to nowhere", element: @link)
             next
           end
 
@@ -18,21 +18,20 @@ module HTMLProofer
           if blank?(@link.url.raw_attribute)
             next if allow_missing_href?
 
-            add_failure("'#{@link.node.name}' tag is missing a reference", line: @link.line, content: @link.content)
+            add_failure("'#{@link.node.name}' tag is missing a reference", element: @link)
             next
           end
 
           # is it even a valid URL?
           unless @link.url.valid?
-            add_failure("#{@link.href} is an invalid URL", line: @link.line, content: @link.content)
+            add_failure("#{@link.href} is an invalid URL", element: @link)
             next
           end
 
           if @link.url.protocol_relative?
             add_failure(
               "#{@link.url} is a protocol-relative URL, use explicit https:// instead",
-              line: @link.line,
-              content: @link.content,
+              element: @link,
             )
             next
           end
@@ -50,7 +49,7 @@ module HTMLProofer
             next if @link.node["rel"] == "dns-prefetch"
 
             unless @link.url.path?
-              add_failure("#{@link.url.raw_attribute} is an invalid URL", line: @link.line, content: @link.content)
+              add_failure("#{@link.url.raw_attribute} is an invalid URL", element: @link)
               next
             end
 
@@ -60,8 +59,7 @@ module HTMLProofer
             if @link.url.unslashed_directory?(@link.url.absolute_path)
               add_failure(
                 "internally linking to a directory #{@link.url.raw_attribute} without trailing slash",
-                line: @link.line,
-                content: @link.content,
+                element: @link,
               )
               next
             end
@@ -88,7 +86,7 @@ module HTMLProofer
         when "http"
           return unless @runner.options[:enforce_https]
 
-          add_failure("#{@link.url.raw_attribute} is not an HTTPS link", line: @link.line, content: @link.content)
+          add_failure("#{@link.url.raw_attribute} is not an HTTPS link", element: @link)
         end
       end
 
@@ -96,14 +94,12 @@ module HTMLProofer
         if @link.url.path.empty?
           add_failure(
             "#{@link.url.raw_attribute} contains no email address",
-            line: @link.line,
-            content: @link.content,
+            element: @link,
           ) unless ignore_empty_mailto?
         elsif !/#{URI::MailTo::EMAIL_REGEXP}/o.match?(@link.url.path)
           add_failure(
             "#{@link.url.raw_attribute} contains an invalid email address",
-            line: @link.line,
-            content: @link.content,
+            element: @link,
           )
         end
       end
@@ -111,8 +107,7 @@ module HTMLProofer
       def handle_tel
         add_failure(
           "#{@link.url.raw_attribute} contains no phone number",
-          line: @link.line,
-          content: @link.content,
+          element: @link,
         ) if @link.url.path.empty?
       end
 
@@ -130,16 +125,14 @@ module HTMLProofer
         if blank?(@link.node["integrity"]) && blank?(@link.node["crossorigin"])
           add_failure(
             "SRI and CORS not provided in: #{@link.url.raw_attribute}",
-            line: @link.line,
-            content: @link.content,
+            element: @link,
           )
         elsif blank?(@link.node["integrity"])
-          add_failure("Integrity is missing in: #{@link.url.raw_attribute}", line: @link.line, content: @link.content)
+          add_failure("Integrity is missing in: #{@link.url.raw_attribute}", element: @link)
         elsif blank?(@link.node["crossorigin"])
           add_failure(
             "CORS not provided for external resource in: #{@link.link.url.raw_attribute}",
-            line: @link.line,
-            content: @link.content,
+            element: @link,
           )
         end
       end

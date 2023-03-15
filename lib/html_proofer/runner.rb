@@ -6,8 +6,8 @@ module HTMLProofer
   class Runner
     include HTMLProofer::Utils
 
-    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :checked_paths, :current_check
-    attr_accessor :current_filename, :current_source, :reporter
+    attr_reader :options, :cache, :logger, :internal_urls, :external_urls, :resolved_paths, :current_check, :current_filename, :current_source
+    attr_accessor :reporter
 
     URL_TYPES = [:external, :internal].freeze
 
@@ -26,7 +26,7 @@ module HTMLProofer
 
       @before_request = []
 
-      @checked_paths = {}
+      @resolved_paths = {}
 
       @current_check = nil
       @current_source = nil
