@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.0.6](https://github.com/gjtorikian/html-proofer/tree/v5.0.6) (2023-03-15)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.5...v5.0.6)
+
+**Merged pull requests:**
+
+- Refactor/simplify internal link check resolution  [\#795](https://github.com/gjtorikian/html-proofer/pull/795) ([riccardoporreca](https://github.com/riccardoporreca))
+
 ## [v5.0.5](https://github.com/gjtorikian/html-proofer/tree/v5.0.5) (2023-03-07)
 
 [Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.4...v5.0.5)
