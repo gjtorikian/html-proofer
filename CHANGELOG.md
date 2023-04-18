@@ -1,5 +1,21 @@
 # Changelog
 
+## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.7...HEAD)
+
+**Closed issues:**
+
+- Fails multi email mailto [\#796](https://github.com/gjtorikian/html-proofer/issues/796)
+
+## [v5.0.7](https://github.com/gjtorikian/html-proofer/tree/v5.0.7) (2023-04-18)
+
+[Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.6...v5.0.7)
+
+**Merged pull requests:**
+
+- Support multiple email addresses in `mailto` [\#797](https://github.com/gjtorikian/html-proofer/pull/797) ([gjtorikian](https://github.com/gjtorikian))
+
 ## [v5.0.6](https://github.com/gjtorikian/html-proofer/tree/v5.0.6) (2023-03-15)
 
 [Full Changelog](https://github.com/gjtorikian/html-proofer/compare/v5.0.5...v5.0.6)
