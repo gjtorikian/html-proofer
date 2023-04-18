@@ -96,7 +96,8 @@ module HTMLProofer
             "#{@link.url.raw_attribute} contains no email address",
             element: @link,
           ) unless ignore_empty_mailto?
-        elsif !/#{URI::MailTo::EMAIL_REGEXP}/o.match?(@link.url.path)
+        # eg., if any do not match a valid URL
+        elsif @link.url.path.split(",").any? { |email| !/#{URI::MailTo::EMAIL_REGEXP}/o.match?(email) }
           add_failure(
             "#{@link.url.raw_attribute} contains an invalid email address",
             element: @link,

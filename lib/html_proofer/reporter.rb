@@ -11,8 +11,8 @@ module HTMLProofer
     end
 
     def failures=(failures)
-      @failures = failures.group_by(&:check_name) \
-        .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } } \
+      @failures = failures.group_by(&:check_name)
+        .transform_values { |issues| issues.sort_by { |issue| [issue.path, issue.line] } }
         .sort
     end
 
