@@ -246,6 +246,12 @@ describe HTMLProofer::Check::Links do
     expect(proofer.failed_checks).to(eq([]))
   end
 
+  it "accepts multiple mailto links" do
+    ignorable_links = File.join(FIXTURES_DIR, "links", "multiple_mailto_links.html")
+    proofer = run_proofer(ignorable_links, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "ignores blank mailto links when configured to allow them" do
     blank_mail_to_link = File.join(FIXTURES_DIR, "links", "blank_mailto_link.html")
     proofer = run_proofer(blank_mail_to_link, :file, ignore_empty_mailto: true)
