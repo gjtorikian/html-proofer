@@ -15,8 +15,11 @@ require "html_proofer/version"
 require "fileutils"
 
 if ENV.fetch("DEBUG", false)
-  require "awesome_print"
   require "debug"
+  begin
+    require "amazing_print"
+  rescue LoadError # rubocop:disable Lint/SuppressedException
+  end
 end
 
 module HTMLProofer
