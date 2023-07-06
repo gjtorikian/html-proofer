@@ -1,4 +1,4 @@
-name: Test
+name: CI
 
 on:
   pull_request:
@@ -8,21 +8,15 @@ permissions:
 
 jobs:
   test:
-    env:
-      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Ruby 3.1
-        uses: ruby/setup-ruby@v1
+      - name: Set up Ruby
+        uses: yettoapp/actions/setup-languages@main
         with:
-          ruby-version: 3.1
-          bundler-cache: true
-
-      - name: Install dependencies
-        run: bundle install
+          ruby: true
 
       - name: Run tests
-        run: bundle exec rake
+        run: bundle exec rake test
