@@ -15,5 +15,5 @@ jobs:
       rubygems_api_key: ${{ secrets.RUBYGEMS_API_BOT_KEY }}
       gh_token: ${{ secrets.PUBLIC_PUSH_TO_PROTECTED_BRANCH }}
     with:
-      gem_name: html_proofer
+      gem_name: html-proofer
       version_filepath: lib/html_proofer/version.rb
