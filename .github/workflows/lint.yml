@@ -1,23 +1,23 @@
-name: Lint
+name: Linting
 
 on:
   pull_request:
+    paths:
+      - "**/*.rb"
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - uses: ruby/setup-ruby@v1
+      - name: Set up Ruby
+        uses: yettoapp/actions/setup-languages@main
         with:
-          ruby-version: 3.1
-          bundler-cache: true
-
-      - run: bundle install
+          ruby: true
 
       - name: Rubocop
         run: bundle exec rake rubocop
