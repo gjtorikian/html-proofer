@@ -35,3 +35,8 @@ task :proof_readme do
   opts = {}
   HTMLProofer.check_directory("./out", opts).run
 end
+
+GEMSPEC = Bundler.load_gemspec("html-proofer.gemspec")
+gem_path = Gem::PackageTask.new(GEMSPEC).define
+desc "Package the ruby gem"
+task "package" => [gem_path]
