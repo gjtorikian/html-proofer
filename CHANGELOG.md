@@ -1,3 +1,5 @@
+## [v5.0.8] - 06-08-2023
+null
 # Changelog
 
 ## [Unreleased](https://github.com/gjtorikian/html-proofer/tree/HEAD)
