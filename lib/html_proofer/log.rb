@@ -41,8 +41,8 @@ module HTMLProofer
         :red
       end
 
-      if (STDOUT_LEVELS.include?(level) && $stdout.isatty) ||
-          (STDERR_LEVELS.include?(level) && $stderr.isatty)
+      if STDOUT_LEVELS.include?(level) ||
+          STDERR_LEVELS.include?(level)
         Rainbow(message).send(color)
       else
         message
