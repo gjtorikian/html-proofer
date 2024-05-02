@@ -46,9 +46,9 @@ describe "Check::Links" do
     expect(proofer.failed_checks.first.description).to(match(/internally linking to #noHash; the file exists, but the hash 'noHash' does not/))
   end
 
-  it "passes for internal links with non-ASCII characters" do
-    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "hash_nonascii.html")
-    proofer = run_proofer(broken_hash_internal_filepath, :file)
+  it "passes for internal links with non-ASCII characters from implicit indexes" do
+    broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "hash_nonascii_dir")
+    proofer = run_proofer(broken_hash_internal_filepath, :directory, check_internal_hash: true)
     expect(proofer.failed_checks).to(eq([]))
   end      
 
