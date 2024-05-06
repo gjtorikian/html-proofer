@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Check::Scripts do
+describe "Check::Scripts" do
   it "fails for src missing the protocol" do
     file = File.join(FIXTURES_DIR, "scripts", "script_missing_protocol.html")
     proofer = run_proofer(file, :file)

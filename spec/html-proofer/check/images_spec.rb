@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Check::Images do
+describe "Check::Images" do
   it "passes for existing external images" do
     external_image_filepath = File.join(FIXTURES_DIR, "images", "existing_image_external.html")
     proofer = run_proofer(external_image_filepath, :file)

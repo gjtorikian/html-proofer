@@ -2,7 +2,9 @@
 
 require "spec_helper"
 
-describe HTMLProofer do
+describe "Proofer" do
+  let(:described_class) { HTMLProofer }
+
   describe "#failed_checks" do
     it "is an array of Failures" do
       broken_link_internal_filepath = File.join(FIXTURES_DIR, "links", "broken_link_internal.html")

@@ -18,8 +18,8 @@ class MailToOctocat < HTMLProofer::Check
   end
 end
 
-describe HTMLProofer::Reporter do
-  it "supports a custom reporter" do
+describe "Check" do
+  it "supports a custom check" do
     file = File.join(FIXTURES_DIR, "links", "mailto_octocat.html")
     cassette_name = make_cassette_name(file, {})
 
