@@ -1,3 +1,0 @@
-#!/bin/sh
-
-bundle exec github_changelog_generator --token $GITHUB_TOKEN -u gjtorikian -p html-proofer
