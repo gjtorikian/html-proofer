@@ -52,7 +52,8 @@ module HTMLProofer
 
       def ignore?
         return true if /^javascript:/.match?(@url)
-        return true if ignores_pattern?(@runner.options[:ignore_urls])
+
+        true if ignores_pattern?(@runner.options[:ignore_urls])
       end
 
       def valid?
@@ -220,11 +221,24 @@ module HTMLProofer
         @url.to_s.sub(/##{hash}/, "")
       end
 
-      # catch any obvious issues, like strings in port numbers
+      # catch any obvious issues
       private def clean_url!
-        return if @url =~ /^([!#{Regexp.last_match(0)}-;=?-\[\]_a-z~]|%[0-9a-fA-F]{2})+$/
+        parsed_url = Addressable::URI.parse(@url)
+        url = if parsed_url.scheme.nil?
+          parsed_url
+        else
+          parsed_url.normalize
+        end.to_s
 
-        @url = Addressable::URI.parse(@url).normalize.to_s
+        # normalize strips this off, which causes issues with cache
+        @url = if @url.end_with?("/") && !url.end_with?("/")
+          "#{url}/"
+        elsif !@url.end_with?("/") && url.end_with?("/")
+          url.chop
+        else
+          url
+        end
+      rescue Addressable::URI::InvalidURIError # rubocop:disable Lint/SuppressedException; error will be reported at check time
       end
 
       private def swap_urls!

@@ -27,7 +27,7 @@ module HTMLProofer
     end
 
     def meta_content
-      return nil unless meta_tag?
+      return unless meta_tag?
 
       @node["content"]
     end
@@ -37,7 +37,7 @@ module HTMLProofer
     end
 
     def src
-      return nil if !img_tag? && !script_tag? && !source_tag?
+      return if !img_tag? && !script_tag? && !source_tag?
 
       @node["src"]
     end
@@ -51,7 +51,7 @@ module HTMLProofer
     end
 
     def srcset
-      return nil if !img_tag? && !source_tag?
+      return if !img_tag? && !source_tag?
 
       @node["srcset"]
     end
@@ -61,7 +61,7 @@ module HTMLProofer
     end
 
     def href
-      return nil if !a_tag? && !link_tag?
+      return if !a_tag? && !link_tag?
 
       @node["href"]
     end
@@ -96,7 +96,7 @@ module HTMLProofer
     IMAGE_CANDIDATE_REGEX = /\s*([^,]\S*[^,](?:\s+[^,]+)?)\s*(?:,|$)/
 
     def srcsets
-      return nil if blank?(srcset)
+      return if blank?(srcset)
 
       srcset.split(IMAGE_CANDIDATE_REGEX).select.with_index do |_part, idx|
         idx.odd?
@@ -112,7 +112,7 @@ module HTMLProofer
     end
 
     def srcsets_wo_sizes
-      return nil if blank?(srcsets)
+      return if blank?(srcsets)
 
       srcsets.map do |srcset|
         srcset.split(" ").first
@@ -133,7 +133,7 @@ module HTMLProofer
 
       attrs = @runner.options[:swap_attributes][@node.name]
 
-      return true unless blank?(attrs)
+      true unless blank?(attrs)
     end
 
     private def swap_attributes!

@@ -2,13 +2,15 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Cache do
+describe "Cache" do
   let(:cache_fixture_dir) { File.join(FIXTURES_DIR, "cache") }
 
   let(:default_cache_options) { { storage_dir: cache_fixture_dir } }
 
   let(:file_runner) { HTMLProofer.check_file(test_file, runner_options) }
   let(:link_runner) { HTMLProofer.check_links(links, runner_options) }
+
+  let(:described_class) { HTMLProofer::Cache }
 
   def read_cache(cache_filename)
     JSON.parse(File.read(File.join(cache_fixture_dir, cache_filename)))

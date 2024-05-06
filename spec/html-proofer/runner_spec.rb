@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Runner do
+describe "Runner" do
   describe "#before_request" do
     it "sends authorization header to github.com" do
       opts = {}

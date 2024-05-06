@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Maliciousness test" do # rubocop:disable RSpec/DescribeClass
+describe "Maliciousness" do
   it "does not accept non-string input for single file" do
     expect do
       run_proofer(23, :file)

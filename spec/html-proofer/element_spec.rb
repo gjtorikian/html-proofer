@@ -2,8 +2,9 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Element do
+describe "Element" do
   let(:runner) { HTMLProofer::Runner.new("") }
+  let(:described_class) { HTMLProofer::Element }
 
   describe "#initialize" do
     it "accepts the xmlns attribute" do
