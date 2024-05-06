@@ -233,6 +233,8 @@ module HTMLProofer
         # normalize strips this off, which causes issues with cache
         @url = if @url.end_with?("/") && !url.end_with?("/")
           "#{url}/"
+        elsif !@url.end_with?("/") && url.end_with?("/")
+          url.chop
         else
           url
         end
