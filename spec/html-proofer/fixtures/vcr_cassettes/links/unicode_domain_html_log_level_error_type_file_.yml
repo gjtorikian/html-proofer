@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: head
-    uri: https://xn--mxaaaiil1bdgepgr1bpt0d.gr/
+    uri: https://xn--gran-8qa.fi
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Mozilla/5.0 (compatible; HTML Proofer/3.19.3; +https://github.com/gjtorikian/html-proofer)
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.8; +https://github.com/gjtorikian/html-proofer)
       Accept:
       - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
       Expect:
@@ -16,33 +16,39 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
-      Date:
-      - Fri, 31 Dec 2021 16:37:41 GMT
-      Content-Type:
-      - text/html; charset=UTF-8
-      Connection:
-      - keep-alive
-      x-powered-by:
-      - PHP/8.0.13
-      x-turbo-charged-by:
-      - LiteSpeed
-      CF-Cache-Status:
-      - DYNAMIC
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=vHwiFt05sw2oM%2BxOEY0YbwWDVJ7lNnaWzqt3YVttfW73qJj%2FOicx%2F2u6FF84ul4dFoAdtntXjMsZhHCWx2Q%2F2%2B842ECjjDJOLjPrkVdaHxBaMKnuzqJWI8j2aXzIKuRDADaWiYS6XcGYTXuEAXZg1g%3D%3D"}],"group":"cf-nel","max_age":604800}'
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      CF-RAY:
-      - 6c64ef1218b18c4b-EWR
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - "*"
+      age:
+      - '2084372'
+      cache-control:
+      - public, max-age=0, must-revalidate
+      content-disposition:
+      - inline
+      content-type:
+      - text/html; charset=utf-8
+      date:
+      - Mon, 06 May 2024 22:16:55 GMT
+      etag:
+      - '"17bf20f1307387d12393425f77714bc2"'
+      server:
+      - Vercel
+      strict-transport-security:
+      - max-age=63072000
+      x-vercel-cache:
+      - HIT
+      x-vercel-id:
+      - sfo1::jvrgm-1715033815794-3d4492f2b00f
+      content-length:
+      - '11213'
     body:
       encoding: ASCII-8BIT
       string: ''
-    http_version: '1.1'
+    http_version: '2'
     adapter_metadata:
-      effective_url: http://xn--mxaaaiil1bdgepgr1bpt0d.gr/
-  recorded_at: Fri, 31 Dec 2021 16:37:41 GMT
+      effective_url: https://www.xn--gran-8qa.fi/
+  recorded_at: Mon, 06 May 2024 22:16:55 GMT
 recorded_with: VCR 2.9.3
