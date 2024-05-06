@@ -120,9 +120,7 @@ module HTMLProofer
         decoded_href_hash = Addressable::URI.unescape(href_hash)
         fragment_ids = [href_hash, decoded_href_hash]
         # https://www.w3.org/TR/html5/single-page.html#scroll-to-fragid
-        return true if fragment_ids.include?("top")
-
-        nil
+        true if fragment_ids.include?("top")
       end
 
       private def hash_exists_in_html?(href_hash, html)

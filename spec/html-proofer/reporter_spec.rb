@@ -8,7 +8,7 @@ class CustomReporter < HTMLProofer::Reporter
   end
 end
 
-describe HTMLProofer::Reporter do
+describe "Reporter" do
   it "supports a custom reporter" do
     file = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
     cassette_name = make_cassette_name(file, {})

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Check::Links do
+describe "Check::Links" do
   it "fails for broken internal hash (even if the file exists)" do
     broken_hash_external_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_external_file.html")
     proofer = run_proofer(broken_hash_external_filepath, :file)

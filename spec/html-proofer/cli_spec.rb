@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::CLI do
+describe "CLI" do
   it "works with allow-hash-href" do
     broken = File.join(FIXTURES_DIR, "links", "hash_href.html")
     output = make_bin("--allow-hash-href #{broken}")
@@ -215,14 +215,14 @@ describe HTMLProofer::CLI do
 
     it "has only one UA" do
       http = make_bin(%|--typhoeus='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
-      expect(http.scan(/User-Agent: Typhoeus/).count).to(eq(0))
+      expect(http.scan("User-Agent: Typhoeus").count).to(eq(0))
       expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i).count).to(eq(2))
     end
 
     it "supports hydra" do
       http = make_bin(%(--hydra '{"max_concurrency": 5}' http://www.github.com --as-links))
-      expect(http.scan(/max_concurrency is invalid/).count).to(eq(0))
-      expect(http.scan(/successfully/).count).to(eq(1))
+      expect(http.scan("max_concurrency is invalid").count).to(eq(0))
+      expect(http.scan("successfully").count).to(eq(1))
     end
   end
 
@@ -231,7 +231,7 @@ describe HTMLProofer::CLI do
       new_time = Time.local(2022, 1, 6, 12, 0, 0)
       Timecop.freeze(new_time) do
         http = make_bin(%(--cache '{"timeframe": { "external": "1d"}}' http://www.github.com --as-links))
-        expect(http.scan(/successfully/).count).to(eq(1))
+        expect(http.scan("successfully").count).to(eq(1))
       end
     end
   end

@@ -41,7 +41,7 @@ module HTMLProofer
     end
 
     def parsed_timeframe(timeframe)
-      return nil if timeframe.nil?
+      return if timeframe.nil?
 
       time, date = timeframe.match(/(\d+)(\D)/).captures
       time = time.to_i
@@ -252,7 +252,7 @@ module HTMLProofer
     SECONDS_PER_HOUR   = 3600
     SECONDS_PER_DAY    = 86400
     SECONDS_PER_WEEK   = 604800
-    SECONDS_PER_MONTH  = 2629746  # 1/12 of a gregorian year
+    SECONDS_PER_MONTH  = 2629746 # 1/12 of a gregorian year
 
     private def time_ago(measurement, unit)
       case unit
@@ -269,7 +269,8 @@ module HTMLProofer
 
     private def url_matches_type?(url, type)
       return true if type == :internal && url !~ URI_REGEXP
-      return true if type == :external && url =~ URI_REGEXP
+
+      true if type == :external && url =~ URI_REGEXP
     end
 
     private def cleaned_url(url)

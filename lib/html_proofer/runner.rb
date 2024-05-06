@@ -236,7 +236,7 @@ module HTMLProofer
     end
 
     private def load_cache(type)
-      ivar = instance_variable_get("@#{type}_urls")
+      ivar = instance_variable_get(:"@#{type}_urls")
 
       existing_urls_count = @cache.size(type)
       cache_text = pluralize(existing_urls_count, "#{type} link", "#{type} links")
@@ -249,7 +249,7 @@ module HTMLProofer
 
     private def format_checks_list(checks)
       checks.map do |check|
-        check.sub(/HTMLProofer::Check::/, "")
+        check.sub("HTMLProofer::Check::", "")
       end.sort.join(", ")
     end
   end

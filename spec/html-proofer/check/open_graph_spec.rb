@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Check::OpenGraph do
+describe "Check::OpenGraph" do
   it "passes for existing external url" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-valid.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])

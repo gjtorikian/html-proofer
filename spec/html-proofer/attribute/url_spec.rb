@@ -2,8 +2,9 @@
 
 require "spec_helper"
 
-describe HTMLProofer::Attribute::Url do
+describe "Attribute::Url" do
   let(:runner) { HTMLProofer::Runner.new("") }
+  let(:described_class) { HTMLProofer::Attribute::Url }
 
   describe "#ignores_pattern_check" do
     it "works for regex patterns" do

@@ -3,7 +3,9 @@
 require "spec_helper"
 require "html-proofer"
 
-describe HTMLProofer::Configuration do
+describe "Configuration" do
+  let(:described_class) { HTMLProofer::Configuration }
+
   it "Throws an error when the option name is not a string" do
     expect do
       described_class.new.parse_json_option(

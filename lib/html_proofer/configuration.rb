@@ -233,8 +233,8 @@ module HTMLProofer
       arg.split(",").each_with_object({}) do |s, hsh|
         split = s.split(/(?<!\\):/, 2)
 
-        re = split[0].gsub(/\\:/, ":")
-        string = split[1].gsub(/\\:/, ":")
+        re = split[0].gsub("\\:", ":")
+        string = split[1].gsub("\\:", ":")
         hsh[Regexp.new(re)] = string
       end
     end
