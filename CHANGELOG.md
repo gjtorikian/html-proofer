@@ -1,7 +1,12 @@
-# [v5.0.9] - 07-05-2024\n
-## What's Changed
-* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/gjtorikian/html-proofer/pull/805
+# [v5.0.9] - 07-05-2024
 
+## What's Changed
+
+- Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/gjtorikian/html-proofer/pull/805
+
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/gjtorikian/html-proofer/pull/805
+* Improved performance be removing unnecessary regexp (https://github.com/gjtorikian/html-proofer/pull/820)
+* Improved color output https://github.com/gjtorikian/html-proofer/pull/818
 
 **Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.0.8...v5.0.9
 ## [v5.0.8] - 06-08-2023
