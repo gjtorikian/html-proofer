@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - if: ${{ contains(github.event.pull_request.title, '[skip test]') }}
+      - if: "${{ contains(github.event.pull_request.title, '[skip test]') }}"
         name: Skip test
         shell: bash
         run: |
