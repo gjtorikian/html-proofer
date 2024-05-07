@@ -1,3 +1,9 @@
+## [v5.0.9] - 07-05-2024
+## What's Changed
+* Bump actions/checkout from 3 to 4 by @dependabot in https://github.com/gjtorikian/html-proofer/pull/805
+
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.0.8...v5.0.9
 ## [v5.0.8] - 06-08-2023
 null
 # Changelog
