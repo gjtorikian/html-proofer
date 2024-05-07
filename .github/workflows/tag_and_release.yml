@@ -20,5 +20,5 @@ jobs:
     with:
       gem_name: html-proofer
       version_filepath: lib/html_proofer/version.rb
-      prepare: ${{ github.event == 'push' || github.event == 'workflow_dispatch' }}
+      prepare: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
       release: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'release')) }}
