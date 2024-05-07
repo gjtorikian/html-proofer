@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  pull_request:
+  pull_request_target:
 
 permissions:
   contents: read
@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - if: ${{ contains(github.event.pull_request.title, '[skip test]') }}
+        name: Skip test
+        shell: bash
+        run: |
+          echo "Skipping test workflow because commit message contains `[skip test]`"
+          exit 0
+
       - uses: actions/checkout@v4
 
       - name: Set up Ruby
