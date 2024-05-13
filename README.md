@@ -500,7 +500,7 @@ HTMLProofer.check_directory("out/", {
 Alternatively, you can specifify these options on the commandline with:
 
 ```bash
-htmlproofer --typhoeus-config='{"headers":{"User-Agent":"Mozilla/5.0 (compatible; My New User-Agent)"}}'
+htmlproofer --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (compatible; My New User-Agent)"}}'
 ```
 
 ### Cookies
@@ -517,7 +517,7 @@ HTMLProofer.check_directory("out/", {
 ```
 
 ```bash
-htmlproofer --typhoeus-config='{"cookiefile":".cookies","cookiejar":".cookies"}'
+htmlproofer --typhoeus='{"cookiefile":".cookies","cookiejar":".cookies"}'
 ```
 
 ### Regular expressions
