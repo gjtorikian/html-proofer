@@ -497,7 +497,7 @@ HTMLProofer.check_directory("out/", {
 }).run
 ```
 
-Alternatively, you can specifify these options on the commandline with:
+Alternatively, you can specify these options on the command-line with:
 
 ```bash
 htmlproofer --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (compatible; My New User-Agent)"}}'
