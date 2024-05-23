@@ -50,7 +50,7 @@ describe "Check::Links" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "hash_nonascii_dir")
     proofer = run_proofer(broken_hash_internal_filepath, :directory, check_internal_hash: true)
     expect(proofer.failed_checks).to(eq([]))
-  end      
+  end
 
   it "passes for broken internal hash when asked to ignore" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
