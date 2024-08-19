@@ -36,45 +36,45 @@ Below is a mostly comprehensive list of checks that HTMLProofer can perform.
 
 `img` elements:
 
-* Whether all your images have alt tags
-* Whether your internal image references are not broken
-* Whether external images are showing
-* Whether your images are HTTP
+- Whether all your images have alt tags
+- Whether your internal image references are not broken
+- Whether external images are showing
+- Whether your images are HTTP
 
 ### Links
 
 `a`, `link` elements:
 
-* Whether your internal links are working
-* Whether your internal hash references (`#linkToMe`) are working
-* Whether external links are working
-* Whether your links are HTTPS
-* Whether CORS/SRI is enabled
+- Whether your internal links are working
+- Whether your internal hash references (`#linkToMe`) are working
+- Whether external links are working
+- Whether your links are HTTPS
+- Whether CORS/SRI is enabled
 
 ### Scripts
 
 `script` elements:
 
-* Whether your internal script references are working
-* Whether external scripts are loading
-* Whether CORS/SRI is enabled
+- Whether your internal script references are working
+- Whether external scripts are loading
+- Whether CORS/SRI is enabled
 
 ### Favicon
 
-* Whether your favicons are valid.
+- Whether your favicons are valid.
 
 ### OpenGraph
 
-* Whether the images and URLs in the OpenGraph metadata are valid.
+- Whether the images and URLs in the OpenGraph metadata are valid.
 
 ## Usage
 
 You can configure HTMLProofer to run on:
 
-* a file
-* a directory
-* an array of directories
-* an array of links
+- a file
+- a directory
+- an array of directories
+- an array of links
 
 It can also run through the command-line.
 
@@ -118,7 +118,7 @@ HTMLProofer.check_directory("./out").run
 
 If you simply want to check a single file, use the `check_file` method:
 
-``` ruby
+```ruby
 HTMLProofer.check_file("/path/to/a/file.html").run
 ```
 
@@ -126,13 +126,13 @@ HTMLProofer.check_file("/path/to/a/file.html").run
 
 If you want to check a directory, use `check_directory`:
 
-``` ruby
+```ruby
 HTMLProofer.check_directory("./out").run
 ```
 
 If you want to check multiple directories, use `check_directories`:
 
-``` ruby
+```ruby
 HTMLProofer.check_directories(["./one", "./two"]).run
 ```
 
@@ -140,7 +140,7 @@ HTMLProofer.check_directories(["./one", "./two"]).run
 
 With `check_links`, you can also pass in an array of links:
 
-``` ruby
+```ruby
 HTMLProofer.check_links(["https://github.com", "https://jekyllrb.com"]).run
 ```
 
@@ -157,7 +157,7 @@ In this case, any link that matches the `^https://placeholder.com` will be conve
 A similar swapping process can be done for attributes:
 
 ```ruby
-run_proofer(file, :file, swap_attributes: { "img": [["data-src", "src"]] })
+run_proofer(file, :file, swap_attributes: { "img"  => [["data-src", "src"]] })
 ```
 
 In this case, we are telling HTMLProofer that, for any `img` tag detected, for any `src` attribute, pretend it's actually the `src` attribute instead. Since the value is an array of arrays, you can pass in as many attribute swaps as you need for each element.
@@ -168,7 +168,7 @@ You'll also get a new program called `htmlproofer` with this gem. Terrific!
 
 Pass in options through the command-line as flags, like this:
 
-``` bash
+```bash
 htmlproofer --extensions .html.erb ./out
 ```
 
@@ -179,14 +179,14 @@ Use `htmlproofer --help` to see all command line options.
 For options which require an array of input, surround the value with quotes, and don't use
 any spaces. For example, to exclude an array of HTTP status code, you might do:
 
-``` bash
+```bash
 htmlproofer --ignore-status-codes "999,401,404" ./out
 ```
 
 For something like `url-ignore`, and other options that require an array of regular expressions,
 you can pass in a syntax like this:
 
-``` bash
+```bash
 htmlproofer --ignore-urls "/www.github.com/,/foo.com/" ./out
 ```
 
@@ -194,7 +194,7 @@ Since `swap_urls` is a bit special, you'll pass in a pair of `RegEx:String`
 values. The escape sequences `\:` should be used to produce literal
 `:`s `htmlproofer` will figure out what you mean.
 
-``` bash
+```bash
 htmlproofer --swap-urls "wow:cow,mow:doh" --extensions .html.erb --ignore-urls www.github.com ./out
 ```
 
@@ -229,18 +229,17 @@ end
 
 If you have trouble with (or don't want to) install Ruby/Nokogumbo, the command-line tool can be run through Docker. See [klakegg/html-proofer](https://hub.docker.com/r/klakegg/html-proofer) for more information.
 
-
 ## Ignoring content
 
 Add the `data-proofer-ignore` attribute to any tag to ignore it from every check.
 
-``` html
+```html
 <a href="https://notareallink" data-proofer-ignore>Not checked.</a>
 ```
 
 This can also apply to parent elements, all the way up to the `<html>` tag:
 
-``` html
+```html
 <div data-proofer-ignore>
   <a href="https://notareallink">Not checked because of parent.</a>
 </div>
@@ -267,41 +266,41 @@ HTMLProofer.check_directory("./output", { ignore_urls: diffable_files }).run
 
 The `HTMLProofer` constructor takes an optional hash of additional options:
 
-| Option | Description | Default |
-| :----- | :---------- | :------ |
-| `allow_hash_href` | If `true`, assumes `href="#"` anchors are valid | `true` |
-| `allow_missing_href` | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error. | `false` |
-| `assume_extension` | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers) | `.html` |
-| `checks`| An array of Strings indicating which checks you want to run | `['Links', 'Images', 'Scripts']`
-| `check_external_hash` | Checks whether external hashes exist (even if the webpage exists) | `true` |
-| `check_internal_hash` | Checks whether internal hashes exist (even if the webpage exists) | `true` |
-| `check_sri` | Check that `<link>` and `<script>` external resources use SRI |false |
-| `directory_index_file` | Sets the file to look for when a link refers to a directory. | `index.html` |
-| `disable_external` | If `true`, does not run the external link checker | `false` |
-| `enforce_https` | Fails a link if it's not marked as `https`. | `true` |
-| `extensions` | An array of Strings indicating the file extensions you would like to check (including the dot) | `['.html']`
-| `ignore_empty_alt` | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true` |
-| `ignore_files` | An array of Strings or RegExps containing file paths that are safe to ignore. | `[]` |
-| `ignore_empty_mailto` | If `true`, allows `mailto:` `href`s which do not contain an email address. | `false`
-| `ignore_missing_alt` | If `true`, ignores images with missing alt tags | `false` |
-| `ignore_status_codes` | An array of numbers representing status codes to ignore. | `[]`
-| `ignore_urls` | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images. | `[]` |
-| `log_level` | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`. | `:info`
-| `only_4xx` | Only reports errors for links that fall within the 4xx status code range. | `false` |
-| `root_dir` | The absolute path to the directory serving your html-files. | "" |
-| `swap_attributes` | JSON-formatted config that maps element names to the preferred attribute to check | `{}` |
-| `swap_urls` | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`. | `{}` |
+| Option                 | Description                                                                                                                                         | Default                          |
+| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
+| `allow_hash_href`      | If `true`, assumes `href="#"` anchors are valid                                                                                                     | `true`                           |
+| `allow_missing_href`   | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.                             | `false`                          |
+| `assume_extension`     | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers)                       | `.html`                          |
+| `checks`               | An array of Strings indicating which checks you want to run                                                                                         | `['Links', 'Images', 'Scripts']` |
+| `check_external_hash`  | Checks whether external hashes exist (even if the webpage exists)                                                                                   | `true`                           |
+| `check_internal_hash`  | Checks whether internal hashes exist (even if the webpage exists)                                                                                   | `true`                           |
+| `check_sri`            | Check that `<link>` and `<script>` external resources use SRI                                                                                       | false                            |
+| `directory_index_file` | Sets the file to look for when a link refers to a directory.                                                                                        | `index.html`                     |
+| `disable_external`     | If `true`, does not run the external link checker                                                                                                   | `false`                          |
+| `enforce_https`        | Fails a link if it's not marked as `https`.                                                                                                         | `true`                           |
+| `extensions`           | An array of Strings indicating the file extensions you would like to check (including the dot)                                                      | `['.html']`                      |
+| `ignore_empty_alt`     | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true`                           |
+| `ignore_files`         | An array of Strings or RegExps containing file paths that are safe to ignore.                                                                       | `[]`                             |
+| `ignore_empty_mailto`  | If `true`, allows `mailto:` `href`s which do not contain an email address.                                                                          | `false`                          |
+| `ignore_missing_alt`   | If `true`, ignores images with missing alt tags                                                                                                     | `false`                          |
+| `ignore_status_codes`  | An array of numbers representing status codes to ignore.                                                                                            | `[]`                             |
+| `ignore_urls`          | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images.             | `[]`                             |
+| `log_level`            | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`.     | `:info`                          |
+| `only_4xx`             | Only reports errors for links that fall within the 4xx status code range.                                                                           | `false`                          |
+| `root_dir`             | The absolute path to the directory serving your html-files.                                                                                         | ""                               |
+| `swap_attributes`      | JSON-formatted config that maps element names to the preferred attribute to check                                                                   | `{}`                             |
+| `swap_urls`            | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.                           | `{}`                             |
 
 In addition, there are a few "namespaced" options. These are:
 
-* `:typhoeus` / `:hydra`
-* `:cache`
+- `:typhoeus` / `:hydra`
+- `:cache`
 
 ### Configuring Typhoeus and Hydra
 
 [Typhoeus](https://github.com/typhoeus/typhoeus) is used to make fast, parallel requests to external URLs. You can pass in any of Typhoeus' options for the external link checks with the options namespace of `:typhoeus`. For example:
 
-``` ruby
+```ruby
 HTMLProofer.new("out/", { extensions: [".htm"], typhoeus: { verbose: true, ssl_verifyhost: 2 } })
 ```
 
@@ -311,7 +310,7 @@ You can similarly pass in a `:hydra` option with a hash configuration for Hydra.
 
 The default value is:
 
-``` ruby
+```ruby
 {
   typhoeus:
   {
@@ -345,40 +344,40 @@ Checking external URLs can slow your tests down. If you'd like to speed that up,
 
 You can enable caching for this by passing in the configuration option `:cache`, with a hash containing a single key, `:timeframe`. `:timeframe` defines the length of time the cache will be used before the link is checked again. The format of `:timeframe` is a hash containing two keys, `external` and `internal`. Each of these contains a number followed by a letter indicating the length of time:
 
-* `M` means months
-* `w` means weeks
-* `d` means days
-* `h` means hours
+- `M` means months
+- `w` means weeks
+- `d` means days
+- `h` means hours
 
 For example, passing the following options means "recheck external links older than thirty days":
 
-``` ruby
+```ruby
 { cache: { timeframe: { external: "30d" } } }
 ```
 
 And the following options means "recheck internal links older than two weeks":
 
-``` ruby
+```ruby
 { cache: { timeframe: { internal: "2w" } } }
 ```
 
 Naturally, to support both internal and external link caching, both keys would need to be provided. The following checks external links every two weeks, but internal links only once a week:
 
-``` ruby
+```ruby
 { cache: { timeframe: { external: "2w", internal: "1w" } } }
 ```
 
 You can change the filename or the directory where the cache file is kept by also providing the `storage_dir` key:
 
-``` ruby
+```ruby
 { cache: { cache_file: "stay_cachey.json", storage_dir: "/tmp/html-proofer-cache-money" } }
 ```
 
-Links that were failures are kept in the cache and *always* rechecked. If they pass, the cache is updated to note the new timestamp.
+Links that were failures are kept in the cache and _always_ rechecked. If they pass, the cache is updated to note the new timestamp.
 
 The cache operates on external links only.
 
-If caching is enabled, HTMLProofer writes to a log file called *tmp/.htmlproofer/cache.log*. You should probably ignore this folder in your version control system.
+If caching is enabled, HTMLProofer writes to a log file called _tmp/.htmlproofer/cache.log_. You should probably ignore this folder in your version control system.
 
 On the CLI, you can provide the `--cache` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
 
@@ -391,12 +390,12 @@ Enable caching in your continuous integration process. It will make your builds 
 Add this step to your build workflow before HTMLProofer is run:
 
 ```yaml
-      - name: Cache HTMLProofer
-        id: cache-htmlproofer
-        uses: actions/cache@v2
-        with:
-          path: tmp/.htmlproofer
-          key: ${{ runner.os }}-htmlproofer
+- name: Cache HTMLProofer
+  id: cache-htmlproofer
+  uses: actions/cache@v2
+  with:
+    path: tmp/.htmlproofer
+    key: ${{ runner.os }}-htmlproofer
 ```
 
 Also make sure that your later step which runs HTMLProofer will not return a failed shell status. You can try something like `html-proof ... || true`. Because a failed step in GitHub Actions will skip all later steps.
@@ -408,7 +407,7 @@ If you want to enable caching with Travis CI, be sure to add these lines into yo
 ```yaml
 cache:
   directories:
-  - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
+    - $TRAVIS_BUILD_DIR/tmp/.htmlproofer
 ```
 
 For more information on using HTML-Proofer with Travis CI, see [this wiki page](https://github.com/gjtorikian/html-proofer/wiki/Using-HTMLProofer-From-Ruby-and-Travis).
@@ -427,7 +426,7 @@ If you're working with the element's attributes (as most checks do), you'll also
 
 Here's an example custom test demonstrating these concepts. It reports `mailto` links that point to `octocat@github.com`:
 
-``` ruby
+```ruby
 class MailToOctocat < HTMLProofer::Check
   def mailto_octocat?
     @link.url.raw_attribute == "mailto:octocat@github.com"
@@ -452,13 +451,13 @@ Don't forget to include this new check in HTMLProofer's options, for example:
 HTMLProofer.check_directories(["out/"], { checks: ["MailToOctocat"] })
 ```
 
-See our [list of third-party custom classes](https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)) and add your own to this list.
+See our [list of third-party custom classes](<https://github.com/gjtorikian/html-proofer/wiki/Extensions-(custom-classes)>) and add your own to this list.
 
 ## Reporting
 
 By default, HTML-Proofer has its own reporting mechanism to print errors at the end of the run. You can choose to use your own reporter by passing in your own subclass of `HTMLProofer::Reporter`:
 
-``` ruby
+```ruby
 proofer = HTMLProofer.check_directory(item, opts)
 proofer.reporter = MyCustomReporter.new(logger: proofer.logger)
 proofer.run
@@ -476,7 +475,7 @@ Here are some brief snippets identifying some common problems that you can work 
 
 To ignore SSL certificates, turn off Typhoeus' SSL verification:
 
-``` ruby
+```ruby
 HTMLProofer.check_directory("out/", {
   typhoeus: {
     ssl_verifypeer: false,
@@ -489,7 +488,7 @@ HTMLProofer.check_directory("out/", {
 
 To change the User-Agent used by Typhoeus:
 
-``` ruby
+```ruby
 HTMLProofer.check_directory("out/", {
   typhoeus: {
     headers: { "User-Agent" => "Mozilla/5.0 (compatible; My New User-Agent)" },
@@ -507,7 +506,7 @@ htmlproofer --typhoeus='{"headers":{"User-Agent":"Mozilla/5.0 (compatible; My Ne
 
 Sometimes links fail because they don't have access to cookies. To fix this you can create a .cookies file using the following snippets:
 
-``` ruby
+```ruby
 HTMLProofer.check_directory("out/", {
   typhoeus: {
     cookiefile: ".cookies",
@@ -524,7 +523,7 @@ htmlproofer --typhoeus='{"cookiefile":".cookies","cookiejar":".cookies"}'
 
 To exclude urls using regular expressions, include them between forward slashes and don't quote them:
 
-``` ruby
+```ruby
 HTMLProofer.check_directories(["out/"], {
   ignore_urls: [/example.com/],
 }).run
@@ -532,12 +531,12 @@ HTMLProofer.check_directories(["out/"], {
 
 ## Real-life examples
 
-Project | Repository | Notes
-:------ | :--------- | :----
-[Jekyll's website](https://jekyllrb.com/) | [jekyll/jekyll](https://github.com/jekyll/jekyll) | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)
-[Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)
-[Squeak's website](https://squeak.org) | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)
-[Atom Flight Manual](https://flight-manual.atom.io) | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)
-[HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites)
-[Project Calico Documentation](https://docs.projectcalico.org) | [projectcalico/calico](https://github.com/projectcalico/calico) | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)
-[GitHub does dotfiles](https://dotfiles.github.io/) | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action
+| Project                                                                      | Repository                                                                              | Notes                                                                                                                                                                                                                                                                                                             |
+| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Jekyll's website](https://jekyllrb.com/)                                    | [jekyll/jekyll](https://github.com/jekyll/jekyll)                                       | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)                                                                         |
+| [Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/)   | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)               |
+| [Squeak's website](https://squeak.org)                                       | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)           |
+| [Atom Flight Manual](https://flight-manual.atom.io)                          | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)             |
+| [HTML Website Template](https://github.com/fulldecent/html-website-template) | [fulldecent/html-website-template](https://github.com/fulldecent/html-website-template) | A starting point for websites, uses [a Rakefile](https://github.com/fulldecent/html-website-template/blob/master/Rakefile) and [Travis configuration](https://github.com/fulldecent/html-website-template/blob/master/.travis.yml) to call [preconfigured testing](https://github.com/fulldecent/lightning-sites) |
+| [Project Calico Documentation](https://docs.projectcalico.org)               | [projectcalico/calico](https://github.com/projectcalico/calico)                         | Simple integration with Jekyll and Docker using a [Makefile](https://github.com/projectcalico/calico/blob/master/Makefile#L13)                                                                                                                                                                                    |
+| [GitHub does dotfiles](https://dotfiles.github.io/)                          | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com)         | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action                                                                                                                                                                                                                            |
