@@ -99,4 +99,29 @@ http_interactions:
     adapter_metadata:
       effective_url: https://www.giffhub.com/
   recorded_at: Wed, 14 Sep 2022 16:55:13 GMT
+- request:
+    method: head
+    uri: https://www.asdo3irj395295jsingrkrg4.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.9; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 0
+      message:
+    headers: {}
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version:
+    adapter_metadata:
+      effective_url: https://www.asdo3irj395295jsingrkrg4.com/
+  recorded_at: Fri, 21 Feb 2025 13:55:33 GMT
 recorded_with: VCR 2.9.3
