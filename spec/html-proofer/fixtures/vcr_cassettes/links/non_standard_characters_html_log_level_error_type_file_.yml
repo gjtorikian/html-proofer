@@ -158,4 +158,75 @@ http_interactions:
     adapter_metadata:
       effective_url: https://ben.balter.com/2014/09/29/source-disclosed-%E2%89%A0-open-source/
   recorded_at: Fri, 31 Dec 2021 16:37:44 GMT
+- request:
+    method: head
+    uri: https://en.wikipedia.org/wiki/Coup_d'%C3%A9tat
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (compatible; HTML Proofer/5.0.9; +https://github.com/gjtorikian/html-proofer)
+      Accept:
+      - application/xml,application/xhtml+xml,text/html;q=0.9, text/plain;q=0.8,image/png,*/*;q=0.5
+      Expect:
+      - ''
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Fri, 21 Feb 2025 13:55:35 GMT
+      vary:
+      - Accept-Encoding,Cookie,Authorization
+      server:
+      - ATS/9.2.6
+      x-content-type-options:
+      - nosniff
+      content-language:
+      - en
+      accept-ch:
+      - ''
+      last-modified:
+      - Fri, 21 Feb 2025 09:34:19 GMT
+      content-type:
+      - text/html; charset=UTF-8
+      age:
+      - '0'
+      x-cache:
+      - cp1106 hit, cp1106 miss
+      x-cache-status:
+      - hit-local
+      server-timing:
+      - cache;desc="hit-local", host;desc="cp1106"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 604800, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 604800, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      set-cookie:
+      - WMF-Last-Access=21-Feb-2025;Path=/;HttpOnly;secure;Expires=Tue, 25 Mar 2025
+        12:00:00 GMT
+      - WMF-Last-Access-Global=21-Feb-2025;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Tue,
+        25 Mar 2025 12:00:00 GMT
+      - WMF-DP=760;Path=/;HttpOnly;secure;Expires=Sat, 22 Feb 2025 00:00:00 GMT
+      - GeoIP=US:NY:Brooklyn:40.67:-73.97:v4; Path=/; secure; Domain=.wikipedia.org
+      - NetworkProbeLimit=0.001;Path=/;Secure;SameSite=Lax;Max-Age=3600
+      x-client-ip:
+      - 2600:4041:5c2a:ee00:419f:6386:6415:616e
+      cache-control:
+      - private, s-maxage=0, max-age=0, must-revalidate, no-transform
+      accept-ranges:
+      - bytes
+    body:
+      encoding: ASCII-8BIT
+      string: ''
+    http_version: '2'
+    adapter_metadata:
+      effective_url: https://en.wikipedia.org/wiki/Coup_d'%C3%A9tat
+  recorded_at: Fri, 21 Feb 2025 13:55:35 GMT
 recorded_with: VCR 2.9.3

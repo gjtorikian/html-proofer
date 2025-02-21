@@ -278,6 +278,12 @@ describe "Check::Images" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
+  it "works for picture elements with multiple remote sizes" do
+    custom_data_src_check = "#{FIXTURES_DIR}/images/srcset_picture_remote_sizes.html"
+    proofer = run_proofer(custom_data_src_check, :file)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "breaks for picture elements with multiple srcsets and pixel densities" do
     custom_data_src_check = "#{FIXTURES_DIR}/images/srcset_picture_pixel-density_broken.html"
     proofer = run_proofer(custom_data_src_check, :file)

@@ -238,7 +238,7 @@ module HTMLProofer
         else
           url
         end
-      rescue Addressable::URI::InvalidURIError # rubocop:disable Lint/SuppressedException; error will be reported at check time
+      rescue Addressable::URI::InvalidURIError # rubocop:disable Lint/SuppressedException -- error will be reported at check time
       end
 
       private def swap_urls!

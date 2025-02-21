@@ -526,7 +526,7 @@ describe "Cache" do
           external_link = cache["external"]["https://github.com/gjtorikian/html-proofer"]
           expect(external_link["found"]).to(equal(true))
           expect(external_link["status_code"]).to(equal(200))
-          expect(external_link["message"]).equal?("OK")
+          expect(external_link["message"]).to(match("OK"))
 
           File.delete(cache_filepath)
         end
