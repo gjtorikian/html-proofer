@@ -13,7 +13,7 @@ module HTMLProofer
     def initialize(log_level)
       @logger = Yell.new(
         format: false,
-        name: "HTMLProofer", \
+        name: "HTMLProofer",
         level: "gte.#{log_level}",
       ) do |l|
         l.adapter(:stdout, level: "lte.warn")
