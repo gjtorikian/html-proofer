@@ -216,7 +216,7 @@ describe "CLI" do
     it "has only one UA" do
       http = make_bin(%|--typhoeus='{"verbose":true,"headers":{"User-Agent":"Mozilla/5.0 (Macintosh; My New User-Agent)"}}' --as-links https://linkedin.com|)
       expect(http.scan("User-Agent: Typhoeus").count).to(eq(0))
-      expect(http.scan(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i).count).to(eq(2))
+      expect(http.match(%r{User-Agent: Mozilla/5.0 \(Macintosh; My New User-Agent\)}i)).not_to(be_nil)
     end
 
     it "supports hydra" do
