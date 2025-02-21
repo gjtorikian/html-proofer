@@ -1,3 +1,18 @@
+# [v5.0.10] - 21-02-2025
+## What's Changed
+* Fixup typhoeus arg usage in README by @gionn in https://github.com/gjtorikian/html-proofer/pull/841
+* Check utf8 relative anchors by @ahpook in https://github.com/gjtorikian/html-proofer/pull/842
+* Fix variable assignment in index.php by @MakWigglz in https://github.com/gjtorikian/html-proofer/pull/845
+* Correct README example by @gjtorikian in https://github.com/gjtorikian/html-proofer/pull/847
+* Handle multiple srcsets when first is remote (fixes #850) by @paulroub in https://github.com/gjtorikian/html-proofer/pull/851
+
+## New Contributors
+* @gionn made their first contribution in https://github.com/gjtorikian/html-proofer/pull/841
+* @ahpook made their first contribution in https://github.com/gjtorikian/html-proofer/pull/842
+* @MakWigglz made their first contribution in https://github.com/gjtorikian/html-proofer/pull/845
+* @paulroub made their first contribution in https://github.com/gjtorikian/html-proofer/pull/851
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.0.9...v5.0.10
 # [v5.0.9] - 07-05-2024
 
 ## What's Changed
