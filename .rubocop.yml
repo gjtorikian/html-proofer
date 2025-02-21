@@ -2,7 +2,7 @@ inherit_gem:
   rubocop-standard:
     - config/default.yml
 
-require:
+plugins:
   - rubocop-rspec
 
 Naming/FileName:
@@ -14,8 +14,11 @@ RSpec/AnyInstance:
 RSpec/ExampleLength:
   Enabled: false
 
-RSpec/FilePath:
-  Enabled: false
+# RSpec/SpecFilePathFormat:
+#   Enabled: false
+
+# RSpec/SpecFilePathSuffix:
+#   Enabled: false
 
 RSpec/MultipleExpectations:
   Enabled: false
