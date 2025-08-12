@@ -18,7 +18,7 @@ jobs:
           echo "Skipping test workflow because commit message contains `[skip test]`"
           exit 0
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Ruby
         uses: yettoapp/actions/setup-languages@main
