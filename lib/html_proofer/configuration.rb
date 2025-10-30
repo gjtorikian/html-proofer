@@ -13,7 +13,7 @@ module HTMLProofer
       check_external_hash: true,
       check_internal_hash: true,
       checks: DEFAULT_TESTS,
-      directory_index_file: "index.html",
+      directory_index_files: ["index.html"],
       disable_external: false,
       ignore_empty_alt: true,
       ignore_empty_mailto: false,
@@ -47,6 +47,12 @@ module HTMLProofer
 
     class << self
       def generate_defaults(opts)
+        # If `:directory_index_file` (singular) is given, convert it into an
+        # array for `:directory_index_files` (plural) instead.
+        if opts.key?(:directory_index_file)
+          opts[:directory_index_files] = [opts.delete(:directory_index_file)]
+        end
+
         options = PROOFER_DEFAULTS.merge(opts)
 
         options[:typhoeus] = HTMLProofer::Configuration::TYPHOEUS_DEFAULTS.merge(opts[:typhoeus] || {})
@@ -87,6 +93,10 @@ module HTMLProofer
 
           set_option(opts, "--directory-index-file FILENAME") do |long_opt_symbol, arg|
             @options[long_opt_symbol] = arg
+          end
+
+          set_option(opts, "--directory-index-files [FILENAME1,FILENAME2,...]") do |long_opt_symbol, list|
+            @options[long_opt_symbol] = list.nil? ? [] : list.split(",")
           end
 
           set_option(opts, "--extensions [EXT1,EXT2,...]") do |long_opt_symbol, list|
@@ -285,6 +295,7 @@ module HTMLProofer
           "to allow extensionless URLs (as supported by most servers) (default: `.html`).",
         ],
         directory_index_file: ["Sets the file to look for when a link refers to a directory. (default: `index.html`)."],
+        directory_index_files: ["Sets the files to look for when a link refers to a directory. (default: `[\"index.html\"]`)."],
         extensions: [
           "A comma-separated list of Strings indicating the file extensions you",
           "would like to check (default: `.html`)",
