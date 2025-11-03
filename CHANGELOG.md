@@ -1,3 +1,14 @@
+# [v5.1.0] - 03-11-2025
+## What's Changed
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/gjtorikian/html-proofer/pull/857
+* Add  to Gemfile by @denisdefreyne in https://github.com/gjtorikian/html-proofer/pull/858
+* Remove outdated real-world examples by @denisdefreyne in https://github.com/gjtorikian/html-proofer/pull/859
+* Allow support for multiple directory index files by @denisdefreyne in https://github.com/gjtorikian/html-proofer/pull/860
+
+## New Contributors
+* @denisdefreyne made their first contribution in https://github.com/gjtorikian/html-proofer/pull/858
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.0.10...v5.1.0
 # [v5.0.10] - 21-02-2025
 ## What's Changed
 * Fixup typhoeus arg usage in README by @gionn in https://github.com/gjtorikian/html-proofer/pull/841
