@@ -18,4 +18,4 @@ gem "rubocop"
 gem "rubocop-rspec"
 gem "rubocop-standard"
 
-gem "benchmark", "~> 0.5.0"
+gem "benchmark", "~> 0.5"
