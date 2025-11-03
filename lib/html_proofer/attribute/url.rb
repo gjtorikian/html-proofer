@@ -133,8 +133,9 @@ module HTMLProofer
           path_with_extension # existence checked implicitly by File.file?
         # implicit index support
         elsif File.directory?(path_to_resolve) && !unslashed_directory?(path_to_resolve)
-          path_with_index = File.join(path_to_resolve, @runner.options[:directory_index_file])
-          path_with_index if File.file?(path_with_index)
+          @runner.options[:directory_index_files]
+            .map { |dif| File.join(path_to_resolve, dif) }
+            .find { |path_with_index| File.file?(path_with_index) }
         # explicit file or directory
         elsif File.exist?(path_to_resolve)
           path_to_resolve

@@ -80,6 +80,12 @@ describe "CLI" do
     expect(output).to(match("successfully"))
   end
 
+  it "works with directory-index-files" do
+    link_pointing_to_directory = File.join(FIXTURES_DIR, "links", "link_pointing_to_directory.html")
+    output = make_bin("--directory-index-files index.html,index.php #{link_pointing_to_directory}")
+    expect(output).to(match("successfully"))
+  end
+
   it "works with disable-external" do
     external = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
     output = make_bin("--disable-external #{external}")

@@ -393,8 +393,22 @@ describe "Check::Links" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
+  it "works for a list of directory index files" do
+    options = { directory_index_files: ["index.html", "index.php"] }
+    link_pointing_to_directory = File.join(FIXTURES_DIR, "links", "link_pointing_to_directories.html")
+    proofer = run_proofer(link_pointing_to_directory, :file, options)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "fails if directory index file doesn't exist" do
     options = { directory_index_file: "README.md" }
+    link_pointing_to_directory = File.join(FIXTURES_DIR, "links", "link_pointing_to_directory.html")
+    proofer = run_proofer(link_pointing_to_directory, :file, options)
+    expect(proofer.failed_checks.first.description).to(match("internally linking to folder-php/, which does not exist"))
+  end
+
+  it "fails if directory index files don't exist" do
+    options = { directory_index_files: ["README.md"] }
     link_pointing_to_directory = File.join(FIXTURES_DIR, "links", "link_pointing_to_directory.html")
     proofer = run_proofer(link_pointing_to_directory, :file, options)
     expect(proofer.failed_checks.first.description).to(match("internally linking to folder-php/, which does not exist"))
