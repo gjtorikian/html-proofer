@@ -34,9 +34,9 @@ module HTMLProofer
         setup_cache!(options)
 
         @external_timeframe = parsed_timeframe(options[:timeframe][:external])
-        define_singleton_method(:external_enabled?) { !@external_timeframe.nil? }
+        define_singleton_method(:external_enabled?) { !@external_timeframe.nil? } # rubocop:disable ThreadSafety/ClassInstanceVariable
         @internal_timeframe = parsed_timeframe(options[:timeframe][:internal])
-        define_singleton_method(:internal_enabled?) { !@internal_timeframe.nil? }
+        define_singleton_method(:internal_enabled?) { !@internal_timeframe.nil? } # rubocop:disable ThreadSafety/ClassInstanceVariable
       end
     end
 

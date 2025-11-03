@@ -393,7 +393,7 @@ describe "Check::Links" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
-  it "works for directory index file" do
+  it "works for a list of directory index files" do
     options = { directory_index_files: ["index.html", "index.php"] }
     link_pointing_to_directory = File.join(FIXTURES_DIR, "links", "link_pointing_to_directories.html")
     proofer = run_proofer(link_pointing_to_directory, :file, options)
