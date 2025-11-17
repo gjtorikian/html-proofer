@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.bindir = "exe"
   spec.executables = ["htmlproofer"]
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = [">= 3.1", "< 4.0"]
+  spec.required_ruby_version = [">= 3.1", "< 5.0"]
 
   spec.metadata = {
     "funding_uri" => "https://github.com/sponsors/gjtorikian/",
@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("addressable",     "~> 2.3")
   spec.add_dependency("async",           "~> 2.1")
+  spec.add_dependency("benchmark",       "~> 0.5")
   spec.add_dependency("nokogiri",        "~> 1.13")
   spec.add_dependency("pdf-reader",      "~> 2.11")
   spec.add_dependency("rainbow",         "~> 3.0")
