@@ -1,3 +1,5 @@
+# [v5.1.1] - 17-11-2025
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.1.0...v5.1.1
 # [v5.1.0] - 03-11-2025
 ## What's Changed
 * Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/gjtorikian/html-proofer/pull/857
