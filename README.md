@@ -323,7 +323,11 @@ The default value is:
 }
 ```
 
-On the CLI, you can provide the `--typhoeus` or `hydra` arguments to set the configurations. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+On the CLI, you can provide the `--typhoeus` or `--hydra` arguments to set the configurations. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden. To pass in the above example on the CLI, you would do:
+
+```bash
+htmlproofer --typhoeus '{ "followlocation": true, "connecttimeout": 10, "timeout": 30 }' --hydra '{ "max_concurrency": 50 }'
+```
 
 #### Setting `before-request` callback
 
@@ -380,7 +384,13 @@ The cache operates on external links only.
 
 If caching is enabled, HTMLProofer writes to a log file called _tmp/.htmlproofer/cache.log_. You should probably ignore this folder in your version control system.
 
-On the CLI, you can provide the `--cache` argument to set the configuration. This is parsed using `JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+On the CLI, you can provide the `--cache` argument to set the configuration. This is parsed using
+`JSON.parse` and mapped on top of the default configuration values so that they can be overridden.
+To pass in one of the above examples on the CLI, you would do:
+
+```bash
+htmlproofer --cache '{ "timeframe": { "external": "2w", "internal": "1w" } }'
+```
 
 ### Caching with continuous integration
 
