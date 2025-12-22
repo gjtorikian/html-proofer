@@ -394,7 +394,9 @@ htmlproofer --cache '{ "timeframe": { "external": "2w", "internal": "1w" } }'
 
 ### Caching with continuous integration
 
-Enable caching in your continuous integration process. It will make your builds faster.
+After configuring HTMLProofer to cache its results (see the above section), you can enable caching
+in your continuous integration process to make your builds faster as well as avoiding rate limits
+on the external sites you might be linking to.
 
 **In GitHub Actions:**
 
