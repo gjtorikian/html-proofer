@@ -28,3 +28,5 @@ _yardoc
 .idea
 .byebug_history
 .vscode
+vendor/bundle
+vendor/cache
