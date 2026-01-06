@@ -19,7 +19,7 @@ module HTMLProofer
               element: @script,
             )
           elsif @script.url.remote?
-            add_to_external_urls(@script.url, @script.line)
+            add_to_external_urls(@script.url, @script)
             check_sri if @runner.check_sri?
           elsif !@script.url.exists?
             add_failure(

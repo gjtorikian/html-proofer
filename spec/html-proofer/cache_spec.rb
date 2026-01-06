@@ -390,7 +390,7 @@ describe "Cache" do
 
           # we expect an add since we are mocking outside the timeframe
           expect_any_instance_of(described_class).to(receive(:add_internal).with(
-            "/tel_link.html", { base_url: "", filename: "spec/html-proofer/fixtures/links/working_root_link_internal.html", found: false, line: 5, source: test_file }, true
+            "/tel_link.html", hash_including(base_url: "", filename: "spec/html-proofer/fixtures/links/working_root_link_internal.html", found: false, line: 5, source: test_file), true
           ))
 
           run_proofer(
@@ -415,7 +415,7 @@ describe "Cache" do
 
           expect_any_instance_of(described_class).to(receive(:add_internal).with(
             "/",
-            { base_url: "", filename: root_link, found: false, line: 5, source: root_link },
+            hash_including(base_url: "", filename: root_link, found: false, line: 5, source: root_link),
             true,
           ).and_call_original)
 
@@ -436,7 +436,7 @@ describe "Cache" do
           root_link = File.join(FIXTURES_DIR, "links", "broken_internal_link.html")
           expect_any_instance_of(described_class).to(receive(:add_internal).once.with(
             "#noHash",
-            { base_url: "", filename: root_link, found: false, line: 5, source: root_link },
+            hash_including(base_url: "", filename: root_link, found: false, line: 5, source: root_link),
             false,
           ))
 
@@ -562,7 +562,7 @@ describe "Cache" do
           # because `index.html` contains a failure
           expect_any_instance_of(described_class).to(receive(:add_internal).with(
             "/missing.html",
-            { base_url: "", filename: test_file, found: false, line: 6, source: test_path },
+            hash_including(base_url: "", filename: test_file, found: false, line: 6, source: test_path),
             false,
           ))
 

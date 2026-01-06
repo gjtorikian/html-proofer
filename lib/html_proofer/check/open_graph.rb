@@ -22,7 +22,7 @@ module HTMLProofer
               element: @open_graph,
             )
           elsif @open_graph.url.remote?
-            add_to_external_urls(@open_graph.url, @open_graph.line)
+            add_to_external_urls(@open_graph.url, @open_graph)
           else
             add_failure(
               "internal open graph #{@open_graph.url.raw_attribute} does not exist",

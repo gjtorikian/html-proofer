@@ -53,7 +53,7 @@ module HTMLProofer
               next
             end
 
-            add_to_external_urls(@link.url, @link.line)
+            add_to_external_urls(@link.url, @link)
           elsif @link.url.internal?
             # does the local directory have a trailing slash?
             if @link.url.unslashed_directory?(@link.url.absolute_path)
@@ -64,7 +64,7 @@ module HTMLProofer
               next
             end
 
-            add_to_internal_urls(@link.url, @link.line)
+            add_to_internal_urls(@link.url, @link)
           end
         end
       end
