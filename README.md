@@ -78,42 +78,6 @@ You can configure HTMLProofer to run on:
 
 It can also run through the command-line.
 
-### Using in a script
-
-1. Require the gem.
-2. Generate some HTML.
-3. Create a new instance of the `HTMLProofer` on your output folder.
-4. Call `proofer.run` on that path.
-
-Here's an example:
-
-```ruby
-require "html-proofer"
-require "html/pipeline"
-require "find"
-
-# make an out dir
-Dir.mkdir("out") unless File.exist?("out")
-
-pipeline = HTML::Pipeline.new([
-  HTML::Pipeline::MarkdownFilter,
-  HTML::Pipeline::TableOfContentsFilter,
-],
-gfm: true)
-
-# iterate over files, and generate HTML from Markdown
-Find.find("./docs") do |path|
-  next unless File.extname(path) == ".md"
-  contents = File.read(path)
-  result = pipeline.call(contents)
-
-  File.open("out/#{path.split("/").pop.sub(".md", ".html")}", "w") { |file| file.write(result[:output].to_s) }
-end
-
-# test your out dir!
-HTMLProofer.check_directory("./out").run
-```
-
 ### Checking a single file
 
 If you simply want to check a single file, use the `check_file` method:
@@ -266,31 +230,31 @@ HTMLProofer.check_directory("./output", { ignore_urls: diffable_files }).run
 
 The `HTMLProofer` constructor takes an optional hash of additional options:
 
-| Option                 | Description                                                                                                                                         | Default                          |
-| :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
-| `allow_hash_href`      | If `true`, assumes `href="#"` anchors are valid                                                                                                     | `true`                           |
-| `allow_missing_href`   | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.                             | `false`                          |
-| `assume_extension`     | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers)                       | `.html`                          |
-| `checks`               | An array of Strings indicating which checks you want to run                                                                                         | `['Links', 'Images', 'Scripts']` |
-| `check_external_hash`  | Checks whether external hashes exist (even if the webpage exists)                                                                                   | `true`                           |
-| `check_internal_hash`  | Checks whether internal hashes exist (even if the webpage exists)                                                                                   | `true`                           |
-| `check_sri`            | Check that `<link>` and `<script>` external resources use SRI                                                                                       | false                            |
-| `directory_index_file` | Sets the file to look for when a link refers to a directory. (Overrules `directory_index_files` if present.)                                        | `index.html`                     |
-| `directory_index_files` | Sets the files to look for when a link refers to a directory.                                                                                      | `['index.html']`                 |
-| `disable_external`     | If `true`, does not run the external link checker                                                                                                   | `false`                          |
-| `enforce_https`        | Fails a link if it's not marked as `https`.                                                                                                         | `true`                           |
-| `extensions`           | An array of Strings indicating the file extensions you would like to check (including the dot)                                                      | `['.html']`                      |
-| `ignore_empty_alt`     | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true`                           |
-| `ignore_files`         | An array of Strings or RegExps containing file paths that are safe to ignore.                                                                       | `[]`                             |
-| `ignore_empty_mailto`  | If `true`, allows `mailto:` `href`s which do not contain an email address.                                                                          | `false`                          |
-| `ignore_missing_alt`   | If `true`, ignores images with missing alt tags                                                                                                     | `false`                          |
-| `ignore_status_codes`  | An array of numbers representing status codes to ignore.                                                                                            | `[]`                             |
-| `ignore_urls`          | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images.             | `[]`                             |
-| `log_level`            | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`.     | `:info`                          |
-| `only_4xx`             | Only reports errors for links that fall within the 4xx status code range.                                                                           | `false`                          |
-| `root_dir`             | The absolute path to the directory serving your html-files.                                                                                         | ""                               |
-| `swap_attributes`      | JSON-formatted config that maps element names to the preferred attribute to check                                                                   | `{}`                             |
-| `swap_urls`            | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.                           | `{}`                             |
+| Option                  | Description                                                                                                                                         | Default                          |
+| :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------- |
+| `allow_hash_href`       | If `true`, assumes `href="#"` anchors are valid                                                                                                     | `true`                           |
+| `allow_missing_href`    | If `true`, does not flag `a` tags missing `href`. In HTML5, this is technically allowed, but could also be human error.                             | `false`                          |
+| `assume_extension`      | Automatically add specified extension to files for internal links, to allow extensionless URLs (as supported by most servers)                       | `.html`                          |
+| `checks`                | An array of Strings indicating which checks you want to run                                                                                         | `['Links', 'Images', 'Scripts']` |
+| `check_external_hash`   | Checks whether external hashes exist (even if the webpage exists)                                                                                   | `true`                           |
+| `check_internal_hash`   | Checks whether internal hashes exist (even if the webpage exists)                                                                                   | `true`                           |
+| `check_sri`             | Check that `<link>` and `<script>` external resources use SRI                                                                                       | false                            |
+| `directory_index_file`  | Sets the file to look for when a link refers to a directory. (Overrules `directory_index_files` if present.)                                        | `index.html`                     |
+| `directory_index_files` | Sets the files to look for when a link refers to a directory.                                                                                       | `['index.html']`                 |
+| `disable_external`      | If `true`, does not run the external link checker                                                                                                   | `false`                          |
+| `enforce_https`         | Fails a link if it's not marked as `https`.                                                                                                         | `true`                           |
+| `extensions`            | An array of Strings indicating the file extensions you would like to check (including the dot)                                                      | `['.html']`                      |
+| `ignore_empty_alt`      | If `true`, ignores images with empty/missing alt tags (in other words, `<img alt>` and `<img alt="">` are valid; set this to `false` to flag those) | `true`                           |
+| `ignore_files`          | An array of Strings or RegExps containing file paths that are safe to ignore.                                                                       | `[]`                             |
+| `ignore_empty_mailto`   | If `true`, allows `mailto:` `href`s which do not contain an email address.                                                                          | `false`                          |
+| `ignore_missing_alt`    | If `true`, ignores images with missing alt tags                                                                                                     | `false`                          |
+| `ignore_status_codes`   | An array of numbers representing status codes to ignore.                                                                                            | `[]`                             |
+| `ignore_urls`           | An array of Strings or RegExps containing URLs that are safe to ignore. This affects all HTML attributes, such as `alt` tags on images.             | `[]`                             |
+| `log_level`             | Sets the logging level, as determined by [Yell](https://github.com/rudionrails/yell). One of `:debug`, `:info`, `:warn`, `:error`, or `:fatal`.     | `:info`                          |
+| `only_4xx`              | Only reports errors for links that fall within the 4xx status code range.                                                                           | `false`                          |
+| `root_dir`              | The absolute path to the directory serving your html-files.                                                                                         | ""                               |
+| `swap_attributes`       | JSON-formatted config that maps element names to the preferred attribute to check                                                                   | `{}`                             |
+| `swap_urls`             | A hash containing key-value pairs of `RegExp => String`. It transforms URLs that match `RegExp` into `String` via `gsub`.                           | `{}`                             |
 
 In addition, there are a few "namespaced" options. These are:
 
@@ -544,10 +508,10 @@ HTMLProofer.check_directories(["out/"], {
 
 ## Real-life examples
 
-| Project                                                                      | Repository                                                                              | Notes                                                                                                                                                                                                                                                                                                             |
-| :--------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Jekyll's website](https://jekyllrb.com/)                                    | [jekyll/jekyll](https://github.com/jekyll/jekyll)                                       | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml)                                                                         |
-| [Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/)   | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)               |
-| [Squeak's website](https://squeak.org)                                       | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)           |
-| [Atom Flight Manual](https://flight-manual.atom.io)                          | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)             |
-| [GitHub does dotfiles](https://dotfiles.github.io/)                          | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com)         | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action                                                                                                                                                                                                                            |
+| Project                                                                    | Repository                                                                      | Notes                                                                                                                                                                                                                                     |
+| :------------------------------------------------------------------------- | :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Jekyll's website](https://jekyllrb.com/)                                  | [jekyll/jekyll](https://github.com/jekyll/jekyll)                               | A [separate script](https://github.com/jekyll/jekyll/blob/master/script/proof) calls `htmlproofer` and this used to be [called from Circle CI](https://github.com/jekyll/jekyll/blob/fdc0e33ebc9e4861840e66374956c47c8f5fcd95/circle.yml) |
+| [Raspberry Pi's documentation](https://www.raspberrypi.org/documentation/) | [raspberrypi/documentation](https://github.com/raspberrypi/documentation)       |
+| [Squeak's website](https://squeak.org)                                     | [squeak-smalltalk/squeak.org](https://github.com/squeak-smalltalk/squeak.org)   |
+| [Atom Flight Manual](https://flight-manual.atom.io)                        | [atom/flight-manual.atom.io](https://github.com/atom/flight-manual.atom.io)     |
+| [GitHub does dotfiles](https://dotfiles.github.io/)                        | [dotfiles/dotfiles.github.com](https://github.com/dotfiles/dotfiles.github.com) | Uses the [proof-html](https://github.com/marketplace/actions/proof-html) GitHub action                                                                                                                                                    |
