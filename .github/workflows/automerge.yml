@@ -1,4 +1,4 @@
-name: "Bot auto-{approve,merge}"
+name: PR auto-{approve,merge}
 
 on:
   workflow_dispatch:
@@ -9,6 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  dependabot:
-    uses: yettoapp/actions/.github/workflows/automerge_dependabot.yml@main
-    secrets: inherit
+  bot-check:
+    uses: gjtorikian/actions/.github/workflows/automerge.yml@main
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+
