@@ -1,3 +1,15 @@
+# [v5.2.0] - 07-01-2026
+## What's Changed
+* [skip test] Release v5.1.1 by @github-actions[bot] in https://github.com/gjtorikian/html-proofer/pull/862
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/gjtorikian/html-proofer/pull/863
+* Add JSON argument examples by @asbjornu in https://github.com/gjtorikian/html-proofer/pull/864
+* CI/CD caching requires HTMLProofer caching by @asbjornu in https://github.com/gjtorikian/html-proofer/pull/865
+* Simplify README by @gjtorikian in https://github.com/gjtorikian/html-proofer/pull/869
+* Bump the bundler-dependencies group with 2 updates by @dependabot[bot] in https://github.com/gjtorikian/html-proofer/pull/871
+* Allows access to the full Nokogiri node and all element attributes when processing failures by @gjtorikian in https://github.com/gjtorikian/html-proofer/pull/870
+
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.1.1...v5.2.0
 # [v5.1.1] - 17-11-2025
 **Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.1.0...v5.1.1
 # [v5.1.0] - 03-11-2025
