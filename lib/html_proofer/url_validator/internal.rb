@@ -38,7 +38,8 @@ module HTMLProofer
                 "internally linking to #{url}, which does not exist",
                 line: metadata[:line],
                 status: nil,
-                content: nil,
+                content: metadata[:element]&.content,
+                element: metadata[:element],
               )
               to_add << [url, metadata, false]
               next
@@ -64,7 +65,8 @@ module HTMLProofer
                 "internally linking to #{url}; the file exists, but the hash '#{url.hash}' does not",
                 line: metadata[:line],
                 status: nil,
-                content: nil,
+                content: metadata[:element]&.content,
+                element: metadata[:element],
               )
               to_add << [url, metadata, false]
               next
@@ -90,7 +92,8 @@ module HTMLProofer
                   "internally linking to #{url}; the file exists, but the hash '#{href_hash}' does not",
                   line: metadata[:line],
                   status: nil,
-                  content: nil,
+                  content: metadata[:element]&.content,
+                  element: metadata[:element],
                 )
               end
               to_add << [url, metadata, exists]

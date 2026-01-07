@@ -195,7 +195,15 @@ module HTMLProofer
           @failed_checks << Failure.new("", "Links > External", description, status: status)
         else
           metadata.each do |m|
-            @failed_checks << Failure.new(m[:filename], "Links > External", description, line: m[:line], status: status)
+            @failed_checks << Failure.new(
+              m[:filename],
+              "Links > External",
+              description,
+              line: m[:line],
+              status: status,
+              content: m[:element]&.content,
+              element: m[:element],
+            )
           end
         end
       end

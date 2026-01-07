@@ -71,8 +71,10 @@ module HTMLProofer
       return unless external_enabled?
 
       clean_url = cleaned_url(url)
+      # Filter out non-serializable element from metadata
+      cleaned_filenames = filenames.map { |f| f.except(:element) }
       @cache_log[:external][clean_url] =
-        { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: filenames }
+        { time: @cache_time.to_s, found: found, status_code: status_code, message: msg, metadata: cleaned_filenames }
     end
 
     def detect_url_changes(urls_detected, type)
@@ -186,7 +188,9 @@ module HTMLProofer
         hsh[url] = metadata_additions
         # remove from the cache the detected metadata additions as they correspond to failures to be rechecked
         # (this works assuming the detected url metadata have "found" set to false)
-        @cache_log[:internal][url][:metadata] = cache_metadata.difference(metadata_additions)
+        # Compare without the :element key since cached metadata doesn't have it
+        metadata_additions_for_diff = metadata_additions.map { |m| m.except(:element) }
+        @cache_log[:internal][url][:metadata] = cache_metadata.difference(metadata_additions_for_diff)
       end
     end
 

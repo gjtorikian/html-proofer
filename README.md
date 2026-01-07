@@ -442,6 +442,49 @@ proofer.run
 
 Your custom reporter must implement the `report` function which implements the behavior you wish to see. The `logger` kwarg is optional.
 
+## Accessing Failures Programmatically
+
+After running HTMLProofer, you can access the list of failures through the `failed_checks` method. Each failure is an `HTMLProofer::Failure` object containing detailed information about the error:
+
+```ruby
+proofer = HTMLProofer.check_directory("./out")
+proofer.run
+
+proofer.failed_checks.each do |failure|
+  puts "File: #{failure.path}"
+  puts "Check: #{failure.check_name}"
+  puts "Description: #{failure.description}"
+  puts "Line: #{failure.line}"
+  puts "Status: #{failure.status}" # HTTP status code for external links
+  puts "Content: #{failure.content}" # Text content of the element
+end
+```
+
+### Accessing the Element
+
+Each failure also provides access to the original `HTMLProofer::Element` object, which gives you access to the underlying Nokogiri node and all its attributes:
+
+```ruby
+proofer.failed_checks.each do |failure|
+  element = failure.element
+  next if element.nil?
+
+  # Access the Nokogiri node directly
+  node = element.node
+  puts "Tag name: #{node.name}"
+  puts "Href: #{node['href']}"
+  puts "All attributes: #{node.attributes.keys}"
+
+  # Use helper methods
+  puts "Is anchor tag: #{element.a_tag?}"
+  puts "Is image tag: #{element.img_tag?}"
+  puts "Link text: #{element.content}"
+  puts "Line number: #{element.line}"
+end
+```
+
+This is useful for building custom reporters, integrating with other tools, or programmatically processing validation results.
+
 ## Troubleshooting
 
 Here are some brief snippets identifying some common problems that you can work around. For more information, check out [our wiki](https://github.com/gjtorikian/html-proofer/wiki).

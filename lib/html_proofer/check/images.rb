@@ -30,7 +30,7 @@ module HTMLProofer
                   element: @img,
                 )
               elsif srcset_url.remote?
-                add_to_external_urls(srcset_url.url, @img.line)
+                add_to_external_urls(srcset_url.url, @img)
               elsif !srcset_url.exists?
                 add_failure("internal image #{srcset} does not exist", element: @img)
               end
@@ -41,7 +41,7 @@ module HTMLProofer
               element: @img,
             )
           elsif @img.url.remote?
-            add_to_external_urls(@img.url, @img.line)
+            add_to_external_urls(@img.url, @img)
           elsif !@img.url.exists? && !@img.multiple_srcsets? && !@img.multiple_sizes?
             add_failure(
               "internal image #{@img.url.raw_attribute} does not exist",

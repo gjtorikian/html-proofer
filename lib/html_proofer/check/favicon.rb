@@ -22,7 +22,7 @@ module HTMLProofer
               element: @favicon,
             )
           elsif @favicon.url.remote?
-            add_to_external_urls(@favicon.url, @favicon.line)
+            add_to_external_urls(@favicon.url, @favicon)
           elsif !@favicon.url.exists?
             add_failure(
               "internal favicon #{@favicon.url.raw_attribute} does not exist",

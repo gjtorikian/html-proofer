@@ -32,6 +32,7 @@ module HTMLProofer
         line: element.nil? ? line : element.line,
         status: status,
         content: element.nil? ? content : element.content,
+        element: element,
       )
     end
 
@@ -39,7 +40,7 @@ module HTMLProofer
       self.class.name.split("::").last
     end
 
-    def add_to_internal_urls(url, line)
+    def add_to_internal_urls(url, element)
       url_string = url.raw_attribute
 
       @internal_urls[url_string] = [] if @internal_urls[url_string].nil?
@@ -47,19 +48,20 @@ module HTMLProofer
       metadata = {
         source: url.source,
         filename: url.filename,
-        line: line,
+        line: element.line,
         base_url: base_url,
         found: false,
+        element: element,
       }
       @internal_urls[url_string] << metadata
     end
 
-    def add_to_external_urls(url, line)
+    def add_to_external_urls(url, element)
       url_string = url.to_s
 
       @external_urls[url_string] = [] if @external_urls[url_string].nil?
 
-      @external_urls[url_string] << { filename: url.filename, line: line }
+      @external_urls[url_string] << { filename: url.filename, line: element.line, element: element }
     end
 
     class << self

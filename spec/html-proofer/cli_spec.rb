@@ -100,13 +100,13 @@ describe "CLI" do
 
   it "works with enforce-https" do
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
-    output = make_bin("#{custom_data_src_check} --enforce-https")
+    output = make_bin("#{custom_data_src_check} --enforce-https --disable-external")
     expect(output).to(match("1 failure"))
   end
 
   it "works with no-enforce-https" do
     custom_data_src_check = File.join(FIXTURES_DIR, "images", "src_http.html")
-    output = make_bin("#{custom_data_src_check} --no-enforce-https")
+    output = make_bin("#{custom_data_src_check} --no-enforce-https --disable-external")
     expect(output).to(match("successfully"))
   end
 
