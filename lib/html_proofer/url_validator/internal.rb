@@ -116,9 +116,12 @@ module HTMLProofer
         return true if blank?(href_hash)
         return true unless @runner.options[:check_internal_hash]
 
-        # prevents searching files we didn't ask about
-        return false unless url.known_extension?
-        return false unless url.has_hash?
+        # For hash links, we need to defer to file-based checking
+        # (even if URL doesn't have extension, it may resolve to index.html)
+        return nil unless url.has_hash?
+
+        # If URL has no known extension, defer to file-based checking
+        return nil unless url.known_extension?
 
         decoded_href_hash = Addressable::URI.unescape(href_hash)
         fragment_ids = [href_hash, decoded_href_hash]
@@ -134,10 +137,18 @@ module HTMLProofer
 
       private def find_fragments(fragment_ids, html)
         xpaths = fragment_ids.uniq.flat_map do |frag_id|
-          escaped_frag_id = "'#{frag_id.split("'").join("', \"'\", '")}', ''"
+          # Build XPath string argument, handling single quotes
+          if frag_id.include?("'")
+            # Use concat() to handle single quotes: concat('part1', "'", 'part2')
+            escaped_frag_id = frag_id.split("'").map { |part| "'#{part}'" }.join(", \"'\", ")
+            xpath_arg = "concat(#{escaped_frag_id})"
+          else
+            # No single quotes, just use quoted string
+            xpath_arg = "'#{frag_id}'"
+          end
           [
-            "//*[case_sensitive_equals(@id, concat(#{escaped_frag_id}))]",
-            "//*[case_sensitive_equals(@name, concat(#{escaped_frag_id}))]",
+            "//*[case_sensitive_equals(@id, #{xpath_arg})]",
+            "//*[case_sensitive_equals(@name, #{xpath_arg})]",
           ]
         end
         xpaths << XpathFunctions.new
