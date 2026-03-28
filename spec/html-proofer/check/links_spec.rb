@@ -70,6 +70,14 @@ describe "Check::Links" do
     expect(proofer.failed_checks).to(eq([]))
   end
 
+  it "passes for valid hashes on index URLs without extensions" do
+    # Tests fix for XPath concat() syntax error and known_extension? false positives
+    # URLs like /subdir#hash should resolve to /subdir/index.html
+    index_with_hashes = File.join(FIXTURES_DIR, "links", "index_with_hashes")
+    proofer = run_proofer(index_with_hashes, :directory, check_internal_hash: true)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "fails to find internal hash with implict index if not asked to follow" do
     options = { typhoeus: { followlocation: false } }
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
