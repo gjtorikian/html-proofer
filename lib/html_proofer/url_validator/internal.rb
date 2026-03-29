@@ -118,10 +118,10 @@ module HTMLProofer
 
         # For hash links, we need to defer to file-based checking
         # (even if URL doesn't have extension, it may resolve to index.html)
-        return nil unless url.has_hash?
+        return false unless url.has_hash?
 
         # If URL has no known extension, defer to file-based checking
-        return nil unless url.known_extension?
+        return false unless url.known_extension?
 
         decoded_href_hash = Addressable::URI.unescape(href_hash)
         fragment_ids = [href_hash, decoded_href_hash]
