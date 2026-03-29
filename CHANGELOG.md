@@ -1,3 +1,12 @@
+# [v5.2.1] - 29-03-2026
+## What's Changed
+* [skip test] Release v5.2.0 by @github-actions[bot] in https://github.com/gjtorikian/html-proofer/pull/872
+* Fix XPath syntax errors and hash validation false positives by @ZoeLeBlanc in https://github.com/gjtorikian/html-proofer/pull/873
+
+## New Contributors
+* @ZoeLeBlanc made their first contribution in https://github.com/gjtorikian/html-proofer/pull/873
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.2.0...v5.2.1
 # [v5.2.0] - 07-01-2026
 ## What's Changed
 * [skip test] Release v5.1.1 by @github-actions[bot] in https://github.com/gjtorikian/html-proofer/pull/862
