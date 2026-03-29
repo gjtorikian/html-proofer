@@ -200,7 +200,7 @@ module HTMLProofer
     end
 
     def failed_checks
-      @reporter.failures.flatten.select { |f| f.is_a?(Failure) }
+      @reporter.failures.flatten.grep(Failure)
     end
 
     def report_failed_checks

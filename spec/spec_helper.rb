@@ -70,7 +70,7 @@ def capture_proofer_http(item, type, opts = {})
 end
 
 def make_bin(args)
-  ap("#{RbConfig.ruby} exe/htmlproofer #{args}") if debug?
+  ap("#{RbConfig.ruby} exe/htmlproofer #{args}") if debug? # rubocop:disable RSpec/Output
   stdout, stderr = Open3.capture3("#{RbConfig.ruby} exe/htmlproofer #{args}")
   # Filter out Ruby experimental warnings (e.g., IO::Buffer in Ruby 4.0)
   stderr = stderr.lines.reject { |line| line.include?("warning:") && line.include?("experimental") }.join
