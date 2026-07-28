@@ -12,7 +12,7 @@ describe "Check::Links" do
   it "fails for broken hashes on the web when asked (even if the file exists)" do
     broken_hash_on_the_web = File.join(FIXTURES_DIR, "links", "broken_hash_on_the_web.html")
     proofer = run_proofer(broken_hash_on_the_web, :file)
-    expect(proofer.failed_checks.first.description).to(match(/but the hash 'no' does not/))
+    expect(proofer.failed_checks.first.description).to(include("but the hash 'no' does not"))
   end
 
   it "passes for broken hashes on the web when ignored (even if the file exists)" do
@@ -43,7 +43,7 @@ describe "Check::Links" do
   it "fails for broken internal hash" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "broken_hash_internal.html")
     proofer = run_proofer(broken_hash_internal_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/internally linking to #noHash; the file exists, but the hash 'noHash' does not/))
+    expect(proofer.failed_checks.first.description).to(include("internally linking to #noHash; the file exists, but the hash 'noHash' does not"))
   end
 
   it "passes for internal links with non-ASCII characters from implicit indexes" do
@@ -83,7 +83,7 @@ describe "Check::Links" do
     broken_hash_internal_filepath = File.join(FIXTURES_DIR, "links", "implicit_internal")
     proofer = run_proofer(broken_hash_internal_filepath, :directory, options)
     expect(proofer.failed_checks.count).to(eq(1))
-    expect(proofer.failed_checks.first.description).to(match(/without trailing slash/))
+    expect(proofer.failed_checks.first.description).to(include('without trailing slash'))
   end
 
   it "passes when linking to the top" do
@@ -96,7 +96,7 @@ describe "Check::Links" do
     broken_link_external_filepath = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
     proofer = run_proofer(broken_link_external_filepath, :file)
     failure = proofer.failed_checks.first.description
-    expect(failure).to(match(/failed with something very wrong/))
+    expect(failure).to(include('failed with something very wrong'))
   end
 
   it "passes for different filename without option" do
@@ -109,7 +109,7 @@ describe "Check::Links" do
     options = { extensions: [".foo"] }
     broken_link_external_filepath = File.join(FIXTURES_DIR, "links", "file.foo")
     proofer = run_proofer(broken_link_external_filepath, :file, options)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "accepts multiple filenames" do
@@ -163,7 +163,7 @@ describe "Check::Links" do
       :file,
       { enforce_https: false, typhoeus: { followlocation: false } },
     )
-    expect(proofer.failed_checks.first.description).to(match(/failed/))
+    expect(proofer.failed_checks.first.description).to(include('failed'))
   end
 
   it "does not fail on redirects we're not following" do
@@ -186,7 +186,7 @@ describe "Check::Links" do
   it "fails for broken hash links with status code numbers" do
     broken_link_with_number_filepath = File.join(FIXTURES_DIR, "links", "broken_link_with_number.html")
     proofer = run_proofer(broken_link_with_number_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/internally linking to #25-method-not-allowed; the file exists, but the hash '25-method-not-allowed' does not/))
+    expect(proofer.failed_checks.first.description).to(include("internally linking to #25-method-not-allowed; the file exists, but the hash '25-method-not-allowed' does not"))
   end
 
   it "understands relative hash" do
@@ -245,7 +245,7 @@ describe "Check::Links" do
   it "finds a mix of broken and unbroken links" do
     multiple_problems = File.join(FIXTURES_DIR, "links", "multiple_problems.html")
     proofer = run_proofer(multiple_problems, :file)
-    expect(proofer.failed_checks.first.description).to(match(/internally linking to #anadaasdadsadschor; the file exists, but the hash 'anadaasdadsadschor' does not/))
+    expect(proofer.failed_checks.first.description).to(include("internally linking to #anadaasdadsadschor; the file exists, but the hash 'anadaasdadsadschor' does not"))
   end
 
   it "finds the same broken link multiple times" do
@@ -275,13 +275,13 @@ describe "Check::Links" do
   it "fails for blank mailto links" do
     blank_mail_to_link = File.join(FIXTURES_DIR, "links", "blank_mailto_link.html")
     proofer = run_proofer(blank_mail_to_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/mailto: contains no email address/))
+    expect(proofer.failed_checks.first.description).to(include('mailto: contains no email address'))
   end
 
   it "fails for invalid mailto links" do
     invalid_mail_to_link = File.join(FIXTURES_DIR, "links", "invalid_mailto_link.html")
     proofer = run_proofer(invalid_mail_to_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/mailto:octocat contains an invalid email address/))
+    expect(proofer.failed_checks.first.description).to(include('mailto:octocat contains an invalid email address'))
   end
 
   it "ignores valid tel links" do
@@ -293,7 +293,7 @@ describe "Check::Links" do
   it "fails for blank tel links" do
     blank_tel_link = File.join(FIXTURES_DIR, "links", "blank_tel_link.html")
     proofer = run_proofer(blank_tel_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/tel: contains no phone number/))
+    expect(proofer.failed_checks.first.description).to(include('tel: contains no phone number'))
   end
 
   it "ignores javascript links" do
@@ -305,7 +305,7 @@ describe "Check::Links" do
   it "fails for links missing the protocol" do
     missing_protocol_link = File.join(FIXTURES_DIR, "links", "link_missing_protocol_valid.html")
     proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+    expect(proofer.failed_checks.first.description).to(include('protocol-relative URL'))
   end
 
   it "works for valid href within link elements" do
@@ -336,7 +336,7 @@ describe "Check::Links" do
     options = { typhoeus: { followlocation: false } }
     internal = File.join(FIXTURES_DIR, "links", "link_directory_without_slash.html")
     proofer = run_proofer(internal, :file, options)
-    expect(proofer.failed_checks.first.description).to(match(/without trailing slash/))
+    expect(proofer.failed_checks.first.description).to(include('without trailing slash'))
   end
 
   it "allows for internal linking to a directory with trailing slash when not following" do
@@ -369,7 +369,7 @@ describe "Check::Links" do
 
   it "works for array of links" do
     proofer = run_proofer(["www.github.com", "foofoofoo.biz"], :links)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "works for broken anchors within pre" do
@@ -393,7 +393,7 @@ describe "Check::Links" do
   it "fails for broken hash with query" do
     broken_hash = File.join(FIXTURES_DIR, "links", "broken_hash_with_query.html")
     proofer = run_proofer(broken_hash, :file)
-    expect(proofer.failed_checks.first.description).to(match(/#example; the file exists, but the hash 'example' does not/))
+    expect(proofer.failed_checks.first.description).to(include("#example; the file exists, but the hash 'example' does not"))
   end
 
   it "passes when linking to hash on another page" do
@@ -569,12 +569,12 @@ describe "Check::Links" do
     fixture = File.join(FIXTURES_DIR, "links", "bad_external_links.html")
     proofer = run_proofer(fixture, :file)
     expect(proofer.failed_checks.length).to(eq(2))
-    expect(proofer.failed_checks.first.description).to(match(/is an invalid URL/))
+    expect(proofer.failed_checks.first.description).to(include('is an invalid URL'))
   end
 
   it "does not explode on bad external links in arrays" do
     proofer = run_proofer(["www.github.com", "http://127.0.0.1:____"], :links)
-    expect(proofer.failed_checks.first.description).to(match(/is an invalid URL/))
+    expect(proofer.failed_checks.first.description).to(include('is an invalid URL'))
   end
 
   it "passes for non-HTTPS links when asked" do
@@ -598,13 +598,13 @@ describe "Check::Links" do
   it "fails for hash href when asked" do
     hash_href = File.join(FIXTURES_DIR, "links", "hash_href.html")
     proofer = run_proofer(hash_href, :file, allow_hash_href: false)
-    expect(proofer.failed_checks.first.description).to(match(/linking to internal hash #, which points to nowhere/))
+    expect(proofer.failed_checks.first.description).to(include('linking to internal hash #, which points to nowhere'))
   end
 
   it "fails for broken IP address links" do
     hash_href = File.join(FIXTURES_DIR, "links", "ip_href.html")
     proofer = run_proofer(hash_href, :file)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "works for internal links to weird encoding IDs" do
@@ -680,19 +680,19 @@ describe "Check::Links" do
   it "complains if SRI and CORS not provided" do
     file = File.join(FIXTURES_DIR, "links", "integrity_and_cors_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/SRI and CORS not provided/))
+    expect(proofer.failed_checks.first.description).to(include('SRI and CORS not provided'))
   end
 
   it "complains if SRI not provided" do
     file = File.join(FIXTURES_DIR, "links", "cors_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/CORS not provided/))
+    expect(proofer.failed_checks.first.description).to(include('CORS not provided'))
   end
 
   it "complains if CORS not provided" do
     file = File.join(FIXTURES_DIR, "links", "integrity_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/Integrity is missing/))
+    expect(proofer.failed_checks.first.description).to(include('Integrity is missing'))
   end
 
   it "is happy if SRI and CORS provided" do
@@ -745,7 +745,7 @@ describe "Check::Links" do
   it "allows for at-sign attribute" do
     file = File.join(FIXTURES_DIR, "links", "at_sign.html")
     proofer = run_proofer(file, :file, allow_hash_href: false)
-    expect(proofer.failed_checks.first.description).to(match(/linking to internal hash/))
+    expect(proofer.failed_checks.first.description).to(include('linking to internal hash'))
   end
 
   it "allows for at-sign attribute to be ignored" do
@@ -757,7 +757,7 @@ describe "Check::Links" do
   it "checks source tags" do
     file = File.join(FIXTURES_DIR, "links", "source.html")
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.first.description).to(match(/failed/))
+    expect(proofer.failed_checks.first.description).to(include('failed'))
   end
 
   it "works for a direct link through directory" do
@@ -776,7 +776,7 @@ describe "Check::Links" do
   it "reports linked internal through directory" do
     file = File.join(FIXTURES_DIR, "links", "hashes")
     proofer = run_proofer(file, :directory)
-    expect(proofer.failed_checks.first.description).to(match(/the file exists, but the hash 'generating-and-submitting' does not/))
+    expect(proofer.failed_checks.first.description).to(include("the file exists, but the hash 'generating-and-submitting' does not"))
   end
 
   it "works for hash hrefs" do
@@ -794,7 +794,7 @@ describe "Check::Links" do
   it "does not crash on badly formatted urls" do
     file = File.join(FIXTURES_DIR, "links", "bad_formatting.html")
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.first.description).to(match(/is an invalid URL/))
+    expect(proofer.failed_checks.first.description).to(include('is an invalid URL'))
   end
 
   it "does not try reading PDFs" do

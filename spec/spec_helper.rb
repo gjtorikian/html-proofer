@@ -29,7 +29,7 @@ def capture_stderr(*)
   $stdout = StringIO.new unless ENV["DEBUG"]
   begin
     yield
-  rescue SystemExit # rubocop:disable Lint/SuppressedException
+  rescue SystemExit
   ensure
     $stderr = original_stderr
     $stdout = original_stdout unless ENV["DEBUG"]
