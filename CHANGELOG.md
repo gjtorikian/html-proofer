@@ -1,3 +1,9 @@
+# [v5.2.2] - 28-07-2026
+## What's Changed
+* fix: Read trailing slash from URL, not expanded path by @gjtorikian in https://github.com/gjtorikian/html-proofer/pull/877
+
+
+**Full Changelog**: https://github.com/gjtorikian/html-proofer/compare/v5.2.1...v5.2.2
 # [v5.2.1] - 29-03-2026
 ## What's Changed
 * [skip test] Release v5.2.0 by @github-actions[bot] in https://github.com/gjtorikian/html-proofer/pull/872
