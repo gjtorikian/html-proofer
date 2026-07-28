@@ -121,7 +121,10 @@ module HTMLProofer
         return false unless url.hash?
 
         hash = url.hash
-        headers = response.options.fetch(:headers, {})
+        # `response.headers` covers both live responses (which expose the headers
+        # via :response_headers) and stubbed ones (which set :headers directly);
+        # reading options[:headers] saw nothing but stubs.
+        headers = response.headers || {}
         content_type = headers.find { |k, _| k.casecmp("content-type").zero? }
 
         # attempt to verify PDF hash ref; see #787 for more details

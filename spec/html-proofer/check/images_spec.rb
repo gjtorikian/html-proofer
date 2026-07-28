@@ -67,7 +67,7 @@ describe "Check::Images" do
   it "fails for missing external images" do
     external_image_filepath = File.join(FIXTURES_DIR, "images", "missing_image_external.html")
     proofer = run_proofer(external_image_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "fails for missing internal images" do
@@ -79,13 +79,13 @@ describe "Check::Images" do
   it "fails for image with no src" do
     image_src_filepath = File.join(FIXTURES_DIR, "images", "missing_image_src.html")
     proofer = run_proofer(image_src_filepath, :file)
-    expect(proofer.failed_checks.first.description).to(match(/image has no src or srcset attribute/))
+    expect(proofer.failed_checks.first.description).to(include('image has no src or srcset attribute'))
   end
 
   it "fails for image with default macOS filename" do
     terrible_image_name = File.join(FIXTURES_DIR, "images", "terrible_image_name.html")
     proofer = run_proofer(terrible_image_name, :file)
-    expect(proofer.failed_checks.first.description).to(match(/image has a terrible filename/))
+    expect(proofer.failed_checks.first.description).to(include('image has a terrible filename'))
   end
 
   it "ignores images marked as ignore data-proofer-ignore" do
@@ -125,7 +125,7 @@ describe "Check::Images" do
   it "fails for images missing the protocol" do
     missing_protocol_link = File.join(FIXTURES_DIR, "images", "image_missing_protocol_valid.html")
     proofer = run_proofer(missing_protocol_link, :file)
-    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+    expect(proofer.failed_checks.first.description).to(include('protocol-relative URL'))
   end
 
   it "properly checks relative links" do
@@ -185,7 +185,7 @@ describe "Check::Images" do
   it "fails for images with an alt but missing src or srcset" do
     src_set_missing_alt = File.join(FIXTURES_DIR, "images", "src_set_missing_image.html")
     proofer = run_proofer(src_set_missing_alt, :file)
-    expect(proofer.failed_checks.first.description).to(match(/image has no src or srcset attribute/))
+    expect(proofer.failed_checks.first.description).to(include('image has no src or srcset attribute'))
   end
 
   it "properly ignores missing alt tags when asked for srcset" do
@@ -209,7 +209,7 @@ describe "Check::Images" do
   it "fails for HTTP images when not asked" do
     http    = File.join(FIXTURES_DIR, "images", "src_http.html")
     proofer = run_proofer(http, :file)
-    expect(proofer.failed_checks.first.description).to(match(/uses the http scheme/))
+    expect(proofer.failed_checks.first.description).to(include('uses the http scheme'))
   end
 
   it "properly checks relative images with base" do

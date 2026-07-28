@@ -18,7 +18,7 @@ if ENV.fetch("DEBUG", false)
   require "debug"
   begin
     require "amazing_print"
-  rescue LoadError # rubocop:disable Lint/SuppressedException
+  rescue LoadError
   end
 end
 

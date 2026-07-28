@@ -172,7 +172,9 @@ module HTMLProofer
       def unslashed_directory?(file)
         return false unless File.directory?(file)
 
-        !file.end_with?(File::SEPARATOR) && !follow_location?
+        # the trailing slash must be read off the URL, not off `file`: the latter
+        # is produced by File.expand_path, which strips trailing separators
+        !path.to_s.end_with?("/") && !follow_location?
       end
 
       def follow_location?
@@ -239,7 +241,7 @@ module HTMLProofer
         else
           url
         end
-      rescue Addressable::URI::InvalidURIError # rubocop:disable Lint/SuppressedException -- error will be reported at check time
+      rescue Addressable::URI::InvalidURIError # -- error will be reported at check time
       end
 
       private def swap_urls!

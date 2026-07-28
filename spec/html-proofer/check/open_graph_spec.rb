@@ -12,25 +12,25 @@ describe "Check::OpenGraph" do
   it "fails for missing url content attribute" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-missing.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/open graph has no content attribute/))
+    expect(proofer.failed_checks.first.description).to(include('open graph has no content attribute'))
   end
 
   it "fails for empty url" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-empty.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/open graph content attribute is empty/))
+    expect(proofer.failed_checks.first.description).to(include('open graph content attribute is empty'))
   end
 
   it "fails for url missing the protocol" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-missing-protocol.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+    expect(proofer.failed_checks.first.description).to(include('protocol-relative URL'))
   end
 
   it "fails for missing external url" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "url-broken.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "passes for existing external image" do
@@ -42,25 +42,25 @@ describe "Check::OpenGraph" do
   it "fails for missing image content attribute" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "image-missing.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/open graph has no content attribute/))
+    expect(proofer.failed_checks.first.description).to(include('open graph has no content attribute'))
   end
 
   it "fails for empty image" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "image-empty.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/open graph content attribute is empty/))
+    expect(proofer.failed_checks.first.description).to(include('open graph content attribute is empty'))
   end
 
   it "fails for image missing the protocol" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "image-missing-protocol.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+    expect(proofer.failed_checks.first.description).to(include('protocol-relative URL'))
   end
 
   it "fails for missing external image" do
     url_valid = File.join(FIXTURES_DIR, "opengraph", "image-broken.html")
     proofer = run_proofer(url_valid, :file, checks: ["OpenGraph"])
-    expect(proofer.failed_checks.first.description).to(match(/failed/))
+    expect(proofer.failed_checks.first.description).to(include('failed'))
   end
 
   it "fails for missing internal images" do

@@ -33,8 +33,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency("typhoeus",        "~> 1.3")
   spec.add_dependency("yell",            "~> 2.0")
   spec.add_dependency("zeitwerk",        "~> 2.5")
-
-  spec.add_development_dependency("rspec", "~> 3.1")
-  spec.add_development_dependency("timecop", "~> 0.8")
-  spec.add_development_dependency("vcr", "~> 6.4")
 end

@@ -216,7 +216,7 @@ describe "CLI" do
     it "supports typhoeus" do
       link_with_redirect_filepath = File.join(FIXTURES_DIR, "links", "link_with_redirect.html")
       output = make_bin(" --typhoeus '{ \"followlocation\": false }' #{link_with_redirect_filepath}")
-      expect(output).to(match(/failed/))
+      expect(output).to(include('failed'))
     end
 
     it "has only one UA" do

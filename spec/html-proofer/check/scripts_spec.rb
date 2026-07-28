@@ -6,13 +6,13 @@ describe "Check::Scripts" do
   it "fails for src missing the protocol" do
     file = File.join(FIXTURES_DIR, "scripts", "script_missing_protocol.html")
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.first.description).to(match(/protocol-relative URL/))
+    expect(proofer.failed_checks.first.description).to(include('protocol-relative URL'))
   end
 
   it "fails for broken external src" do
     file = File.join(FIXTURES_DIR, "scripts", "script_broken_external.html")
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.first.description).to(match(/failed with something very wrong/))
+    expect(proofer.failed_checks.first.description).to(include('failed with something very wrong'))
   end
 
   it "works for valid internal src" do
@@ -37,7 +37,7 @@ describe "Check::Scripts" do
   it "fails for absent content" do
     file = File.join(FIXTURES_DIR, "scripts", "script_content_absent.html")
     proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.first.description).to(match(/script is empty and has no src attribute/))
+    expect(proofer.failed_checks.first.description).to(include('script is empty and has no src attribute'))
   end
 
   it "works for broken script within pre" do
@@ -61,19 +61,19 @@ describe "Check::Scripts" do
   it "is unhappy if SRI and CORS not provided" do
     file = File.join(FIXTURES_DIR, "scripts", "integrity_and_cors_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/SRI and CORS not provided/))
+    expect(proofer.failed_checks.first.description).to(include('SRI and CORS not provided'))
   end
 
   it "is unhappy if SRI not provided" do
     file = File.join(FIXTURES_DIR, "scripts", "cors_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/CORS not provided/))
+    expect(proofer.failed_checks.first.description).to(include('CORS not provided'))
   end
 
   it "is unhappy if CORS not provided" do
     file = File.join(FIXTURES_DIR, "scripts", "integrity_not_provided.html")
     proofer = run_proofer(file, :file, check_sri: true)
-    expect(proofer.failed_checks.first.description).to(match(/Integrity is missing/))
+    expect(proofer.failed_checks.first.description).to(include('Integrity is missing'))
   end
 
   it "is happy if SRI and CORS provided" do
