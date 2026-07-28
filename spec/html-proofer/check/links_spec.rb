@@ -339,6 +339,20 @@ describe "Check::Links" do
     expect(proofer.failed_checks.first.description).to(match(/without trailing slash/))
   end
 
+  it "allows for internal linking to a directory with trailing slash when not following" do
+    options = { typhoeus: { followlocation: false } }
+    internal = File.join(FIXTURES_DIR, "links", "link_to_folder.html")
+    proofer = run_proofer(internal, :file, options)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
+  it "allows for internal linking to the site root when not following" do
+    options = { typhoeus: { followlocation: false } }
+    internal = File.join(FIXTURES_DIR, "links", "root_slash", "index.html")
+    proofer = run_proofer(internal, :file, options)
+    expect(proofer.failed_checks).to(eq([]))
+  end
+
   it "ignores external links when asked" do
     options = { disable_external: true }
     external = File.join(FIXTURES_DIR, "links", "broken_link_external.html")
