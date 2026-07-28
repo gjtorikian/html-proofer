@@ -806,15 +806,26 @@ describe "Check::Links" do
   end
 
   it "tries reading PDFs with hashes" do
-    file = File.join(FIXTURES_DIR, "links", "pdf_w_hash.html")
-    proofer = run_proofer(file, :file)
+    pdf = File.join(FIXTURES_DIR, "links", "two_pages.pdf")
 
-    expect(proofer.failed_checks.count).to(eq(0))
+    StaticFileServer.serving(pdf, content_type: "application/pdf") do |server|
+      # the fixtures are written against a placeholder host so they stay readable;
+      # enforce_https is off because the local server speaks plain HTTP
+      options = {
+        swap_urls: { %r{^http://pdf\.example\.test} => server.origin },
+        enforce_https: false,
+      }
 
-    file = File.join(FIXTURES_DIR, "links", "pdf_w_hash_broken.html")
-    proofer = run_proofer(file, :file)
-    expect(proofer.failed_checks.count).to(eq(1))
-    expect(proofer.failed_checks.first.description).to(match(/.pdf exists, but the hash 'page=2111115' does not/))
+      file = File.join(FIXTURES_DIR, "links", "pdf_w_hash.html")
+      proofer = run_proofer_live(file, :file, options)
+
+      expect(proofer.failed_checks.count).to(eq(0))
+
+      file = File.join(FIXTURES_DIR, "links", "pdf_w_hash_broken.html")
+      proofer = run_proofer_live(file, :file, options)
+      expect(proofer.failed_checks.count).to(eq(1))
+      expect(proofer.failed_checks.first.description).to(match(/.pdf exists, but the hash 'page=2111115' does not/))
+    end
   end
 
   it "navigates to sibling through parent" do
