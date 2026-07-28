@@ -17,3 +17,7 @@ gem "redcarpet"
 gem "rubocop"
 gem "rubocop-rspec"
 gem "rubocop-standard"
+
+gem "rspec", "~> 3.1"
+gem "timecop", "~> 0.8"
+gem "vcr", "~> 6.4"
