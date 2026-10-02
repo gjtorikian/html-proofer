@@ -281,7 +281,12 @@ module HTMLProofer
       return {} if config.strip.empty?
 
       begin
-        JSON.parse(config, { symbolize_names: symbolize_names })
+        # JSON 3 takes keywords. JSON 2 still takes a positional Hash.
+        if Gem::Version.new(JSON::VERSION) >= Gem::Version.new("3")
+          JSON.parse(config, symbolize_names: symbolize_names)
+        else
+          JSON.parse(config, { symbolize_names: symbolize_names })
+        end
       rescue StandardError
         raise ArgumentError, "Option '#{option_name} did not contain valid JSON."
       end
