@@ -2,6 +2,8 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
+    commit-message:
+      prefix: "build"
     schedule:
       interval: daily
       time: "09:00"
@@ -10,6 +12,8 @@ updates:
 
   - package-ecosystem: "bundler"
     directory: "/"
+    commit-message:
+      prefix: "build"
     schedule:
       interval: daily
       time: "09:00"
