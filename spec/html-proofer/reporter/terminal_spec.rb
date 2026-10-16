@@ -7,7 +7,9 @@ describe "Reporter::Terminal" do
     it "reports all issues accurately" do
       error_file = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
       output = StaticFileServer.serving(error_file, content_type: "text/html") do |server|
-        swap_urls = %Q(--swap-urls '/https://help[.]github[.]com:#{server.origin}')
+        # --swap-urls splits on bare colons, so the ones inside each URL are escaped
+        origin = server.origin.gsub(":", "\\:")
+        swap_urls = %Q(--swap-urls '^https\\://help[.]github[.]com:#{origin}')
         make_bin("#{swap_urls} --no-enforce-https --checks Links,Images,Scripts,Favicon --no-ignore-missing-alt #{error_file}")
       end
 
