@@ -6,7 +6,10 @@ describe "Reporter::Terminal" do
   describe "report" do
     it "reports all issues accurately" do
       error_file = File.join(FIXTURES_DIR, "sorting", "kitchen_sinkish.html")
-      output = make_bin("--checks Links,Images,Scripts,Favicon --no-ignore-missing-alt #{error_file}")
+      output = StaticFileServer.serving(error_file, content_type: "text/html") do |server|
+        swap_urls = %Q(--swap-urls '/https://help[.]github[.]com:#{server.origin}')
+        make_bin("#{swap_urls} --no-enforce-https --checks Links,Images,Scripts,Favicon --no-ignore-missing-alt #{error_file}")
+      end
 
       msg = <<~MSG
         Running 4 checks (Favicon, Images, Links, Scripts) in spec/html-proofer/fixtures/sorting/kitchen_sinkish.html on *.html files ...
