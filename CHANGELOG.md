@@ -1,3 +1,18 @@
+## [5.2.3](https://github.com/gjtorikian/html-proofer/compare/v5.2.2...v5.2.3) (2026-10-16)
+
+### Bug Fixes
+
+* Add ruby-json 3 support ([de14af9](https://github.com/gjtorikian/html-proofer/commit/de14af9e4d75d89c3f4c594a31f5fe6a7b2605c3))
+
+### Miscellaneous Chores
+
+* **reporter:** Escape colons in swapped test URLs ([#879](https://github.com/gjtorikian/html-proofer/pull/879))
+* **reporter:** Avoid live external URLs ([#879](https://github.com/gjtorikian/html-proofer/pull/879))
+* Prefix Dependabot commits with a Conventional Commits type ([#880](https://github.com/gjtorikian/html-proofer/pull/880))
+* Lint PR titles for Conventional Commits ([#880](https://github.com/gjtorikian/html-proofer/pull/880))
+* Run release prep on every push to main ([#880](https://github.com/gjtorikian/html-proofer/pull/880))
+
+
 # [v5.2.2] - 28-07-2026
 ## What's Changed
 * fix: Read trailing slash from URL, not expanded path by @gjtorikian in https://github.com/gjtorikian/html-proofer/pull/877
